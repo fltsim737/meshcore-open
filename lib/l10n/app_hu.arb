@@ -3407,6 +3407,7 @@
   "sos_ackSent": "ACK elküldve",
   "sos_dismiss": "Elvetés",
   "sos_copyCoordinates": "Koordináták másolása",
+  "sos_message": "Üzenet",
   "sos_coordinatesCopied": "Koordináták másolva",
   "sos_noPosition": "Nincs pozíció",
   "sos_ackedByOthers": "Visszaigazolta még: {names}",

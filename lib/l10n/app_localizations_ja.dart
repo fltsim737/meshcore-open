@@ -6239,6 +6239,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sos_copyCoordinates => '座標をコピー';
 
   @override
+  String get sos_message => 'メッセージ';
+
+  @override
   String get sos_coordinatesCopied => '座標をコピーしました';
 
   @override

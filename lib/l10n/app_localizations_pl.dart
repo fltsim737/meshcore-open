@@ -6573,6 +6573,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sos_copyCoordinates => 'Kopiuj współrzędne';
 
   @override
+  String get sos_message => 'Wiadomość';
+
+  @override
   String get sos_coordinatesCopied => 'Skopiowano współrzędne';
 
   @override

@@ -3373,6 +3373,7 @@
   "sos_ackSent": "已发送 ACK",
   "sos_dismiss": "忽略",
   "sos_copyCoordinates": "复制坐标",
+  "sos_message": "消息",
   "sos_coordinatesCopied": "已复制坐标",
   "sos_noPosition": "未包含位置",
   "sos_ackedByOthers": "{names} 也已确认",

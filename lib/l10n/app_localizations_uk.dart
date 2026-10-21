@@ -6561,6 +6561,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sos_copyCoordinates => 'Копіювати координати';
 
   @override
+  String get sos_message => 'Повідомлення';
+
+  @override
   String get sos_coordinatesCopied => 'Координати скопійовано';
 
   @override

@@ -199,6 +199,7 @@ enum SosPacketKind {
 class SosPacket {
   static const int version = 1;
   static const int keyPrefixSize = 6;
+  static const int publicKeySize = 32;
   static const int maxNameBytes = 31;
 
   final SosPacketKind kind;
@@ -208,6 +209,11 @@ class SosPacket {
   final DateTime? time;
   final SosFix fix;
 
+  /// The sender's full public key, so SOS and ACK let each side add the
+  /// other as a contact. Appended after the fields older builds read, which
+  /// ignore it.
+  final Uint8List? senderKey;
+
   const SosPacket({
     required this.kind,
     required this.id,
@@ -215,7 +221,11 @@ class SosPacket {
     required this.senderName,
     this.time,
     this.fix = const SosFix.none(),
+    this.senderKey,
   });
+
+  bool get _carriesKey =>
+      kind != SosPacketKind.cancel && senderKey?.length == publicKeySize;
 
   Uint8List encode() {
     final out = BytesBuilder()
@@ -231,7 +241,10 @@ class SosPacket {
     out
       ..addByte(name.length)
       ..add(name);
-    if (kind == SosPacketKind.ack) return out.toBytes();
+    if (kind == SosPacketKind.ack) {
+      if (_carriesKey) out.add(senderKey!);
+      return out.toBytes();
+    }
     final seconds = (time ?? DateTime.now()).millisecondsSinceEpoch ~/ 1000;
     out.add(_u32(seconds));
     if (kind == SosPacketKind.cancel) return out.toBytes();
@@ -240,6 +253,7 @@ class SosPacket {
       ..addByte(fix.hasPosition ? 1 : 0)
       ..add(_i32(((fix.latitude ?? 0) * 1e6).round()))
       ..add(_i32(((fix.longitude ?? 0) * 1e6).round()));
+    if (_carriesKey) out.add(senderKey!);
     return out.toBytes();
   }
 
@@ -266,6 +280,7 @@ class SosPacket {
           id: id,
           senderPrefix: prefix,
           senderName: name,
+          senderKey: _readKey(data, offset, prefix),
         );
       }
       if (data.length < offset + 4) return null;
@@ -294,6 +309,7 @@ class SosPacket {
         senderPrefix: prefix,
         senderName: name,
         time: time,
+        senderKey: _readKey(data, offset + 10, prefix),
         fix: valid
             ? SosFix(
                 latitude: lat,
@@ -307,6 +323,18 @@ class SosPacket {
     } catch (_) {
       return null;
     }
+  }
+
+  /// The optional full key at [offset]; null unless it matches [prefix].
+  static Uint8List? _readKey(Uint8List data, int offset, Uint8List prefix) {
+    if (data.length < offset + publicKeySize) return null;
+    final key = Uint8List.fromList(
+      data.sublist(offset, offset + publicKeySize),
+    );
+    for (var i = 0; i < keyPrefixSize; i++) {
+      if (key[i] != prefix[i]) return null;
+    }
+    return key;
   }
 
   static Uint8List _prefix(Uint8List key) {

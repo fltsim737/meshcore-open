@@ -2665,6 +2665,7 @@
   "sos_ackSent": "ACK отправлен",
   "sos_dismiss": "Скрыть",
   "sos_copyCoordinates": "Копировать координаты",
+  "sos_message": "Сообщение",
   "sos_coordinatesCopied": "Координаты скопированы",
   "sos_noPosition": "Координаты не переданы",
   "sos_ackedByOthers": "Также подтвердили: {names}",

@@ -6521,6 +6521,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get sos_copyCoordinates => 'Kopírovať súradnice';
 
   @override
+  String get sos_message => 'Správa';
+
+  @override
   String get sos_coordinatesCopied => 'Súradnice skopírované';
 
   @override

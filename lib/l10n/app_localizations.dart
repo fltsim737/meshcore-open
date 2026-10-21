@@ -10987,6 +10987,12 @@ abstract class AppLocalizations {
   /// **'Copy coordinates'**
   String get sos_copyCoordinates;
 
+  /// No description provided for @sos_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get sos_message;
+
   /// No description provided for @sos_coordinatesCopied.
   ///
   /// In en, this message translates to:

@@ -17,6 +17,7 @@ import '../utils/route_transitions.dart';
 import '../widgets/mesh_ui.dart';
 import '../widgets/quick_switch_bar.dart';
 import 'channels_screen.dart';
+import 'chat_screen.dart';
 import 'contacts_screen.dart';
 import 'map_screen.dart';
 
@@ -33,6 +34,11 @@ String sosCoordinates(SosFix fix) =>
 
 String _time(BuildContext context, DateTime time) =>
     TimeOfDay.fromDateTime(time).format(context);
+
+void _openChat(BuildContext context, Contact contact) => Navigator.push(
+  context,
+  MaterialPageRoute(builder: (_) => ChatScreen(contact: contact)),
+);
 
 class EmergencyScreen extends StatefulWidget {
   final bool hideBackButton;
@@ -295,11 +301,7 @@ class _ActiveSosCard extends StatelessWidget {
                 sos.acks.isEmpty ? l10n.sos_acksNone : l10n.sos_acksHeader,
                 style: textTheme.titleSmall?.merge(onRed),
               ),
-              for (final ack in sos.acks)
-                Text(
-                  '• ${ack.senderName.isEmpty ? l10n.sos_unknownSender : ack.senderName}'
-                  '  ${_time(context, ack.receivedAt)}',
-                ),
+              for (final ack in sos.acks) _ackRow(context, ack),
               if (contacts.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 Text(
@@ -326,6 +328,28 @@ class _ActiveSosCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  /// A responder who acknowledged, with a button to message them once they
+  /// are a contact.
+  Widget _ackRow(BuildContext context, SosAck ack) {
+    final l10n = context.l10n;
+    final contact = service.contactFor(ack.senderKeyHex);
+    final label =
+        '• ${ack.senderName.isEmpty ? l10n.sos_unknownSender : ack.senderName}'
+        '  ${_time(context, ack.receivedAt)}';
+    if (contact == null) return Text(label);
+    return Row(
+      children: [
+        Expanded(child: Text(label)),
+        TextButton.icon(
+          style: TextButton.styleFrom(foregroundColor: Colors.white),
+          icon: const Icon(Icons.chat_bubble_outline, size: 18),
+          label: Text(l10n.sos_message),
+          onPressed: () => _openChat(context, contact),
+        ),
+      ],
     );
   }
 
@@ -457,6 +481,13 @@ class _IncomingSosCard extends StatelessWidget {
                       onPressed: service.isConnected
                           ? () => service.acknowledge(alert)
                           : null,
+                    ),
+                  if (service.contactFor(alert.senderKeyHex)
+                      case final contact?)
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.chat_bubble_outline),
+                      label: Text(l10n.sos_message),
+                      onPressed: () => _openChat(context, contact),
                     ),
                   // Deletes the alert and its position from this phone.
                   OutlinedButton(

@@ -144,6 +144,15 @@ When the sender cancels, the alert is deleted: the alarm and warning screen stop
 
 On the sending phone, each new responder's ACK raises an "SOS acknowledged by …" notification.
 
+## Messaging each other
+
+The SOS and each ACK on the emergency network carry the sender's full public key, so the two phones save each other as chat contacts without anyone swapping adverts first:
+
+- A responder's radio saves whoever sent an SOS it heard.
+- The sending radio saves each responder who acknowledged its SOS (ACKs for other people's alerts are not saved).
+
+A **Message** button then appears on the alert (for the responder) and next to each responder in the active SOS card (for the sender), and opens an ordinary direct-message chat. New contacts are reached by flood until a route is learned. These messages are normal chat messages and stay in chat history; only the SOS, ACK and cancellation themselves are kept out of it. Alerts from builds without this, or from emergency contacts by DM, show the button only when the sender is already a contact.
+
 The active SOS and live alerts survive an app restart; alerts that expired while the app was closed are deleted when it starts.
 
 ## Platform behaviour

@@ -5276,6 +5276,38 @@ class MeshCoreConnector extends ChangeNotifier {
     return true;
   }
 
+  /// Saves the other side of an SOS as a contact, so the two can message
+  /// each other. Routed by flood until a path is learned.
+  Future<Contact?> addSosContact(Uint8List publicKey, String name) async {
+    if (!isConnected || publicKey.length != 32) return null;
+    final existing = _contacts
+        .where((c) => listEquals(c.publicKey, publicKey))
+        .firstOrNull;
+    if (existing != null) return existing;
+    await sendFrame(
+      // No advert seen yet, so no replay-guard timestamp.
+      buildUpdateContactPathFrame(
+        publicKey,
+        Uint8List(0),
+        -1,
+        type: advTypeChat,
+        name: name,
+      ),
+      waitForGenericAck: true,
+    );
+    final contact = Contact(
+      publicKey: publicKey,
+      name: name,
+      type: advTypeChat,
+      pathLength: -1,
+      path: Uint8List(0),
+      lastSeen: DateTime.now(),
+    );
+    _handleContactAdvert(contact);
+    notifyListeners();
+    return contact;
+  }
+
   Future<void> clearContactPath(Contact contact) async {
     // Serialize path operations to prevent interleaved async calls.
     final prev = _pathOpLock;

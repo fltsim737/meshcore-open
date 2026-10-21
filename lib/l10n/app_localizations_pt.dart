@@ -6538,6 +6538,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get sos_copyCoordinates => 'Copiar coordenadas';
 
   @override
+  String get sos_message => 'Mensagem';
+
+  @override
   String get sos_coordinatesCopied => 'Coordenadas copiadas';
 
   @override

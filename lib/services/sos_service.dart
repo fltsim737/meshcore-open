@@ -57,6 +57,9 @@ abstract class SosTransport implements Listenable {
 
   /// Returns the ACK hash the recipient's radio will confirm delivery with.
   Future<int?> sendDirectText(Contact contact, String text);
+
+  /// Saves [publicKey] as a chat contact unless it already is one.
+  Future<Contact?> addContact(Uint8List publicKey, String name);
 }
 
 class ConnectorSosTransport implements SosTransport {
@@ -110,6 +113,9 @@ class ConnectorSosTransport implements SosTransport {
   @override
   Future<int?> sendDirectText(Contact contact, String text) =>
       connector.sendSosDirectText(contact, text);
+  @override
+  Future<Contact?> addContact(Uint8List publicKey, String name) =>
+      connector.addSosContact(publicKey, name);
   @override
   void addListener(VoidCallback listener) => connector.addListener(listener);
   @override
@@ -506,13 +512,20 @@ class SosService extends ChangeNotifier {
       lat.abs() <= 90 &&
       lon.abs() <= 180;
 
-  SosPacket _packet(SosPacketKind kind, String id, {SosFix? fix}) => SosPacket(
+  /// [withKey] adds our full key, so the other side can save us as a contact.
+  SosPacket _packet(
+    SosPacketKind kind,
+    String id, {
+    SosFix? fix,
+    bool withKey = false,
+  }) => SosPacket(
     kind: kind,
     id: id,
     senderPrefix: _transport.selfPublicKey ?? Uint8List(0),
     senderName: _transport.selfName ?? '',
     time: _now(),
     fix: fix ?? const SosFix.none(),
+    senderKey: withKey ? _transport.selfPublicKey : null,
   );
 
   Future<void> activate() async {
@@ -570,7 +583,9 @@ class SosService extends ChangeNotifier {
     notifyListeners();
     await _store.saveOutgoing(sos);
 
-    await _sendChannelPacket(_packet(SosPacketKind.sos, sos.id, fix: fix));
+    await _sendChannelPacket(
+      _packet(SosPacketKind.sos, sos.id, fix: fix, withKey: true),
+    );
 
     final dmText = SosCodec.encodeSos(
       id: sos.id,
@@ -698,7 +713,21 @@ class SosService extends ChangeNotifier {
         )) {
       return; // Our own packet, repeated back to us.
     }
-    final senderKeyHex = _contactKeyForPrefix(packet.senderPrefix);
+    var senderKeyHex = _contactKeyForPrefix(packet.senderPrefix);
+    // Someone in an SOS with us: save them as a contact so we can message.
+    final fullKey = packet.senderKey;
+    final involvesUs =
+        packet.kind == SosPacketKind.sos ||
+        (packet.kind == SosPacketKind.ack && _active?.id == packet.id);
+    if (fullKey != null && involvesUs) {
+      final known = _contactKeyForKey(fullKey);
+      if (known == null) {
+        senderKeyHex = _hex(fullKey);
+        unawaited(_addContact(fullKey, packet.senderName));
+      } else {
+        senderKeyHex = known;
+      }
+    }
     switch (packet.kind) {
       case SosPacketKind.sos:
         _handleSos(
@@ -723,6 +752,28 @@ class SosService extends ChangeNotifier {
       )
       .firstOrNull
       ?.publicKeyHex;
+
+  String? _contactKeyForKey(Uint8List key) => _transport.contacts
+      .where((c) => listEquals(c.publicKey, key))
+      .firstOrNull
+      ?.publicKeyHex;
+
+  static String _hex(Uint8List bytes) =>
+      bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+
+  Future<void> _addContact(Uint8List key, String name) async {
+    try {
+      await _transport.addContact(key, name);
+      notifyListeners();
+    } catch (e) {
+      appLogger.warn('Saving SOS contact $name failed: $e', tag: 'SOS');
+    }
+  }
+
+  /// The saved contact for [keyHex], or null.
+  Contact? contactFor(String? keyHex) => keyHex == null
+      ? null
+      : _transport.contacts.where((c) => c.publicKeyHex == keyHex).firstOrNull;
 
   void _handleAck(String id, String senderName, String? senderKeyHex) {
     var changed = false;
@@ -864,7 +915,7 @@ class SosService extends ChangeNotifier {
       try {
         await _transport.sendChannelData(
           channel,
-          _packet(SosPacketKind.ack, alert.id).encode(),
+          _packet(SosPacketKind.ack, alert.id, withKey: true).encode(),
         );
       } catch (e) {
         appLogger.warn('SOS ACK channel send failed: $e', tag: 'SOS');

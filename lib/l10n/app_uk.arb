@@ -3348,6 +3348,7 @@
   "sos_ackSent": "ACK надіслано",
   "sos_dismiss": "Приховати",
   "sos_copyCoordinates": "Копіювати координати",
+  "sos_message": "Повідомлення",
   "sos_coordinatesCopied": "Координати скопійовано",
   "sos_noPosition": "Координати не передано",
   "sos_ackedByOthers": "Також підтвердили: {names}",

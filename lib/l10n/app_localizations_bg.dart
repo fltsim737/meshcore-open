@@ -6543,6 +6543,9 @@ class AppLocalizationsBg extends AppLocalizations {
   String get sos_copyCoordinates => 'Копирай координатите';
 
   @override
+  String get sos_message => 'Съобщение';
+
+  @override
   String get sos_coordinatesCopied => 'Координатите са копирани';
 
   @override

@@ -6101,6 +6101,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_copyCoordinates => '复制坐标';
 
   @override
+  String get sos_message => '消息';
+
+  @override
   String get sos_coordinatesCopied => '已复制坐标';
 
   @override

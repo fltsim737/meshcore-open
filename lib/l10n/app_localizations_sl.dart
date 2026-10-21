@@ -6522,6 +6522,9 @@ class AppLocalizationsSl extends AppLocalizations {
   String get sos_copyCoordinates => 'Kopiraj koordinate';
 
   @override
+  String get sos_message => 'Sporočilo';
+
+  @override
   String get sos_coordinatesCopied => 'Koordinate kopirane';
 
   @override

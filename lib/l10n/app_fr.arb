@@ -3502,6 +3502,7 @@
   "sos_ackSent": "ACK envoyé",
   "sos_dismiss": "Ignorer",
   "sos_copyCoordinates": "Copier les coordonnées",
+  "sos_message": "Message",
   "sos_coordinatesCopied": "Coordonnées copiées",
   "sos_noPosition": "Aucune position incluse",
   "sos_ackedByOthers": "Également accusé par {names}",
