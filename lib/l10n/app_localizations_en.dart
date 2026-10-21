@@ -6247,10 +6247,114 @@ class AppLocalizationsEn extends AppLocalizations {
       'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.';
 
   @override
-  String get sos_channel => 'SOS channel';
+  String get sos_network => 'Emergency network';
 
   @override
-  String get sos_channelUnavailable => 'Connect a radio to choose a channel';
+  String get sos_networkNoneSubtitle =>
+      'Not set up. Your SOS goes to emergency contacts only.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Member';
+
+  @override
+  String get sos_roleResponder => 'Responder';
+
+  @override
+  String get sos_networkIntro =>
+      'An emergency network is a private, hidden channel for your group. Members can send an SOS into it. Responders also see the channel, receive alerts and can chat on it. Anyone without a code cannot read it.';
+
+  @override
+  String get sos_networkCreate => 'Set up a new network';
+
+  @override
+  String get sos_networkJoin => 'Join with a code';
+
+  @override
+  String get sos_networkNameLabel => 'Network name';
+
+  @override
+  String get sos_networkCreateAction => 'Create';
+
+  @override
+  String get sos_networkCodesTitle => 'Share these codes';
+
+  @override
+  String get sos_networkMemberCode => 'Member code';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'For people who can send an SOS but should not see alerts.';
+
+  @override
+  String get sos_networkResponderCode => 'Responder code';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'For people who receive alerts and can chat on the channel.';
+
+  @override
+  String get sos_copyCode => 'Copy code';
+
+  @override
+  String get sos_networkCodeCopied => 'Code copied';
+
+  @override
+  String get sos_networkCodeLabel => 'Network code';
+
+  @override
+  String get sos_networkScan => 'Scan QR code';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Point the camera at an emergency network QR code';
+
+  @override
+  String get sos_networkInvalidCode =>
+      'That is not a valid emergency network code.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Join $name as $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Join';
+
+  @override
+  String get sos_networkLeave => 'Leave network';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Leave $name? Its channel is removed from your radio and alerts from it stop.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Your role: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Channel set up on this radio';
+
+  @override
+  String get sos_networkStatusInstalling => 'Adding the channel to this radio…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'No free channel slot on this radio. Remove a channel to use the network.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Connect a radio to set up the channel';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Anyone given a code can send alerts, and a member using modified software could read them. If a code leaks, set up a new network and share new codes.';
 
   @override
   String get sos_channelNeedsFirmware =>

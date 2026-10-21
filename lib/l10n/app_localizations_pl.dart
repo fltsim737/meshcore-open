@@ -6370,10 +6370,114 @@ class AppLocalizationsPl extends AppLocalizations {
       'Wysyłana, gdy ani telefon, ani radio nie mają pozycji. Zostaw oba pola puste, aby ją usunąć.';
 
   @override
-  String get sos_channel => 'Kanał SOS';
+  String get sos_network => 'Sieć alarmowa';
 
   @override
-  String get sos_channelUnavailable => 'Połącz radio, aby wybrać kanał';
+  String get sos_networkNoneSubtitle =>
+      'Nie skonfigurowano. Twoje SOS trafia tylko do kontaktów alarmowych.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Członek';
+
+  @override
+  String get sos_roleResponder => 'Ratownik';
+
+  @override
+  String get sos_networkIntro =>
+      'Sieć alarmowa to prywatny, ukryty kanał dla twojej grupy. Członkowie mogą wysyłać do niej SOS. Ratownicy dodatkowo widzą kanał, otrzymują alarmy i mogą w nim rozmawiać. Bez kodu nikt nie może go odczytać.';
+
+  @override
+  String get sos_networkCreate => 'Utwórz nową sieć';
+
+  @override
+  String get sos_networkJoin => 'Dołącz za pomocą kodu';
+
+  @override
+  String get sos_networkNameLabel => 'Nazwa sieci';
+
+  @override
+  String get sos_networkCreateAction => 'Utwórz';
+
+  @override
+  String get sos_networkCodesTitle => 'Udostępnij te kody';
+
+  @override
+  String get sos_networkMemberCode => 'Kod członka';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Dla osób, które mogą wysłać SOS, ale nie powinny widzieć alarmów.';
+
+  @override
+  String get sos_networkResponderCode => 'Kod ratownika';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Dla osób, które otrzymują alarmy i mogą rozmawiać na kanale.';
+
+  @override
+  String get sos_copyCode => 'Kopiuj kod';
+
+  @override
+  String get sos_networkCodeCopied => 'Skopiowano kod';
+
+  @override
+  String get sos_networkCodeLabel => 'Kod sieci';
+
+  @override
+  String get sos_networkScan => 'Skanuj kod QR';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Skieruj aparat na kod QR sieci alarmowej';
+
+  @override
+  String get sos_networkInvalidCode =>
+      'To nie jest prawidłowy kod sieci alarmowej.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Dołączyć do $name jako $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Dołącz';
+
+  @override
+  String get sos_networkLeave => 'Opuść sieć';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Opuścić $name? Jej kanał zostanie usunięty z radia, a alarmy z niego ustaną.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Twoja rola: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Kanał skonfigurowany na tym radiu';
+
+  @override
+  String get sos_networkStatusInstalling => 'Dodawanie kanału do tego radia…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Brak wolnego miejsca na kanał w tym radiu. Usuń kanał, aby korzystać z sieci.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Połącz radio, aby skonfigurować kanał';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Każdy, kto ma kod, może wysyłać alarmy, a członek ze zmodyfikowanym oprogramowaniem mógłby je odczytać. Jeśli kod wycieknie, utwórz nową sieć i udostępnij nowe kody.';
 
   @override
   String get sos_channelNeedsFirmware =>

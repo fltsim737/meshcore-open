@@ -3218,8 +3218,6 @@
   "sos_storedLocation": "Opgeslagen noodlocatie",
   "sos_storedLocationUnset": "Niet ingesteld",
   "sos_storedLocationHelper": "Wordt verzonden als telefoon en radio geen positie hebben. Laat beide velden leeg om te verwijderen.",
-  "sos_channel": "SOS-kanaal",
-  "sos_channelUnavailable": "Verbind een radio om een kanaal te kiezen",
   "sos_includeFavourites": "Favoriete contacten meenemen",
   "sos_includeFavouritesSubtitle": "SOS ook als direct bericht naar elke favoriet sturen",
   "sos_contacts": "Noodcontacten",
@@ -3351,5 +3349,70 @@
     }
   },
   "sos_cancelNotificationBody": "De afzender heeft deze SOS geannuleerd.",
-  "sos_channelNeedsFirmware": "Deze radio heeft firmware 1.15 of nieuwer nodig voor kanaalmeldingen. Noodcontacten krijgen nog steeds directe berichten."
+  "sos_channelNeedsFirmware": "Deze radio heeft firmware 1.15 of nieuwer nodig voor kanaalmeldingen. Noodcontacten krijgen nog steeds directe berichten.",
+  "sos_network": "Noodnetwerk",
+  "sos_networkNoneSubtitle": "Niet ingesteld. Je SOS gaat alleen naar je noodcontacten.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Lid",
+  "sos_roleResponder": "Hulpverlener",
+  "sos_networkIntro": "Een noodnetwerk is een privé, verborgen kanaal voor je groep. Leden kunnen er een SOS in versturen. Hulpverleners zien het kanaal ook, krijgen meldingen en kunnen erin chatten. Zonder code kan niemand het lezen.",
+  "sos_networkCreate": "Nieuw netwerk instellen",
+  "sos_networkJoin": "Deelnemen met een code",
+  "sos_networkNameLabel": "Netwerknaam",
+  "sos_networkCreateAction": "Aanmaken",
+  "sos_networkCodesTitle": "Deel deze codes",
+  "sos_networkMemberCode": "Ledencode",
+  "sos_networkMemberCodeHelp": "Voor mensen die een SOS kunnen sturen maar geen meldingen mogen zien.",
+  "sos_networkResponderCode": "Hulpverlenerscode",
+  "sos_networkResponderCodeHelp": "Voor mensen die meldingen krijgen en in het kanaal kunnen chatten.",
+  "sos_copyCode": "Code kopiëren",
+  "sos_networkCodeCopied": "Code gekopieerd",
+  "sos_networkCodeLabel": "Netwerkcode",
+  "sos_networkScan": "QR-code scannen",
+  "sos_networkScanInstructions": "Richt de camera op een noodnetwerk-QR-code",
+  "sos_networkInvalidCode": "Dat is geen geldige noodnetwerkcode.",
+  "sos_networkJoinConfirm": "Deelnemen aan {name} als {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Deelnemen",
+  "sos_networkLeave": "Netwerk verlaten",
+  "sos_networkLeaveConfirm": "{name} verlaten? Het kanaal wordt van je radio verwijderd en meldingen ervan stoppen.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Je rol: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Kanaal ingesteld op deze radio",
+  "sos_networkStatusInstalling": "Kanaal toevoegen aan deze radio…",
+  "sos_networkStatusNoFreeSlot": "Geen vrije kanaalplek op deze radio. Verwijder een kanaal om het netwerk te gebruiken.",
+  "sos_networkStatusDisconnected": "Verbind een radio om het kanaal in te stellen",
+  "sos_networkSecurityNote": "Iedereen met een code kan meldingen sturen, en een lid met aangepaste software zou ze kunnen lezen. Als een code uitlekt, stel dan een nieuw netwerk in en deel nieuwe codes."
 }

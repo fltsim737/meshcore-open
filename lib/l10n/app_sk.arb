@@ -3318,8 +3318,6 @@
   "sos_storedLocation": "Uložená núdzová poloha",
   "sos_storedLocationUnset": "Nenastavené",
   "sos_storedLocationHelper": "Odošle sa, keď telefón ani rádio nemajú polohu. Nechajte obe polia prázdne, ak ju chcete odstrániť.",
-  "sos_channel": "Kanál SOS",
-  "sos_channelUnavailable": "Pripojte rádio a vyberte kanál",
   "sos_includeFavourites": "Zahrnúť obľúbené kontakty",
   "sos_includeFavouritesSubtitle": "SOS posielať aj priamou správou každému obľúbenému",
   "sos_contacts": "Núdzové kontakty",
@@ -3451,5 +3449,70 @@
     }
   },
   "sos_cancelNotificationBody": "Odosielateľ zrušil toto SOS.",
-  "sos_channelNeedsFirmware": "Toto rádio potrebuje firmvér 1.15 alebo novší pre poplachy v kanáli. Núdzové kontakty stále dostanú priame správy."
+  "sos_channelNeedsFirmware": "Toto rádio potrebuje firmvér 1.15 alebo novší pre poplachy v kanáli. Núdzové kontakty stále dostanú priame správy.",
+  "sos_network": "Núdzová sieť",
+  "sos_networkNoneSubtitle": "Nenastavené. Vaše SOS ide len núdzovým kontaktom.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Člen",
+  "sos_roleResponder": "Záchranár",
+  "sos_networkIntro": "Núdzová sieť je súkromný skrytý kanál pre vašu skupinu. Členovia doň môžu poslať SOS. Záchranári navyše vidia kanál, dostávajú poplachy a môžu v ňom chatovať. Bez kódu ho nikto nemôže čítať.",
+  "sos_networkCreate": "Nastaviť novú sieť",
+  "sos_networkJoin": "Pripojiť sa pomocou kódu",
+  "sos_networkNameLabel": "Názov siete",
+  "sos_networkCreateAction": "Vytvoriť",
+  "sos_networkCodesTitle": "Zdieľajte tieto kódy",
+  "sos_networkMemberCode": "Kód člena",
+  "sos_networkMemberCodeHelp": "Pre ľudí, ktorí môžu poslať SOS, ale nemajú vidieť poplachy.",
+  "sos_networkResponderCode": "Kód záchranára",
+  "sos_networkResponderCodeHelp": "Pre ľudí, ktorí dostávajú poplachy a môžu chatovať v kanáli.",
+  "sos_copyCode": "Kopírovať kód",
+  "sos_networkCodeCopied": "Kód skopírovaný",
+  "sos_networkCodeLabel": "Kód siete",
+  "sos_networkScan": "Skenovať QR kód",
+  "sos_networkScanInstructions": "Namierte kameru na QR kód núdzovej siete",
+  "sos_networkInvalidCode": "Toto nie je platný kód núdzovej siete.",
+  "sos_networkJoinConfirm": "Pripojiť sa k {name} ako {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Pripojiť",
+  "sos_networkLeave": "Opustiť sieť",
+  "sos_networkLeaveConfirm": "Opustiť {name}? Jej kanál sa odstráni z rádia a poplachy z neho prestanú.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Vaša rola: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Kanál je nastavený na tomto rádiu",
+  "sos_networkStatusInstalling": "Pridávam kanál do tohto rádia…",
+  "sos_networkStatusNoFreeSlot": "Na tomto rádiu nie je voľné miesto pre kanál. Odstráňte kanál, aby ste mohli sieť používať.",
+  "sos_networkStatusDisconnected": "Pripojte rádio na nastavenie kanála",
+  "sos_networkSecurityNote": "Ktokoľvek s kódom môže posielať poplachy a člen s upraveným softvérom by ich mohol čítať. Ak kód unikne, nastavte novú sieť a zdieľajte nové kódy."
 }

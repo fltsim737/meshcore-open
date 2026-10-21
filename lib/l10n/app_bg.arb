@@ -3317,8 +3317,6 @@
   "sos_storedLocation": "Запазено местоположение за спешни случаи",
   "sos_storedLocationUnset": "Не е зададено",
   "sos_storedLocationHelper": "Изпраща се, когато нито телефонът, нито радиото имат позиция. Оставете двете полета празни, за да го премахнете.",
-  "sos_channel": "SOS канал",
-  "sos_channelUnavailable": "Свържете радио, за да изберете канал",
   "sos_includeFavourites": "Включване на любими контакти",
   "sos_includeFavouritesSubtitle": "Изпращане на SOS и като директно съобщение до всеки любим",
   "sos_contacts": "Контакти за спешни случаи",
@@ -3450,5 +3448,70 @@
     }
   },
   "sos_cancelNotificationBody": "Подателят отмени този SOS.",
-  "sos_channelNeedsFirmware": "Това радио се нуждае от фърмуер 1.15 или по-нов за сигнали в канала. Контактите за спешни случаи пак получават директни съобщения."
+  "sos_channelNeedsFirmware": "Това радио се нуждае от фърмуер 1.15 или по-нов за сигнали в канала. Контактите за спешни случаи пак получават директни съобщения.",
+  "sos_network": "Аварийна мрежа",
+  "sos_networkNoneSubtitle": "Не е настроена. Вашият SOS отива само до контактите за спешни случаи.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Член",
+  "sos_roleResponder": "Спасител",
+  "sos_networkIntro": "Аварийната мрежа е частен, скрит канал за вашата група. Членовете могат да изпращат SOS в нея. Спасителите също виждат канала, получават сигнали и могат да пишат в него. Без код никой не може да го чете.",
+  "sos_networkCreate": "Създай нова мрежа",
+  "sos_networkJoin": "Присъедини се с код",
+  "sos_networkNameLabel": "Име на мрежата",
+  "sos_networkCreateAction": "Създай",
+  "sos_networkCodesTitle": "Споделете тези кодове",
+  "sos_networkMemberCode": "Код за член",
+  "sos_networkMemberCodeHelp": "За хора, които могат да изпращат SOS, но не трябва да виждат сигнали.",
+  "sos_networkResponderCode": "Код за спасител",
+  "sos_networkResponderCodeHelp": "За хора, които получават сигнали и могат да пишат в канала.",
+  "sos_copyCode": "Копирай кода",
+  "sos_networkCodeCopied": "Кодът е копиран",
+  "sos_networkCodeLabel": "Код на мрежата",
+  "sos_networkScan": "Сканирай QR код",
+  "sos_networkScanInstructions": "Насочете камерата към QR код на аварийна мрежа",
+  "sos_networkInvalidCode": "Това не е валиден код на аварийна мрежа.",
+  "sos_networkJoinConfirm": "Присъединяване към {name} като {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Присъедини се",
+  "sos_networkLeave": "Напусни мрежата",
+  "sos_networkLeaveConfirm": "Да напуснете {name}? Каналът ѝ се премахва от радиото и сигналите от него спират.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Вашата роля: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Каналът е настроен на това радио",
+  "sos_networkStatusInstalling": "Добавяне на канала към това радио…",
+  "sos_networkStatusNoFreeSlot": "Няма свободно място за канал на това радио. Премахнете канал, за да използвате мрежата.",
+  "sos_networkStatusDisconnected": "Свържете радио, за да настроите канала",
+  "sos_networkSecurityNote": "Всеки с код може да изпраща сигнали, а член с модифициран софтуер би могъл да ги чете. Ако код изтече, създайте нова мрежа и споделете нови кодове."
 }

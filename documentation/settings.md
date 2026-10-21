@@ -117,7 +117,7 @@ Individual channels can be muted from the channel chat bell icon, the channel li
 
 ### Emergency SOS
 - **Stored emergency location**: Fallback SOS position, used when neither the phone nor the radio has one. **Use current GPS** fills it from the phone
-- **SOS channel**: Channel the SOS is broadcast on (default: first channel)
+- **Emergency network**: Set up a private, hidden SOS channel for your group or join one with a member or responder code
 - **Include favourite contacts** (default on): Also send the SOS by direct message to every favourite
 - **Emergency contacts**: Chat contacts that always receive the SOS by direct message
 

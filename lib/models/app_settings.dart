@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import '../helpers/sos_network_code.dart';
 import 'image_codec_support.dart';
 import 'translation_support.dart';
 
@@ -171,11 +174,32 @@ class AppSettings {
   /// Fallback SOS position, used when neither the phone nor the radio has one.
   final double? sosLatitude;
   final double? sosLongitude;
-  final int sosChannelIndex;
+
+  /// The emergency network this phone has joined; see [sosNetwork].
+  final String? sosNetworkKeyHex;
+  final String? sosNetworkName;
+  final String? sosNetworkRole;
+
+  /// Created the network here, so its codes can be shown again.
+  final bool sosNetworkCoordinator;
   final bool sosIncludeFavourites;
 
   /// Full public keys of contacts that receive the SOS by direct message.
   final Set<String> sosContactKeys;
+
+  /// The joined emergency network, or null.
+  SosNetworkCode? get sosNetwork {
+    final hex = sosNetworkKeyHex;
+    final role = SosNetworkRole.values
+        .where((r) => r.name == sosNetworkRole)
+        .firstOrNull;
+    if (hex == null || role == null || hex.length != 32) return null;
+    final key = Uint8List(SosNetworkCode.keySize);
+    for (var i = 0; i < key.length; i++) {
+      key[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+    }
+    return SosNetworkCode(role: role, key: key, name: sosNetworkName);
+  }
 
   /// The five `imageCodec*` fields as the value object `ImageCodecService`
   /// consumes. Assembled rather than stored so the settings blob stays flat.
@@ -273,7 +297,10 @@ class AppSettings {
     String? selectedCyr2latProfileId,
     this.sosLatitude,
     this.sosLongitude,
-    this.sosChannelIndex = 0,
+    this.sosNetworkKeyHex,
+    this.sosNetworkName,
+    this.sosNetworkRole,
+    this.sosNetworkCoordinator = false,
     this.sosIncludeFavourites = true,
     Set<String>? sosContactKeys,
   }) : batteryChemistryByDeviceId = batteryChemistryByDeviceId ?? {},
@@ -369,7 +396,10 @@ class AppSettings {
       'selected_cyr2lat_profile_id': selectedCyr2latProfileId,
       'sos_latitude': sosLatitude,
       'sos_longitude': sosLongitude,
-      'sos_channel_index': sosChannelIndex,
+      'sos_network_key_hex': sosNetworkKeyHex,
+      'sos_network_name': sosNetworkName,
+      'sos_network_role': sosNetworkRole,
+      'sos_network_coordinator': sosNetworkCoordinator,
       'sos_include_favourites': sosIncludeFavourites,
       'sos_contact_keys': sosContactKeys.toList(),
     };
@@ -531,7 +561,10 @@ class AppSettings {
           (json['cyr2lat_char_map'] != null ? 'migrated' : 'default'),
       sosLatitude: (json['sos_latitude'] as num?)?.toDouble(),
       sosLongitude: (json['sos_longitude'] as num?)?.toDouble(),
-      sosChannelIndex: json['sos_channel_index'] as int? ?? 0,
+      sosNetworkKeyHex: json['sos_network_key_hex'] as String?,
+      sosNetworkName: json['sos_network_name'] as String?,
+      sosNetworkRole: json['sos_network_role'] as String?,
+      sosNetworkCoordinator: json['sos_network_coordinator'] as bool? ?? false,
       sosIncludeFavourites: json['sos_include_favourites'] as bool? ?? true,
       sosContactKeys:
           (json['sos_contact_keys'] as List<dynamic>?)
@@ -609,7 +642,10 @@ class AppSettings {
     String? selectedCyr2latProfileId,
     Object? sosLatitude = _unset,
     Object? sosLongitude = _unset,
-    int? sosChannelIndex,
+    Object? sosNetworkKeyHex = _unset,
+    Object? sosNetworkName = _unset,
+    Object? sosNetworkRole = _unset,
+    bool? sosNetworkCoordinator,
     bool? sosIncludeFavourites,
     Set<String>? sosContactKeys,
   }) {
@@ -723,7 +759,17 @@ class AppSettings {
       sosLongitude: sosLongitude == _unset
           ? this.sosLongitude
           : sosLongitude as double?,
-      sosChannelIndex: sosChannelIndex ?? this.sosChannelIndex,
+      sosNetworkKeyHex: sosNetworkKeyHex == _unset
+          ? this.sosNetworkKeyHex
+          : sosNetworkKeyHex as String?,
+      sosNetworkName: sosNetworkName == _unset
+          ? this.sosNetworkName
+          : sosNetworkName as String?,
+      sosNetworkRole: sosNetworkRole == _unset
+          ? this.sosNetworkRole
+          : sosNetworkRole as String?,
+      sosNetworkCoordinator:
+          sosNetworkCoordinator ?? this.sosNetworkCoordinator,
       sosIncludeFavourites: sosIncludeFavourites ?? this.sosIncludeFavourites,
       sosContactKeys: sosContactKeys ?? this.sosContactKeys,
     );

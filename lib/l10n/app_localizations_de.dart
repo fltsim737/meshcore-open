@@ -6352,11 +6352,116 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wird gesendet, wenn weder das Telefon noch das Funkgerät eine Position hat. Beide Felder leer lassen, um ihn zu entfernen.';
 
   @override
-  String get sos_channel => 'SOS-Kanal';
+  String get sos_network => 'Notfallnetz';
 
   @override
-  String get sos_channelUnavailable =>
-      'Funkgerät verbinden, um einen Kanal zu wählen';
+  String get sos_networkNoneSubtitle =>
+      'Nicht eingerichtet. Dein SOS geht nur an Notfallkontakte.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Mitglied';
+
+  @override
+  String get sos_roleResponder => 'Helfer';
+
+  @override
+  String get sos_networkIntro =>
+      'Ein Notfallnetz ist ein privater, versteckter Kanal für deine Gruppe. Mitglieder können ein SOS hineinsenden. Helfer sehen den Kanal außerdem, erhalten Alarme und können darin chatten. Ohne Code kann ihn niemand lesen.';
+
+  @override
+  String get sos_networkCreate => 'Neues Netz einrichten';
+
+  @override
+  String get sos_networkJoin => 'Mit Code beitreten';
+
+  @override
+  String get sos_networkNameLabel => 'Netzname';
+
+  @override
+  String get sos_networkCreateAction => 'Erstellen';
+
+  @override
+  String get sos_networkCodesTitle => 'Diese Codes teilen';
+
+  @override
+  String get sos_networkMemberCode => 'Mitglieds-Code';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Für Personen, die ein SOS senden können, aber keine Alarme sehen sollen.';
+
+  @override
+  String get sos_networkResponderCode => 'Helfer-Code';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Für Personen, die Alarme erhalten und im Kanal chatten können.';
+
+  @override
+  String get sos_copyCode => 'Code kopieren';
+
+  @override
+  String get sos_networkCodeCopied => 'Code kopiert';
+
+  @override
+  String get sos_networkCodeLabel => 'Netz-Code';
+
+  @override
+  String get sos_networkScan => 'QR-Code scannen';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Richte die Kamera auf einen Notfallnetz-QR-Code';
+
+  @override
+  String get sos_networkInvalidCode =>
+      'Das ist kein gültiger Notfallnetz-Code.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return '$name als $role beitreten?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Beitreten';
+
+  @override
+  String get sos_networkLeave => 'Netz verlassen';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return '$name verlassen? Sein Kanal wird von deinem Funkgerät entfernt und Alarme daraus enden.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Deine Rolle: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady =>
+      'Kanal auf diesem Funkgerät eingerichtet';
+
+  @override
+  String get sos_networkStatusInstalling =>
+      'Kanal wird zu diesem Funkgerät hinzugefügt…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Kein freier Kanalplatz auf diesem Funkgerät. Entferne einen Kanal, um das Netz zu nutzen.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Verbinde ein Funkgerät, um den Kanal einzurichten';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Jeder mit einem Code kann Alarme senden, und ein Mitglied mit veränderter Software könnte sie lesen. Wenn ein Code bekannt wird, richte ein neues Netz ein und teile neue Codes.';
 
   @override
   String get sos_channelNeedsFirmware =>

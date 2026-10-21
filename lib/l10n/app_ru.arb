@@ -2614,8 +2614,6 @@
   "sos_storedLocation": "Сохранённое экстренное местоположение",
   "sos_storedLocationUnset": "Не задано",
   "sos_storedLocationHelper": "Отправляется, если ни у телефона, ни у радио нет координат. Оставьте оба поля пустыми, чтобы удалить.",
-  "sos_channel": "Канал SOS",
-  "sos_channelUnavailable": "Подключите радио, чтобы выбрать канал",
   "sos_includeFavourites": "Включать избранные контакты",
   "sos_includeFavouritesSubtitle": "Также отправлять SOS личным сообщением каждому избранному",
   "sos_contacts": "Экстренные контакты",
@@ -2747,5 +2745,70 @@
     }
   },
   "sos_cancelNotificationBody": "Отправитель отменил этот SOS.",
-  "sos_channelNeedsFirmware": "Для сигналов в канале этому радио нужна прошивка 1.15 или новее. Экстренные контакты по-прежнему получают личные сообщения."
+  "sos_channelNeedsFirmware": "Для сигналов в канале этому радио нужна прошивка 1.15 или новее. Экстренные контакты по-прежнему получают личные сообщения.",
+  "sos_network": "Экстренная сеть",
+  "sos_networkNoneSubtitle": "Не настроена. Ваш SOS уходит только экстренным контактам.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Участник",
+  "sos_roleResponder": "Спасатель",
+  "sos_networkIntro": "Экстренная сеть — это частный скрытый канал для вашей группы. Участники могут отправлять в неё SOS. Спасатели также видят канал, получают сигналы и могут в нём общаться. Без кода его никто не прочитает.",
+  "sos_networkCreate": "Создать новую сеть",
+  "sos_networkJoin": "Присоединиться по коду",
+  "sos_networkNameLabel": "Название сети",
+  "sos_networkCreateAction": "Создать",
+  "sos_networkCodesTitle": "Поделитесь этими кодами",
+  "sos_networkMemberCode": "Код участника",
+  "sos_networkMemberCodeHelp": "Для тех, кто может отправить SOS, но не должен видеть сигналы.",
+  "sos_networkResponderCode": "Код спасателя",
+  "sos_networkResponderCodeHelp": "Для тех, кто получает сигналы и может общаться в канале.",
+  "sos_copyCode": "Копировать код",
+  "sos_networkCodeCopied": "Код скопирован",
+  "sos_networkCodeLabel": "Код сети",
+  "sos_networkScan": "Сканировать QR-код",
+  "sos_networkScanInstructions": "Наведите камеру на QR-код экстренной сети",
+  "sos_networkInvalidCode": "Это недействительный код экстренной сети.",
+  "sos_networkJoinConfirm": "Присоединиться к {name} как {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Присоединиться",
+  "sos_networkLeave": "Покинуть сеть",
+  "sos_networkLeaveConfirm": "Покинуть {name}? Её канал будет удалён с радио, и сигналы из него прекратятся.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Ваша роль: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Канал настроен на этом радио",
+  "sos_networkStatusInstalling": "Добавление канала на это радио…",
+  "sos_networkStatusNoFreeSlot": "На этом радио нет свободного слота для канала. Удалите канал, чтобы пользоваться сетью.",
+  "sos_networkStatusDisconnected": "Подключите радио, чтобы настроить канал",
+  "sos_networkSecurityNote": "Любой, у кого есть код, может отправлять сигналы, а участник с изменённым ПО мог бы их читать. Если код утёк, создайте новую сеть и раздайте новые коды."
 }

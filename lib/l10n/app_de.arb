@@ -3452,8 +3452,6 @@
   "sos_storedLocation": "Gespeicherter Notfallstandort",
   "sos_storedLocationUnset": "Nicht festgelegt",
   "sos_storedLocationHelper": "Wird gesendet, wenn weder das Telefon noch das Funkgerät eine Position hat. Beide Felder leer lassen, um ihn zu entfernen.",
-  "sos_channel": "SOS-Kanal",
-  "sos_channelUnavailable": "Funkgerät verbinden, um einen Kanal zu wählen",
   "sos_includeFavourites": "Favoriten einbeziehen",
   "sos_includeFavouritesSubtitle": "SOS zusätzlich als Direktnachricht an jeden Favoriten senden",
   "sos_contacts": "Notfallkontakte",
@@ -3585,5 +3583,70 @@
     }
   },
   "sos_cancelNotificationBody": "Der Absender hat dieses SOS abgebrochen.",
-  "sos_channelNeedsFirmware": "Dieses Funkgerät braucht Firmware 1.15 oder neuer für Kanalalarme. Notfallkontakte erhalten weiterhin Direktnachrichten."
+  "sos_channelNeedsFirmware": "Dieses Funkgerät braucht Firmware 1.15 oder neuer für Kanalalarme. Notfallkontakte erhalten weiterhin Direktnachrichten.",
+  "sos_network": "Notfallnetz",
+  "sos_networkNoneSubtitle": "Nicht eingerichtet. Dein SOS geht nur an Notfallkontakte.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Mitglied",
+  "sos_roleResponder": "Helfer",
+  "sos_networkIntro": "Ein Notfallnetz ist ein privater, versteckter Kanal für deine Gruppe. Mitglieder können ein SOS hineinsenden. Helfer sehen den Kanal außerdem, erhalten Alarme und können darin chatten. Ohne Code kann ihn niemand lesen.",
+  "sos_networkCreate": "Neues Netz einrichten",
+  "sos_networkJoin": "Mit Code beitreten",
+  "sos_networkNameLabel": "Netzname",
+  "sos_networkCreateAction": "Erstellen",
+  "sos_networkCodesTitle": "Diese Codes teilen",
+  "sos_networkMemberCode": "Mitglieds-Code",
+  "sos_networkMemberCodeHelp": "Für Personen, die ein SOS senden können, aber keine Alarme sehen sollen.",
+  "sos_networkResponderCode": "Helfer-Code",
+  "sos_networkResponderCodeHelp": "Für Personen, die Alarme erhalten und im Kanal chatten können.",
+  "sos_copyCode": "Code kopieren",
+  "sos_networkCodeCopied": "Code kopiert",
+  "sos_networkCodeLabel": "Netz-Code",
+  "sos_networkScan": "QR-Code scannen",
+  "sos_networkScanInstructions": "Richte die Kamera auf einen Notfallnetz-QR-Code",
+  "sos_networkInvalidCode": "Das ist kein gültiger Notfallnetz-Code.",
+  "sos_networkJoinConfirm": "{name} als {role} beitreten?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Beitreten",
+  "sos_networkLeave": "Netz verlassen",
+  "sos_networkLeaveConfirm": "{name} verlassen? Sein Kanal wird von deinem Funkgerät entfernt und Alarme daraus enden.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Deine Rolle: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Kanal auf diesem Funkgerät eingerichtet",
+  "sos_networkStatusInstalling": "Kanal wird zu diesem Funkgerät hinzugefügt…",
+  "sos_networkStatusNoFreeSlot": "Kein freier Kanalplatz auf diesem Funkgerät. Entferne einen Kanal, um das Netz zu nutzen.",
+  "sos_networkStatusDisconnected": "Verbinde ein Funkgerät, um den Kanal einzurichten",
+  "sos_networkSecurityNote": "Jeder mit einem Code kann Alarme senden, und ein Mitglied mit veränderter Software könnte sie lesen. Wenn ein Code bekannt wird, richte ein neues Netz ein und teile neue Codes."
 }

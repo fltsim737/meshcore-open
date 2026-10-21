@@ -13,13 +13,32 @@ Open **Settings → App Settings → Emergency SOS**:
 | Setting | What it does |
 |---|---|
 | **Stored emergency location** | A fixed position (for example the homestead) used when neither the phone nor the radio has a position. **Use current GPS** fills it in from the phone. Leave both fields empty to remove it. |
-| **SOS channel** | The channel the SOS alert goes out on, as a hidden data packet. Defaults to the first channel (normally Public); choose a private channel shared only with your responders. If the chosen slot no longer exists on the radio, the first channel is used. Channel alerts need radio firmware 1.15 or newer; with older firmware only emergency contacts are alerted, by DM. |
+| **Emergency network** | The private, hidden channel your group's SOS alerts go out on. Set one up or join one with a code; see [Emergency network](#emergency-network). Without one, your SOS goes only to your emergency contacts by DM. |
 | **Include favourite contacts** | Also send the SOS by direct message to every favourite chat contact (default on). |
 | **Emergency contacts** | Chat contacts that always receive the SOS by direct message. |
 
 These settings belong to the phone, not the radio, so they stay the same whichever radio you connect.
 
 When you first open the Emergency tab, the app asks for location permission. It asks then rather than when you send, so the SOS is never held up by a permission dialog.
+
+## Emergency network
+
+An emergency network is a private channel for one group, such as a farm team. Nobody without one of its codes can read it.
+
+**Set up (coordinator, once).** Settings → App Settings → Emergency SOS → **Emergency network** → **Set up a new network**, and give it a name. The app generates a random key and shows two codes, each as text and as a QR code:
+
+| Code | Who it is for | What they get |
+|---|---|---|
+| **Member code** | People who can send an SOS but should not see alerts | The channel is hidden from them everywhere; their SOS goes into it; they still see ACKs for their own SOS |
+| **Responder code** | People who receive alerts | The channel appears in their Channels list so they can chat on it, and SOS alerts on it raise the alarm |
+
+The coordinator joins as a responder and can show the codes again at any time.
+
+**Join (everyone else, once).** **Emergency network → Join with a code**, then scan the QR code or type the code (for example `SOS1-R-ABCD-…`; case, spaces and dashes do not matter). The app confirms the network name and role before joining.
+
+**On the radio.** The app adds the network's channel to a free slot on the connected radio, and again on any other radio you connect later. If the radio has no free slot, the settings say so; remove a channel to make room. **Leave network** removes the channel from the radio and deletes alerts heard on it.
+
+**What the roles do and do not protect.** Both codes contain the same channel key, because anyone who sends an SOS needs it to encrypt. The difference between member and responder is enforced by the app: a member using modified software could read alerts. Anyone given a code can send alerts. If a code leaks, set up a new network and share new codes. Other MeshCore apps connected to the same radio will list the network's channel.
 
 ## Sending an SOS
 
@@ -35,7 +54,7 @@ Press and hold the red **SOS** button for two seconds. A ring fills while you ho
 
 | When | What is sent |
 |---|---|
-| Immediately | Channel broadcast and a direct message to each emergency contact |
+| Immediately | Alert on your emergency network and a direct message to each emergency contact |
 | Every minute for the first 5 minutes | Repeated quickly, so anyone who missed the first copy soon hears another |
 | Every 5 minutes after that | Repeated until you cancel, whether or not anyone has acknowledged |
 
@@ -46,7 +65,7 @@ So broadcasts go out at 0, 1, 2, 3, 4 and 5 minutes, then at 10, 15, 20 minutes 
 **Cancel SOS** (after a confirmation) stops everything at once:
 
 - no further repeats, and a broadcast that is partway through sending stops before its remaining DMs;
-- a cancellation notice goes out on the SOS channel and by DM to every emergency contact, including those who already acknowledged.
+- a cancellation notice goes out on the emergency network and by DM to every emergency contact, including those who already acknowledged.
 
 If the radio is disconnected when you cancel, the notice is sent as soon as it reconnects, even after an app restart.
 
@@ -67,7 +86,7 @@ The source is included in the message.
 
 ## Message format
 
-**On a channel** the SOS, ACK and cancellation travel as binary channel-data packets (type `0x5053`), not text. No chat in MeshCore Open or any other MeshCore app shows or stores them; only MeshCore Open's Emergency tab reads them. The layout is in the [protocol reference](ble-protocol.md#emergency-sos-packets).
+**On the emergency network channel** the SOS, ACK and cancellation travel as binary channel-data packets (type `0x5053`), not text. Packets on any other channel are ignored. No chat in MeshCore Open or any other MeshCore app shows or stores them; only MeshCore Open's Emergency tab reads them. The layout is in the [protocol reference](ble-protocol.md#emergency-sos-packets).
 
 **Direct messages** to emergency contacts are text, so a contact using another MeshCore app still understands them:
 
@@ -106,12 +125,12 @@ An SOS carries your position, so MeshCore Open never keeps it where it could be 
 
 What the app cannot control:
 
-- Anyone with the channel's key and modified software can capture channel packets, so use a private SOS channel rather than Public.
+- Anyone holding a network code and running modified software can capture its packets; see [what the roles protect](#emergency-network).
 - An emergency contact using a different MeshCore app sees the SOS direct message in that app's chat.
 
 ## Receiving an SOS
 
-When an SOS arrives on any channel or by direct message:
+When an SOS arrives on your emergency network (responders only) or by direct message from someone who listed you as an emergency contact:
 
 - A full-screen red **EMERGENCY SOS** warning covers the app, showing who sent it, the position and source, and when it was first and last heard. It cannot be navigated away from. It stays until you press **Send ACK** or **Dismiss**, or the sender cancels, and if several alerts are open they are shown one at a time, oldest first.
 - A dedicated SOS notification replaces the ordinary message notification (see [platform behaviour](#platform-behaviour)).
@@ -143,6 +162,7 @@ The active SOS and live alerts survive an app restart; alerts that expired while
 
 ## Limitations
 
-- **Spoofing.** Anyone with the channel key can send a fake SOS or ACK, and sender names on channels are not verified. The Public channel key is widely known, so use a private channel when trust matters.
-- **Region scope.** The broadcast follows the SOS channel's region setting, like any other message on that channel (see [Regions](regions.md)).
+- **Spoofing.** Anyone with a network code can send a fake SOS or ACK, and sender names on channels are not verified.
+- **Region scope.** The alert follows the network channel's region setting, like any other message on that channel (see [Regions](regions.md)).
+- **Radio slots.** The network uses one of the radio's channel slots.
 - **Airtime.** Repeats and direct messages use airtime; the six broadcasts in the first five minutes are the busiest stretch. The intervals are fixed in v1.

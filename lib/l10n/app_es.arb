@@ -3451,8 +3451,6 @@
   "sos_storedLocation": "Ubicación de emergencia guardada",
   "sos_storedLocationUnset": "Sin definir",
   "sos_storedLocationHelper": "Se envía cuando ni el teléfono ni la radio tienen posición. Deja ambos campos vacíos para quitarla.",
-  "sos_channel": "Canal SOS",
-  "sos_channelUnavailable": "Conecta una radio para elegir un canal",
   "sos_includeFavourites": "Incluir contactos favoritos",
   "sos_includeFavouritesSubtitle": "Enviar también el SOS por mensaje directo a cada favorito",
   "sos_contacts": "Contactos de emergencia",
@@ -3584,5 +3582,70 @@
     }
   },
   "sos_cancelNotificationBody": "El remitente canceló este SOS.",
-  "sos_channelNeedsFirmware": "Esta radio necesita firmware 1.15 o posterior para alertas de canal. Los contactos de emergencia siguen recibiendo mensajes directos."
+  "sos_channelNeedsFirmware": "Esta radio necesita firmware 1.15 o posterior para alertas de canal. Los contactos de emergencia siguen recibiendo mensajes directos.",
+  "sos_network": "Red de emergencia",
+  "sos_networkNoneSubtitle": "Sin configurar. Tu SOS solo llega a tus contactos de emergencia.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Miembro",
+  "sos_roleResponder": "Respondedor",
+  "sos_networkIntro": "Una red de emergencia es un canal privado y oculto para tu grupo. Los miembros pueden enviar un SOS a ella. Los respondedores además ven el canal, reciben alertas y pueden chatear en él. Sin un código nadie puede leerlo.",
+  "sos_networkCreate": "Configurar una red nueva",
+  "sos_networkJoin": "Unirse con un código",
+  "sos_networkNameLabel": "Nombre de la red",
+  "sos_networkCreateAction": "Crear",
+  "sos_networkCodesTitle": "Comparte estos códigos",
+  "sos_networkMemberCode": "Código de miembro",
+  "sos_networkMemberCodeHelp": "Para quienes pueden enviar un SOS pero no deben ver alertas.",
+  "sos_networkResponderCode": "Código de respondedor",
+  "sos_networkResponderCodeHelp": "Para quienes reciben alertas y pueden chatear en el canal.",
+  "sos_copyCode": "Copiar código",
+  "sos_networkCodeCopied": "Código copiado",
+  "sos_networkCodeLabel": "Código de red",
+  "sos_networkScan": "Escanear código QR",
+  "sos_networkScanInstructions": "Apunta la cámara a un código QR de red de emergencia",
+  "sos_networkInvalidCode": "Ese no es un código de red de emergencia válido.",
+  "sos_networkJoinConfirm": "¿Unirse a {name} como {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Unirse",
+  "sos_networkLeave": "Salir de la red",
+  "sos_networkLeaveConfirm": "¿Salir de {name}? Su canal se quita de tu radio y dejan de llegar sus alertas.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Tu rol: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Canal configurado en esta radio",
+  "sos_networkStatusInstalling": "Añadiendo el canal a esta radio…",
+  "sos_networkStatusNoFreeSlot": "No hay ninguna ranura de canal libre en esta radio. Quita un canal para usar la red.",
+  "sos_networkStatusDisconnected": "Conecta una radio para configurar el canal",
+  "sos_networkSecurityNote": "Cualquiera con un código puede enviar alertas, y un miembro con software modificado podría leerlas. Si un código se filtra, configura una red nueva y comparte códigos nuevos."
 }

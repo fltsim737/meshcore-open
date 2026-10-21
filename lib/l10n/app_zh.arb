@@ -3322,8 +3322,6 @@
   "sos_storedLocation": "已保存的紧急位置",
   "sos_storedLocationUnset": "未设置",
   "sos_storedLocationHelper": "当手机和电台都没有位置时发送。将两个字段都留空即可删除。",
-  "sos_channel": "SOS 频道",
-  "sos_channelUnavailable": "连接电台后才能选择频道",
   "sos_includeFavourites": "包含收藏联系人",
   "sos_includeFavouritesSubtitle": "同时以私信方式向每个收藏联系人发送 SOS",
   "sos_contacts": "紧急联系人",
@@ -3455,5 +3453,70 @@
     }
   },
   "sos_cancelNotificationBody": "发送者已取消此 SOS。",
-  "sos_channelNeedsFirmware": "此电台需要 1.15 或更高版本固件才能发送频道警报。紧急联系人仍会收到私信。"
+  "sos_channelNeedsFirmware": "此电台需要 1.15 或更高版本固件才能发送频道警报。紧急联系人仍会收到私信。",
+  "sos_network": "紧急网络",
+  "sos_networkNoneSubtitle": "未设置。你的 SOS 只会发送给紧急联系人。",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "成员",
+  "sos_roleResponder": "救援人员",
+  "sos_networkIntro": "紧急网络是为你的团队准备的私密隐藏频道。成员可以向其发送 SOS。救援人员还能看到该频道、接收警报并在其中聊天。没有代码的人无法读取。",
+  "sos_networkCreate": "设置新网络",
+  "sos_networkJoin": "使用代码加入",
+  "sos_networkNameLabel": "网络名称",
+  "sos_networkCreateAction": "创建",
+  "sos_networkCodesTitle": "分享这些代码",
+  "sos_networkMemberCode": "成员代码",
+  "sos_networkMemberCodeHelp": "适用于可以发送 SOS 但不应看到警报的人。",
+  "sos_networkResponderCode": "救援人员代码",
+  "sos_networkResponderCodeHelp": "适用于接收警报并可在频道中聊天的人。",
+  "sos_copyCode": "复制代码",
+  "sos_networkCodeCopied": "已复制代码",
+  "sos_networkCodeLabel": "网络代码",
+  "sos_networkScan": "扫描二维码",
+  "sos_networkScanInstructions": "将摄像头对准紧急网络二维码",
+  "sos_networkInvalidCode": "这不是有效的紧急网络代码。",
+  "sos_networkJoinConfirm": "以{role}身份加入 {name}？",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "加入",
+  "sos_networkLeave": "退出网络",
+  "sos_networkLeaveConfirm": "退出 {name}？其频道将从你的电台中移除，来自它的警报将停止。",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "你的角色：{role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "已在此电台上设置频道",
+  "sos_networkStatusInstalling": "正在向此电台添加频道…",
+  "sos_networkStatusNoFreeSlot": "此电台没有空闲的频道位置。请删除一个频道以使用该网络。",
+  "sos_networkStatusDisconnected": "连接电台以设置频道",
+  "sos_networkSecurityNote": "任何持有代码的人都能发送警报，使用修改版软件的成员可能读取警报。如果代码泄露，请设置新网络并分享新代码。"
 }

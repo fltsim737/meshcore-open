@@ -3451,8 +3451,6 @@
   "sos_storedLocation": "保存済みの緊急位置",
   "sos_storedLocationUnset": "未設定",
   "sos_storedLocationHelper": "スマートフォンにも無線機にも位置情報がない場合に送信されます。削除するには両方の欄を空にしてください。",
-  "sos_channel": "SOSチャンネル",
-  "sos_channelUnavailable": "チャンネルを選ぶには無線機を接続してください",
   "sos_includeFavourites": "お気に入りの連絡先を含める",
   "sos_includeFavouritesSubtitle": "お気に入りの全員にもダイレクトメッセージでSOSを送信",
   "sos_contacts": "緊急連絡先",
@@ -3584,5 +3582,70 @@
     }
   },
   "sos_cancelNotificationBody": "送信者がこのSOSを取り消しました。",
-  "sos_channelNeedsFirmware": "チャンネル通知にはこの無線機のファームウェア1.15以降が必要です。緊急連絡先には引き続きダイレクトメッセージが届きます。"
+  "sos_channelNeedsFirmware": "チャンネル通知にはこの無線機のファームウェア1.15以降が必要です。緊急連絡先には引き続きダイレクトメッセージが届きます。",
+  "sos_network": "緊急ネットワーク",
+  "sos_networkNoneSubtitle": "未設定です。SOSは緊急連絡先にのみ送られます。",
+  "sos_networkSummary": "{name}・{role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "メンバー",
+  "sos_roleResponder": "対応者",
+  "sos_networkIntro": "緊急ネットワークは、グループ専用の非公開・非表示のチャンネルです。メンバーはSOSを送信できます。対応者はさらにチャンネルを表示でき、通知を受け取り、チャットもできます。コードがなければ誰も読めません。",
+  "sos_networkCreate": "新しいネットワークを作成",
+  "sos_networkJoin": "コードで参加",
+  "sos_networkNameLabel": "ネットワーク名",
+  "sos_networkCreateAction": "作成",
+  "sos_networkCodesTitle": "これらのコードを共有",
+  "sos_networkMemberCode": "メンバーコード",
+  "sos_networkMemberCodeHelp": "SOSを送信できるが通知は見るべきでない人向け。",
+  "sos_networkResponderCode": "対応者コード",
+  "sos_networkResponderCodeHelp": "通知を受け取り、チャンネルでチャットできる人向け。",
+  "sos_copyCode": "コードをコピー",
+  "sos_networkCodeCopied": "コードをコピーしました",
+  "sos_networkCodeLabel": "ネットワークコード",
+  "sos_networkScan": "QRコードを読み取る",
+  "sos_networkScanInstructions": "カメラを緊急ネットワークのQRコードに向けてください",
+  "sos_networkInvalidCode": "有効な緊急ネットワークコードではありません。",
+  "sos_networkJoinConfirm": "{name} に {role} として参加しますか？",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "参加",
+  "sos_networkLeave": "ネットワークを退出",
+  "sos_networkLeaveConfirm": "{name} を退出しますか？チャンネルは無線機から削除され、そのチャンネルからの通知は届かなくなります。",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "あなたの役割: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "この無線機にチャンネルを設定済み",
+  "sos_networkStatusInstalling": "この無線機にチャンネルを追加中…",
+  "sos_networkStatusNoFreeSlot": "この無線機に空きチャンネルがありません。ネットワークを使うにはチャンネルを削除してください。",
+  "sos_networkStatusDisconnected": "チャンネルを設定するには無線機を接続してください",
+  "sos_networkSecurityNote": "コードを持つ人は誰でも通知を送信でき、改造ソフトを使うメンバーは内容を読める可能性があります。コードが漏れた場合は、新しいネットワークを作成して新しいコードを共有してください。"
 }
