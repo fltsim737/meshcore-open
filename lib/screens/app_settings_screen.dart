@@ -9,7 +9,7 @@ import '../models/image_codec_support.dart';
 import '../services/app_settings_service.dart';
 import '../services/background_service.dart';
 import '../services/image_codec_service.dart';
-import '../services/linux_autostart.dart';
+import '../services/login_autostart.dart';
 import '../services/map_tile_cache_service.dart';
 import '../services/notification_service.dart';
 import '../theme/mesh_theme.dart';
@@ -313,7 +313,7 @@ class AppSettingsScreen extends StatelessWidget {
             onTap: BackgroundService.openBatteryOptimizationSettings,
           ),
         ],
-        if (PlatformInfo.isLinux) ...[
+        if (LoginAutostart.forPlatform() != null) ...[
           const Divider(height: 1, indent: 16),
           const _StartOnLoginTile(),
         ],
@@ -1635,7 +1635,7 @@ class _ScrollIntoViewOnceState extends State<_ScrollIntoViewOnce> {
   Widget build(BuildContext context) => widget.child;
 }
 
-/// Linux: start hidden in the tray at login.
+/// Desktop: start hidden in the tray at login.
 class _StartOnLoginTile extends StatefulWidget {
   const _StartOnLoginTile();
 
@@ -1644,16 +1644,32 @@ class _StartOnLoginTile extends StatefulWidget {
 }
 
 class _StartOnLoginTileState extends State<_StartOnLoginTile> {
-  final _autostart = LinuxAutostart();
-  late bool _enabled = _autostart.isEnabled;
+  final _autostart = LoginAutostart.forPlatform()!;
+  bool _enabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _read();
+  }
+
+  Future<void> _read() async {
+    bool enabled;
+    try {
+      enabled = await _autostart.enabled();
+    } catch (_) {
+      enabled = false;
+    }
+    if (mounted) setState(() => _enabled = enabled);
+  }
 
   Future<void> _set(bool enabled) async {
     try {
       await _autostart.setEnabled(enabled);
     } catch (_) {
-      // Fall through: the switch shows what is actually on disk.
+      // Fall through: the switch shows what is actually set.
     }
-    if (mounted) setState(() => _enabled = _autostart.isEnabled);
+    await _read();
   }
 
   @override

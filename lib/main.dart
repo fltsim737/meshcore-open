@@ -23,7 +23,7 @@ import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
 import 'services/sos_service.dart';
 import 'services/desktop_tray_service.dart';
-import 'services/linux_autostart.dart';
+import 'services/login_autostart.dart';
 import 'widgets/sos_warning_overlay.dart';
 import 'services/storage_service.dart';
 import 'services/message_retry_service.dart';
@@ -225,14 +225,12 @@ void main(List<String> args) async {
   await trayService.initialize(
     onQuit: connector.disconnect,
     languageOverride: appSettingsService.settings.languageOverride,
-    startedHidden: args.contains(LinuxAutostart.hiddenArgument),
+    startedHidden: args.contains(LoginAutostart.hiddenArgument),
   );
-  if (PlatformInfo.isLinux) {
-    try {
-      await LinuxAutostart().refresh();
-    } catch (e) {
-      appLogger.warn('Updating the login autostart entry failed: $e');
-    }
+  try {
+    await LoginAutostart.forPlatform()?.refresh();
+  } catch (e) {
+    appLogger.warn('Updating the login autostart entry failed: $e');
   }
   // A new SOS brings the window up, so its warning screen is in view.
   var shownAlerts = <String>{};

@@ -8,11 +8,14 @@ import 'package:window_manager/window_manager.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/platform_info.dart';
 
-/// Linux: a tray icon, and closing the window hides it there instead of
-/// quitting, so the radio connection, messages and SOS alarms carry on.
-/// Only Quit in the tray menu ends the app.
+/// Linux and Windows: a tray icon, and closing the window hides it there
+/// instead of quitting, so the radio connection, messages and SOS alarms
+/// carry on. Only Quit in the tray menu ends the app.
 class DesktopTrayService with TrayListener, WindowListener {
-  static const String _iconAsset = 'assets/icons/tray_icon.png';
+  // Windows tray icons must be .ico.
+  static String get _iconAsset => PlatformInfo.isWindows
+      ? 'assets/icons/tray_icon.ico'
+      : 'assets/icons/tray_icon.png';
   static const String _showKey = 'show';
   static const String _quitKey = 'quit';
 
@@ -26,7 +29,7 @@ class DesktopTrayService with TrayListener, WindowListener {
     String? languageOverride,
     bool startedHidden = false,
   }) async {
-    if (!PlatformInfo.isLinux) return;
+    if (!PlatformInfo.isLinux && !PlatformInfo.isWindows) return;
     _onQuit = onQuit;
     try {
       await windowManager.ensureInitialized();

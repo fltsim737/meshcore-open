@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'login_autostart.dart';
+
 /// Starts the app hidden in the tray when the user logs in, through a
 /// freedesktop autostart entry (`~/.config/autostart`). The entry's presence
 /// is the setting, so turning it off in the desktop's own startup settings
 /// turns it off here too.
-class LinuxAutostart {
-  /// Launch argument that keeps the window hidden in the tray.
-  static const String hiddenArgument = '--hidden';
+class LinuxAutostart implements LoginAutostart {
+  static const String hiddenArgument = LoginAutostart.hiddenArgument;
   static const String _fileName = 'meshcore-open.desktop';
 
   final String _configHome;
@@ -34,8 +35,12 @@ class LinuxAutostart {
 
   bool get isEnabled => _file.existsSync();
 
-  Future<void> setEnabled(bool enabled) async {
-    if (enabled) {
+  @override
+  Future<bool> enabled() async => isEnabled;
+
+  @override
+  Future<void> setEnabled(bool on) async {
+    if (on) {
       await _file.parent.create(recursive: true);
       await _file.writeAsString(desktopEntry);
     } else if (_file.existsSync()) {
@@ -45,6 +50,7 @@ class LinuxAutostart {
 
   /// Points an existing entry at where the app runs from now, in case the
   /// AppImage was moved or replaced under another name.
+  @override
   Future<void> refresh() async {
     if (!isEnabled) return;
     if (await _file.readAsString() != desktopEntry) {
