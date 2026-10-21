@@ -6031,196 +6031,193 @@ class AppLocalizationsKo extends AppLocalizations {
   String get networkMap_unnamed => '이름 없는 리피터';
 
   @override
-  String get nav_emergency => 'Emergency';
+  String get nav_emergency => '긴급';
 
   @override
-  String get sos_title => 'Emergency';
+  String get sos_title => '긴급';
 
   @override
-  String get sos_settingsSection => 'Emergency SOS';
+  String get sos_settingsSection => '긴급 SOS';
 
   @override
-  String get sos_storedLocation => 'Stored emergency location';
+  String get sos_storedLocation => '저장된 긴급 위치';
 
   @override
-  String get sos_storedLocationUnset => 'Not set';
+  String get sos_storedLocationUnset => '설정 안 됨';
 
   @override
   String get sos_storedLocationHelper =>
-      'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.';
+      '휴대폰과 무전기 모두 위치가 없을 때 전송됩니다. 삭제하려면 두 칸을 모두 비워 두세요.';
 
   @override
-  String get sos_channel => 'SOS channel';
+  String get sos_channel => 'SOS 채널';
 
   @override
-  String get sos_channelUnavailable => 'Connect a radio to choose a channel';
+  String get sos_channelUnavailable => '채널을 선택하려면 무전기를 연결하세요';
 
   @override
-  String get sos_includeFavourites => 'Include favourite contacts';
+  String get sos_includeFavourites => '즐겨찾기 연락처 포함';
 
   @override
-  String get sos_includeFavouritesSubtitle =>
-      'Also send the SOS by direct message to every favourite';
+  String get sos_includeFavouritesSubtitle => '모든 즐겨찾기 연락처에도 SOS를 개인 메시지로 전송';
 
   @override
-  String get sos_contacts => 'Emergency contacts';
+  String get sos_contacts => '긴급 연락처';
 
   @override
   String sos_contactsSubtitle(int count) {
-    return '$count selected';
+    return '$count명 선택됨';
   }
 
   @override
-  String get sos_contactsEmpty => 'No chat contacts on this radio yet';
+  String get sos_contactsEmpty => '이 무전기에 아직 채팅 연락처가 없습니다';
 
   @override
   String get sos_buttonLabel => 'SOS';
 
   @override
-  String get sos_holdToSend => 'Press and hold for 2 seconds to send an SOS';
+  String get sos_holdToSend => '2초 동안 길게 눌러 SOS 보내기';
 
   @override
-  String get sos_active => 'SOS ACTIVE';
+  String get sos_active => 'SOS 활성';
 
   @override
-  String get sos_cancel => 'Cancel SOS';
+  String get sos_cancel => 'SOS 취소';
 
   @override
-  String get sos_cancelConfirmTitle => 'Cancel SOS?';
+  String get sos_cancelConfirmTitle => 'SOS를 취소할까요?';
 
   @override
   String get sos_cancelConfirmBody =>
-      'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.';
+      '반복 전송이 중단됩니다. 응답자에게 취소 사실이 전달되지 않으니 안전하다면 알려 주세요.';
 
   @override
-  String get sos_keepActive => 'Keep active';
+  String get sos_keepActive => '계속 유지';
 
   @override
   String sos_broadcastCount(int count, String time) {
-    return 'Sent $count times, last at $time';
+    return '$count회 전송, 마지막 $time';
   }
 
   @override
-  String get sos_notSentYet => 'Waiting for the radio to send';
+  String get sos_notSentYet => '무전기 전송 대기 중';
 
   @override
   String sos_locationSource(String source) {
-    return 'Location source: $source';
+    return '위치 출처: $source';
   }
 
   @override
-  String get sos_sourcePhoneGps => 'Phone GPS';
+  String get sos_sourcePhoneGps => '휴대폰 GPS';
 
   @override
-  String get sos_sourceRadio => 'Radio location';
+  String get sos_sourceRadio => '무전기 위치';
 
   @override
-  String get sos_sourceStored => 'Stored emergency location';
+  String get sos_sourceStored => '저장된 긴급 위치';
 
   @override
-  String get sos_sourceNone => 'No location';
+  String get sos_sourceNone => '위치 없음';
 
   @override
-  String get sos_acksNone => 'No acknowledgements yet';
+  String get sos_acksNone => '아직 응답 없음';
 
   @override
-  String get sos_acksHeader => 'Acknowledged by';
+  String get sos_acksHeader => '응답한 사람';
 
   @override
-  String get sos_incomingHeader => 'Incoming alerts';
+  String get sos_incomingHeader => '수신 경보';
 
   @override
-  String get sos_incomingEmpty => 'No SOS alerts received';
+  String get sos_incomingEmpty => '수신된 SOS 경보 없음';
 
   @override
-  String get sos_sendAck => 'Send ACK';
+  String get sos_sendAck => 'ACK 보내기';
 
   @override
-  String get sos_ackSent => 'ACK sent';
+  String get sos_ackSent => 'ACK 전송됨';
 
   @override
-  String get sos_dismiss => 'Dismiss';
+  String get sos_dismiss => '닫기';
 
   @override
-  String get sos_dismissed => 'Dismissed';
+  String get sos_dismissed => '닫음';
 
   @override
-  String get sos_copyCoordinates => 'Copy coordinates';
+  String get sos_copyCoordinates => '좌표 복사';
 
   @override
-  String get sos_coordinatesCopied => 'Coordinates copied';
+  String get sos_coordinatesCopied => '좌표 복사됨';
 
   @override
-  String get sos_noPosition => 'No position included';
+  String get sos_noPosition => '위치 정보 없음';
 
   @override
   String sos_ackedByOthers(String names) {
-    return 'Also acknowledged by $names';
+    return '$names도 응답함';
   }
 
   @override
   String sos_heardSummary(String first, String last, int count) {
-    return 'First heard $first, last heard $last ($count×)';
+    return '처음 $first, 마지막 $last ($count회)';
   }
 
   @override
-  String get sos_unknownSender => 'Unknown node';
+  String get sos_unknownSender => '알 수 없는 노드';
 
   @override
-  String get sos_contactWaiting => 'Waiting';
+  String get sos_contactWaiting => '대기 중';
 
   @override
-  String get sos_contactDelivered => 'Delivered';
+  String get sos_contactDelivered => '전달됨';
 
   @override
-  String get sos_contactAcked => 'Acknowledged';
+  String get sos_contactAcked => '응답함';
 
   @override
   String sos_nextBroadcast(String time) {
-    return 'Next broadcast at $time';
+    return '다음 전송 $time';
   }
 
   @override
-  String get sos_dmHeader => 'Direct messages';
+  String get sos_dmHeader => '개인 메시지';
 
   @override
-  String get sos_useCurrentGps => 'Use current GPS';
+  String get sos_useCurrentGps => '현재 GPS 사용';
 
   @override
-  String get sos_gpsUnavailable => 'Phone GPS unavailable';
+  String get sos_gpsUnavailable => '휴대폰 GPS를 사용할 수 없음';
 
   @override
   String sos_notificationTitle(String name) {
-    return 'EMERGENCY SOS from $name';
+    return '$name의 긴급 SOS';
   }
 
   @override
-  String get sos_notificationOpenToRespond => 'Open MeshCore Open to send ACK';
+  String get sos_notificationOpenToRespond => 'ACK를 보내려면 MeshCore Open을 여세요';
 
   @override
-  String get sos_notificationChannelName => 'Emergency SOS alerts';
+  String get sos_notificationChannelName => '긴급 SOS 경보';
 
   @override
-  String get sos_notificationChannelDescription =>
-      'Alarm for SOS messages from other nodes';
+  String get sos_notificationChannelDescription => '다른 노드의 SOS 메시지 경보';
 
   @override
-  String get sos_ackChannelName => 'SOS acknowledgements';
+  String get sos_ackChannelName => 'SOS 응답';
 
   @override
   String sos_ackNotificationTitle(String name) {
-    return 'SOS acknowledged by $name';
+    return '$name님이 SOS에 응답함';
   }
 
   @override
-  String get sos_ackNotificationBody =>
-      'Your SOS was received. It keeps repeating until you cancel it.';
+  String get sos_ackNotificationBody => 'SOS가 수신되었습니다. 취소할 때까지 계속 반복됩니다.';
 
   @override
-  String get sos_warningTitle => 'EMERGENCY SOS';
+  String get sos_warningTitle => '긴급 SOS';
 
   @override
   String sos_warningMore(int count) {
-    return '$count more open alerts';
+    return '열린 경보 $count개 더 있음';
   }
 }

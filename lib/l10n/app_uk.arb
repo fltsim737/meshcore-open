@@ -3290,5 +3290,134 @@
   "networkMap_manage": "Керувати",
   "networkMap_addedToContacts": "Додано до контактів",
   "networkMap_addFailed": "Не вдалося додати до контактів",
-  "networkMap_unnamed": "Ретранслятор без назви"
+  "networkMap_unnamed": "Ретранслятор без назви",
+  "nav_emergency": "Екстрене",
+  "sos_title": "Екстрене",
+  "sos_settingsSection": "Екстрений SOS",
+  "sos_storedLocation": "Збережене екстрене розташування",
+  "sos_storedLocationUnset": "Не задано",
+  "sos_storedLocationHelper": "Надсилається, коли ні телефон, ні радіо не мають координат. Залиште обидва поля порожніми, щоб видалити.",
+  "sos_channel": "Канал SOS",
+  "sos_channelUnavailable": "Під'єднайте радіо, щоб вибрати канал",
+  "sos_includeFavourites": "Включати обрані контакти",
+  "sos_includeFavouritesSubtitle": "Також надсилати SOS особистим повідомленням кожному обраному",
+  "sos_contacts": "Екстрені контакти",
+  "sos_contactsSubtitle": "Вибрано: {count}",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "На цьому радіо ще немає контактів чату",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Утримуйте 2 секунди, щоб надіслати SOS",
+  "sos_active": "SOS АКТИВНИЙ",
+  "sos_cancel": "Скасувати SOS",
+  "sos_cancelConfirmTitle": "Скасувати SOS?",
+  "sos_cancelConfirmBody": "Повторне надсилання припиниться. Рятувальники не дізнаються про скасування — повідомте їх, якщо ви в безпеці.",
+  "sos_keepActive": "Залишити активним",
+  "sos_broadcastCount": "Надіслано {count} разів, останній о {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Очікування надсилання радіо",
+  "sos_locationSource": "Джерело координат: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS телефона",
+  "sos_sourceRadio": "Розташування радіо",
+  "sos_sourceStored": "Збережене екстрене розташування",
+  "sos_sourceNone": "Немає координат",
+  "sos_acksNone": "Підтверджень поки немає",
+  "sos_acksHeader": "Підтвердили",
+  "sos_incomingHeader": "Вхідні сигнали",
+  "sos_incomingEmpty": "SOS-сигналів не отримано",
+  "sos_sendAck": "Надіслати ACK",
+  "sos_ackSent": "ACK надіслано",
+  "sos_dismiss": "Приховати",
+  "sos_dismissed": "Приховано",
+  "sos_copyCoordinates": "Копіювати координати",
+  "sos_coordinatesCopied": "Координати скопійовано",
+  "sos_noPosition": "Координати не передано",
+  "sos_ackedByOthers": "Також підтвердили: {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Уперше {first}, востаннє {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Невідомий вузол",
+  "sos_contactWaiting": "Очікує",
+  "sos_contactDelivered": "Доставлено",
+  "sos_contactAcked": "Підтверджено",
+  "sos_nextBroadcast": "Наступне надсилання о {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Особисті повідомлення",
+  "sos_useCurrentGps": "Використати поточний GPS",
+  "sos_gpsUnavailable": "GPS телефона недоступний",
+  "sos_notificationTitle": "ЕКСТРЕНИЙ SOS від {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Відкрийте MeshCore Open, щоб надіслати ACK",
+  "sos_notificationChannelName": "Екстрені SOS-сигнали",
+  "sos_notificationChannelDescription": "Тривога для SOS-повідомлень від інших вузлів",
+  "sos_ackChannelName": "Підтвердження SOS",
+  "sos_ackNotificationTitle": "SOS підтвердив {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Ваш SOS отримано. Він повторюватиметься, доки ви його не скасуєте.",
+  "sos_warningTitle": "ЕКСТРЕНИЙ SOS",
+  "sos_warningMore": "Ще відкритих сигналів: {count}",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

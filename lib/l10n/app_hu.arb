@@ -3349,5 +3349,134 @@
   "networkMap_manage": "Kezelés",
   "networkMap_addedToContacts": "Hozzáadva a kapcsolatokhoz",
   "networkMap_addFailed": "Nem sikerült hozzáadni a kapcsolatokhoz",
-  "networkMap_unnamed": "Névtelen repeater"
+  "networkMap_unnamed": "Névtelen repeater",
+  "nav_emergency": "Vészhelyzet",
+  "sos_title": "Vészhelyzet",
+  "sos_settingsSection": "Vészhelyzeti SOS",
+  "sos_storedLocation": "Mentett vészhelyzeti hely",
+  "sos_storedLocationUnset": "Nincs beállítva",
+  "sos_storedLocationHelper": "Akkor küldjük, ha sem a telefonnak, sem a rádiónak nincs pozíciója. Hagyja üresen mindkét mezőt a törléshez.",
+  "sos_channel": "SOS-csatorna",
+  "sos_channelUnavailable": "Csatlakoztasson rádiót a csatorna kiválasztásához",
+  "sos_includeFavourites": "Kedvenc partnerek bevonása",
+  "sos_includeFavouritesSubtitle": "Az SOS-t közvetlen üzenetben is elküldi minden kedvencnek",
+  "sos_contacts": "Vészhelyzeti partnerek",
+  "sos_contactsSubtitle": "{count} kiválasztva",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Ezen a rádión még nincsenek csevegőpartnerek",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Tartsa lenyomva 2 másodpercig az SOS küldéséhez",
+  "sos_active": "SOS AKTÍV",
+  "sos_cancel": "SOS visszavonása",
+  "sos_cancelConfirmTitle": "Visszavonja az SOS-t?",
+  "sos_cancelConfirmBody": "Az ismételt sugárzás leáll. A segítők nem értesülnek a visszavonásról, ezért szóljon nekik, ha biztonságban van.",
+  "sos_keepActive": "Aktív marad",
+  "sos_broadcastCount": "{count} alkalommal elküldve, utoljára {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Várakozás a rádió küldésére",
+  "sos_locationSource": "Helyforrás: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "Telefon GPS",
+  "sos_sourceRadio": "Rádió helye",
+  "sos_sourceStored": "Mentett vészhelyzeti hely",
+  "sos_sourceNone": "Nincs hely",
+  "sos_acksNone": "Még nincs visszaigazolás",
+  "sos_acksHeader": "Visszaigazolta",
+  "sos_incomingHeader": "Bejövő riasztások",
+  "sos_incomingEmpty": "Nem érkezett SOS-riasztás",
+  "sos_sendAck": "ACK küldése",
+  "sos_ackSent": "ACK elküldve",
+  "sos_dismiss": "Elvetés",
+  "sos_dismissed": "Elvetve",
+  "sos_copyCoordinates": "Koordináták másolása",
+  "sos_coordinatesCopied": "Koordináták másolva",
+  "sos_noPosition": "Nincs pozíció",
+  "sos_ackedByOthers": "Visszaigazolta még: {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Először {first}, utoljára {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Ismeretlen csomópont",
+  "sos_contactWaiting": "Várakozik",
+  "sos_contactDelivered": "Kézbesítve",
+  "sos_contactAcked": "Visszaigazolva",
+  "sos_nextBroadcast": "Következő sugárzás: {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Közvetlen üzenetek",
+  "sos_useCurrentGps": "Jelenlegi GPS használata",
+  "sos_gpsUnavailable": "A telefon GPS nem érhető el",
+  "sos_notificationTitle": "VÉSZHELYZETI SOS tőle: {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Nyissa meg a MeshCore Opent az ACK küldéséhez",
+  "sos_notificationChannelName": "Vészhelyzeti SOS-riasztások",
+  "sos_notificationChannelDescription": "Riasztás más csomópontok SOS-üzeneteihez",
+  "sos_ackChannelName": "SOS-visszaigazolások",
+  "sos_ackNotificationTitle": "{name} visszaigazolta az SOS-t",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Az SOS-ét megkapták. Addig ismétlődik, amíg vissza nem vonja.",
+  "sos_warningTitle": "VÉSZHELYZETI SOS",
+  "sos_warningMore": "Még {count} nyitott riasztás",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

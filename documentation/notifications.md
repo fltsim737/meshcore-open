@@ -109,6 +109,10 @@ Mute or unmute a channel from any of these places. Muted channels do not generat
 
 There is no per-contact muting.
 
+### Emergency SOS Notifications
+
+An incoming SOS replaces the ordinary message notification with its own, on the Android channel `sos_alerts` (maximum importance, alarm audio, a two-tone sound that loops until the alert is acknowledged or dismissed, and cannot be swiped away). Each repeat the sender broadcasts sounds again until you act on it. When someone acknowledges your own SOS, an "SOS acknowledged by …" notification appears on the `sos_acks` channel. SOS notifications are never rate limited, batched, or suppressed during sync, and SOS/ACK texts do not create ordinary message notifications. On iOS they follow silent mode and Focus. See [Emergency SOS](emergency-sos.md#platform-behaviour).
+
 ## Rate Limiting
 
 The notification system prevents notification storms:

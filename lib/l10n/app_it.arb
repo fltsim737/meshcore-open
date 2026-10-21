@@ -3444,5 +3444,134 @@
   "networkMap_manage": "Gestisci",
   "networkMap_addedToContacts": "Aggiunto ai contatti",
   "networkMap_addFailed": "Impossibile aggiungere ai contatti",
-  "networkMap_unnamed": "Ripetitore senza nome"
+  "networkMap_unnamed": "Ripetitore senza nome",
+  "nav_emergency": "Emergenza",
+  "sos_title": "Emergenza",
+  "sos_settingsSection": "SOS di emergenza",
+  "sos_storedLocation": "Posizione di emergenza salvata",
+  "sos_storedLocationUnset": "Non impostata",
+  "sos_storedLocationHelper": "Inviata quando né il telefono né la radio hanno una posizione. Lascia vuoti entrambi i campi per rimuoverla.",
+  "sos_channel": "Canale SOS",
+  "sos_channelUnavailable": "Collega una radio per scegliere un canale",
+  "sos_includeFavourites": "Includi contatti preferiti",
+  "sos_includeFavouritesSubtitle": "Invia l'SOS anche come messaggio diretto a ogni preferito",
+  "sos_contacts": "Contatti di emergenza",
+  "sos_contactsSubtitle": "{count} selezionati",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Ancora nessun contatto chat su questa radio",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Tieni premuto 2 secondi per inviare un SOS",
+  "sos_active": "SOS ATTIVO",
+  "sos_cancel": "Annulla SOS",
+  "sos_cancelConfirmTitle": "Annullare l'SOS?",
+  "sos_cancelConfirmBody": "Le ritrasmissioni si fermeranno. I soccorritori non vengono avvisati dell'annullamento: informali se sei al sicuro.",
+  "sos_keepActive": "Mantieni attivo",
+  "sos_broadcastCount": "Inviato {count} volte, ultimo alle {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "In attesa che la radio invii",
+  "sos_locationSource": "Fonte posizione: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS del telefono",
+  "sos_sourceRadio": "Posizione della radio",
+  "sos_sourceStored": "Posizione di emergenza salvata",
+  "sos_sourceNone": "Nessuna posizione",
+  "sos_acksNone": "Ancora nessuna conferma",
+  "sos_acksHeader": "Confermato da",
+  "sos_incomingHeader": "Avvisi in arrivo",
+  "sos_incomingEmpty": "Nessun avviso SOS ricevuto",
+  "sos_sendAck": "Invia ACK",
+  "sos_ackSent": "ACK inviato",
+  "sos_dismiss": "Ignora",
+  "sos_dismissed": "Ignorato",
+  "sos_copyCoordinates": "Copia coordinate",
+  "sos_coordinatesCopied": "Coordinate copiate",
+  "sos_noPosition": "Nessuna posizione inclusa",
+  "sos_ackedByOthers": "Confermato anche da {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Primo alle {first}, ultimo alle {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Nodo sconosciuto",
+  "sos_contactWaiting": "In attesa",
+  "sos_contactDelivered": "Consegnato",
+  "sos_contactAcked": "Confermato",
+  "sos_nextBroadcast": "Prossima trasmissione alle {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Messaggi diretti",
+  "sos_useCurrentGps": "Usa GPS attuale",
+  "sos_gpsUnavailable": "GPS del telefono non disponibile",
+  "sos_notificationTitle": "SOS DI EMERGENZA da {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Apri MeshCore Open per inviare ACK",
+  "sos_notificationChannelName": "Avvisi SOS di emergenza",
+  "sos_notificationChannelDescription": "Allarme per messaggi SOS da altri nodi",
+  "sos_ackChannelName": "Conferme SOS",
+  "sos_ackNotificationTitle": "SOS confermato da {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Il tuo SOS è stato ricevuto. Continua a ripetersi finché non lo annulli.",
+  "sos_warningTitle": "SOS DI EMERGENZA",
+  "sos_warningMore": "Altri {count} avvisi aperti",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

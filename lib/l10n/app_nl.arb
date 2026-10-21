@@ -3211,5 +3211,134 @@
   "networkMap_manage": "Beheren",
   "networkMap_addedToContacts": "Toegevoegd aan contacten",
   "networkMap_addFailed": "Kan niet aan contacten toevoegen",
-  "networkMap_unnamed": "Naamloze repeater"
+  "networkMap_unnamed": "Naamloze repeater",
+  "nav_emergency": "Noodgeval",
+  "sos_title": "Noodgeval",
+  "sos_settingsSection": "Nood-SOS",
+  "sos_storedLocation": "Opgeslagen noodlocatie",
+  "sos_storedLocationUnset": "Niet ingesteld",
+  "sos_storedLocationHelper": "Wordt verzonden als telefoon en radio geen positie hebben. Laat beide velden leeg om te verwijderen.",
+  "sos_channel": "SOS-kanaal",
+  "sos_channelUnavailable": "Verbind een radio om een kanaal te kiezen",
+  "sos_includeFavourites": "Favoriete contacten meenemen",
+  "sos_includeFavouritesSubtitle": "SOS ook als direct bericht naar elke favoriet sturen",
+  "sos_contacts": "Noodcontacten",
+  "sos_contactsSubtitle": "{count} geselecteerd",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Nog geen chatcontacten op deze radio",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Houd 2 seconden ingedrukt om een SOS te versturen",
+  "sos_active": "SOS ACTIEF",
+  "sos_cancel": "SOS annuleren",
+  "sos_cancelConfirmTitle": "SOS annuleren?",
+  "sos_cancelConfirmBody": "Herhaalde uitzendingen stoppen. Hulpverleners horen niet dat je annuleerde; laat ze weten als je veilig bent.",
+  "sos_keepActive": "Actief houden",
+  "sos_broadcastCount": "{count} keer verzonden, laatst om {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Wachten tot de radio verzendt",
+  "sos_locationSource": "Locatiebron: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "Telefoon-GPS",
+  "sos_sourceRadio": "Radiolocatie",
+  "sos_sourceStored": "Opgeslagen noodlocatie",
+  "sos_sourceNone": "Geen locatie",
+  "sos_acksNone": "Nog geen bevestigingen",
+  "sos_acksHeader": "Bevestigd door",
+  "sos_incomingHeader": "Inkomende meldingen",
+  "sos_incomingEmpty": "Geen SOS-meldingen ontvangen",
+  "sos_sendAck": "ACK sturen",
+  "sos_ackSent": "ACK verzonden",
+  "sos_dismiss": "Negeren",
+  "sos_dismissed": "Genegeerd",
+  "sos_copyCoordinates": "Coördinaten kopiëren",
+  "sos_coordinatesCopied": "Coördinaten gekopieerd",
+  "sos_noPosition": "Geen positie meegestuurd",
+  "sos_ackedByOthers": "Ook bevestigd door {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Eerst ontvangen {first}, laatst {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Onbekende node",
+  "sos_contactWaiting": "Wachten",
+  "sos_contactDelivered": "Afgeleverd",
+  "sos_contactAcked": "Bevestigd",
+  "sos_nextBroadcast": "Volgende uitzending om {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Directe berichten",
+  "sos_useCurrentGps": "Huidige GPS gebruiken",
+  "sos_gpsUnavailable": "Telefoon-GPS niet beschikbaar",
+  "sos_notificationTitle": "NOOD-SOS van {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Open MeshCore Open om ACK te sturen",
+  "sos_notificationChannelName": "Nood-SOS-meldingen",
+  "sos_notificationChannelDescription": "Alarm voor SOS-berichten van andere nodes",
+  "sos_ackChannelName": "SOS-bevestigingen",
+  "sos_ackNotificationTitle": "SOS bevestigd door {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Je SOS is ontvangen. Hij blijft herhalen tot je annuleert.",
+  "sos_warningTitle": "NOOD-SOS",
+  "sos_warningMore": "Nog {count} open meldingen",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

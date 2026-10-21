@@ -37,11 +37,12 @@ The versioned web build uses `dart run build_pipe:build` (also `bun run build`).
 | Translation models/inference | `lib/services/translation_service.dart` |
 | Image models/inference and GRP_DATA chunks | `lib/services/image_codec_service.dart`, `lib/services/image_chunk_transport.dart` |
 | Image reassembly and file persistence | `lib/services/received_image_store.dart`, `lib/services/received_image_blob_store_io.dart` |
+| Emergency SOS: wire format, scheduler, alerts | `lib/helpers/sos_codec.dart`, `lib/services/sos_service.dart`, `lib/widgets/sos_warning_overlay.dart` |
 | Material themes | `lib/theme/mesh_theme.dart` |
 | Screens and reusable UI | `lib/screens/`, `lib/widgets/` |
 | Localization | `lib/l10n/` (18 locales) |
 
-`Provider`/`ChangeNotifier` drives UI state. `main.dart` wires `MeshTheme.light()` and `MeshTheme.dark()` and uses the saved theme preference. Its `MultiProvider` exposes `MeshCoreConnector`, `MessageRetryService`, `PathHistoryService`, `AppSettingsService`, `BleDebugLogService`, `AppDebugLogService`, `ChatTextScaleService`, `TranslationService`, `UiViewStateService`, `StorageService` (plain `Provider`), `MapTileCacheService`, `TimeoutPredictionService`, `ImageCodecService`, and `ReceivedImageStore`; screens read them with `Consumer<T>`, `context.watch<T>()`, or `context.read<T>()`.
+`Provider`/`ChangeNotifier` drives UI state. `main.dart` wires `MeshTheme.light()` and `MeshTheme.dark()` and uses the saved theme preference. Its `MultiProvider` exposes `MeshCoreConnector`, `MessageRetryService`, `PathHistoryService`, `AppSettingsService`, `BleDebugLogService`, `AppDebugLogService`, `ChatTextScaleService`, `TranslationService`, `UiViewStateService`, `StorageService` (plain `Provider`), `MapTileCacheService`, `TimeoutPredictionService`, `ImageCodecService`, `ReceivedImageStore`, `NetworkMapUploadService`, and `SosService`; screens read them with `Consumer<T>`, `context.watch<T>()`, or `context.read<T>()`.
 
 Most JSON stores scope keys by the first 10 hex chars of the connected device's public key, so per-radio data stays isolated; some preferences, including the saved region-name list, are global. Model bundles, received images, and caches use files.
 
@@ -61,4 +62,4 @@ Android builds currently include ARM64 only and use Java 17. iOS targets 16.4. R
 
 ## Documentation
 
-Use the [feature index](documentation/README.md), [regions](documentation/regions.md), [image messages](documentation/image-messages.md), and [routing reference](documentation/routing-paths.md). Keep protocol details in the canonical reference rather than maintaining competing command tables.
+Use the [feature index](documentation/README.md), [emergency SOS](documentation/emergency-sos.md), [regions](documentation/regions.md), [image messages](documentation/image-messages.md), and [routing reference](documentation/routing-paths.md). Keep protocol details in the canonical reference rather than maintaining competing command tables.

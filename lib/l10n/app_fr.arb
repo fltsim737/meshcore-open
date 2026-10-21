@@ -3444,5 +3444,134 @@
   "networkMap_manage": "Gérer",
   "networkMap_addedToContacts": "Ajouté aux contacts",
   "networkMap_addFailed": "Impossible d'ajouter aux contacts",
-  "networkMap_unnamed": "Répéteur sans nom"
+  "networkMap_unnamed": "Répéteur sans nom",
+  "nav_emergency": "Urgence",
+  "sos_title": "Urgence",
+  "sos_settingsSection": "SOS d'urgence",
+  "sos_storedLocation": "Position d'urgence enregistrée",
+  "sos_storedLocationUnset": "Non définie",
+  "sos_storedLocationHelper": "Envoyée lorsque ni le téléphone ni la radio n'ont de position. Laissez les deux champs vides pour la supprimer.",
+  "sos_channel": "Canal SOS",
+  "sos_channelUnavailable": "Connectez une radio pour choisir un canal",
+  "sos_includeFavourites": "Inclure les contacts favoris",
+  "sos_includeFavouritesSubtitle": "Envoyer aussi le SOS en message direct à chaque favori",
+  "sos_contacts": "Contacts d'urgence",
+  "sos_contactsSubtitle": "{count} sélectionné(s)",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Aucun contact de discussion sur cette radio pour l'instant",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Maintenez appuyé 2 secondes pour envoyer un SOS",
+  "sos_active": "SOS ACTIF",
+  "sos_cancel": "Annuler le SOS",
+  "sos_cancelConfirmTitle": "Annuler le SOS ?",
+  "sos_cancelConfirmBody": "Les rediffusions vont s'arrêter. Les secours ne sont pas prévenus de l'annulation : informez-les si vous êtes en sécurité.",
+  "sos_keepActive": "Garder actif",
+  "sos_broadcastCount": "Envoyé {count} fois, dernier à {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "En attente d'envoi par la radio",
+  "sos_locationSource": "Source de position : {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS du téléphone",
+  "sos_sourceRadio": "Position de la radio",
+  "sos_sourceStored": "Position d'urgence enregistrée",
+  "sos_sourceNone": "Aucune position",
+  "sos_acksNone": "Aucun accusé de réception pour l'instant",
+  "sos_acksHeader": "Accusé de réception par",
+  "sos_incomingHeader": "Alertes reçues",
+  "sos_incomingEmpty": "Aucune alerte SOS reçue",
+  "sos_sendAck": "Envoyer ACK",
+  "sos_ackSent": "ACK envoyé",
+  "sos_dismiss": "Ignorer",
+  "sos_dismissed": "Ignorée",
+  "sos_copyCoordinates": "Copier les coordonnées",
+  "sos_coordinatesCopied": "Coordonnées copiées",
+  "sos_noPosition": "Aucune position incluse",
+  "sos_ackedByOthers": "Également accusé par {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Reçu d'abord à {first}, dernier à {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Nœud inconnu",
+  "sos_contactWaiting": "En attente",
+  "sos_contactDelivered": "Remis",
+  "sos_contactAcked": "Accusé reçu",
+  "sos_nextBroadcast": "Prochaine diffusion à {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Messages directs",
+  "sos_useCurrentGps": "Utiliser le GPS actuel",
+  "sos_gpsUnavailable": "GPS du téléphone indisponible",
+  "sos_notificationTitle": "SOS D'URGENCE de {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Ouvrez MeshCore Open pour envoyer ACK",
+  "sos_notificationChannelName": "Alertes SOS d'urgence",
+  "sos_notificationChannelDescription": "Alarme pour les messages SOS d'autres nœuds",
+  "sos_ackChannelName": "Accusés de réception SOS",
+  "sos_ackNotificationTitle": "SOS accusé par {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Votre SOS a été reçu. Il continue de se répéter jusqu'à ce que vous l'annuliez.",
+  "sos_warningTitle": "SOS D'URGENCE",
+  "sos_warningMore": "{count} autres alertes ouvertes",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

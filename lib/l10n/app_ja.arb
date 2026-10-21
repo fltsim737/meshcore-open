@@ -3444,5 +3444,134 @@
   "networkMap_manage": "管理",
   "networkMap_addedToContacts": "連絡先に追加しました",
   "networkMap_addFailed": "連絡先に追加できませんでした",
-  "networkMap_unnamed": "名前のないリピータ"
+  "networkMap_unnamed": "名前のないリピータ",
+  "nav_emergency": "緊急",
+  "sos_title": "緊急",
+  "sos_settingsSection": "緊急SOS",
+  "sos_storedLocation": "保存済みの緊急位置",
+  "sos_storedLocationUnset": "未設定",
+  "sos_storedLocationHelper": "スマートフォンにも無線機にも位置情報がない場合に送信されます。削除するには両方の欄を空にしてください。",
+  "sos_channel": "SOSチャンネル",
+  "sos_channelUnavailable": "チャンネルを選ぶには無線機を接続してください",
+  "sos_includeFavourites": "お気に入りの連絡先を含める",
+  "sos_includeFavouritesSubtitle": "お気に入りの全員にもダイレクトメッセージでSOSを送信",
+  "sos_contacts": "緊急連絡先",
+  "sos_contactsSubtitle": "{count}件選択中",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "この無線機にはまだチャット連絡先がありません",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "2秒間長押ししてSOSを送信",
+  "sos_active": "SOS発信中",
+  "sos_cancel": "SOSを取り消す",
+  "sos_cancelConfirmTitle": "SOSを取り消しますか？",
+  "sos_cancelConfirmBody": "繰り返し送信が止まります。応答者には取り消しが伝わらないため、無事であれば知らせてください。",
+  "sos_keepActive": "発信を続ける",
+  "sos_broadcastCount": "{count}回送信、最終 {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "無線機の送信待ち",
+  "sos_locationSource": "位置情報の取得元: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "スマートフォンのGPS",
+  "sos_sourceRadio": "無線機の位置",
+  "sos_sourceStored": "保存済みの緊急位置",
+  "sos_sourceNone": "位置情報なし",
+  "sos_acksNone": "まだ応答はありません",
+  "sos_acksHeader": "応答者",
+  "sos_incomingHeader": "受信したアラート",
+  "sos_incomingEmpty": "SOSアラートは受信していません",
+  "sos_sendAck": "ACKを送信",
+  "sos_ackSent": "ACK送信済み",
+  "sos_dismiss": "閉じる",
+  "sos_dismissed": "閉じました",
+  "sos_copyCoordinates": "座標をコピー",
+  "sos_coordinatesCopied": "座標をコピーしました",
+  "sos_noPosition": "位置情報なし",
+  "sos_ackedByOthers": "{names} も応答済み",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "初回 {first}、最終 {last}（{count}回）",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "不明なノード",
+  "sos_contactWaiting": "待機中",
+  "sos_contactDelivered": "配信済み",
+  "sos_contactAcked": "応答済み",
+  "sos_nextBroadcast": "次回送信 {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "ダイレクトメッセージ",
+  "sos_useCurrentGps": "現在のGPSを使用",
+  "sos_gpsUnavailable": "スマートフォンのGPSを利用できません",
+  "sos_notificationTitle": "{name} からの緊急SOS",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "ACKを送るには MeshCore Open を開いてください",
+  "sos_notificationChannelName": "緊急SOSアラート",
+  "sos_notificationChannelDescription": "他のノードからのSOSメッセージのアラーム",
+  "sos_ackChannelName": "SOSの応答",
+  "sos_ackNotificationTitle": "{name} がSOSに応答しました",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "SOSは受信されました。取り消すまで繰り返し送信されます。",
+  "sos_warningTitle": "緊急SOS",
+  "sos_warningMore": "未対応のアラートがあと{count}件",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

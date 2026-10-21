@@ -3445,5 +3445,134 @@
   "networkMap_manage": "Verwalten",
   "networkMap_addedToContacts": "Zu Kontakten hinzugefügt",
   "networkMap_addFailed": "Hinzufügen zu Kontakten fehlgeschlagen",
-  "networkMap_unnamed": "Unbenannter Repeater"
+  "networkMap_unnamed": "Unbenannter Repeater",
+  "nav_emergency": "Notfall",
+  "sos_title": "Notfall",
+  "sos_settingsSection": "Notfall-SOS",
+  "sos_storedLocation": "Gespeicherter Notfallstandort",
+  "sos_storedLocationUnset": "Nicht festgelegt",
+  "sos_storedLocationHelper": "Wird gesendet, wenn weder das Telefon noch das Funkgerät eine Position hat. Beide Felder leer lassen, um ihn zu entfernen.",
+  "sos_channel": "SOS-Kanal",
+  "sos_channelUnavailable": "Funkgerät verbinden, um einen Kanal zu wählen",
+  "sos_includeFavourites": "Favoriten einbeziehen",
+  "sos_includeFavouritesSubtitle": "SOS zusätzlich als Direktnachricht an jeden Favoriten senden",
+  "sos_contacts": "Notfallkontakte",
+  "sos_contactsSubtitle": "{count} ausgewählt",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Noch keine Chat-Kontakte auf diesem Funkgerät",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "2 Sekunden gedrückt halten, um ein SOS zu senden",
+  "sos_active": "SOS AKTIV",
+  "sos_cancel": "SOS abbrechen",
+  "sos_cancelConfirmTitle": "SOS abbrechen?",
+  "sos_cancelConfirmBody": "Wiederholte Aussendungen werden gestoppt. Helfer erfahren nicht, dass du abgebrochen hast – sag ihnen Bescheid, wenn du in Sicherheit bist.",
+  "sos_keepActive": "Aktiv lassen",
+  "sos_broadcastCount": "{count}-mal gesendet, zuletzt um {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Warte auf Senden durch das Funkgerät",
+  "sos_locationSource": "Standortquelle: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "Telefon-GPS",
+  "sos_sourceRadio": "Funkgerät-Standort",
+  "sos_sourceStored": "Gespeicherter Notfallstandort",
+  "sos_sourceNone": "Kein Standort",
+  "sos_acksNone": "Noch keine Bestätigungen",
+  "sos_acksHeader": "Bestätigt von",
+  "sos_incomingHeader": "Eingehende Alarme",
+  "sos_incomingEmpty": "Keine SOS-Alarme empfangen",
+  "sos_sendAck": "ACK senden",
+  "sos_ackSent": "ACK gesendet",
+  "sos_dismiss": "Verwerfen",
+  "sos_dismissed": "Verworfen",
+  "sos_copyCoordinates": "Koordinaten kopieren",
+  "sos_coordinatesCopied": "Koordinaten kopiert",
+  "sos_noPosition": "Keine Position enthalten",
+  "sos_ackedByOthers": "Auch bestätigt von {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Zuerst empfangen {first}, zuletzt {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Unbekannter Knoten",
+  "sos_contactWaiting": "Ausstehend",
+  "sos_contactDelivered": "Zugestellt",
+  "sos_contactAcked": "Bestätigt",
+  "sos_nextBroadcast": "Nächste Aussendung um {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Direktnachrichten",
+  "sos_useCurrentGps": "Aktuelles GPS verwenden",
+  "sos_gpsUnavailable": "Telefon-GPS nicht verfügbar",
+  "sos_notificationTitle": "NOTFALL-SOS von {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "MeshCore Open öffnen, um ACK zu senden",
+  "sos_notificationChannelName": "Notfall-SOS-Alarme",
+  "sos_notificationChannelDescription": "Alarm für SOS-Nachrichten anderer Knoten",
+  "sos_ackChannelName": "SOS-Bestätigungen",
+  "sos_ackNotificationTitle": "SOS bestätigt von {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Dein SOS wurde empfangen. Es wird wiederholt, bis du es abbrichst.",
+  "sos_warningTitle": "NOTFALL-SOS",
+  "sos_warningMore": "{count} weitere offene Alarme",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }
