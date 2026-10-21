@@ -6324,6 +6324,10 @@ class AppLocalizationsSk extends AppLocalizations {
   String get sos_channelUnavailable => 'Pripojte rádio a vyberte kanál';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Toto rádio potrebuje firmvér 1.15 alebo novší pre poplachy v kanáli. Núdzové kontakty stále dostanú priame správy.';
+
+  @override
   String get sos_includeFavourites => 'Zahrnúť obľúbené kontakty';
 
   @override
@@ -6411,9 +6415,6 @@ class AppLocalizationsSk extends AppLocalizations {
   String get sos_dismiss => 'Zavrieť';
 
   @override
-  String get sos_dismissed => 'Zavreté';
-
-  @override
   String get sos_copyCoordinates => 'Kopírovať súradnice';
 
   @override
@@ -6488,9 +6489,6 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NÚDZOVÉ SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Zrušené odosielateľom';
 
   @override
   String get sos_updatesChannelName => 'Aktualizácie SOS';

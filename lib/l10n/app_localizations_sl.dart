@@ -6326,6 +6326,10 @@ class AppLocalizationsSl extends AppLocalizations {
   String get sos_channelUnavailable => 'Povežite radio, da izberete kanal';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Ta radio potrebuje vdelano programsko opremo 1.15 ali novejšo za opozorila na kanalu. Nujni stiki še vedno prejmejo neposredna sporočila.';
+
+  @override
   String get sos_includeFavourites => 'Vključi priljubljene stike';
 
   @override
@@ -6412,9 +6416,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get sos_dismiss => 'Opusti';
 
   @override
-  String get sos_dismissed => 'Opuščeno';
-
-  @override
   String get sos_copyCoordinates => 'Kopiraj koordinate';
 
   @override
@@ -6489,9 +6490,6 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NUJNI SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Preklical pošiljatelj';
 
   @override
   String get sos_updatesChannelName => 'Posodobitve SOS';

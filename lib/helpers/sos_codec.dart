@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 
 /// Where the position in an SOS came from, in priority order.
 enum SosLocationSource {
@@ -173,5 +174,161 @@ class SosCodec {
     return firstLine == null
         ? null
         : _cancelLine.firstMatch(firstLine.trim())?.group(1);
+  }
+}
+
+/// GRP_DATA type for SOS packets ("SP"). Clients that do not know it drop
+/// the packet, so an SOS on a channel never lands in any chat history.
+const int dataTypeSos = 0x5053;
+
+enum SosPacketKind {
+  sos(1),
+  ack(2),
+  cancel(3);
+
+  final int code;
+  const SosPacketKind(this.code);
+}
+
+/// A binary SOS, ACK or cancellation sent as channel data.
+///
+/// Layout (little-endian):
+/// `[version=1][kind][id u16][sender key prefix x6][name len][name...]`
+/// then for an SOS `[time u32][source][has position][lat i32][lon i32]`
+/// (degrees x 1e6), or for a cancellation `[time u32]`.
+class SosPacket {
+  static const int version = 1;
+  static const int keyPrefixSize = 6;
+  static const int maxNameBytes = 31;
+
+  final SosPacketKind kind;
+  final String id;
+  final Uint8List senderPrefix;
+  final String senderName;
+  final DateTime? time;
+  final SosFix fix;
+
+  const SosPacket({
+    required this.kind,
+    required this.id,
+    required this.senderPrefix,
+    required this.senderName,
+    this.time,
+    this.fix = const SosFix.none(),
+  });
+
+  Uint8List encode() {
+    final out = BytesBuilder()
+      ..addByte(version)
+      ..addByte(kind.code);
+    final idValue = int.parse(id, radix: 16);
+    out
+      ..addByte(idValue & 0xFF)
+      ..addByte((idValue >> 8) & 0xFF)
+      ..add(_prefix(senderPrefix));
+    var name = utf8.encode(senderName);
+    if (name.length > maxNameBytes) name = name.sublist(0, maxNameBytes);
+    out
+      ..addByte(name.length)
+      ..add(name);
+    if (kind == SosPacketKind.ack) return out.toBytes();
+    final seconds = (time ?? DateTime.now()).millisecondsSinceEpoch ~/ 1000;
+    out.add(_u32(seconds));
+    if (kind == SosPacketKind.cancel) return out.toBytes();
+    out
+      ..addByte(fix.source.index)
+      ..addByte(fix.hasPosition ? 1 : 0)
+      ..add(_i32(((fix.latitude ?? 0) * 1e6).round()))
+      ..add(_i32(((fix.longitude ?? 0) * 1e6).round()));
+    return out.toBytes();
+  }
+
+  static SosPacket? decode(Uint8List data) {
+    try {
+      if (data.length < 11 || data[0] != version) return null;
+      final kind = SosPacketKind.values
+          .where((k) => k.code == data[1])
+          .firstOrNull;
+      if (kind == null) return null;
+      final id = (data[2] | (data[3] << 8)).toRadixString(16).padLeft(4, '0');
+      final prefix = Uint8List.fromList(data.sublist(4, 4 + keyPrefixSize));
+      final nameLength = data[10];
+      var offset = 11;
+      if (data.length < offset + nameLength) return null;
+      final name = utf8.decode(
+        data.sublist(offset, offset + nameLength),
+        allowMalformed: true,
+      );
+      offset += nameLength;
+      if (kind == SosPacketKind.ack) {
+        return SosPacket(
+          kind: kind,
+          id: id,
+          senderPrefix: prefix,
+          senderName: name,
+        );
+      }
+      if (data.length < offset + 4) return null;
+      final time = DateTime.fromMillisecondsSinceEpoch(
+        _readU32(data, offset) * 1000,
+      );
+      offset += 4;
+      if (kind == SosPacketKind.cancel) {
+        return SosPacket(
+          kind: kind,
+          id: id,
+          senderPrefix: prefix,
+          senderName: name,
+          time: time,
+        );
+      }
+      if (data.length < offset + 10) return null;
+      final sourceIndex = data[offset];
+      final hasPosition = data[offset + 1] == 1;
+      final lat = _readI32(data, offset + 2) / 1e6;
+      final lon = _readI32(data, offset + 6) / 1e6;
+      final valid = hasPosition && lat.abs() <= 90 && lon.abs() <= 180;
+      return SosPacket(
+        kind: kind,
+        id: id,
+        senderPrefix: prefix,
+        senderName: name,
+        time: time,
+        fix: valid
+            ? SosFix(
+                latitude: lat,
+                longitude: lon,
+                source: sourceIndex < SosLocationSource.values.length
+                    ? SosLocationSource.values[sourceIndex]
+                    : SosLocationSource.none,
+              )
+            : const SosFix.none(),
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  static Uint8List _prefix(Uint8List key) {
+    final out = Uint8List(keyPrefixSize);
+    out.setRange(0, min(keyPrefixSize, key.length), key);
+    return out;
+  }
+
+  static List<int> _u32(int v) => [
+    v & 0xFF,
+    (v >> 8) & 0xFF,
+    (v >> 16) & 0xFF,
+    (v >> 24) & 0xFF,
+  ];
+
+  static List<int> _i32(int v) => _u32(v & 0xFFFFFFFF);
+
+  static int _readU32(Uint8List d, int o) =>
+      d[o] | (d[o + 1] << 8) | (d[o + 2] << 16) | (d[o + 3] << 24);
+
+  static int _readI32(Uint8List d, int o) {
+    final v = _readU32(d, o);
+    return v >= 0x80000000 ? v - 0x100000000 : v;
   }
 }

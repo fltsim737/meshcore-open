@@ -6347,6 +6347,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sos_channelUnavailable => 'Conecta una radio para elegir un canal';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Esta radio necesita firmware 1.15 o posterior para alertas de canal. Los contactos de emergencia siguen recibiendo mensajes directos.';
+
+  @override
   String get sos_includeFavourites => 'Incluir contactos favoritos';
 
   @override
@@ -6433,9 +6437,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sos_dismiss => 'Descartar';
 
   @override
-  String get sos_dismissed => 'Descartada';
-
-  @override
   String get sos_copyCoordinates => 'Copiar coordenadas';
 
   @override
@@ -6510,9 +6511,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'SOS DE EMERGENCIA';
-
-  @override
-  String get sos_cancelledBySender => 'Cancelado por el remitente';
 
   @override
   String get sos_updatesChannelName => 'Novedades de SOS';

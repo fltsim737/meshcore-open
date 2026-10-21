@@ -6049,6 +6049,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sos_channelUnavailable => 'チャンネルを選ぶには無線機を接続してください';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'チャンネル通知にはこの無線機のファームウェア1.15以降が必要です。緊急連絡先には引き続きダイレクトメッセージが届きます。';
+
+  @override
   String get sos_includeFavourites => 'お気に入りの連絡先を含める';
 
   @override
@@ -6134,9 +6138,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sos_dismiss => '閉じる';
 
   @override
-  String get sos_dismissed => '閉じました';
-
-  @override
   String get sos_copyCoordinates => '座標をコピー';
 
   @override
@@ -6208,9 +6209,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_warningTitle => '緊急SOS';
-
-  @override
-  String get sos_cancelledBySender => '送信者が取り消し';
 
   @override
   String get sos_updatesChannelName => 'SOSの更新';

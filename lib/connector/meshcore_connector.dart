@@ -34,6 +34,7 @@ import '../services/image_chunk_transport.dart'
         buildSendChannelDataFrame,
         dataTypeAeicImage,
         outPathUnknown,
+        parseChannelDataFrame,
         respCodeChannelDataRecv,
         senderPrefixFromKey;
 import '../services/image_codec_service.dart';
@@ -318,8 +319,11 @@ class MeshCoreConnector extends ChangeNotifier {
   ReceivedImageStore? _receivedImageStore;
   void Function(ImageChunkOutcome outcome)? _onImageChunk;
 
-  /// Offered every new incoming direct and channel text; see SosService.
+  /// SOS hooks; see SosService. SOS, ACK and cancellation texts go only to
+  /// [sosTextListener] and never into chat history.
   void Function(SosInboundText inbound)? sosTextListener;
+  void Function(int channelIndex, Uint8List payload)? sosDataListener;
+  void Function(int ackHash)? sosAckListener;
   void Function(int senderPrefix)? _onImageSenderPrefix;
   // Intentionally global (not per-contact): tracks overall network activity.
   // Frequent RX from any source indicates a busy network with more collisions.
@@ -4936,6 +4940,38 @@ class MeshCoreConnector extends ChangeNotifier {
   /// (unsupported command), 2 (bad channel index), 3 (packet pool full, worth
   /// retrying) or 6 (illegal arg — blob too long or bad data type), or a
   /// TimeoutException after _commandAckTimeout.
+  /// Sends an SOS packet as channel data (flood), outside chat history.
+  Future<void> sendSosChannelData(int channelIndex, Uint8List payload) async {
+    if (!supportsChannelData) return;
+    await _runScopedChannelSend(() async {
+      await _waitForRadioQuiet(lastInboundRxTime: _lastChannelMsgRxTime);
+      await _sendFrameAndWaitForCommandAck(
+        buildSendChannelDataFrame(
+          channelIndex: channelIndex,
+          dataType: dataTypeSos,
+          payload: payload,
+        ),
+      );
+    }, region: _channelSendScope(channelIndex));
+  }
+
+  /// Sends an SOS text straight to the radio, bypassing the retry service so
+  /// it never enters the conversation. Returns the ACK hash the recipient's
+  /// radio will confirm with, or null if it could not be sent.
+  Future<int?> sendSosDirectText(Contact contact, String text) async {
+    final self = _selfPublicKey;
+    if (!isConnected || self == null) return null;
+    final timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    await sendFrame(
+      buildSendTextMsgFrame(
+        contact.publicKey,
+        text,
+        timestampSeconds: timestamp,
+      ),
+    );
+    return MessageRetryService.computeExpectedAckHash(timestamp, 0, text, self);
+  }
+
   Future<bool> sendImageChunks(
     List<Uint8List> blobs, {
     required int channelIndex,
@@ -7010,10 +7046,9 @@ class MeshCoreConnector extends ChangeNotifier {
           }
         }
       }
-      _addMessage(message.senderKeyHex, message);
-      _maybeIncrementContactUnread(message);
-      notifyListeners();
-      if (!message.isOutgoing && !message.isCli) {
+      if (!message.isOutgoing &&
+          !message.isCli &&
+          SosCodec.isStructured(message.text)) {
         sosTextListener?.call(
           SosInboundText(
             text: message.text,
@@ -7021,13 +7056,15 @@ class MeshCoreConnector extends ChangeNotifier {
             senderKeyHex: message.senderKeyHex,
           ),
         );
+        return;
       }
+      _addMessage(message.senderKeyHex, message);
+      _maybeIncrementContactUnread(message);
+      notifyListeners();
 
       // Show notification for new incoming message (run async with translation)
-      // SOS and ACK texts raise their own alarm (SosService) instead.
       if (!message.isOutgoing &&
           !message.isCli &&
-          !SosCodec.isStructured(message.text) &&
           _appSettingsService != null) {
         final settings = _appSettingsService!.settings;
         if (settings.notificationsEnabled && settings.notifyOnNewMessage) {
@@ -7363,7 +7400,6 @@ class MeshCoreConnector extends ChangeNotifier {
     TranslationResult? translationResult,
   }) {
     if (message.isOutgoing || _appSettingsService == null) return;
-    if (SosCodec.isStructured(message.text)) return;
     final channelIndex = message.channelIndex;
     if (channelIndex == null) return;
 
@@ -7401,6 +7437,11 @@ class MeshCoreConnector extends ChangeNotifier {
     // Anchor the post-RX backoff for our own next channel send, exactly as
     // _handleIncomingChannelMessage does.
     _lastChannelMsgRxTime = DateTime.now();
+    final parsed = parseChannelDataFrame(frame);
+    if (parsed != null && parsed.dataType == dataTypeSos) {
+      sosDataListener?.call(parsed.channelIndex, parsed.payload);
+      return;
+    }
     final outcome = _imageTransport?.handleFrame(frame);
     if (outcome == null) return; // Not an AEIC image chunk.
     _onImageChunk?.call(outcome);
@@ -7419,6 +7460,16 @@ class MeshCoreConnector extends ChangeNotifier {
         return;
       }
       _lastChannelMsgRxTime = DateTime.now();
+      if (!parsed.isOutgoing && SosCodec.isStructured(parsed.text)) {
+        sosTextListener?.call(
+          SosInboundText(
+            text: parsed.text,
+            senderName: parsed.senderName,
+            channelIndex: parsed.channelIndex,
+          ),
+        );
+        return;
+      }
       final contentHash = _computeContentHash(
         parsed.channelIndex!,
         parsed.timestamp.millisecondsSinceEpoch ~/ 1000,
@@ -7435,13 +7486,6 @@ class MeshCoreConnector extends ChangeNotifier {
       _maybeIncrementChannelUnread(message, isNew: isNew);
       notifyListeners();
       if (isNew && !message.isOutgoing) {
-        sosTextListener?.call(
-          SosInboundText(
-            text: message.text,
-            senderName: message.senderName,
-            channelIndex: message.channelIndex,
-          ),
-        );
         final msg = message; // capture for closure
         unawaited(() async {
           final translationResult = await translateChannelMessage(
@@ -7677,6 +7721,7 @@ class MeshCoreConnector extends ChangeNotifier {
       if (_handleRepeaterCommandAck(ackHash, tripTimeMs)) {
         return;
       }
+      sosAckListener?.call(ackHash);
 
       // Handle ACK in retry service
       if (_retryService != null) {

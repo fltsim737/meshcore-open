@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/helpers/sos_codec.dart';
 import 'package:meshcore_open/l10n/app_localizations.dart';
-import 'package:meshcore_open/models/sos_alert.dart';
 import 'package:meshcore_open/services/sos_service.dart';
 import 'package:meshcore_open/widgets/sos_warning_overlay.dart';
 import 'package:provider/provider.dart';
 
-import '../services/sos_service_test.dart' show FakeSosTransport, freshSettings;
+import '../services/sos_service_test.dart'
+    show FakeSosTransport, freshSettings, sosPacketFrom;
 
 void main() {
   testWidgets('stays over the app until the alert is acknowledged', (
@@ -16,7 +16,6 @@ void main() {
     final settings = await freshSettings();
     final transport = FakeSosTransport();
     final service = SosService(transport: transport, settings: settings);
-    addTearDown(service.dispose);
 
     await tester.pumpWidget(
       ChangeNotifierProvider.value(
@@ -32,20 +31,9 @@ void main() {
     );
     expect(find.text('EMERGENCY SOS'), findsNothing);
 
-    service.handleInbound(
-      SosInboundText(
-        text: SosCodec.encodeSos(
-          id: 'a1b2',
-          time: DateTime.utc(2026, 10, 21),
-          fix: const SosFix(
-            latitude: -41.28646,
-            longitude: 174.77624,
-            source: SosLocationSource.phoneGps,
-          ),
-        ),
-        senderName: 'Ridge',
-        channelIndex: 0,
-      ),
+    service.handleInboundData(
+      0,
+      sosPacketFrom('Ridge', 9, 'a1b2', lat: -41.28646, lon: 174.77624),
     );
     await tester.pump();
     expect(find.text('EMERGENCY SOS'), findsOneWidget);
@@ -55,25 +43,18 @@ void main() {
     await tester.tap(find.text('Send ACK'));
     await tester.pump();
     expect(find.text('EMERGENCY SOS'), findsNothing);
-    expect(transport.channelSends, [(0, 'ACK #a1b2')]);
+    expect(
+      transport.channelPackets.single.$2.kind,
+      SosPacketKind.ack,
+    ); // Disposed inside the test: its expiry timer must not outlive it.
+    service.dispose();
   });
 
   testWidgets('Send ACK is disabled while disconnected', (tester) async {
     final settings = await freshSettings();
     final transport = FakeSosTransport()..isConnected = false;
     final service = SosService(transport: transport, settings: settings);
-    addTearDown(service.dispose);
-    service.handleInbound(
-      SosInboundText(
-        text: SosCodec.encodeSos(
-          id: 'a1b2',
-          time: DateTime.utc(2026, 10, 21),
-          fix: const SosFix.none(),
-        ),
-        senderName: 'Ridge',
-        channelIndex: 0,
-      ),
-    );
+    service.handleInboundData(0, sosPacketFrom('Ridge', 9, 'a1b2'));
 
     await tester.pumpWidget(
       ChangeNotifierProvider.value(
@@ -88,6 +69,7 @@ void main() {
     await tester.tap(find.text('Send ACK'));
     await tester.pump();
     expect(find.text('EMERGENCY SOS'), findsOneWidget);
-    expect(transport.channelSends, isEmpty);
+    expect(transport.channelPackets, isEmpty);
+    service.dispose();
   });
 }

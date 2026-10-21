@@ -2666,7 +2666,6 @@
   "sos_sendAck": "Отправить ACK",
   "sos_ackSent": "ACK отправлен",
   "sos_dismiss": "Скрыть",
-  "sos_dismissed": "Скрыт",
   "sos_copyCoordinates": "Копировать координаты",
   "sos_coordinatesCopied": "Координаты скопированы",
   "sos_noPosition": "Координаты не переданы",
@@ -2738,7 +2737,6 @@
     }
   },
   "map_enterPathManually": "Ввести путь вручную",
-  "sos_cancelledBySender": "Отменено отправителем",
   "sos_updatesChannelName": "Обновления SOS",
   "sos_cancelNotificationTitle": "SOS от {name} отменён",
   "@sos_cancelNotificationTitle": {
@@ -2748,5 +2746,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Отправитель отменил этот SOS."
+  "sos_cancelNotificationBody": "Отправитель отменил этот SOS.",
+  "sos_channelNeedsFirmware": "Для сигналов в канале этому радио нужна прошивка 1.15 или новее. Экстренные контакты по-прежнему получают личные сообщения."
 }

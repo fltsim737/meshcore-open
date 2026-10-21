@@ -6365,6 +6365,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sos_channelUnavailable => 'Під\'єднайте радіо, щоб вибрати канал';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Для сигналів у каналі цьому радіо потрібна прошивка 1.15 або новіша. Екстрені контакти й надалі отримують особисті повідомлення.';
+
+  @override
   String get sos_includeFavourites => 'Включати обрані контакти';
 
   @override
@@ -6451,9 +6455,6 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sos_dismiss => 'Приховати';
 
   @override
-  String get sos_dismissed => 'Приховано';
-
-  @override
   String get sos_copyCoordinates => 'Копіювати координати';
 
   @override
@@ -6528,9 +6529,6 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'ЕКСТРЕНИЙ SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Скасовано відправником';
 
   @override
   String get sos_updatesChannelName => 'Оновлення SOS';

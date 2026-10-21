@@ -1,6 +1,8 @@
 # Emergency SOS
 
-The **Emergency** tab sends a repeating distress alert over the mesh and shows alerts from other nodes. It is built for remote areas and farms with no internet or mobile coverage, so everything runs over the radio with ordinary MeshCore text messages. No firmware change is needed, and nodes running other MeshCore clients can still read the alert as plain text.
+The **Emergency** tab sends a repeating distress alert over the mesh and shows alerts from other nodes. It is built for remote areas and farms with no internet or mobile coverage, so everything runs over the radio. No firmware change is needed.
+
+Because an SOS carries your position, it never lands in any chat history where it could be scrolled back through: see [Privacy](#privacy).
 
 > An SOS is best effort. LoRa delivery is never guaranteed, and an ACK only means someone received your alert, not that help is on the way. Keep using every other means of calling for help that you have.
 
@@ -11,7 +13,7 @@ Open **Settings → App Settings → Emergency SOS**:
 | Setting | What it does |
 |---|---|
 | **Stored emergency location** | A fixed position (for example the homestead) used when neither the phone nor the radio has a position. **Use current GPS** fills it in from the phone. Leave both fields empty to remove it. |
-| **SOS channel** | The channel the SOS is broadcast on. Defaults to the first channel (normally Public); choose a private emergency channel if your group has one. If the chosen slot no longer exists on the radio, the first channel is used. |
+| **SOS channel** | The channel the SOS alert goes out on, as a hidden data packet. Defaults to the first channel (normally Public); choose a private channel shared only with your responders. If the chosen slot no longer exists on the radio, the first channel is used. Channel alerts need radio firmware 1.15 or newer; with older firmware only emergency contacts are alerted, by DM. |
 | **Include favourite contacts** | Also send the SOS by direct message to every favourite chat contact (default on). |
 | **Emergency contacts** | Chat contacts that always receive the SOS by direct message. |
 
@@ -44,12 +46,11 @@ So broadcasts go out at 0, 1, 2, 3, 4 and 5 minutes, then at 10, 15, 20 minutes 
 **Cancel SOS** (after a confirmation) stops everything at once:
 
 - no further repeats, and a broadcast that is partway through sending stops before its remaining DMs;
-- SOS direct messages still queued or being retried are withdrawn and shown as failed in the chat;
 - a cancellation notice goes out on the SOS channel and by DM to every emergency contact, including those who already acknowledged.
 
 If the radio is disconnected when you cancel, the notice is sent as soon as it reconnects, even after an app restart.
 
-Direct messages stop going to a contact once their radio confirms delivery or they reply ACK (on the channel or by DM). A new DM is not queued while the previous one is still being retried. The channel broadcast always continues.
+Direct messages stop going to a contact once their radio confirms delivery or they reply ACK (on the channel or by DM). The channel alert always continues.
 
 Each repeat is a new packet carrying the same ID. Repeaters forward every one, and receivers merge them into a single alert with the latest position.
 
@@ -66,10 +67,13 @@ The source is included in the message.
 
 ## Message format
 
-Channel broadcast. The radio adds `<node name>: ` in front automatically:
+**On a channel** the SOS, ACK and cancellation travel as binary channel-data packets (type `0x5053`), not text. No chat in MeshCore Open or any other MeshCore app shows or stores them; only MeshCore Open's Emergency tab reads them. The layout is in the [protocol reference](ble-protocol.md#emergency-sos-packets).
+
+**Direct messages** to emergency contacts are text, so a contact using another MeshCore app still understands them:
 
 ```
 *** EMERGENCY SOS *** #a1b2
+Node: Farmhouse
 Time: 10-21 14:32Z
 Source: Phone GPS
 Lat: -41.28646
@@ -77,7 +81,7 @@ Lon: 174.77624
 Reply ACK #a1b2
 ```
 
-Direct messages add a `Node: <name>` line after the first line, shortening the name if that is needed to fit. `Source` is one of `Phone GPS`, `Radio location`, `Stored location` or `None`, and the `Lat`/`Lon` lines are left out when there is no position. Time is UTC. The longest form fits within the firmware's 160-byte text limit on every channel and node name.
+The node name is shortened if needed to fit. `Source` is one of `Phone GPS`, `Radio location`, `Stored location` or `None`, and the `Lat`/`Lon` lines are left out when there is no position. Time is UTC. The longest form fits within the firmware's 160-byte text limit for every node name.
 
 A cancellation is:
 
@@ -87,27 +91,41 @@ Time: 10-21 14:32Z
 The sender cancelled this SOS.
 ```
 
-An acknowledgement is the text `ACK #a1b2`. Anyone can type it by hand, so responders on other MeshCore clients can answer too.
+An acknowledgement is the text `ACK #a1b2`, which a contact on another MeshCore app can type by hand.
 
-SOS, cancellation and ACK texts are always sent uncompressed. Smaz and Cyr2Lat are skipped for them, so every client can read them.
+These texts are always sent uncompressed (Smaz and Cyr2Lat are skipped), so every client can read them.
+
+## Privacy
+
+An SOS carries your position, so MeshCore Open never keeps it where it could be scrolled back through:
+
+- **Channel alerts are hidden data packets.** They never appear in a channel chat on any device, in MeshCore Open or other MeshCore apps.
+- **SOS direct messages bypass chat history.** The sending phone sends them straight to the radio without adding them to the conversation, and a receiving MeshCore Open diverts SOS, ACK and cancellation texts to the Emergency tab instead of the chat.
+- **Received alerts are short-lived.** An alert, with its position, is deleted when the sender cancels, when you dismiss it, or once no repeat has been heard for 60 minutes. Until then a responder who acknowledged keeps the position to navigate by.
+- **Your own SOS** is cleared from the Emergency tab when you cancel it, and the alarm notification (which shows the position) is removed when an alert closes.
+
+What the app cannot control:
+
+- Anyone with the channel's key and modified software can capture channel packets, so use a private SOS channel rather than Public.
+- An emergency contact using a different MeshCore app sees the SOS direct message in that app's chat.
 
 ## Receiving an SOS
 
 When an SOS arrives on any channel or by direct message:
 
-- A full-screen red **EMERGENCY SOS** warning covers the app, showing who sent it, the position and source, and when it was first and last heard. It cannot be navigated away from. It stays until you press **Send ACK** or **Dismiss**, and if several alerts are open they are shown one at a time, oldest first.
+- A full-screen red **EMERGENCY SOS** warning covers the app, showing who sent it, the position and source, and when it was first and last heard. It cannot be navigated away from. It stays until you press **Send ACK** or **Dismiss**, or the sender cancels, and if several alerts are open they are shown one at a time, oldest first.
 - A dedicated SOS notification replaces the ordinary message notification (see [platform behaviour](#platform-behaviour)).
 - The alert is listed in the Emergency tab with **Send ACK**, **Dismiss**, **Map** and copy-coordinates actions. The Emergency tab icon shows a badge while any alert is open.
 
-**Send ACK** replies `ACK #id` on the channel the alert arrived on, and also by direct message when the sender is one of your contacts. It is disabled while no radio is connected, so an alert is never marked answered when no ACK went out. Other responders' ACKs are shown on the alert ("Also acknowledged by …"), so a group can see who has already answered.
+**Send ACK** replies with an ACK packet on the channel the alert arrived on, and also by direct message when the sender is one of your contacts. The alert stays in the Emergency tab, with its position, until the sender cancels or it expires. It is disabled while no radio is connected, so an alert is never marked answered when no ACK went out. Other responders' ACKs are shown on the alert ("Also acknowledged by …"), so a group can see who has already answered.
 
-When the sender cancels, the alert closes on its own: the alarm and warning screen stop, the alert is marked **Cancelled by sender**, and an "SOS from … cancelled" notification replaces the alarm. Only a cancellation from the same sender closes an alert; a late repeat of a cancelled SOS does not reopen it.
+When the sender cancels, the alert is deleted: the alarm and warning screen stop, and an "SOS from … cancelled" notification (without the position) replaces the alarm. Only a cancellation from the same sender does this.
 
-**Dismiss** silences the alert on this phone without replying. Repeats of an acknowledged or dismissed alert still update its position and counts, but they don't sound again.
+**Dismiss** deletes the alert and its position from this phone without replying. If the sender is still broadcasting, the next repeat raises it again. Repeats of an acknowledged alert update its position and counts but don't sound again.
 
 On the sending phone, each new responder's ACK raises an "SOS acknowledged by …" notification.
 
-Alerts and the active SOS are saved, so they survive an app restart. Up to 50 resolved alerts are kept, and open alerts are never removed.
+The active SOS and live alerts survive an app restart; alerts that expired while the app was closed are deleted when it starts.
 
 ## Platform behaviour
 
@@ -128,4 +146,3 @@ Alerts and the active SOS are saved, so they survive an app restart. Up to 50 re
 - **Spoofing.** Anyone with the channel key can send a fake SOS or ACK, and sender names on channels are not verified. The Public channel key is widely known, so use a private channel when trust matters.
 - **Region scope.** The broadcast follows the SOS channel's region setting, like any other message on that channel (see [Regions](regions.md)).
 - **Airtime.** Repeats and direct messages use airtime; the six broadcasts in the first five minutes are the busiest stretch. The intervals are fixed in v1.
-- **Chat history.** SOS and ACK texts also appear as ordinary messages in the channel or contact chat.

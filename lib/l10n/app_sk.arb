@@ -3370,7 +3370,6 @@
   "sos_sendAck": "Poslať ACK",
   "sos_ackSent": "ACK odoslané",
   "sos_dismiss": "Zavrieť",
-  "sos_dismissed": "Zavreté",
   "sos_copyCoordinates": "Kopírovať súradnice",
   "sos_coordinatesCopied": "Súradnice skopírované",
   "sos_noPosition": "Poloha nie je zahrnutá",
@@ -3442,7 +3441,6 @@
     }
   },
   "map_enterPathManually": "Zadať cestu ručne",
-  "sos_cancelledBySender": "Zrušené odosielateľom",
   "sos_updatesChannelName": "Aktualizácie SOS",
   "sos_cancelNotificationTitle": "SOS od {name} zrušené",
   "@sos_cancelNotificationTitle": {
@@ -3452,5 +3450,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Odosielateľ zrušil toto SOS."
+  "sos_cancelNotificationBody": "Odosielateľ zrušil toto SOS.",
+  "sos_channelNeedsFirmware": "Toto rádio potrebuje firmvér 1.15 alebo novší pre poplachy v kanáli. Núdzové kontakty stále dostanú priame správy."
 }

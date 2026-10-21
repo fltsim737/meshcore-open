@@ -6291,6 +6291,10 @@ class AppLocalizationsSv extends AppLocalizations {
   String get sos_channelUnavailable => 'Anslut en radio för att välja kanal';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Den här radion behöver firmware 1.15 eller senare för kanallarm. Nödkontakter får fortfarande direktmeddelanden.';
+
+  @override
   String get sos_includeFavourites => 'Inkludera favoritkontakter';
 
   @override
@@ -6377,9 +6381,6 @@ class AppLocalizationsSv extends AppLocalizations {
   String get sos_dismiss => 'Avfärda';
 
   @override
-  String get sos_dismissed => 'Avfärdat';
-
-  @override
   String get sos_copyCoordinates => 'Kopiera koordinater';
 
   @override
@@ -6454,9 +6455,6 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NÖD-SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Avbrutet av avsändaren';
 
   @override
   String get sos_updatesChannelName => 'SOS-uppdateringar';

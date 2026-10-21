@@ -5913,6 +5913,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_channelUnavailable => '连接电台后才能选择频道';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      '此电台需要 1.15 或更高版本固件才能发送频道警报。紧急联系人仍会收到私信。';
+
+  @override
   String get sos_includeFavourites => '包含收藏联系人';
 
   @override
@@ -5997,9 +6001,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_dismiss => '忽略';
 
   @override
-  String get sos_dismissed => '已忽略';
-
-  @override
   String get sos_copyCoordinates => '复制坐标';
 
   @override
@@ -6071,9 +6072,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_warningTitle => '紧急 SOS';
-
-  @override
-  String get sos_cancelledBySender => '已由发送者取消';
 
   @override
   String get sos_updatesChannelName => 'SOS 更新';

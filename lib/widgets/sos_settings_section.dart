@@ -43,12 +43,15 @@ class SosSettingsSection extends StatelessWidget {
         MeshNavTile(
           icon: Icons.tag,
           title: l10n.sos_channel,
-          subtitle: canPickChannel
+          subtitle: !canPickChannel
+              ? l10n.sos_channelUnavailable
+              : connector.supportsChannelData
               ? channel?.name
-              : l10n.sos_channelUnavailable,
+              : '${channel?.name ?? ''}\n${l10n.sos_channelNeedsFirmware}',
           onTap: canPickChannel
               ? () => _pickChannel(context, connector, settingsService)
               : null,
+          subtitleMaxLines: 3,
         ),
         const Divider(height: 1, indent: 16),
         SwitchListTile(

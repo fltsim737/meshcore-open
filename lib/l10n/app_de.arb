@@ -3504,7 +3504,6 @@
   "sos_sendAck": "ACK senden",
   "sos_ackSent": "ACK gesendet",
   "sos_dismiss": "Verwerfen",
-  "sos_dismissed": "Verworfen",
   "sos_copyCoordinates": "Koordinaten kopieren",
   "sos_coordinatesCopied": "Koordinaten kopiert",
   "sos_noPosition": "Keine Position enthalten",
@@ -3576,7 +3575,6 @@
     }
   },
   "map_enterPathManually": "Pfad manuell eingeben",
-  "sos_cancelledBySender": "Vom Absender abgebrochen",
   "sos_updatesChannelName": "SOS-Updates",
   "sos_cancelNotificationTitle": "SOS von {name} abgebrochen",
   "@sos_cancelNotificationTitle": {
@@ -3586,5 +3584,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Der Absender hat dieses SOS abgebrochen."
+  "sos_cancelNotificationBody": "Der Absender hat dieses SOS abgebrochen.",
+  "sos_channelNeedsFirmware": "Dieses Funkgerät braucht Firmware 1.15 oder neuer für Kanalalarme. Notfallkontakte erhalten weiterhin Direktnachrichten."
 }

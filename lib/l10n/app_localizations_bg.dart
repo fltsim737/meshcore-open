@@ -6345,6 +6345,10 @@ class AppLocalizationsBg extends AppLocalizations {
   String get sos_channelUnavailable => 'Свържете радио, за да изберете канал';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Това радио се нуждае от фърмуер 1.15 или по-нов за сигнали в канала. Контактите за спешни случаи пак получават директни съобщения.';
+
+  @override
   String get sos_includeFavourites => 'Включване на любими контакти';
 
   @override
@@ -6431,9 +6435,6 @@ class AppLocalizationsBg extends AppLocalizations {
   String get sos_dismiss => 'Отхвърли';
 
   @override
-  String get sos_dismissed => 'Отхвърлен';
-
-  @override
   String get sos_copyCoordinates => 'Копирай координатите';
 
   @override
@@ -6508,9 +6509,6 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'СПЕШЕН SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Отменено от подателя';
 
   @override
   String get sos_updatesChannelName => 'SOS актуализации';

@@ -3408,7 +3408,6 @@
   "sos_sendAck": "ACK küldése",
   "sos_ackSent": "ACK elküldve",
   "sos_dismiss": "Elvetés",
-  "sos_dismissed": "Elvetve",
   "sos_copyCoordinates": "Koordináták másolása",
   "sos_coordinatesCopied": "Koordináták másolva",
   "sos_noPosition": "Nincs pozíció",
@@ -3480,7 +3479,6 @@
     }
   },
   "map_enterPathManually": "Útvonal kézi megadása",
-  "sos_cancelledBySender": "A küldő visszavonta",
   "sos_updatesChannelName": "SOS-frissítések",
   "sos_cancelNotificationTitle": "{name} SOS-e visszavonva",
   "@sos_cancelNotificationTitle": {
@@ -3490,5 +3488,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "A küldő visszavonta ezt az SOS-t."
+  "sos_cancelNotificationBody": "A küldő visszavonta ezt az SOS-t.",
+  "sos_channelNeedsFirmware": "Ehhez a rádióhoz 1.15-ös vagy újabb firmware kell a csatornás riasztásokhoz. A vészhelyzeti partnerek továbbra is közvetlen üzenetet kapnak."
 }
