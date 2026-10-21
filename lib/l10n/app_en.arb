@@ -3505,7 +3505,7 @@
   "sos_active": "SOS ACTIVE",
   "sos_cancel": "Cancel SOS",
   "sos_cancelConfirmTitle": "Cancel SOS?",
-  "sos_cancelConfirmBody": "Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.",
+  "sos_cancelConfirmBody": "Repeat broadcasts stop at once and a cancellation notice is sent on the SOS channel and to your emergency contacts.",
   "sos_keepActive": "Keep active",
   "sos_broadcastCount": "{count, plural, =1{Sent once} other{Sent {count} times}}, last at {time}",
   "@sos_broadcastCount": {"placeholders": {"count": {"type": "int"}, "time": {"type": "String"}}},
@@ -3550,6 +3550,11 @@
   "@sos_ackNotificationTitle": {"placeholders": {"name": {"type": "String"}}},
   "sos_ackNotificationBody": "Your SOS was received. It keeps repeating until you cancel it.",
   "sos_warningTitle": "EMERGENCY SOS",
+  "sos_cancelledBySender": "Cancelled by sender",
+  "sos_updatesChannelName": "SOS updates",
+  "sos_cancelNotificationTitle": "SOS from {name} cancelled",
+  "@sos_cancelNotificationTitle": {"placeholders": {"name": {"type": "String"}}},
+  "sos_cancelNotificationBody": "The sender cancelled this SOS.",
   "sos_warningMore": "{count} more open alerts",
   "@sos_warningMore": {"placeholders": {"count": {"type": "int"}}}
 }

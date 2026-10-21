@@ -6287,7 +6287,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.';
+      'Repeat broadcasts stop at once and a cancellation notice is sent on the SOS channel and to your emergency contacts.';
 
   @override
   String get sos_keepActive => 'Keep active';
@@ -6421,6 +6421,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'EMERGENCY SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Cancelled by sender';
+
+  @override
+  String get sos_updatesChannelName => 'SOS updates';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS from $name cancelled';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'The sender cancelled this SOS.';
 
   @override
   String sos_warningMore(int count) {

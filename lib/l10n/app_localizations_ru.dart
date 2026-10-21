@@ -6397,7 +6397,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Повторная рассылка прекратится. Откликнувшиеся не узнают об отмене — сообщите им, если вы в безопасности.';
+      'Повторная рассылка сразу прекратится, а уведомление об отмене уйдёт в канал SOS и вашим экстренным контактам.';
 
   @override
   String get sos_keepActive => 'Оставить активным';
@@ -6526,6 +6526,20 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'ЭКСТРЕННЫЙ SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Отменено отправителем';
+
+  @override
+  String get sos_updatesChannelName => 'Обновления SOS';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS от $name отменён';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'Отправитель отменил этот SOS.';
 
   @override
   String sos_warningMore(int count) {

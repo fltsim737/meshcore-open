@@ -6359,7 +6359,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Opakované vysielanie sa zastaví. Záchranári sa o zrušení nedozvedia, dajte im vedieť, ak ste v bezpečí.';
+      'Opakované vysielanie sa okamžite zastaví a do kanála SOS a núdzovým kontaktom sa odošle oznámenie o zrušení.';
 
   @override
   String get sos_keepActive => 'Ponechať aktívne';
@@ -6488,6 +6488,20 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NÚDZOVÉ SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Zrušené odosielateľom';
+
+  @override
+  String get sos_updatesChannelName => 'Aktualizácie SOS';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS od $name zrušené';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'Odosielateľ zrušil toto SOS.';
 
   @override
   String sos_warningMore(int count) {

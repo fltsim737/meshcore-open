@@ -6360,7 +6360,7 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Ponovna oddajanja se ustavijo. Reševalci ne izvejo, da ste preklicali, zato jim sporočite, če ste na varnem.';
+      'Ponovna oddajanja se takoj ustavijo, obvestilo o preklicu pa se pošlje na kanal SOS in vašim nujnim stikom.';
 
   @override
   String get sos_keepActive => 'Ohrani aktivno';
@@ -6489,6 +6489,20 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NUJNI SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Preklical pošiljatelj';
+
+  @override
+  String get sos_updatesChannelName => 'Posodobitve SOS';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS od $name preklican';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'Pošiljatelj je preklical ta SOS.';
 
   @override
   String sos_warningMore(int count) {

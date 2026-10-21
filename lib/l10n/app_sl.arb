@@ -3337,7 +3337,7 @@
   "sos_active": "SOS AKTIVEN",
   "sos_cancel": "Prekliči SOS",
   "sos_cancelConfirmTitle": "Preklic SOS?",
-  "sos_cancelConfirmBody": "Ponovna oddajanja se ustavijo. Reševalci ne izvejo, da ste preklicali, zato jim sporočite, če ste na varnem.",
+  "sos_cancelConfirmBody": "Ponovna oddajanja se takoj ustavijo, obvestilo o preklicu pa se pošlje na kanal SOS in vašim nujnim stikom.",
   "sos_keepActive": "Ohrani aktivno",
   "sos_broadcastCount": "Poslano {count}-krat, nazadnje ob {time}",
   "@sos_broadcastCount": {
@@ -3441,5 +3441,16 @@
       }
     }
   },
-  "map_enterPathManually": "Ročno vnesi pot"
+  "map_enterPathManually": "Ročno vnesi pot",
+  "sos_cancelledBySender": "Preklical pošiljatelj",
+  "sos_updatesChannelName": "Posodobitve SOS",
+  "sos_cancelNotificationTitle": "SOS od {name} preklican",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Pošiljatelj je preklical ta SOS."
 }

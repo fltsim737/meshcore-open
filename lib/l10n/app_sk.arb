@@ -3337,7 +3337,7 @@
   "sos_active": "SOS AKTÍVNE",
   "sos_cancel": "Zrušiť SOS",
   "sos_cancelConfirmTitle": "Zrušiť SOS?",
-  "sos_cancelConfirmBody": "Opakované vysielanie sa zastaví. Záchranári sa o zrušení nedozvedia, dajte im vedieť, ak ste v bezpečí.",
+  "sos_cancelConfirmBody": "Opakované vysielanie sa okamžite zastaví a do kanála SOS a núdzovým kontaktom sa odošle oznámenie o zrušení.",
   "sos_keepActive": "Ponechať aktívne",
   "sos_broadcastCount": "Odoslané {count}-krát, naposledy o {time}",
   "@sos_broadcastCount": {
@@ -3441,5 +3441,16 @@
       }
     }
   },
-  "map_enterPathManually": "Zadať cestu ručne"
+  "map_enterPathManually": "Zadať cestu ručne",
+  "sos_cancelledBySender": "Zrušené odosielateľom",
+  "sos_updatesChannelName": "Aktualizácie SOS",
+  "sos_cancelNotificationTitle": "SOS od {name} zrušené",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Odosielateľ zrušil toto SOS."
 }

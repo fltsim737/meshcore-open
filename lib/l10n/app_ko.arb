@@ -3470,7 +3470,7 @@
   "sos_active": "SOS 활성",
   "sos_cancel": "SOS 취소",
   "sos_cancelConfirmTitle": "SOS를 취소할까요?",
-  "sos_cancelConfirmBody": "반복 전송이 중단됩니다. 응답자에게 취소 사실이 전달되지 않으니 안전하다면 알려 주세요.",
+  "sos_cancelConfirmBody": "반복 전송이 즉시 중단되고 SOS 채널과 긴급 연락처에 취소 알림이 전송됩니다.",
   "sos_keepActive": "계속 유지",
   "sos_broadcastCount": "{count}회 전송, 마지막 {time}",
   "@sos_broadcastCount": {
@@ -3574,5 +3574,16 @@
       }
     }
   },
-  "map_enterPathManually": "경로 직접 입력"
+  "map_enterPathManually": "경로 직접 입력",
+  "sos_cancelledBySender": "보낸 사람이 취소함",
+  "sos_updatesChannelName": "SOS 업데이트",
+  "sos_cancelNotificationTitle": "{name}의 SOS가 취소됨",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "보낸 사람이 이 SOS를 취소했습니다."
 }

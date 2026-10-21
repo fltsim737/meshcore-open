@@ -3470,7 +3470,7 @@
   "sos_active": "SOS ATTIVO",
   "sos_cancel": "Annulla SOS",
   "sos_cancelConfirmTitle": "Annullare l'SOS?",
-  "sos_cancelConfirmBody": "Le ritrasmissioni si fermeranno. I soccorritori non vengono avvisati dell'annullamento: informali se sei al sicuro.",
+  "sos_cancelConfirmBody": "Le ritrasmissioni si fermano subito e un avviso di annullamento viene inviato sul canale SOS e ai tuoi contatti di emergenza.",
   "sos_keepActive": "Mantieni attivo",
   "sos_broadcastCount": "Inviato {count} volte, ultimo alle {time}",
   "@sos_broadcastCount": {
@@ -3574,5 +3574,16 @@
       }
     }
   },
-  "map_enterPathManually": "Inserisci percorso manualmente"
+  "map_enterPathManually": "Inserisci percorso manualmente",
+  "sos_cancelledBySender": "Annullato dal mittente",
+  "sos_updatesChannelName": "Aggiornamenti SOS",
+  "sos_cancelNotificationTitle": "SOS di {name} annullato",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Il mittente ha annullato questo SOS."
 }

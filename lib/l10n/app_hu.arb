@@ -3375,7 +3375,7 @@
   "sos_active": "SOS AKTÍV",
   "sos_cancel": "SOS visszavonása",
   "sos_cancelConfirmTitle": "Visszavonja az SOS-t?",
-  "sos_cancelConfirmBody": "Az ismételt sugárzás leáll. A segítők nem értesülnek a visszavonásról, ezért szóljon nekik, ha biztonságban van.",
+  "sos_cancelConfirmBody": "Az ismételt sugárzás azonnal leáll, és visszavonási értesítés megy az SOS-csatornára és a vészhelyzeti partnereknek.",
   "sos_keepActive": "Aktív marad",
   "sos_broadcastCount": "{count} alkalommal elküldve, utoljára {time}",
   "@sos_broadcastCount": {
@@ -3479,5 +3479,16 @@
       }
     }
   },
-  "map_enterPathManually": "Útvonal kézi megadása"
+  "map_enterPathManually": "Útvonal kézi megadása",
+  "sos_cancelledBySender": "A küldő visszavonta",
+  "sos_updatesChannelName": "SOS-frissítések",
+  "sos_cancelNotificationTitle": "{name} SOS-e visszavonva",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "A küldő visszavonta ezt az SOS-t."
 }

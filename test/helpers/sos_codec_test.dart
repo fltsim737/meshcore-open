@@ -100,6 +100,20 @@ void main() {
     expect(SosCodec.parseAck('ACK #a1b2 thanks'), isNull);
   });
 
+  test('round-trips a cancellation', () {
+    final text = SosCodec.encodeCancel('a1b2', time);
+    expect(
+      text,
+      '*** SOS CANCELLED *** #a1b2\n'
+      'Time: 10-21 14:32Z\n'
+      'The sender cancelled this SOS.',
+    );
+    expect(SosCodec.parseCancel(text), 'a1b2');
+    expect(SosCodec.parseSos(text), isNull);
+    expect(SosCodec.parseCancel('SOS CANCELLED #a1b2'), isNull);
+    expect(SosCodec.isStructured(text), isTrue);
+  });
+
   test('marks SOS and ACK text as structured', () {
     expect(SosCodec.isStructured('*** EMERGENCY SOS *** #a1b2\n'), isTrue);
     expect(SosCodec.isStructured('ACK #a1b2'), isTrue);

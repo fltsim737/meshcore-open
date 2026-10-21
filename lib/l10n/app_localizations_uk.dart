@@ -6399,7 +6399,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Повторне надсилання припиниться. Рятувальники не дізнаються про скасування — повідомте їх, якщо ви в безпеці.';
+      'Повторне надсилання одразу припиниться, а сповіщення про скасування буде надіслано в канал SOS і вашим екстреним контактам.';
 
   @override
   String get sos_keepActive => 'Залишити активним';
@@ -6528,6 +6528,20 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'ЕКСТРЕНИЙ SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Скасовано відправником';
+
+  @override
+  String get sos_updatesChannelName => 'Оновлення SOS';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS від $name скасовано';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'Відправник скасував цей SOS.';
 
   @override
   String sos_warningMore(int count) {

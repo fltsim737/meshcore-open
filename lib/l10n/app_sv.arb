@@ -3331,7 +3331,7 @@
   "sos_active": "SOS AKTIVT",
   "sos_cancel": "Avbryt SOS",
   "sos_cancelConfirmTitle": "Avbryta SOS?",
-  "sos_cancelConfirmBody": "Upprepade sändningar stoppas. Hjälpare får inte veta att du avbröt, så meddela dem om du är i säkerhet.",
+  "sos_cancelConfirmBody": "Upprepade sändningar stoppas direkt och ett avbrottsmeddelande skickas i SOS-kanalen och till dina nödkontakter.",
   "sos_keepActive": "Behåll aktivt",
   "sos_broadcastCount": "Skickat {count} gånger, senast {time}",
   "@sos_broadcastCount": {
@@ -3435,5 +3435,16 @@
       }
     }
   },
-  "map_enterPathManually": "Ange sökväg manuellt"
+  "map_enterPathManually": "Ange sökväg manuellt",
+  "sos_cancelledBySender": "Avbrutet av avsändaren",
+  "sos_updatesChannelName": "SOS-uppdateringar",
+  "sos_cancelNotificationTitle": "SOS från {name} avbrutet",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Avsändaren avbröt detta SOS."
 }

@@ -6389,7 +6389,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Le ritrasmissioni si fermeranno. I soccorritori non vengono avvisati dell\'annullamento: informali se sei al sicuro.';
+      'Le ritrasmissioni si fermano subito e un avviso di annullamento viene inviato sul canale SOS e ai tuoi contatti di emergenza.';
 
   @override
   String get sos_keepActive => 'Mantieni attivo';
@@ -6518,6 +6518,21 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'SOS DI EMERGENZA';
+
+  @override
+  String get sos_cancelledBySender => 'Annullato dal mittente';
+
+  @override
+  String get sos_updatesChannelName => 'Aggiornamenti SOS';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS di $name annullato';
+  }
+
+  @override
+  String get sos_cancelNotificationBody =>
+      'Il mittente ha annullato questo SOS.';
 
   @override
   String sos_warningMore(int count) {

@@ -6082,7 +6082,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      '繰り返し送信が止まります。応答者には取り消しが伝わらないため、無事であれば知らせてください。';
+      '繰り返し送信はすぐに停止し、SOSチャンネルと緊急連絡先に取り消しの通知が送信されます。';
 
   @override
   String get sos_keepActive => '発信を続ける';
@@ -6208,6 +6208,20 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_warningTitle => '緊急SOS';
+
+  @override
+  String get sos_cancelledBySender => '送信者が取り消し';
+
+  @override
+  String get sos_updatesChannelName => 'SOSの更新';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return '$name のSOSは取り消されました';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => '送信者がこのSOSを取り消しました。';
 
   @override
   String sos_warningMore(int count) {

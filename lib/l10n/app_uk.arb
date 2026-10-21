@@ -3316,7 +3316,7 @@
   "sos_active": "SOS АКТИВНИЙ",
   "sos_cancel": "Скасувати SOS",
   "sos_cancelConfirmTitle": "Скасувати SOS?",
-  "sos_cancelConfirmBody": "Повторне надсилання припиниться. Рятувальники не дізнаються про скасування — повідомте їх, якщо ви в безпеці.",
+  "sos_cancelConfirmBody": "Повторне надсилання одразу припиниться, а сповіщення про скасування буде надіслано в канал SOS і вашим екстреним контактам.",
   "sos_keepActive": "Залишити активним",
   "sos_broadcastCount": "Надіслано {count} разів, останній о {time}",
   "@sos_broadcastCount": {
@@ -3420,5 +3420,16 @@
       }
     }
   },
-  "map_enterPathManually": "Ввести шлях вручну"
+  "map_enterPathManually": "Ввести шлях вручну",
+  "sos_cancelledBySender": "Скасовано відправником",
+  "sos_updatesChannelName": "Оновлення SOS",
+  "sos_cancelNotificationTitle": "SOS від {name} скасовано",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Відправник скасував цей SOS."
 }

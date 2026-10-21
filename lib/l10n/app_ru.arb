@@ -2633,7 +2633,7 @@
   "sos_active": "SOS АКТИВЕН",
   "sos_cancel": "Отменить SOS",
   "sos_cancelConfirmTitle": "Отменить SOS?",
-  "sos_cancelConfirmBody": "Повторная рассылка прекратится. Откликнувшиеся не узнают об отмене — сообщите им, если вы в безопасности.",
+  "sos_cancelConfirmBody": "Повторная рассылка сразу прекратится, а уведомление об отмене уйдёт в канал SOS и вашим экстренным контактам.",
   "sos_keepActive": "Оставить активным",
   "sos_broadcastCount": "Отправлено {count} раз, последний в {time}",
   "@sos_broadcastCount": {
@@ -2737,5 +2737,16 @@
       }
     }
   },
-  "map_enterPathManually": "Ввести путь вручную"
+  "map_enterPathManually": "Ввести путь вручную",
+  "sos_cancelledBySender": "Отменено отправителем",
+  "sos_updatesChannelName": "Обновления SOS",
+  "sos_cancelNotificationTitle": "SOS от {name} отменён",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Отправитель отменил этот SOS."
 }

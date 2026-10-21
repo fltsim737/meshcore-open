@@ -10708,7 +10708,7 @@ abstract class AppLocalizations {
   /// No description provided for @sos_cancelConfirmBody.
   ///
   /// In en, this message translates to:
-  /// **'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.'**
+  /// **'Repeat broadcasts stop at once and a cancellation notice is sent on the SOS channel and to your emergency contacts.'**
   String get sos_cancelConfirmBody;
 
   /// No description provided for @sos_keepActive.
@@ -10932,6 +10932,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'EMERGENCY SOS'**
   String get sos_warningTitle;
+
+  /// No description provided for @sos_cancelledBySender.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled by sender'**
+  String get sos_cancelledBySender;
+
+  /// No description provided for @sos_updatesChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS updates'**
+  String get sos_updatesChannelName;
+
+  /// No description provided for @sos_cancelNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS from {name} cancelled'**
+  String sos_cancelNotificationTitle(String name);
+
+  /// No description provided for @sos_cancelNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The sender cancelled this SOS.'**
+  String get sos_cancelNotificationBody;
 
   /// No description provided for @sos_warningMore.
   ///

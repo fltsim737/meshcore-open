@@ -3341,7 +3341,7 @@
   "sos_active": "SOS 进行中",
   "sos_cancel": "取消 SOS",
   "sos_cancelConfirmTitle": "取消 SOS？",
-  "sos_cancelConfirmBody": "将停止重复广播。响应者不会收到取消通知，如果你已安全，请告知他们。",
+  "sos_cancelConfirmBody": "重复广播会立即停止，并在 SOS 频道和你的紧急联系人处发送取消通知。",
   "sos_keepActive": "保持进行",
   "sos_broadcastCount": "已发送 {count} 次，最近一次 {time}",
   "@sos_broadcastCount": {
@@ -3445,5 +3445,16 @@
       }
     }
   },
-  "map_enterPathManually": "手动输入路径"
+  "map_enterPathManually": "手动输入路径",
+  "sos_cancelledBySender": "已由发送者取消",
+  "sos_updatesChannelName": "SOS 更新",
+  "sos_cancelNotificationTitle": "来自 {name} 的 SOS 已取消",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "发送者已取消此 SOS。"
 }
