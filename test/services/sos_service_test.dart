@@ -262,37 +262,37 @@ void main() {
   });
 
   group('schedule', () {
-    test(
-      'repeats every 5 minutes, then every 15 after the first ACK',
-      () async {
-        await service.activate();
-        expect(transport.channelSends, hasLength(1));
+    test('repeats every minute for 5 minutes, then every 5 minutes', () async {
+      final start = now;
+      await service.activate();
+      final sentAt = <Duration>[Duration.zero];
+      // Step through the first hour a few seconds at a time.
+      for (var t = 0; t < 3600; t += 5) {
+        now = start.add(Duration(seconds: t));
+        final before = transport.channelSends.length;
+        await service.broadcastIfDue();
+        if (transport.channelSends.length > before) {
+          sentAt.add(now.difference(start));
+        }
+      }
+      expect(sentAt.map((d) => d.inMinutes), [
+        0, 1, 2, 3, 4, 5, // every minute for the first 5 minutes
+        10, 15, 20, 25, 30, 35, 40, 45, 50, 55,
+      ]);
+      expect(service.isActive, isTrue);
+    });
 
-        now = now.add(const Duration(minutes: 4, seconds: 59));
-        await service.broadcastIfDue();
-        expect(transport.channelSends, hasLength(1));
-
-        now = now.add(const Duration(seconds: 1));
-        await service.broadcastIfDue();
-        expect(transport.channelSends, hasLength(2));
-        expect(service.active!.broadcastCount, 2);
-
-        service.handleInbound(
-          SosInboundText(text: 'ACK #${service.active!.id}', senderName: 'N'),
-        );
-        expect(
-          service.nextBroadcastAt,
-          now.add(SosService.acknowledgedRepeatInterval),
-        );
-        now = now.add(const Duration(minutes: 14));
-        await service.broadcastIfDue();
-        expect(transport.channelSends, hasLength(2));
-        now = now.add(const Duration(minutes: 1));
-        await service.broadcastIfDue();
-        expect(transport.channelSends, hasLength(3));
-        expect(service.isActive, isTrue);
-      },
-    );
+    test('an ACK does not slow the schedule', () async {
+      final start = now;
+      await service.activate();
+      service.handleInbound(
+        SosInboundText(text: 'ACK #${service.active!.id}', senderName: 'N'),
+      );
+      expect(service.nextBroadcastAt, start.add(SosService.burstInterval));
+      now = start.add(const Duration(minutes: 20));
+      await service.broadcastIfDue();
+      expect(service.nextBroadcastAt, now.add(SosService.repeatInterval));
+    });
 
     test('a due broadcast waits for the radio', () async {
       transport.setConnected(false);
@@ -343,7 +343,7 @@ void main() {
       );
 
       transport.directSends.clear();
-      now = now.add(SosService.acknowledgedRepeatInterval);
+      now = now.add(SosService.repeatInterval);
       await service.broadcastIfDue();
       expect(transport.directSends.map((s) => s.$1), ['Carol']);
       expect(transport.channelSends, hasLength(2));

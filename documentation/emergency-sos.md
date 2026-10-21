@@ -34,10 +34,10 @@ Press and hold the red **SOS** button for two seconds. A ring fills while you ho
 | When | What is sent |
 |---|---|
 | Immediately | Channel broadcast and a direct message to each emergency contact |
-| Every 5 minutes | Repeated until the first ACK arrives |
-| Every 15 minutes | After the first ACK, until you cancel |
+| Every minute for the first 5 minutes | Repeated quickly, so anyone who missed the first copy soon hears another |
+| Every 5 minutes after that | Repeated until you cancel, whether or not anyone has acknowledged |
 
-The SOS stays active until you press **Cancel SOS**. Cancelling only stops the repeats; responders are **not** told you cancelled, so let them know you are safe.
+So broadcasts go out at 0, 1, 2, 3, 4 and 5 minutes, then at 10, 15, 20 minutes and so on. An ACK does not slow the schedule: it proves someone received the alert, not that help is on the way. The SOS stays active until you press **Cancel SOS**. Cancelling only stops the repeats; responders are **not** told you cancelled, so let them know you are safe.
 
 Direct messages stop going to a contact once their radio confirms delivery or they reply ACK (on the channel or by DM). A new DM is not queued while the previous one is still being retried. The channel broadcast always continues.
 
@@ -107,5 +107,5 @@ Alerts and the active SOS are saved, so they survive an app restart. Up to 50 re
 
 - **Spoofing.** Anyone with the channel key can send a fake SOS or ACK, and sender names on channels are not verified. The Public channel key is widely known, so use a private channel when trust matters.
 - **Region scope.** The broadcast follows the SOS channel's region setting, like any other message on that channel (see [Regions](regions.md)).
-- **Airtime.** Repeats and direct messages use airtime. The 5- and 15-minute intervals are fixed in v1.
+- **Airtime.** Repeats and direct messages use airtime; the six broadcasts in the first five minutes are the busiest stretch. The intervals are fixed in v1.
 - **Chat history.** SOS and ACK texts also appear as ordinary messages in the channel or contact chat.

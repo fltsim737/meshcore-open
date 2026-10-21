@@ -109,8 +109,13 @@ class NotificationSosAlerter implements SosAlerter {
 
 class SosService extends ChangeNotifier {
   static const int _maxIncoming = 50;
+
+  /// Repeats every [burstInterval] for the first [burstWindow], so anyone who
+  /// missed the first copy soon hears another, then every [repeatInterval]
+  /// until cancelled. An ACK does not slow it: it proves reception, not rescue.
+  static const Duration burstInterval = Duration(minutes: 1);
+  static const Duration burstWindow = Duration(minutes: 5);
   static const Duration repeatInterval = Duration(minutes: 5);
-  static const Duration acknowledgedRepeatInterval = Duration(minutes: 15);
 
   /// How long the first broadcast waits for a phone fix; repeats wait longer.
   static const Duration firstFixTimeout = Duration(seconds: 8);
@@ -178,9 +183,8 @@ class SosService extends ChangeNotifier {
     if (sos == null) return null;
     final last = sos.lastBroadcastAt;
     if (last == null) return sos.startedAt;
-    return last.add(
-      sos.isAcknowledged ? acknowledgedRepeatInterval : repeatInterval,
-    );
+    final inBurst = last.difference(sos.startedAt) < burstWindow;
+    return last.add(inBurst ? burstInterval : repeatInterval);
   }
 
   void _schedule([Duration? delay]) {
@@ -393,8 +397,6 @@ class SosService extends ChangeNotifier {
         (ack) => ack.senderName == inbound.senderName,
       );
       if (index == -1) {
-        // The first ACK stretches the schedule to the slower interval.
-        final first = !sos.isAcknowledged;
         final ack = SosAck(
           senderName: inbound.senderName,
           senderKeyHex: inbound.senderKeyHex,
@@ -402,7 +404,6 @@ class SosService extends ChangeNotifier {
         );
         sos.acks.add(ack);
         _alerter?.acknowledged(sos, ack);
-        if (first) _schedule();
         changed = true;
       } else if (sos.acks[index].senderKeyHex == null &&
           inbound.senderKeyHex != null) {
