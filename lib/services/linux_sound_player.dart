@@ -56,7 +56,9 @@ class LinuxSoundPlayer {
     final file = '$_soundDir/$name.oga';
     for (final player in const ['paplay', 'pw-play']) {
       try {
-        await Process.start(player, [file], mode: ProcessStartMode.detached);
+        // Waits for the player to exit so it is reaped; a detached start
+        // left a zombie process behind for every sound.
+        await Process.run(player, [file]);
         return;
       } on ProcessException {
         continue;
