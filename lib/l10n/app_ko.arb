@@ -3503,7 +3503,6 @@
   "sos_sendAck": "ACK 보내기",
   "sos_ackSent": "ACK 전송됨",
   "sos_dismiss": "닫기",
-  "sos_dismissed": "닫음",
   "sos_copyCoordinates": "좌표 복사",
   "sos_coordinatesCopied": "좌표 복사됨",
   "sos_noPosition": "위치 정보 없음",
@@ -3575,7 +3574,6 @@
     }
   },
   "map_enterPathManually": "경로 직접 입력",
-  "sos_cancelledBySender": "보낸 사람이 취소함",
   "sos_updatesChannelName": "SOS 업데이트",
   "sos_cancelNotificationTitle": "{name}의 SOS가 취소됨",
   "@sos_cancelNotificationTitle": {
@@ -3585,5 +3583,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "보낸 사람이 이 SOS를 취소했습니다."
+  "sos_cancelNotificationBody": "보낸 사람이 이 SOS를 취소했습니다.",
+  "sos_channelNeedsFirmware": "채널 경보를 사용하려면 이 무전기에 펌웨어 1.15 이상이 필요합니다. 긴급 연락처에는 계속 개인 메시지가 전송됩니다."
 }

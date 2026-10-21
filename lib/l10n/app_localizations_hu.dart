@@ -6335,6 +6335,10 @@ class AppLocalizationsHu extends AppLocalizations {
       'Csatlakoztasson rádiót a csatorna kiválasztásához';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Ehhez a rádióhoz 1.15-ös vagy újabb firmware kell a csatornás riasztásokhoz. A vészhelyzeti partnerek továbbra is közvetlen üzenetet kapnak.';
+
+  @override
   String get sos_includeFavourites => 'Kedvenc partnerek bevonása';
 
   @override
@@ -6423,9 +6427,6 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sos_dismiss => 'Elvetés';
 
   @override
-  String get sos_dismissed => 'Elvetve';
-
-  @override
   String get sos_copyCoordinates => 'Koordináták másolása';
 
   @override
@@ -6500,9 +6501,6 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'VÉSZHELYZETI SOS';
-
-  @override
-  String get sos_cancelledBySender => 'A küldő visszavonta';
 
   @override
   String get sos_updatesChannelName => 'SOS-frissítések';

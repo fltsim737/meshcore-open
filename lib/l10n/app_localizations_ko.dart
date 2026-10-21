@@ -6059,6 +6059,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sos_channelUnavailable => '채널을 선택하려면 무전기를 연결하세요';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      '채널 경보를 사용하려면 이 무전기에 펌웨어 1.15 이상이 필요합니다. 긴급 연락처에는 계속 개인 메시지가 전송됩니다.';
+
+  @override
   String get sos_includeFavourites => '즐겨찾기 연락처 포함';
 
   @override
@@ -6144,9 +6148,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sos_dismiss => '닫기';
 
   @override
-  String get sos_dismissed => '닫음';
-
-  @override
   String get sos_copyCoordinates => '좌표 복사';
 
   @override
@@ -6218,9 +6219,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_warningTitle => '긴급 SOS';
-
-  @override
-  String get sos_cancelledBySender => '보낸 사람이 취소함';
 
   @override
   String get sos_updatesChannelName => 'SOS 업데이트';

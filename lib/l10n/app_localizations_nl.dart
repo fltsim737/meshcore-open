@@ -6311,6 +6311,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'Verbind een radio om een kanaal te kiezen';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Deze radio heeft firmware 1.15 of nieuwer nodig voor kanaalmeldingen. Noodcontacten krijgen nog steeds directe berichten.';
+
+  @override
   String get sos_includeFavourites => 'Favoriete contacten meenemen';
 
   @override
@@ -6398,9 +6402,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sos_dismiss => 'Negeren';
 
   @override
-  String get sos_dismissed => 'Genegeerd';
-
-  @override
   String get sos_copyCoordinates => 'Coördinaten kopiëren';
 
   @override
@@ -6475,9 +6476,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NOOD-SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Geannuleerd door afzender';
 
   @override
   String get sos_updatesChannelName => 'SOS-updates';

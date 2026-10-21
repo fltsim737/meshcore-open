@@ -6363,6 +6363,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sos_channelUnavailable => 'Подключите радио, чтобы выбрать канал';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Для сигналов в канале этому радио нужна прошивка 1.15 или новее. Экстренные контакты по-прежнему получают личные сообщения.';
+
+  @override
   String get sos_includeFavourites => 'Включать избранные контакты';
 
   @override
@@ -6449,9 +6453,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sos_dismiss => 'Скрыть';
 
   @override
-  String get sos_dismissed => 'Скрыт';
-
-  @override
   String get sos_copyCoordinates => 'Копировать координаты';
 
   @override
@@ -6526,9 +6527,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'ЭКСТРЕННЫЙ SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Отменено отправителем';
 
   @override
   String get sos_updatesChannelName => 'Обновления SOS';

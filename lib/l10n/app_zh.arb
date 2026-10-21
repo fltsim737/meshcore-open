@@ -3374,7 +3374,6 @@
   "sos_sendAck": "发送 ACK",
   "sos_ackSent": "已发送 ACK",
   "sos_dismiss": "忽略",
-  "sos_dismissed": "已忽略",
   "sos_copyCoordinates": "复制坐标",
   "sos_coordinatesCopied": "已复制坐标",
   "sos_noPosition": "未包含位置",
@@ -3446,7 +3445,6 @@
     }
   },
   "map_enterPathManually": "手动输入路径",
-  "sos_cancelledBySender": "已由发送者取消",
   "sos_updatesChannelName": "SOS 更新",
   "sos_cancelNotificationTitle": "来自 {name} 的 SOS 已取消",
   "@sos_cancelNotificationTitle": {
@@ -3456,5 +3454,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "发送者已取消此 SOS。"
+  "sos_cancelNotificationBody": "发送者已取消此 SOS。",
+  "sos_channelNeedsFirmware": "此电台需要 1.15 或更高版本固件才能发送频道警报。紧急联系人仍会收到私信。"
 }

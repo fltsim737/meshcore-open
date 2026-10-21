@@ -249,17 +249,6 @@ class MessageRetryService extends ChangeNotifier {
 
   /// Fails every pending and queued message. Call when the radio link drops:
   /// nothing in flight can be sent or acknowledged any more.
-  /// Stops retrying the matching messages and marks them failed.
-  void failPendingWhere(bool Function(Message message) test) {
-    final ids = [
-      for (final entry in _pendingMessages.entries)
-        if (test(entry.value)) entry.key,
-    ];
-    for (final messageId in ids) {
-      _failMessage(messageId);
-    }
-  }
-
   void failAllPending() {
     _sendQueue.clear();
     for (final messageId in _pendingMessages.keys.toList()) {

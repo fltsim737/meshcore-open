@@ -3270,7 +3270,6 @@
   "sos_sendAck": "ACK sturen",
   "sos_ackSent": "ACK verzonden",
   "sos_dismiss": "Negeren",
-  "sos_dismissed": "Genegeerd",
   "sos_copyCoordinates": "Coördinaten kopiëren",
   "sos_coordinatesCopied": "Coördinaten gekopieerd",
   "sos_noPosition": "Geen positie meegestuurd",
@@ -3342,7 +3341,6 @@
     }
   },
   "map_enterPathManually": "Pad handmatig invoeren",
-  "sos_cancelledBySender": "Geannuleerd door afzender",
   "sos_updatesChannelName": "SOS-updates",
   "sos_cancelNotificationTitle": "SOS van {name} geannuleerd",
   "@sos_cancelNotificationTitle": {
@@ -3352,5 +3350,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "De afzender heeft deze SOS geannuleerd."
+  "sos_cancelNotificationBody": "De afzender heeft deze SOS geannuleerd.",
+  "sos_channelNeedsFirmware": "Deze radio heeft firmware 1.15 of nieuwer nodig voor kanaalmeldingen. Noodcontacten krijgen nog steeds directe berichten."
 }

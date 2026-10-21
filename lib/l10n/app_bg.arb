@@ -3369,7 +3369,6 @@
   "sos_sendAck": "Изпрати ACK",
   "sos_ackSent": "ACK е изпратен",
   "sos_dismiss": "Отхвърли",
-  "sos_dismissed": "Отхвърлен",
   "sos_copyCoordinates": "Копирай координатите",
   "sos_coordinatesCopied": "Координатите са копирани",
   "sos_noPosition": "Без позиция",
@@ -3441,7 +3440,6 @@
     }
   },
   "map_enterPathManually": "Въведи пътя ръчно",
-  "sos_cancelledBySender": "Отменено от подателя",
   "sos_updatesChannelName": "SOS актуализации",
   "sos_cancelNotificationTitle": "SOS от {name} е отменен",
   "@sos_cancelNotificationTitle": {
@@ -3451,5 +3449,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Подателят отмени този SOS."
+  "sos_cancelNotificationBody": "Подателят отмени този SOS.",
+  "sos_channelNeedsFirmware": "Това радио се нуждае от фърмуер 1.15 или по-нов за сигнали в канала. Контактите за спешни случаи пак получават директни съобщения."
 }

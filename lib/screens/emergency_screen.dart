@@ -437,11 +437,7 @@ class _IncomingSosCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    alert.cancelled
-                        ? l10n.sos_cancelledBySender
-                        : alert.ackSent
-                        ? l10n.sos_ackSent
-                        : l10n.sos_dismissed,
+                    l10n.sos_ackSent,
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -450,7 +446,7 @@ class _IncomingSosCard extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 4,
                 children: [
-                  if (!alert.ackSent && !alert.cancelled)
+                  if (!alert.ackSent)
                     FilledButton.icon(
                       style: FilledButton.styleFrom(
                         backgroundColor: Colors.red.shade700,
@@ -462,11 +458,11 @@ class _IncomingSosCard extends StatelessWidget {
                           ? () => service.acknowledge(alert)
                           : null,
                     ),
-                  if (open)
-                    OutlinedButton(
-                      onPressed: () => service.dismiss(alert),
-                      child: Text(l10n.sos_dismiss),
-                    ),
+                  // Deletes the alert and its position from this phone.
+                  OutlinedButton(
+                    onPressed: () => service.dismiss(alert),
+                    child: Text(l10n.sos_dismiss),
+                  ),
                   if (fix.hasPosition) ...[
                     OutlinedButton.icon(
                       icon: const Icon(Icons.map_outlined),

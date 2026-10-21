@@ -3503,7 +3503,6 @@
   "sos_sendAck": "Envoyer ACK",
   "sos_ackSent": "ACK envoyé",
   "sos_dismiss": "Ignorer",
-  "sos_dismissed": "Ignorée",
   "sos_copyCoordinates": "Copier les coordonnées",
   "sos_coordinatesCopied": "Coordonnées copiées",
   "sos_noPosition": "Aucune position incluse",
@@ -3575,7 +3574,6 @@
     }
   },
   "map_enterPathManually": "Saisir le chemin manuellement",
-  "sos_cancelledBySender": "Annulé par l'expéditeur",
   "sos_updatesChannelName": "Mises à jour SOS",
   "sos_cancelNotificationTitle": "SOS de {name} annulé",
   "@sos_cancelNotificationTitle": {
@@ -3585,5 +3583,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "L'expéditeur a annulé ce SOS."
+  "sos_cancelNotificationBody": "L'expéditeur a annulé ce SOS.",
+  "sos_channelNeedsFirmware": "Cette radio nécessite le firmware 1.15 ou plus récent pour les alertes de canal. Les contacts d'urgence reçoivent toujours des messages directs."
 }

@@ -178,7 +178,7 @@ void main() async {
   );
 
   final sosService = SosService(
-    transport: ConnectorSosTransport(connector, retryService),
+    transport: ConnectorSosTransport(connector),
     settings: appSettingsService,
     phoneLocation: GeolocatorPhoneLocation(),
     alerter: NotificationSosAlerter(),

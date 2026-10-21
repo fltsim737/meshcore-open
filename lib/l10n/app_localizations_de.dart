@@ -6359,6 +6359,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Funkgerät verbinden, um einen Kanal zu wählen';
 
   @override
+  String get sos_channelNeedsFirmware =>
+      'Dieses Funkgerät braucht Firmware 1.15 oder neuer für Kanalalarme. Notfallkontakte erhalten weiterhin Direktnachrichten.';
+
+  @override
   String get sos_includeFavourites => 'Favoriten einbeziehen';
 
   @override
@@ -6447,9 +6451,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sos_dismiss => 'Verwerfen';
 
   @override
-  String get sos_dismissed => 'Verworfen';
-
-  @override
   String get sos_copyCoordinates => 'Koordinaten kopieren';
 
   @override
@@ -6524,9 +6525,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NOTFALL-SOS';
-
-  @override
-  String get sos_cancelledBySender => 'Vom Absender abgebrochen';
 
   @override
   String get sos_updatesChannelName => 'SOS-Updates';

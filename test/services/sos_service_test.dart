@@ -17,6 +17,8 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   @override
   String? selfName = 'Farmhouse';
   @override
+  Uint8List? selfPublicKey = Uint8List.fromList(List.filled(32, 0xAA));
+  @override
   double? selfLatitude;
   @override
   double? selfLongitude;
@@ -27,43 +29,44 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   ];
   @override
   List<Contact> contacts = [];
+  @override
+  bool supportsChannelData = true;
 
-  void Function(SosInboundText inbound)? listener;
-  final List<(int, String)> channelSends = [];
+  void Function(SosInboundText inbound)? textListener;
+  void Function(int channelIndex, Uint8List payload)? dataListener;
+  void Function(int ackHash)? ackListener;
+
+  /// (channel index, decoded packet) for every channel send.
+  final List<(int, SosPacket)> channelPackets = [];
+
+  /// (recipient name, text) for every direct send.
   final List<(String, String)> directSends = [];
+  final Map<String, int> _lastHashFor = {};
+  int _nextHash = 1;
 
   @override
   set sosTextListener(void Function(SosInboundText inbound)? value) =>
-      listener = value;
+      textListener = value;
+  @override
+  set sosDataListener(void Function(int, Uint8List)? value) =>
+      dataListener = value;
+  @override
+  set sosAckListener(void Function(int ackHash)? value) => ackListener = value;
 
   @override
-  Future<void> sendChannelText(Channel channel, String text) async =>
-      channelSends.add((channel.index, text));
+  Future<void> sendChannelData(Channel channel, Uint8List payload) async =>
+      channelPackets.add((channel.index, SosPacket.decode(payload)!));
 
   @override
-  Future<void> sendDirectText(Contact contact, String text) async =>
-      directSends.add((contact.name, text));
-
-  final Set<String> delivered = {};
-  final Set<String> pending = {};
-
-  @override
-  bool hasDeliveredSos(Contact contact, String sosId) =>
-      delivered.contains(contact.name);
-
-  @override
-  bool hasPendingSos(Contact contact, String sosId) =>
-      pending.contains(contact.name);
-
-  final List<String> abandoned = [];
-
-  @override
-  void abandonPendingSos(String sosId) => abandoned.add(sosId);
-
-  void markDelivered(String name) {
-    delivered.add(name);
-    notifyListeners();
+  Future<int?> sendDirectText(Contact contact, String text) async {
+    directSends.add((contact.name, text));
+    final hash = _nextHash++;
+    _lastHashFor[contact.name] = hash;
+    return hash;
   }
+
+  /// The recipient's radio confirms the last DM sent to [name].
+  void confirmDelivery(String name) => ackListener?.call(_lastHashFor[name]!);
 
   void setConnected(bool value) {
     isConnected = value;
@@ -105,8 +108,19 @@ Contact contactFor(String name, int seed, {bool favourite = false}) => Contact(
   lastSeen: DateTime(2026),
 );
 
-String sosText(String id, {double? lat, double? lon}) => SosCodec.encodeSos(
+/// A channel SOS packet from [name], whose key starts with byte [seed].
+Uint8List sosPacketFrom(
+  String name,
+  int seed,
+  String id, {
+  SosPacketKind kind = SosPacketKind.sos,
+  double? lat,
+  double? lon,
+}) => SosPacket(
+  kind: kind,
   id: id,
+  senderPrefix: Uint8List.fromList(List.filled(6, seed)),
+  senderName: name,
   time: DateTime.utc(2026, 10, 21),
   fix: lat == null
       ? const SosFix.none()
@@ -115,7 +129,7 @@ String sosText(String id, {double? lat, double? lon}) => SosCodec.encodeSos(
           longitude: lon,
           source: SosLocationSource.phoneGps,
         ),
-);
+).encode();
 
 Future<AppSettingsService> freshSettings() async {
   SharedPreferences.setMockInitialValues({});
@@ -130,10 +144,9 @@ void main() {
   late FakeSosTransport transport;
   late AppSettingsService settings;
   late SosService service;
-  late DateTime now;
-
   late FakePhoneLocation phone;
   late FakeAlerter alerter;
+  late DateTime now;
 
   SosService newService() => SosService(
     transport: transport,
@@ -142,6 +155,9 @@ void main() {
     alerter: alerter,
     now: () => now,
   );
+
+  void hear(Uint8List packet, {int channel = 0}) =>
+      transport.dataListener!(channel, packet);
 
   setUp(() async {
     now = DateTime(2026, 10, 21, 9);
@@ -154,64 +170,54 @@ void main() {
 
   tearDown(() => service.dispose());
 
-  test('registers as the connector text listener', () {
-    expect(transport.listener, isNotNull);
+  test('registers all connector listeners', () {
+    expect(transport.textListener, isNotNull);
+    expect(transport.dataListener, isNotNull);
+    expect(transport.ackListener, isNotNull);
   });
 
-  group('location priority', () {
-    test('uses phone GPS first', () async {
-      phone.fix = const SosFix(
-        latitude: -42,
-        longitude: 173,
-        source: SosLocationSource.phoneGps,
-      );
-      transport
-        ..selfLatitude = -41.1
-        ..selfLongitude = 174.2;
-      expect((await service.resolveFix()).source, SosLocationSource.phoneGps);
-      phone.fix = null;
-      expect((await service.resolveFix()).source, SosLocationSource.radio);
-    });
-
-    test('uses the radio position before the stored location', () async {
-      transport
-        ..selfLatitude = -41.1
-        ..selfLongitude = 174.2;
-      await settings.setSosLocation(-40, 175);
-      final fix = await service.resolveFix();
-      expect(fix.source, SosLocationSource.radio);
-      expect(fix.latitude, -41.1);
-    });
-
-    test('treats a 0,0 radio position as absent', () async {
-      transport
-        ..selfLatitude = 0
-        ..selfLongitude = 0;
-      await settings.setSosLocation(-40, 175);
-      expect((await service.resolveFix()).source, SosLocationSource.stored);
-    });
-
-    test('falls back to no location', () async {
-      expect((await service.resolveFix()).hasPosition, isFalse);
-    });
+  test('location priority: phone, radio, stored, none', () async {
+    phone.fix = const SosFix(
+      latitude: -42,
+      longitude: 173,
+      source: SosLocationSource.phoneGps,
+    );
+    transport
+      ..selfLatitude = -41.1
+      ..selfLongitude = 174.2;
+    await settings.setSosLocation(-40, 175);
+    expect((await service.resolveFix()).source, SosLocationSource.phoneGps);
+    phone.fix = null;
+    expect((await service.resolveFix()).source, SosLocationSource.radio);
+    transport
+      ..selfLatitude = 0
+      ..selfLongitude = 0;
+    expect((await service.resolveFix()).source, SosLocationSource.stored);
+    await settings.setSosLocation(null, null);
+    expect((await service.resolveFix()).hasPosition, isFalse);
   });
 
   group('sending', () {
-    test('broadcasts on the SOS channel and DMs emergency contacts', () async {
+    test('sends a data packet on the channel and DMs contacts', () async {
       final alice = contactFor('Alice', 1);
       final bob = contactFor('Bob', 2, favourite: true);
-      final carol = contactFor('Carol', 3);
-      transport.contacts = [alice, bob, carol];
+      transport.contacts = [alice, bob, contactFor('Carol', 3)];
       await settings.setSosChannelIndex(2);
       await settings.setSosContact(alice.publicKeyHex, true);
+      phone.fix = const SosFix(
+        latitude: -41.28646,
+        longitude: 174.77624,
+        source: SosLocationSource.phoneGps,
+      );
 
       await service.activate();
 
-      expect(service.isActive, isTrue);
-      expect(transport.channelSends.single.$1, 2);
-      final sent = SosCodec.parseSos(transport.channelSends.single.$2)!;
-      expect(sent.id, service.active!.id);
-      expect(sent.node, isNull);
+      final (channelIndex, packet) = transport.channelPackets.single;
+      expect(channelIndex, 2);
+      expect(packet.kind, SosPacketKind.sos);
+      expect(packet.id, service.active!.id);
+      expect(packet.senderName, 'Farmhouse');
+      expect(packet.fix.latitude, closeTo(-41.28646, 1e-6));
       expect(transport.directSends.map((s) => s.$1), ['Alice', 'Bob']);
       expect(
         SosCodec.parseSos(transport.directSends.first.$2)!.node,
@@ -219,44 +225,43 @@ void main() {
       );
     });
 
+    test('sends DMs only when the radio cannot send channel data', () async {
+      final alice = contactFor('Alice', 1);
+      transport
+        ..contacts = [alice]
+        ..supportsChannelData = false;
+      await settings.setSosContact(alice.publicKeyHex, true);
+      await service.activate();
+      expect(transport.channelPackets, isEmpty);
+      expect(transport.directSends, hasLength(1));
+    });
+
     test('falls back to the first channel when the slot is gone', () async {
       await settings.setSosChannelIndex(7);
       await service.activate();
-      expect(transport.channelSends.single.$1, 0);
+      expect(transport.channelPackets.single.$1, 0);
     });
 
     test('counts an ACK once per responder across channel and DM', () async {
       final bob = contactFor('Bob', 2);
       transport.contacts = [bob];
       await service.activate();
-      final ack = 'ACK #${service.active!.id}';
-      service.handleInbound(
-        SosInboundText(text: ack, senderName: 'Bob', channelIndex: 0),
-      );
-      service.handleInbound(
-        SosInboundText(text: ack, senderName: 'Bob', channelIndex: 0),
-      );
+      final id = service.active!.id;
+      hear(sosPacketFrom('Bob', 2, id, kind: SosPacketKind.ack));
+      hear(sosPacketFrom('Bob', 2, id, kind: SosPacketKind.ack));
       service.handleInbound(
         SosInboundText(
-          text: ack,
+          text: 'ACK #$id',
           senderName: 'Bob',
           senderKeyHex: bob.publicKeyHex,
         ),
       );
       service.handleInbound(
-        const SosInboundText(text: 'ACK #zzzz', senderName: 'Other'),
+        const SosInboundText(text: 'ACK #ffff', senderName: 'Other'),
       );
       expect(service.active!.acks, hasLength(1));
       expect(service.active!.acks.single.senderKeyHex, bob.publicKeyHex);
-    });
-
-    test('cancel clears the active SOS and its saved state', () async {
-      await service.activate();
-      await service.cancel();
-      expect(service.isActive, isFalse);
-      final reloaded = newService()..load();
-      expect(reloaded.isActive, isFalse);
-      reloaded.dispose();
+      expect(alerter.events, ['ack:Bob']);
     });
 
     test('an active SOS survives a restart', () async {
@@ -273,12 +278,11 @@ void main() {
       final start = now;
       await service.activate();
       final sentAt = <Duration>[Duration.zero];
-      // Step through the first hour a few seconds at a time.
       for (var t = 0; t < 3600; t += 5) {
         now = start.add(Duration(seconds: t));
-        final before = transport.channelSends.length;
+        final before = transport.channelPackets.length;
         await service.broadcastIfDue();
-        if (transport.channelSends.length > before) {
+        if (transport.channelPackets.length > before) {
           sentAt.add(now.difference(start));
         }
       }
@@ -286,42 +290,30 @@ void main() {
         0, 1, 2, 3, 4, 5, // every minute for the first 5 minutes
         10, 15, 20, 25, 30, 35, 40, 45, 50, 55,
       ]);
-      expect(service.isActive, isTrue);
     });
 
     test('an ACK does not slow the schedule', () async {
       final start = now;
       await service.activate();
-      service.handleInbound(
-        SosInboundText(text: 'ACK #${service.active!.id}', senderName: 'N'),
-      );
+      hear(sosPacketFrom('N', 9, service.active!.id, kind: SosPacketKind.ack));
       expect(service.nextBroadcastAt, start.add(SosService.burstInterval));
-      now = start.add(const Duration(minutes: 20));
-      await service.broadcastIfDue();
-      expect(service.nextBroadcastAt, now.add(SosService.repeatInterval));
     });
 
-    test('a due broadcast waits for the radio', () async {
+    test('a due broadcast waits for the radio, then catches up', () async {
       transport.setConnected(false);
       await service.activate();
-      expect(transport.channelSends, isEmpty);
-      expect(service.active!.lastBroadcastAt, isNull);
-      transport.isConnected = true;
-      await service.broadcastIfDue();
-      expect(transport.channelSends, hasLength(1));
+      expect(transport.channelPackets, isEmpty);
+      transport.setConnected(true);
+      await pumpEventQueue();
+      expect(transport.channelPackets, hasLength(1));
     });
 
-    test('a cancelled SOS stops repeating', () async {
+    test('catches up when the app returns to the foreground', () async {
       await service.activate();
-      await service.cancel();
-      now = now.add(const Duration(hours: 1));
-      await service.broadcastIfDue();
-      // The SOS, then the cancellation notice, then nothing more.
-      final sent = transport.channelSends.map((s) => s.$2).toList();
-      expect(sent, hasLength(2));
-      expect(SosCodec.parseSos(sent[0]), isNotNull);
-      expect(SosCodec.parseCancel(sent[1]), isNotNull);
-      expect(service.nextBroadcastAt, isNull);
+      now = now.add(SosService.burstInterval);
+      service.onAppResumed();
+      await pumpEventQueue();
+      expect(transport.channelPackets, hasLength(2));
     });
   });
 
@@ -342,94 +334,23 @@ void main() {
       await service.activate();
       expect(transport.directSends.map((s) => s.$1), ['Alice', 'Bob', 'Carol']);
 
-      transport.markDelivered('Alice');
+      transport.confirmDelivery('Alice');
       expect(service.active!.deliveredContactKeys, {alice.publicKeyHex});
-      // A channel ACK carries only the name.
-      service.handleInbound(
-        SosInboundText(
-          text: 'ACK #${service.active!.id}',
-          senderName: 'Bob',
-          channelIndex: 0,
-        ),
+      // A channel ACK identifies Bob by his key prefix.
+      hear(
+        sosPacketFrom('Bob', 2, service.active!.id, kind: SosPacketKind.ack),
       );
 
       transport.directSends.clear();
-      now = now.add(SosService.repeatInterval);
+      now = now.add(SosService.burstInterval);
       await service.broadcastIfDue();
       expect(transport.directSends.map((s) => s.$1), ['Carol']);
-      expect(transport.channelSends, hasLength(2));
     });
 
-    test('does not queue a DM while the last one is retrying', () async {
+    test('ignores delivery confirmations it did not ask for', () async {
       await service.activate();
-      transport.pending.addAll(['Alice', 'Bob', 'Carol']);
-      transport.directSends.clear();
-      now = now.add(SosService.repeatInterval);
-      await service.broadcastIfDue();
-      expect(transport.directSends, isEmpty);
-      expect(transport.channelSends, hasLength(2));
-    });
-  });
-
-  group('alerts and recovery', () {
-    test('sounds for every repeat until acknowledged', () async {
-      void hear() => service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2'),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
-      hear();
-      hear();
-      await service.acknowledge(service.incoming.single);
-      hear();
-      expect(alerter.events, [
-        'alert:Ridge#a1b2',
-        'alert:Ridge#a1b2',
-        'clear:Ridge#a1b2',
-      ]);
-    });
-
-    test('a dismissed alert stays quiet on repeats', () async {
-      service.handleInbound(
-        SosInboundText(text: sosText('a1b2'), senderName: 'Ridge'),
-      );
-      await service.dismiss(service.incoming.single);
-      service.handleInbound(
-        SosInboundText(text: sosText('a1b2'), senderName: 'Ridge'),
-      );
-      expect(alerter.events.where((e) => e.startsWith('alert')), hasLength(1));
-      expect(service.incoming.single.receivedCount, 2);
-    });
-
-    test('notifies the originator once per responder', () async {
-      await service.activate();
-      final ack = 'ACK #${service.active!.id}';
-      service.handleInbound(SosInboundText(text: ack, senderName: 'A'));
-      service.handleInbound(SosInboundText(text: ack, senderName: 'A'));
-      service.handleInbound(SosInboundText(text: ack, senderName: 'B'));
-      expect(alerter.events, ['ack:A', 'ack:B']);
-    });
-
-    test('sends an overdue SOS as soon as the radio reconnects', () async {
-      await service.activate();
-      transport.setConnected(false);
-      now = now.add(const Duration(minutes: 20));
-      await service.broadcastIfDue();
-      expect(transport.channelSends, hasLength(1));
-
-      transport.setConnected(true);
-      await pumpEventQueue();
-      expect(transport.channelSends, hasLength(2));
-    });
-
-    test('catches up when the app returns to the foreground', () async {
-      await service.activate();
-      now = now.add(SosService.repeatInterval);
-      service.onAppResumed();
-      await pumpEventQueue();
-      expect(transport.channelSends, hasLength(2));
+      service.handleDeliveryAck(999);
+      expect(service.active!.deliveredContactKeys, isEmpty);
     });
   });
 
@@ -444,25 +365,19 @@ void main() {
       await settings.setSosContact(bob.publicKeyHex, true);
     });
 
-    test('stops at once, withdraws DMs and notifies everyone', () async {
+    test('stops at once and notifies everyone, ACKed or not', () async {
       await service.activate();
       final id = service.active!.id;
-      // Bob already acknowledged; he still needs to hear it was cancelled.
-      service.handleInbound(
-        SosInboundText(
-          text: 'ACK #$id',
-          senderName: 'Bob',
-          senderKeyHex: bob.publicKeyHex,
-        ),
-      );
-      transport.channelSends.clear();
+      transport.confirmDelivery('Bob');
+      transport.channelPackets.clear();
       transport.directSends.clear();
 
       await service.cancel();
 
       expect(service.isActive, isFalse);
-      expect(transport.abandoned, [id]);
-      expect(SosCodec.parseCancel(transport.channelSends.single.$2), id);
+      final (_, packet) = transport.channelPackets.single;
+      expect(packet.kind, SosPacketKind.cancel);
+      expect(packet.id, id);
       expect(transport.directSends.map((s) => s.$1), ['Alice', 'Bob']);
       expect(
         transport.directSends.every((s) => SosCodec.parseCancel(s.$2) == id),
@@ -470,166 +385,152 @@ void main() {
       );
       now = now.add(const Duration(hours: 1));
       await service.broadcastIfDue();
-      expect(transport.channelSends, hasLength(1));
+      expect(transport.channelPackets, hasLength(1));
     });
 
     test('a cancel while disconnected is sent on reconnect', () async {
       await service.activate();
       final id = service.active!.id;
       transport.setConnected(false);
-      transport.channelSends.clear();
+      transport.channelPackets.clear();
       await service.cancel();
-      expect(transport.channelSends, isEmpty);
-      expect(service.pendingCancelId, id);
-
-      // Survives a restart too.
+      expect(transport.channelPackets, isEmpty);
       final reloaded = newService()..load();
       expect(reloaded.pendingCancelId, id);
       reloaded.dispose();
 
       transport.setConnected(true);
       await pumpEventQueue();
-      expect(SosCodec.parseCancel(transport.channelSends.single.$2), id);
+      expect(transport.channelPackets.single.$2.kind, SosPacketKind.cancel);
       expect(service.pendingCancelId, isNull);
-    });
-
-    test('an incoming cancel closes the alert and stops the alarm', () {
-      service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2'),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
-      expect(service.openIncoming, hasLength(1));
-      // Someone else cannot cancel Ridge's alert.
-      service.handleInbound(
-        SosInboundText(
-          text: SosCodec.encodeCancel('a1b2', now),
-          senderName: 'Mallory',
-          channelIndex: 0,
-        ),
-      );
-      expect(service.openIncoming, hasLength(1));
-      service.handleInbound(
-        SosInboundText(
-          text: SosCodec.encodeCancel('a1b2', now),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
-      expect(service.openIncoming, isEmpty);
-      expect(service.incoming.single.cancelled, isTrue);
-      expect(alerter.events, [
-        'alert:Ridge#a1b2',
-        'clear:Ridge#a1b2',
-        'cancelled:Ridge#a1b2',
-      ]);
-      // A late repeat of the SOS does not reopen it.
-      service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2'),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
-      expect(service.openIncoming, isEmpty);
     });
   });
 
   group('receiving', () {
-    test('merges repeats of the same alert and keeps the latest fix', () {
-      service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2', lat: -41, lon: 174),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
-      service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2', lat: -41.5, lon: 174.5),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
-      service.handleInbound(
-        SosInboundText(text: sosText('a1b2'), senderName: 'Ridge'),
-      );
-      final alert = service.incoming.single;
-      expect(alert.receivedCount, 3);
-      expect(alert.fix.latitude, -41.5);
-      expect(service.openIncoming, hasLength(1));
-    });
-
-    test('acknowledging replies on the channel and by DM', () async {
+    test('a channel packet raises an alert linked to the contact', () {
       final ridge = contactFor('Ridge', 9);
       transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174), channel: 2);
+      final alert = service.incoming.single;
+      expect(alert.senderName, 'Ridge');
+      expect(alert.senderKeyHex, ridge.publicKeyHex);
+      expect(alert.channelIndex, 2);
+      expect(alert.fix.latitude, closeTo(-41, 1e-6));
+      expect(alerter.events, ['alert:Ridge#a1b2']);
+    });
+
+    test('ignores our own packets heard back from the mesh', () {
+      hear(sosPacketFrom('Farmhouse', 0xAA, 'a1b2'));
+      expect(service.incoming, isEmpty);
+    });
+
+    test('merges repeats from channel and DM into one alert', () {
+      final ridge = contactFor('Ridge', 9);
+      transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41.5, lon: 174.5));
       service.handleInbound(
         SosInboundText(
-          text: sosText('a1b2'),
-          senderName: 'Ridge',
-          channelIndex: 2,
-        ),
-      );
-      service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2'),
+          text: SosCodec.encodeSos(
+            id: 'a1b2',
+            time: now,
+            fix: const SosFix.none(),
+          ),
           senderName: 'Ridge',
           senderKeyHex: ridge.publicKeyHex,
         ),
       );
       final alert = service.incoming.single;
+      expect(alert.receivedCount, 3);
+      expect(alert.fix.latitude, closeTo(-41.5, 1e-6));
+    });
+
+    test('ACK replies by packet and DM and keeps the position', () async {
+      final ridge = contactFor('Ridge', 9);
+      transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174), channel: 2);
+      final alert = service.incoming.single;
       await service.acknowledge(alert);
       expect(alert.ackSent, isTrue);
       expect(service.openIncoming, isEmpty);
-      expect(transport.channelSends, [(2, 'ACK #a1b2')]);
+      expect(service.incoming.single.fix.hasPosition, isTrue);
+      final (channelIndex, packet) = transport.channelPackets.single;
+      expect(channelIndex, 2);
+      expect(packet.kind, SosPacketKind.ack);
+      expect(packet.id, 'a1b2');
       expect(transport.directSends, [('Ridge', 'ACK #a1b2')]);
     });
 
     test('acknowledging while disconnected leaves the alert open', () async {
-      service.handleInbound(
-        SosInboundText(
-          text: sosText('a1b2'),
-          senderName: 'Ridge',
-          channelIndex: 0,
-        ),
-      );
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       transport.setConnected(false);
-      expect(service.isConnected, isFalse);
       await service.acknowledge(service.incoming.single);
-      expect(service.incoming.single.isOpen, isTrue);
-      expect(transport.channelSends, isEmpty);
+      expect(service.openIncoming, hasLength(1));
+      expect(transport.channelPackets, isEmpty);
     });
 
-    test('notes other responders and survives a restart', () async {
-      service.handleInbound(
-        SosInboundText(text: sosText('a1b2'), senderName: 'Ridge'),
-      );
-      service.handleInbound(
-        const SosInboundText(text: 'ACK #a1b2', senderName: 'Valley'),
-      );
+    test('a cancel from the sender deletes the alert; others cannot', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      hear(sosPacketFrom('Mallory', 7, 'a1b2', kind: SosPacketKind.cancel));
+      expect(service.incoming, hasLength(1));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+      expect(service.incoming, isEmpty);
+      expect(alerter.events, [
+        'alert:Ridge#a1b2',
+        'clear:Ridge#a1b2',
+        'cancelled:Ridge#a1b2',
+      ]);
+    });
+
+    test('dismiss deletes the alert and its position', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
       await service.dismiss(service.incoming.single);
+      expect(service.incoming, isEmpty);
       final reloaded = newService()..load();
-      final alert = reloaded.incoming.single;
-      expect(alert.ackedBy, {'Valley'});
-      expect(alert.dismissed, isTrue);
+      expect(reloaded.incoming, isEmpty);
       reloaded.dispose();
     });
 
-    test('keeps open alerts when trimming history', () async {
-      service.handleInbound(
-        SosInboundText(text: sosText('0000'), senderName: 'First'),
-      );
-      for (var i = 1; i <= 60; i++) {
-        final id = i.toRadixString(16).padLeft(4, '0');
-        service.handleInbound(
-          SosInboundText(text: sosText(id), senderName: 'N$i'),
-        );
-        await service.dismiss(service.incoming.first);
-      }
-      expect(service.incoming.length, lessThanOrEqualTo(51));
-      expect(service.incoming.any((a) => a.senderName == 'First'), isTrue);
+    test('an alert not heard for 60 minutes is deleted', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      await service.acknowledge(service.incoming.single);
+      now = now.add(const Duration(minutes: 59));
+      service.purgeExpired();
+      expect(service.incoming, hasLength(1));
+      // A repeat keeps it alive.
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      now = now.add(const Duration(minutes: 59));
+      service.purgeExpired();
+      expect(service.incoming, hasLength(1));
+      now = now.add(const Duration(minutes: 2));
+      service.purgeExpired();
+      expect(service.incoming, isEmpty);
+    });
+
+    test('expired alerts are gone after a restart', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      now = now.add(const Duration(hours: 2));
+      final reloaded = newService()..load();
+      expect(reloaded.incoming, isEmpty);
+      reloaded.dispose();
+    });
+
+    test('sounds for every repeat until acknowledged', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      await service.acknowledge(service.incoming.single);
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(alerter.events, [
+        'alert:Ridge#a1b2',
+        'alert:Ridge#a1b2',
+        'clear:Ridge#a1b2',
+      ]);
+    });
+
+    test('notes other responders', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      hear(sosPacketFrom('Valley', 5, 'a1b2', kind: SosPacketKind.ack));
+      expect(service.incoming.single.ackedBy, {'Valley'});
     });
   });
 }

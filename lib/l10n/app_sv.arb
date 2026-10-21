@@ -3364,7 +3364,6 @@
   "sos_sendAck": "Skicka ACK",
   "sos_ackSent": "ACK skickat",
   "sos_dismiss": "Avfärda",
-  "sos_dismissed": "Avfärdat",
   "sos_copyCoordinates": "Kopiera koordinater",
   "sos_coordinatesCopied": "Koordinater kopierade",
   "sos_noPosition": "Ingen position medskickad",
@@ -3436,7 +3435,6 @@
     }
   },
   "map_enterPathManually": "Ange sökväg manuellt",
-  "sos_cancelledBySender": "Avbrutet av avsändaren",
   "sos_updatesChannelName": "SOS-uppdateringar",
   "sos_cancelNotificationTitle": "SOS från {name} avbrutet",
   "@sos_cancelNotificationTitle": {
@@ -3446,5 +3444,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Avsändaren avbröt detta SOS."
+  "sos_cancelNotificationBody": "Avsändaren avbröt detta SOS.",
+  "sos_channelNeedsFirmware": "Den här radion behöver firmware 1.15 eller senare för kanallarm. Nödkontakter får fortfarande direktmeddelanden."
 }

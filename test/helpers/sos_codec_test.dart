@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/connector/meshcore_protocol.dart';
@@ -112,6 +113,68 @@ void main() {
     expect(SosCodec.parseSos(text), isNull);
     expect(SosCodec.parseCancel('SOS CANCELLED #a1b2'), isNull);
     expect(SosCodec.isStructured(text), isTrue);
+  });
+
+  group('SosPacket', () {
+    final prefix = Uint8List.fromList([1, 2, 3, 4, 5, 6]);
+
+    test('round-trips an SOS with a southern, western position', () {
+      final packet = SosPacket(
+        kind: SosPacketKind.sos,
+        id: 'a1b2',
+        senderPrefix: prefix,
+        senderName: 'Farmhouse',
+        time: time,
+        fix: const SosFix(
+          latitude: -45.123456,
+          longitude: -122.543211,
+          source: SosLocationSource.radio,
+        ),
+      );
+      final bytes = packet.encode();
+      expect(bytes.length, lessThan(64));
+      final decoded = SosPacket.decode(bytes)!;
+      expect(decoded.kind, SosPacketKind.sos);
+      expect(decoded.id, 'a1b2');
+      expect(decoded.senderPrefix, prefix);
+      expect(decoded.senderName, 'Farmhouse');
+      expect(decoded.time!.isAtSameMomentAs(time), isTrue);
+      expect(decoded.fix.source, SosLocationSource.radio);
+      expect(decoded.fix.latitude, closeTo(-45.123456, 1e-6));
+      expect(decoded.fix.longitude, closeTo(-122.543211, 1e-6));
+    });
+
+    test('round-trips ACK and cancel, and an SOS without a position', () {
+      for (final kind in SosPacketKind.values) {
+        final decoded = SosPacket.decode(
+          SosPacket(
+            kind: kind,
+            id: '00ff',
+            senderPrefix: prefix,
+            senderName: 'Ridge',
+            time: time,
+          ).encode(),
+        )!;
+        expect(decoded.kind, kind);
+        expect(decoded.id, '00ff');
+        expect(decoded.senderName, 'Ridge');
+        expect(decoded.fix.hasPosition, isFalse);
+      }
+    });
+
+    test('shortens long names and rejects junk', () {
+      final decoded = SosPacket.decode(
+        SosPacket(
+          kind: SosPacketKind.ack,
+          id: 'ffff',
+          senderPrefix: prefix,
+          senderName: 'N' * 60,
+        ).encode(),
+      )!;
+      expect(decoded.senderName.length, SosPacket.maxNameBytes);
+      expect(SosPacket.decode(Uint8List.fromList([1, 2, 3])), isNull);
+      expect(SosPacket.decode(Uint8List.fromList(List.filled(20, 9))), isNull);
+    });
   });
 
   test('marks SOS and ACK text as structured', () {

@@ -3349,7 +3349,6 @@
   "sos_sendAck": "Надіслати ACK",
   "sos_ackSent": "ACK надіслано",
   "sos_dismiss": "Приховати",
-  "sos_dismissed": "Приховано",
   "sos_copyCoordinates": "Копіювати координати",
   "sos_coordinatesCopied": "Координати скопійовано",
   "sos_noPosition": "Координати не передано",
@@ -3421,7 +3420,6 @@
     }
   },
   "map_enterPathManually": "Ввести шлях вручну",
-  "sos_cancelledBySender": "Скасовано відправником",
   "sos_updatesChannelName": "Оновлення SOS",
   "sos_cancelNotificationTitle": "SOS від {name} скасовано",
   "@sos_cancelNotificationTitle": {
@@ -3431,5 +3429,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Відправник скасував цей SOS."
+  "sos_cancelNotificationBody": "Відправник скасував цей SOS.",
+  "sos_channelNeedsFirmware": "Для сигналів у каналі цьому радіо потрібна прошивка 1.15 або новіша. Екстрені контакти й надалі отримують особисті повідомлення."
 }

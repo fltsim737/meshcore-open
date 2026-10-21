@@ -3503,7 +3503,6 @@
   "sos_sendAck": "ACKを送信",
   "sos_ackSent": "ACK送信済み",
   "sos_dismiss": "閉じる",
-  "sos_dismissed": "閉じました",
   "sos_copyCoordinates": "座標をコピー",
   "sos_coordinatesCopied": "座標をコピーしました",
   "sos_noPosition": "位置情報なし",
@@ -3575,7 +3574,6 @@
     }
   },
   "map_enterPathManually": "経路を手動で入力",
-  "sos_cancelledBySender": "送信者が取り消し",
   "sos_updatesChannelName": "SOSの更新",
   "sos_cancelNotificationTitle": "{name} のSOSは取り消されました",
   "@sos_cancelNotificationTitle": {
@@ -3585,5 +3583,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "送信者がこのSOSを取り消しました。"
+  "sos_cancelNotificationBody": "送信者がこのSOSを取り消しました。",
+  "sos_channelNeedsFirmware": "チャンネル通知にはこの無線機のファームウェア1.15以降が必要です。緊急連絡先には引き続きダイレクトメッセージが届きます。"
 }

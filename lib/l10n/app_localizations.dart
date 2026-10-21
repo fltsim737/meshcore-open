@@ -10645,6 +10645,12 @@ abstract class AppLocalizations {
   /// **'Connect a radio to choose a channel'**
   String get sos_channelUnavailable;
 
+  /// No description provided for @sos_channelNeedsFirmware.
+  ///
+  /// In en, this message translates to:
+  /// **'This radio needs firmware 1.15 or newer for channel alerts. Emergency contacts still get direct messages.'**
+  String get sos_channelNeedsFirmware;
+
   /// No description provided for @sos_includeFavourites.
   ///
   /// In en, this message translates to:
@@ -10801,12 +10807,6 @@ abstract class AppLocalizations {
   /// **'Dismiss'**
   String get sos_dismiss;
 
-  /// No description provided for @sos_dismissed.
-  ///
-  /// In en, this message translates to:
-  /// **'Dismissed'**
-  String get sos_dismissed;
-
   /// No description provided for @sos_copyCoordinates.
   ///
   /// In en, this message translates to:
@@ -10932,12 +10932,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'EMERGENCY SOS'**
   String get sos_warningTitle;
-
-  /// No description provided for @sos_cancelledBySender.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancelled by sender'**
-  String get sos_cancelledBySender;
 
   /// No description provided for @sos_updatesChannelName.
   ///

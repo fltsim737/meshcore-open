@@ -3370,7 +3370,6 @@
   "sos_sendAck": "Pošlji ACK",
   "sos_ackSent": "ACK poslan",
   "sos_dismiss": "Opusti",
-  "sos_dismissed": "Opuščeno",
   "sos_copyCoordinates": "Kopiraj koordinate",
   "sos_coordinatesCopied": "Koordinate kopirane",
   "sos_noPosition": "Položaj ni vključen",
@@ -3442,7 +3441,6 @@
     }
   },
   "map_enterPathManually": "Ročno vnesi pot",
-  "sos_cancelledBySender": "Preklical pošiljatelj",
   "sos_updatesChannelName": "Posodobitve SOS",
   "sos_cancelNotificationTitle": "SOS od {name} preklican",
   "@sos_cancelNotificationTitle": {
@@ -3452,5 +3450,6 @@
       }
     }
   },
-  "sos_cancelNotificationBody": "Pošiljatelj je preklical ta SOS."
+  "sos_cancelNotificationBody": "Pošiljatelj je preklical ta SOS.",
+  "sos_channelNeedsFirmware": "Ta radio potrebuje vdelano programsko opremo 1.15 ali novejšo za opozorila na kanalu. Nujni stiki še vedno prejmejo neposredna sporočila."
 }
