@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../l10n/l10n.dart';
+import '../services/sos_service.dart';
 import '../theme/mesh_theme.dart';
 
 class QuickSwitchBar extends StatelessWidget {
@@ -40,6 +42,8 @@ class QuickSwitchBar extends StatelessWidget {
         ? MapPalette.textSecondary
         : colorScheme.onSurfaceVariant;
     final indicator = highContrast ? MapPalette.selected : colorScheme.primary;
+    final sos = context.watch<SosService>();
+    final openAlerts = sos.openIncoming.length;
 
     return SizedBox(
       width: double.infinity,
@@ -112,6 +116,19 @@ class QuickSwitchBar extends StatelessWidget {
                     selectedIcon: const Icon(Icons.map),
                     label: context.l10n.nav_map,
                   ),
+                  NavigationDestination(
+                    icon: _buildSosIcon(
+                      Icon(Icons.sos, color: colorScheme.error),
+                      openAlerts,
+                      sos.isActive,
+                    ),
+                    selectedIcon: _buildSosIcon(
+                      const Icon(Icons.sos),
+                      openAlerts,
+                      sos.isActive,
+                    ),
+                    label: context.l10n.nav_emergency,
+                  ),
                 ],
               ),
             ),
@@ -119,6 +136,13 @@ class QuickSwitchBar extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Count of open incoming alerts, or a dot while this device's SOS is on.
+  Widget _buildSosIcon(Icon icon, int openAlerts, bool active) {
+    if (openAlerts > 0) return Badge(label: Text('$openAlerts'), child: icon);
+    if (active) return Badge(child: icon);
+    return icon;
   }
 
   Widget _buildIconWithBadge(BuildContext context, Icon icon, int count) {

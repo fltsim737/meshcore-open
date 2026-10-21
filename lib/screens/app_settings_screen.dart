@@ -19,6 +19,7 @@ import '../widgets/language_picker_sheet.dart';
 import '../widgets/mesh_nav_tile.dart';
 import '../widgets/mesh_ui.dart';
 import '../widgets/network_map_settings_section.dart';
+import '../widgets/sos_settings_section.dart';
 import '../widgets/sync_progress_overlay.dart';
 import '../widgets/translation_settings_section.dart';
 import '../helpers/snack_bar_builder.dart';
@@ -63,6 +64,13 @@ class AppSettingsScreen extends StatelessWidget {
             MeshCard(
               padding: EdgeInsets.zero,
               child: _settingsCard(_buildNotificationsContent),
+            ),
+
+            // EMERGENCY SOS
+            SectionHeader(context.l10n.sos_settingsSection),
+            const MeshCard(
+              padding: EdgeInsets.zero,
+              child: SosSettingsSection(),
             ),
 
             // MESSAGING

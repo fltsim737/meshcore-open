@@ -459,4 +459,28 @@ class AppSettingsService extends ChangeNotifier {
       ),
     );
   }
+
+  Future<void> setSosLocation(double? latitude, double? longitude) async {
+    await updateSettings(
+      _settings.copyWith(sosLatitude: latitude, sosLongitude: longitude),
+    );
+  }
+
+  Future<void> setSosChannelIndex(int value) async {
+    await updateSettings(_settings.copyWith(sosChannelIndex: value));
+  }
+
+  Future<void> setSosIncludeFavourites(bool value) async {
+    await updateSettings(_settings.copyWith(sosIncludeFavourites: value));
+  }
+
+  Future<void> setSosContact(String publicKeyHex, bool included) async {
+    final updated = Set<String>.from(_settings.sosContactKeys);
+    if (included) {
+      updated.add(publicKeyHex);
+    } else {
+      updated.remove(publicKeyHex);
+    }
+    await updateSettings(_settings.copyWith(sosContactKeys: updated));
+  }
 }

@@ -10590,6 +10590,348 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unnamed repeater'**
   String get networkMap_unnamed;
+
+  /// No description provided for @nav_emergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency'**
+  String get nav_emergency;
+
+  /// No description provided for @sos_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency'**
+  String get sos_title;
+
+  /// No description provided for @sos_settingsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency SOS'**
+  String get sos_settingsSection;
+
+  /// No description provided for @sos_storedLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Stored emergency location'**
+  String get sos_storedLocation;
+
+  /// No description provided for @sos_storedLocationUnset.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get sos_storedLocationUnset;
+
+  /// No description provided for @sos_storedLocationHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.'**
+  String get sos_storedLocationHelper;
+
+  /// No description provided for @sos_channel.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS channel'**
+  String get sos_channel;
+
+  /// No description provided for @sos_channelUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a radio to choose a channel'**
+  String get sos_channelUnavailable;
+
+  /// No description provided for @sos_includeFavourites.
+  ///
+  /// In en, this message translates to:
+  /// **'Include favourite contacts'**
+  String get sos_includeFavourites;
+
+  /// No description provided for @sos_includeFavouritesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Also send the SOS by direct message to every favourite'**
+  String get sos_includeFavouritesSubtitle;
+
+  /// No description provided for @sos_contacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contacts'**
+  String get sos_contacts;
+
+  /// No description provided for @sos_contactsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String sos_contactsSubtitle(int count);
+
+  /// No description provided for @sos_contactsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No chat contacts on this radio yet'**
+  String get sos_contactsEmpty;
+
+  /// No description provided for @sos_buttonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS'**
+  String get sos_buttonLabel;
+
+  /// No description provided for @sos_holdToSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Press and hold for 2 seconds to send an SOS'**
+  String get sos_holdToSend;
+
+  /// No description provided for @sos_active.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS ACTIVE'**
+  String get sos_active;
+
+  /// No description provided for @sos_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel SOS'**
+  String get sos_cancel;
+
+  /// No description provided for @sos_cancelConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel SOS?'**
+  String get sos_cancelConfirmTitle;
+
+  /// No description provided for @sos_cancelConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.'**
+  String get sos_cancelConfirmBody;
+
+  /// No description provided for @sos_keepActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep active'**
+  String get sos_keepActive;
+
+  /// No description provided for @sos_broadcastCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent {count} times, last at {time}'**
+  String sos_broadcastCount(int count, String time);
+
+  /// No description provided for @sos_notSentYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for the radio to send'**
+  String get sos_notSentYet;
+
+  /// No description provided for @sos_locationSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Location source: {source}'**
+  String sos_locationSource(String source);
+
+  /// No description provided for @sos_sourcePhoneGps.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone GPS'**
+  String get sos_sourcePhoneGps;
+
+  /// No description provided for @sos_sourceRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'Radio location'**
+  String get sos_sourceRadio;
+
+  /// No description provided for @sos_sourceStored.
+  ///
+  /// In en, this message translates to:
+  /// **'Stored emergency location'**
+  String get sos_sourceStored;
+
+  /// No description provided for @sos_sourceNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No location'**
+  String get sos_sourceNone;
+
+  /// No description provided for @sos_acksNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No acknowledgements yet'**
+  String get sos_acksNone;
+
+  /// No description provided for @sos_acksHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged by'**
+  String get sos_acksHeader;
+
+  /// No description provided for @sos_incomingHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Incoming alerts'**
+  String get sos_incomingHeader;
+
+  /// No description provided for @sos_incomingEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No SOS alerts received'**
+  String get sos_incomingEmpty;
+
+  /// No description provided for @sos_sendAck.
+  ///
+  /// In en, this message translates to:
+  /// **'Send ACK'**
+  String get sos_sendAck;
+
+  /// No description provided for @sos_ackSent.
+  ///
+  /// In en, this message translates to:
+  /// **'ACK sent'**
+  String get sos_ackSent;
+
+  /// No description provided for @sos_dismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get sos_dismiss;
+
+  /// No description provided for @sos_dismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get sos_dismissed;
+
+  /// No description provided for @sos_copyCoordinates.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy coordinates'**
+  String get sos_copyCoordinates;
+
+  /// No description provided for @sos_coordinatesCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Coordinates copied'**
+  String get sos_coordinatesCopied;
+
+  /// No description provided for @sos_noPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'No position included'**
+  String get sos_noPosition;
+
+  /// No description provided for @sos_ackedByOthers.
+  ///
+  /// In en, this message translates to:
+  /// **'Also acknowledged by {names}'**
+  String sos_ackedByOthers(String names);
+
+  /// No description provided for @sos_heardSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'First heard {first}, last heard {last} ({count}×)'**
+  String sos_heardSummary(String first, String last, int count);
+
+  /// No description provided for @sos_unknownSender.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown node'**
+  String get sos_unknownSender;
+
+  /// No description provided for @sos_contactWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting'**
+  String get sos_contactWaiting;
+
+  /// No description provided for @sos_contactDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get sos_contactDelivered;
+
+  /// No description provided for @sos_contactAcked.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get sos_contactAcked;
+
+  /// No description provided for @sos_nextBroadcast.
+  ///
+  /// In en, this message translates to:
+  /// **'Next broadcast at {time}'**
+  String sos_nextBroadcast(String time);
+
+  /// No description provided for @sos_dmHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct messages'**
+  String get sos_dmHeader;
+
+  /// No description provided for @sos_useCurrentGps.
+  ///
+  /// In en, this message translates to:
+  /// **'Use current GPS'**
+  String get sos_useCurrentGps;
+
+  /// No description provided for @sos_gpsUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone GPS unavailable'**
+  String get sos_gpsUnavailable;
+
+  /// No description provided for @sos_notificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'EMERGENCY SOS from {name}'**
+  String sos_notificationTitle(String name);
+
+  /// No description provided for @sos_notificationOpenToRespond.
+  ///
+  /// In en, this message translates to:
+  /// **'Open MeshCore Open to send ACK'**
+  String get sos_notificationOpenToRespond;
+
+  /// No description provided for @sos_notificationChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency SOS alerts'**
+  String get sos_notificationChannelName;
+
+  /// No description provided for @sos_notificationChannelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm for SOS messages from other nodes'**
+  String get sos_notificationChannelDescription;
+
+  /// No description provided for @sos_ackChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS acknowledgements'**
+  String get sos_ackChannelName;
+
+  /// No description provided for @sos_ackNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS acknowledged by {name}'**
+  String sos_ackNotificationTitle(String name);
+
+  /// No description provided for @sos_ackNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your SOS was received. It keeps repeating until you cancel it.'**
+  String get sos_ackNotificationBody;
+
+  /// No description provided for @sos_warningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'EMERGENCY SOS'**
+  String get sos_warningTitle;
+
+  /// No description provided for @sos_warningMore.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} more open alerts'**
+  String sos_warningMore(int count);
 }
 
 class _AppLocalizationsDelegate

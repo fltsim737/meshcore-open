@@ -22,6 +22,7 @@ import '../widgets/path_map_scaffold.dart';
 import '../widgets/quick_switch_bar.dart';
 import '../icons/los_icon.dart';
 import '../theme/mesh_theme.dart';
+import 'emergency_screen.dart';
 
 class LineOfSightEndpoint {
   final String label;
@@ -1743,6 +1744,12 @@ class _LineOfSightMapScreenState extends State<LineOfSightMapScreen> {
         Navigator.pushReplacement(
           context,
           buildQuickSwitchRoute(const ChannelsScreen(hideBackButton: true)),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          buildQuickSwitchRoute(const EmergencyScreen(hideBackButton: true)),
         );
         break;
     }

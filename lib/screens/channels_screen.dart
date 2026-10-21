@@ -36,6 +36,7 @@ import 'contacts_screen.dart';
 import 'map_screen.dart';
 import 'settings_screen.dart';
 import '../review_mode/review_mode_banner.dart';
+import 'emergency_screen.dart';
 
 class ChannelsScreen extends StatefulWidget {
   final bool hideBackButton;
@@ -703,6 +704,12 @@ class _ChannelsScreenState extends State<ChannelsScreen>
         Navigator.pushReplacement(
           context,
           buildQuickSwitchRoute(const MapScreen(hideBackButton: true)),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          buildQuickSwitchRoute(const EmergencyScreen(hideBackButton: true)),
         );
         break;
     }

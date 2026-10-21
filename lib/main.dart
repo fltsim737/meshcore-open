@@ -19,6 +19,7 @@ import 'services/image_codec_service.dart';
 import 'services/image_codec_settings_store.dart';
 import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
+import 'services/sos_service.dart';
 import 'services/storage_service.dart';
 import 'services/message_retry_service.dart';
 import 'services/path_history_service.dart';
@@ -174,6 +175,11 @@ void main() async {
     settings: appSettingsService,
   );
 
+  final sosService = SosService(
+    transport: ConnectorSosTransport(connector),
+    settings: appSettingsService,
+  )..load();
+
   await connector.loadContactCache();
   await connector.loadCachedChannels();
   await connector.loadUnreadState();
@@ -196,6 +202,7 @@ void main() async {
       receivedImageStore: receivedImageStore,
       imageReassembler: imageReassembler,
       networkMapUploadService: networkMapUploadService,
+      sosService: sosService,
     ),
   );
 }
@@ -341,6 +348,7 @@ class MeshCoreApp extends StatefulWidget {
   final ReceivedImageStore receivedImageStore;
   final ImageStreamReassembler imageReassembler;
   final NetworkMapUploadService networkMapUploadService;
+  final SosService sosService;
 
   const MeshCoreApp({
     super.key,
@@ -360,6 +368,7 @@ class MeshCoreApp extends StatefulWidget {
     required this.receivedImageStore,
     required this.imageReassembler,
     required this.networkMapUploadService,
+    required this.sosService,
   });
 
   @override
@@ -443,6 +452,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
         ChangeNotifierProvider.value(value: widget.imageCodecService),
         ChangeNotifierProvider.value(value: widget.receivedImageStore),
         ChangeNotifierProvider.value(value: widget.networkMapUploadService),
+        ChangeNotifierProvider.value(value: widget.sosService),
       ],
       child: Consumer<AppSettingsService>(
         builder: (context, settingsService, child) {
