@@ -3310,5 +3310,134 @@
   "networkMap_manage": "Gerenciar",
   "networkMap_addedToContacts": "Adicionado aos contactos",
   "networkMap_addFailed": "Não foi possível adicionar aos contactos",
-  "networkMap_unnamed": "Repetidor sem nome"
+  "networkMap_unnamed": "Repetidor sem nome",
+  "nav_emergency": "Emergência",
+  "sos_title": "Emergência",
+  "sos_settingsSection": "SOS de emergência",
+  "sos_storedLocation": "Local de emergência guardado",
+  "sos_storedLocationUnset": "Não definido",
+  "sos_storedLocationHelper": "Enviado quando nem o telefone nem o rádio têm posição. Deixe ambos os campos vazios para o remover.",
+  "sos_channel": "Canal SOS",
+  "sos_channelUnavailable": "Ligue um rádio para escolher um canal",
+  "sos_includeFavourites": "Incluir contactos favoritos",
+  "sos_includeFavouritesSubtitle": "Enviar também o SOS por mensagem direta a cada favorito",
+  "sos_contacts": "Contactos de emergência",
+  "sos_contactsSubtitle": "{count} selecionados",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Ainda não há contactos de chat neste rádio",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Mantenha premido 2 segundos para enviar um SOS",
+  "sos_active": "SOS ATIVO",
+  "sos_cancel": "Cancelar SOS",
+  "sos_cancelConfirmTitle": "Cancelar SOS?",
+  "sos_cancelConfirmBody": "As retransmissões vão parar. Quem responde não é avisado do cancelamento; informe-os se estiver em segurança.",
+  "sos_keepActive": "Manter ativo",
+  "sos_broadcastCount": "Enviado {count} vezes, último às {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "A aguardar envio pelo rádio",
+  "sos_locationSource": "Fonte da localização: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS do telefone",
+  "sos_sourceRadio": "Localização do rádio",
+  "sos_sourceStored": "Local de emergência guardado",
+  "sos_sourceNone": "Sem localização",
+  "sos_acksNone": "Ainda sem confirmações",
+  "sos_acksHeader": "Confirmado por",
+  "sos_incomingHeader": "Alertas recebidos",
+  "sos_incomingEmpty": "Nenhum alerta SOS recebido",
+  "sos_sendAck": "Enviar ACK",
+  "sos_ackSent": "ACK enviado",
+  "sos_dismiss": "Ignorar",
+  "sos_dismissed": "Ignorado",
+  "sos_copyCoordinates": "Copiar coordenadas",
+  "sos_coordinatesCopied": "Coordenadas copiadas",
+  "sos_noPosition": "Sem posição incluída",
+  "sos_ackedByOthers": "Também confirmado por {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Primeiro às {first}, último às {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Nó desconhecido",
+  "sos_contactWaiting": "A aguardar",
+  "sos_contactDelivered": "Entregue",
+  "sos_contactAcked": "Confirmado",
+  "sos_nextBroadcast": "Próxima transmissão às {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Mensagens diretas",
+  "sos_useCurrentGps": "Usar GPS atual",
+  "sos_gpsUnavailable": "GPS do telefone indisponível",
+  "sos_notificationTitle": "SOS DE EMERGÊNCIA de {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Abra o MeshCore Open para enviar ACK",
+  "sos_notificationChannelName": "Alertas SOS de emergência",
+  "sos_notificationChannelDescription": "Alarme para mensagens SOS de outros nós",
+  "sos_ackChannelName": "Confirmações de SOS",
+  "sos_ackNotificationTitle": "SOS confirmado por {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "O seu SOS foi recebido. Continua a repetir até o cancelar.",
+  "sos_warningTitle": "SOS DE EMERGÊNCIA",
+  "sos_warningMore": "Mais {count} alertas abertos",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

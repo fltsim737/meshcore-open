@@ -3343,5 +3343,134 @@
   "networkMap_manage": "Zarządzaj",
   "networkMap_addedToContacts": "Dodano do kontaktów",
   "networkMap_addFailed": "Nie udało się dodać do kontaktów",
-  "networkMap_unnamed": "Repeater bez nazwy"
+  "networkMap_unnamed": "Repeater bez nazwy",
+  "nav_emergency": "Alarm",
+  "sos_title": "Alarm",
+  "sos_settingsSection": "Alarmowe SOS",
+  "sos_storedLocation": "Zapisana lokalizacja awaryjna",
+  "sos_storedLocationUnset": "Nie ustawiono",
+  "sos_storedLocationHelper": "Wysyłana, gdy ani telefon, ani radio nie mają pozycji. Zostaw oba pola puste, aby ją usunąć.",
+  "sos_channel": "Kanał SOS",
+  "sos_channelUnavailable": "Połącz radio, aby wybrać kanał",
+  "sos_includeFavourites": "Uwzględnij ulubione kontakty",
+  "sos_includeFavouritesSubtitle": "Wysyłaj SOS także wiadomością bezpośrednią do każdego ulubionego",
+  "sos_contacts": "Kontakty alarmowe",
+  "sos_contactsSubtitle": "Wybrano: {count}",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Brak kontaktów czatu na tym radiu",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Przytrzymaj przez 2 sekundy, aby wysłać SOS",
+  "sos_active": "SOS AKTYWNE",
+  "sos_cancel": "Anuluj SOS",
+  "sos_cancelConfirmTitle": "Anulować SOS?",
+  "sos_cancelConfirmBody": "Powtórne nadawanie zostanie zatrzymane. Ratownicy nie dowiedzą się o anulowaniu – daj im znać, jeśli jesteś bezpieczny.",
+  "sos_keepActive": "Pozostaw aktywne",
+  "sos_broadcastCount": "Wysłano {count} razy, ostatnio o {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Oczekiwanie na wysłanie przez radio",
+  "sos_locationSource": "Źródło lokalizacji: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS telefonu",
+  "sos_sourceRadio": "Lokalizacja radia",
+  "sos_sourceStored": "Zapisana lokalizacja awaryjna",
+  "sos_sourceNone": "Brak lokalizacji",
+  "sos_acksNone": "Brak potwierdzeń",
+  "sos_acksHeader": "Potwierdzone przez",
+  "sos_incomingHeader": "Alarmy przychodzące",
+  "sos_incomingEmpty": "Nie odebrano alarmów SOS",
+  "sos_sendAck": "Wyślij ACK",
+  "sos_ackSent": "Wysłano ACK",
+  "sos_dismiss": "Odrzuć",
+  "sos_dismissed": "Odrzucono",
+  "sos_copyCoordinates": "Kopiuj współrzędne",
+  "sos_coordinatesCopied": "Skopiowano współrzędne",
+  "sos_noPosition": "Brak pozycji",
+  "sos_ackedByOthers": "Potwierdzone także przez {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Pierwszy raz {first}, ostatnio {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Nieznany węzeł",
+  "sos_contactWaiting": "Oczekuje",
+  "sos_contactDelivered": "Dostarczono",
+  "sos_contactAcked": "Potwierdzono",
+  "sos_nextBroadcast": "Następne nadanie o {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Wiadomości bezpośrednie",
+  "sos_useCurrentGps": "Użyj bieżącego GPS",
+  "sos_gpsUnavailable": "GPS telefonu niedostępny",
+  "sos_notificationTitle": "ALARMOWE SOS od {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Otwórz MeshCore Open, aby wysłać ACK",
+  "sos_notificationChannelName": "Alarmy SOS",
+  "sos_notificationChannelDescription": "Alarm dla wiadomości SOS od innych węzłów",
+  "sos_ackChannelName": "Potwierdzenia SOS",
+  "sos_ackNotificationTitle": "SOS potwierdzone przez {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Twoje SOS zostało odebrane. Będzie powtarzane, dopóki go nie anulujesz.",
+  "sos_warningTitle": "ALARMOWE SOS",
+  "sos_warningMore": "Otwarte alarmy: jeszcze {count}",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -115,6 +115,14 @@ A dedicated sub-screen for app-level preferences (nothing here is sent to the de
 
 Individual channels can be muted from the channel chat bell icon, the channel list, or the channel notification. Replying from notifications, watches, and Android Auto is described in [Notifications](notifications.md).
 
+### Emergency SOS
+- **Stored emergency location**: Fallback SOS position, used when neither the phone nor the radio has one. **Use current GPS** fills it from the phone
+- **SOS channel**: Channel the SOS is broadcast on (default: first channel)
+- **Include favourite contacts** (default on): Also send the SOS by direct message to every favourite
+- **Emergency contacts**: Chat contacts that always receive the SOS by direct message
+
+See [Emergency SOS](emergency-sos.md).
+
 ### Messaging
 - **Clear Path on Max Retry**: Erases the stored routing path after all retries fail
 - **Jump to Oldest Unread**: When opening a chat, scrolls to the oldest unread message instead of the newest

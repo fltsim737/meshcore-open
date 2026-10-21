@@ -12,15 +12,16 @@ After connecting, the three main screens (Contacts, Channels, Map) are accessibl
 
 ## Quick Switch Bar
 
-The QuickSwitchBar is a Material 3 `NavigationBar` with a frosted-glass visual treatment (blur backdrop, transparent theme, rounded corners). It appears at the bottom of all three main screens.
+The QuickSwitchBar is a Material 3 `NavigationBar` with a frosted-glass visual treatment (blur backdrop, transparent theme, rounded corners). It appears at the bottom of all four main screens.
 
 | Index | Icon | Label | Screen |
 |---|---|---|---|
 | 0 | People | Contacts | ContactsScreen |
 | 1 | Tag | Channels | ChannelsScreen |
 | 2 | Map | Map | MapScreen |
+| 3 | SOS (red) | Emergency | EmergencyScreen |
 
-Tapping a tab replaces the current screen with a subtle fade + slight horizontal nudge transition (220ms forward, 200ms reverse). The back button is suppressed on all three main screens — navigation between them is flat, not stacked. All icons use outline variants (`people_outline`, `tag`, `map_outlined`) following Material 3 conventions.
+Tapping a tab replaces the current screen with a subtle fade + slight horizontal nudge transition (220ms forward, 200ms reverse). The back button is suppressed on all four main screens — navigation between them is flat, not stacked. All icons use outline variants (`people_outline`, `tag`, `map_outlined`) following Material 3 conventions, except the red `sos` icon. The Emergency tab shows a count badge while incoming SOS alerts are open, and a dot while your own SOS is active. See [Emergency SOS](emergency-sos.md).
 
 ## Disconnection
 
@@ -47,6 +48,7 @@ ScannerScreen (root, always on stack)
 ContactsScreen (selected=0)
   ├─ [quick-switch 1] → pushReplacement → ChannelsScreen
   ├─ [quick-switch 2] → pushReplacement → MapScreen
+  ├─ [quick-switch 3] → pushReplacement → EmergencyScreen
   ├─ [tap contact] → push → ChatScreen
   ├─ [overflow > Settings] → push → SettingsScreen
   └─ [overflow > Discovered] → push → DiscoveryScreen
@@ -54,15 +56,24 @@ ContactsScreen (selected=0)
 ChannelsScreen (selected=1)
   ├─ [quick-switch 0] → pushReplacement → ContactsScreen
   ├─ [quick-switch 2] → pushReplacement → MapScreen
+  ├─ [quick-switch 3] → pushReplacement → EmergencyScreen
   ├─ [tap channel] → push → ChannelChatScreen
   └─ [overflow > Settings] → push → SettingsScreen
 
 MapScreen (selected=2)
   ├─ [quick-switch 0] → pushReplacement → ContactsScreen
   ├─ [quick-switch 1] → pushReplacement → ChannelsScreen
+  ├─ [quick-switch 3] → pushReplacement → EmergencyScreen
   ├─ [radar menu item] → enters in-map path trace mode (push → PathTraceMapScreen after path is built)
   ├─ [terrain menu item] → push → LineOfSightMapScreen
   └─ [long-press] → share marker sheet
+
+EmergencyScreen (selected=3)
+  ├─ [quick-switch 0/1/2] → pushReplacement → Contacts / Channels / Map
+  └─ [alert Map button] → push → MapScreen (highlighting the SOS position)
+
+SosWarningOverlay (drawn above every route while an incoming SOS is open;
+  not a route, so only Send ACK or Dismiss removes it)
 
 Settings (push from any main screen)
   └─ [App Settings] → push → AppSettingsScreen

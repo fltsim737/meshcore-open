@@ -5886,196 +5886,191 @@ class AppLocalizationsZh extends AppLocalizations {
   String get networkMap_unnamed => '未命名转发节点';
 
   @override
-  String get nav_emergency => 'Emergency';
+  String get nav_emergency => '紧急';
 
   @override
-  String get sos_title => 'Emergency';
+  String get sos_title => '紧急';
 
   @override
-  String get sos_settingsSection => 'Emergency SOS';
+  String get sos_settingsSection => '紧急 SOS';
 
   @override
-  String get sos_storedLocation => 'Stored emergency location';
+  String get sos_storedLocation => '已保存的紧急位置';
 
   @override
-  String get sos_storedLocationUnset => 'Not set';
+  String get sos_storedLocationUnset => '未设置';
 
   @override
-  String get sos_storedLocationHelper =>
-      'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.';
+  String get sos_storedLocationHelper => '当手机和电台都没有位置时发送。将两个字段都留空即可删除。';
 
   @override
-  String get sos_channel => 'SOS channel';
+  String get sos_channel => 'SOS 频道';
 
   @override
-  String get sos_channelUnavailable => 'Connect a radio to choose a channel';
+  String get sos_channelUnavailable => '连接电台后才能选择频道';
 
   @override
-  String get sos_includeFavourites => 'Include favourite contacts';
+  String get sos_includeFavourites => '包含收藏联系人';
 
   @override
-  String get sos_includeFavouritesSubtitle =>
-      'Also send the SOS by direct message to every favourite';
+  String get sos_includeFavouritesSubtitle => '同时以私信方式向每个收藏联系人发送 SOS';
 
   @override
-  String get sos_contacts => 'Emergency contacts';
+  String get sos_contacts => '紧急联系人';
 
   @override
   String sos_contactsSubtitle(int count) {
-    return '$count selected';
+    return '已选择 $count 个';
   }
 
   @override
-  String get sos_contactsEmpty => 'No chat contacts on this radio yet';
+  String get sos_contactsEmpty => '此电台上还没有聊天联系人';
 
   @override
   String get sos_buttonLabel => 'SOS';
 
   @override
-  String get sos_holdToSend => 'Press and hold for 2 seconds to send an SOS';
+  String get sos_holdToSend => '按住 2 秒发送 SOS';
 
   @override
-  String get sos_active => 'SOS ACTIVE';
+  String get sos_active => 'SOS 进行中';
 
   @override
-  String get sos_cancel => 'Cancel SOS';
+  String get sos_cancel => '取消 SOS';
 
   @override
-  String get sos_cancelConfirmTitle => 'Cancel SOS?';
+  String get sos_cancelConfirmTitle => '取消 SOS？';
 
   @override
-  String get sos_cancelConfirmBody =>
-      'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.';
+  String get sos_cancelConfirmBody => '将停止重复广播。响应者不会收到取消通知，如果你已安全，请告知他们。';
 
   @override
-  String get sos_keepActive => 'Keep active';
+  String get sos_keepActive => '保持进行';
 
   @override
   String sos_broadcastCount(int count, String time) {
-    return 'Sent $count times, last at $time';
+    return '已发送 $count 次，最近一次 $time';
   }
 
   @override
-  String get sos_notSentYet => 'Waiting for the radio to send';
+  String get sos_notSentYet => '等待电台发送';
 
   @override
   String sos_locationSource(String source) {
-    return 'Location source: $source';
+    return '位置来源：$source';
   }
 
   @override
-  String get sos_sourcePhoneGps => 'Phone GPS';
+  String get sos_sourcePhoneGps => '手机 GPS';
 
   @override
-  String get sos_sourceRadio => 'Radio location';
+  String get sos_sourceRadio => '电台位置';
 
   @override
-  String get sos_sourceStored => 'Stored emergency location';
+  String get sos_sourceStored => '已保存的紧急位置';
 
   @override
-  String get sos_sourceNone => 'No location';
+  String get sos_sourceNone => '无位置';
 
   @override
-  String get sos_acksNone => 'No acknowledgements yet';
+  String get sos_acksNone => '尚无确认';
 
   @override
-  String get sos_acksHeader => 'Acknowledged by';
+  String get sos_acksHeader => '确认者';
 
   @override
-  String get sos_incomingHeader => 'Incoming alerts';
+  String get sos_incomingHeader => '收到的警报';
 
   @override
-  String get sos_incomingEmpty => 'No SOS alerts received';
+  String get sos_incomingEmpty => '未收到 SOS 警报';
 
   @override
-  String get sos_sendAck => 'Send ACK';
+  String get sos_sendAck => '发送 ACK';
 
   @override
-  String get sos_ackSent => 'ACK sent';
+  String get sos_ackSent => '已发送 ACK';
 
   @override
-  String get sos_dismiss => 'Dismiss';
+  String get sos_dismiss => '忽略';
 
   @override
-  String get sos_dismissed => 'Dismissed';
+  String get sos_dismissed => '已忽略';
 
   @override
-  String get sos_copyCoordinates => 'Copy coordinates';
+  String get sos_copyCoordinates => '复制坐标';
 
   @override
-  String get sos_coordinatesCopied => 'Coordinates copied';
+  String get sos_coordinatesCopied => '已复制坐标';
 
   @override
-  String get sos_noPosition => 'No position included';
+  String get sos_noPosition => '未包含位置';
 
   @override
   String sos_ackedByOthers(String names) {
-    return 'Also acknowledged by $names';
+    return '$names 也已确认';
   }
 
   @override
   String sos_heardSummary(String first, String last, int count) {
-    return 'First heard $first, last heard $last ($count×)';
+    return '首次 $first，最近 $last（$count 次）';
   }
 
   @override
-  String get sos_unknownSender => 'Unknown node';
+  String get sos_unknownSender => '未知节点';
 
   @override
-  String get sos_contactWaiting => 'Waiting';
+  String get sos_contactWaiting => '等待中';
 
   @override
-  String get sos_contactDelivered => 'Delivered';
+  String get sos_contactDelivered => '已送达';
 
   @override
-  String get sos_contactAcked => 'Acknowledged';
+  String get sos_contactAcked => '已确认';
 
   @override
   String sos_nextBroadcast(String time) {
-    return 'Next broadcast at $time';
+    return '下次广播 $time';
   }
 
   @override
-  String get sos_dmHeader => 'Direct messages';
+  String get sos_dmHeader => '私信';
 
   @override
-  String get sos_useCurrentGps => 'Use current GPS';
+  String get sos_useCurrentGps => '使用当前 GPS';
 
   @override
-  String get sos_gpsUnavailable => 'Phone GPS unavailable';
+  String get sos_gpsUnavailable => '手机 GPS 不可用';
 
   @override
   String sos_notificationTitle(String name) {
-    return 'EMERGENCY SOS from $name';
+    return '来自 $name 的紧急 SOS';
   }
 
   @override
-  String get sos_notificationOpenToRespond => 'Open MeshCore Open to send ACK';
+  String get sos_notificationOpenToRespond => '打开 MeshCore Open 以发送 ACK';
 
   @override
-  String get sos_notificationChannelName => 'Emergency SOS alerts';
+  String get sos_notificationChannelName => '紧急 SOS 警报';
 
   @override
-  String get sos_notificationChannelDescription =>
-      'Alarm for SOS messages from other nodes';
+  String get sos_notificationChannelDescription => '其他节点 SOS 消息的警报';
 
   @override
-  String get sos_ackChannelName => 'SOS acknowledgements';
+  String get sos_ackChannelName => 'SOS 确认';
 
   @override
   String sos_ackNotificationTitle(String name) {
-    return 'SOS acknowledged by $name';
+    return '$name 已确认 SOS';
   }
 
   @override
-  String get sos_ackNotificationBody =>
-      'Your SOS was received. It keeps repeating until you cancel it.';
+  String get sos_ackNotificationBody => '你的 SOS 已被收到。它会一直重复，直到你取消。';
 
   @override
-  String get sos_warningTitle => 'EMERGENCY SOS';
+  String get sos_warningTitle => '紧急 SOS';
 
   @override
   String sos_warningMore(int count) {
-    return '$count more open alerts';
+    return '还有 $count 个未处理的警报';
   }
 }

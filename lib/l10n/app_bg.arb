@@ -3310,5 +3310,134 @@
   "networkMap_manage": "Управление",
   "networkMap_addedToContacts": "Добавено към контактите",
   "networkMap_addFailed": "Неуспешно добавяне към контактите",
-  "networkMap_unnamed": "Неназован повторител"
+  "networkMap_unnamed": "Неназован повторител",
+  "nav_emergency": "Спешен случай",
+  "sos_title": "Спешен случай",
+  "sos_settingsSection": "Спешен SOS",
+  "sos_storedLocation": "Запазено местоположение за спешни случаи",
+  "sos_storedLocationUnset": "Не е зададено",
+  "sos_storedLocationHelper": "Изпраща се, когато нито телефонът, нито радиото имат позиция. Оставете двете полета празни, за да го премахнете.",
+  "sos_channel": "SOS канал",
+  "sos_channelUnavailable": "Свържете радио, за да изберете канал",
+  "sos_includeFavourites": "Включване на любими контакти",
+  "sos_includeFavouritesSubtitle": "Изпращане на SOS и като директно съобщение до всеки любим",
+  "sos_contacts": "Контакти за спешни случаи",
+  "sos_contactsSubtitle": "Избрани: {count}",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Все още няма чат контакти на това радио",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Задръжте 2 секунди, за да изпратите SOS",
+  "sos_active": "SOS АКТИВЕН",
+  "sos_cancel": "Отмяна на SOS",
+  "sos_cancelConfirmTitle": "Отмяна на SOS?",
+  "sos_cancelConfirmBody": "Повторните излъчвания ще спрат. Спасителите няма да разберат, че сте отменили — уведомете ги, ако сте в безопасност.",
+  "sos_keepActive": "Остави активен",
+  "sos_broadcastCount": "Изпратено {count} пъти, последно в {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Изчакване радиото да изпрати",
+  "sos_locationSource": "Източник на местоположение: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS на телефона",
+  "sos_sourceRadio": "Местоположение на радиото",
+  "sos_sourceStored": "Запазено местоположение за спешни случаи",
+  "sos_sourceNone": "Без местоположение",
+  "sos_acksNone": "Все още няма потвърждения",
+  "sos_acksHeader": "Потвърдено от",
+  "sos_incomingHeader": "Входящи сигнали",
+  "sos_incomingEmpty": "Няма получени SOS сигнали",
+  "sos_sendAck": "Изпрати ACK",
+  "sos_ackSent": "ACK е изпратен",
+  "sos_dismiss": "Отхвърли",
+  "sos_dismissed": "Отхвърлен",
+  "sos_copyCoordinates": "Копирай координатите",
+  "sos_coordinatesCopied": "Координатите са копирани",
+  "sos_noPosition": "Без позиция",
+  "sos_ackedByOthers": "Потвърдено също от {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Първо чут в {first}, последно в {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Непознат възел",
+  "sos_contactWaiting": "Изчаква",
+  "sos_contactDelivered": "Доставено",
+  "sos_contactAcked": "Потвърдено",
+  "sos_nextBroadcast": "Следващо излъчване в {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Директни съобщения",
+  "sos_useCurrentGps": "Използвай текущия GPS",
+  "sos_gpsUnavailable": "GPS на телефона не е наличен",
+  "sos_notificationTitle": "СПЕШЕН SOS от {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Отворете MeshCore Open, за да изпратите ACK",
+  "sos_notificationChannelName": "Спешни SOS сигнали",
+  "sos_notificationChannelDescription": "Аларма за SOS съобщения от други възли",
+  "sos_ackChannelName": "SOS потвърждения",
+  "sos_ackNotificationTitle": "SOS потвърден от {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Вашият SOS е получен. Ще се повтаря, докато не го отмените.",
+  "sos_warningTitle": "СПЕШЕН SOS",
+  "sos_warningMore": "Още {count} отворени сигнала",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

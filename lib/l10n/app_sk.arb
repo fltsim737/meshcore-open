@@ -3311,5 +3311,134 @@
   "networkMap_manage": "Spravovať",
   "networkMap_addedToContacts": "Pridané do kontaktov",
   "networkMap_addFailed": "Nepodarilo sa pridať do kontaktov",
-  "networkMap_unnamed": "Nepomenovaný opakovač"
+  "networkMap_unnamed": "Nepomenovaný opakovač",
+  "nav_emergency": "Núdza",
+  "sos_title": "Núdza",
+  "sos_settingsSection": "Núdzové SOS",
+  "sos_storedLocation": "Uložená núdzová poloha",
+  "sos_storedLocationUnset": "Nenastavené",
+  "sos_storedLocationHelper": "Odošle sa, keď telefón ani rádio nemajú polohu. Nechajte obe polia prázdne, ak ju chcete odstrániť.",
+  "sos_channel": "Kanál SOS",
+  "sos_channelUnavailable": "Pripojte rádio a vyberte kanál",
+  "sos_includeFavourites": "Zahrnúť obľúbené kontakty",
+  "sos_includeFavouritesSubtitle": "SOS posielať aj priamou správou každému obľúbenému",
+  "sos_contacts": "Núdzové kontakty",
+  "sos_contactsSubtitle": "Vybraté: {count}",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Na tomto rádiu zatiaľ nie sú žiadne kontakty",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Podržte 2 sekundy na odoslanie SOS",
+  "sos_active": "SOS AKTÍVNE",
+  "sos_cancel": "Zrušiť SOS",
+  "sos_cancelConfirmTitle": "Zrušiť SOS?",
+  "sos_cancelConfirmBody": "Opakované vysielanie sa zastaví. Záchranári sa o zrušení nedozvedia, dajte im vedieť, ak ste v bezpečí.",
+  "sos_keepActive": "Ponechať aktívne",
+  "sos_broadcastCount": "Odoslané {count}-krát, naposledy o {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Čaká sa na odoslanie rádiom",
+  "sos_locationSource": "Zdroj polohy: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS telefónu",
+  "sos_sourceRadio": "Poloha rádia",
+  "sos_sourceStored": "Uložená núdzová poloha",
+  "sos_sourceNone": "Bez polohy",
+  "sos_acksNone": "Zatiaľ žiadne potvrdenia",
+  "sos_acksHeader": "Potvrdil",
+  "sos_incomingHeader": "Prichádzajúce poplachy",
+  "sos_incomingEmpty": "Neprijali sa žiadne SOS poplachy",
+  "sos_sendAck": "Poslať ACK",
+  "sos_ackSent": "ACK odoslané",
+  "sos_dismiss": "Zavrieť",
+  "sos_dismissed": "Zavreté",
+  "sos_copyCoordinates": "Kopírovať súradnice",
+  "sos_coordinatesCopied": "Súradnice skopírované",
+  "sos_noPosition": "Poloha nie je zahrnutá",
+  "sos_ackedByOthers": "Potvrdili aj {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Prvýkrát {first}, naposledy {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Neznámy uzol",
+  "sos_contactWaiting": "Čaká",
+  "sos_contactDelivered": "Doručené",
+  "sos_contactAcked": "Potvrdené",
+  "sos_nextBroadcast": "Ďalšie vysielanie o {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Priame správy",
+  "sos_useCurrentGps": "Použiť aktuálne GPS",
+  "sos_gpsUnavailable": "GPS telefónu nie je dostupné",
+  "sos_notificationTitle": "NÚDZOVÉ SOS od {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Otvorte MeshCore Open a pošlite ACK",
+  "sos_notificationChannelName": "Núdzové SOS poplachy",
+  "sos_notificationChannelDescription": "Poplach pre SOS správy z iných uzlov",
+  "sos_ackChannelName": "Potvrdenia SOS",
+  "sos_ackNotificationTitle": "SOS potvrdil {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Vaše SOS bolo prijaté. Bude sa opakovať, kým ho nezrušíte.",
+  "sos_warningTitle": "NÚDZOVÉ SOS",
+  "sos_warningMore": "Ďalšie otvorené poplachy: {count}",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

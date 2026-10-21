@@ -2607,5 +2607,134 @@
   "networkMap_manage": "Управлять",
   "networkMap_addedToContacts": "Добавлено в контакты",
   "networkMap_addFailed": "Не удалось добавить в контакты",
-  "networkMap_unnamed": "Репитер без имени"
+  "networkMap_unnamed": "Репитер без имени",
+  "nav_emergency": "Экстренное",
+  "sos_title": "Экстренное",
+  "sos_settingsSection": "Экстренный SOS",
+  "sos_storedLocation": "Сохранённое экстренное местоположение",
+  "sos_storedLocationUnset": "Не задано",
+  "sos_storedLocationHelper": "Отправляется, если ни у телефона, ни у радио нет координат. Оставьте оба поля пустыми, чтобы удалить.",
+  "sos_channel": "Канал SOS",
+  "sos_channelUnavailable": "Подключите радио, чтобы выбрать канал",
+  "sos_includeFavourites": "Включать избранные контакты",
+  "sos_includeFavouritesSubtitle": "Также отправлять SOS личным сообщением каждому избранному",
+  "sos_contacts": "Экстренные контакты",
+  "sos_contactsSubtitle": "Выбрано: {count}",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "На этом радио пока нет контактов чата",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Удерживайте 2 секунды, чтобы отправить SOS",
+  "sos_active": "SOS АКТИВЕН",
+  "sos_cancel": "Отменить SOS",
+  "sos_cancelConfirmTitle": "Отменить SOS?",
+  "sos_cancelConfirmBody": "Повторная рассылка прекратится. Откликнувшиеся не узнают об отмене — сообщите им, если вы в безопасности.",
+  "sos_keepActive": "Оставить активным",
+  "sos_broadcastCount": "Отправлено {count} раз, последний в {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Ожидание отправки радио",
+  "sos_locationSource": "Источник координат: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "GPS телефона",
+  "sos_sourceRadio": "Местоположение радио",
+  "sos_sourceStored": "Сохранённое экстренное местоположение",
+  "sos_sourceNone": "Нет координат",
+  "sos_acksNone": "Подтверждений пока нет",
+  "sos_acksHeader": "Подтвердили",
+  "sos_incomingHeader": "Входящие сигналы",
+  "sos_incomingEmpty": "SOS-сигналы не получены",
+  "sos_sendAck": "Отправить ACK",
+  "sos_ackSent": "ACK отправлен",
+  "sos_dismiss": "Скрыть",
+  "sos_dismissed": "Скрыт",
+  "sos_copyCoordinates": "Копировать координаты",
+  "sos_coordinatesCopied": "Координаты скопированы",
+  "sos_noPosition": "Координаты не переданы",
+  "sos_ackedByOthers": "Также подтвердили: {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Впервые {first}, последний раз {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Неизвестный узел",
+  "sos_contactWaiting": "Ожидание",
+  "sos_contactDelivered": "Доставлено",
+  "sos_contactAcked": "Подтверждено",
+  "sos_nextBroadcast": "Следующая рассылка в {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Личные сообщения",
+  "sos_useCurrentGps": "Использовать текущий GPS",
+  "sos_gpsUnavailable": "GPS телефона недоступен",
+  "sos_notificationTitle": "ЭКСТРЕННЫЙ SOS от {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Откройте MeshCore Open, чтобы отправить ACK",
+  "sos_notificationChannelName": "Экстренные SOS-сигналы",
+  "sos_notificationChannelDescription": "Тревога для SOS-сообщений от других узлов",
+  "sos_ackChannelName": "Подтверждения SOS",
+  "sos_ackNotificationTitle": "SOS подтвердил {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Ваш SOS получен. Он будет повторяться, пока вы его не отмените.",
+  "sos_warningTitle": "ЭКСТРЕННЫЙ SOS",
+  "sos_warningMore": "Ещё открытых сигналов: {count}",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

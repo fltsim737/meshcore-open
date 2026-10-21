@@ -6296,196 +6296,198 @@ class AppLocalizationsSk extends AppLocalizations {
   String get networkMap_unnamed => 'Nepomenovaný opakovač';
 
   @override
-  String get nav_emergency => 'Emergency';
+  String get nav_emergency => 'Núdza';
 
   @override
-  String get sos_title => 'Emergency';
+  String get sos_title => 'Núdza';
 
   @override
-  String get sos_settingsSection => 'Emergency SOS';
+  String get sos_settingsSection => 'Núdzové SOS';
 
   @override
-  String get sos_storedLocation => 'Stored emergency location';
+  String get sos_storedLocation => 'Uložená núdzová poloha';
 
   @override
-  String get sos_storedLocationUnset => 'Not set';
+  String get sos_storedLocationUnset => 'Nenastavené';
 
   @override
   String get sos_storedLocationHelper =>
-      'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.';
+      'Odošle sa, keď telefón ani rádio nemajú polohu. Nechajte obe polia prázdne, ak ju chcete odstrániť.';
 
   @override
-  String get sos_channel => 'SOS channel';
+  String get sos_channel => 'Kanál SOS';
 
   @override
-  String get sos_channelUnavailable => 'Connect a radio to choose a channel';
+  String get sos_channelUnavailable => 'Pripojte rádio a vyberte kanál';
 
   @override
-  String get sos_includeFavourites => 'Include favourite contacts';
+  String get sos_includeFavourites => 'Zahrnúť obľúbené kontakty';
 
   @override
   String get sos_includeFavouritesSubtitle =>
-      'Also send the SOS by direct message to every favourite';
+      'SOS posielať aj priamou správou každému obľúbenému';
 
   @override
-  String get sos_contacts => 'Emergency contacts';
+  String get sos_contacts => 'Núdzové kontakty';
 
   @override
   String sos_contactsSubtitle(int count) {
-    return '$count selected';
+    return 'Vybraté: $count';
   }
 
   @override
-  String get sos_contactsEmpty => 'No chat contacts on this radio yet';
+  String get sos_contactsEmpty =>
+      'Na tomto rádiu zatiaľ nie sú žiadne kontakty';
 
   @override
   String get sos_buttonLabel => 'SOS';
 
   @override
-  String get sos_holdToSend => 'Press and hold for 2 seconds to send an SOS';
+  String get sos_holdToSend => 'Podržte 2 sekundy na odoslanie SOS';
 
   @override
-  String get sos_active => 'SOS ACTIVE';
+  String get sos_active => 'SOS AKTÍVNE';
 
   @override
-  String get sos_cancel => 'Cancel SOS';
+  String get sos_cancel => 'Zrušiť SOS';
 
   @override
-  String get sos_cancelConfirmTitle => 'Cancel SOS?';
+  String get sos_cancelConfirmTitle => 'Zrušiť SOS?';
 
   @override
   String get sos_cancelConfirmBody =>
-      'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.';
+      'Opakované vysielanie sa zastaví. Záchranári sa o zrušení nedozvedia, dajte im vedieť, ak ste v bezpečí.';
 
   @override
-  String get sos_keepActive => 'Keep active';
+  String get sos_keepActive => 'Ponechať aktívne';
 
   @override
   String sos_broadcastCount(int count, String time) {
-    return 'Sent $count times, last at $time';
+    return 'Odoslané $count-krát, naposledy o $time';
   }
 
   @override
-  String get sos_notSentYet => 'Waiting for the radio to send';
+  String get sos_notSentYet => 'Čaká sa na odoslanie rádiom';
 
   @override
   String sos_locationSource(String source) {
-    return 'Location source: $source';
+    return 'Zdroj polohy: $source';
   }
 
   @override
-  String get sos_sourcePhoneGps => 'Phone GPS';
+  String get sos_sourcePhoneGps => 'GPS telefónu';
 
   @override
-  String get sos_sourceRadio => 'Radio location';
+  String get sos_sourceRadio => 'Poloha rádia';
 
   @override
-  String get sos_sourceStored => 'Stored emergency location';
+  String get sos_sourceStored => 'Uložená núdzová poloha';
 
   @override
-  String get sos_sourceNone => 'No location';
+  String get sos_sourceNone => 'Bez polohy';
 
   @override
-  String get sos_acksNone => 'No acknowledgements yet';
+  String get sos_acksNone => 'Zatiaľ žiadne potvrdenia';
 
   @override
-  String get sos_acksHeader => 'Acknowledged by';
+  String get sos_acksHeader => 'Potvrdil';
 
   @override
-  String get sos_incomingHeader => 'Incoming alerts';
+  String get sos_incomingHeader => 'Prichádzajúce poplachy';
 
   @override
-  String get sos_incomingEmpty => 'No SOS alerts received';
+  String get sos_incomingEmpty => 'Neprijali sa žiadne SOS poplachy';
 
   @override
-  String get sos_sendAck => 'Send ACK';
+  String get sos_sendAck => 'Poslať ACK';
 
   @override
-  String get sos_ackSent => 'ACK sent';
+  String get sos_ackSent => 'ACK odoslané';
 
   @override
-  String get sos_dismiss => 'Dismiss';
+  String get sos_dismiss => 'Zavrieť';
 
   @override
-  String get sos_dismissed => 'Dismissed';
+  String get sos_dismissed => 'Zavreté';
 
   @override
-  String get sos_copyCoordinates => 'Copy coordinates';
+  String get sos_copyCoordinates => 'Kopírovať súradnice';
 
   @override
-  String get sos_coordinatesCopied => 'Coordinates copied';
+  String get sos_coordinatesCopied => 'Súradnice skopírované';
 
   @override
-  String get sos_noPosition => 'No position included';
+  String get sos_noPosition => 'Poloha nie je zahrnutá';
 
   @override
   String sos_ackedByOthers(String names) {
-    return 'Also acknowledged by $names';
+    return 'Potvrdili aj $names';
   }
 
   @override
   String sos_heardSummary(String first, String last, int count) {
-    return 'First heard $first, last heard $last ($count×)';
+    return 'Prvýkrát $first, naposledy $last ($count×)';
   }
 
   @override
-  String get sos_unknownSender => 'Unknown node';
+  String get sos_unknownSender => 'Neznámy uzol';
 
   @override
-  String get sos_contactWaiting => 'Waiting';
+  String get sos_contactWaiting => 'Čaká';
 
   @override
-  String get sos_contactDelivered => 'Delivered';
+  String get sos_contactDelivered => 'Doručené';
 
   @override
-  String get sos_contactAcked => 'Acknowledged';
+  String get sos_contactAcked => 'Potvrdené';
 
   @override
   String sos_nextBroadcast(String time) {
-    return 'Next broadcast at $time';
+    return 'Ďalšie vysielanie o $time';
   }
 
   @override
-  String get sos_dmHeader => 'Direct messages';
+  String get sos_dmHeader => 'Priame správy';
 
   @override
-  String get sos_useCurrentGps => 'Use current GPS';
+  String get sos_useCurrentGps => 'Použiť aktuálne GPS';
 
   @override
-  String get sos_gpsUnavailable => 'Phone GPS unavailable';
+  String get sos_gpsUnavailable => 'GPS telefónu nie je dostupné';
 
   @override
   String sos_notificationTitle(String name) {
-    return 'EMERGENCY SOS from $name';
+    return 'NÚDZOVÉ SOS od $name';
   }
 
   @override
-  String get sos_notificationOpenToRespond => 'Open MeshCore Open to send ACK';
+  String get sos_notificationOpenToRespond =>
+      'Otvorte MeshCore Open a pošlite ACK';
 
   @override
-  String get sos_notificationChannelName => 'Emergency SOS alerts';
+  String get sos_notificationChannelName => 'Núdzové SOS poplachy';
 
   @override
   String get sos_notificationChannelDescription =>
-      'Alarm for SOS messages from other nodes';
+      'Poplach pre SOS správy z iných uzlov';
 
   @override
-  String get sos_ackChannelName => 'SOS acknowledgements';
+  String get sos_ackChannelName => 'Potvrdenia SOS';
 
   @override
   String sos_ackNotificationTitle(String name) {
-    return 'SOS acknowledged by $name';
+    return 'SOS potvrdil $name';
   }
 
   @override
   String get sos_ackNotificationBody =>
-      'Your SOS was received. It keeps repeating until you cancel it.';
+      'Vaše SOS bolo prijaté. Bude sa opakovať, kým ho nezrušíte.';
 
   @override
-  String get sos_warningTitle => 'EMERGENCY SOS';
+  String get sos_warningTitle => 'NÚDZOVÉ SOS';
 
   @override
   String sos_warningMore(int count) {
-    return '$count more open alerts';
+    return 'Ďalšie otvorené poplachy: $count';
   }
 }

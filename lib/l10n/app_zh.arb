@@ -3315,5 +3315,134 @@
   "networkMap_manage": "管理",
   "networkMap_addedToContacts": "已添加到联系人",
   "networkMap_addFailed": "无法添加到联系人",
-  "networkMap_unnamed": "未命名转发节点"
+  "networkMap_unnamed": "未命名转发节点",
+  "nav_emergency": "紧急",
+  "sos_title": "紧急",
+  "sos_settingsSection": "紧急 SOS",
+  "sos_storedLocation": "已保存的紧急位置",
+  "sos_storedLocationUnset": "未设置",
+  "sos_storedLocationHelper": "当手机和电台都没有位置时发送。将两个字段都留空即可删除。",
+  "sos_channel": "SOS 频道",
+  "sos_channelUnavailable": "连接电台后才能选择频道",
+  "sos_includeFavourites": "包含收藏联系人",
+  "sos_includeFavouritesSubtitle": "同时以私信方式向每个收藏联系人发送 SOS",
+  "sos_contacts": "紧急联系人",
+  "sos_contactsSubtitle": "已选择 {count} 个",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "此电台上还没有聊天联系人",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "按住 2 秒发送 SOS",
+  "sos_active": "SOS 进行中",
+  "sos_cancel": "取消 SOS",
+  "sos_cancelConfirmTitle": "取消 SOS？",
+  "sos_cancelConfirmBody": "将停止重复广播。响应者不会收到取消通知，如果你已安全，请告知他们。",
+  "sos_keepActive": "保持进行",
+  "sos_broadcastCount": "已发送 {count} 次，最近一次 {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "等待电台发送",
+  "sos_locationSource": "位置来源：{source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "手机 GPS",
+  "sos_sourceRadio": "电台位置",
+  "sos_sourceStored": "已保存的紧急位置",
+  "sos_sourceNone": "无位置",
+  "sos_acksNone": "尚无确认",
+  "sos_acksHeader": "确认者",
+  "sos_incomingHeader": "收到的警报",
+  "sos_incomingEmpty": "未收到 SOS 警报",
+  "sos_sendAck": "发送 ACK",
+  "sos_ackSent": "已发送 ACK",
+  "sos_dismiss": "忽略",
+  "sos_dismissed": "已忽略",
+  "sos_copyCoordinates": "复制坐标",
+  "sos_coordinatesCopied": "已复制坐标",
+  "sos_noPosition": "未包含位置",
+  "sos_ackedByOthers": "{names} 也已确认",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "首次 {first}，最近 {last}（{count} 次）",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "未知节点",
+  "sos_contactWaiting": "等待中",
+  "sos_contactDelivered": "已送达",
+  "sos_contactAcked": "已确认",
+  "sos_nextBroadcast": "下次广播 {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "私信",
+  "sos_useCurrentGps": "使用当前 GPS",
+  "sos_gpsUnavailable": "手机 GPS 不可用",
+  "sos_notificationTitle": "来自 {name} 的紧急 SOS",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "打开 MeshCore Open 以发送 ACK",
+  "sos_notificationChannelName": "紧急 SOS 警报",
+  "sos_notificationChannelDescription": "其他节点 SOS 消息的警报",
+  "sos_ackChannelName": "SOS 确认",
+  "sos_ackNotificationTitle": "{name} 已确认 SOS",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "你的 SOS 已被收到。它会一直重复，直到你取消。",
+  "sos_warningTitle": "紧急 SOS",
+  "sos_warningMore": "还有 {count} 个未处理的警报",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

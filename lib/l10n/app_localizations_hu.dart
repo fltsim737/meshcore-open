@@ -6306,196 +6306,200 @@ class AppLocalizationsHu extends AppLocalizations {
   String get networkMap_unnamed => 'Névtelen repeater';
 
   @override
-  String get nav_emergency => 'Emergency';
+  String get nav_emergency => 'Vészhelyzet';
 
   @override
-  String get sos_title => 'Emergency';
+  String get sos_title => 'Vészhelyzet';
 
   @override
-  String get sos_settingsSection => 'Emergency SOS';
+  String get sos_settingsSection => 'Vészhelyzeti SOS';
 
   @override
-  String get sos_storedLocation => 'Stored emergency location';
+  String get sos_storedLocation => 'Mentett vészhelyzeti hely';
 
   @override
-  String get sos_storedLocationUnset => 'Not set';
+  String get sos_storedLocationUnset => 'Nincs beállítva';
 
   @override
   String get sos_storedLocationHelper =>
-      'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.';
+      'Akkor küldjük, ha sem a telefonnak, sem a rádiónak nincs pozíciója. Hagyja üresen mindkét mezőt a törléshez.';
 
   @override
-  String get sos_channel => 'SOS channel';
+  String get sos_channel => 'SOS-csatorna';
 
   @override
-  String get sos_channelUnavailable => 'Connect a radio to choose a channel';
+  String get sos_channelUnavailable =>
+      'Csatlakoztasson rádiót a csatorna kiválasztásához';
 
   @override
-  String get sos_includeFavourites => 'Include favourite contacts';
+  String get sos_includeFavourites => 'Kedvenc partnerek bevonása';
 
   @override
   String get sos_includeFavouritesSubtitle =>
-      'Also send the SOS by direct message to every favourite';
+      'Az SOS-t közvetlen üzenetben is elküldi minden kedvencnek';
 
   @override
-  String get sos_contacts => 'Emergency contacts';
+  String get sos_contacts => 'Vészhelyzeti partnerek';
 
   @override
   String sos_contactsSubtitle(int count) {
-    return '$count selected';
+    return '$count kiválasztva';
   }
 
   @override
-  String get sos_contactsEmpty => 'No chat contacts on this radio yet';
+  String get sos_contactsEmpty =>
+      'Ezen a rádión még nincsenek csevegőpartnerek';
 
   @override
   String get sos_buttonLabel => 'SOS';
 
   @override
-  String get sos_holdToSend => 'Press and hold for 2 seconds to send an SOS';
+  String get sos_holdToSend =>
+      'Tartsa lenyomva 2 másodpercig az SOS küldéséhez';
 
   @override
-  String get sos_active => 'SOS ACTIVE';
+  String get sos_active => 'SOS AKTÍV';
 
   @override
-  String get sos_cancel => 'Cancel SOS';
+  String get sos_cancel => 'SOS visszavonása';
 
   @override
-  String get sos_cancelConfirmTitle => 'Cancel SOS?';
+  String get sos_cancelConfirmTitle => 'Visszavonja az SOS-t?';
 
   @override
   String get sos_cancelConfirmBody =>
-      'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.';
+      'Az ismételt sugárzás leáll. A segítők nem értesülnek a visszavonásról, ezért szóljon nekik, ha biztonságban van.';
 
   @override
-  String get sos_keepActive => 'Keep active';
+  String get sos_keepActive => 'Aktív marad';
 
   @override
   String sos_broadcastCount(int count, String time) {
-    return 'Sent $count times, last at $time';
+    return '$count alkalommal elküldve, utoljára $time';
   }
 
   @override
-  String get sos_notSentYet => 'Waiting for the radio to send';
+  String get sos_notSentYet => 'Várakozás a rádió küldésére';
 
   @override
   String sos_locationSource(String source) {
-    return 'Location source: $source';
+    return 'Helyforrás: $source';
   }
 
   @override
-  String get sos_sourcePhoneGps => 'Phone GPS';
+  String get sos_sourcePhoneGps => 'Telefon GPS';
 
   @override
-  String get sos_sourceRadio => 'Radio location';
+  String get sos_sourceRadio => 'Rádió helye';
 
   @override
-  String get sos_sourceStored => 'Stored emergency location';
+  String get sos_sourceStored => 'Mentett vészhelyzeti hely';
 
   @override
-  String get sos_sourceNone => 'No location';
+  String get sos_sourceNone => 'Nincs hely';
 
   @override
-  String get sos_acksNone => 'No acknowledgements yet';
+  String get sos_acksNone => 'Még nincs visszaigazolás';
 
   @override
-  String get sos_acksHeader => 'Acknowledged by';
+  String get sos_acksHeader => 'Visszaigazolta';
 
   @override
-  String get sos_incomingHeader => 'Incoming alerts';
+  String get sos_incomingHeader => 'Bejövő riasztások';
 
   @override
-  String get sos_incomingEmpty => 'No SOS alerts received';
+  String get sos_incomingEmpty => 'Nem érkezett SOS-riasztás';
 
   @override
-  String get sos_sendAck => 'Send ACK';
+  String get sos_sendAck => 'ACK küldése';
 
   @override
-  String get sos_ackSent => 'ACK sent';
+  String get sos_ackSent => 'ACK elküldve';
 
   @override
-  String get sos_dismiss => 'Dismiss';
+  String get sos_dismiss => 'Elvetés';
 
   @override
-  String get sos_dismissed => 'Dismissed';
+  String get sos_dismissed => 'Elvetve';
 
   @override
-  String get sos_copyCoordinates => 'Copy coordinates';
+  String get sos_copyCoordinates => 'Koordináták másolása';
 
   @override
-  String get sos_coordinatesCopied => 'Coordinates copied';
+  String get sos_coordinatesCopied => 'Koordináták másolva';
 
   @override
-  String get sos_noPosition => 'No position included';
+  String get sos_noPosition => 'Nincs pozíció';
 
   @override
   String sos_ackedByOthers(String names) {
-    return 'Also acknowledged by $names';
+    return 'Visszaigazolta még: $names';
   }
 
   @override
   String sos_heardSummary(String first, String last, int count) {
-    return 'First heard $first, last heard $last ($count×)';
+    return 'Először $first, utoljára $last ($count×)';
   }
 
   @override
-  String get sos_unknownSender => 'Unknown node';
+  String get sos_unknownSender => 'Ismeretlen csomópont';
 
   @override
-  String get sos_contactWaiting => 'Waiting';
+  String get sos_contactWaiting => 'Várakozik';
 
   @override
-  String get sos_contactDelivered => 'Delivered';
+  String get sos_contactDelivered => 'Kézbesítve';
 
   @override
-  String get sos_contactAcked => 'Acknowledged';
+  String get sos_contactAcked => 'Visszaigazolva';
 
   @override
   String sos_nextBroadcast(String time) {
-    return 'Next broadcast at $time';
+    return 'Következő sugárzás: $time';
   }
 
   @override
-  String get sos_dmHeader => 'Direct messages';
+  String get sos_dmHeader => 'Közvetlen üzenetek';
 
   @override
-  String get sos_useCurrentGps => 'Use current GPS';
+  String get sos_useCurrentGps => 'Jelenlegi GPS használata';
 
   @override
-  String get sos_gpsUnavailable => 'Phone GPS unavailable';
+  String get sos_gpsUnavailable => 'A telefon GPS nem érhető el';
 
   @override
   String sos_notificationTitle(String name) {
-    return 'EMERGENCY SOS from $name';
+    return 'VÉSZHELYZETI SOS tőle: $name';
   }
 
   @override
-  String get sos_notificationOpenToRespond => 'Open MeshCore Open to send ACK';
+  String get sos_notificationOpenToRespond =>
+      'Nyissa meg a MeshCore Opent az ACK küldéséhez';
 
   @override
-  String get sos_notificationChannelName => 'Emergency SOS alerts';
+  String get sos_notificationChannelName => 'Vészhelyzeti SOS-riasztások';
 
   @override
   String get sos_notificationChannelDescription =>
-      'Alarm for SOS messages from other nodes';
+      'Riasztás más csomópontok SOS-üzeneteihez';
 
   @override
-  String get sos_ackChannelName => 'SOS acknowledgements';
+  String get sos_ackChannelName => 'SOS-visszaigazolások';
 
   @override
   String sos_ackNotificationTitle(String name) {
-    return 'SOS acknowledged by $name';
+    return '$name visszaigazolta az SOS-t';
   }
 
   @override
   String get sos_ackNotificationBody =>
-      'Your SOS was received. It keeps repeating until you cancel it.';
+      'Az SOS-ét megkapták. Addig ismétlődik, amíg vissza nem vonja.';
 
   @override
-  String get sos_warningTitle => 'EMERGENCY SOS';
+  String get sos_warningTitle => 'VÉSZHELYZETI SOS';
 
   @override
   String sos_warningMore(int count) {
-    return '$count more open alerts';
+    return 'Még $count nyitott riasztás';
   }
 }

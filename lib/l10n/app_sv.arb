@@ -3305,5 +3305,134 @@
   "networkMap_manage": "Hantera",
   "networkMap_addedToContacts": "Tillagd i kontakter",
   "networkMap_addFailed": "Det gick inte att lägga till i kontakter",
-  "networkMap_unnamed": "Namnlös repeater"
+  "networkMap_unnamed": "Namnlös repeater",
+  "nav_emergency": "Nödläge",
+  "sos_title": "Nödläge",
+  "sos_settingsSection": "Nöd-SOS",
+  "sos_storedLocation": "Sparad nödplats",
+  "sos_storedLocationUnset": "Inte angiven",
+  "sos_storedLocationHelper": "Skickas när varken telefonen eller radion har en position. Lämna båda fälten tomma för att ta bort den.",
+  "sos_channel": "SOS-kanal",
+  "sos_channelUnavailable": "Anslut en radio för att välja kanal",
+  "sos_includeFavourites": "Inkludera favoritkontakter",
+  "sos_includeFavouritesSubtitle": "Skicka även SOS som direktmeddelande till varje favorit",
+  "sos_contacts": "Nödkontakter",
+  "sos_contactsSubtitle": "{count} valda",
+  "@sos_contactsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_contactsEmpty": "Inga chattkontakter på den här radion än",
+  "sos_buttonLabel": "SOS",
+  "sos_holdToSend": "Håll in i 2 sekunder för att skicka SOS",
+  "sos_active": "SOS AKTIVT",
+  "sos_cancel": "Avbryt SOS",
+  "sos_cancelConfirmTitle": "Avbryta SOS?",
+  "sos_cancelConfirmBody": "Upprepade sändningar stoppas. Hjälpare får inte veta att du avbröt, så meddela dem om du är i säkerhet.",
+  "sos_keepActive": "Behåll aktivt",
+  "sos_broadcastCount": "Skickat {count} gånger, senast {time}",
+  "@sos_broadcastCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notSentYet": "Väntar på att radion ska skicka",
+  "sos_locationSource": "Platskälla: {source}",
+  "@sos_locationSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_sourcePhoneGps": "Telefonens GPS",
+  "sos_sourceRadio": "Radions plats",
+  "sos_sourceStored": "Sparad nödplats",
+  "sos_sourceNone": "Ingen plats",
+  "sos_acksNone": "Inga kvittenser än",
+  "sos_acksHeader": "Kvitterat av",
+  "sos_incomingHeader": "Inkommande larm",
+  "sos_incomingEmpty": "Inga SOS-larm mottagna",
+  "sos_sendAck": "Skicka ACK",
+  "sos_ackSent": "ACK skickat",
+  "sos_dismiss": "Avfärda",
+  "sos_dismissed": "Avfärdat",
+  "sos_copyCoordinates": "Kopiera koordinater",
+  "sos_coordinatesCopied": "Koordinater kopierade",
+  "sos_noPosition": "Ingen position medskickad",
+  "sos_ackedByOthers": "Även kvitterat av {names}",
+  "@sos_ackedByOthers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_heardSummary": "Först hört {first}, senast {last} ({count}×)",
+  "@sos_heardSummary": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_unknownSender": "Okänd nod",
+  "sos_contactWaiting": "Väntar",
+  "sos_contactDelivered": "Levererat",
+  "sos_contactAcked": "Kvitterat",
+  "sos_nextBroadcast": "Nästa sändning {time}",
+  "@sos_nextBroadcast": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_dmHeader": "Direktmeddelanden",
+  "sos_useCurrentGps": "Använd aktuell GPS",
+  "sos_gpsUnavailable": "Telefonens GPS är inte tillgänglig",
+  "sos_notificationTitle": "NÖD-SOS från {name}",
+  "@sos_notificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_notificationOpenToRespond": "Öppna MeshCore Open för att skicka ACK",
+  "sos_notificationChannelName": "Nöd-SOS-larm",
+  "sos_notificationChannelDescription": "Larm för SOS-meddelanden från andra noder",
+  "sos_ackChannelName": "SOS-kvittenser",
+  "sos_ackNotificationTitle": "SOS kvitterat av {name}",
+  "@sos_ackNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_ackNotificationBody": "Ditt SOS togs emot. Det fortsätter upprepas tills du avbryter.",
+  "sos_warningTitle": "NÖD-SOS",
+  "sos_warningMore": "{count} fler öppna larm",
+  "@sos_warningMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

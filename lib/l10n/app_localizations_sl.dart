@@ -6298,196 +6298,197 @@ class AppLocalizationsSl extends AppLocalizations {
   String get networkMap_unnamed => 'Repeater brez imena';
 
   @override
-  String get nav_emergency => 'Emergency';
+  String get nav_emergency => 'Nujno';
 
   @override
-  String get sos_title => 'Emergency';
+  String get sos_title => 'Nujno';
 
   @override
-  String get sos_settingsSection => 'Emergency SOS';
+  String get sos_settingsSection => 'Nujni SOS';
 
   @override
-  String get sos_storedLocation => 'Stored emergency location';
+  String get sos_storedLocation => 'Shranjena nujna lokacija';
 
   @override
-  String get sos_storedLocationUnset => 'Not set';
+  String get sos_storedLocationUnset => 'Ni nastavljeno';
 
   @override
   String get sos_storedLocationHelper =>
-      'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.';
+      'Pošlje se, ko niti telefon niti radio nimata položaja. Pustite obe polji prazni, da jo odstranite.';
 
   @override
-  String get sos_channel => 'SOS channel';
+  String get sos_channel => 'Kanal SOS';
 
   @override
-  String get sos_channelUnavailable => 'Connect a radio to choose a channel';
+  String get sos_channelUnavailable => 'Povežite radio, da izberete kanal';
 
   @override
-  String get sos_includeFavourites => 'Include favourite contacts';
+  String get sos_includeFavourites => 'Vključi priljubljene stike';
 
   @override
   String get sos_includeFavouritesSubtitle =>
-      'Also send the SOS by direct message to every favourite';
+      'SOS pošlji tudi kot neposredno sporočilo vsakemu priljubljenemu';
 
   @override
-  String get sos_contacts => 'Emergency contacts';
+  String get sos_contacts => 'Nujni stiki';
 
   @override
   String sos_contactsSubtitle(int count) {
-    return '$count selected';
+    return 'Izbranih: $count';
   }
 
   @override
-  String get sos_contactsEmpty => 'No chat contacts on this radio yet';
+  String get sos_contactsEmpty => 'Na tem radiu še ni stikov za klepet';
 
   @override
   String get sos_buttonLabel => 'SOS';
 
   @override
-  String get sos_holdToSend => 'Press and hold for 2 seconds to send an SOS';
+  String get sos_holdToSend => 'Pridržite 2 sekundi za pošiljanje SOS';
 
   @override
-  String get sos_active => 'SOS ACTIVE';
+  String get sos_active => 'SOS AKTIVEN';
 
   @override
-  String get sos_cancel => 'Cancel SOS';
+  String get sos_cancel => 'Prekliči SOS';
 
   @override
-  String get sos_cancelConfirmTitle => 'Cancel SOS?';
+  String get sos_cancelConfirmTitle => 'Preklic SOS?';
 
   @override
   String get sos_cancelConfirmBody =>
-      'Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.';
+      'Ponovna oddajanja se ustavijo. Reševalci ne izvejo, da ste preklicali, zato jim sporočite, če ste na varnem.';
 
   @override
-  String get sos_keepActive => 'Keep active';
+  String get sos_keepActive => 'Ohrani aktivno';
 
   @override
   String sos_broadcastCount(int count, String time) {
-    return 'Sent $count times, last at $time';
+    return 'Poslano $count-krat, nazadnje ob $time';
   }
 
   @override
-  String get sos_notSentYet => 'Waiting for the radio to send';
+  String get sos_notSentYet => 'Čakanje, da radio pošlje';
 
   @override
   String sos_locationSource(String source) {
-    return 'Location source: $source';
+    return 'Vir lokacije: $source';
   }
 
   @override
-  String get sos_sourcePhoneGps => 'Phone GPS';
+  String get sos_sourcePhoneGps => 'GPS telefona';
 
   @override
-  String get sos_sourceRadio => 'Radio location';
+  String get sos_sourceRadio => 'Lokacija radia';
 
   @override
-  String get sos_sourceStored => 'Stored emergency location';
+  String get sos_sourceStored => 'Shranjena nujna lokacija';
 
   @override
-  String get sos_sourceNone => 'No location';
+  String get sos_sourceNone => 'Brez lokacije';
 
   @override
-  String get sos_acksNone => 'No acknowledgements yet';
+  String get sos_acksNone => 'Še ni potrditev';
 
   @override
-  String get sos_acksHeader => 'Acknowledged by';
+  String get sos_acksHeader => 'Potrdil';
 
   @override
-  String get sos_incomingHeader => 'Incoming alerts';
+  String get sos_incomingHeader => 'Dohodna opozorila';
 
   @override
-  String get sos_incomingEmpty => 'No SOS alerts received';
+  String get sos_incomingEmpty => 'Ni prejetih opozoril SOS';
 
   @override
-  String get sos_sendAck => 'Send ACK';
+  String get sos_sendAck => 'Pošlji ACK';
 
   @override
-  String get sos_ackSent => 'ACK sent';
+  String get sos_ackSent => 'ACK poslan';
 
   @override
-  String get sos_dismiss => 'Dismiss';
+  String get sos_dismiss => 'Opusti';
 
   @override
-  String get sos_dismissed => 'Dismissed';
+  String get sos_dismissed => 'Opuščeno';
 
   @override
-  String get sos_copyCoordinates => 'Copy coordinates';
+  String get sos_copyCoordinates => 'Kopiraj koordinate';
 
   @override
-  String get sos_coordinatesCopied => 'Coordinates copied';
+  String get sos_coordinatesCopied => 'Koordinate kopirane';
 
   @override
-  String get sos_noPosition => 'No position included';
+  String get sos_noPosition => 'Položaj ni vključen';
 
   @override
   String sos_ackedByOthers(String names) {
-    return 'Also acknowledged by $names';
+    return 'Potrdili tudi $names';
   }
 
   @override
   String sos_heardSummary(String first, String last, int count) {
-    return 'First heard $first, last heard $last ($count×)';
+    return 'Prvič $first, nazadnje $last ($count×)';
   }
 
   @override
-  String get sos_unknownSender => 'Unknown node';
+  String get sos_unknownSender => 'Neznano vozlišče';
 
   @override
-  String get sos_contactWaiting => 'Waiting';
+  String get sos_contactWaiting => 'Čaka';
 
   @override
-  String get sos_contactDelivered => 'Delivered';
+  String get sos_contactDelivered => 'Dostavljeno';
 
   @override
-  String get sos_contactAcked => 'Acknowledged';
+  String get sos_contactAcked => 'Potrjeno';
 
   @override
   String sos_nextBroadcast(String time) {
-    return 'Next broadcast at $time';
+    return 'Naslednje oddajanje ob $time';
   }
 
   @override
-  String get sos_dmHeader => 'Direct messages';
+  String get sos_dmHeader => 'Neposredna sporočila';
 
   @override
-  String get sos_useCurrentGps => 'Use current GPS';
+  String get sos_useCurrentGps => 'Uporabi trenutni GPS';
 
   @override
-  String get sos_gpsUnavailable => 'Phone GPS unavailable';
+  String get sos_gpsUnavailable => 'GPS telefona ni na voljo';
 
   @override
   String sos_notificationTitle(String name) {
-    return 'EMERGENCY SOS from $name';
+    return 'NUJNI SOS od $name';
   }
 
   @override
-  String get sos_notificationOpenToRespond => 'Open MeshCore Open to send ACK';
+  String get sos_notificationOpenToRespond =>
+      'Odprite MeshCore Open in pošljite ACK';
 
   @override
-  String get sos_notificationChannelName => 'Emergency SOS alerts';
+  String get sos_notificationChannelName => 'Nujna opozorila SOS';
 
   @override
   String get sos_notificationChannelDescription =>
-      'Alarm for SOS messages from other nodes';
+      'Alarm za sporočila SOS drugih vozlišč';
 
   @override
-  String get sos_ackChannelName => 'SOS acknowledgements';
+  String get sos_ackChannelName => 'Potrditve SOS';
 
   @override
   String sos_ackNotificationTitle(String name) {
-    return 'SOS acknowledged by $name';
+    return 'SOS potrdil $name';
   }
 
   @override
   String get sos_ackNotificationBody =>
-      'Your SOS was received. It keeps repeating until you cancel it.';
+      'Vaš SOS je bil prejet. Ponavlja se, dokler ga ne prekličete.';
 
   @override
-  String get sos_warningTitle => 'EMERGENCY SOS';
+  String get sos_warningTitle => 'NUJNI SOS';
 
   @override
   String sos_warningMore(int count) {
-    return '$count more open alerts';
+    return 'Še $count odprtih opozoril';
   }
 }
