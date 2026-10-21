@@ -6320,10 +6320,113 @@ class AppLocalizationsSl extends AppLocalizations {
       'Pošlje se, ko niti telefon niti radio nimata položaja. Pustite obe polji prazni, da jo odstranite.';
 
   @override
-  String get sos_channel => 'Kanal SOS';
+  String get sos_network => 'Nujno omrežje';
 
   @override
-  String get sos_channelUnavailable => 'Povežite radio, da izberete kanal';
+  String get sos_networkNoneSubtitle =>
+      'Ni nastavljeno. Vaš SOS gre samo nujnim stikom.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Član';
+
+  @override
+  String get sos_roleResponder => 'Reševalec';
+
+  @override
+  String get sos_networkIntro =>
+      'Nujno omrežje je zaseben, skrit kanal za vašo skupino. Člani lahko vanj pošljejo SOS. Reševalci kanal tudi vidijo, prejemajo opozorila in lahko v njem klepetajo. Brez kode ga nihče ne more brati.';
+
+  @override
+  String get sos_networkCreate => 'Nastavi novo omrežje';
+
+  @override
+  String get sos_networkJoin => 'Pridruži se s kodo';
+
+  @override
+  String get sos_networkNameLabel => 'Ime omrežja';
+
+  @override
+  String get sos_networkCreateAction => 'Ustvari';
+
+  @override
+  String get sos_networkCodesTitle => 'Delite te kode';
+
+  @override
+  String get sos_networkMemberCode => 'Koda člana';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Za ljudi, ki lahko pošljejo SOS, ne smejo pa videti opozoril.';
+
+  @override
+  String get sos_networkResponderCode => 'Koda reševalca';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Za ljudi, ki prejemajo opozorila in lahko klepetajo v kanalu.';
+
+  @override
+  String get sos_copyCode => 'Kopiraj kodo';
+
+  @override
+  String get sos_networkCodeCopied => 'Koda kopirana';
+
+  @override
+  String get sos_networkCodeLabel => 'Koda omrežja';
+
+  @override
+  String get sos_networkScan => 'Skeniraj kodo QR';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Usmerite kamero v kodo QR nujnega omrežja';
+
+  @override
+  String get sos_networkInvalidCode => 'To ni veljavna koda nujnega omrežja.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Se pridružite $name kot $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Pridruži se';
+
+  @override
+  String get sos_networkLeave => 'Zapusti omrežje';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Zapustite $name? Njegov kanal se odstrani z radia in opozorila iz njega prenehajo.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Vaša vloga: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Kanal je nastavljen na tem radiu';
+
+  @override
+  String get sos_networkStatusInstalling => 'Dodajanje kanala na ta radio…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Na tem radiu ni prostega mesta za kanal. Odstranite kanal, da uporabite omrežje.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Povežite radio, da nastavite kanal';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Kdorkoli s kodo lahko pošilja opozorila, član s spremenjeno programsko opremo pa bi jih lahko bral. Če koda uide, nastavite novo omrežje in delite nove kode.';
 
   @override
   String get sos_channelNeedsFirmware =>

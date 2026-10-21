@@ -5907,10 +5907,107 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_storedLocationHelper => '当手机和电台都没有位置时发送。将两个字段都留空即可删除。';
 
   @override
-  String get sos_channel => 'SOS 频道';
+  String get sos_network => '紧急网络';
 
   @override
-  String get sos_channelUnavailable => '连接电台后才能选择频道';
+  String get sos_networkNoneSubtitle => '未设置。你的 SOS 只会发送给紧急联系人。';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => '成员';
+
+  @override
+  String get sos_roleResponder => '救援人员';
+
+  @override
+  String get sos_networkIntro =>
+      '紧急网络是为你的团队准备的私密隐藏频道。成员可以向其发送 SOS。救援人员还能看到该频道、接收警报并在其中聊天。没有代码的人无法读取。';
+
+  @override
+  String get sos_networkCreate => '设置新网络';
+
+  @override
+  String get sos_networkJoin => '使用代码加入';
+
+  @override
+  String get sos_networkNameLabel => '网络名称';
+
+  @override
+  String get sos_networkCreateAction => '创建';
+
+  @override
+  String get sos_networkCodesTitle => '分享这些代码';
+
+  @override
+  String get sos_networkMemberCode => '成员代码';
+
+  @override
+  String get sos_networkMemberCodeHelp => '适用于可以发送 SOS 但不应看到警报的人。';
+
+  @override
+  String get sos_networkResponderCode => '救援人员代码';
+
+  @override
+  String get sos_networkResponderCodeHelp => '适用于接收警报并可在频道中聊天的人。';
+
+  @override
+  String get sos_copyCode => '复制代码';
+
+  @override
+  String get sos_networkCodeCopied => '已复制代码';
+
+  @override
+  String get sos_networkCodeLabel => '网络代码';
+
+  @override
+  String get sos_networkScan => '扫描二维码';
+
+  @override
+  String get sos_networkScanInstructions => '将摄像头对准紧急网络二维码';
+
+  @override
+  String get sos_networkInvalidCode => '这不是有效的紧急网络代码。';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return '以$role身份加入 $name？';
+  }
+
+  @override
+  String get sos_networkJoinAction => '加入';
+
+  @override
+  String get sos_networkLeave => '退出网络';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return '退出 $name？其频道将从你的电台中移除，来自它的警报将停止。';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return '你的角色：$role';
+  }
+
+  @override
+  String get sos_networkStatusReady => '已在此电台上设置频道';
+
+  @override
+  String get sos_networkStatusInstalling => '正在向此电台添加频道…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot => '此电台没有空闲的频道位置。请删除一个频道以使用该网络。';
+
+  @override
+  String get sos_networkStatusDisconnected => '连接电台以设置频道';
+
+  @override
+  String get sos_networkSecurityNote =>
+      '任何持有代码的人都能发送警报，使用修改版软件的成员可能读取警报。如果代码泄露，请设置新网络并分享新代码。';
 
   @override
   String get sos_channelNeedsFirmware =>

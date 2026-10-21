@@ -3317,8 +3317,6 @@
   "sos_storedLocation": "Local de emergência guardado",
   "sos_storedLocationUnset": "Não definido",
   "sos_storedLocationHelper": "Enviado quando nem o telefone nem o rádio têm posição. Deixe ambos os campos vazios para o remover.",
-  "sos_channel": "Canal SOS",
-  "sos_channelUnavailable": "Ligue um rádio para escolher um canal",
   "sos_includeFavourites": "Incluir contactos favoritos",
   "sos_includeFavouritesSubtitle": "Enviar também o SOS por mensagem direta a cada favorito",
   "sos_contacts": "Contactos de emergência",
@@ -3450,5 +3448,70 @@
     }
   },
   "sos_cancelNotificationBody": "O remetente cancelou este SOS.",
-  "sos_channelNeedsFirmware": "Este rádio precisa do firmware 1.15 ou mais recente para alertas no canal. Os contactos de emergência continuam a receber mensagens diretas."
+  "sos_channelNeedsFirmware": "Este rádio precisa do firmware 1.15 ou mais recente para alertas no canal. Os contactos de emergência continuam a receber mensagens diretas.",
+  "sos_network": "Rede de emergência",
+  "sos_networkNoneSubtitle": "Não configurada. O seu SOS vai apenas para os contactos de emergência.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Membro",
+  "sos_roleResponder": "Socorrista",
+  "sos_networkIntro": "Uma rede de emergência é um canal privado e oculto para o seu grupo. Os membros podem enviar um SOS para ela. Os socorristas também veem o canal, recebem alertas e podem conversar nele. Sem um código ninguém o consegue ler.",
+  "sos_networkCreate": "Configurar uma nova rede",
+  "sos_networkJoin": "Entrar com um código",
+  "sos_networkNameLabel": "Nome da rede",
+  "sos_networkCreateAction": "Criar",
+  "sos_networkCodesTitle": "Partilhe estes códigos",
+  "sos_networkMemberCode": "Código de membro",
+  "sos_networkMemberCodeHelp": "Para quem pode enviar um SOS mas não deve ver alertas.",
+  "sos_networkResponderCode": "Código de socorrista",
+  "sos_networkResponderCodeHelp": "Para quem recebe alertas e pode conversar no canal.",
+  "sos_copyCode": "Copiar código",
+  "sos_networkCodeCopied": "Código copiado",
+  "sos_networkCodeLabel": "Código da rede",
+  "sos_networkScan": "Ler código QR",
+  "sos_networkScanInstructions": "Aponte a câmara para um código QR de rede de emergência",
+  "sos_networkInvalidCode": "Este não é um código de rede de emergência válido.",
+  "sos_networkJoinConfirm": "Entrar em {name} como {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Entrar",
+  "sos_networkLeave": "Sair da rede",
+  "sos_networkLeaveConfirm": "Sair de {name}? O canal é removido do seu rádio e os alertas dele param.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "O seu papel: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Canal configurado neste rádio",
+  "sos_networkStatusInstalling": "A adicionar o canal a este rádio…",
+  "sos_networkStatusNoFreeSlot": "Não há espaço de canal livre neste rádio. Remova um canal para usar a rede.",
+  "sos_networkStatusDisconnected": "Ligue um rádio para configurar o canal",
+  "sos_networkSecurityNote": "Qualquer pessoa com um código pode enviar alertas, e um membro com software modificado poderia lê-los. Se um código for divulgado, configure uma nova rede e partilhe novos códigos."
 }

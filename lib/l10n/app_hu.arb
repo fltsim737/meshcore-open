@@ -3356,8 +3356,6 @@
   "sos_storedLocation": "Mentett vészhelyzeti hely",
   "sos_storedLocationUnset": "Nincs beállítva",
   "sos_storedLocationHelper": "Akkor küldjük, ha sem a telefonnak, sem a rádiónak nincs pozíciója. Hagyja üresen mindkét mezőt a törléshez.",
-  "sos_channel": "SOS-csatorna",
-  "sos_channelUnavailable": "Csatlakoztasson rádiót a csatorna kiválasztásához",
   "sos_includeFavourites": "Kedvenc partnerek bevonása",
   "sos_includeFavouritesSubtitle": "Az SOS-t közvetlen üzenetben is elküldi minden kedvencnek",
   "sos_contacts": "Vészhelyzeti partnerek",
@@ -3489,5 +3487,70 @@
     }
   },
   "sos_cancelNotificationBody": "A küldő visszavonta ezt az SOS-t.",
-  "sos_channelNeedsFirmware": "Ehhez a rádióhoz 1.15-ös vagy újabb firmware kell a csatornás riasztásokhoz. A vészhelyzeti partnerek továbbra is közvetlen üzenetet kapnak."
+  "sos_channelNeedsFirmware": "Ehhez a rádióhoz 1.15-ös vagy újabb firmware kell a csatornás riasztásokhoz. A vészhelyzeti partnerek továbbra is közvetlen üzenetet kapnak.",
+  "sos_network": "Vészhelyzeti hálózat",
+  "sos_networkNoneSubtitle": "Nincs beállítva. Az SOS-ed csak a vészhelyzeti partnerekhez jut el.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Tag",
+  "sos_roleResponder": "Segítő",
+  "sos_networkIntro": "A vészhelyzeti hálózat egy privát, rejtett csatorna a csoportodnak. A tagok SOS-t küldhetnek bele. A segítők látják is a csatornát, riasztásokat kapnak és cseveghetnek rajta. Kód nélkül senki sem olvashatja.",
+  "sos_networkCreate": "Új hálózat beállítása",
+  "sos_networkJoin": "Csatlakozás kóddal",
+  "sos_networkNameLabel": "Hálózat neve",
+  "sos_networkCreateAction": "Létrehozás",
+  "sos_networkCodesTitle": "Oszd meg ezeket a kódokat",
+  "sos_networkMemberCode": "Tagkód",
+  "sos_networkMemberCodeHelp": "Azoknak, akik SOS-t küldhetnek, de nem láthatják a riasztásokat.",
+  "sos_networkResponderCode": "Segítőkód",
+  "sos_networkResponderCodeHelp": "Azoknak, akik riasztásokat kapnak és cseveghetnek a csatornán.",
+  "sos_copyCode": "Kód másolása",
+  "sos_networkCodeCopied": "Kód másolva",
+  "sos_networkCodeLabel": "Hálózati kód",
+  "sos_networkScan": "QR-kód beolvasása",
+  "sos_networkScanInstructions": "Irányítsd a kamerát egy vészhelyzeti hálózat QR-kódjára",
+  "sos_networkInvalidCode": "Ez nem érvényes vészhelyzeti hálózati kód.",
+  "sos_networkJoinConfirm": "Csatlakozol ehhez: {name}, mint {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Csatlakozás",
+  "sos_networkLeave": "Kilépés a hálózatból",
+  "sos_networkLeaveConfirm": "Kilépsz innen: {name}? A csatornája törlődik a rádióról, és a riasztásai megszűnnek.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Szereped: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "A csatorna beállítva ezen a rádión",
+  "sos_networkStatusInstalling": "Csatorna hozzáadása ehhez a rádióhoz…",
+  "sos_networkStatusNoFreeSlot": "Nincs szabad csatornahely ezen a rádión. Törölj egy csatornát a hálózat használatához.",
+  "sos_networkStatusDisconnected": "Csatlakoztass rádiót a csatorna beállításához",
+  "sos_networkSecurityNote": "Bárki, akinek van kódja, küldhet riasztást, és egy módosított szoftvert használó tag elolvashatná őket. Ha egy kód kiszivárog, állíts be új hálózatot és oszd meg az új kódokat."
 }

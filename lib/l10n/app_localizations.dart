@@ -10633,17 +10633,191 @@ abstract class AppLocalizations {
   /// **'Sent when neither the phone nor the radio has a position. Leave both fields empty to remove it.'**
   String get sos_storedLocationHelper;
 
-  /// No description provided for @sos_channel.
+  /// No description provided for @sos_network.
   ///
   /// In en, this message translates to:
-  /// **'SOS channel'**
-  String get sos_channel;
+  /// **'Emergency network'**
+  String get sos_network;
 
-  /// No description provided for @sos_channelUnavailable.
+  /// No description provided for @sos_networkNoneSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Connect a radio to choose a channel'**
-  String get sos_channelUnavailable;
+  /// **'Not set up. Your SOS goes to emergency contacts only.'**
+  String get sos_networkNoneSubtitle;
+
+  /// No description provided for @sos_networkSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} · {role}'**
+  String sos_networkSummary(String name, String role);
+
+  /// No description provided for @sos_roleMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get sos_roleMember;
+
+  /// No description provided for @sos_roleResponder.
+  ///
+  /// In en, this message translates to:
+  /// **'Responder'**
+  String get sos_roleResponder;
+
+  /// No description provided for @sos_networkIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'An emergency network is a private, hidden channel for your group. Members can send an SOS into it. Responders also see the channel, receive alerts and can chat on it. Anyone without a code cannot read it.'**
+  String get sos_networkIntro;
+
+  /// No description provided for @sos_networkCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up a new network'**
+  String get sos_networkCreate;
+
+  /// No description provided for @sos_networkJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Join with a code'**
+  String get sos_networkJoin;
+
+  /// No description provided for @sos_networkNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Network name'**
+  String get sos_networkNameLabel;
+
+  /// No description provided for @sos_networkCreateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get sos_networkCreateAction;
+
+  /// No description provided for @sos_networkCodesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share these codes'**
+  String get sos_networkCodesTitle;
+
+  /// No description provided for @sos_networkMemberCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Member code'**
+  String get sos_networkMemberCode;
+
+  /// No description provided for @sos_networkMemberCodeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'For people who can send an SOS but should not see alerts.'**
+  String get sos_networkMemberCodeHelp;
+
+  /// No description provided for @sos_networkResponderCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Responder code'**
+  String get sos_networkResponderCode;
+
+  /// No description provided for @sos_networkResponderCodeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'For people who receive alerts and can chat on the channel.'**
+  String get sos_networkResponderCodeHelp;
+
+  /// No description provided for @sos_copyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy code'**
+  String get sos_copyCode;
+
+  /// No description provided for @sos_networkCodeCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Code copied'**
+  String get sos_networkCodeCopied;
+
+  /// No description provided for @sos_networkCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Network code'**
+  String get sos_networkCodeLabel;
+
+  /// No description provided for @sos_networkScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan QR code'**
+  String get sos_networkScan;
+
+  /// No description provided for @sos_networkScanInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Point the camera at an emergency network QR code'**
+  String get sos_networkScanInstructions;
+
+  /// No description provided for @sos_networkInvalidCode.
+  ///
+  /// In en, this message translates to:
+  /// **'That is not a valid emergency network code.'**
+  String get sos_networkInvalidCode;
+
+  /// No description provided for @sos_networkJoinConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Join {name} as {role}?'**
+  String sos_networkJoinConfirm(String name, String role);
+
+  /// No description provided for @sos_networkJoinAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get sos_networkJoinAction;
+
+  /// No description provided for @sos_networkLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave network'**
+  String get sos_networkLeave;
+
+  /// No description provided for @sos_networkLeaveConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave {name}? Its channel is removed from your radio and alerts from it stop.'**
+  String sos_networkLeaveConfirm(String name);
+
+  /// No description provided for @sos_networkRoleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your role: {role}'**
+  String sos_networkRoleLabel(String role);
+
+  /// No description provided for @sos_networkStatusReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel set up on this radio'**
+  String get sos_networkStatusReady;
+
+  /// No description provided for @sos_networkStatusInstalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Adding the channel to this radio…'**
+  String get sos_networkStatusInstalling;
+
+  /// No description provided for @sos_networkStatusNoFreeSlot.
+  ///
+  /// In en, this message translates to:
+  /// **'No free channel slot on this radio. Remove a channel to use the network.'**
+  String get sos_networkStatusNoFreeSlot;
+
+  /// No description provided for @sos_networkStatusDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a radio to set up the channel'**
+  String get sos_networkStatusDisconnected;
+
+  /// No description provided for @sos_networkSecurityNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Anyone given a code can send alerts, and a member using modified software could read them. If a code leaks, set up a new network and share new codes.'**
+  String get sos_networkSecurityNote;
 
   /// No description provided for @sos_channelNeedsFirmware.
   ///

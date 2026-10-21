@@ -7,9 +7,10 @@ import '../l10n/l10n.dart';
 import '../services/app_settings_service.dart';
 import '../services/sos_location_service.dart';
 import '../services/sos_service.dart';
+import '../screens/sos_network_screen.dart';
 import 'mesh_nav_tile.dart';
 
-/// Stored emergency location, SOS channel and emergency contacts.
+/// Stored emergency location, emergency network and emergency contacts.
 class SosSettingsSection extends StatelessWidget {
   const SosSettingsSection({super.key});
 
@@ -17,17 +18,11 @@ class SosSettingsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final settingsService = context.watch<AppSettingsService>();
-    final connector = context.watch<MeshCoreConnector>();
     final settings = settingsService.settings;
     final lat = settings.sosLatitude;
     final lon = settings.sosLongitude;
-    final channels = connector.channels;
-    final canPickChannel = connector.isConnected && channels.isNotEmpty;
-    final channel =
-        channels
-            .where((c) => c.index == settings.sosChannelIndex)
-            .firstOrNull ??
-        channels.firstOrNull;
+    final sos = context.watch<SosService>();
+    final network = sos.network;
 
     return Column(
       children: [
@@ -41,17 +36,17 @@ class SosSettingsSection extends StatelessWidget {
         ),
         const Divider(height: 1, indent: 16),
         MeshNavTile(
-          icon: Icons.tag,
-          title: l10n.sos_channel,
-          subtitle: !canPickChannel
-              ? l10n.sos_channelUnavailable
-              : connector.supportsChannelData
-              ? channel?.name
-              : '${channel?.name ?? ''}\n${l10n.sos_channelNeedsFirmware}',
-          onTap: canPickChannel
-              ? () => _pickChannel(context, connector, settingsService)
-              : null,
+          icon: Icons.shield_outlined,
+          title: l10n.sos_network,
+          subtitle: network == null
+              ? l10n.sos_networkNoneSubtitle
+              : '${l10n.sos_networkSummary(network.name, sosRoleLabel(l10n, network.role))}\n'
+                    '${sosNetworkStatusLabel(l10n, sos.networkStatus)}',
           subtitleMaxLines: 3,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const SosNetworkScreen()),
+          ),
         ),
         const Divider(height: 1, indent: 16),
         SwitchListTile(
@@ -95,36 +90,6 @@ class SosSettingsSection extends StatelessWidget {
     );
     if (result == null) return;
     await settingsService.setSosLocation(result.$1, result.$2);
-  }
-
-  Future<void> _pickChannel(
-    BuildContext context,
-    MeshCoreConnector connector,
-    AppSettingsService settingsService,
-  ) async {
-    final selected = await showDialog<int>(
-      context: context,
-      builder: (dialogContext) => SimpleDialog(
-        title: Text(dialogContext.l10n.sos_channel),
-        children: [
-          RadioGroup<int>(
-            groupValue: settingsService.settings.sosChannelIndex,
-            onChanged: (value) => Navigator.pop(dialogContext, value),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final channel in connector.channels)
-                  RadioListTile<int>(
-                    value: channel.index,
-                    title: Text(channel.name),
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-    if (selected != null) await settingsService.setSosChannelIndex(selected);
   }
 }
 

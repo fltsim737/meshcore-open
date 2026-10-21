@@ -6318,10 +6318,113 @@ class AppLocalizationsSk extends AppLocalizations {
       'Odošle sa, keď telefón ani rádio nemajú polohu. Nechajte obe polia prázdne, ak ju chcete odstrániť.';
 
   @override
-  String get sos_channel => 'Kanál SOS';
+  String get sos_network => 'Núdzová sieť';
 
   @override
-  String get sos_channelUnavailable => 'Pripojte rádio a vyberte kanál';
+  String get sos_networkNoneSubtitle =>
+      'Nenastavené. Vaše SOS ide len núdzovým kontaktom.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Člen';
+
+  @override
+  String get sos_roleResponder => 'Záchranár';
+
+  @override
+  String get sos_networkIntro =>
+      'Núdzová sieť je súkromný skrytý kanál pre vašu skupinu. Členovia doň môžu poslať SOS. Záchranári navyše vidia kanál, dostávajú poplachy a môžu v ňom chatovať. Bez kódu ho nikto nemôže čítať.';
+
+  @override
+  String get sos_networkCreate => 'Nastaviť novú sieť';
+
+  @override
+  String get sos_networkJoin => 'Pripojiť sa pomocou kódu';
+
+  @override
+  String get sos_networkNameLabel => 'Názov siete';
+
+  @override
+  String get sos_networkCreateAction => 'Vytvoriť';
+
+  @override
+  String get sos_networkCodesTitle => 'Zdieľajte tieto kódy';
+
+  @override
+  String get sos_networkMemberCode => 'Kód člena';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Pre ľudí, ktorí môžu poslať SOS, ale nemajú vidieť poplachy.';
+
+  @override
+  String get sos_networkResponderCode => 'Kód záchranára';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Pre ľudí, ktorí dostávajú poplachy a môžu chatovať v kanáli.';
+
+  @override
+  String get sos_copyCode => 'Kopírovať kód';
+
+  @override
+  String get sos_networkCodeCopied => 'Kód skopírovaný';
+
+  @override
+  String get sos_networkCodeLabel => 'Kód siete';
+
+  @override
+  String get sos_networkScan => 'Skenovať QR kód';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Namierte kameru na QR kód núdzovej siete';
+
+  @override
+  String get sos_networkInvalidCode => 'Toto nie je platný kód núdzovej siete.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Pripojiť sa k $name ako $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Pripojiť';
+
+  @override
+  String get sos_networkLeave => 'Opustiť sieť';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Opustiť $name? Jej kanál sa odstráni z rádia a poplachy z neho prestanú.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Vaša rola: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Kanál je nastavený na tomto rádiu';
+
+  @override
+  String get sos_networkStatusInstalling => 'Pridávam kanál do tohto rádia…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Na tomto rádiu nie je voľné miesto pre kanál. Odstráňte kanál, aby ste mohli sieť používať.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Pripojte rádio na nastavenie kanála';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Ktokoľvek s kódom môže posielať poplachy a člen s upraveným softvérom by ich mohol čítať. Ak kód unikne, nastavte novú sieť a zdieľajte nové kódy.';
 
   @override
   String get sos_channelNeedsFirmware =>

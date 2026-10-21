@@ -6304,11 +6304,113 @@ class AppLocalizationsNl extends AppLocalizations {
       'Wordt verzonden als telefoon en radio geen positie hebben. Laat beide velden leeg om te verwijderen.';
 
   @override
-  String get sos_channel => 'SOS-kanaal';
+  String get sos_network => 'Noodnetwerk';
 
   @override
-  String get sos_channelUnavailable =>
-      'Verbind een radio om een kanaal te kiezen';
+  String get sos_networkNoneSubtitle =>
+      'Niet ingesteld. Je SOS gaat alleen naar je noodcontacten.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Lid';
+
+  @override
+  String get sos_roleResponder => 'Hulpverlener';
+
+  @override
+  String get sos_networkIntro =>
+      'Een noodnetwerk is een privé, verborgen kanaal voor je groep. Leden kunnen er een SOS in versturen. Hulpverleners zien het kanaal ook, krijgen meldingen en kunnen erin chatten. Zonder code kan niemand het lezen.';
+
+  @override
+  String get sos_networkCreate => 'Nieuw netwerk instellen';
+
+  @override
+  String get sos_networkJoin => 'Deelnemen met een code';
+
+  @override
+  String get sos_networkNameLabel => 'Netwerknaam';
+
+  @override
+  String get sos_networkCreateAction => 'Aanmaken';
+
+  @override
+  String get sos_networkCodesTitle => 'Deel deze codes';
+
+  @override
+  String get sos_networkMemberCode => 'Ledencode';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Voor mensen die een SOS kunnen sturen maar geen meldingen mogen zien.';
+
+  @override
+  String get sos_networkResponderCode => 'Hulpverlenerscode';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Voor mensen die meldingen krijgen en in het kanaal kunnen chatten.';
+
+  @override
+  String get sos_copyCode => 'Code kopiëren';
+
+  @override
+  String get sos_networkCodeCopied => 'Code gekopieerd';
+
+  @override
+  String get sos_networkCodeLabel => 'Netwerkcode';
+
+  @override
+  String get sos_networkScan => 'QR-code scannen';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Richt de camera op een noodnetwerk-QR-code';
+
+  @override
+  String get sos_networkInvalidCode => 'Dat is geen geldige noodnetwerkcode.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Deelnemen aan $name als $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Deelnemen';
+
+  @override
+  String get sos_networkLeave => 'Netwerk verlaten';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return '$name verlaten? Het kanaal wordt van je radio verwijderd en meldingen ervan stoppen.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Je rol: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Kanaal ingesteld op deze radio';
+
+  @override
+  String get sos_networkStatusInstalling => 'Kanaal toevoegen aan deze radio…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Geen vrije kanaalplek op deze radio. Verwijder een kanaal om het netwerk te gebruiken.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Verbind een radio om het kanaal in te stellen';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Iedereen met een code kan meldingen sturen, en een lid met aangepaste software zou ze kunnen lezen. Als een code uitlekt, stel dan een nieuw netwerk in en deel nieuwe codes.';
 
   @override
   String get sos_channelNeedsFirmware =>

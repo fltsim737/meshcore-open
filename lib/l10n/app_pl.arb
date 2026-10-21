@@ -3350,8 +3350,6 @@
   "sos_storedLocation": "Zapisana lokalizacja awaryjna",
   "sos_storedLocationUnset": "Nie ustawiono",
   "sos_storedLocationHelper": "Wysyłana, gdy ani telefon, ani radio nie mają pozycji. Zostaw oba pola puste, aby ją usunąć.",
-  "sos_channel": "Kanał SOS",
-  "sos_channelUnavailable": "Połącz radio, aby wybrać kanał",
   "sos_includeFavourites": "Uwzględnij ulubione kontakty",
   "sos_includeFavouritesSubtitle": "Wysyłaj SOS także wiadomością bezpośrednią do każdego ulubionego",
   "sos_contacts": "Kontakty alarmowe",
@@ -3483,5 +3481,70 @@
     }
   },
   "sos_cancelNotificationBody": "Nadawca anulował to SOS.",
-  "sos_channelNeedsFirmware": "To radio wymaga firmware 1.15 lub nowszego do alarmów na kanale. Kontakty alarmowe nadal otrzymują wiadomości bezpośrednie."
+  "sos_channelNeedsFirmware": "To radio wymaga firmware 1.15 lub nowszego do alarmów na kanale. Kontakty alarmowe nadal otrzymują wiadomości bezpośrednie.",
+  "sos_network": "Sieć alarmowa",
+  "sos_networkNoneSubtitle": "Nie skonfigurowano. Twoje SOS trafia tylko do kontaktów alarmowych.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Członek",
+  "sos_roleResponder": "Ratownik",
+  "sos_networkIntro": "Sieć alarmowa to prywatny, ukryty kanał dla twojej grupy. Członkowie mogą wysyłać do niej SOS. Ratownicy dodatkowo widzą kanał, otrzymują alarmy i mogą w nim rozmawiać. Bez kodu nikt nie może go odczytać.",
+  "sos_networkCreate": "Utwórz nową sieć",
+  "sos_networkJoin": "Dołącz za pomocą kodu",
+  "sos_networkNameLabel": "Nazwa sieci",
+  "sos_networkCreateAction": "Utwórz",
+  "sos_networkCodesTitle": "Udostępnij te kody",
+  "sos_networkMemberCode": "Kod członka",
+  "sos_networkMemberCodeHelp": "Dla osób, które mogą wysłać SOS, ale nie powinny widzieć alarmów.",
+  "sos_networkResponderCode": "Kod ratownika",
+  "sos_networkResponderCodeHelp": "Dla osób, które otrzymują alarmy i mogą rozmawiać na kanale.",
+  "sos_copyCode": "Kopiuj kod",
+  "sos_networkCodeCopied": "Skopiowano kod",
+  "sos_networkCodeLabel": "Kod sieci",
+  "sos_networkScan": "Skanuj kod QR",
+  "sos_networkScanInstructions": "Skieruj aparat na kod QR sieci alarmowej",
+  "sos_networkInvalidCode": "To nie jest prawidłowy kod sieci alarmowej.",
+  "sos_networkJoinConfirm": "Dołączyć do {name} jako {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Dołącz",
+  "sos_networkLeave": "Opuść sieć",
+  "sos_networkLeaveConfirm": "Opuścić {name}? Jej kanał zostanie usunięty z radia, a alarmy z niego ustaną.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Twoja rola: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Kanał skonfigurowany na tym radiu",
+  "sos_networkStatusInstalling": "Dodawanie kanału do tego radia…",
+  "sos_networkStatusNoFreeSlot": "Brak wolnego miejsca na kanał w tym radiu. Usuń kanał, aby korzystać z sieci.",
+  "sos_networkStatusDisconnected": "Połącz radio, aby skonfigurować kanał",
+  "sos_networkSecurityNote": "Każdy, kto ma kod, może wysyłać alarmy, a członek ze zmodyfikowanym oprogramowaniem mógłby je odczytać. Jeśli kod wycieknie, utwórz nową sieć i udostępnij nowe kody."
 }

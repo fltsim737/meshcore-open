@@ -620,7 +620,34 @@ class MeshCoreConnector extends ChangeNotifier {
     return result;
   }
 
-  List<Channel> get channels => List.unmodifiable(_channels);
+  /// Channels shown to the user. Excludes the emergency network channel
+  /// while this phone is only a member of it; see [hiddenChannelPsk].
+  List<Channel> get channels => List.unmodifiable(
+    _hiddenChannelPsk == null
+        ? _channels
+        : _channels.where((c) => !_isHiddenChannel(c)),
+  );
+
+  /// Every channel on the radio, hidden ones included.
+  List<Channel> get allChannels => List.unmodifiable(_channels);
+
+  Uint8List? _hiddenChannelPsk;
+
+  /// Key of a channel to keep out of the UI: it is left out of [channels]
+  /// and nothing received on it is stored, counted or notified.
+  Uint8List? get hiddenChannelPsk => _hiddenChannelPsk;
+  set hiddenChannelPsk(Uint8List? psk) {
+    _hiddenChannelPsk = psk;
+    notifyListeners();
+  }
+
+  bool _isHiddenChannel(Channel channel) {
+    final hidden = _hiddenChannelPsk;
+    return hidden != null && listEquals(channel.psk, hidden);
+  }
+
+  bool _isHiddenSlot(int slot) =>
+      _channels.any((c) => c.index == slot && _isHiddenChannel(c));
   bool get isConnected => _state == MeshCoreConnectionState.connected;
   bool get isLoadingContacts => _isLoadingContacts;
   bool get hasLoadedContacts => _hasLoadedContacts;
@@ -8304,6 +8331,7 @@ class MeshCoreConnector extends ChangeNotifier {
   }
 
   bool _addChannelMessage(int slot, ChannelMessage message) {
+    if (_isHiddenSlot(slot)) return false;
     final channelIndex = _canonicalSlot(slot);
     _channelMessages.putIfAbsent(channelIndex, () => []);
     final messages = _channelMessages[channelIndex]!;

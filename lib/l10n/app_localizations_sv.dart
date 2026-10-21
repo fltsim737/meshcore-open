@@ -6285,10 +6285,115 @@ class AppLocalizationsSv extends AppLocalizations {
       'Skickas när varken telefonen eller radion har en position. Lämna båda fälten tomma för att ta bort den.';
 
   @override
-  String get sos_channel => 'SOS-kanal';
+  String get sos_network => 'Nödnätverk';
 
   @override
-  String get sos_channelUnavailable => 'Anslut en radio för att välja kanal';
+  String get sos_networkNoneSubtitle =>
+      'Inte konfigurerat. Ditt SOS går bara till nödkontakter.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Medlem';
+
+  @override
+  String get sos_roleResponder => 'Räddare';
+
+  @override
+  String get sos_networkIntro =>
+      'Ett nödnätverk är en privat, dold kanal för din grupp. Medlemmar kan skicka SOS till den. Räddare ser även kanalen, får larm och kan chatta i den. Utan kod kan ingen läsa den.';
+
+  @override
+  String get sos_networkCreate => 'Skapa ett nytt nätverk';
+
+  @override
+  String get sos_networkJoin => 'Gå med med en kod';
+
+  @override
+  String get sos_networkNameLabel => 'Nätverksnamn';
+
+  @override
+  String get sos_networkCreateAction => 'Skapa';
+
+  @override
+  String get sos_networkCodesTitle => 'Dela de här koderna';
+
+  @override
+  String get sos_networkMemberCode => 'Medlemskod';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'För personer som kan skicka SOS men inte ska se larm.';
+
+  @override
+  String get sos_networkResponderCode => 'Räddarkod';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'För personer som får larm och kan chatta i kanalen.';
+
+  @override
+  String get sos_copyCode => 'Kopiera kod';
+
+  @override
+  String get sos_networkCodeCopied => 'Koden kopierad';
+
+  @override
+  String get sos_networkCodeLabel => 'Nätverkskod';
+
+  @override
+  String get sos_networkScan => 'Skanna QR-kod';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Rikta kameran mot en QR-kod för ett nödnätverk';
+
+  @override
+  String get sos_networkInvalidCode => 'Det är inte en giltig nödnätverkskod.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Gå med i $name som $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Gå med';
+
+  @override
+  String get sos_networkLeave => 'Lämna nätverket';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Lämna $name? Kanalen tas bort från din radio och larm från den upphör.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Din roll: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady =>
+      'Kanalen är konfigurerad på den här radion';
+
+  @override
+  String get sos_networkStatusInstalling =>
+      'Lägger till kanalen på den här radion…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Ingen ledig kanalplats på den här radion. Ta bort en kanal för att använda nätverket.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Anslut en radio för att konfigurera kanalen';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Alla som har en kod kan skicka larm, och en medlem med modifierad programvara skulle kunna läsa dem. Om en kod läcker, skapa ett nytt nätverk och dela nya koder.';
 
   @override
   String get sos_channelNeedsFirmware =>

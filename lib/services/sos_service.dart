@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
 import '../connector/meshcore_connector.dart';
 import '../connector/meshcore_protocol.dart';
 import '../helpers/sos_codec.dart';
+import '../helpers/sos_network_code.dart';
 import '../models/channel.dart';
 import '../models/contact.dart';
 import '../models/sos_alert.dart';
@@ -26,11 +28,24 @@ abstract class SosTransport implements Listenable {
   Uint8List? get selfPublicKey;
   double? get selfLatitude;
   double? get selfLongitude;
-  List<Channel> get channels;
+
+  /// Every channel on the radio, the hidden network channel included.
+  List<Channel> get allChannels;
   List<Contact> get contacts;
+  int get maxChannels;
+
+  /// The channel list has been read from the radio and can be trusted.
+  bool get channelsReady;
 
   /// Channel data needs companion firmware v1.15 or newer.
   bool get supportsChannelData;
+
+  /// Key of the channel to keep out of the UI, or null.
+  Uint8List? get hiddenChannelPsk;
+  set hiddenChannelPsk(Uint8List? psk);
+
+  Future<void> setChannel(int index, String name, Uint8List psk);
+  Future<void> deleteChannel(int index);
 
   set sosTextListener(void Function(SosInboundText inbound)? listener);
   set sosDataListener(
@@ -60,11 +75,25 @@ class ConnectorSosTransport implements SosTransport {
   @override
   double? get selfLongitude => connector.selfLongitude;
   @override
-  List<Channel> get channels => connector.channels;
+  List<Channel> get allChannels => connector.allChannels;
   @override
   List<Contact> get contacts => connector.contacts;
   @override
+  int get maxChannels => connector.maxChannels;
+  @override
+  bool get channelsReady =>
+      connector.hasLoadedChannels && !connector.isLoadingChannels;
+  @override
   bool get supportsChannelData => connector.supportsChannelData;
+  @override
+  Uint8List? get hiddenChannelPsk => connector.hiddenChannelPsk;
+  @override
+  set hiddenChannelPsk(Uint8List? psk) => connector.hiddenChannelPsk = psk;
+  @override
+  Future<void> setChannel(int index, String name, Uint8List psk) =>
+      connector.setChannel(index, name, psk);
+  @override
+  Future<void> deleteChannel(int index) => connector.deleteChannel(index);
   @override
   set sosTextListener(void Function(SosInboundText inbound)? listener) =>
       connector.sosTextListener = listener;
@@ -86,6 +115,16 @@ class ConnectorSosTransport implements SosTransport {
   @override
   void removeListener(VoidCallback listener) =>
       connector.removeListener(listener);
+}
+
+enum SosNetworkStatus {
+  /// No network joined: SOS goes to emergency contacts only.
+  none,
+  disconnected,
+  needsFirmware,
+  installing,
+  noFreeSlot,
+  ready,
 }
 
 /// How alerts reach the user outside the Emergency tab.
@@ -168,6 +207,7 @@ class SosService extends ChangeNotifier {
     _transport.sosDataListener = handleInboundData;
     _transport.sosAckListener = handleDeliveryAck;
     _transport.addListener(_onTransportChanged);
+    _settings.addListener(_syncNetwork);
     _expiryTimer = Timer.periodic(
       const Duration(minutes: 1),
       (_) => purgeExpired(),
@@ -260,6 +300,7 @@ class SosService extends ChangeNotifier {
   }
 
   void _onTransportChanged() {
+    _syncNetwork();
     final connected = _transport.isConnected;
     if (connected == _wasConnected) return;
     _wasConnected = connected;
@@ -271,14 +312,140 @@ class SosService extends ChangeNotifier {
     }
   }
 
-  /// The configured SOS channel, falling back to the first channel when the
-  /// configured slot no longer exists on this radio.
+  // ---------------------------------------------------------------------
+  // Emergency network
+  // ---------------------------------------------------------------------
+
+  /// The joined emergency network, or null.
+  SosNetworkCode? get network => _settings.settings.sosNetwork;
+
+  /// Sees the network channel and receives alerts from it.
+  bool get isResponder => network?.role == SosNetworkRole.responder;
+
+  bool get isCoordinator =>
+      network != null && _settings.settings.sosNetworkCoordinator;
+
+  bool _installing = false;
+  bool _noFreeSlot = false;
+
+  /// The network's channel on the connected radio, or null when there is no
+  /// network or it is not installed (yet).
   Channel? get sosChannel {
-    final channels = _transport.channels;
-    if (channels.isEmpty) return null;
-    final index = _settings.settings.sosChannelIndex;
-    return channels.where((c) => c.index == index).firstOrNull ??
-        channels.first;
+    final key = network?.key;
+    if (key == null) return null;
+    return _transport.allChannels
+        .where((c) => listEquals(c.psk, key))
+        .firstOrNull;
+  }
+
+  SosNetworkStatus get networkStatus {
+    if (network == null) return SosNetworkStatus.none;
+    if (!_transport.isConnected) return SosNetworkStatus.disconnected;
+    if (!_transport.supportsChannelData) return SosNetworkStatus.needsFirmware;
+    if (sosChannel != null) return SosNetworkStatus.ready;
+    if (_noFreeSlot) return SosNetworkStatus.noFreeSlot;
+    return SosNetworkStatus.installing;
+  }
+
+  /// Hides the channel from members and puts it on the radio if missing.
+  void _syncNetwork() {
+    final net = network;
+    final hide = net != null && net.role == SosNetworkRole.member
+        ? net.key
+        : null;
+    final current = _transport.hiddenChannelPsk;
+    if (!(hide == null ? current == null : listEquals(current, hide))) {
+      _transport.hiddenChannelPsk = hide;
+    }
+    if (net == null ||
+        _installing ||
+        !_transport.isConnected ||
+        !_transport.channelsReady ||
+        sosChannel != null) {
+      return;
+    }
+    final used = _transport.allChannels.map((c) => c.index).toSet();
+    final free = [
+      for (var i = 0; i < _transport.maxChannels; i++)
+        if (!used.contains(i)) i,
+    ];
+    if (free.isEmpty) {
+      if (!_noFreeSlot) {
+        _noFreeSlot = true;
+        notifyListeners();
+      }
+      return;
+    }
+    _noFreeSlot = false;
+    _installing = true;
+    unawaited(() async {
+      try {
+        await _transport.setChannel(
+          free.first,
+          _radioChannelName(net),
+          net.key,
+        );
+      } catch (e) {
+        appLogger.warn('Installing SOS channel failed: $e', tag: 'SOS');
+      } finally {
+        _installing = false;
+        notifyListeners();
+      }
+    }());
+  }
+
+  /// Radio channel names hold at most 31 bytes.
+  static String _radioChannelName(SosNetworkCode net) {
+    var name = net.name;
+    while (utf8.encode(name).length > 31) {
+      name = name.substring(0, name.length - 1);
+    }
+    return name;
+  }
+
+  /// Creates a network with a new random key; this phone is its responder
+  /// and coordinator.
+  Future<SosNetworkCode> createNetwork(String name) async {
+    final net = SosNetworkCode(
+      role: SosNetworkRole.responder,
+      key: SosNetworkCode.generateKey(),
+      name: name,
+    );
+    await joinNetwork(net, coordinator: true);
+    return net;
+  }
+
+  Future<void> joinNetwork(
+    SosNetworkCode net, {
+    bool coordinator = false,
+  }) async {
+    // Save first: removing the old channel triggers a sync, which must
+    // already see the new network or it would put the old one back.
+    final old = sosChannel;
+    await _settings.joinSosNetwork(net, coordinator: coordinator);
+    if (old != null && !listEquals(old.psk, net.key)) {
+      await _transport.deleteChannel(old.index);
+    }
+    _syncNetwork();
+    notifyListeners();
+  }
+
+  /// Removes the channel from the radio and forgets the network, together
+  /// with any alerts heard on it.
+  Future<void> leaveNetwork() async {
+    final channel = sosChannel;
+    await _settings.leaveSosNetwork();
+    if (channel != null && _transport.isConnected) {
+      await _transport.deleteChannel(channel.index);
+    }
+    final fromChannel = _incoming.where((a) => a.channelIndex != null).toList();
+    for (final alert in fromChannel) {
+      _incoming.remove(alert);
+      _alerter?.clear(alert);
+    }
+    await _store.saveIncoming(_incoming);
+    _syncNetwork();
+    notifyListeners();
   }
 
   List<Contact> get emergencyContacts {
@@ -476,8 +643,12 @@ class SosService extends ChangeNotifier {
   /// A channel data packet of type [dataTypeSos].
   @visibleForTesting
   void handleInboundData(int channelIndex, Uint8List data) {
+    // Only the network's own channel carries alerts.
+    if (sosChannel?.index != channelIndex) return;
     final packet = SosPacket.decode(data);
     if (packet == null) return;
+    // Members only hear ACKs for their own SOS.
+    if (!isResponder && packet.kind != SosPacketKind.ack) return;
     final self = _transport.selfPublicKey;
     if (self != null &&
         self.length >= SosPacket.keyPrefixSize &&
@@ -646,7 +817,9 @@ class SosService extends ChangeNotifier {
     final channelIndex = alert.channelIndex;
     final channel = channelIndex == null
         ? (alert.senderKeyHex == null ? sosChannel : null)
-        : _transport.channels.where((c) => c.index == channelIndex).firstOrNull;
+        : _transport.allChannels
+              .where((c) => c.index == channelIndex)
+              .firstOrNull;
     if (channel != null && _transport.supportsChannelData) {
       try {
         await _transport.sendChannelData(
@@ -678,6 +851,7 @@ class SosService extends ChangeNotifier {
     _timer?.cancel();
     _expiryTimer?.cancel();
     _transport.removeListener(_onTransportChanged);
+    _settings.removeListener(_syncNetwork);
     _transport.sosTextListener = null;
     _transport.sosDataListener = null;
     _transport.sosAckListener = null;

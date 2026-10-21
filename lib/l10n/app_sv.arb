@@ -3312,8 +3312,6 @@
   "sos_storedLocation": "Sparad nödplats",
   "sos_storedLocationUnset": "Inte angiven",
   "sos_storedLocationHelper": "Skickas när varken telefonen eller radion har en position. Lämna båda fälten tomma för att ta bort den.",
-  "sos_channel": "SOS-kanal",
-  "sos_channelUnavailable": "Anslut en radio för att välja kanal",
   "sos_includeFavourites": "Inkludera favoritkontakter",
   "sos_includeFavouritesSubtitle": "Skicka även SOS som direktmeddelande till varje favorit",
   "sos_contacts": "Nödkontakter",
@@ -3445,5 +3443,70 @@
     }
   },
   "sos_cancelNotificationBody": "Avsändaren avbröt detta SOS.",
-  "sos_channelNeedsFirmware": "Den här radion behöver firmware 1.15 eller senare för kanallarm. Nödkontakter får fortfarande direktmeddelanden."
+  "sos_channelNeedsFirmware": "Den här radion behöver firmware 1.15 eller senare för kanallarm. Nödkontakter får fortfarande direktmeddelanden.",
+  "sos_network": "Nödnätverk",
+  "sos_networkNoneSubtitle": "Inte konfigurerat. Ditt SOS går bara till nödkontakter.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Medlem",
+  "sos_roleResponder": "Räddare",
+  "sos_networkIntro": "Ett nödnätverk är en privat, dold kanal för din grupp. Medlemmar kan skicka SOS till den. Räddare ser även kanalen, får larm och kan chatta i den. Utan kod kan ingen läsa den.",
+  "sos_networkCreate": "Skapa ett nytt nätverk",
+  "sos_networkJoin": "Gå med med en kod",
+  "sos_networkNameLabel": "Nätverksnamn",
+  "sos_networkCreateAction": "Skapa",
+  "sos_networkCodesTitle": "Dela de här koderna",
+  "sos_networkMemberCode": "Medlemskod",
+  "sos_networkMemberCodeHelp": "För personer som kan skicka SOS men inte ska se larm.",
+  "sos_networkResponderCode": "Räddarkod",
+  "sos_networkResponderCodeHelp": "För personer som får larm och kan chatta i kanalen.",
+  "sos_copyCode": "Kopiera kod",
+  "sos_networkCodeCopied": "Koden kopierad",
+  "sos_networkCodeLabel": "Nätverkskod",
+  "sos_networkScan": "Skanna QR-kod",
+  "sos_networkScanInstructions": "Rikta kameran mot en QR-kod för ett nödnätverk",
+  "sos_networkInvalidCode": "Det är inte en giltig nödnätverkskod.",
+  "sos_networkJoinConfirm": "Gå med i {name} som {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Gå med",
+  "sos_networkLeave": "Lämna nätverket",
+  "sos_networkLeaveConfirm": "Lämna {name}? Kanalen tas bort från din radio och larm från den upphör.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Din roll: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Kanalen är konfigurerad på den här radion",
+  "sos_networkStatusInstalling": "Lägger till kanalen på den här radion…",
+  "sos_networkStatusNoFreeSlot": "Ingen ledig kanalplats på den här radion. Ta bort en kanal för att använda nätverket.",
+  "sos_networkStatusDisconnected": "Anslut en radio för att konfigurera kanalen",
+  "sos_networkSecurityNote": "Alla som har en kod kan skicka larm, och en medlem med modifierad programvara skulle kunna läsa dem. Om en kod läcker, skapa ett nytt nätverk och dela nya koder."
 }

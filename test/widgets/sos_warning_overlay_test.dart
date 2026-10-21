@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/helpers/sos_codec.dart';
+import 'package:meshcore_open/helpers/sos_network_code.dart';
 import 'package:meshcore_open/l10n/app_localizations.dart';
 import 'package:meshcore_open/services/sos_service.dart';
 import 'package:meshcore_open/widgets/sos_warning_overlay.dart';
 import 'package:provider/provider.dart';
 
 import '../services/sos_service_test.dart'
-    show FakeSosTransport, freshSettings, sosPacketFrom;
+    show FakeSosTransport, farmNetwork, freshSettings, sosPacketFrom;
 
 void main() {
   testWidgets('stays over the app until the alert is acknowledged', (
@@ -16,6 +17,7 @@ void main() {
     final settings = await freshSettings();
     final transport = FakeSosTransport();
     final service = SosService(transport: transport, settings: settings);
+    await settings.joinSosNetwork(farmNetwork(SosNetworkRole.responder));
 
     await tester.pumpWidget(
       ChangeNotifierProvider.value(
@@ -32,7 +34,7 @@ void main() {
     expect(find.text('EMERGENCY SOS'), findsNothing);
 
     service.handleInboundData(
-      0,
+      2,
       sosPacketFrom('Ridge', 9, 'a1b2', lat: -41.28646, lon: 174.77624),
     );
     await tester.pump();
@@ -54,7 +56,8 @@ void main() {
     final settings = await freshSettings();
     final transport = FakeSosTransport()..isConnected = false;
     final service = SosService(transport: transport, settings: settings);
-    service.handleInboundData(0, sosPacketFrom('Ridge', 9, 'a1b2'));
+    await settings.joinSosNetwork(farmNetwork(SosNetworkRole.responder));
+    service.handleInboundData(2, sosPacketFrom('Ridge', 9, 'a1b2'));
 
     await tester.pumpWidget(
       ChangeNotifierProvider.value(

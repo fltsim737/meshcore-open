@@ -6053,10 +6053,108 @@ class AppLocalizationsKo extends AppLocalizations {
       '휴대폰과 무전기 모두 위치가 없을 때 전송됩니다. 삭제하려면 두 칸을 모두 비워 두세요.';
 
   @override
-  String get sos_channel => 'SOS 채널';
+  String get sos_network => '긴급 네트워크';
 
   @override
-  String get sos_channelUnavailable => '채널을 선택하려면 무전기를 연결하세요';
+  String get sos_networkNoneSubtitle => '설정되지 않음. SOS는 긴급 연락처에만 전송됩니다.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => '구성원';
+
+  @override
+  String get sos_roleResponder => '대응자';
+
+  @override
+  String get sos_networkIntro =>
+      '긴급 네트워크는 그룹 전용의 비공개 숨김 채널입니다. 구성원은 SOS를 보낼 수 있습니다. 대응자는 채널도 볼 수 있고 경보를 받으며 채팅할 수 있습니다. 코드가 없으면 누구도 읽을 수 없습니다.';
+
+  @override
+  String get sos_networkCreate => '새 네트워크 설정';
+
+  @override
+  String get sos_networkJoin => '코드로 참여';
+
+  @override
+  String get sos_networkNameLabel => '네트워크 이름';
+
+  @override
+  String get sos_networkCreateAction => '만들기';
+
+  @override
+  String get sos_networkCodesTitle => '이 코드를 공유하세요';
+
+  @override
+  String get sos_networkMemberCode => '구성원 코드';
+
+  @override
+  String get sos_networkMemberCodeHelp => 'SOS는 보낼 수 있지만 경보는 보면 안 되는 사람용.';
+
+  @override
+  String get sos_networkResponderCode => '대응자 코드';
+
+  @override
+  String get sos_networkResponderCodeHelp => '경보를 받고 채널에서 채팅할 수 있는 사람용.';
+
+  @override
+  String get sos_copyCode => '코드 복사';
+
+  @override
+  String get sos_networkCodeCopied => '코드 복사됨';
+
+  @override
+  String get sos_networkCodeLabel => '네트워크 코드';
+
+  @override
+  String get sos_networkScan => 'QR 코드 스캔';
+
+  @override
+  String get sos_networkScanInstructions => '카메라를 긴급 네트워크 QR 코드에 맞추세요';
+
+  @override
+  String get sos_networkInvalidCode => '유효한 긴급 네트워크 코드가 아닙니다.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return '$name에 $role(으)로 참여할까요?';
+  }
+
+  @override
+  String get sos_networkJoinAction => '참여';
+
+  @override
+  String get sos_networkLeave => '네트워크 나가기';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return '$name에서 나갈까요? 채널이 무전기에서 제거되고 경보가 중단됩니다.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return '내 역할: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => '이 무전기에 채널이 설정됨';
+
+  @override
+  String get sos_networkStatusInstalling => '이 무전기에 채널 추가 중…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      '이 무전기에 빈 채널 슬롯이 없습니다. 네트워크를 사용하려면 채널을 삭제하세요.';
+
+  @override
+  String get sos_networkStatusDisconnected => '채널을 설정하려면 무전기를 연결하세요';
+
+  @override
+  String get sos_networkSecurityNote =>
+      '코드를 가진 사람은 누구나 경보를 보낼 수 있고, 수정된 소프트웨어를 쓰는 구성원은 내용을 읽을 수도 있습니다. 코드가 유출되면 새 네트워크를 만들고 새 코드를 공유하세요.';
 
   @override
   String get sos_channelNeedsFirmware =>

@@ -6043,10 +6043,108 @@ class AppLocalizationsJa extends AppLocalizations {
       'スマートフォンにも無線機にも位置情報がない場合に送信されます。削除するには両方の欄を空にしてください。';
 
   @override
-  String get sos_channel => 'SOSチャンネル';
+  String get sos_network => '緊急ネットワーク';
 
   @override
-  String get sos_channelUnavailable => 'チャンネルを選ぶには無線機を接続してください';
+  String get sos_networkNoneSubtitle => '未設定です。SOSは緊急連絡先にのみ送られます。';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name・$role';
+  }
+
+  @override
+  String get sos_roleMember => 'メンバー';
+
+  @override
+  String get sos_roleResponder => '対応者';
+
+  @override
+  String get sos_networkIntro =>
+      '緊急ネットワークは、グループ専用の非公開・非表示のチャンネルです。メンバーはSOSを送信できます。対応者はさらにチャンネルを表示でき、通知を受け取り、チャットもできます。コードがなければ誰も読めません。';
+
+  @override
+  String get sos_networkCreate => '新しいネットワークを作成';
+
+  @override
+  String get sos_networkJoin => 'コードで参加';
+
+  @override
+  String get sos_networkNameLabel => 'ネットワーク名';
+
+  @override
+  String get sos_networkCreateAction => '作成';
+
+  @override
+  String get sos_networkCodesTitle => 'これらのコードを共有';
+
+  @override
+  String get sos_networkMemberCode => 'メンバーコード';
+
+  @override
+  String get sos_networkMemberCodeHelp => 'SOSを送信できるが通知は見るべきでない人向け。';
+
+  @override
+  String get sos_networkResponderCode => '対応者コード';
+
+  @override
+  String get sos_networkResponderCodeHelp => '通知を受け取り、チャンネルでチャットできる人向け。';
+
+  @override
+  String get sos_copyCode => 'コードをコピー';
+
+  @override
+  String get sos_networkCodeCopied => 'コードをコピーしました';
+
+  @override
+  String get sos_networkCodeLabel => 'ネットワークコード';
+
+  @override
+  String get sos_networkScan => 'QRコードを読み取る';
+
+  @override
+  String get sos_networkScanInstructions => 'カメラを緊急ネットワークのQRコードに向けてください';
+
+  @override
+  String get sos_networkInvalidCode => '有効な緊急ネットワークコードではありません。';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return '$name に $role として参加しますか？';
+  }
+
+  @override
+  String get sos_networkJoinAction => '参加';
+
+  @override
+  String get sos_networkLeave => 'ネットワークを退出';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return '$name を退出しますか？チャンネルは無線機から削除され、そのチャンネルからの通知は届かなくなります。';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'あなたの役割: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'この無線機にチャンネルを設定済み';
+
+  @override
+  String get sos_networkStatusInstalling => 'この無線機にチャンネルを追加中…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'この無線機に空きチャンネルがありません。ネットワークを使うにはチャンネルを削除してください。';
+
+  @override
+  String get sos_networkStatusDisconnected => 'チャンネルを設定するには無線機を接続してください';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'コードを持つ人は誰でも通知を送信でき、改造ソフトを使うメンバーは内容を読める可能性があります。コードが漏れた場合は、新しいネットワークを作成して新しいコードを共有してください。';
 
   @override
   String get sos_channelNeedsFirmware =>

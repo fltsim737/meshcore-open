@@ -3318,8 +3318,6 @@
   "sos_storedLocation": "Shranjena nujna lokacija",
   "sos_storedLocationUnset": "Ni nastavljeno",
   "sos_storedLocationHelper": "Pošlje se, ko niti telefon niti radio nimata položaja. Pustite obe polji prazni, da jo odstranite.",
-  "sos_channel": "Kanal SOS",
-  "sos_channelUnavailable": "Povežite radio, da izberete kanal",
   "sos_includeFavourites": "Vključi priljubljene stike",
   "sos_includeFavouritesSubtitle": "SOS pošlji tudi kot neposredno sporočilo vsakemu priljubljenemu",
   "sos_contacts": "Nujni stiki",
@@ -3451,5 +3449,70 @@
     }
   },
   "sos_cancelNotificationBody": "Pošiljatelj je preklical ta SOS.",
-  "sos_channelNeedsFirmware": "Ta radio potrebuje vdelano programsko opremo 1.15 ali novejšo za opozorila na kanalu. Nujni stiki še vedno prejmejo neposredna sporočila."
+  "sos_channelNeedsFirmware": "Ta radio potrebuje vdelano programsko opremo 1.15 ali novejšo za opozorila na kanalu. Nujni stiki še vedno prejmejo neposredna sporočila.",
+  "sos_network": "Nujno omrežje",
+  "sos_networkNoneSubtitle": "Ni nastavljeno. Vaš SOS gre samo nujnim stikom.",
+  "sos_networkSummary": "{name} · {role}",
+  "@sos_networkSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_roleMember": "Član",
+  "sos_roleResponder": "Reševalec",
+  "sos_networkIntro": "Nujno omrežje je zaseben, skrit kanal za vašo skupino. Člani lahko vanj pošljejo SOS. Reševalci kanal tudi vidijo, prejemajo opozorila in lahko v njem klepetajo. Brez kode ga nihče ne more brati.",
+  "sos_networkCreate": "Nastavi novo omrežje",
+  "sos_networkJoin": "Pridruži se s kodo",
+  "sos_networkNameLabel": "Ime omrežja",
+  "sos_networkCreateAction": "Ustvari",
+  "sos_networkCodesTitle": "Delite te kode",
+  "sos_networkMemberCode": "Koda člana",
+  "sos_networkMemberCodeHelp": "Za ljudi, ki lahko pošljejo SOS, ne smejo pa videti opozoril.",
+  "sos_networkResponderCode": "Koda reševalca",
+  "sos_networkResponderCodeHelp": "Za ljudi, ki prejemajo opozorila in lahko klepetajo v kanalu.",
+  "sos_copyCode": "Kopiraj kodo",
+  "sos_networkCodeCopied": "Koda kopirana",
+  "sos_networkCodeLabel": "Koda omrežja",
+  "sos_networkScan": "Skeniraj kodo QR",
+  "sos_networkScanInstructions": "Usmerite kamero v kodo QR nujnega omrežja",
+  "sos_networkInvalidCode": "To ni veljavna koda nujnega omrežja.",
+  "sos_networkJoinConfirm": "Se pridružite {name} kot {role}?",
+  "@sos_networkJoinConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkJoinAction": "Pridruži se",
+  "sos_networkLeave": "Zapusti omrežje",
+  "sos_networkLeaveConfirm": "Zapustite {name}? Njegov kanal se odstrani z radia in opozorila iz njega prenehajo.",
+  "@sos_networkLeaveConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkRoleLabel": "Vaša vloga: {role}",
+  "@sos_networkRoleLabel": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_networkStatusReady": "Kanal je nastavljen na tem radiu",
+  "sos_networkStatusInstalling": "Dodajanje kanala na ta radio…",
+  "sos_networkStatusNoFreeSlot": "Na tem radiu ni prostega mesta za kanal. Odstranite kanal, da uporabite omrežje.",
+  "sos_networkStatusDisconnected": "Povežite radio, da nastavite kanal",
+  "sos_networkSecurityNote": "Kdorkoli s kodo lahko pošilja opozorila, član s spremenjeno programsko opremo pa bi jih lahko bral. Če koda uide, nastavite novo omrežje in delite nove kode."
 }

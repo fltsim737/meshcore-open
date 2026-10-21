@@ -6,6 +6,7 @@ import '../models/translation_support.dart';
 import '../storage/prefs_manager.dart';
 import '../utils/app_logger.dart';
 import '../helpers/cyr2lat.dart';
+import '../helpers/sos_network_code.dart';
 
 class AppSettingsService extends ChangeNotifier {
   static const String _settingsKey = 'app_settings';
@@ -466,8 +467,31 @@ class AppSettingsService extends ChangeNotifier {
     );
   }
 
-  Future<void> setSosChannelIndex(int value) async {
-    await updateSettings(_settings.copyWith(sosChannelIndex: value));
+  Future<void> joinSosNetwork(
+    SosNetworkCode network, {
+    bool coordinator = false,
+  }) async {
+    await updateSettings(
+      _settings.copyWith(
+        sosNetworkKeyHex: network.key
+            .map((b) => b.toRadixString(16).padLeft(2, '0'))
+            .join(),
+        sosNetworkName: network.name,
+        sosNetworkRole: network.role.name,
+        sosNetworkCoordinator: coordinator,
+      ),
+    );
+  }
+
+  Future<void> leaveSosNetwork() async {
+    await updateSettings(
+      _settings.copyWith(
+        sosNetworkKeyHex: null,
+        sosNetworkName: null,
+        sosNetworkRole: null,
+        sosNetworkCoordinator: false,
+      ),
+    );
   }
 
   Future<void> setSosIncludeFavourites(bool value) async {

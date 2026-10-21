@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/connector/meshcore_protocol.dart';
 import 'package:meshcore_open/helpers/sos_codec.dart';
+import 'package:meshcore_open/helpers/sos_network_code.dart';
 import 'package:meshcore_open/models/channel.dart';
 import 'package:meshcore_open/models/contact.dart';
 import 'package:meshcore_open/models/sos_alert.dart';
@@ -23,14 +24,37 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   @override
   double? selfLongitude;
   @override
-  List<Channel> channels = [
+  List<Channel> allChannels = [
     Channel(index: 0, name: 'Public', psk: Uint8List(16)),
-    Channel(index: 2, name: 'Farm', psk: Uint8List(16)),
+    Channel(index: 2, name: 'Farm', psk: farmKey),
   ];
   @override
   List<Contact> contacts = [];
   @override
   bool supportsChannelData = true;
+  @override
+  int maxChannels = 4;
+  @override
+  bool channelsReady = true;
+  @override
+  Uint8List? hiddenChannelPsk;
+
+  final List<(int, String)> installed = [];
+  final List<int> deleted = [];
+
+  @override
+  Future<void> setChannel(int index, String name, Uint8List psk) async {
+    installed.add((index, name));
+    allChannels = [...allChannels, Channel(index: index, name: name, psk: psk)];
+    notifyListeners();
+  }
+
+  @override
+  Future<void> deleteChannel(int index) async {
+    deleted.add(index);
+    allChannels = allChannels.where((c) => c.index != index).toList();
+    notifyListeners();
+  }
 
   void Function(SosInboundText inbound)? textListener;
   void Function(int channelIndex, Uint8List payload)? dataListener;
@@ -73,6 +97,12 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
     notifyListeners();
   }
 }
+
+/// Key of the "Farm" channel in slot 2, used as the emergency network.
+final Uint8List farmKey = Uint8List.fromList(List.filled(16, 7));
+
+SosNetworkCode farmNetwork(SosNetworkRole role) =>
+    SosNetworkCode(role: role, key: farmKey, name: 'Farm');
 
 class FakeAlerter implements SosAlerter {
   final List<String> events = [];
@@ -156,7 +186,8 @@ void main() {
     now: () => now,
   );
 
-  void hear(Uint8List packet, {int channel = 0}) =>
+  /// A packet on the network channel (slot 2) unless [channel] says not.
+  void hear(Uint8List packet, {int channel = 2}) =>
       transport.dataListener!(channel, packet);
 
   setUp(() async {
@@ -166,6 +197,7 @@ void main() {
     phone = FakePhoneLocation();
     alerter = FakeAlerter();
     service = newService();
+    await settings.joinSosNetwork(farmNetwork(SosNetworkRole.responder));
   });
 
   tearDown(() => service.dispose());
@@ -202,7 +234,6 @@ void main() {
       final alice = contactFor('Alice', 1);
       final bob = contactFor('Bob', 2, favourite: true);
       transport.contacts = [alice, bob, contactFor('Carol', 3)];
-      await settings.setSosChannelIndex(2);
       await settings.setSosContact(alice.publicKeyHex, true);
       phone.fix = const SosFix(
         latitude: -41.28646,
@@ -236,10 +267,14 @@ void main() {
       expect(transport.directSends, hasLength(1));
     });
 
-    test('falls back to the first channel when the slot is gone', () async {
-      await settings.setSosChannelIndex(7);
+    test('without a network only emergency contacts are alerted', () async {
+      final alice = contactFor('Alice', 1);
+      transport.contacts = [alice];
+      await settings.setSosContact(alice.publicKeyHex, true);
+      await settings.leaveSosNetwork();
       await service.activate();
-      expect(transport.channelPackets.single.$1, 0);
+      expect(transport.channelPackets, isEmpty);
+      expect(transport.directSends.map((s) => s.$1), ['Alice']);
     });
 
     test('counts an ACK once per responder across channel and DM', () async {
@@ -531,6 +566,84 @@ void main() {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       hear(sosPacketFrom('Valley', 5, 'a1b2', kind: SosPacketKind.ack));
       expect(service.incoming.single.ackedBy, {'Valley'});
+    });
+  });
+
+  group('emergency network', () {
+    test('a responder sees the channel; a member has it hidden', () async {
+      expect(transport.hiddenChannelPsk, isNull);
+      expect(service.isResponder, isTrue);
+      await settings.joinSosNetwork(farmNetwork(SosNetworkRole.member));
+      expect(transport.hiddenChannelPsk, farmKey);
+      expect(service.isResponder, isFalse);
+    });
+
+    test(
+      'a member ignores channel alerts but hears ACKs for its SOS',
+      () async {
+        await settings.joinSosNetwork(farmNetwork(SosNetworkRole.member));
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+        expect(service.incoming, isEmpty);
+        expect(alerter.events, isEmpty);
+
+        await service.activate();
+        final id = service.active!.id;
+        expect(transport.channelPackets.single.$1, 2);
+        hear(sosPacketFrom('Valley', 5, id, kind: SosPacketKind.ack));
+        expect(service.active!.acks.single.senderName, 'Valley');
+      },
+    );
+
+    test('packets on other channels are ignored', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'), channel: 0);
+      expect(service.incoming, isEmpty);
+    });
+
+    test('installs the channel in the first free slot', () async {
+      final other = SosNetworkCode(
+        role: SosNetworkRole.member,
+        key: Uint8List.fromList(List.filled(16, 3)),
+        name: 'Ridge Station',
+      );
+      await service.joinNetwork(other);
+      expect(transport.installed, [(1, 'Ridge Station')]);
+      expect(transport.deleted, [2]);
+      expect(service.sosChannel?.index, 1);
+      expect(service.networkStatus, SosNetworkStatus.ready);
+      expect(transport.hiddenChannelPsk, other.key);
+    });
+
+    test('reports when the radio has no free slot', () async {
+      transport
+        ..maxChannels = 2
+        ..allChannels = [
+          Channel(index: 0, name: 'Public', psk: Uint8List(16)),
+          Channel(index: 1, name: 'Hiking', psk: Uint8List(16)),
+        ];
+      transport.notifyListeners();
+      expect(service.networkStatus, SosNetworkStatus.noFreeSlot);
+      expect(transport.installed, isEmpty);
+    });
+
+    test('leaving removes the channel and its alerts', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(service.incoming, hasLength(1));
+      await service.leaveNetwork();
+      expect(transport.deleted, [2]);
+      expect(transport.installed, isEmpty);
+      expect(service.network, isNull);
+      expect(service.incoming, isEmpty);
+      expect(service.networkStatus, SosNetworkStatus.none);
+    });
+
+    test('creating a network makes this phone its coordinator', () async {
+      await settings.leaveSosNetwork();
+      final net = await service.createNetwork('Smith Farm');
+      expect(net.role, SosNetworkRole.responder);
+      expect(service.isCoordinator, isTrue);
+      expect(service.network!.name, 'Smith Farm');
+      expect(transport.installed.single.$2, 'Smith Farm');
+      expect(net.key, isNot(farmKey));
     });
   });
 }

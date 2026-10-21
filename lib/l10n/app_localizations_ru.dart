@@ -6357,10 +6357,114 @@ class AppLocalizationsRu extends AppLocalizations {
       'Отправляется, если ни у телефона, ни у радио нет координат. Оставьте оба поля пустыми, чтобы удалить.';
 
   @override
-  String get sos_channel => 'Канал SOS';
+  String get sos_network => 'Экстренная сеть';
 
   @override
-  String get sos_channelUnavailable => 'Подключите радио, чтобы выбрать канал';
+  String get sos_networkNoneSubtitle =>
+      'Не настроена. Ваш SOS уходит только экстренным контактам.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Участник';
+
+  @override
+  String get sos_roleResponder => 'Спасатель';
+
+  @override
+  String get sos_networkIntro =>
+      'Экстренная сеть — это частный скрытый канал для вашей группы. Участники могут отправлять в неё SOS. Спасатели также видят канал, получают сигналы и могут в нём общаться. Без кода его никто не прочитает.';
+
+  @override
+  String get sos_networkCreate => 'Создать новую сеть';
+
+  @override
+  String get sos_networkJoin => 'Присоединиться по коду';
+
+  @override
+  String get sos_networkNameLabel => 'Название сети';
+
+  @override
+  String get sos_networkCreateAction => 'Создать';
+
+  @override
+  String get sos_networkCodesTitle => 'Поделитесь этими кодами';
+
+  @override
+  String get sos_networkMemberCode => 'Код участника';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Для тех, кто может отправить SOS, но не должен видеть сигналы.';
+
+  @override
+  String get sos_networkResponderCode => 'Код спасателя';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Для тех, кто получает сигналы и может общаться в канале.';
+
+  @override
+  String get sos_copyCode => 'Копировать код';
+
+  @override
+  String get sos_networkCodeCopied => 'Код скопирован';
+
+  @override
+  String get sos_networkCodeLabel => 'Код сети';
+
+  @override
+  String get sos_networkScan => 'Сканировать QR-код';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Наведите камеру на QR-код экстренной сети';
+
+  @override
+  String get sos_networkInvalidCode =>
+      'Это недействительный код экстренной сети.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Присоединиться к $name как $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Присоединиться';
+
+  @override
+  String get sos_networkLeave => 'Покинуть сеть';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Покинуть $name? Её канал будет удалён с радио, и сигналы из него прекратятся.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Ваша роль: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Канал настроен на этом радио';
+
+  @override
+  String get sos_networkStatusInstalling => 'Добавление канала на это радио…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'На этом радио нет свободного слота для канала. Удалите канал, чтобы пользоваться сетью.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Подключите радио, чтобы настроить канал';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Любой, у кого есть код, может отправлять сигналы, а участник с изменённым ПО мог бы их читать. Если код утёк, создайте новую сеть и раздайте новые коды.';
 
   @override
   String get sos_channelNeedsFirmware =>

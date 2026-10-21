@@ -6328,11 +6328,115 @@ class AppLocalizationsHu extends AppLocalizations {
       'Akkor küldjük, ha sem a telefonnak, sem a rádiónak nincs pozíciója. Hagyja üresen mindkét mezőt a törléshez.';
 
   @override
-  String get sos_channel => 'SOS-csatorna';
+  String get sos_network => 'Vészhelyzeti hálózat';
 
   @override
-  String get sos_channelUnavailable =>
-      'Csatlakoztasson rádiót a csatorna kiválasztásához';
+  String get sos_networkNoneSubtitle =>
+      'Nincs beállítva. Az SOS-ed csak a vészhelyzeti partnerekhez jut el.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Tag';
+
+  @override
+  String get sos_roleResponder => 'Segítő';
+
+  @override
+  String get sos_networkIntro =>
+      'A vészhelyzeti hálózat egy privát, rejtett csatorna a csoportodnak. A tagok SOS-t küldhetnek bele. A segítők látják is a csatornát, riasztásokat kapnak és cseveghetnek rajta. Kód nélkül senki sem olvashatja.';
+
+  @override
+  String get sos_networkCreate => 'Új hálózat beállítása';
+
+  @override
+  String get sos_networkJoin => 'Csatlakozás kóddal';
+
+  @override
+  String get sos_networkNameLabel => 'Hálózat neve';
+
+  @override
+  String get sos_networkCreateAction => 'Létrehozás';
+
+  @override
+  String get sos_networkCodesTitle => 'Oszd meg ezeket a kódokat';
+
+  @override
+  String get sos_networkMemberCode => 'Tagkód';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Azoknak, akik SOS-t küldhetnek, de nem láthatják a riasztásokat.';
+
+  @override
+  String get sos_networkResponderCode => 'Segítőkód';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Azoknak, akik riasztásokat kapnak és cseveghetnek a csatornán.';
+
+  @override
+  String get sos_copyCode => 'Kód másolása';
+
+  @override
+  String get sos_networkCodeCopied => 'Kód másolva';
+
+  @override
+  String get sos_networkCodeLabel => 'Hálózati kód';
+
+  @override
+  String get sos_networkScan => 'QR-kód beolvasása';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Irányítsd a kamerát egy vészhelyzeti hálózat QR-kódjára';
+
+  @override
+  String get sos_networkInvalidCode =>
+      'Ez nem érvényes vészhelyzeti hálózati kód.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Csatlakozol ehhez: $name, mint $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Csatlakozás';
+
+  @override
+  String get sos_networkLeave => 'Kilépés a hálózatból';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Kilépsz innen: $name? A csatornája törlődik a rádióról, és a riasztásai megszűnnek.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Szereped: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'A csatorna beállítva ezen a rádión';
+
+  @override
+  String get sos_networkStatusInstalling =>
+      'Csatorna hozzáadása ehhez a rádióhoz…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Nincs szabad csatornahely ezen a rádión. Törölj egy csatornát a hálózat használatához.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Csatlakoztass rádiót a csatorna beállításához';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Bárki, akinek van kódja, küldhet riasztást, és egy módosított szoftvert használó tag elolvashatná őket. Ha egy kód kiszivárog, állíts be új hálózatot és oszd meg az új kódokat.';
 
   @override
   String get sos_channelNeedsFirmware =>

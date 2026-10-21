@@ -6348,11 +6348,115 @@ class AppLocalizationsIt extends AppLocalizations {
       'Inviata quando né il telefono né la radio hanno una posizione. Lascia vuoti entrambi i campi per rimuoverla.';
 
   @override
-  String get sos_channel => 'Canale SOS';
+  String get sos_network => 'Rete di emergenza';
 
   @override
-  String get sos_channelUnavailable =>
-      'Collega una radio per scegliere un canale';
+  String get sos_networkNoneSubtitle =>
+      'Non configurata. Il tuo SOS va solo ai contatti di emergenza.';
+
+  @override
+  String sos_networkSummary(String name, String role) {
+    return '$name · $role';
+  }
+
+  @override
+  String get sos_roleMember => 'Membro';
+
+  @override
+  String get sos_roleResponder => 'Soccorritore';
+
+  @override
+  String get sos_networkIntro =>
+      'Una rete di emergenza è un canale privato e nascosto per il tuo gruppo. I membri possono inviarvi un SOS. I soccorritori vedono anche il canale, ricevono gli avvisi e possono chattare. Senza un codice nessuno può leggerlo.';
+
+  @override
+  String get sos_networkCreate => 'Configura una nuova rete';
+
+  @override
+  String get sos_networkJoin => 'Unisciti con un codice';
+
+  @override
+  String get sos_networkNameLabel => 'Nome della rete';
+
+  @override
+  String get sos_networkCreateAction => 'Crea';
+
+  @override
+  String get sos_networkCodesTitle => 'Condividi questi codici';
+
+  @override
+  String get sos_networkMemberCode => 'Codice membro';
+
+  @override
+  String get sos_networkMemberCodeHelp =>
+      'Per chi può inviare un SOS ma non deve vedere gli avvisi.';
+
+  @override
+  String get sos_networkResponderCode => 'Codice soccorritore';
+
+  @override
+  String get sos_networkResponderCodeHelp =>
+      'Per chi riceve gli avvisi e può chattare sul canale.';
+
+  @override
+  String get sos_copyCode => 'Copia codice';
+
+  @override
+  String get sos_networkCodeCopied => 'Codice copiato';
+
+  @override
+  String get sos_networkCodeLabel => 'Codice di rete';
+
+  @override
+  String get sos_networkScan => 'Scansiona codice QR';
+
+  @override
+  String get sos_networkScanInstructions =>
+      'Inquadra un codice QR di rete di emergenza';
+
+  @override
+  String get sos_networkInvalidCode =>
+      'Questo non è un codice di rete di emergenza valido.';
+
+  @override
+  String sos_networkJoinConfirm(String name, String role) {
+    return 'Unirsi a $name come $role?';
+  }
+
+  @override
+  String get sos_networkJoinAction => 'Unisciti';
+
+  @override
+  String get sos_networkLeave => 'Esci dalla rete';
+
+  @override
+  String sos_networkLeaveConfirm(String name) {
+    return 'Uscire da $name? Il suo canale viene rimosso dalla tua radio e i suoi avvisi si fermano.';
+  }
+
+  @override
+  String sos_networkRoleLabel(String role) {
+    return 'Il tuo ruolo: $role';
+  }
+
+  @override
+  String get sos_networkStatusReady => 'Canale configurato su questa radio';
+
+  @override
+  String get sos_networkStatusInstalling =>
+      'Aggiunta del canale a questa radio…';
+
+  @override
+  String get sos_networkStatusNoFreeSlot =>
+      'Nessuno slot canale libero su questa radio. Rimuovi un canale per usare la rete.';
+
+  @override
+  String get sos_networkStatusDisconnected =>
+      'Collega una radio per configurare il canale';
+
+  @override
+  String get sos_networkSecurityNote =>
+      'Chiunque abbia un codice può inviare avvisi, e un membro con software modificato potrebbe leggerli. Se un codice trapela, configura una nuova rete e condividi nuovi codici.';
 
   @override
   String get sos_channelNeedsFirmware =>
