@@ -139,3 +139,5 @@ Automatic incoming translation can also translate notification text when enabled
 | macOS | Yes | No | — | Yes (dock badge) | No |
 | Windows | Yes | No | — | No | No |
 | Linux | Yes (if D-Bus available) | No | — | No | No |
+
+On Linux, many notification daemons (Cinnamon's included) ignore a notification's sound, so the app plays the freedesktop theme sounds itself with `paplay` (or `pw-play`): `message-new-instant` for messages and SOS acknowledgements, and `alarm-clock-elapsed` every 4 seconds while an SOS alert is open, until it is acknowledged, dismissed or cancelled. Nothing plays if neither player or the sound theme (`/usr/share/sounds/freedesktop`) is installed.
