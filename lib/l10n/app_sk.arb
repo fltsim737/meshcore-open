@@ -2389,6 +2389,8 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Počúva správy a SOS výstrahy",
   "background_stop": "Zastaviť",
+  "tray_show": "Zobraziť MeshCore Open",
+  "tray_quit": "Ukončiť",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

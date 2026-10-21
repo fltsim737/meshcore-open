@@ -5278,6 +5278,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get background_stop => 'Interrompi';
 
   @override
+  String get tray_show => 'Mostra MeshCore Open';
+
+  @override
+  String get tray_quit => 'Esci';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Deleted $name';
   }

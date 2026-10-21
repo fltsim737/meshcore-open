@@ -1480,6 +1480,8 @@
   "background_serviceText": "Поддерживает BLE-соединение",
   "background_serviceRunningText": "Ожидание сообщений и сигналов SOS",
   "background_stop": "Остановить",
+  "tray_show": "Показать MeshCore Open",
+  "tray_quit": "Выход",
   "appSettings_translationModelDeleted": "Удалено {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

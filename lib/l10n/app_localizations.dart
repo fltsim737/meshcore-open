@@ -8966,6 +8966,18 @@ abstract class AppLocalizations {
   /// **'Stop'**
   String get background_stop;
 
+  /// No description provided for @tray_show.
+  ///
+  /// In en, this message translates to:
+  /// **'Show MeshCore Open'**
+  String get tray_show;
+
+  /// No description provided for @tray_quit.
+  ///
+  /// In en, this message translates to:
+  /// **'Quit'**
+  String get tray_quit;
+
   /// No description provided for @appSettings_translationModelDeleted.
   ///
   /// In en, this message translates to:

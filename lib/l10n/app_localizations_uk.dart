@@ -5287,6 +5287,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String get background_stop => 'Зупинити';
 
   @override
+  String get tray_show => 'Показати MeshCore Open';
+
+  @override
+  String get tray_quit => 'Вийти';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Видалено $name';
   }

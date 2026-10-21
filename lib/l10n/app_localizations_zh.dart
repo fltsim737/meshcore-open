@@ -4882,6 +4882,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get background_stop => '停止';
 
   @override
+  String get tray_show => '显示 MeshCore Open';
+
+  @override
+  String get tray_quit => '退出';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Deleted $name';
   }

@@ -266,6 +266,12 @@ The Flutter engine is cached for the whole process (`MainActivity.kt`), so closi
 - **Stop** on the notification disconnects the radio and closes the app completely
 - On first launch the app asks once to be exempt from battery optimisation; the shortcut in App Settings changes it later
 
+## Tray Icon (Linux)
+
+On Linux (`desktop_tray_service.dart`) the app puts an icon in the panel's system tray. Closing the window hides it there instead of quitting, so the radio connection, message notifications and SOS alarms keep running. The tray menu has **Show MeshCore Open** and **Quit**; Quit disconnects the radio and ends the app. A new incoming SOS brings the window back to the front. If the desktop has no tray, closing the window quits as before.
+
+Building needs `libayatana-appindicator3-dev`; running needs `libayatana-appindicator3-1`, which most desktops ship.
+
 ## URL Image Previews
 
 Enable URL images per contact in Chat → overflow → Contact Settings, or per channel in Channels → long-press (right-click on desktop) → Edit. Supported references include direct PNG/JPEG/WebP URLs, pyx.li links, ibb.co sharing pages, and IPFS references/gateway URLs.

@@ -5274,6 +5274,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get background_stop => 'Detener';
 
   @override
+  String get tray_show => 'Mostrar MeshCore Open';
+
+  @override
+  String get tray_quit => 'Salir';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Eliminado $name';
   }

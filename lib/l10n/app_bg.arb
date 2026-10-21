@@ -2388,6 +2388,8 @@
   "background_serviceText": "Поддържа BLE връзката активна",
   "background_serviceRunningText": "Следи за съобщения и SOS сигнали",
   "background_stop": "Спри",
+  "tray_show": "Покажи MeshCore Open",
+  "tray_quit": "Изход",
   "appSettings_translationModelDeleted": "Изтрит {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

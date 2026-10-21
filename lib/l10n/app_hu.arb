@@ -2426,6 +2426,8 @@
   "background_serviceText": "A BLE-kapcsolat fenntartása",
   "background_serviceRunningText": "Üzenetek és SOS-riasztások figyelése",
   "background_stop": "Leállítás",
+  "tray_show": "MeshCore Open megjelenítése",
+  "tray_quit": "Kilépés",
   "appSettings_translationModelDeleted": "Törölve {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

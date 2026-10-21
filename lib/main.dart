@@ -22,6 +22,7 @@ import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
 import 'services/sos_service.dart';
+import 'services/desktop_tray_service.dart';
 import 'widgets/sos_warning_overlay.dart';
 import 'services/storage_service.dart';
 import 'services/message_retry_service.dart';
@@ -218,6 +219,20 @@ void main() async {
     await backgroundService.stop();
     exit(0);
   };
+  // Linux: closing the window hides it to the tray; Quit there ends the app.
+  final trayService = DesktopTrayService();
+  await trayService.initialize(
+    onQuit: connector.disconnect,
+    languageOverride: appSettingsService.settings.languageOverride,
+  );
+  // A new SOS brings the window up, so its warning screen is in view.
+  var shownAlerts = <String>{};
+  sosService.addListener(() {
+    final open = {for (final alert in sosService.openIncoming) alert.key};
+    if (open.difference(shownAlerts).isNotEmpty) trayService.showWindow();
+    shownAlerts = open;
+  });
+
   WidgetsBinding.instance.addPostFrameCallback((_) async {
     try {
       await backgroundService.start();

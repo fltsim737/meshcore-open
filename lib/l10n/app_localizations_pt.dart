@@ -5271,6 +5271,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get background_stop => 'Parar';
 
   @override
+  String get tray_show => 'Mostrar MeshCore Open';
+
+  @override
+  String get tray_quit => 'Sair';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Deleted $name';
   }
