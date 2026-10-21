@@ -14,6 +14,7 @@ import '../l10n/app_localizations.dart';
 import '../models/sos_alert.dart';
 import '../storage/prefs_manager.dart';
 import '../utils/platform_info.dart';
+import 'linux_sound_player.dart';
 import 'notification_reply.dart';
 
 class NotificationService {
@@ -81,6 +82,11 @@ class NotificationService {
   // Rate limiting to prevent notification storms
   // (Added after getting notification-flooded while evaluating RF flood management. The irony.)
   static const _minNotificationInterval = Duration(seconds: 3);
+
+  /// Linux plays its own sounds; see [LinuxSoundPlayer].
+  final LinuxSoundPlayer? _linuxSound = PlatformInfo.isLinux
+      ? LinuxSoundPlayer()
+      : null;
   static const _batchWindow = Duration(seconds: 5);
 
   DateTime? _lastNotificationTime;
@@ -443,6 +449,7 @@ class NotificationService {
         notificationDetails: notificationDetails,
         payload: payload,
       );
+      if (!silent) _linuxSound?.playMessage();
     } catch (e) {
       debugPrint('Failed to show message notification: $e');
     }
@@ -673,12 +680,14 @@ class NotificationService {
         ),
         payload: 'sos:${alert.key}',
       );
+      _linuxSound?.startAlarm(_sosAlertId(alert.key));
     } catch (e) {
       debugPrint('Failed to show SOS notification: $e');
     }
   }
 
   Future<void> cancelSosAlert(IncomingSos alert) async {
+    _linuxSound?.stopAlarm(_sosAlertId(alert.key));
     if (!_isInitialized) return;
     try {
       await _notifications.cancel(id: _sosAlertId(alert.key));
@@ -689,6 +698,7 @@ class NotificationService {
 
   /// Posted in place of the alarm, so the alert no longer sounds.
   Future<void> showSosCancelled(IncomingSos alert) async {
+    _linuxSound?.stopAlarm(_sosAlertId(alert.key));
     if (!await _ensureCanNotify()) return;
     final l10n = _l10n;
     final sender = alert.senderName.isEmpty
@@ -718,6 +728,7 @@ class NotificationService {
         ),
         payload: 'sos_cancel:${alert.key}',
       );
+      _linuxSound?.playEvent();
     } catch (e) {
       debugPrint('Failed to show SOS cancel notification: $e');
     }
@@ -753,6 +764,7 @@ class NotificationService {
         ),
         payload: 'sos_ack:${sos.id}',
       );
+      _linuxSound?.playMessage();
     } catch (e) {
       debugPrint('Failed to show SOS ACK notification: $e');
     }
@@ -768,6 +780,7 @@ class NotificationService {
   }
 
   Future<void> cancelAll() async {
+    _linuxSound?.stopAll();
     _conversations.clear();
     await _notifications.cancelAll();
     await _updateBadge(0);
