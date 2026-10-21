@@ -4876,6 +4876,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get background_serviceText => 'Keeping BLE connected';
 
   @override
+  String get background_serviceRunningText => '正在接收消息和 SOS 警报';
+
+  @override
+  String get background_stop => '停止';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Deleted $name';
   }

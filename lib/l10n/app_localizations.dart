@@ -8954,6 +8954,18 @@ abstract class AppLocalizations {
   /// **'Keeping BLE connected'**
   String get background_serviceText;
 
+  /// No description provided for @background_serviceRunningText.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening for messages and SOS alerts'**
+  String get background_serviceRunningText;
+
+  /// No description provided for @background_stop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get background_stop;
+
   /// No description provided for @appSettings_translationModelDeleted.
   ///
   /// In en, this message translates to:

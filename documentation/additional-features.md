@@ -256,11 +256,15 @@ Users can pinch to scale all chat text up or down within a session.
 ## Background Service (Android)
 
 ### What It Does
-On Android, a foreground service (`background_service.dart`) keeps the BLE connection and message handling alive when the app is in the background. On other platforms this is a no-op.
+On Android, a foreground service (`background_service.dart`) keeps the app running from the moment it is opened, connected to a radio or not, until the user taps **Stop** on its notification or force-stops the app. On other platforms this is a no-op.
+
+The Flutter engine is cached for the whole process (`MainActivity.kt`), so closing the screen with Back or swiping the app away from recent apps leaves the radio connection (BLE, TCP or USB), message handling, SOS repeats and SOS alarms running.
 
 ### User Impact
-- A persistent notification appears while the service is running
-- Messages are received and retry logic continues even when the app is not in the foreground
+- A persistent notification appears while the app is running
+- Messages are received, SOS alerts sound and retry logic continues when the app is in the background or swiped away
+- **Stop** on the notification disconnects the radio and closes the app completely
+- On first launch the app asks once to be exempt from battery optimisation; the shortcut in App Settings changes it later
 
 ## URL Image Previews
 

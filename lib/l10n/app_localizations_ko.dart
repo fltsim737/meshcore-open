@@ -5011,6 +5011,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get background_serviceText => 'BLE 연결 유지 중';
 
   @override
+  String get background_serviceRunningText => '메시지 및 SOS 경보 수신 대기 중';
+
+  @override
+  String get background_stop => '중지';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return '$name 삭제됨';
   }

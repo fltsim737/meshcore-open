@@ -2519,6 +2519,8 @@
   "common_done": "完了",
   "background_serviceTitle": "MeshCore 実行中",
   "background_serviceText": "BLE 接続を維持しています",
+  "background_serviceRunningText": "メッセージとSOSアラートを待ち受け中",
+  "background_stop": "停止",
   "appSettings_translationModelDeleted": "{name} を削除しました",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

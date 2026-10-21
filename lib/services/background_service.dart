@@ -2,11 +2,21 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 
 import '../l10n/app_localizations.dart';
+import '../storage/prefs_manager.dart';
 import '../utils/platform_info.dart';
 
+/// Keeps the app running on Android for as long as it is open, connected or
+/// not, until the user taps Stop on its notification (or force-stops it).
 class BackgroundService {
+  static const String _stopButtonId = 'stop';
+  static const String _stopMessage = 'stop';
+  static const String _batteryPromptedKey = 'background_battery_prompted';
+
   bool _initialized = false;
   String? Function()? _languageOverrideProvider;
+
+  /// Runs when the user taps Stop on the service notification.
+  Future<void> Function()? onStopRequested;
 
   /// Allows the app to expose its current language override (e.g. from
   /// AppSettingsService) so the foreground notification matches the app UI
@@ -35,7 +45,13 @@ class BackgroundService {
         allowWifiLock: false,
       ),
     );
+    FlutterForegroundTask.initCommunicationPort();
+    FlutterForegroundTask.addTaskDataCallback(_onTaskData);
     _initialized = true;
+  }
+
+  void _onTaskData(Object data) {
+    if (data == _stopMessage) onStopRequested?.call();
   }
 
   Future<void> start() async {
@@ -48,9 +64,24 @@ class BackgroundService {
     final l10n = await _loadLocalizations();
     await FlutterForegroundTask.startService(
       notificationTitle: l10n.background_serviceTitle,
-      notificationText: l10n.background_serviceText,
+      notificationText: l10n.background_serviceRunningText,
+      notificationButtons: [
+        NotificationButton(id: _stopButtonId, text: l10n.background_stop),
+      ],
       callback: startCallback,
     );
+  }
+
+  /// Asks once to be exempt from battery optimisation, which otherwise lets
+  /// Android (and some phone makers far sooner) stop the app in the
+  /// background. The app settings keep a shortcut for later.
+  Future<void> requestBatteryExemptionOnce() async {
+    if (!PlatformInfo.isAndroid) return;
+    final prefs = PrefsManager.instance;
+    if (prefs.getBool(_batteryPromptedKey) ?? false) return;
+    if (await FlutterForegroundTask.isIgnoringBatteryOptimizations) return;
+    await prefs.setBool(_batteryPromptedKey, true);
+    await FlutterForegroundTask.requestIgnoreBatteryOptimization();
   }
 
   Future<AppLocalizations> _loadLocalizations() async {
@@ -99,7 +130,12 @@ class _MeshCoreTaskHandler extends TaskHandler {
   Future<void> onDestroy(DateTime timestamp, bool isTimeout) async {}
 
   @override
-  void onNotificationButtonPressed(String id) {}
+  void onNotificationButtonPressed(String id) {
+    if (id != BackgroundService._stopButtonId) return;
+    // The app disconnects and exits; stop here too in case it is gone.
+    FlutterForegroundTask.sendDataToMain(BackgroundService._stopMessage);
+    FlutterForegroundTask.stopService();
+  }
 
   @override
   void onNotificationPressed() {

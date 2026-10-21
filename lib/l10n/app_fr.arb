@@ -2513,6 +2513,8 @@
   "common_done": "Terminé",
   "background_serviceTitle": "MeshCore en cours d'exécution",
   "background_serviceText": "Maintien de la connexion BLE",
+  "background_serviceRunningText": "À l'écoute des messages et alertes SOS",
+  "background_stop": "Arrêter",
   "appSettings_translationModelDeleted": "Supprimé {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

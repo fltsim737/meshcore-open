@@ -5294,6 +5294,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get background_serviceText => 'Keeping BLE connected';
 
   @override
+  String get background_serviceRunningText =>
+      'Nasłuchiwanie wiadomości i alarmów SOS';
+
+  @override
+  String get background_stop => 'Zatrzymaj';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Deleted $name';
   }

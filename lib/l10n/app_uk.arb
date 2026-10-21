@@ -2388,6 +2388,8 @@
   "repeater_cliHelpStatsCore": "(Тільки для серійного використання) Відображає основні статистичні дані про програмне забезпечення.",
   "background_serviceTitle": "MeshCore працює",
   "background_serviceText": "Підтримує з'єднання BLE",
+  "background_serviceRunningText": "Очікування повідомлень і сигналів SOS",
+  "background_stop": "Зупинити",
   "appSettings_translationModelDeleted": "Видалено {name}",
   "appSettings_translationModelDeleteFailed": "Не вдалось видалити: {error}",
   "channels_channelUpdateFailed": "Не вдалось оновити канал: {error}",

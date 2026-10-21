@@ -30,8 +30,9 @@ MeshCore Open provides both **system notifications** (push-style OS alerts) and 
 - **Android channel**: `adverts`
 
 ### 4. Background Service Notification (Android Only)
-- A persistent low-priority notification: "MeshCore running — Keeping BLE connected"
-- Required by Android for foreground services to keep BLE alive in the background
+- A persistent low-priority notification: "MeshCore running — Listening for messages and SOS alerts"
+- Shown from app launch until the user taps **Stop**, connected or not; swiping the app away does not stop it
+- **Stop** disconnects the radio and closes the app completely
 - Tap to re-launch the app
 - **Does not auto-start on reboot** — the user must re-open the app manually after a phone restart
 

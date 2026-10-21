@@ -5280,6 +5280,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get background_serviceText => 'Підтримує з\'єднання BLE';
 
   @override
+  String get background_serviceRunningText =>
+      'Очікування повідомлень і сигналів SOS';
+
+  @override
+  String get background_stop => 'Зупинити';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Видалено $name';
   }

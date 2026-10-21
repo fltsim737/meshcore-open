@@ -1478,6 +1478,8 @@
   "common_done": "Готово",
   "background_serviceTitle": "MeshCore работает",
   "background_serviceText": "Поддерживает BLE-соединение",
+  "background_serviceRunningText": "Ожидание сообщений и сигналов SOS",
+  "background_stop": "Остановить",
   "appSettings_translationModelDeleted": "Удалено {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

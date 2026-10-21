@@ -14,7 +14,6 @@ import android.hardware.usb.UsbManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
@@ -23,8 +22,10 @@ import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+/** Lives as long as the Flutter engine, not the activity, so a USB link survives the app's
+ * screen being closed. */
 class MeshcoreUsbFunctions(
-    private val activity: FlutterActivity,
+    private val context: Context,
 ) {
     private companion object {
         const val usbRecipientInterface = 0x01
@@ -35,7 +36,7 @@ class MeshcoreUsbFunctions(
     private val usbPermissionAction = "com.meshcore.meshcore_open.USB_PERMISSION"
 
     private val usbManager by lazy {
-        activity.getSystemService(Context.USB_SERVICE) as UsbManager
+        context.getSystemService(Context.USB_SERVICE) as UsbManager
     }
     private val mainHandler = Handler(Looper.getMainLooper())
     private val usbIoExecutor: ExecutorService = Executors.newSingleThreadExecutor()
@@ -139,7 +140,7 @@ class MeshcoreUsbFunctions(
         closeUsbConnection()
         usbIoExecutor.shutdownNow()
         try {
-            activity.unregisterReceiver(permissionReceiver)
+            context.unregisterReceiver(permissionReceiver)
         } catch (_: IllegalArgumentException) {
         }
     }
@@ -151,10 +152,10 @@ class MeshcoreUsbFunctions(
                 addAction(UsbManager.ACTION_USB_DEVICE_DETACHED)
             }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            activity.registerReceiver(permissionReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+            context.registerReceiver(permissionReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
         } else {
             @Suppress("DEPRECATION")
-            activity.registerReceiver(permissionReceiver, filter)
+            context.registerReceiver(permissionReceiver, filter)
         }
     }
 
@@ -201,9 +202,9 @@ class MeshcoreUsbFunctions(
         pendingConnectBaudRate = baudRate
 
         val permissionIntent = PendingIntent.getBroadcast(
-            activity,
+            context,
             0,
-            Intent(usbPermissionAction).setPackage(activity.packageName),
+            Intent(usbPermissionAction).setPackage(context.packageName),
             pendingIntentFlags(),
         )
         usbManager.requestPermission(device, permissionIntent)

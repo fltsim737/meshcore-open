@@ -2431,6 +2431,8 @@
   "common_done": "Klaar",
   "background_serviceTitle": "MeshCore actief",
   "background_serviceText": "BLE-verbinding actief houden",
+  "background_serviceRunningText": "Luistert naar berichten en SOS-meldingen",
+  "background_stop": "Stoppen",
   "appSettings_translationModelDeleted": "{name} verwijderd",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

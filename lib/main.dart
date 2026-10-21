@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show exit;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -209,6 +210,22 @@ void main() async {
       sosService: sosService,
     ),
   );
+
+  // Android: stay running in the background while the app is open, until
+  // the user taps Stop on the service notification.
+  backgroundService.onStopRequested = () async {
+    await connector.disconnect();
+    await backgroundService.stop();
+    exit(0);
+  };
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    try {
+      await backgroundService.start();
+    } catch (e) {
+      appLogger.warn('Starting the background service failed: $e');
+    }
+    await backgroundService.requestBatteryExemptionOnce();
+  });
 }
 
 /// [ReceivedImageDecoder] over [ImageCodecService].
