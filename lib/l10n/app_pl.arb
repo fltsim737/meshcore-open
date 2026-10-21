@@ -3369,7 +3369,7 @@
   "sos_active": "SOS AKTYWNE",
   "sos_cancel": "Anuluj SOS",
   "sos_cancelConfirmTitle": "Anulować SOS?",
-  "sos_cancelConfirmBody": "Powtórne nadawanie zostanie zatrzymane. Ratownicy nie dowiedzą się o anulowaniu – daj im znać, jeśli jesteś bezpieczny.",
+  "sos_cancelConfirmBody": "Powtórne nadawanie zatrzyma się od razu, a powiadomienie o anulowaniu zostanie wysłane na kanale SOS i do kontaktów alarmowych.",
   "sos_keepActive": "Pozostaw aktywne",
   "sos_broadcastCount": "Wysłano {count} razy, ostatnio o {time}",
   "@sos_broadcastCount": {
@@ -3473,5 +3473,16 @@
       }
     }
   },
-  "map_enterPathManually": "Wprowadź ścieżkę ręcznie"
+  "map_enterPathManually": "Wprowadź ścieżkę ręcznie",
+  "sos_cancelledBySender": "Anulowane przez nadawcę",
+  "sos_updatesChannelName": "Aktualizacje SOS",
+  "sos_cancelNotificationTitle": "SOS od {name} anulowane",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Nadawca anulował to SOS."
 }

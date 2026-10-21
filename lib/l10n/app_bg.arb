@@ -3336,7 +3336,7 @@
   "sos_active": "SOS АКТИВЕН",
   "sos_cancel": "Отмяна на SOS",
   "sos_cancelConfirmTitle": "Отмяна на SOS?",
-  "sos_cancelConfirmBody": "Повторните излъчвания ще спрат. Спасителите няма да разберат, че сте отменили — уведомете ги, ако сте в безопасност.",
+  "sos_cancelConfirmBody": "Повторните излъчвания спират веднага и се изпраща известие за отмяна в SOS канала и до контактите за спешни случаи.",
   "sos_keepActive": "Остави активен",
   "sos_broadcastCount": "Изпратено {count} пъти, последно в {time}",
   "@sos_broadcastCount": {
@@ -3440,5 +3440,16 @@
       }
     }
   },
-  "map_enterPathManually": "Въведи пътя ръчно"
+  "map_enterPathManually": "Въведи пътя ръчно",
+  "sos_cancelledBySender": "Отменено от подателя",
+  "sos_updatesChannelName": "SOS актуализации",
+  "sos_cancelNotificationTitle": "SOS от {name} е отменен",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Подателят отмени този SOS."
 }

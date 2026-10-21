@@ -6375,7 +6375,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'As retransmissões vão parar. Quem responde não é avisado do cancelamento; informe-os se estiver em segurança.';
+      'As retransmissões param de imediato e é enviado um aviso de cancelamento no canal SOS e aos seus contactos de emergência.';
 
   @override
   String get sos_keepActive => 'Manter ativo';
@@ -6504,6 +6504,20 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'SOS DE EMERGÊNCIA';
+
+  @override
+  String get sos_cancelledBySender => 'Cancelado pelo remetente';
+
+  @override
+  String get sos_updatesChannelName => 'Atualizações de SOS';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS de $name cancelado';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'O remetente cancelou este SOS.';
 
   @override
   String sos_warningMore(int count) {

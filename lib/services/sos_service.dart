@@ -12,6 +12,7 @@ import '../models/sos_alert.dart';
 import '../storage/sos_store.dart';
 import '../utils/app_logger.dart';
 import 'app_settings_service.dart';
+import 'message_retry_service.dart';
 import 'notification_service.dart';
 import 'sos_location_service.dart';
 
@@ -33,12 +34,16 @@ abstract class SosTransport implements Listenable {
 
   /// Whether a DM of SOS [sosId] to the contact is still being retried.
   bool hasPendingSos(Contact contact, String sosId);
+
+  /// Stops retrying every queued or in-flight DM of SOS [sosId].
+  void abandonPendingSos(String sosId);
 }
 
 class ConnectorSosTransport implements SosTransport {
   final MeshCoreConnector connector;
+  final MessageRetryService retryService;
 
-  ConnectorSosTransport(this.connector);
+  ConnectorSosTransport(this.connector, this.retryService);
 
   @override
   bool get isConnected => connector.isConnected;
@@ -71,6 +76,13 @@ class ConnectorSosTransport implements SosTransport {
     const {MessageStatus.pending, MessageStatus.sent},
   );
 
+  @override
+  void abandonPendingSos(String sosId) => retryService.failPendingWhere(
+    (m) =>
+        m.text.startsWith(SosCodec.header) &&
+        SosCodec.parseSos(m.text)?.id == sosId,
+  );
+
   bool _hasSos(Contact contact, String sosId, Set<MessageStatus> statuses) =>
       connector
           .getMessages(contact)
@@ -93,6 +105,7 @@ abstract class SosAlerter {
   void alert(IncomingSos alert);
   void clear(IncomingSos alert);
   void acknowledged(OutgoingSos sos, SosAck ack);
+  void cancelled(IncomingSos alert);
 }
 
 class NotificationSosAlerter implements SosAlerter {
@@ -105,6 +118,9 @@ class NotificationSosAlerter implements SosAlerter {
   @override
   void acknowledged(OutgoingSos sos, SosAck ack) =>
       unawaited(NotificationService().showSosAcknowledged(sos, ack));
+  @override
+  void cancelled(IncomingSos alert) =>
+      unawaited(NotificationService().showSosCancelled(alert));
 }
 
 class SosService extends ChangeNotifier {
@@ -132,6 +148,7 @@ class SosService extends ChangeNotifier {
   final DateTime Function() _now;
 
   OutgoingSos? _active;
+  String? _pendingCancelId;
   final List<IncomingSos> _incoming = [];
   bool _wasConnected;
   Timer? _timer;
@@ -170,6 +187,7 @@ class SosService extends ChangeNotifier {
 
   void load() {
     _active = _store.loadOutgoing();
+    _pendingCancelId = _store.loadPendingCancel();
     _incoming
       ..clear()
       ..addAll(_store.loadIncoming());
@@ -230,8 +248,11 @@ class SosService extends ChangeNotifier {
     if (connected != _wasConnected) {
       _wasConnected = connected;
       notifyListeners();
-      // A broadcast that fell due while disconnected goes out right away.
-      if (connected) unawaited(broadcastIfDue());
+      // Anything that fell due while disconnected goes out right away.
+      if (connected) {
+        unawaited(_sendPendingCancel());
+        unawaited(broadcastIfDue());
+      }
     }
     _refreshDeliveries();
   }
@@ -319,13 +340,50 @@ class SosService extends ChangeNotifier {
     await broadcastIfDue();
   }
 
+  /// Stops the SOS at once, withdraws any SOS DMs still queued or retrying,
+  /// and tells responders it was cancelled (when the radio next connects, if
+  /// it is not connected now).
   Future<void> cancel() async {
-    if (_active == null) return;
+    final sos = _active;
+    if (sos == null) return;
     _timer?.cancel();
     _timer = null;
     _active = null;
+    _pendingCancelId = sos.id;
     notifyListeners();
+    _transport.abandonPendingSos(sos.id);
     await _store.saveOutgoing(null);
+    await _store.savePendingCancel(sos.id);
+    await _sendPendingCancel();
+  }
+
+  /// The ID of a cancellation still waiting for the radio, if any.
+  String? get pendingCancelId => _pendingCancelId;
+
+  Future<void> _sendPendingCancel() async {
+    final id = _pendingCancelId;
+    if (id == null || !_transport.isConnected) return;
+    _pendingCancelId = null;
+    notifyListeners();
+    await _store.savePendingCancel(null);
+
+    final text = SosCodec.encodeCancel(id, _now());
+    final channel = sosChannel;
+    if (channel != null) {
+      try {
+        await _transport.sendChannelText(channel, text);
+      } catch (e) {
+        appLogger.warn('SOS cancel channel send failed: $e', tag: 'SOS');
+      }
+    }
+    // Everyone who may have heard the SOS, including those who acknowledged.
+    for (final contact in emergencyContacts) {
+      try {
+        await _transport.sendDirectText(contact, text);
+      } catch (e) {
+        appLogger.warn('SOS cancel DM failed: $e', tag: 'SOS');
+      }
+    }
   }
 
   Future<void> _broadcast(OutgoingSos sos) async {
@@ -350,6 +408,8 @@ class SosService extends ChangeNotifier {
           channel,
           SosCodec.encodeSos(id: sos.id, time: now, fix: fix),
         );
+        // Cancelled while the channel send was in progress: send no DMs.
+        if (!identical(sos, _active)) return;
       } catch (e) {
         appLogger.warn('SOS channel send failed: $e', tag: 'SOS');
       }
@@ -363,6 +423,7 @@ class SosService extends ChangeNotifier {
       maxBytes: maxTextPayloadBytesAfterFullLengthAttempts,
     );
     for (final contact in emergencyContacts) {
+      if (!identical(sos, _active)) return;
       if (sos.isContactAcknowledged(contact.publicKeyHex, contact.name)) {
         continue;
       }
@@ -382,6 +443,11 @@ class SosService extends ChangeNotifier {
     final ackId = SosCodec.parseAck(inbound.text);
     if (ackId != null) {
       _handleAck(ackId, inbound);
+      return;
+    }
+    final cancelId = SosCodec.parseCancel(inbound.text);
+    if (cancelId != null) {
+      _handleCancel(cancelId, inbound);
       return;
     }
     final payload = SosCodec.parseSos(inbound.text);
@@ -425,6 +491,26 @@ class SosService extends ChangeNotifier {
     }
     if (incomingChanged) unawaited(_store.saveIncoming(_incoming));
     if (changed || incomingChanged) notifyListeners();
+  }
+
+  void _handleCancel(String id, SosInboundText inbound) {
+    final alert = _incoming
+        .where(
+          (a) =>
+              a.id == id &&
+              !a.cancelled &&
+              (a.senderName == inbound.senderName ||
+                  (inbound.senderKeyHex != null &&
+                      a.senderKeyHex == inbound.senderKeyHex)),
+        )
+        .firstOrNull;
+    if (alert == null) return;
+    final wasOpen = alert.isOpen;
+    alert.cancelled = true;
+    if (wasOpen) _alerter?.clear(alert);
+    _alerter?.cancelled(alert);
+    unawaited(_store.saveIncoming(_incoming));
+    notifyListeners();
   }
 
   void _handleSos(SosPayload payload, SosInboundText inbound) {

@@ -3237,7 +3237,7 @@
   "sos_active": "SOS ACTIEF",
   "sos_cancel": "SOS annuleren",
   "sos_cancelConfirmTitle": "SOS annuleren?",
-  "sos_cancelConfirmBody": "Herhaalde uitzendingen stoppen. Hulpverleners horen niet dat je annuleerde; laat ze weten als je veilig bent.",
+  "sos_cancelConfirmBody": "Herhaalde uitzendingen stoppen direct en er gaat een annuleringsbericht naar het SOS-kanaal en je noodcontacten.",
   "sos_keepActive": "Actief houden",
   "sos_broadcastCount": "{count} keer verzonden, laatst om {time}",
   "@sos_broadcastCount": {
@@ -3341,5 +3341,16 @@
       }
     }
   },
-  "map_enterPathManually": "Pad handmatig invoeren"
+  "map_enterPathManually": "Pad handmatig invoeren",
+  "sos_cancelledBySender": "Geannuleerd door afzender",
+  "sos_updatesChannelName": "SOS-updates",
+  "sos_cancelNotificationTitle": "SOS van {name} geannuleerd",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "De afzender heeft deze SOS geannuleerd."
 }

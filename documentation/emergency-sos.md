@@ -37,7 +37,17 @@ Press and hold the red **SOS** button for two seconds. A ring fills while you ho
 | Every minute for the first 5 minutes | Repeated quickly, so anyone who missed the first copy soon hears another |
 | Every 5 minutes after that | Repeated until you cancel, whether or not anyone has acknowledged |
 
-So broadcasts go out at 0, 1, 2, 3, 4 and 5 minutes, then at 10, 15, 20 minutes and so on. An ACK does not slow the schedule: it proves someone received the alert, not that help is on the way. The SOS stays active until you press **Cancel SOS**. Cancelling only stops the repeats; responders are **not** told you cancelled, so let them know you are safe.
+So broadcasts go out at 0, 1, 2, 3, 4 and 5 minutes, then at 10, 15, 20 minutes and so on. An ACK does not slow the schedule: it proves someone received the alert, not that help is on the way. The SOS stays active until you press **Cancel SOS**.
+
+### Cancelling
+
+**Cancel SOS** (after a confirmation) stops everything at once:
+
+- no further repeats, and a broadcast that is partway through sending stops before its remaining DMs;
+- SOS direct messages still queued or being retried are withdrawn and shown as failed in the chat;
+- a cancellation notice goes out on the SOS channel and by DM to every emergency contact, including those who already acknowledged.
+
+If the radio is disconnected when you cancel, the notice is sent as soon as it reconnects, even after an app restart.
 
 Direct messages stop going to a contact once their radio confirms delivery or they reply ACK (on the channel or by DM). A new DM is not queued while the previous one is still being retried. The channel broadcast always continues.
 
@@ -69,9 +79,17 @@ Reply ACK #a1b2
 
 Direct messages add a `Node: <name>` line after the first line, shortening the name if that is needed to fit. `Source` is one of `Phone GPS`, `Radio location`, `Stored location` or `None`, and the `Lat`/`Lon` lines are left out when there is no position. Time is UTC. The longest form fits within the firmware's 160-byte text limit on every channel and node name.
 
+A cancellation is:
+
+```
+*** SOS CANCELLED *** #a1b2
+Time: 10-21 14:32Z
+The sender cancelled this SOS.
+```
+
 An acknowledgement is the text `ACK #a1b2`. Anyone can type it by hand, so responders on other MeshCore clients can answer too.
 
-SOS and ACK texts are always sent uncompressed. Smaz and Cyr2Lat are skipped for them, so every client can read them.
+SOS, cancellation and ACK texts are always sent uncompressed. Smaz and Cyr2Lat are skipped for them, so every client can read them.
 
 ## Receiving an SOS
 
@@ -82,6 +100,8 @@ When an SOS arrives on any channel or by direct message:
 - The alert is listed in the Emergency tab with **Send ACK**, **Dismiss**, **Map** and copy-coordinates actions. The Emergency tab icon shows a badge while any alert is open.
 
 **Send ACK** replies `ACK #id` on the channel the alert arrived on, and also by direct message when the sender is one of your contacts. It is disabled while no radio is connected, so an alert is never marked answered when no ACK went out. Other responders' ACKs are shown on the alert ("Also acknowledged by …"), so a group can see who has already answered.
+
+When the sender cancels, the alert closes on its own: the alarm and warning screen stop, the alert is marked **Cancelled by sender**, and an "SOS from … cancelled" notification replaces the alarm. Only a cancellation from the same sender closes an alert; a late repeat of a cancelled SOS does not reopen it.
 
 **Dismiss** silences the alert on this phone without replying. Repeats of an acknowledged or dismissed alert still update its position and counts, but they don't sound again.
 

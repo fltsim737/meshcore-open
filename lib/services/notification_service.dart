@@ -687,6 +687,42 @@ class NotificationService {
     }
   }
 
+  /// Posted in place of the alarm, so the alert no longer sounds.
+  Future<void> showSosCancelled(IncomingSos alert) async {
+    if (!await _ensureCanNotify()) return;
+    final l10n = _l10n;
+    final sender = alert.senderName.isEmpty
+        ? l10n.sos_unknownSender
+        : alert.senderName;
+    final androidDetails = AndroidNotificationDetails(
+      'sos_updates',
+      l10n.sos_updatesChannelName,
+      importance: Importance.high,
+      priority: Priority.high,
+      icon: '@mipmap/ic_launcher',
+    );
+    const darwinDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBanner: true,
+      presentSound: true,
+    );
+    try {
+      await _notifications.show(
+        id: _sosAlertId(alert.key),
+        title: l10n.sos_cancelNotificationTitle(sender),
+        body: l10n.sos_cancelNotificationBody,
+        notificationDetails: NotificationDetails(
+          android: androidDetails,
+          iOS: darwinDetails,
+          macOS: darwinDetails,
+        ),
+        payload: 'sos_cancel:${alert.key}',
+      );
+    } catch (e) {
+      debugPrint('Failed to show SOS cancel notification: $e');
+    }
+  }
+
   Future<void> showSosAcknowledged(OutgoingSos sos, SosAck ack) async {
     if (!await _ensureCanNotify()) return;
     final l10n = _l10n;

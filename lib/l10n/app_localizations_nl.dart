@@ -6346,7 +6346,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Herhaalde uitzendingen stoppen. Hulpverleners horen niet dat je annuleerde; laat ze weten als je veilig bent.';
+      'Herhaalde uitzendingen stoppen direct en er gaat een annuleringsbericht naar het SOS-kanaal en je noodcontacten.';
 
   @override
   String get sos_keepActive => 'Actief houden';
@@ -6475,6 +6475,21 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NOOD-SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Geannuleerd door afzender';
+
+  @override
+  String get sos_updatesChannelName => 'SOS-updates';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS van $name geannuleerd';
+  }
+
+  @override
+  String get sos_cancelNotificationBody =>
+      'De afzender heeft deze SOS geannuleerd.';
 
   @override
   String sos_warningMore(int count) {

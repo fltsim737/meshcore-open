@@ -6395,7 +6395,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Wiederholte Aussendungen werden gestoppt. Helfer erfahren nicht, dass du abgebrochen hast – sag ihnen Bescheid, wenn du in Sicherheit bist.';
+      'Wiederholte Aussendungen stoppen sofort, und eine Abbruchmeldung wird im SOS-Kanal und an deine Notfallkontakte gesendet.';
 
   @override
   String get sos_keepActive => 'Aktiv lassen';
@@ -6524,6 +6524,21 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NOTFALL-SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Vom Absender abgebrochen';
+
+  @override
+  String get sos_updatesChannelName => 'SOS-Updates';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS von $name abgebrochen';
+  }
+
+  @override
+  String get sos_cancelNotificationBody =>
+      'Der Absender hat dieses SOS abgebrochen.';
 
   @override
   String sos_warningMore(int count) {

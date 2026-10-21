@@ -55,6 +55,11 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   bool hasPendingSos(Contact contact, String sosId) =>
       pending.contains(contact.name);
 
+  final List<String> abandoned = [];
+
+  @override
+  void abandonPendingSos(String sosId) => abandoned.add(sosId);
+
   void markDelivered(String name) {
     delivered.add(name);
     notifyListeners();
@@ -76,6 +81,8 @@ class FakeAlerter implements SosAlerter {
   @override
   void acknowledged(OutgoingSos sos, SosAck ack) =>
       events.add('ack:${ack.senderName}');
+  @override
+  void cancelled(IncomingSos alert) => events.add('cancelled:${alert.key}');
 }
 
 class FakePhoneLocation implements PhoneLocationProvider {
@@ -309,7 +316,11 @@ void main() {
       await service.cancel();
       now = now.add(const Duration(hours: 1));
       await service.broadcastIfDue();
-      expect(transport.channelSends, hasLength(1));
+      // The SOS, then the cancellation notice, then nothing more.
+      final sent = transport.channelSends.map((s) => s.$2).toList();
+      expect(sent, hasLength(2));
+      expect(SosCodec.parseSos(sent[0]), isNotNull);
+      expect(SosCodec.parseCancel(sent[1]), isNotNull);
       expect(service.nextBroadcastAt, isNull);
     });
   });
@@ -419,6 +430,110 @@ void main() {
       service.onAppResumed();
       await pumpEventQueue();
       expect(transport.channelSends, hasLength(2));
+    });
+  });
+
+  group('cancel', () {
+    late Contact alice, bob;
+
+    setUp(() async {
+      alice = contactFor('Alice', 1);
+      bob = contactFor('Bob', 2);
+      transport.contacts = [alice, bob];
+      await settings.setSosContact(alice.publicKeyHex, true);
+      await settings.setSosContact(bob.publicKeyHex, true);
+    });
+
+    test('stops at once, withdraws DMs and notifies everyone', () async {
+      await service.activate();
+      final id = service.active!.id;
+      // Bob already acknowledged; he still needs to hear it was cancelled.
+      service.handleInbound(
+        SosInboundText(
+          text: 'ACK #$id',
+          senderName: 'Bob',
+          senderKeyHex: bob.publicKeyHex,
+        ),
+      );
+      transport.channelSends.clear();
+      transport.directSends.clear();
+
+      await service.cancel();
+
+      expect(service.isActive, isFalse);
+      expect(transport.abandoned, [id]);
+      expect(SosCodec.parseCancel(transport.channelSends.single.$2), id);
+      expect(transport.directSends.map((s) => s.$1), ['Alice', 'Bob']);
+      expect(
+        transport.directSends.every((s) => SosCodec.parseCancel(s.$2) == id),
+        isTrue,
+      );
+      now = now.add(const Duration(hours: 1));
+      await service.broadcastIfDue();
+      expect(transport.channelSends, hasLength(1));
+    });
+
+    test('a cancel while disconnected is sent on reconnect', () async {
+      await service.activate();
+      final id = service.active!.id;
+      transport.setConnected(false);
+      transport.channelSends.clear();
+      await service.cancel();
+      expect(transport.channelSends, isEmpty);
+      expect(service.pendingCancelId, id);
+
+      // Survives a restart too.
+      final reloaded = newService()..load();
+      expect(reloaded.pendingCancelId, id);
+      reloaded.dispose();
+
+      transport.setConnected(true);
+      await pumpEventQueue();
+      expect(SosCodec.parseCancel(transport.channelSends.single.$2), id);
+      expect(service.pendingCancelId, isNull);
+    });
+
+    test('an incoming cancel closes the alert and stops the alarm', () {
+      service.handleInbound(
+        SosInboundText(
+          text: sosText('a1b2'),
+          senderName: 'Ridge',
+          channelIndex: 0,
+        ),
+      );
+      expect(service.openIncoming, hasLength(1));
+      // Someone else cannot cancel Ridge's alert.
+      service.handleInbound(
+        SosInboundText(
+          text: SosCodec.encodeCancel('a1b2', now),
+          senderName: 'Mallory',
+          channelIndex: 0,
+        ),
+      );
+      expect(service.openIncoming, hasLength(1));
+      service.handleInbound(
+        SosInboundText(
+          text: SosCodec.encodeCancel('a1b2', now),
+          senderName: 'Ridge',
+          channelIndex: 0,
+        ),
+      );
+      expect(service.openIncoming, isEmpty);
+      expect(service.incoming.single.cancelled, isTrue);
+      expect(alerter.events, [
+        'alert:Ridge#a1b2',
+        'clear:Ridge#a1b2',
+        'cancelled:Ridge#a1b2',
+      ]);
+      // A late repeat of the SOS does not reopen it.
+      service.handleInbound(
+        SosInboundText(
+          text: sosText('a1b2'),
+          senderName: 'Ridge',
+          channelIndex: 0,
+        ),
+      );
+      expect(service.openIncoming, isEmpty);
     });
   });
 

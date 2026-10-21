@@ -117,6 +117,9 @@ class IncomingSos {
   bool ackSent;
   bool dismissed;
 
+  /// The sender broadcast a cancellation.
+  bool cancelled;
+
   /// Other nodes seen acknowledging this SOS.
   final Set<String> ackedBy;
 
@@ -131,6 +134,7 @@ class IncomingSos {
     this.receivedCount = 1,
     this.ackSent = false,
     this.dismissed = false,
+    this.cancelled = false,
     Set<String>? ackedBy,
   }) : ackedBy = ackedBy ?? {};
 
@@ -138,8 +142,9 @@ class IncomingSos {
 
   static String keyFor(String senderName, String id) => '$senderName#$id';
 
-  /// Needs attention until this device acknowledges or dismisses it.
-  bool get isOpen => !ackSent && !dismissed;
+  /// Needs attention until this device acknowledges or dismisses it, or the
+  /// sender cancels it.
+  bool get isOpen => !ackSent && !dismissed && !cancelled;
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -152,6 +157,7 @@ class IncomingSos {
     'received_count': receivedCount,
     'ack_sent': ackSent,
     'dismissed': dismissed,
+    'cancelled': cancelled,
     'acked_by': ackedBy.toList(),
   };
 
@@ -168,6 +174,7 @@ class IncomingSos {
       receivedCount: json['received_count'] as int? ?? 1,
       ackSent: json['ack_sent'] as bool? ?? false,
       dismissed: json['dismissed'] as bool? ?? false,
+      cancelled: json['cancelled'] as bool? ?? false,
       ackedBy: (json['acked_by'] as List<dynamic>? ?? const [])
           .map((e) => e.toString())
           .toSet(),

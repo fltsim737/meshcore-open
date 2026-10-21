@@ -6092,7 +6092,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      '반복 전송이 중단됩니다. 응답자에게 취소 사실이 전달되지 않으니 안전하다면 알려 주세요.';
+      '반복 전송이 즉시 중단되고 SOS 채널과 긴급 연락처에 취소 알림이 전송됩니다.';
 
   @override
   String get sos_keepActive => '계속 유지';
@@ -6218,6 +6218,20 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_warningTitle => '긴급 SOS';
+
+  @override
+  String get sos_cancelledBySender => '보낸 사람이 취소함';
+
+  @override
+  String get sos_updatesChannelName => 'SOS 업데이트';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return '$name의 SOS가 취소됨';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => '보낸 사람이 이 SOS를 취소했습니다.';
 
   @override
   String sos_warningMore(int count) {

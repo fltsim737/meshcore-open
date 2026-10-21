@@ -5945,7 +5945,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_cancelConfirmTitle => '取消 SOS？';
 
   @override
-  String get sos_cancelConfirmBody => '将停止重复广播。响应者不会收到取消通知，如果你已安全，请告知他们。';
+  String get sos_cancelConfirmBody => '重复广播会立即停止，并在 SOS 频道和你的紧急联系人处发送取消通知。';
 
   @override
   String get sos_keepActive => '保持进行';
@@ -6071,6 +6071,20 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_warningTitle => '紧急 SOS';
+
+  @override
+  String get sos_cancelledBySender => '已由发送者取消';
+
+  @override
+  String get sos_updatesChannelName => 'SOS 更新';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return '来自 $name 的 SOS 已取消';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => '发送者已取消此 SOS。';
 
   @override
   String sos_warningMore(int count) {

@@ -6371,7 +6371,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Az ismételt sugárzás leáll. A segítők nem értesülnek a visszavonásról, ezért szóljon nekik, ha biztonságban van.';
+      'Az ismételt sugárzás azonnal leáll, és visszavonási értesítés megy az SOS-csatornára és a vészhelyzeti partnereknek.';
 
   @override
   String get sos_keepActive => 'Aktív marad';
@@ -6500,6 +6500,20 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'VÉSZHELYZETI SOS';
+
+  @override
+  String get sos_cancelledBySender => 'A küldő visszavonta';
+
+  @override
+  String get sos_updatesChannelName => 'SOS-frissítések';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return '$name SOS-e visszavonva';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'A küldő visszavonta ezt az SOS-t.';
 
   @override
   String sos_warningMore(int count) {

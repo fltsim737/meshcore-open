@@ -10,6 +10,7 @@ import 'prefs_manager.dart';
 class SosStore {
   static const String _outgoingKey = 'sos_outgoing';
   static const String _incomingKey = 'sos_incoming';
+  static const String _pendingCancelKey = 'sos_pending_cancel';
 
   /// Unreadable state is discarded rather than allowed to block startup.
   OutgoingSos? loadOutgoing() {
@@ -29,6 +30,19 @@ class SosStore {
       await prefs.remove(_outgoingKey);
     } else {
       await prefs.setString(_outgoingKey, jsonEncode(sos.toJson()));
+    }
+  }
+
+  /// ID of a cancelled SOS whose cancellation notice has not gone out yet.
+  String? loadPendingCancel() =>
+      PrefsManager.instance.getString(_pendingCancelKey);
+
+  Future<void> savePendingCancel(String? id) async {
+    final prefs = PrefsManager.instance;
+    if (id == null) {
+      await prefs.remove(_pendingCancelKey);
+    } else {
+      await prefs.setString(_pendingCancelKey, id);
     }
   }
 

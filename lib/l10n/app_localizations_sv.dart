@@ -6325,7 +6325,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Upprepade sändningar stoppas. Hjälpare får inte veta att du avbröt, så meddela dem om du är i säkerhet.';
+      'Upprepade sändningar stoppas direkt och ett avbrottsmeddelande skickas i SOS-kanalen och till dina nödkontakter.';
 
   @override
   String get sos_keepActive => 'Behåll aktivt';
@@ -6454,6 +6454,20 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'NÖD-SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Avbrutet av avsändaren';
+
+  @override
+  String get sos_updatesChannelName => 'SOS-uppdateringar';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS från $name avbrutet';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'Avsändaren avbröt detta SOS.';
 
   @override
   String sos_warningMore(int count) {

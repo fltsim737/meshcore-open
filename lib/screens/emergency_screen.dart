@@ -437,7 +437,11 @@ class _IncomingSosCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    alert.ackSent ? l10n.sos_ackSent : l10n.sos_dismissed,
+                    alert.cancelled
+                        ? l10n.sos_cancelledBySender
+                        : alert.ackSent
+                        ? l10n.sos_ackSent
+                        : l10n.sos_dismissed,
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -446,7 +450,7 @@ class _IncomingSosCard extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 4,
                 children: [
-                  if (!alert.ackSent)
+                  if (!alert.ackSent && !alert.cancelled)
                     FilledButton.icon(
                       style: FilledButton.styleFrom(
                         backgroundColor: Colors.red.shade700,

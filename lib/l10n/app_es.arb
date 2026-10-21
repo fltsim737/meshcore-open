@@ -3470,7 +3470,7 @@
   "sos_active": "SOS ACTIVO",
   "sos_cancel": "Cancelar SOS",
   "sos_cancelConfirmTitle": "¿Cancelar SOS?",
-  "sos_cancelConfirmBody": "Las retransmisiones se detendrán. No se avisa a quienes respondan de que cancelaste; diles si estás a salvo.",
+  "sos_cancelConfirmBody": "Las retransmisiones se detienen al instante y se envía un aviso de cancelación al canal SOS y a tus contactos de emergencia.",
   "sos_keepActive": "Mantener activo",
   "sos_broadcastCount": "Enviado {count} veces, último a las {time}",
   "@sos_broadcastCount": {
@@ -3574,5 +3574,16 @@
       }
     }
   },
-  "map_enterPathManually": "Introducir ruta manualmente"
+  "map_enterPathManually": "Introducir ruta manualmente",
+  "sos_cancelledBySender": "Cancelado por el remitente",
+  "sos_updatesChannelName": "Novedades de SOS",
+  "sos_cancelNotificationTitle": "SOS de {name} cancelado",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "El remitente canceló este SOS."
 }

@@ -6379,7 +6379,7 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get sos_cancelConfirmBody =>
-      'Повторните излъчвания ще спрат. Спасителите няма да разберат, че сте отменили — уведомете ги, ако сте в безопасност.';
+      'Повторните излъчвания спират веднага и се изпраща известие за отмяна в SOS канала и до контактите за спешни случаи.';
 
   @override
   String get sos_keepActive => 'Остави активен';
@@ -6508,6 +6508,20 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get sos_warningTitle => 'СПЕШЕН SOS';
+
+  @override
+  String get sos_cancelledBySender => 'Отменено от подателя';
+
+  @override
+  String get sos_updatesChannelName => 'SOS актуализации';
+
+  @override
+  String sos_cancelNotificationTitle(String name) {
+    return 'SOS от $name е отменен';
+  }
+
+  @override
+  String get sos_cancelNotificationBody => 'Подателят отмени този SOS.';
 
   @override
   String sos_warningMore(int count) {

@@ -3470,7 +3470,7 @@
   "sos_active": "SOS ACTIF",
   "sos_cancel": "Annuler le SOS",
   "sos_cancelConfirmTitle": "Annuler le SOS ?",
-  "sos_cancelConfirmBody": "Les rediffusions vont s'arrêter. Les secours ne sont pas prévenus de l'annulation : informez-les si vous êtes en sécurité.",
+  "sos_cancelConfirmBody": "Les rediffusions s'arrêtent immédiatement et un avis d'annulation est envoyé sur le canal SOS et à vos contacts d'urgence.",
   "sos_keepActive": "Garder actif",
   "sos_broadcastCount": "Envoyé {count} fois, dernier à {time}",
   "@sos_broadcastCount": {
@@ -3574,5 +3574,16 @@
       }
     }
   },
-  "map_enterPathManually": "Saisir le chemin manuellement"
+  "map_enterPathManually": "Saisir le chemin manuellement",
+  "sos_cancelledBySender": "Annulé par l'expéditeur",
+  "sos_updatesChannelName": "Mises à jour SOS",
+  "sos_cancelNotificationTitle": "SOS de {name} annulé",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "L'expéditeur a annulé ce SOS."
 }

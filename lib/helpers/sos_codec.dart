@@ -55,8 +55,15 @@ class SosPayload {
 /// Lon: -122.54321
 /// Reply ACK #a1b2
 /// ```
+///
+/// Cancelling sends `*** SOS CANCELLED *** #a1b2`, the time, and a line
+/// saying the sender cancelled it.
 class SosCodec {
   static const String header = '*** EMERGENCY SOS ***';
+  static const String cancelHeader = '*** SOS CANCELLED ***';
+  static final RegExp _cancelLine = RegExp(
+    r'^\*\*\* SOS CANCELLED \*\*\* #([0-9a-f]{4})$',
+  );
   static final RegExp _headerLine = RegExp(
     r'^\*\*\* EMERGENCY SOS \*\*\* #([0-9a-f]{4})$',
   );
@@ -73,7 +80,9 @@ class SosCodec {
   /// True for text that must be sent byte-for-byte (no Smaz or Cyr2Lat).
   static bool isStructured(String text) {
     final trimmed = text.trim();
-    return trimmed.startsWith(header) || _ack.hasMatch(trimmed);
+    return trimmed.startsWith(header) ||
+        trimmed.startsWith(cancelHeader) ||
+        _ack.hasMatch(trimmed);
   }
 
   /// [node] is included for direct messages; on a channel the radio already
@@ -152,4 +161,17 @@ class SosCodec {
 
   static String? parseAck(String text) =>
       _ack.firstMatch(text.trim())?.group(1)?.toLowerCase();
+
+  static String encodeCancel(String id, DateTime time) => [
+    '$cancelHeader #$id',
+    'Time: ${formatTime(time)}',
+    'The sender cancelled this SOS.',
+  ].join('\n');
+
+  static String? parseCancel(String text) {
+    final firstLine = const LineSplitter().convert(text.trim()).firstOrNull;
+    return firstLine == null
+        ? null
+        : _cancelLine.firstMatch(firstLine.trim())?.group(1);
+  }
 }

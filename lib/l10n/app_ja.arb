@@ -3470,7 +3470,7 @@
   "sos_active": "SOS発信中",
   "sos_cancel": "SOSを取り消す",
   "sos_cancelConfirmTitle": "SOSを取り消しますか？",
-  "sos_cancelConfirmBody": "繰り返し送信が止まります。応答者には取り消しが伝わらないため、無事であれば知らせてください。",
+  "sos_cancelConfirmBody": "繰り返し送信はすぐに停止し、SOSチャンネルと緊急連絡先に取り消しの通知が送信されます。",
   "sos_keepActive": "発信を続ける",
   "sos_broadcastCount": "{count}回送信、最終 {time}",
   "@sos_broadcastCount": {
@@ -3574,5 +3574,16 @@
       }
     }
   },
-  "map_enterPathManually": "経路を手動で入力"
+  "map_enterPathManually": "経路を手動で入力",
+  "sos_cancelledBySender": "送信者が取り消し",
+  "sos_updatesChannelName": "SOSの更新",
+  "sos_cancelNotificationTitle": "{name} のSOSは取り消されました",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "送信者がこのSOSを取り消しました。"
 }

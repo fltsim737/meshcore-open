@@ -3471,7 +3471,7 @@
   "sos_active": "SOS AKTIV",
   "sos_cancel": "SOS abbrechen",
   "sos_cancelConfirmTitle": "SOS abbrechen?",
-  "sos_cancelConfirmBody": "Wiederholte Aussendungen werden gestoppt. Helfer erfahren nicht, dass du abgebrochen hast – sag ihnen Bescheid, wenn du in Sicherheit bist.",
+  "sos_cancelConfirmBody": "Wiederholte Aussendungen stoppen sofort, und eine Abbruchmeldung wird im SOS-Kanal und an deine Notfallkontakte gesendet.",
   "sos_keepActive": "Aktiv lassen",
   "sos_broadcastCount": "{count}-mal gesendet, zuletzt um {time}",
   "@sos_broadcastCount": {
@@ -3575,5 +3575,16 @@
       }
     }
   },
-  "map_enterPathManually": "Pfad manuell eingeben"
+  "map_enterPathManually": "Pfad manuell eingeben",
+  "sos_cancelledBySender": "Vom Absender abgebrochen",
+  "sos_updatesChannelName": "SOS-Updates",
+  "sos_cancelNotificationTitle": "SOS von {name} abgebrochen",
+  "@sos_cancelNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sos_cancelNotificationBody": "Der Absender hat dieses SOS abgebrochen."
 }
