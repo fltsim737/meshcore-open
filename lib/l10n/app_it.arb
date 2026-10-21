@@ -3145,6 +3145,8 @@
   },
   "appSettings_batteryOptimization": "Attività in background",
   "appSettings_batteryOptimizationSubtitle": "Imposta MeshCore Open su \"Non ottimizzare\" nelle impostazioni della batteria per continuare a ricevere i messaggi in background",
+  "appSettings_startOnLogin": "Avvia all'accesso",
+  "appSettings_startOnLoginSubtitle": "Si apre nascosta nell'area di notifica, in ascolto di messaggi e avvisi SOS",
   "contacts_storageFull": "Lo spazio di archiviazione dei contatti sul nodo è pieno. Non si possono aggiungere nuovi nodi finché non vengono rimossi dei contatti.",
   "contacts_removeFromContacts": "Rimuovi dai contatti",
   "contacts_removeFromContactsConfirm": "{contactName} passerà in Contatti scoperti. La cronologia della chat verrà eliminata.",

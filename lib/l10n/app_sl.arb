@@ -3007,6 +3007,8 @@
   },
   "appSettings_batteryOptimization": "Dejavnost v ozadju",
   "appSettings_batteryOptimizationSubtitle": "V nastavitvah baterije nastavite MeshCore Open na „Ne optimiziraj“, da bodo sporočila še naprej prihajala v ozadju",
+  "appSettings_startOnLogin": "Zaženi ob prijavi",
+  "appSettings_startOnLoginSubtitle": "Odpre se skrita v sistemski vrstici in posluša sporočila ter opozorila SOS",
   "contacts_storageFull": "Pomnilnik stikov v vozlišču je poln. Novih vozlišč ni mogoče dodati, dokler ne odstranite stikov.",
   "contacts_removeFromContacts": "Odstrani iz stikov",
   "contacts_removeFromContactsConfirm": "{contactName} bo prestavljen med odkriti stike. Zgodovina klepeta bo izbrisana.",

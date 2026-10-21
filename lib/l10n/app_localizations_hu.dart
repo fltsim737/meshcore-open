@@ -975,6 +975,13 @@ class AppLocalizationsHu extends AppLocalizations {
       'Állítsa be a MeshCore Open alkalmazást az akkumulátorbeállításokban a „Ne optimalizálja” értékre, hogy az üzenetek a háttérben is érkezzenek';
 
   @override
+  String get appSettings_startOnLogin => 'Indítás bejelentkezéskor';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Rejtve indul a tálcán, és figyeli az üzeneteket és SOS-riasztásokat';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Csatorna üzenetek értesítései';
 

@@ -974,6 +974,13 @@ class AppLocalizationsSl extends AppLocalizations {
       'V nastavitvah baterije nastavite MeshCore Open na „Ne optimiziraj“, da bodo sporočila še naprej prihajala v ozadju';
 
   @override
+  String get appSettings_startOnLogin => 'Zaženi ob prijavi';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Odpre se skrita v sistemski vrstici in posluša sporočila ter opozorila SOS';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Obvestila o sporočilih kanala';
 

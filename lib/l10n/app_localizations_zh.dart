@@ -921,6 +921,12 @@ class AppLocalizationsZh extends AppLocalizations {
       '在电池设置中将 MeshCore Open 设为“不优化”，这样后台也能继续接收消息';
 
   @override
+  String get appSettings_startOnLogin => '登录时启动';
+
+  @override
+  String get appSettings_startOnLoginSubtitle => '在托盘中隐藏启动，接收消息和 SOS 警报';
+
+  @override
   String get appSettings_channelMessageNotifications => '频道消息通知';
 
   @override

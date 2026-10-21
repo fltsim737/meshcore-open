@@ -976,6 +976,13 @@ class AppLocalizationsNl extends AppLocalizations {
       'Zet MeshCore Open op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen';
 
   @override
+  String get appSettings_startOnLogin => 'Starten bij inloggen';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Opent verborgen in het systeemvak en luistert naar berichten en SOS-meldingen';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Kanaalberichtnotificaties';
 

@@ -20,9 +20,11 @@ class DesktopTrayService with TrayListener, WindowListener {
   Future<void> Function()? _onQuit;
 
   /// Sets up the window and tray. [onQuit] runs before the app exits.
+  /// [startedHidden]: launched at login, so the window starts in the tray.
   Future<void> initialize({
     required Future<void> Function() onQuit,
     String? languageOverride,
+    bool startedHidden = false,
   }) async {
     if (!PlatformInfo.isLinux) return;
     _onQuit = onQuit;
@@ -53,6 +55,8 @@ class DesktopTrayService with TrayListener, WindowListener {
       // No tray host: closing the window quits as before.
       debugPrint('Tray icon unavailable: $e');
       await windowManager.setPreventClose(false);
+      // Nowhere to open a hidden window from, so show it.
+      if (startedHidden) await windowManager.show();
     }
   }
 

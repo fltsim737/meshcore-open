@@ -983,6 +983,13 @@ class AppLocalizationsBg extends AppLocalizations {
       'Задайтете за MeshCore Open стойност „Не оптимизирай“ в настройките на батерията, за да продължават да пристигат съобщения във фона';
 
   @override
+  String get appSettings_startOnLogin => 'Стартиране при вход';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Отваря се скрито в системната област и следи за съобщения и SOS сигнали';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Известия за канални съобщения';
 

@@ -3039,6 +3039,8 @@
   },
   "appSettings_batteryOptimization": "Działanie w tle",
   "appSettings_batteryOptimizationSubtitle": "Ustaw w ustawieniach baterii aplikacji MeshCore Open opcję „Nie optymalizuj”, aby wiadomości przychodziły w tle",
+  "appSettings_startOnLogin": "Uruchamiaj po zalogowaniu",
+  "appSettings_startOnLoginSubtitle": "Otwiera się ukryta w zasobniku i nasłuchuje wiadomości oraz alarmów SOS",
   "contacts_storageFull": "Pamięć kontaktów w węźle jest pełna. Nowe węzły nie mogą być dodane, dopóki nie usuniesz kontaktów.",
   "contacts_removeFromContacts": "Usuń z kontaktów",
   "contacts_removeFromContactsConfirm": "{contactName} trafi do Odkrytych kontaktów. Historia czatu zostanie usunięta.",

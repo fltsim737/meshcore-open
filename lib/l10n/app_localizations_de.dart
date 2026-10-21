@@ -980,6 +980,13 @@ class AppLocalizationsDe extends AppLocalizations {
       'Setzen Sie MeshCore Open in den Akkueinstellungen auf „Nicht optimieren“, damit Nachrichten auch im Hintergrund ankommen';
 
   @override
+  String get appSettings_startOnLogin => 'Beim Anmelden starten';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Startet ausgeblendet im Infobereich und empfängt Nachrichten und SOS-Alarme';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Kanalnachrichten-Benachrichtigungen';
 

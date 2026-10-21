@@ -9,6 +9,7 @@ import '../models/image_codec_support.dart';
 import '../services/app_settings_service.dart';
 import '../services/background_service.dart';
 import '../services/image_codec_service.dart';
+import '../services/linux_autostart.dart';
 import '../services/map_tile_cache_service.dart';
 import '../services/notification_service.dart';
 import '../theme/mesh_theme.dart';
@@ -311,6 +312,10 @@ class AppSettingsScreen extends StatelessWidget {
             trailing: const Icon(Icons.open_in_new, size: 24),
             onTap: BackgroundService.openBatteryOptimizationSettings,
           ),
+        ],
+        if (PlatformInfo.isLinux) ...[
+          const Divider(height: 1, indent: 16),
+          const _StartOnLoginTile(),
         ],
         const Divider(height: 1, indent: 16),
         SwitchListTile(
@@ -1628,4 +1633,38 @@ class _ScrollIntoViewOnceState extends State<_ScrollIntoViewOnce> {
 
   @override
   Widget build(BuildContext context) => widget.child;
+}
+
+/// Linux: start hidden in the tray at login.
+class _StartOnLoginTile extends StatefulWidget {
+  const _StartOnLoginTile();
+
+  @override
+  State<_StartOnLoginTile> createState() => _StartOnLoginTileState();
+}
+
+class _StartOnLoginTileState extends State<_StartOnLoginTile> {
+  final _autostart = LinuxAutostart();
+  late bool _enabled = _autostart.isEnabled;
+
+  Future<void> _set(bool enabled) async {
+    try {
+      await _autostart.setEnabled(enabled);
+    } catch (_) {
+      // Fall through: the switch shows what is actually on disk.
+    }
+    if (mounted) setState(() => _enabled = _autostart.isEnabled);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      secondary: const Icon(Icons.login, size: 24),
+      title: Text(context.l10n.appSettings_startOnLogin),
+      subtitle: Text(context.l10n.appSettings_startOnLoginSubtitle),
+      value: _enabled,
+      onChanged: _set,
+    );
+  }
 }

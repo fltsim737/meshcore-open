@@ -982,6 +982,13 @@ class AppLocalizationsIt extends AppLocalizations {
       'Imposta MeshCore Open su \"Non ottimizzare\" nelle impostazioni della batteria per continuare a ricevere i messaggi in background';
 
   @override
+  String get appSettings_startOnLogin => 'Avvia all\'accesso';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Si apre nascosta nell\'area di notifica, in ascolto di messaggi e avvisi SOS';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Notifiche Messaggi Canale';
 

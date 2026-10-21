@@ -429,6 +429,8 @@
   "appSettings_messageNotificationsSubtitle": "Show notification when receiving new messages",
   "appSettings_batteryOptimization": "Background Activity",
   "appSettings_batteryOptimizationSubtitle": "Set MeshCore Open to \"Don't optimize\" in battery settings so messages keep arriving in the background",
+  "appSettings_startOnLogin": "Start when you log in",
+  "appSettings_startOnLoginSubtitle": "Opens hidden in the tray, listening for messages and SOS alerts",
   "appSettings_channelMessageNotifications": "Channel Message Notifications",
   "appSettings_channelMessageNotificationsSubtitle": "Show notification when receiving channel messages",
   "appSettings_advertisementNotifications": "Advertisement Notifications",

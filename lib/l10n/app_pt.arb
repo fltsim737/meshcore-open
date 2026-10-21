@@ -3006,6 +3006,8 @@
   },
   "appSettings_batteryOptimization": "Atividade em segundo plano",
   "appSettings_batteryOptimizationSubtitle": "Defina o MeshCore Open como \"Não otimizar\" nas configurações de bateria para que as mensagens continuem a chegar em segundo plano",
+  "appSettings_startOnLogin": "Iniciar ao entrar na sessão",
+  "appSettings_startOnLoginSubtitle": "Abre oculta na área de notificação, a aguardar mensagens e alertas SOS",
   "contacts_storageFull": "O armazenamento de contatos no nó está cheio. Não é possível adicionar novos nós até que contatos sejam removidos.",
   "contacts_removeFromContacts": "Remover dos contatos",
   "contacts_removeFromContactsConfirm": "{contactName} passará para os contatos descobertos. O histórico do chat será excluído.",

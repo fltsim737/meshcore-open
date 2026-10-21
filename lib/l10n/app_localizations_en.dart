@@ -966,6 +966,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Set MeshCore Open to \"Don\'t optimize\" in battery settings so messages keep arriving in the background';
 
   @override
+  String get appSettings_startOnLogin => 'Start when you log in';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Opens hidden in the tray, listening for messages and SOS alerts';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Channel Message Notifications';
 

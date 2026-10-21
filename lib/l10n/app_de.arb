@@ -3141,6 +3141,8 @@
   },
   "appSettings_batteryOptimization": "Hintergrundaktivität",
   "appSettings_batteryOptimizationSubtitle": "Setzen Sie MeshCore Open in den Akkueinstellungen auf „Nicht optimieren“, damit Nachrichten auch im Hintergrund ankommen",
+  "appSettings_startOnLogin": "Beim Anmelden starten",
+  "appSettings_startOnLoginSubtitle": "Startet ausgeblendet im Infobereich und empfängt Nachrichten und SOS-Alarme",
   "contacts_storageFull": "Der Kontaktspeicher auf dem Knoten ist voll. Neue Knoten lassen sich erst wieder hinzufügen, wenn Kontakte entfernt wurden.",
   "contacts_removeFromContacts": "Aus Kontakten entfernen",
   "contacts_removeFromContactsConfirm": "{contactName} wird zu „Entdeckte Kontakte“ verschoben. Der Chatverlauf wird gelöscht.",

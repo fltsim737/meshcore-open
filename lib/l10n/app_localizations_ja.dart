@@ -934,6 +934,13 @@ class AppLocalizationsJa extends AppLocalizations {
       'バッテリー設定で MeshCore Open を「最適化しない」に設定すると、バックグラウンドでもメッセージを受信し続けられます';
 
   @override
+  String get appSettings_startOnLogin => 'ログイン時に起動';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'トレイに隠れた状態で起動し、メッセージとSOSアラートを待ち受けます';
+
+  @override
   String get appSettings_channelMessageNotifications => 'チャネルメッセージの通知';
 
   @override
