@@ -10714,7 +10714,7 @@ abstract class AppLocalizations {
   /// No description provided for @sos_broadcastCount.
   ///
   /// In en, this message translates to:
-  /// **'Sent {count} times, last at {time}'**
+  /// **'{count, plural, =1{Sent once} other{Sent {count} times}}, last at {time}'**
   String sos_broadcastCount(int count, String time);
 
   /// No description provided for @sos_notSentYet.

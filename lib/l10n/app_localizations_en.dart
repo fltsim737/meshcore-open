@@ -6291,7 +6291,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String sos_broadcastCount(int count, String time) {
-    return 'Sent $count times, last at $time';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Sent $count times',
+      one: 'Sent once',
+    );
+    return '$_temp0, last at $time';
   }
 
   @override

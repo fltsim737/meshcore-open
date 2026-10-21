@@ -10,6 +10,7 @@ import '../l10n/app_localizations.dart';
 import '../l10n/l10n.dart';
 import '../models/contact.dart';
 import '../models/sos_alert.dart';
+import '../review_mode/review_mode_banner.dart';
 import '../services/sos_service.dart';
 import '../utils/disconnect_navigation_mixin.dart';
 import '../utils/route_transitions.dart';
@@ -72,8 +73,10 @@ class _EmergencyScreenState extends State<EmergencyScreen>
         automaticallyImplyLeading: !widget.hideBackButton,
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(0, 8, 0, 24),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
         children: [
+          const ReviewModeBanner(),
+          const SizedBox(height: 8),
           if (active == null)
             _SosHoldButton(onActivated: sos.activate)
           else
