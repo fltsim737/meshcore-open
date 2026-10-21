@@ -966,6 +966,13 @@ class AppLocalizationsSv extends AppLocalizations {
       'Sätt MeshCore Open till “Inte optimera” i batteriinställningarna så att meddelanden fortsätter att komma i bakgrunden';
 
   @override
+  String get appSettings_startOnLogin => 'Starta vid inloggning';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Öppnas dold i systemfältet och lyssnar efter meddelanden och SOS-larm';
+
+  @override
   String get appSettings_channelMessageNotifications => 'Kanalnotifieringar';
 
   @override

@@ -981,6 +981,13 @@ class AppLocalizationsPt extends AppLocalizations {
       'Defina o MeshCore Open como \"Não otimizar\" nas configurações de bateria para que as mensagens continuem a chegar em segundo plano';
 
   @override
+  String get appSettings_startOnLogin => 'Iniciar ao entrar na sessão';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Abre oculta na área de notificação, a aguardar mensagens e alertas SOS';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Notificações de Mensagens do Canal';
 

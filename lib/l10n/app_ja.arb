@@ -3140,6 +3140,8 @@
   },
   "appSettings_batteryOptimization": "バックグラウンド動作",
   "appSettings_batteryOptimizationSubtitle": "バッテリー設定で MeshCore Open を「最適化しない」に設定すると、バックグラウンドでもメッセージを受信し続けられます",
+  "appSettings_startOnLogin": "ログイン時に起動",
+  "appSettings_startOnLoginSubtitle": "トレイに隠れた状態で起動し、メッセージとSOSアラートを待ち受けます",
   "contacts_storageFull": "ノードの連絡先ストレージが満杯です。連絡先を削除するまで、新しいノードを追加できません。",
   "contacts_removeFromContacts": "連絡先から削除",
   "contacts_removeFromContactsConfirm": "{contactName} は発見された連絡先に移動します。チャット履歴は削除されます。",

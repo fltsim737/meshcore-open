@@ -270,6 +270,10 @@ The Flutter engine is cached for the whole process (`MainActivity.kt`), so closi
 
 On Linux (`desktop_tray_service.dart`) the app puts an icon in the panel's system tray. Closing the window hides it there instead of quitting, so the radio connection, message notifications and SOS alarms keep running. The tray menu has **Show MeshCore Open** and **Quit**; Quit disconnects the radio and ends the app. A new incoming SOS brings the window back to the front. If the desktop has no tray, closing the window quits as before.
 
+Only one copy runs at a time: launching the app again while it is in the tray brings its window back instead of connecting a second copy.
+
+**Start when you log in** (App Settings → Notifications, Linux only, off by default) adds a desktop autostart entry, `~/.config/autostart/meshcore-open.desktop`, that launches the app with `--hidden`: it starts in the tray, connects and listens without opening a window. Turning it off, or removing the entry in the desktop's own startup settings, stops it. When running from an AppImage the entry points at the AppImage, and is updated if the AppImage moves.
+
 Building needs `libayatana-appindicator3-dev`; running needs `libayatana-appindicator3-1`, which most desktops ship.
 
 ## URL Image Previews

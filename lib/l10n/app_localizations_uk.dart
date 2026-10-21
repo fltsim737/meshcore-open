@@ -977,6 +977,13 @@ class AppLocalizationsUk extends AppLocalizations {
       'Встановіть для MeshCore Open значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні';
 
   @override
+  String get appSettings_startOnLogin => 'Запускати під час входу';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Відкривається прихованою в треї та очікує повідомлення і сигнали SOS';
+
+  @override
   String get appSettings_channelMessageNotifications => 'Сповіщення каналів';
 
   @override

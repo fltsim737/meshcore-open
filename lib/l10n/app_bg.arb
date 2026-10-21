@@ -3006,6 +3006,8 @@
   },
   "appSettings_batteryOptimization": "Дейност във фона",
   "appSettings_batteryOptimizationSubtitle": "Задайтете за MeshCore Open стойност „Не оптимизирай“ в настройките на батерията, за да продължават да пристигат съобщения във фона",
+  "appSettings_startOnLogin": "Стартиране при вход",
+  "appSettings_startOnLoginSubtitle": "Отваря се скрито в системната област и следи за съобщения и SOS сигнали",
   "contacts_storageFull": "Паметта за контакти на възела е запълнена. Нови възли не могат да се добавят, докато контактите не бъдат премахнати.",
   "contacts_removeFromContacts": "Премахни от контактите",
   "contacts_removeFromContactsConfirm": "{contactName} ще бъде преместен в „Открити контакти“. Историята на чата ще бъде изтрита.",

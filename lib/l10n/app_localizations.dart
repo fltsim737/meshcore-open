@@ -1810,6 +1810,18 @@ abstract class AppLocalizations {
   /// **'Set MeshCore Open to \"Don\'t optimize\" in battery settings so messages keep arriving in the background'**
   String get appSettings_batteryOptimizationSubtitle;
 
+  /// No description provided for @appSettings_startOnLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Start when you log in'**
+  String get appSettings_startOnLogin;
+
+  /// No description provided for @appSettings_startOnLoginSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens hidden in the tray, listening for messages and SOS alerts'**
+  String get appSettings_startOnLoginSubtitle;
+
   /// No description provided for @appSettings_channelMessageNotifications.
   ///
   /// In en, this message translates to:

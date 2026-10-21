@@ -196,6 +196,8 @@
   "appSettings_messageNotificationsSubtitle": "Toon notificatie bij het ontvangen van nieuwe berichten",
   "appSettings_batteryOptimization": "Achtergrondactiviteit",
   "appSettings_batteryOptimizationSubtitle": "Zet MeshCore Open op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen",
+  "appSettings_startOnLogin": "Starten bij inloggen",
+  "appSettings_startOnLoginSubtitle": "Opent verborgen in het systeemvak en luistert naar berichten en SOS-meldingen",
   "appSettings_channelMessageNotifications": "Kanaalberichtnotificaties",
   "appSettings_channelMessageNotificationsSubtitle": "Toon notificatie bij het ontvangen van kanaalberichten",
   "appSettings_advertisementNotifications": "Advert-notificaties",

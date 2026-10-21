@@ -936,6 +936,13 @@ class AppLocalizationsKo extends AppLocalizations {
       '배터리 설정에서 MeshCore Open을 \"최적화 안 함\"으로 지정하면 백그라운드에서도 메시지가 계속 수신됩니다';
 
   @override
+  String get appSettings_startOnLogin => '로그인 시 시작';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      '트레이에 숨겨진 채로 열려 메시지와 SOS 경보를 수신합니다';
+
+  @override
   String get appSettings_channelMessageNotifications => '채널 메시지 알림';
 
   @override

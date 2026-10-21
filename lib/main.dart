@@ -23,6 +23,7 @@ import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
 import 'services/sos_service.dart';
 import 'services/desktop_tray_service.dart';
+import 'services/linux_autostart.dart';
 import 'widgets/sos_warning_overlay.dart';
 import 'services/storage_service.dart';
 import 'services/message_retry_service.dart';
@@ -43,7 +44,7 @@ import 'theme/mesh_theme.dart';
 import 'utils/app_logger.dart';
 import 'widgets/image_send_codec_binding.dart';
 
-void main() async {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // On desktop, debugPrint is not suppressed in release builds and every
@@ -224,7 +225,15 @@ void main() async {
   await trayService.initialize(
     onQuit: connector.disconnect,
     languageOverride: appSettingsService.settings.languageOverride,
+    startedHidden: args.contains(LinuxAutostart.hiddenArgument),
   );
+  if (PlatformInfo.isLinux) {
+    try {
+      await LinuxAutostart().refresh();
+    } catch (e) {
+      appLogger.warn('Updating the login autostart entry failed: $e');
+    }
+  }
   // A new SOS brings the window up, so its warning screen is in view.
   var shownAlerts = <String>{};
   sosService.addListener(() {

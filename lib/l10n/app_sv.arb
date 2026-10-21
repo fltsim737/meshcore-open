@@ -3001,6 +3001,8 @@
   },
   "appSettings_batteryOptimization": "Bakgrundsaktivitet",
   "appSettings_batteryOptimizationSubtitle": "Sätt MeshCore Open till “Inte optimera” i batteriinställningarna så att meddelanden fortsätter att komma i bakgrunden",
+  "appSettings_startOnLogin": "Starta vid inloggning",
+  "appSettings_startOnLoginSubtitle": "Öppnas dold i systemfältet och lyssnar efter meddelanden och SOS-larm",
   "contacts_storageFull": "Kontaktlagringen på noden är full. Nya noder kan inte läggas till förrän kontakter har tagits bort.",
   "contacts_removeFromContacts": "Ta bort från kontakter",
   "contacts_removeFromContactsConfirm": "{contactName} flyttas till Upptäckta kontakter. Chatthistoriken tas bort.",

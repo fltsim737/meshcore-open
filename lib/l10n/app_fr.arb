@@ -3140,6 +3140,8 @@
   },
   "appSettings_batteryOptimization": "Activité en arrière-plan",
   "appSettings_batteryOptimizationSubtitle": "Définissez MeshCore Open sur « Ne pas optimiser » dans les paramètres de batterie pour que les messages continuent d'arriver en arrière-plan",
+  "appSettings_startOnLogin": "Démarrer à l'ouverture de session",
+  "appSettings_startOnLoginSubtitle": "S'ouvre masquée dans la zone de notification, à l'écoute des messages et alertes SOS",
   "contacts_storageFull": "Le stockage des contacts sur le nœud est plein. Impossible d'ajouter de nouveaux nœuds tant que des contacts ne sont pas supprimés.",
   "contacts_removeFromContacts": "Retirer des contacts",
   "contacts_removeFromContactsConfirm": "{contactName} sera déplacé vers Contacts découverts. L'historique du chat sera supprimé.",

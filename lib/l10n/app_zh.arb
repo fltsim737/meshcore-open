@@ -3011,6 +3011,8 @@
   },
   "appSettings_batteryOptimization": "后台活动",
   "appSettings_batteryOptimizationSubtitle": "在电池设置中将 MeshCore Open 设为“不优化”，这样后台也能继续接收消息",
+  "appSettings_startOnLogin": "登录时启动",
+  "appSettings_startOnLoginSubtitle": "在托盘中隐藏启动，接收消息和 SOS 警报",
   "contacts_storageFull": "节点上的联系人存储已满。在删除联系人之前无法添加新节点。",
   "contacts_removeFromContacts": "从联系人中移除",
   "contacts_removeFromContactsConfirm": "{contactName} 将移至已发现的联系人。聊天记录将被删除。",

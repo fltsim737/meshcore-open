@@ -3007,6 +3007,8 @@
   },
   "appSettings_batteryOptimization": "Aktivita na pozadí",
   "appSettings_batteryOptimizationSubtitle": "V nastaveniach batérie nastavte MeshCore Open na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí",
+  "appSettings_startOnLogin": "Spustiť po prihlásení",
+  "appSettings_startOnLoginSubtitle": "Otvorí sa skrytá v oblasti oznámení a počúva správy a SOS výstrahy",
   "contacts_storageFull": "Úložisko kontaktov v uzle je plné. Nové uzly nemožno pridať, kým neodstránite kontakty.",
   "contacts_removeFromContacts": "Odstrániť z kontaktov",
   "contacts_removeFromContactsConfirm": "{contactName} sa presunie medzi objavené kontakty. História chatu bude vymazaná.",

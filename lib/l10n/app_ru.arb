@@ -2303,6 +2303,8 @@
   },
   "appSettings_batteryOptimization": "Работа в фоне",
   "appSettings_batteryOptimizationSubtitle": "Задайте для MeshCore Open значение «Не оптимизировать» в настройках батареи, чтобы сообщения продолжали приходить в фоне",
+  "appSettings_startOnLogin": "Запускать при входе",
+  "appSettings_startOnLoginSubtitle": "Открывается скрыто в трее и ожидает сообщения и сигналы SOS",
   "contacts_storageFull": "Хранилище контактов на узле заполнено. Новые узлы нельзя добавить, пока контакты не удалены.",
   "contacts_removeFromContacts": "Убрать из контактов",
   "contacts_removeFromContactsConfirm": "{contactName} будет перемещён в «Обнаруженные контакты». История чата будет удалена.",

@@ -975,6 +975,13 @@ class AppLocalizationsSk extends AppLocalizations {
       'V nastaveniach batérie nastavte MeshCore Open na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí';
 
   @override
+  String get appSettings_startOnLogin => 'Spustiť po prihlásení';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Otvorí sa skrytá v oblasti oznámení a počúva správy a SOS výstrahy';
+
+  @override
   String get appSettings_channelMessageNotifications => 'Notifikácie z kanálov';
 
   @override

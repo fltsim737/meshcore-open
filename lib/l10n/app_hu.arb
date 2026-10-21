@@ -3045,6 +3045,8 @@
   },
   "appSettings_batteryOptimization": "Háttérben futó tevékenység",
   "appSettings_batteryOptimizationSubtitle": "Állítsa be a MeshCore Open alkalmazást az akkumulátorbeállításokban a „Ne optimalizálja” értékre, hogy az üzenetek a háttérben is érkezzenek",
+  "appSettings_startOnLogin": "Indítás bejelentkezéskor",
+  "appSettings_startOnLoginSubtitle": "Rejtve indul a tálcán, és figyeli az üzeneteket és SOS-riasztásokat",
   "contacts_storageFull": "A csomópont névjegytárhelye megtelt. Új csomópontokat nem lehet hozzáadni, amíg nem távolít el névjegyeket.",
   "contacts_removeFromContacts": "Eltávolítás a névjegyek közül",
   "contacts_removeFromContactsConfirm": "{contactName} átkerül a Felfedezett kapcsolatok közé. A csevegési előzmények törlődnek.",

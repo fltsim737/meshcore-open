@@ -989,6 +989,13 @@ class AppLocalizationsPl extends AppLocalizations {
       'Ustaw w ustawieniach baterii aplikacji MeshCore Open opcję „Nie optymalizuj”, aby wiadomości przychodziły w tle';
 
   @override
+  String get appSettings_startOnLogin => 'Uruchamiaj po zalogowaniu';
+
+  @override
+  String get appSettings_startOnLoginSubtitle =>
+      'Otwiera się ukryta w zasobniku i nasłuchuje wiadomości oraz alarmów SOS';
+
+  @override
   String get appSettings_channelMessageNotifications =>
       'Powiadomienia o Wiadomościach na Kanałach';
 
