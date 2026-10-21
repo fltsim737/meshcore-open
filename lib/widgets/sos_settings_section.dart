@@ -5,6 +5,8 @@ import '../connector/meshcore_connector.dart';
 import '../connector/meshcore_protocol.dart';
 import '../l10n/l10n.dart';
 import '../services/app_settings_service.dart';
+import '../services/sos_location_service.dart';
+import '../services/sos_service.dart';
 import 'mesh_nav_tile.dart';
 
 /// Stored emergency location, SOS channel and emergency contacts.
@@ -85,6 +87,7 @@ class SosSettingsSection extends StatelessWidget {
       builder: (_) => SosLocationDialog(
         initialLatitude: settingsService.settings.sosLatitude,
         initialLongitude: settingsService.settings.sosLongitude,
+        phoneLocation: context.read<SosService>().phoneLocation,
       ),
     );
     if (result == null) return;
@@ -126,11 +129,13 @@ class SosSettingsSection extends StatelessWidget {
 class SosLocationDialog extends StatefulWidget {
   final double? initialLatitude;
   final double? initialLongitude;
+  final PhoneLocationProvider? phoneLocation;
 
   const SosLocationDialog({
     super.key,
     this.initialLatitude,
     this.initialLongitude,
+    this.phoneLocation,
   });
 
   @override
@@ -145,6 +150,26 @@ class _SosLocationDialogState extends State<SosLocationDialog> {
     text: widget.initialLongitude?.toStringAsFixed(5) ?? '',
   );
   String? _error;
+  bool _locating = false;
+
+  Future<void> _useCurrentGps(PhoneLocationProvider provider) async {
+    setState(() {
+      _locating = true;
+      _error = null;
+    });
+    await provider.requestPermission();
+    final fix = await provider.currentFix();
+    if (!mounted) return;
+    setState(() {
+      _locating = false;
+      if (fix == null || !fix.hasPosition) {
+        _error = context.l10n.sos_gpsUnavailable;
+        return;
+      }
+      _latController.text = fix.latitude!.toStringAsFixed(5);
+      _lonController.text = fix.longitude!.toStringAsFixed(5);
+    });
+  }
 
   @override
   void dispose() {
@@ -177,6 +202,7 @@ class _SosLocationDialogState extends State<SosLocationDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final provider = widget.phoneLocation;
     const keyboard = TextInputType.numberWithOptions(
       decimal: true,
       signed: true,
@@ -201,6 +227,25 @@ class _SosLocationDialogState extends State<SosLocationDialog> {
                 errorText: _error,
               ),
             ),
+            if (provider != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: TextButton.icon(
+                    onPressed: _locating
+                        ? null
+                        : () => _useCurrentGps(provider),
+                    icon: _locating
+                        ? const SizedBox.square(
+                            dimension: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.my_location),
+                    label: Text(l10n.sos_useCurrentGps),
+                  ),
+                ),
+              ),
             const SizedBox(height: 12),
             Text(
               l10n.sos_storedLocationHelper,

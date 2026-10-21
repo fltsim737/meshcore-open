@@ -20,6 +20,9 @@
 		<string>/dev/cu.</string>
 		<string>/dev/tty.</string>
 	</array>
+	<!-- geolocator: phone position for Emergency SOS -->
+	<key>com.apple.security.personal-information.location</key>
+	<true/>
 	<key>com.apple.security.device.camera</key>
 	<true/>
 	<!-- image_picker: read photos the user explicitly chooses -->

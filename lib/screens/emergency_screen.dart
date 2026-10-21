@@ -8,6 +8,7 @@ import '../helpers/snack_bar_builder.dart';
 import '../helpers/sos_codec.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/l10n.dart';
+import '../models/contact.dart';
 import '../models/sos_alert.dart';
 import '../services/sos_service.dart';
 import '../utils/disconnect_navigation_mixin.dart';
@@ -43,6 +44,17 @@ class EmergencyScreen extends StatefulWidget {
 
 class _EmergencyScreenState extends State<EmergencyScreen>
     with DisconnectNavigationMixin {
+  @override
+  void initState() {
+    super.initState();
+    // Ask now, while nothing is urgent, so the SOS itself never waits on a
+    // permission dialog.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<SosService>().phoneLocation?.requestPermission();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final connector = context.watch<MeshCoreConnector>();
@@ -232,7 +244,9 @@ class _ActiveSosCard extends StatelessWidget {
     final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
     final lastBroadcast = sos.lastBroadcastAt;
+    final nextBroadcast = service.nextBroadcastAt;
     final fix = sos.lastFix;
+    final contacts = service.emergencyContacts;
     const onRed = TextStyle(color: Colors.white);
 
     return Card(
@@ -268,6 +282,8 @@ class _ActiveSosCard extends StatelessWidget {
                         _time(context, lastBroadcast),
                       ),
               ),
+              if (lastBroadcast != null && nextBroadcast != null)
+                Text(l10n.sos_nextBroadcast(_time(context, nextBroadcast))),
               const SizedBox(height: 4),
               Text(l10n.sos_locationSource(sosSourceLabel(l10n, fix.source))),
               if (fix.hasPosition) Text(sosCoordinates(fix)),
@@ -281,6 +297,15 @@ class _ActiveSosCard extends StatelessWidget {
                   '• ${ack.senderName.isEmpty ? l10n.sos_unknownSender : ack.senderName}'
                   '  ${_time(context, ack.receivedAt)}',
                 ),
+              if (contacts.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Text(
+                  l10n.sos_dmHeader,
+                  style: textTheme.titleSmall?.merge(onRed),
+                ),
+                for (final contact in contacts)
+                  Text('• ${contact.name}  ${_dmStatus(l10n, contact)}'),
+              ],
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
@@ -299,6 +324,19 @@ class _ActiveSosCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _dmStatus(AppLocalizations l10n, Contact contact) {
+    final key = contact.publicKeyHex;
+    if (sos.acks.any(
+      (ack) => ack.senderKeyHex == key || ack.senderName == contact.name,
+    )) {
+      return l10n.sos_contactAcked;
+    }
+    if (sos.deliveredContactKeys.contains(key)) {
+      return l10n.sos_contactDelivered;
+    }
+    return l10n.sos_contactWaiting;
   }
 
   Future<void> _confirmCancel(BuildContext context) async {
