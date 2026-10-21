@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:meshcore_open/helpers/path_helper.dart';
+import 'package:meshcore_open/helpers/path_hop_resolver.dart';
 import 'package:meshcore_open/screens/path_trace_map.dart';
 import 'package:meshcore_open/widgets/app_bar.dart';
 import 'package:provider/provider.dart';
@@ -32,6 +33,7 @@ import '../utils/battery_utils.dart';
 import '../utils/route_transitions.dart';
 import '../widgets/map_poi_cluster.dart';
 import '../widgets/marker_label_dialog.dart';
+import '../widgets/path_editor_sheet.dart';
 import '../widgets/network_map_online_layer.dart';
 import '../widgets/quick_switch_bar.dart';
 import '../widgets/sync_progress_overlay.dart';
@@ -93,7 +95,8 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
   bool _removedMarkersLoaded = false;
   final List<int> _pathTrace = [];
   final List<int> _pathTraceHopWidths = [];
-  final List<Contact> _pathTraceContacts = [];
+  // Null for a manually entered hop that matches no single known node.
+  final List<Contact?> _pathTraceContacts = [];
   final List<LatLng> _points = [];
   final List<Polyline> _polylines = [];
   bool _statsExpanded = false;
@@ -4164,14 +4167,59 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
               pubKeySize,
             );
       final hopByteCount = min(recordedHopWidth, _pathTrace.length).toInt();
-      _pathTraceContacts.removeLast();
+      final removed = _pathTraceContacts.removeLast();
       // A path trace hop can be wider than one byte; remove the full hash prefix.
       _pathTrace.removeRange(
         _pathTrace.length - hopByteCount,
         _pathTrace.length,
       );
-      _points.removeLast(); // Remove last point from points list
+      // Hops with no known position never added a point.
+      if (removed != null && _points.length > 1) _points.removeLast();
       _polylines.clear(); // Clear polylines
+    });
+  }
+
+  /// Replaces the path being built with hops typed or picked in the path
+  /// editor. Hops are matched to repeaters the same way received paths are;
+  /// a hop with no match or no position is traced but not drawn.
+  Future<void> _enterPathManually() async {
+    final connector = context.read<MeshCoreConnector>();
+    final width = connector.pathHashByteWidth.clamp(1, pubKeySize).toInt();
+    final path = await PathEditorSheet.show(
+      context,
+      availableContacts: connector.contacts,
+      initialPath: _pathTrace,
+      pathHashByteWidth: width,
+    );
+    if (path == null || !mounted) return;
+    final start = _points.first;
+    final resolved = PathHopResolver.resolve(
+      pathBytes: path,
+      contacts: connector.contacts,
+      endpoint: start,
+      pathHashByteWidth: width,
+    );
+    setState(() {
+      _pathTrace
+        ..clear()
+        ..addAll(path);
+      _pathTraceHopWidths
+        ..clear()
+        ..addAll(PathHelper.splitPathBytes(path, width).map((h) => h.length));
+      _pathTraceContacts.clear();
+      _points
+        ..clear()
+        ..add(start);
+      _polylines.clear();
+      for (final contact in resolved) {
+        final located =
+            contact != null &&
+            contact.hasLocation &&
+            contact.latitude != null &&
+            contact.longitude != null;
+        _pathTraceContacts.add(located ? contact : null);
+        if (located) _points.add(LatLng(contact.latitude!, contact.longitude!));
+      }
     });
   }
 
@@ -4260,7 +4308,9 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
                                 path: Uint8List.fromList(_pathTrace),
                                 flipPathAround: false,
                                 pathHashByteWidth: hashW,
-                                pathContacts: _pathTraceContacts,
+                                pathContacts: _pathTraceContacts
+                                    .whereType<Contact>()
+                                    .toList(),
                               ),
                             ),
                           );
@@ -4284,7 +4334,9 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
                                 pathHashByteWidth: context
                                     .read<MeshCoreConnector>()
                                     .pathHashByteWidth,
-                                pathContacts: _pathTraceContacts,
+                                pathContacts: _pathTraceContacts
+                                    .whereType<Contact>()
+                                    .toList(),
                               ),
                             ),
                           );
@@ -4295,6 +4347,11 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
                         tooltip: l10n.map_runTraceWithReturnPath,
                         icon: const Icon(Icons.replay),
                       ),
+                    IconButton(
+                      onPressed: _enterPathManually,
+                      tooltip: l10n.map_enterPathManually,
+                      icon: const Icon(Icons.keyboard_outlined),
+                    ),
                     if (_pathTrace.isNotEmpty)
                       IconButton(
                         onPressed: _removePath,
@@ -4308,6 +4365,7 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
                             _isBuildingPathTrace = false;
                             _pathTrace.clear();
                             _pathTraceHopWidths.clear();
+                            _pathTraceContacts.clear();
                             _points.clear();
                             _polylines.clear();
                           });

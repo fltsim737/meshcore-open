@@ -2736,5 +2736,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Ввести путь вручную"
 }

@@ -2391,6 +2391,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get map_runTrace => 'Uruchom ślad ścieżki';
 
   @override
+  String get map_enterPathManually => 'Wprowadź ścieżkę ręcznie';
+
+  @override
   String get map_runTraceWithReturnPath => 'Wróć tą samą ścieżką';
 
   @override

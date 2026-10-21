@@ -2374,6 +2374,9 @@ class AppLocalizationsBg extends AppLocalizations {
   String get map_runTrace => 'Стартирай проследяването на пътя';
 
   @override
+  String get map_enterPathManually => 'Въведи пътя ръчно';
+
+  @override
   String get map_runTraceWithReturnPath => 'Върни се по същия път.';
 
   @override

@@ -3472,5 +3472,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Wprowadź ścieżkę ręcznie"
 }

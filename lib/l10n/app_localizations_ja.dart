@@ -2268,6 +2268,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get map_runTrace => '経路トレースを実行';
 
   @override
+  String get map_enterPathManually => '経路を手動で入力';
+
+  @override
   String get map_runTraceWithReturnPath => '元の経路に戻る。';
 
   @override

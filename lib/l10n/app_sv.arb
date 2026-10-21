@@ -3434,5 +3434,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Ange sökväg manuellt"
 }

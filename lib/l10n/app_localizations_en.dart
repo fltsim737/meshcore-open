@@ -2336,6 +2336,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get map_runTrace => 'Run path trace';
 
   @override
+  String get map_enterPathManually => 'Enter path manually';
+
+  @override
   String get map_runTraceWithReturnPath => 'Return back on the same path.';
 
   @override

@@ -2274,6 +2274,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get map_runTrace => '경로 추적';
 
   @override
+  String get map_enterPathManually => '경로 직접 입력';
+
+  @override
   String get map_runTraceWithReturnPath => '원래 경로로 돌아가세요.';
 
   @override

@@ -4228,6 +4228,12 @@ abstract class AppLocalizations {
   /// **'Run path trace'**
   String get map_runTrace;
 
+  /// No description provided for @map_enterPathManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter path manually'**
+  String get map_enterPathManually;
+
   /// No description provided for @map_runTraceWithReturnPath.
   ///
   /// In en, this message translates to:

@@ -3573,5 +3573,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Introducir ruta manualmente"
 }

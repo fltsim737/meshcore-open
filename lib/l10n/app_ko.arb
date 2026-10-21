@@ -3573,5 +3573,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "경로 직접 입력"
 }

@@ -2355,6 +2355,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get map_runTrace => 'Padtrace uitvoeren';
 
   @override
+  String get map_enterPathManually => 'Pad handmatig invoeren';
+
+  @override
   String get map_runTraceWithReturnPath => 'Terugkeren op hetzelfde pad.';
 
   @override

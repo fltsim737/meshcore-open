@@ -1231,6 +1231,7 @@
   "map_manageServer": "Manage Server",
   "map_tapToAdd": "Tap on nodes to add them to the path.",
   "map_runTrace": "Run path trace",
+  "map_enterPathManually": "Enter path manually",
   "map_runTraceWithReturnPath": "Return back on the same path.",
   "map_removeLast": "Remove Last",
   "map_pathTraceCancelled": "Path trace cancelled.",

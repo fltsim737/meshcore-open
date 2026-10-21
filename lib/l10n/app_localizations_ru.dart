@@ -2376,6 +2376,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get map_runTrace => 'Запустить трассировку пути';
 
   @override
+  String get map_enterPathManually => 'Ввести путь вручную';
+
+  @override
   String get map_runTraceWithReturnPath => 'Вернуться обратно по тому же пути';
 
   @override

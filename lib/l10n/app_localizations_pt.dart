@@ -2370,6 +2370,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get map_runTrace => 'Executar Traçado de Caminho';
 
   @override
+  String get map_enterPathManually => 'Introduzir caminho manualmente';
+
+  @override
   String get map_runTraceWithReturnPath => 'Retornar ao mesmo caminho.';
 
   @override

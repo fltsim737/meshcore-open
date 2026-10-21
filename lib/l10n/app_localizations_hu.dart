@@ -2363,6 +2363,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get map_runTrace => 'Futtatási útvonal nyomkövetése';
 
   @override
+  String get map_enterPathManually => 'Útvonal kézi megadása';
+
+  @override
   String get map_runTraceWithReturnPath => 'Térj vissza ugyanazon az úton.';
 
   @override

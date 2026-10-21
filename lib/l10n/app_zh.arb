@@ -3444,5 +3444,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "手动输入路径"
 }
