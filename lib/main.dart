@@ -19,6 +19,7 @@ import 'services/image_codec_service.dart';
 import 'services/image_codec_settings_store.dart';
 import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
+import 'services/sos_location_service.dart';
 import 'services/sos_service.dart';
 import 'services/storage_service.dart';
 import 'services/message_retry_service.dart';
@@ -178,6 +179,7 @@ void main() async {
   final sosService = SosService(
     transport: ConnectorSosTransport(connector),
     settings: appSettingsService,
+    phoneLocation: GeolocatorPhoneLocation(),
   )..load();
 
   await connector.loadContactCache();

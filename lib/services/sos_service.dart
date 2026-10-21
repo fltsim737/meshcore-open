@@ -7,10 +7,12 @@ import '../connector/meshcore_protocol.dart';
 import '../helpers/sos_codec.dart';
 import '../models/channel.dart';
 import '../models/contact.dart';
+import '../models/message.dart';
 import '../models/sos_alert.dart';
 import '../storage/sos_store.dart';
 import '../utils/app_logger.dart';
 import 'app_settings_service.dart';
+import 'sos_location_service.dart';
 
 /// The parts of the connector the SOS feature uses, so it can be faked.
 /// Notifies when connection state or message delivery may have changed.
@@ -24,6 +26,12 @@ abstract class SosTransport implements Listenable {
   set sosTextListener(void Function(SosInboundText inbound)? listener);
   Future<void> sendChannelText(Channel channel, String text);
   Future<void> sendDirectText(Contact contact, String text);
+
+  /// Whether the contact's radio confirmed any DM of SOS [sosId].
+  bool hasDeliveredSos(Contact contact, String sosId);
+
+  /// Whether a DM of SOS [sosId] to the contact is still being retried.
+  bool hasPendingSos(Contact contact, String sosId);
 }
 
 class ConnectorSosTransport implements SosTransport {
@@ -53,6 +61,26 @@ class ConnectorSosTransport implements SosTransport {
   Future<void> sendDirectText(Contact contact, String text) =>
       connector.sendMessage(contact, text);
   @override
+  bool hasDeliveredSos(Contact contact, String sosId) =>
+      _hasSos(contact, sosId, const {MessageStatus.delivered});
+  @override
+  bool hasPendingSos(Contact contact, String sosId) => _hasSos(
+    contact,
+    sosId,
+    const {MessageStatus.pending, MessageStatus.sent},
+  );
+
+  bool _hasSos(Contact contact, String sosId, Set<MessageStatus> statuses) =>
+      connector
+          .getMessages(contact)
+          .any(
+            (m) =>
+                m.isOutgoing &&
+                statuses.contains(m.status) &&
+                m.text.startsWith(SosCodec.header) &&
+                SosCodec.parseSos(m.text)?.id == sosId,
+          );
+  @override
   void addListener(VoidCallback listener) => connector.addListener(listener);
   @override
   void removeListener(VoidCallback listener) =>
@@ -61,29 +89,45 @@ class ConnectorSosTransport implements SosTransport {
 
 class SosService extends ChangeNotifier {
   static const int _maxIncoming = 50;
+  static const Duration repeatInterval = Duration(minutes: 5);
+  static const Duration acknowledgedRepeatInterval = Duration(minutes: 15);
+
+  /// How long the first broadcast waits for a phone fix; repeats wait longer.
+  static const Duration firstFixTimeout = Duration(seconds: 8);
+  static const Duration repeatFixTimeout = Duration(seconds: 20);
+
+  /// Retry delay for a due broadcast while the radio is disconnected.
+  static const Duration disconnectedRetry = Duration(seconds: 30);
 
   final SosTransport _transport;
   final AppSettingsService _settings;
+  final PhoneLocationProvider? _phoneLocation;
   final SosStore _store;
   final DateTime Function() _now;
 
   OutgoingSos? _active;
   final List<IncomingSos> _incoming = [];
   bool _wasConnected;
+  Timer? _timer;
+  bool _broadcasting = false;
 
   SosService({
     required SosTransport transport,
     required AppSettingsService settings,
+    PhoneLocationProvider? phoneLocation,
     SosStore? store,
     DateTime Function()? now,
   }) : _transport = transport,
        _settings = settings,
+       _phoneLocation = phoneLocation,
        _store = store ?? SosStore(),
        _now = now ?? DateTime.now,
        _wasConnected = transport.isConnected {
     _transport.sosTextListener = handleInbound;
     _transport.addListener(_onTransportChanged);
   }
+
+  PhoneLocationProvider? get phoneLocation => _phoneLocation;
 
   OutgoingSos? get active => _active;
   bool get isActive => _active != null;
@@ -102,13 +146,79 @@ class SosService extends ChangeNotifier {
       ..clear()
       ..addAll(_store.loadIncoming());
     notifyListeners();
+    _schedule();
+  }
+
+  /// When the next broadcast is due; overdue when it is in the past.
+  DateTime? get nextBroadcastAt {
+    final sos = _active;
+    if (sos == null) return null;
+    final last = sos.lastBroadcastAt;
+    if (last == null) return sos.startedAt;
+    return last.add(
+      sos.isAcknowledged ? acknowledgedRepeatInterval : repeatInterval,
+    );
+  }
+
+  void _schedule([Duration? delay]) {
+    _timer?.cancel();
+    _timer = null;
+    final next = nextBroadcastAt;
+    if (next == null) return;
+    final wait = delay ?? next.difference(_now());
+    _timer = Timer(wait.isNegative ? Duration.zero : wait, () {
+      unawaited(broadcastIfDue());
+    });
+  }
+
+  /// Sends the SOS if it is due, then schedules the next one.
+  @visibleForTesting
+  Future<void> broadcastIfDue() async {
+    final sos = _active;
+    final next = nextBroadcastAt;
+    if (sos == null || next == null || _broadcasting) return;
+    if (_now().isBefore(next)) {
+      _schedule();
+      return;
+    }
+    if (!_transport.isConnected) {
+      _schedule(disconnectedRetry);
+      return;
+    }
+    _broadcasting = true;
+    try {
+      await _broadcast(sos);
+    } finally {
+      _broadcasting = false;
+    }
+    _schedule();
   }
 
   void _onTransportChanged() {
     final connected = _transport.isConnected;
-    if (connected == _wasConnected) return;
-    _wasConnected = connected;
-    notifyListeners();
+    if (connected != _wasConnected) {
+      _wasConnected = connected;
+      notifyListeners();
+    }
+    _refreshDeliveries();
+  }
+
+  void _refreshDeliveries() {
+    final sos = _active;
+    if (sos == null) return;
+    var changed = false;
+    for (final contact in emergencyContacts) {
+      final key = contact.publicKeyHex;
+      if (!sos.deliveredContactKeys.contains(key) &&
+          _transport.hasDeliveredSos(contact, sos.id)) {
+        sos.deliveredContactKeys.add(key);
+        changed = true;
+      }
+    }
+    if (changed) {
+      unawaited(_store.saveOutgoing(sos));
+      notifyListeners();
+    }
   }
 
   /// The configured SOS channel, falling back to the first channel when the
@@ -133,8 +243,12 @@ class SosService extends ChangeNotifier {
         .toList();
   }
 
-  /// The radio's position, then the stored location.
-  Future<SosFix> resolveFix() async {
+  /// Phone GPS, then the radio's position, then the stored location.
+  Future<SosFix> resolveFix({Duration timeout = repeatFixTimeout}) async {
+    final phoneFix = await _phoneLocation?.currentFix(timeout: timeout);
+    if (phoneFix != null && _isUsable(phoneFix.latitude, phoneFix.longitude)) {
+      return phoneFix;
+    }
     final radioLat = _transport.selfLatitude;
     final radioLon = _transport.selfLongitude;
     if (_isUsable(radioLat, radioLon)) {
@@ -169,20 +283,25 @@ class SosService extends ChangeNotifier {
     _active = sos;
     notifyListeners();
     await _store.saveOutgoing(sos);
-    if (_transport.isConnected) await _broadcast(sos);
+    await broadcastIfDue();
   }
 
   Future<void> cancel() async {
     if (_active == null) return;
+    _timer?.cancel();
+    _timer = null;
     _active = null;
     notifyListeners();
     await _store.saveOutgoing(null);
   }
 
   Future<void> _broadcast(OutgoingSos sos) async {
-    final fix = await resolveFix();
+    final fix = await resolveFix(
+      timeout: sos.broadcastCount == 0 ? firstFixTimeout : repeatFixTimeout,
+    );
     // Cancelled while waiting for a fix.
     if (!identical(sos, _active)) return;
+    _refreshDeliveries();
     final now = _now();
     sos
       ..lastFix = fix
@@ -214,6 +333,9 @@ class SosService extends ChangeNotifier {
       if (sos.isContactAcknowledged(contact.publicKeyHex, contact.name)) {
         continue;
       }
+      // The retry service is still working on the last one; queueing
+      // another would only stack up airtime behind it.
+      if (_transport.hasPendingSos(contact, sos.id)) continue;
       try {
         await _transport.sendDirectText(contact, dmText);
       } catch (e) {
@@ -242,6 +364,8 @@ class SosService extends ChangeNotifier {
         (ack) => ack.senderName == inbound.senderName,
       );
       if (index == -1) {
+        // The first ACK stretches the schedule to the slower interval.
+        final first = !sos.isAcknowledged;
         sos.acks.add(
           SosAck(
             senderName: inbound.senderName,
@@ -249,6 +373,7 @@ class SosService extends ChangeNotifier {
             receivedAt: _now(),
           ),
         );
+        if (first) _schedule();
         changed = true;
       } else if (sos.acks[index].senderKeyHex == null &&
           inbound.senderKeyHex != null) {
@@ -360,6 +485,7 @@ class SosService extends ChangeNotifier {
 
   @override
   void dispose() {
+    _timer?.cancel();
     _transport.removeListener(_onTransportChanged);
     _transport.sosTextListener = null;
     super.dispose();

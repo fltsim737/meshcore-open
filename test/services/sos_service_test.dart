@@ -6,6 +6,7 @@ import 'package:meshcore_open/models/channel.dart';
 import 'package:meshcore_open/models/contact.dart';
 import 'package:meshcore_open/models/sos_alert.dart';
 import 'package:meshcore_open/services/app_settings_service.dart';
+import 'package:meshcore_open/services/sos_location_service.dart';
 import 'package:meshcore_open/services/sos_service.dart';
 import 'package:meshcore_open/storage/prefs_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,10 +44,36 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   Future<void> sendDirectText(Contact contact, String text) async =>
       directSends.add((contact.name, text));
 
+  final Set<String> delivered = {};
+  final Set<String> pending = {};
+
+  @override
+  bool hasDeliveredSos(Contact contact, String sosId) =>
+      delivered.contains(contact.name);
+
+  @override
+  bool hasPendingSos(Contact contact, String sosId) =>
+      pending.contains(contact.name);
+
+  void markDelivered(String name) {
+    delivered.add(name);
+    notifyListeners();
+  }
+
   void setConnected(bool value) {
     isConnected = value;
     notifyListeners();
   }
+}
+
+class FakePhoneLocation implements PhoneLocationProvider {
+  SosFix? fix;
+
+  @override
+  Future<SosFix?> currentFix({Duration? timeout}) async => fix;
+
+  @override
+  Future<bool> requestPermission() async => true;
 }
 
 Contact contactFor(String name, int seed, {bool favourite = false}) => Contact(
@@ -86,13 +113,20 @@ void main() {
   late SosService service;
   late DateTime now;
 
-  SosService newService() =>
-      SosService(transport: transport, settings: settings, now: () => now);
+  late FakePhoneLocation phone;
+
+  SosService newService() => SosService(
+    transport: transport,
+    settings: settings,
+    phoneLocation: phone,
+    now: () => now,
+  );
 
   setUp(() async {
     now = DateTime(2026, 10, 21, 9);
     settings = await freshSettings();
     transport = FakeSosTransport();
+    phone = FakePhoneLocation();
     service = newService();
   });
 
@@ -103,6 +137,20 @@ void main() {
   });
 
   group('location priority', () {
+    test('uses phone GPS first', () async {
+      phone.fix = const SosFix(
+        latitude: -42,
+        longitude: 173,
+        source: SosLocationSource.phoneGps,
+      );
+      transport
+        ..selfLatitude = -41.1
+        ..selfLongitude = 174.2;
+      expect((await service.resolveFix()).source, SosLocationSource.phoneGps);
+      phone.fix = null;
+      expect((await service.resolveFix()).source, SosLocationSource.radio);
+    });
+
     test('uses the radio position before the stored location', () async {
       transport
         ..selfLatitude = -41.1
@@ -195,6 +243,105 @@ void main() {
       final reloaded = newService()..load();
       expect(reloaded.active?.id, id);
       reloaded.dispose();
+    });
+  });
+
+  group('schedule', () {
+    test(
+      'repeats every 5 minutes, then every 15 after the first ACK',
+      () async {
+        await service.activate();
+        expect(transport.channelSends, hasLength(1));
+
+        now = now.add(const Duration(minutes: 4, seconds: 59));
+        await service.broadcastIfDue();
+        expect(transport.channelSends, hasLength(1));
+
+        now = now.add(const Duration(seconds: 1));
+        await service.broadcastIfDue();
+        expect(transport.channelSends, hasLength(2));
+        expect(service.active!.broadcastCount, 2);
+
+        service.handleInbound(
+          SosInboundText(text: 'ACK #${service.active!.id}', senderName: 'N'),
+        );
+        expect(
+          service.nextBroadcastAt,
+          now.add(SosService.acknowledgedRepeatInterval),
+        );
+        now = now.add(const Duration(minutes: 14));
+        await service.broadcastIfDue();
+        expect(transport.channelSends, hasLength(2));
+        now = now.add(const Duration(minutes: 1));
+        await service.broadcastIfDue();
+        expect(transport.channelSends, hasLength(3));
+        expect(service.isActive, isTrue);
+      },
+    );
+
+    test('a due broadcast waits for the radio', () async {
+      transport.setConnected(false);
+      await service.activate();
+      expect(transport.channelSends, isEmpty);
+      expect(service.active!.lastBroadcastAt, isNull);
+      transport.isConnected = true;
+      await service.broadcastIfDue();
+      expect(transport.channelSends, hasLength(1));
+    });
+
+    test('a cancelled SOS stops repeating', () async {
+      await service.activate();
+      await service.cancel();
+      now = now.add(const Duration(hours: 1));
+      await service.broadcastIfDue();
+      expect(transport.channelSends, hasLength(1));
+      expect(service.nextBroadcastAt, isNull);
+    });
+  });
+
+  group('DM fan-out', () {
+    late Contact alice, bob, carol;
+
+    setUp(() async {
+      alice = contactFor('Alice', 1);
+      bob = contactFor('Bob', 2);
+      carol = contactFor('Carol', 3);
+      transport.contacts = [alice, bob, carol];
+      for (final c in transport.contacts) {
+        await settings.setSosContact(c.publicKeyHex, true);
+      }
+    });
+
+    test('stops DMs to contacts that confirmed delivery or ACKed', () async {
+      await service.activate();
+      expect(transport.directSends.map((s) => s.$1), ['Alice', 'Bob', 'Carol']);
+
+      transport.markDelivered('Alice');
+      expect(service.active!.deliveredContactKeys, {alice.publicKeyHex});
+      // A channel ACK carries only the name.
+      service.handleInbound(
+        SosInboundText(
+          text: 'ACK #${service.active!.id}',
+          senderName: 'Bob',
+          channelIndex: 0,
+        ),
+      );
+
+      transport.directSends.clear();
+      now = now.add(SosService.acknowledgedRepeatInterval);
+      await service.broadcastIfDue();
+      expect(transport.directSends.map((s) => s.$1), ['Carol']);
+      expect(transport.channelSends, hasLength(2));
+    });
+
+    test('does not queue a DM while the last one is retrying', () async {
+      await service.activate();
+      transport.pending.addAll(['Alice', 'Bob', 'Carol']);
+      transport.directSends.clear();
+      now = now.add(SosService.repeatInterval);
+      await service.broadcastIfDue();
+      expect(transport.directSends, isEmpty);
+      expect(transport.channelSends, hasLength(2));
     });
   });
 
