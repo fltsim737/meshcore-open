@@ -58,6 +58,7 @@ class LinuxAutostart {
 Type=Application
 Name=MeshCore Open
 Comment=Listens for messages and SOS alerts
+TryExec=${_launchPath.replaceAll('\\', '\\\\')}
 Exec=${_quote(_launchPath)} $hiddenArgument
 Terminal=false
 X-GNOME-Autostart-enabled=true

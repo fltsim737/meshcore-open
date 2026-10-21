@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 /// included, ignore a notification's sound hint, so the app plays the
 /// freedesktop theme sounds itself.
 class LinuxSoundPlayer {
-  static const String _soundDir = '/usr/share/sounds/freedesktop/stereo';
+  static const String _systemSoundDir = '/usr/share/sounds/freedesktop/stereo';
 
   /// How often an SOS alarm sounds again until it is cleared.
   final Duration alarmRepeat;
@@ -53,7 +53,12 @@ class LinuxSoundPlayer {
 
   /// PulseAudio's player first (PipeWire provides it too), then PipeWire's.
   static Future<void> _playThemeSound(String name) async {
-    final file = '$_soundDir/$name.oga';
+    // The AppImage bundles the sounds and points here at them.
+    final bundled = Platform.environment['MESHCORE_SOUND_DIR'];
+    var file = '$_systemSoundDir/$name.oga';
+    if (bundled != null && File('$bundled/$name.oga').existsSync()) {
+      file = '$bundled/$name.oga';
+    }
     for (final player in const ['paplay', 'pw-play']) {
       try {
         // Waits for the player to exit so it is reaped; a detached start
