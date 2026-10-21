@@ -17,3 +17,24 @@
 # The Flutter plugin's platform-channel handler, reached the same way.
 -keep class com.masicai.flutteronnxruntime.** { *; }
 -dontwarn com.masicai.flutteronnxruntime.**
+
+# shared_preferences_android 2.5 calls its Kotlin suspend functions from Dart
+# through JNI (package:jni), looking each one up by its full JVM signature,
+# and package:jni resolves Kotlin classes by name to drive them: the
+# coroutine machinery, Result (and Result$Failure) and Unit. These are all
+# the kotlin/ names the jni 1.1 and shared_preferences_android 2.5 Dart
+# bindings look up. R8 renames
+# those (Continuation became m3.c), the lookups fail, and
+# PrefsManager.initialize() throws
+#
+#   NoSuchMethodError: no non-static method
+#     "Lio/flutter/plugins/sharedpreferences/SharedPreferencesApiRegistrar;.getAll(
+#      Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)..."
+#
+# before runApp, so the app sits on the launch screen forever.
+-keep class io.flutter.plugins.sharedpreferences.** { *; }
+-keep class kotlin.coroutines.** { *; }
+-keep class kotlin.Result { *; }
+-keep class kotlin.Result$Failure { *; }
+-keep class kotlin.Unit { *; }
+-dontwarn io.flutter.plugins.sharedpreferences.**
