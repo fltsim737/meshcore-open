@@ -6052,6 +6052,8 @@ class MeshCoreConnector extends ChangeNotifier {
         if (_isSyncingQueuedMessages) {
           _handleQueuedMessageReceived();
         }
+        // SOS packets must never depend on the image-message setting.
+        if (_handleSosChannelData(frame)) break;
         // Advance the sync state machine ALWAYS (above), but only reassemble
         // when the feature is actually on. Without this the "disabled" feature
         // still reassembles, persists and displays received images: the store
@@ -7433,15 +7435,20 @@ class MeshCoreConnector extends ChangeNotifier {
   /// Handles RESP_CODE_CHANNEL_DATA_RECV (GRP_DATA). Frames whose dataType is
   /// not 0xAE1C — or that arrive before an [ImageChunkTransport] is installed —
   /// are ignored without disturbing any other behaviour.
+  /// Hands an SOS GRP_DATA packet to [sosDataListener]; false for any other
+  /// data type.
+  bool _handleSosChannelData(Uint8List frame) {
+    final parsed = parseChannelDataFrame(frame);
+    if (parsed == null || parsed.dataType != dataTypeSos) return false;
+    _lastChannelMsgRxTime = DateTime.now();
+    sosDataListener?.call(parsed.channelIndex, parsed.payload);
+    return true;
+  }
+
   void _handleIncomingChannelData(Uint8List frame) {
     // Anchor the post-RX backoff for our own next channel send, exactly as
     // _handleIncomingChannelMessage does.
     _lastChannelMsgRxTime = DateTime.now();
-    final parsed = parseChannelDataFrame(frame);
-    if (parsed != null && parsed.dataType == dataTypeSos) {
-      sosDataListener?.call(parsed.channelIndex, parsed.payload);
-      return;
-    }
     final outcome = _imageTransport?.handleFrame(frame);
     if (outcome == null) return; // Not an AEIC image chunk.
     _onImageChunk?.call(outcome);
