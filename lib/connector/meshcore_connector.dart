@@ -7024,8 +7024,10 @@ class MeshCoreConnector extends ChangeNotifier {
       }
 
       // Show notification for new incoming message (run async with translation)
+      // SOS and ACK texts raise their own alarm (SosService) instead.
       if (!message.isOutgoing &&
           !message.isCli &&
+          !SosCodec.isStructured(message.text) &&
           _appSettingsService != null) {
         final settings = _appSettingsService!.settings;
         if (settings.notificationsEnabled && settings.notifyOnNewMessage) {
@@ -7361,6 +7363,7 @@ class MeshCoreConnector extends ChangeNotifier {
     TranslationResult? translationResult,
   }) {
     if (message.isOutgoing || _appSettingsService == null) return;
+    if (SosCodec.isStructured(message.text)) return;
     final channelIndex = message.channelIndex;
     if (channelIndex == null) return;
 

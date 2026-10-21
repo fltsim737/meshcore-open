@@ -66,6 +66,18 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   }
 }
 
+class FakeAlerter implements SosAlerter {
+  final List<String> events = [];
+
+  @override
+  void alert(IncomingSos alert) => events.add('alert:${alert.key}');
+  @override
+  void clear(IncomingSos alert) => events.add('clear:${alert.key}');
+  @override
+  void acknowledged(OutgoingSos sos, SosAck ack) =>
+      events.add('ack:${ack.senderName}');
+}
+
 class FakePhoneLocation implements PhoneLocationProvider {
   SosFix? fix;
 
@@ -114,11 +126,13 @@ void main() {
   late DateTime now;
 
   late FakePhoneLocation phone;
+  late FakeAlerter alerter;
 
   SosService newService() => SosService(
     transport: transport,
     settings: settings,
     phoneLocation: phone,
+    alerter: alerter,
     now: () => now,
   );
 
@@ -127,6 +141,7 @@ void main() {
     settings = await freshSettings();
     transport = FakeSosTransport();
     phone = FakePhoneLocation();
+    alerter = FakeAlerter();
     service = newService();
   });
 
@@ -341,6 +356,68 @@ void main() {
       now = now.add(SosService.repeatInterval);
       await service.broadcastIfDue();
       expect(transport.directSends, isEmpty);
+      expect(transport.channelSends, hasLength(2));
+    });
+  });
+
+  group('alerts and recovery', () {
+    test('sounds for every repeat until acknowledged', () async {
+      void hear() => service.handleInbound(
+        SosInboundText(
+          text: sosText('a1b2'),
+          senderName: 'Ridge',
+          channelIndex: 0,
+        ),
+      );
+      hear();
+      hear();
+      await service.acknowledge(service.incoming.single);
+      hear();
+      expect(alerter.events, [
+        'alert:Ridge#a1b2',
+        'alert:Ridge#a1b2',
+        'clear:Ridge#a1b2',
+      ]);
+    });
+
+    test('a dismissed alert stays quiet on repeats', () async {
+      service.handleInbound(
+        SosInboundText(text: sosText('a1b2'), senderName: 'Ridge'),
+      );
+      await service.dismiss(service.incoming.single);
+      service.handleInbound(
+        SosInboundText(text: sosText('a1b2'), senderName: 'Ridge'),
+      );
+      expect(alerter.events.where((e) => e.startsWith('alert')), hasLength(1));
+      expect(service.incoming.single.receivedCount, 2);
+    });
+
+    test('notifies the originator once per responder', () async {
+      await service.activate();
+      final ack = 'ACK #${service.active!.id}';
+      service.handleInbound(SosInboundText(text: ack, senderName: 'A'));
+      service.handleInbound(SosInboundText(text: ack, senderName: 'A'));
+      service.handleInbound(SosInboundText(text: ack, senderName: 'B'));
+      expect(alerter.events, ['ack:A', 'ack:B']);
+    });
+
+    test('sends an overdue SOS as soon as the radio reconnects', () async {
+      await service.activate();
+      transport.setConnected(false);
+      now = now.add(const Duration(minutes: 20));
+      await service.broadcastIfDue();
+      expect(transport.channelSends, hasLength(1));
+
+      transport.setConnected(true);
+      await pumpEventQueue();
+      expect(transport.channelSends, hasLength(2));
+    });
+
+    test('catches up when the app returns to the foreground', () async {
+      await service.activate();
+      now = now.add(SosService.repeatInterval);
+      service.onAppResumed();
+      await pumpEventQueue();
       expect(transport.channelSends, hasLength(2));
     });
   });

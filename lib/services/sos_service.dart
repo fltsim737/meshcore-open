@@ -12,6 +12,7 @@ import '../models/sos_alert.dart';
 import '../storage/sos_store.dart';
 import '../utils/app_logger.dart';
 import 'app_settings_service.dart';
+import 'notification_service.dart';
 import 'sos_location_service.dart';
 
 /// The parts of the connector the SOS feature uses, so it can be faked.
@@ -87,6 +88,25 @@ class ConnectorSosTransport implements SosTransport {
       connector.removeListener(listener);
 }
 
+/// How alerts reach the user outside the Emergency tab.
+abstract class SosAlerter {
+  void alert(IncomingSos alert);
+  void clear(IncomingSos alert);
+  void acknowledged(OutgoingSos sos, SosAck ack);
+}
+
+class NotificationSosAlerter implements SosAlerter {
+  @override
+  void alert(IncomingSos alert) =>
+      unawaited(NotificationService().showSosAlert(alert));
+  @override
+  void clear(IncomingSos alert) =>
+      unawaited(NotificationService().cancelSosAlert(alert));
+  @override
+  void acknowledged(OutgoingSos sos, SosAck ack) =>
+      unawaited(NotificationService().showSosAcknowledged(sos, ack));
+}
+
 class SosService extends ChangeNotifier {
   static const int _maxIncoming = 50;
   static const Duration repeatInterval = Duration(minutes: 5);
@@ -102,6 +122,7 @@ class SosService extends ChangeNotifier {
   final SosTransport _transport;
   final AppSettingsService _settings;
   final PhoneLocationProvider? _phoneLocation;
+  final SosAlerter? _alerter;
   final SosStore _store;
   final DateTime Function() _now;
 
@@ -115,11 +136,13 @@ class SosService extends ChangeNotifier {
     required SosTransport transport,
     required AppSettingsService settings,
     PhoneLocationProvider? phoneLocation,
+    SosAlerter? alerter,
     SosStore? store,
     DateTime Function()? now,
   }) : _transport = transport,
        _settings = settings,
        _phoneLocation = phoneLocation,
+       _alerter = alerter,
        _store = store ?? SosStore(),
        _now = now ?? DateTime.now,
        _wasConnected = transport.isConnected {
@@ -194,11 +217,17 @@ class SosService extends ChangeNotifier {
     _schedule();
   }
 
+  /// Timers can stall while the app is suspended (iOS especially), so catch
+  /// up as soon as it is back in the foreground.
+  void onAppResumed() => unawaited(broadcastIfDue());
+
   void _onTransportChanged() {
     final connected = _transport.isConnected;
     if (connected != _wasConnected) {
       _wasConnected = connected;
       notifyListeners();
+      // A broadcast that fell due while disconnected goes out right away.
+      if (connected) unawaited(broadcastIfDue());
     }
     _refreshDeliveries();
   }
@@ -366,13 +395,13 @@ class SosService extends ChangeNotifier {
       if (index == -1) {
         // The first ACK stretches the schedule to the slower interval.
         final first = !sos.isAcknowledged;
-        sos.acks.add(
-          SosAck(
-            senderName: inbound.senderName,
-            senderKeyHex: inbound.senderKeyHex,
-            receivedAt: _now(),
-          ),
+        final ack = SosAck(
+          senderName: inbound.senderName,
+          senderKeyHex: inbound.senderKeyHex,
+          receivedAt: _now(),
         );
+        sos.acks.add(ack);
+        _alerter?.acknowledged(sos, ack);
         if (first) _schedule();
         changed = true;
       } else if (sos.acks[index].senderKeyHex == null &&
@@ -403,8 +432,9 @@ class SosService extends ChangeNotifier {
         : (payload.node ?? '');
     final key = IncomingSos.keyFor(senderName, payload.id);
     final now = _now();
-    final existing = _incoming.where((a) => a.key == key).firstOrNull;
-    if (existing != null) {
+    var alert = _incoming.where((a) => a.key == key).firstOrNull;
+    if (alert != null) {
+      final existing = alert;
       existing
         ..lastSeen = now
         ..receivedCount += 1
@@ -414,20 +444,20 @@ class SosService extends ChangeNotifier {
         existing.fix = payload.fix;
       }
     } else {
-      _incoming.insert(
-        0,
-        IncomingSos(
-          id: payload.id,
-          senderName: senderName,
-          senderKeyHex: inbound.senderKeyHex,
-          channelIndex: inbound.channelIndex,
-          firstSeen: now,
-          lastSeen: now,
-          fix: payload.fix,
-        ),
+      alert = IncomingSos(
+        id: payload.id,
+        senderName: senderName,
+        senderKeyHex: inbound.senderKeyHex,
+        channelIndex: inbound.channelIndex,
+        firstSeen: now,
+        lastSeen: now,
+        fix: payload.fix,
       );
+      _incoming.insert(0, alert);
       _trimIncoming();
     }
+    // Every repeat of a still-open alert sounds again.
+    if (alert.isOpen) _alerter?.alert(alert);
     unawaited(_store.saveIncoming(_incoming));
     notifyListeners();
   }
@@ -449,6 +479,7 @@ class SosService extends ChangeNotifier {
   Future<void> acknowledge(IncomingSos alert) async {
     if (!_transport.isConnected) return;
     alert.ackSent = true;
+    _alerter?.clear(alert);
     notifyListeners();
     await _store.saveIncoming(_incoming);
 
@@ -479,6 +510,7 @@ class SosService extends ChangeNotifier {
 
   Future<void> dismiss(IncomingSos alert) async {
     alert.dismissed = true;
+    _alerter?.clear(alert);
     notifyListeners();
     await _store.saveIncoming(_incoming);
   }

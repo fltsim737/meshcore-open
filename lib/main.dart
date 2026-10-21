@@ -21,6 +21,7 @@ import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
 import 'services/sos_service.dart';
+import 'widgets/sos_warning_overlay.dart';
 import 'services/storage_service.dart';
 import 'services/message_retry_service.dart';
 import 'services/path_history_service.dart';
@@ -180,6 +181,7 @@ void main() async {
     transport: ConnectorSosTransport(connector),
     settings: appSettingsService,
     phoneLocation: GeolocatorPhoneLocation(),
+    alerter: NotificationSosAlerter(),
   )..load();
 
   await connector.loadContactCache();
@@ -423,6 +425,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
     }
     if (state == AppLifecycleState.resumed) {
       widget.connector.syncAppBadge();
+      widget.sosService.onAppResumed();
     }
   }
 
@@ -482,7 +485,12 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
               NotificationService().setLocale(locale);
               return AnnotatedRegion<SystemUiOverlayStyle>(
                 value: _systemUiOverlayStyle(context),
-                child: child ?? const SizedBox.shrink(),
+                child: Stack(
+                  children: [
+                    child ?? const SizedBox.shrink(),
+                    const SosWarningOverlay(),
+                  ],
+                ),
               );
             },
             home: (PlatformInfo.isWeb && !PlatformInfo.isChrome)
