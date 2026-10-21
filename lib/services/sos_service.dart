@@ -171,6 +171,9 @@ class SosService extends ChangeNotifier {
   /// Retry delay for a due broadcast while the radio is disconnected.
   static const Duration disconnectedRetry = Duration(seconds: 30);
 
+  /// How long a channel send waits for the radio's channel list to load.
+  static const Duration channelsWait = Duration(seconds: 30);
+
   final SosTransport _transport;
   final AppSettingsService _settings;
   final PhoneLocationProvider? _phoneLocation;
@@ -328,6 +331,10 @@ class SosService extends ChangeNotifier {
   bool _installing = false;
   bool _noFreeSlot = false;
 
+  /// The network channel's slot as last read, used while the radio's
+  /// channel list reloads (on every connect and after a channel change).
+  int? _knownSosChannelIndex;
+
   /// The network's channel on the connected radio, or null when there is no
   /// network or it is not installed (yet).
   Channel? get sosChannel {
@@ -350,6 +357,11 @@ class SosService extends ChangeNotifier {
   /// Hides the channel from members and puts it on the radio if missing.
   void _syncNetwork() {
     final net = network;
+    if (net == null) {
+      _knownSosChannelIndex = null;
+    } else if (_transport.channelsReady) {
+      _knownSosChannelIndex = sosChannel?.index;
+    }
     final hide = net != null && net.role == SosNetworkRole.member
         ? net.key
         : null;
@@ -578,7 +590,32 @@ class SosService extends ChangeNotifier {
     }
   }
 
+  /// The channel list is reread on every connect and after each channel
+  /// change, and the network channel cannot be found until it is back.
+  /// False if the radio disconnects or the list takes too long.
+  Future<bool> _waitForChannels() async {
+    bool ready() =>
+        _transport.isConnected && _transport.channelsReady && !_installing;
+    if (ready()) return true;
+    final done = Completer<bool>();
+    void check() {
+      if (done.isCompleted) return;
+      if (!_transport.isConnected) done.complete(false);
+      if (ready()) done.complete(true);
+    }
+
+    _transport.addListener(check);
+    addListener(check);
+    try {
+      return await done.future.timeout(channelsWait, onTimeout: ready);
+    } finally {
+      _transport.removeListener(check);
+      removeListener(check);
+    }
+  }
+
   Future<void> _sendChannelPacket(SosPacket packet) async {
+    if (network == null || !await _waitForChannels()) return;
     final channel = sosChannel;
     if (channel == null || !_transport.supportsChannelData) return;
     try {
@@ -644,7 +681,10 @@ class SosService extends ChangeNotifier {
   @visibleForTesting
   void handleInboundData(int channelIndex, Uint8List data) {
     // Only the network's own channel carries alerts.
-    if (sosChannel?.index != channelIndex) return;
+    final networkIndex = _transport.channelsReady
+        ? sosChannel?.index
+        : _knownSosChannelIndex;
+    if (networkIndex != channelIndex) return;
     final packet = SosPacket.decode(data);
     if (packet == null) return;
     // Members only hear ACKs for their own SOS.
