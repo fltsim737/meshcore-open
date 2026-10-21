@@ -11,6 +11,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../helpers/message_url_image_helper.dart';
 import '../helpers/reaction_helper.dart';
 import '../l10n/app_localizations.dart';
+import '../models/sos_alert.dart';
 import '../storage/prefs_manager.dart';
 import '../utils/platform_info.dart';
 import 'notification_reply.dart';
@@ -610,6 +611,114 @@ class NotificationService {
         return 'from: ${_logSafe(n.title)}';
       case _NotificationType.channelMessage:
         return 'in: ${_logSafe(n.title)}';
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // Emergency SOS. Never rate limited, batched or suppressed during sync.
+  // ─────────────────────────────────────────────────────────────────
+
+  static int _sosAlertId(String key) => 'sos:$key'.hashCode & 0x7FFFFFFF;
+
+  /// Android: alarm audio, repeats until cancelled, cannot be swiped away.
+  /// Elsewhere: an ordinary notification with sound, re-posted on each
+  /// repeat the alert's sender broadcasts.
+  Future<void> showSosAlert(IncomingSos alert) async {
+    if (!await _ensureCanNotify()) return;
+    final l10n = _l10n;
+    final sender = alert.senderName.isEmpty
+        ? l10n.sos_unknownSender
+        : alert.senderName;
+    final fix = alert.fix;
+    final position = fix.hasPosition
+        ? '${fix.latitude!.toStringAsFixed(5)}, '
+              '${fix.longitude!.toStringAsFixed(5)}'
+        : l10n.sos_noPosition;
+    final body = '$position\n${l10n.sos_notificationOpenToRespond}';
+
+    final androidDetails = AndroidNotificationDetails(
+      'sos_alerts',
+      l10n.sos_notificationChannelName,
+      channelDescription: l10n.sos_notificationChannelDescription,
+      importance: Importance.max,
+      priority: Priority.max,
+      category: AndroidNotificationCategory.alarm,
+      visibility: NotificationVisibility.public,
+      sound: const RawResourceAndroidNotificationSound('sos_alarm'),
+      audioAttributesUsage: AudioAttributesUsage.alarm,
+      // FLAG_INSISTENT: loop the sound until the notification is cancelled.
+      additionalFlags: Int32List.fromList(const [4]),
+      ongoing: true,
+      autoCancel: false,
+      color: const Color(0xFFD32F2F),
+      styleInformation: BigTextStyleInformation(body),
+      icon: '@mipmap/ic_launcher',
+    );
+    const darwinDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBanner: true,
+      presentList: true,
+      presentSound: true,
+      interruptionLevel: InterruptionLevel.active,
+    );
+    try {
+      await _notifications.show(
+        id: _sosAlertId(alert.key),
+        title: l10n.sos_notificationTitle(sender),
+        body: body,
+        notificationDetails: NotificationDetails(
+          android: androidDetails,
+          iOS: darwinDetails,
+          macOS: darwinDetails,
+        ),
+        payload: 'sos:${alert.key}',
+      );
+    } catch (e) {
+      debugPrint('Failed to show SOS notification: $e');
+    }
+  }
+
+  Future<void> cancelSosAlert(IncomingSos alert) async {
+    if (!_isInitialized) return;
+    try {
+      await _notifications.cancel(id: _sosAlertId(alert.key));
+    } catch (e) {
+      debugPrint('Failed to cancel SOS notification: $e');
+    }
+  }
+
+  Future<void> showSosAcknowledged(OutgoingSos sos, SosAck ack) async {
+    if (!await _ensureCanNotify()) return;
+    final l10n = _l10n;
+    final name = ack.senderName.isEmpty
+        ? l10n.sos_unknownSender
+        : ack.senderName;
+    final androidDetails = AndroidNotificationDetails(
+      'sos_acks',
+      l10n.sos_ackChannelName,
+      importance: Importance.high,
+      priority: Priority.high,
+      icon: '@mipmap/ic_launcher',
+    );
+    const darwinDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBanner: true,
+      presentSound: true,
+    );
+    try {
+      await _notifications.show(
+        id: 'sos_ack:${sos.id}'.hashCode & 0x7FFFFFFF,
+        title: l10n.sos_ackNotificationTitle(name),
+        body: l10n.sos_ackNotificationBody,
+        notificationDetails: NotificationDetails(
+          android: androidDetails,
+          iOS: darwinDetails,
+          macOS: darwinDetails,
+        ),
+        payload: 'sos_ack:${sos.id}',
+      );
+    } catch (e) {
+      debugPrint('Failed to show SOS ACK notification: $e');
     }
   }
 
