@@ -49,6 +49,7 @@ import '../helpers/utf8_length_limiter.dart';
 import 'repeater_hub_screen.dart';
 import 'settings_screen.dart';
 import 'line_of_sight_map_screen.dart';
+import 'emergency_screen.dart';
 
 class MapScreen extends StatefulWidget {
   final LatLng? highlightPosition;
@@ -3283,6 +3284,12 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
         Navigator.pushReplacement(
           context,
           buildQuickSwitchRoute(const ChannelsScreen(hideBackButton: true)),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          buildQuickSwitchRoute(const EmergencyScreen(hideBackButton: true)),
         );
         break;
     }

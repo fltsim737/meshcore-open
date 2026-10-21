@@ -15,11 +15,13 @@ import '../models/companion_radio_stats.dart';
 import '../models/contact.dart';
 import '../models/message.dart';
 import '../models/path_selection.dart';
+import '../models/sos_alert.dart';
 import '../models/translation_support.dart';
 import '../helpers/reaction_helper.dart';
 import '../helpers/channel_resend_coverage.dart';
 import '../helpers/cyr2lat.dart';
 import '../helpers/smaz.dart';
+import '../helpers/sos_codec.dart';
 import '../services/app_debug_log_service.dart';
 import '../services/ble_debug_log_service.dart';
 import '../services/linux_ble_error_classifier.dart';
@@ -315,6 +317,9 @@ class MeshCoreConnector extends ChangeNotifier {
   ImageChunkTransport? _imageTransport;
   ReceivedImageStore? _receivedImageStore;
   void Function(ImageChunkOutcome outcome)? _onImageChunk;
+
+  /// Offered every new incoming direct and channel text; see SosService.
+  void Function(SosInboundText inbound)? sosTextListener;
   void Function(int senderPrefix)? _onImageSenderPrefix;
   // Intentionally global (not per-contact): tracks overall network activity.
   // Frequent RX from any source indicates a busy network with more collisions.
@@ -7008,6 +7013,15 @@ class MeshCoreConnector extends ChangeNotifier {
       _addMessage(message.senderKeyHex, message);
       _maybeIncrementContactUnread(message);
       notifyListeners();
+      if (!message.isOutgoing && !message.isCli) {
+        sosTextListener?.call(
+          SosInboundText(
+            text: message.text,
+            senderName: contact?.name ?? '',
+            senderKeyHex: message.senderKeyHex,
+          ),
+        );
+      }
 
       // Show notification for new incoming message (run async with translation)
       if (!message.isOutgoing &&
@@ -7280,7 +7294,8 @@ class MeshCoreConnector extends ChangeNotifier {
     final isStructuredPayload =
         trimmed.startsWith('g:') ||
         trimmed.startsWith('m:') ||
-        trimmed.startsWith('V1|');
+        trimmed.startsWith('V1|') ||
+        SosCodec.isStructured(trimmed);
     if (!isStructuredPayload) {
       if (isContactSmazEnabled(contact.publicKeyHex)) {
         return Smaz.encodeIfSmaller(text);
@@ -7308,7 +7323,9 @@ class MeshCoreConnector extends ChangeNotifier {
   String prepareChannelOutboundText(int channelIndex, String text) {
     final trimmed = text.trim();
     final isStructuredPayload =
-        trimmed.startsWith('g:') || trimmed.startsWith('m:');
+        trimmed.startsWith('g:') ||
+        trimmed.startsWith('m:') ||
+        SosCodec.isStructured(trimmed);
     if (!isStructuredPayload) {
       if (isChannelSmazEnabled(channelIndex)) {
         return Smaz.encodeIfSmaller(text);
@@ -7415,6 +7432,13 @@ class MeshCoreConnector extends ChangeNotifier {
       _maybeIncrementChannelUnread(message, isNew: isNew);
       notifyListeners();
       if (isNew && !message.isOutgoing) {
+        sosTextListener?.call(
+          SosInboundText(
+            text: message.text,
+            senderName: message.senderName,
+            channelIndex: message.channelIndex,
+          ),
+        );
         final msg = message; // capture for closure
         unawaited(() async {
           final translationResult = await translateChannelMessage(

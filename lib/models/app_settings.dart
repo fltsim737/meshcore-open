@@ -168,6 +168,15 @@ class AppSettings {
   final List<Cyr2LatProfile> cyr2latProfiles;
   final String selectedCyr2latProfileId;
 
+  /// Fallback SOS position, used when neither the phone nor the radio has one.
+  final double? sosLatitude;
+  final double? sosLongitude;
+  final int sosChannelIndex;
+  final bool sosIncludeFavourites;
+
+  /// Full public keys of contacts that receive the SOS by direct message.
+  final Set<String> sosContactKeys;
+
   /// The five `imageCodec*` fields as the value object `ImageCodecService`
   /// consumes. Assembled rather than stored so the settings blob stays flat.
   ImageCodecPreferences get imageCodec => ImageCodecPreferences(
@@ -262,6 +271,11 @@ class AppSettings {
     List<TranslationModelRecord>? translationDownloadedModels,
     List<Cyr2LatProfile>? cyr2latProfiles,
     String? selectedCyr2latProfileId,
+    this.sosLatitude,
+    this.sosLongitude,
+    this.sosChannelIndex = 0,
+    this.sosIncludeFavourites = true,
+    Set<String>? sosContactKeys,
   }) : batteryChemistryByDeviceId = batteryChemistryByDeviceId ?? {},
        batteryChemistryByRepeaterId = batteryChemistryByRepeaterId ?? {},
        mutedChannels = mutedChannels ?? {},
@@ -276,7 +290,8 @@ class AppSettings {
                charMap: defaultCyr2LatCharMap,
              ),
            ],
-       selectedCyr2latProfileId = selectedCyr2latProfileId ?? 'default';
+       selectedCyr2latProfileId = selectedCyr2latProfileId ?? 'default',
+       sosContactKeys = sosContactKeys ?? {};
 
   Map<String, dynamic> toJson() {
     return {
@@ -352,6 +367,11 @@ class AppSettings {
           .map((profile) => profile.toJson())
           .toList(),
       'selected_cyr2lat_profile_id': selectedCyr2latProfileId,
+      'sos_latitude': sosLatitude,
+      'sos_longitude': sosLongitude,
+      'sos_channel_index': sosChannelIndex,
+      'sos_include_favourites': sosIncludeFavourites,
+      'sos_contact_keys': sosContactKeys.toList(),
     };
   }
 
@@ -509,6 +529,15 @@ class AppSettings {
       selectedCyr2latProfileId:
           json['selected_cyr2lat_profile_id'] as String? ??
           (json['cyr2lat_char_map'] != null ? 'migrated' : 'default'),
+      sosLatitude: (json['sos_latitude'] as num?)?.toDouble(),
+      sosLongitude: (json['sos_longitude'] as num?)?.toDouble(),
+      sosChannelIndex: json['sos_channel_index'] as int? ?? 0,
+      sosIncludeFavourites: json['sos_include_favourites'] as bool? ?? true,
+      sosContactKeys:
+          (json['sos_contact_keys'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toSet() ??
+          {},
     );
   }
 
@@ -578,6 +607,11 @@ class AppSettings {
     List<TranslationModelRecord>? translationDownloadedModels,
     List<Cyr2LatProfile>? cyr2latProfiles,
     String? selectedCyr2latProfileId,
+    Object? sosLatitude = _unset,
+    Object? sosLongitude = _unset,
+    int? sosChannelIndex,
+    bool? sosIncludeFavourites,
+    Set<String>? sosContactKeys,
   }) {
     return AppSettings(
       clearPathOnMaxRetry: clearPathOnMaxRetry ?? this.clearPathOnMaxRetry,
@@ -683,6 +717,15 @@ class AppSettings {
       cyr2latProfiles: cyr2latProfiles ?? this.cyr2latProfiles,
       selectedCyr2latProfileId:
           selectedCyr2latProfileId ?? this.selectedCyr2latProfileId,
+      sosLatitude: sosLatitude == _unset
+          ? this.sosLatitude
+          : sosLatitude as double?,
+      sosLongitude: sosLongitude == _unset
+          ? this.sosLongitude
+          : sosLongitude as double?,
+      sosChannelIndex: sosChannelIndex ?? this.sosChannelIndex,
+      sosIncludeFavourites: sosIncludeFavourites ?? this.sosIncludeFavourites,
+      sosContactKeys: sosContactKeys ?? this.sosContactKeys,
     );
   }
 }

@@ -41,6 +41,7 @@ import 'map_screen.dart';
 import '../review_mode/review_mode_banner.dart';
 import 'repeater_hub_screen.dart';
 import 'settings_screen.dart';
+import 'emergency_screen.dart';
 
 enum RoomLoginDestination { chat, management }
 
@@ -1265,6 +1266,12 @@ class _ContactsScreenState extends State<ContactsScreen>
         Navigator.pushReplacement(
           context,
           buildQuickSwitchRoute(const MapScreen(hideBackButton: true)),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          buildQuickSwitchRoute(const EmergencyScreen(hideBackButton: true)),
         );
         break;
     }
