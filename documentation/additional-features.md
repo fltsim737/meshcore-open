@@ -276,6 +276,19 @@ Only one copy runs at a time: launching the app again while it is in the tray br
 
 Building needs `libayatana-appindicator3-dev`; running needs `libayatana-appindicator3-1`, which most desktops ship.
 
+### AppImage packaging
+
+`linux/appimage/build-appimage.sh` packages `flutter build linux --release` as an AppImage that carries what it needs beyond a standard desktop:
+
+- the tray libraries (AppIndicator and dbusmenu), loaded from `usr/lib/fallback` only when the system has none
+- the notification and alarm sounds (`MESHCORE_SOUND_DIR`), so no sound theme is needed
+
+On every launch `AppRun` runs `integrate.sh`, which adds a menu entry (`~/.local/share/applications/meshcore-open.desktop`), an uninstaller (`~/.local/share/meshcore-open/uninstall.sh`) and a systemd user path unit, `meshcore-open-cleanup.path`, that runs the uninstaller when the AppImage is deleted. Replacing the AppImage with a newer file at the same path keeps everything; opening it from a new path moves the entries there.
+
+The uninstaller removes the menu entry, start on login, the watcher and itself. It keeps messages, contacts and settings (`~/.local/share/com.meshcore.meshcore_open`) so a newer AppImage carries on, and remembers start on login for that case; `uninstall.sh --purge` deletes them too.
+
+Not bundled: GTK 3 and a sound player (`paplay` or `pw-play`), present on any desktop with sound; FUSE, which the AppImage needs to start (without it, run it with `--appimage-extract-and-run`); BlueZ for Bluetooth; and membership of the serial-port group (`dialout` on Debian and Ubuntu) for USB radios. The AppImage runs on distributions with glibc at least as new as the build machine's.
+
 ## URL Image Previews
 
 Enable URL images per contact in Chat → overflow → Contact Settings, or per channel in Channels → long-press (right-click on desktop) → Edit. Supported references include direct PNG/JPEG/WebP URLs, pyx.li links, ibb.co sharing pages, and IPFS references/gateway URLs.

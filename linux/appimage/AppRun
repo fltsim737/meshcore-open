@@ -1,0 +1,19 @@
+#!/bin/sh
+# Entry point of the MeshCore Open AppImage.
+HERE="$(dirname "$(readlink -f "$0")")"
+
+# Tray libraries: the system's when it has them, else the bundled copies.
+if ! /sbin/ldconfig -p 2>/dev/null | grep -q 'libayatana-appindicator3\.so\.1 '; then
+  export LD_LIBRARY_PATH="$HERE/usr/lib/fallback${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+fi
+
+# Notification and alarm sounds ship inside the AppImage.
+export MESHCORE_SOUND_DIR="$HERE/usr/share/sounds"
+
+# Menu entry, uninstaller and removal watcher, refreshed on every launch so
+# they follow the AppImage if it moves. Never blocks the app from starting.
+if [ -n "$APPIMAGE" ]; then
+  "$HERE/integrate.sh" "$HERE" "$APPIMAGE" >/dev/null 2>&1 || true
+fi
+
+exec "$HERE/usr/bin/meshcore_open" "$@"

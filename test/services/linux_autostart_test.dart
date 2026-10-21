@@ -26,6 +26,11 @@ void main() {
       contains('Exec="/home/sam/MeshCore_Open_SOS-x86_64.AppImage" --hidden\n'),
     );
     expect(text, startsWith('[Desktop Entry]\n'));
+    // Skipped at login if the AppImage has gone.
+    expect(
+      text,
+      contains('TryExec=/home/sam/MeshCore_Open_SOS-x86_64.AppImage\n'),
+    );
 
     await autostart.setEnabled(false);
     expect(autostart.isEnabled, isFalse);
