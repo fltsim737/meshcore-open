@@ -3608,7 +3608,6 @@ class MeshCoreConnector extends ChangeNotifier {
         _manualDisconnect = true;
         _cancelReconnectTimer();
         _clearTcpReconnectTarget();
-        unawaited(_backgroundService?.stop());
       }
       return inFlight;
     }
@@ -3662,19 +3661,11 @@ class MeshCoreConnector extends ChangeNotifier {
       _cancelReconnectTimer();
       _reconnectAttempts = 0;
       _clearTcpReconnectTarget();
-      unawaited(_backgroundService?.stop());
     } else {
       _manualDisconnect = false;
-      // BLE and handshaked TCP links reconnect on their own and keep the
-      // foreground service; nothing keeps USB alive.
-      final tcpWillReconnect =
-          transportAtDisconnect == MeshCoreTransportType.tcp &&
-          _shouldAutoReconnectTcp;
-      if (transportAtDisconnect != MeshCoreTransportType.bluetooth &&
-          !tcpWillReconnect) {
-        unawaited(_backgroundService?.stop());
-      }
     }
+    // The foreground service outlives the connection: it runs for as long as
+    // the app is open (see BackgroundService).
     _setState(MeshCoreConnectionState.disconnecting);
     _retryService?.failAllPending();
     _stopBatteryPolling();

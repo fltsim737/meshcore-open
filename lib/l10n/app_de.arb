@@ -2513,6 +2513,8 @@
   "common_done": "Fertig",
   "background_serviceTitle": "MeshCore läuft",
   "background_serviceText": "BLE-Verbindung bleibt aktiv",
+  "background_serviceRunningText": "Empfängt Nachrichten und SOS-Alarme",
+  "background_stop": "Beenden",
   "appSettings_translationModelDeleted": "Übersetzungsmodell {name} gelöscht",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

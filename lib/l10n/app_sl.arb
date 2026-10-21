@@ -2379,6 +2379,8 @@
   "common_done": "Done",
   "background_serviceTitle": "MeshCore running",
   "background_serviceText": "Keeping BLE connected",
+  "background_serviceRunningText": "Posluša sporočila in opozorila SOS",
+  "background_stop": "Ustavi",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

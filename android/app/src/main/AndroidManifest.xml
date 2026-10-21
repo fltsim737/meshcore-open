@@ -16,6 +16,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- Install-time permission that lets the connected-device service start before a radio
+         is connected (Android 14 requires one such permission) -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <!-- Ask to be exempt from battery optimisation so the app keeps running in the background -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
     <!-- Camera permission for QR code scanning -->
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>

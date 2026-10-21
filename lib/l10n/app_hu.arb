@@ -2424,6 +2424,8 @@
   "common_done": "Kész",
   "background_serviceTitle": "MeshCore fut",
   "background_serviceText": "A BLE-kapcsolat fenntartása",
+  "background_serviceRunningText": "Üzenetek és SOS-riasztások figyelése",
+  "background_stop": "Leállítás",
   "appSettings_translationModelDeleted": "Törölve {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

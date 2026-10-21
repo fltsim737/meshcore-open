@@ -5001,6 +5001,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get background_serviceText => 'BLE 接続を維持しています';
 
   @override
+  String get background_serviceRunningText => 'メッセージとSOSアラートを待ち受け中';
+
+  @override
+  String get background_stop => '停止';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return '$name を削除しました';
   }

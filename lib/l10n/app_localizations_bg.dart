@@ -5260,6 +5260,13 @@ class AppLocalizationsBg extends AppLocalizations {
   String get background_serviceText => 'Поддържа BLE връзката активна';
 
   @override
+  String get background_serviceRunningText =>
+      'Следи за съобщения и SOS сигнали';
+
+  @override
+  String get background_stop => 'Спри';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Изтрит $name';
   }

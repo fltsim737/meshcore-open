@@ -5257,6 +5257,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get background_serviceText => 'A BLE-kapcsolat fenntartása';
 
   @override
+  String get background_serviceRunningText =>
+      'Üzenetek és SOS-riasztások figyelése';
+
+  @override
+  String get background_stop => 'Leállítás';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Törölve $name';
   }
