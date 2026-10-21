@@ -96,6 +96,23 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
     isConnected = value;
     notifyListeners();
   }
+
+  List<Channel> _loadedChannels = [];
+
+  /// The radio rereads its channel list, as on every connect: the list is
+  /// empty until [finishChannelReload].
+  void startChannelReload() {
+    _loadedChannels = allChannels;
+    allChannels = [];
+    channelsReady = false;
+    notifyListeners();
+  }
+
+  void finishChannelReload() {
+    allChannels = _loadedChannels;
+    channelsReady = true;
+    notifyListeners();
+  }
 }
 
 /// Key of the "Farm" channel in slot 2, used as the emergency network.
@@ -423,6 +440,21 @@ void main() {
       expect(transport.channelPackets, hasLength(1));
     });
 
+    test('a cancel waits for the channel list after reconnecting', () async {
+      await service.activate();
+      transport.setConnected(false);
+      transport.channelPackets.clear();
+      await service.cancel();
+
+      transport.startChannelReload();
+      transport.setConnected(true);
+      await pumpEventQueue();
+      expect(transport.channelPackets, isEmpty);
+      transport.finishChannelReload();
+      await pumpEventQueue();
+      expect(transport.channelPackets.single.$2.kind, SosPacketKind.cancel);
+    });
+
     test('a cancel while disconnected is sent on reconnect', () async {
       await service.activate();
       final id = service.active!.id;
@@ -593,6 +625,23 @@ void main() {
         expect(service.active!.acks.single.senderName, 'Valley');
       },
     );
+
+    test('a broadcast waits for the channel list to load', () async {
+      transport.startChannelReload();
+      final activating = service.activate();
+      await pumpEventQueue();
+      expect(transport.channelPackets, isEmpty);
+      transport.finishChannelReload();
+      await activating;
+      expect(transport.channelPackets.single.$1, 2);
+      expect(transport.installed, isEmpty);
+    });
+
+    test('alerts are heard while the channel list reloads', () {
+      transport.startChannelReload();
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(service.incoming.single.senderName, 'Ridge');
+    });
 
     test('packets on other channels are ignored', () {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'), channel: 0);

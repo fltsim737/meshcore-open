@@ -5765,6 +5765,8 @@ class MeshCoreConnector extends ChangeNotifier {
     for (final frame in frames) {
       if (frame[0] != respCodeChannelDataRecv) {
         _handleIncomingChannelMessage(frame);
+      } else if (_handleSosChannelData(frame)) {
+        // SOS packets must never depend on the image-message setting.
       } else if (_appSettingsService?.settings.imageMessagesEnabled ?? false) {
         _handleIncomingChannelData(frame);
       }

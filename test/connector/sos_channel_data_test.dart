@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -66,6 +67,47 @@ void main() {
       retryService.dispose();
     });
   });
+
+  // Packets that arrive before the channel list is read (on every connect,
+  // including the radio's offline queue) are held and replayed afterwards.
+  // Runs first: the map stays confirmed for this connector afterwards.
+  test(
+    'SOS packets held until the channel list is read are delivered',
+    () async {
+      final received = <(int, Uint8List)>[];
+      connector.sosDataListener = (index, data) => received.add((index, data));
+      radio = ReviewRadio(
+        scheduledMessageInterval: const Duration(hours: 1),
+        replyDelay: const Duration(hours: 1),
+      );
+      final packet = SosPacket(
+        kind: SosPacketKind.sos,
+        id: 'c3d4',
+        senderPrefix: Uint8List.fromList([1, 2, 3, 4, 5, 6]),
+        senderName: 'Gully',
+        time: DateTime.utc(2026, 10, 21),
+      ).encode();
+      connector.reviewRadioFactoryForTest = () => radio;
+      connector.hiddenChannelPsk = null;
+      // Sent as soon as the channel list starts loading.
+      var sent = false;
+      final poll = Timer.periodic(const Duration(milliseconds: 1), (timer) {
+        if (!connector.isLoadingChannels) return;
+        timer.cancel();
+        expect(connector.channelMapConfirmed, isFalse);
+        radio.emitForTest(channelDataFrame(1, dataTypeSos, packet));
+        sent = true;
+      });
+      addTearDown(poll.cancel);
+      await connector.connectReview();
+      addTearDown(connector.disconnect);
+      await _waitFor(() => sent && connector.channelMapConfirmed);
+      await _waitFor(() => received.isNotEmpty);
+
+      expect(received.single.$1, 1);
+      expect(SosPacket.decode(received.single.$2)!.senderName, 'Gully');
+    },
+  );
 
   // Image messages default to off, which used to drop every SOS packet
   // along with image chunks.
