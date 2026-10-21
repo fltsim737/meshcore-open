@@ -3419,5 +3419,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Ввести шлях вручну"
 }

@@ -2363,6 +2363,9 @@ class AppLocalizationsSk extends AppLocalizations {
   String get map_runTrace => 'Spustiť trasovaním cesty';
 
   @override
+  String get map_enterPathManually => 'Zadať cestu ručne';
+
+  @override
   String get map_runTraceWithReturnPath => 'Vráťte sa späť po tej istej ceste.';
 
   @override

@@ -103,9 +103,14 @@ Shows node count and pin count. Tappable to expand a legend of all marker types.
 ## Path Trace Map
 
 ### How to Access
-- From the main map's radar icon
+- From the main map's ⋮ menu → **Path Trace**: tap nodes on the map to add hops in order, or tap the **keyboard** button to enter the path manually
 - From a contact's long-press menu → "Path Trace / Ping"
 - From a message's path view → radar icon
+
+### Entering a path manually
+The keyboard button in the Path Trace panel opens the path editor, prefilled with any hops already chosen. Pick repeaters from the list, or open **Advanced: raw hex path** and type the hop prefixes separated by commas (two hex characters per hop, or four or six when the radio uses 2- or 3-byte path hashes). **Use this path** replaces the path being built.
+
+Each hop is matched to a known repeater or room the same way received paths are. Hops that match nothing, or a node with no position, are still traced; they are just not drawn on the map or counted in the distance. Undo removes the last hop either way, and the run buttons (one-way and round trip) work as for a map-built path.
 
 ### What the User Sees
 A map with a polyline showing the route from your node through repeater hops to the target:

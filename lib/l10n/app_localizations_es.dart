@@ -2366,6 +2366,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get map_runTrace => 'Ejecutar traza de ruta';
 
   @override
+  String get map_enterPathManually => 'Introducir ruta manualmente';
+
+  @override
   String get map_runTraceWithReturnPath => 'Volver por la misma ruta.';
 
   @override

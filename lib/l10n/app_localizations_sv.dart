@@ -2345,6 +2345,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get map_runTrace => 'Kör ruttspårning';
 
   @override
+  String get map_enterPathManually => 'Ange sökväg manuellt';
+
+  @override
   String get map_runTraceWithReturnPath => 'Återvänd längs samma rutt.';
 
   @override

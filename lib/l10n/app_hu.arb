@@ -3478,5 +3478,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Útvonal kézi megadása"
 }

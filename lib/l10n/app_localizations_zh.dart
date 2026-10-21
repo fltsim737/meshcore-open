@@ -2239,6 +2239,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get map_runTrace => '运行路径追踪';
 
   @override
+  String get map_enterPathManually => '手动输入路径';
+
+  @override
   String get map_runTraceWithReturnPath => '沿着相同的路径返回';
 
   @override

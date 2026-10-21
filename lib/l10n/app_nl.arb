@@ -3340,5 +3340,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Pad handmatig invoeren"
 }

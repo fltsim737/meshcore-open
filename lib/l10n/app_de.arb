@@ -3574,5 +3574,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "map_enterPathManually": "Pfad manuell eingeben"
 }
