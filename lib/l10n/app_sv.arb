@@ -2377,6 +2377,8 @@
   "background_serviceText": "Håller BLE-anslutningen aktiv",
   "background_serviceRunningText": "Lyssnar efter meddelanden och SOS-larm",
   "background_stop": "Stoppa",
+  "tray_show": "Visa MeshCore Open",
+  "tray_quit": "Avsluta",
   "appSettings_translationModelDeleted": "Tog bort {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

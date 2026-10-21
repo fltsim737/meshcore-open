@@ -5240,6 +5240,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get background_stop => 'Stoppen';
 
   @override
+  String get tray_show => 'MeshCore Open tonen';
+
+  @override
+  String get tray_quit => 'Afsluiten';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return '$name verwijderd';
   }

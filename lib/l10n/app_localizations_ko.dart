@@ -5017,6 +5017,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get background_stop => '중지';
 
   @override
+  String get tray_show => 'MeshCore Open 표시';
+
+  @override
+  String get tray_quit => '종료';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return '$name 삭제됨';
   }

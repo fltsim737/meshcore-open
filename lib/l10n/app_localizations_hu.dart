@@ -5264,6 +5264,12 @@ class AppLocalizationsHu extends AppLocalizations {
   String get background_stop => 'Leállítás';
 
   @override
+  String get tray_show => 'MeshCore Open megjelenítése';
+
+  @override
+  String get tray_quit => 'Kilépés';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Törölve $name';
   }

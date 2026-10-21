@@ -5226,6 +5226,12 @@ class AppLocalizationsSv extends AppLocalizations {
   String get background_stop => 'Stoppa';
 
   @override
+  String get tray_show => 'Visa MeshCore Open';
+
+  @override
+  String get tray_quit => 'Avsluta';
+
+  @override
   String appSettings_translationModelDeleted(String name) {
     return 'Tog bort $name';
   }

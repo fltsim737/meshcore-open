@@ -2390,6 +2390,8 @@
   "background_serviceText": "Підтримує з'єднання BLE",
   "background_serviceRunningText": "Очікування повідомлень і сигналів SOS",
   "background_stop": "Зупинити",
+  "tray_show": "Показати MeshCore Open",
+  "tray_quit": "Вийти",
   "appSettings_translationModelDeleted": "Видалено {name}",
   "appSettings_translationModelDeleteFailed": "Не вдалось видалити: {error}",
   "channels_channelUpdateFailed": "Не вдалось оновити канал: {error}",

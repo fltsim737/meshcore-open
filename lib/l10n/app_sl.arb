@@ -2381,6 +2381,8 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Posluša sporočila in opozorila SOS",
   "background_stop": "Ustavi",
+  "tray_show": "Prikaži MeshCore Open",
+  "tray_quit": "Izhod",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

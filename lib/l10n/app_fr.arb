@@ -2515,6 +2515,8 @@
   "background_serviceText": "Maintien de la connexion BLE",
   "background_serviceRunningText": "À l'écoute des messages et alertes SOS",
   "background_stop": "Arrêter",
+  "tray_show": "Afficher MeshCore Open",
+  "tray_quit": "Quitter",
   "appSettings_translationModelDeleted": "Supprimé {name}",
   "@appSettings_translationModelDeleted": {
     "placeholders": {

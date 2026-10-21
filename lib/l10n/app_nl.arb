@@ -2433,6 +2433,8 @@
   "background_serviceText": "BLE-verbinding actief houden",
   "background_serviceRunningText": "Luistert naar berichten en SOS-meldingen",
   "background_stop": "Stoppen",
+  "tray_show": "MeshCore Open tonen",
+  "tray_quit": "Afsluiten",
   "appSettings_translationModelDeleted": "{name} verwijderd",
   "@appSettings_translationModelDeleted": {
     "placeholders": {
