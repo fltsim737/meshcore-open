@@ -3369,6 +3369,7 @@
   "sos_ackSent": "ACK odoslané",
   "sos_dismiss": "Zavrieť",
   "sos_copyCoordinates": "Kopírovať súradnice",
+  "sos_message": "Správa",
   "sos_coordinatesCopied": "Súradnice skopírované",
   "sos_noPosition": "Poloha nie je zahrnutá",
   "sos_ackedByOthers": "Potvrdili aj {names}",

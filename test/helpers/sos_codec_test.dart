@@ -162,6 +162,46 @@ void main() {
       }
     });
 
+    test('SOS and ACK carry the full key; older packets have none', () {
+      final key = Uint8List.fromList([...prefix, ...List.filled(26, 7)]);
+      for (final kind in [SosPacketKind.sos, SosPacketKind.ack]) {
+        final withKey = SosPacket(
+          kind: kind,
+          id: 'a1b2',
+          senderPrefix: key,
+          senderName: 'Ridge',
+          time: time,
+          fix: const SosFix(
+            latitude: -41,
+            longitude: 174,
+            source: SosLocationSource.phoneGps,
+          ),
+          senderKey: key,
+        ).encode();
+        final decoded = SosPacket.decode(withKey)!;
+        expect(decoded.senderKey, key);
+        expect(decoded.senderName, 'Ridge');
+        if (kind == SosPacketKind.sos) {
+          expect(decoded.fix.latitude, closeTo(-41, 1e-6));
+        }
+        // Without the trailing key, as older builds send it.
+        final older = SosPacket.decode(
+          Uint8List.sublistView(withKey, 0, withKey.length - 32),
+        )!;
+        expect(older.senderKey, isNull);
+        expect(older.senderName, 'Ridge');
+      }
+      // A key that does not match the prefix is not trusted.
+      final mismatched = SosPacket(
+        kind: SosPacketKind.ack,
+        id: 'a1b2',
+        senderPrefix: prefix,
+        senderName: 'Ridge',
+        senderKey: Uint8List.fromList(List.filled(32, 9)),
+      ).encode();
+      expect(SosPacket.decode(mismatched)!.senderKey, isNull);
+    });
+
     test('shortens long names and rejects junk', () {
       final decoded = SosPacket.decode(
         SosPacket(

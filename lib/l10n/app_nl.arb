@@ -3269,6 +3269,7 @@
   "sos_ackSent": "ACK verzonden",
   "sos_dismiss": "Negeren",
   "sos_copyCoordinates": "Coördinaten kopiëren",
+  "sos_message": "Bericht",
   "sos_coordinatesCopied": "Coördinaten gekopieerd",
   "sos_noPosition": "Geen positie meegestuurd",
   "sos_ackedByOthers": "Ook bevestigd door {names}",

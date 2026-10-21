@@ -3369,6 +3369,7 @@
   "sos_ackSent": "ACK poslan",
   "sos_dismiss": "Opusti",
   "sos_copyCoordinates": "Kopiraj koordinate",
+  "sos_message": "Sporočilo",
   "sos_coordinatesCopied": "Koordinate kopirane",
   "sos_noPosition": "Položaj ni vključen",
   "sos_ackedByOthers": "Potrdili tudi {names}",

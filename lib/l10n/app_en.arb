@@ -3558,6 +3558,7 @@
   "sos_ackSent": "ACK sent",
   "sos_dismiss": "Dismiss",
   "sos_copyCoordinates": "Copy coordinates",
+  "sos_message": "Message",
   "sos_coordinatesCopied": "Coordinates copied",
   "sos_noPosition": "No position included",
   "sos_ackedByOthers": "Also acknowledged by {names}",

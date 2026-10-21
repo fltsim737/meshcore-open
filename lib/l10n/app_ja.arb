@@ -3502,6 +3502,7 @@
   "sos_ackSent": "ACK送信済み",
   "sos_dismiss": "閉じる",
   "sos_copyCoordinates": "座標をコピー",
+  "sos_message": "メッセージ",
   "sos_coordinatesCopied": "座標をコピーしました",
   "sos_noPosition": "位置情報なし",
   "sos_ackedByOthers": "{names} も応答済み",

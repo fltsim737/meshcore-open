@@ -6552,6 +6552,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sos_copyCoordinates => 'Copia coordinate';
 
   @override
+  String get sos_message => 'Messaggio';
+
+  @override
   String get sos_coordinatesCopied => 'Coordinate copiate';
 
   @override

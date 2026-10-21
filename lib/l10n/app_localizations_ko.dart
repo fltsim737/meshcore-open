@@ -6249,6 +6249,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sos_copyCoordinates => '좌표 복사';
 
   @override
+  String get sos_message => '메시지';
+
+  @override
   String get sos_coordinatesCopied => '좌표 복사됨';
 
   @override

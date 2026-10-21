@@ -6534,6 +6534,9 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sos_copyCoordinates => 'Koordináták másolása';
 
   @override
+  String get sos_message => 'Üzenet';
+
+  @override
   String get sos_coordinatesCopied => 'Koordináták másolva';
 
   @override

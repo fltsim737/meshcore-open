@@ -89,6 +89,24 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
     return hash;
   }
 
+  /// (name, key) for every contact saved.
+  final List<(String, Uint8List)> addedContacts = [];
+
+  @override
+  Future<Contact?> addContact(Uint8List publicKey, String name) async {
+    addedContacts.add((name, publicKey));
+    final contact = Contact(
+      publicKey: publicKey,
+      name: name,
+      type: advTypeChat,
+      pathLength: -1,
+      path: Uint8List(0),
+      lastSeen: DateTime(2026),
+    );
+    contacts = [...contacts, contact];
+    return contact;
+  }
+
   /// The recipient's radio confirms the last DM sent to [name].
   void confirmDelivery(String name) => ackListener?.call(_lastHashFor[name]!);
 
@@ -163,12 +181,14 @@ Uint8List sosPacketFrom(
   SosPacketKind kind = SosPacketKind.sos,
   double? lat,
   double? lon,
+  bool withKey = false,
 }) => SosPacket(
   kind: kind,
   id: id,
   senderPrefix: Uint8List.fromList(List.filled(6, seed)),
   senderName: name,
   time: DateTime.utc(2026, 10, 21),
+  senderKey: withKey ? Uint8List.fromList(List.filled(32, seed)) : null,
   fix: lat == null
       ? const SosFix.none()
       : SosFix(
@@ -641,6 +661,60 @@ void main() {
       transport.startChannelReload();
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       expect(service.incoming.single.senderName, 'Ridge');
+    });
+
+    test('an SOS carrying its key saves the sender as a contact', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', withKey: true));
+      await pumpEventQueue();
+      final (name, key) = transport.addedContacts.single;
+      expect(name, 'Ridge');
+      expect(key, List.filled(32, 9));
+      final alert = service.incoming.single;
+      expect(service.contactFor(alert.senderKeyHex)?.name, 'Ridge');
+
+      // Repeats do not add it again.
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', withKey: true));
+      await pumpEventQueue();
+      expect(transport.addedContacts, hasLength(1));
+    });
+
+    test('our SOS and ACK packets carry our key', () async {
+      await service.activate();
+      expect(
+        transport.channelPackets.single.$2.senderKey,
+        List.filled(32, 0xAA),
+      );
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      await service.acknowledge(service.incoming.single);
+      final ack = transport.channelPackets.last.$2;
+      expect(ack.kind, SosPacketKind.ack);
+      expect(ack.senderKey, List.filled(32, 0xAA));
+    });
+
+    test('a member saves the responder who ACKed its SOS', () async {
+      await settings.joinSosNetwork(farmNetwork(SosNetworkRole.member));
+      await service.activate();
+      final id = service.active!.id;
+      // An ACK for someone else's SOS is not ours to save.
+      hear(
+        sosPacketFrom(
+          'Hill',
+          4,
+          'ffff',
+          kind: SosPacketKind.ack,
+          withKey: true,
+        ),
+      );
+      await pumpEventQueue();
+      expect(transport.addedContacts, isEmpty);
+
+      hear(
+        sosPacketFrom('Valley', 5, id, kind: SosPacketKind.ack, withKey: true),
+      );
+      await pumpEventQueue();
+      expect(transport.addedContacts.single.$1, 'Valley');
+      final ack = service.active!.acks.single;
+      expect(service.contactFor(ack.senderKeyHex)?.name, 'Valley');
     });
 
     test('packets on other channels are ignored', () {

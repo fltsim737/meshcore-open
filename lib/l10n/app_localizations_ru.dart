@@ -6560,6 +6560,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sos_copyCoordinates => 'Копировать координаты';
 
   @override
+  String get sos_message => 'Сообщение';
+
+  @override
   String get sos_coordinatesCopied => 'Координаты скопированы';
 
   @override

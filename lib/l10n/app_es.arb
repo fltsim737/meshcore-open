@@ -3502,6 +3502,7 @@
   "sos_ackSent": "ACK enviado",
   "sos_dismiss": "Descartar",
   "sos_copyCoordinates": "Copiar coordenadas",
+  "sos_message": "Mensaje",
   "sos_coordinatesCopied": "Coordenadas copiadas",
   "sos_noPosition": "Sin posición incluida",
   "sos_ackedByOthers": "También confirmado por {names}",

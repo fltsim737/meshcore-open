@@ -3502,6 +3502,7 @@
   "sos_ackSent": "ACK 전송됨",
   "sos_dismiss": "닫기",
   "sos_copyCoordinates": "좌표 복사",
+  "sos_message": "메시지",
   "sos_coordinatesCopied": "좌표 복사됨",
   "sos_noPosition": "위치 정보 없음",
   "sos_ackedByOthers": "{names}도 응답함",

@@ -3401,6 +3401,7 @@
   "sos_ackSent": "Wysłano ACK",
   "sos_dismiss": "Odrzuć",
   "sos_copyCoordinates": "Kopiuj współrzędne",
+  "sos_message": "Wiadomość",
   "sos_coordinatesCopied": "Skopiowano współrzędne",
   "sos_noPosition": "Brak pozycji",
   "sos_ackedByOthers": "Potwierdzone także przez {names}",

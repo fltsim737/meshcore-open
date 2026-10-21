@@ -6489,6 +6489,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get sos_copyCoordinates => 'Kopiera koordinater';
 
   @override
+  String get sos_message => 'Meddelande';
+
+  @override
   String get sos_coordinatesCopied => 'Koordinater kopierade';
 
   @override

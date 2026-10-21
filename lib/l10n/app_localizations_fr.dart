@@ -6572,6 +6572,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sos_copyCoordinates => 'Copier les coordonnées';
 
   @override
+  String get sos_message => 'Message';
+
+  @override
   String get sos_coordinatesCopied => 'Coordonnées copiées';
 
   @override
