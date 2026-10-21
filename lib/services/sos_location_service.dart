@@ -23,6 +23,15 @@ class GeolocatorPhoneLocation implements PhoneLocationProvider {
   /// A last-known position this recent still beats having none.
   static const Duration maxLastKnownAge = Duration(minutes: 10);
 
+  /// Coarser than this is a network estimate, not GPS (Android's approximate
+  /// location is about 2 km): the radio's or stored position is better.
+  static const double maxAccuracyMetres = 500;
+
+  /// Whether a reported accuracy is good enough to send. Zero means the
+  /// platform did not report one.
+  static bool isPreciseEnough(double accuracyMetres) =>
+      accuracyMetres <= maxAccuracyMetres;
+
   @override
   Future<SosFix?> currentFix({
     Duration timeout = const Duration(seconds: 15),
@@ -45,7 +54,10 @@ class GeolocatorPhoneLocation implements PhoneLocationProvider {
       return null;
     }
     final last = await _lastKnown();
-    if (last != null && _age(last) <= freshLastKnownAge) return _toFix(last);
+    if (last != null && _age(last) <= freshLastKnownAge) {
+      final fix = _toFix(last);
+      if (fix != null) return fix;
+    }
     try {
       final position = await Geolocator.getCurrentPosition(
         locationSettings: LocationSettings(
@@ -72,11 +84,20 @@ class GeolocatorPhoneLocation implements PhoneLocationProvider {
   Duration _age(Position position) =>
       DateTime.now().difference(position.timestamp);
 
-  SosFix _toFix(Position position) => SosFix(
-    latitude: position.latitude,
-    longitude: position.longitude,
-    source: SosLocationSource.phoneGps,
-  );
+  SosFix? _toFix(Position position) {
+    if (!isPreciseEnough(position.accuracy)) {
+      appLogger.info(
+        'Ignoring a ${position.accuracy.round()} m phone fix',
+        tag: 'SOS',
+      );
+      return null;
+    }
+    return SosFix(
+      latitude: position.latitude,
+      longitude: position.longitude,
+      source: SosLocationSource.phoneGps,
+    );
+  }
 
   @override
   Future<bool> requestPermission() async {

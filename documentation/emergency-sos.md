@@ -77,7 +77,7 @@ Each repeat is a new packet carrying the same ID. Repeaters forward every one, a
 
 Each broadcast looks up a position, in this order:
 
-1. **Phone GPS**: a recent last-known fix (under 2 minutes old) is used straight away. Otherwise the app waits up to 8 seconds for the first broadcast and 20 seconds for repeats.
+1. **Phone GPS** (phones only): a recent last-known fix (under 2 minutes old) is used straight away. Otherwise the app waits up to 8 seconds for the first broadcast and 20 seconds for repeats. A fix less precise than 500 m is a network estimate, not GPS, and is skipped. Computers (Windows, Linux, macOS) skip this step: they have no GPS, and their network-based estimate can be kilometres out.
 2. **Radio location**: the position the radio advertises, from its own GPS or one set under Settings → Location. A radio reporting 0, 0 counts as having no position.
 3. **Stored emergency location**.
 4. **None**: the SOS is still sent, without coordinates.
