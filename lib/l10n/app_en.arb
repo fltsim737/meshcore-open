@@ -3506,7 +3506,7 @@
   "sos_cancelConfirmTitle": "Cancel SOS?",
   "sos_cancelConfirmBody": "Repeat broadcasts will stop. Responders are not told that you cancelled, so let them know if you are safe.",
   "sos_keepActive": "Keep active",
-  "sos_broadcastCount": "Sent {count} times, last at {time}",
+  "sos_broadcastCount": "{count, plural, =1{Sent once} other{Sent {count} times}}, last at {time}",
   "@sos_broadcastCount": {"placeholders": {"count": {"type": "int"}, "time": {"type": "String"}}},
   "sos_notSentYet": "Waiting for the radio to send",
   "sos_locationSource": "Location source: {source}",
