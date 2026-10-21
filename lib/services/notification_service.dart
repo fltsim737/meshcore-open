@@ -677,6 +677,18 @@ class NotificationService {
           android: androidDetails,
           iOS: darwinDetails,
           macOS: darwinDetails,
+          // An alarm toast loops its sound and stays until dismissed; Windows
+          // only treats it as one when it has a button.
+          windows: WindowsNotificationDetails(
+            scenario: WindowsNotificationScenario.alarm,
+            audio: WindowsNotificationAudio.preset(
+              sound: WindowsNotificationSound.alarm1,
+              shouldLoop: true,
+            ),
+            actions: [
+              WindowsAction(content: l10n.chat_open, arguments: 'sos_open'),
+            ],
+          ),
         ),
         payload: 'sos:${alert.key}',
       );

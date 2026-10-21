@@ -289,6 +289,12 @@ The uninstaller removes the menu entry, start on login, the watcher and itself. 
 
 Not bundled: GTK 3 and a sound player (`paplay` or `pw-play`), present on any desktop with sound; FUSE, which the AppImage needs to start (without it, run it with `--appimage-extract-and-run`); BlueZ for Bluetooth; and membership of the serial-port group (`dialout` on Debian and Ubuntu) for USB radios. The AppImage runs on distributions with glibc at least as new as the build machine's.
 
+## Windows
+
+The tray icon and hide-on-close work as on Linux (`desktop_tray_service.dart`); left-clicking the tray icon opens the window. Only one copy runs at a time (`windows/runner/main.cpp`): launching it again brings the running copy's window back. An incoming SOS raises an alarm notification that loops its sound until dismissed, and brings the window to the front. **Start when you log in** adds a `MeshCore Open` value under `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` that launches with `--hidden`; it shows in Task Manager's startup apps.
+
+`windows\installer\build-windows.ps1` builds the app, copies the Visual C++ runtime next to it and packages `build\windows\installer\MeshCore-Open-Setup.exe` with Inno Setup (`meshcore-open.iss`). The installer needs no administrator rights, adds a Start menu entry and optionally start on sign-in, and registers an uninstaller under Settings → Apps. Uninstalling closes the running copy, removes start on sign-in and the notification registration, and asks whether to delete messages and settings as well. Building needs Flutter, Visual Studio 2022 with "Desktop development with C++", Inno Setup 6 and Developer Mode.
+
 ## URL Image Previews
 
 Enable URL images per contact in Chat → overflow → Contact Settings, or per channel in Channels → long-press (right-click on desktop) → Edit. Supported references include direct PNG/JPEG/WebP URLs, pyx.li links, ibb.co sharing pages, and IPFS references/gateway URLs.
