@@ -183,10 +183,10 @@ void main(List<String> args) async {
   final sosService = SosService(
     transport: ConnectorSosTransport(connector),
     settings: appSettingsService,
-    // Computers have no GPS: Windows and Linux only estimate a position from
-    // the network, often kilometres out, which must not override the radio's
-    // or the stored location.
-    phoneLocation: PlatformInfo.isDesktop ? null : GeolocatorPhoneLocation(),
+    // Windows has no GPS on a desktop: it estimates a position from the
+    // network, often kilometres out, which must not override the radio's or
+    // the stored location.
+    phoneLocation: PlatformInfo.isWindows ? null : GeolocatorPhoneLocation(),
     alerter: NotificationSosAlerter(),
   )..load();
 
