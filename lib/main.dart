@@ -193,9 +193,10 @@ void main(List<String> args) async {
     alerter: NotificationSosAlerter(),
   )..load();
 
-  // Voice clips need the Codec2 library, which is built for Android and
-  // Linux only.
-  final voiceSupported = PlatformInfo.isAndroid || PlatformInfo.isLinux;
+  // Voice clips need the Codec2 library, which is built for Android, Linux
+  // and Windows.
+  final voiceSupported =
+      PlatformInfo.isAndroid || PlatformInfo.isLinux || PlatformInfo.isWindows;
   final sosVoiceService = SosVoiceService(
     sos: sosService,
     transport: ConnectorSosVoiceTransport(connector),

@@ -40,6 +40,7 @@
 #include "mbest.h"
 #include "phase.h"
 #include "quantise.h"
+#include "vla.h"
 
 /*---------------------------------------------------------------------------*\
 
@@ -171,7 +172,7 @@ float rate_K_mbest_encode(int *indexes, float *x, float *xq, int ndim,
   const float *codebook1 = newamp1vq_cb[0].cb;
   const float *codebook2 = newamp1vq_cb[1].cb;
   struct MBEST *mbest_stage1, *mbest_stage2;
-  float target[ndim];
+  VLA(float, target, ndim);
   int index[MBEST_STAGES];
   float mse, tmp;
 
@@ -240,7 +241,7 @@ void post_filter_newamp1(float vec[], float sample_freq_kHz[], int K,
     and normalise.  Plenty of room for experimentation here.
   */
 
-  float pre[K];
+  VLA(float, pre, K);
   float e_before = 0.0;
   float e_after = 0.0;
   for (k = 0; k < K; k++) {
@@ -319,7 +320,7 @@ void interp_Wo_v(float Wo_[], int L_[], int voicing_[], float Wo1, float Wo2,
 
 void resample_rate_L(C2CONST *c2const, MODEL *model, float rate_K_vec[],
                      float rate_K_sample_freqs_kHz[], int K) {
-  float rate_K_vec_term[K + 2], rate_K_sample_freqs_kHz_term[K + 2];
+  VLA(float, rate_K_vec_term, K + 2); VLA(float, rate_K_sample_freqs_kHz_term, K + 2);
   float AmdB[MAX_AMP + 1], rate_L_sample_freqs_kHz[MAX_AMP + 1];
   int m, k;
 
@@ -364,7 +365,7 @@ void determine_phase(C2CONST *c2const, COMP H[], MODEL *model, int Nfft,
                      codec2_fft_cfg fwd_cfg, codec2_fft_cfg inv_cfg) {
   int i, m, b;
   int Ns = Nfft / 2 + 1;
-  float Gdbfk[Ns], sample_freqs_kHz[Ns], phase[Ns];
+  VLA(float, Gdbfk, Ns); VLA(float, sample_freqs_kHz, Ns); VLA(float, phase, Ns);
   float AmdB[MAX_AMP + 1], rate_L_sample_freqs_kHz[MAX_AMP + 1];
 
   for (m = 1; m <= model->L; m++) {
@@ -404,7 +405,7 @@ void determine_autoc(C2CONST *c2const, float Rk[], int order, MODEL *model,
                      int Nfft, codec2_fft_cfg fwd_cfg, codec2_fft_cfg inv_cfg) {
   int i, m;
   int Ns = Nfft / 2 + 1;
-  float Gdbfk[Ns], sample_freqs_kHz[Ns];
+  VLA(float, Gdbfk, Ns); VLA(float, sample_freqs_kHz, Ns);
   float AmdB[MAX_AMP + 1], rate_L_sample_freqs_kHz[MAX_AMP + 1];
 
   /* interpolate in the log domain */
@@ -422,7 +423,7 @@ void determine_autoc(C2CONST *c2const, float Rk[], int order, MODEL *model,
   interp_para(Gdbfk, &rate_L_sample_freqs_kHz[1], &AmdB[1], model->L,
               sample_freqs_kHz, Ns);
 
-  COMP S[Nfft], R[Nfft];
+  VLA(COMP, S, Nfft); VLA(COMP, R, Nfft);
 
   /* install negative frequency components, convert to mag squared of spectrum
    */
@@ -599,7 +600,7 @@ void newamp1_indexes_to_model(C2CONST *c2const, MODEL model_[], COMP H[],
                               codec2_fft_cfg fwd_cfg, codec2_fft_cfg inv_cfg,
                               int indexes[], float user_rate_K_vec_no_mean_[],
                               int post_filter_en) {
-  float rate_K_vec_[K], rate_K_vec_no_mean_[K], mean_, Wo_right;
+  VLA(float, rate_K_vec_, K); VLA(float, rate_K_vec_no_mean_, K); float mean_; float Wo_right;
   int voicing_right, k;
   int M = 4;
 
@@ -627,8 +628,8 @@ void newamp1_indexes_to_model(C2CONST *c2const, MODEL model_[], COMP H[],
 
   /* interpolate 25Hz v and Wo back to 100Hz */
 
-  float aWo_[M];
-  int avoicing_[M], aL_[M], i;
+  VLA(float, aWo_, M);
+  VLA(int, avoicing_, M); VLA(int, aL_, M); int i;
 
   interp_Wo_v(aWo_, aL_, avoicing_, *Wo_left, Wo_right, *voicing_left,
               voicing_right);

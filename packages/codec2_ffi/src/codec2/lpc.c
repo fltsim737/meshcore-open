@@ -37,6 +37,7 @@
 #include <math.h>
 
 #include "defines.h"
+#include "vla.h"
 
 /*---------------------------------------------------------------------------*\
 
@@ -143,7 +144,8 @@ void levinson_durbin(float R[],    /* order+1 autocorrelation coeff */
                      float lpcs[], /* order+1 LPC's */
                      int order     /* order of the LPC analysis */
 ) {
-  float a[order + 1][order + 1];
+  VLA(float, a, (order + 1) * (order + 1));
+#define A(r, c) a[(r) * (order + 1) + (c)]
   float sum, e, k;
   int i, j; /* loop variables */
 
@@ -151,20 +153,21 @@ void levinson_durbin(float R[],    /* order+1 autocorrelation coeff */
 
   for (i = 1; i <= order; i++) {
     sum = 0.0;
-    for (j = 1; j <= i - 1; j++) sum += a[i - 1][j] * R[i - j];
+    for (j = 1; j <= i - 1; j++) sum += A(i - 1, j) * R[i - j];
     k = -1.0 * (R[i] + sum) / e; /* Equation 38b, Makhoul */
     if (fabsf(k) > 1.0) k = 0.0;
 
-    a[i][i] = k;
+    A(i, i) = k;
 
     for (j = 1; j <= i - 1; j++)
-      a[i][j] = a[i - 1][j] + k * a[i - 1][i - j]; /* Equation 38c, Makhoul */
+      A(i, j) = A(i - 1, j) + k * A(i - 1, i - j); /* Equation 38c, Makhoul */
 
     e *= (1 - k * k); /* Equation 38d, Makhoul */
   }
 
-  for (i = 1; i <= order; i++) lpcs[i] = a[order][i];
+  for (i = 1; i <= order; i++) lpcs[i] = A(order, i);
   lpcs[0] = 1.0;
+#undef A
 }
 
 /*---------------------------------------------------------------------------*\
@@ -244,7 +247,7 @@ void find_aks(float Sn[], /* Nsam samples with order sample memory */
               float *E    /* residual energy */
 ) {
   float Wn[LPC_MAX_N]; /* windowed frame of Nsam speech samples */
-  float R[order + 1];  /* order+1 autocorrelation values of Sn[] */
+  VLA(float, R, order + 1);  /* order+1 autocorrelation values of Sn[] */
   int i;
 
   assert(Nsam < LPC_MAX_N);

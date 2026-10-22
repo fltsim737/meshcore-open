@@ -14,9 +14,19 @@ target_include_directories(codec2_ffi PRIVATE
 )
 
 set_target_properties(codec2_ffi PROPERTIES OUTPUT_NAME "codec2_ffi")
-target_compile_options(codec2_ffi PRIVATE -O2 -w)
 
-if (NOT MSVC)
+if (MSVC)
+  # C11 for inline, M_PI from math.h, and every Codec2 function exported
+  # from the DLL so Dart can look it up. Variable-length arrays become
+  # _alloca there; see codec2/vla.h.
+  set_target_properties(codec2_ffi PROPERTIES
+    C_STANDARD 11
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
+  )
+  target_compile_definitions(codec2_ffi PRIVATE _USE_MATH_DEFINES)
+  target_compile_options(codec2_ffi PRIVATE /O2 /w)
+else()
+  target_compile_options(codec2_ffi PRIVATE -O2 -w)
   target_link_libraries(codec2_ffi PRIVATE m)
 endif()
 

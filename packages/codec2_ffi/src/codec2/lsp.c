@@ -35,6 +35,7 @@
 #include <stdlib.h>
 
 #include "defines.h"
+#include "vla.h"
 
 /*---------------------------------------------------------------------------*\
 
@@ -93,7 +94,7 @@ static float cheb_poly_eva(float *coef, float x, int order)
 {
   int i;
   float *t, *u, *v, sum;
-  float T[(order / 2) + 1];
+  VLA(float, T, (order / 2) + 1);
 
   /* Initialise pointers */
 
@@ -145,8 +146,8 @@ int lpc_to_lsp(float *a, int order, float *freq, int nb, float delta)
   float *pt;     /* ptr used for cheb_poly_eval()
                     whether P' or Q' 			*/
   int roots = 0; /* number of roots found 	        */
-  float Q[order + 1];
-  float P[order + 1];
+  VLA(float, Q, order + 1);
+  VLA(float, P, order + 1);
 
   flag = 1;
   m = order / 2; /* order of P'(z) & Q'(z) polynimials 	*/
@@ -262,8 +263,8 @@ void lsp_to_lpc(float *lsp, float *ak, int order)
   int i, j;
   float xout1, xout2, xin1, xin2;
   float *pw, *n1, *n2, *n3, *n4 = 0;
-  float freq[order];
-  float Wp[(order * 4) + 2];
+  VLA(float, freq, order);
+  VLA(float, Wp, (order * 4) + 2);
 
   /* convert from radians to the x=cos(w) domain */
 
