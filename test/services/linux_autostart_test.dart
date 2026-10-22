@@ -9,7 +9,7 @@ void main() {
   setUp(() => config = Directory.systemTemp.createTempSync('autostart'));
   tearDown(() => config.deleteSync(recursive: true));
 
-  File entry() => File('${config.path}/autostart/meshcore-open.desktop');
+  File entry() => File('${config.path}/autostart/meshcore-open-sos-voice.desktop');
 
   test('turning it on writes a hidden-start entry; off removes it', () async {
     final autostart = LinuxAutostart(
