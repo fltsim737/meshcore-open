@@ -115,6 +115,11 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.4
 
+# Linux plays voice clips without audioplayers; see the stub's pubspec.
+dependency_overrides:
+  audioplayers_linux:
+    path: packages/audioplayers_linux_stub
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

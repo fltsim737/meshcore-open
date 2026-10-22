@@ -1,0 +1,23 @@
+# Stands in for audioplayers_linux, whose GStreamer backend MeshCore Open does
+# not need: on Linux, voice clips play through paplay or pw-play instead (see
+# lib/services/voice_audio.dart). Without it, building for Linux would need
+# the GStreamer development packages and the app GStreamer at runtime.
+name: audioplayers_linux
+description: "Empty Linux implementation of audioplayers for MeshCore Open."
+version: 4.2.1
+publish_to: none
+
+environment:
+  sdk: ^3.6.0
+  flutter: '>=3.27.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    implements: audioplayers
+    platforms:
+      linux:
+        dartPluginClass: AudioplayersLinuxStub
