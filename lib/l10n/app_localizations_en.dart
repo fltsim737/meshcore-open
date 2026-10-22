@@ -2992,6 +2992,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get repeater_ownerInfo => 'Operator info';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Contact details and notes from the operator.';
+
+  @override
+  String get ownerInfo_empty => 'The operator has not added any information.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'No reply. The repeater may be out of range, or its firmware may be too old to share operator info.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Emergency network code';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'The operator lists this emergency network for the area.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Joined';
+
+  @override
   String get repeater_ownerInfoHelper => 'Public metadata for this repeater';
 
   @override

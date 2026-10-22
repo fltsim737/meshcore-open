@@ -15,6 +15,7 @@ import 'repeater_cli_screen.dart';
 import 'repeater_settings_screen.dart';
 import 'telemetry_screen.dart';
 import 'neighbors_screen.dart';
+import 'repeater_owner_info_screen.dart';
 
 class RepeaterHubScreen extends StatelessWidget {
   final Contact repeater;
@@ -243,9 +244,28 @@ class RepeaterHubScreen extends StatelessWidget {
                 },
               ),
 
-            if (isAdmin) ...[
+            if (repeater.type != advTypeRoom)
               _HubActionTile(
                 index: 3,
+                icon: Icons.badge_outlined,
+                title: l10n.repeater_ownerInfo,
+                subtitle: l10n.repeater_ownerInfoSubtitle,
+                accentColor: MeshPalette.alert,
+                onTap: () {
+                  HapticFeedback.selectionClick();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          RepeaterOwnerInfoScreen(repeater: repeater),
+                    ),
+                  );
+                },
+              ),
+
+            if (isAdmin) ...[
+              _HubActionTile(
+                index: 4,
                 icon: Icons.terminal,
                 title: l10n.repeater_cli,
                 subtitle: l10n.repeater_cliSubtitle,
@@ -264,7 +284,7 @@ class RepeaterHubScreen extends StatelessWidget {
                 },
               ),
               _HubActionTile(
-                index: 4,
+                index: 5,
                 icon: Icons.settings,
                 title: l10n.repeater_settings,
                 subtitle: l10n.repeater_settingsSubtitle,

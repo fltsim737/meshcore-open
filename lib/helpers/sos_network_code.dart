@@ -64,6 +64,23 @@ class SosNetworkCode {
   /// The QR payload, which also carries the network name.
   String get qrData => '$text#${Uri.encodeComponent(name)}';
 
+  static final RegExp _inText = RegExp(
+    r'SOS1-[MR](?:-[A-Z2-7]{1,4})+(?:#\S+)?',
+    caseSensitive: false,
+  );
+
+  /// The valid codes written somewhere in free text, such as a repeater's
+  /// operator info, in order and without repeats.
+  static List<SosNetworkCode> findIn(String text) {
+    final found = <SosNetworkCode>[];
+    final seen = <String>{};
+    for (final match in _inText.allMatches(text)) {
+      final code = parse(match.group(0)!);
+      if (code != null && seen.add(code.text)) found.add(code);
+    }
+    return found;
+  }
+
   /// Parses a typed code or QR payload; null if it is not a valid code.
   static SosNetworkCode? parse(String input) {
     var raw = input.trim();

@@ -3058,6 +3058,31 @@ class AppLocalizationsPl extends AppLocalizations {
   String get repeater_ownerInfo => 'Informacje o operatorze';
 
   @override
+  String get repeater_ownerInfoSubtitle => 'Dane kontaktowe i uwagi operatora.';
+
+  @override
+  String get ownerInfo_empty => 'Operator nie dodał żadnych informacji.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Brak odpowiedzi. Przemiennik może być poza zasięgiem lub jego firmware jest zbyt stary, by udostępniać informacje o operatorze.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Kod sieci alarmowej';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Operator podaje tę sieć alarmową dla tego obszaru.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Dołączono';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Publiczne metadane dla tego urządzenia powielającego';
 

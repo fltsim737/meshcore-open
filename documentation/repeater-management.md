@@ -36,10 +36,13 @@ The central management screen showing:
 | Status | Repeater Status Screen | All users |
 | Telemetry | Telemetry Screen | All users |
 | Neighbors | Neighbors Screen | All users |
+| Operator info | Repeater Operator Info Screen | All users (repeaters only) |
 | CLI | Repeater CLI Screen | Admin only |
 | Settings | Repeater Settings Screen | Admin only |
 
 The battery chemistry selector and CLI/Settings cards are hidden from guest users.
+
+**Operator info** sends binary request `0x07` (GET_OWNER_INFO), which repeater firmware answers for any logged-in client, guests included, with `<firmware version>\n<node name>\n<owner info>`. Older firmware does not answer, and the screen reports a timeout. Room servers do not support the request, so the card is shown only for repeaters. An emergency network code in the text gets a **Join** button; see [Emergency SOS](emergency-sos.md#emergency-network).
 
 ---
 

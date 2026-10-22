@@ -3023,6 +3023,32 @@ class AppLocalizationsSl extends AppLocalizations {
   String get repeater_ownerInfo => 'Informacije o operaterju';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Kontaktni podatki in opombe upravljavca.';
+
+  @override
+  String get ownerInfo_empty => 'Upravljavec ni dodal podatkov.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Ni odgovora. Repetitor je morda izven dosega ali pa je njegova programska oprema prestara za deljenje podatkov o upravljavcu.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Programska oprema $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Koda omrežja za nujne primere';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Upravljavec navaja to omrežje za nujne primere za območje.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Pridruženo';
+
+  @override
   String get repeater_ownerInfoHelper => 'javni podatki o tej napravi';
 
   @override

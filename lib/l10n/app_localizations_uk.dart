@@ -3038,6 +3038,31 @@ class AppLocalizationsUk extends AppLocalizations {
   String get repeater_ownerInfo => 'Інформація про оператора';
 
   @override
+  String get repeater_ownerInfoSubtitle => 'Контакти та нотатки оператора.';
+
+  @override
+  String get ownerInfo_empty => 'Оператор не додав інформації.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Немає відповіді. Ретранслятор може бути поза зоною дії, або його прошивка надто стара, щоб передавати відомості про оператора.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Прошивка $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Код аварійної мережі';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Оператор зазначає цю аварійну мережу для району.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Ви учасник';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Публічні метадані для цього ретранслятора';
 

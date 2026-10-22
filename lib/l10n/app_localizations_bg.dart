@@ -3042,6 +3042,32 @@ class AppLocalizationsBg extends AppLocalizations {
   String get repeater_ownerInfo => 'Информация за оператора';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Данни за контакт и бележки от оператора.';
+
+  @override
+  String get ownerInfo_empty => 'Операторът не е добавил информация.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Няма отговор. Повторителят може да е извън обхват или фърмуерът му е твърде стар, за да споделя информация за оператора.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Фърмуер $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Код на аварийна мрежа';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Операторът посочва тази аварийна мрежа за района.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Присъединен';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Публични метаданни за този повторител';
 

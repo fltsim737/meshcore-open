@@ -27,6 +27,36 @@ String sosNetworkStatusLabel(AppLocalizations l10n, SosNetworkStatus status) =>
       SosNetworkStatus.ready => l10n.sos_networkStatusReady,
     };
 
+/// Asks before joining [code]'s network; true once joined.
+Future<bool> confirmJoinSosNetwork(
+  BuildContext context,
+  SosNetworkCode code,
+) async {
+  final l10n = context.l10n;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: Text(l10n.sos_networkJoin),
+      content: Text(
+        l10n.sos_networkJoinConfirm(code.name, sosRoleLabel(l10n, code.role)),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialogContext, false),
+          child: Text(l10n.common_cancel),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(dialogContext, true),
+          child: Text(l10n.sos_networkJoinAction),
+        ),
+      ],
+    ),
+  );
+  if (confirmed != true || !context.mounted) return false;
+  await context.read<SosService>().joinNetwork(code);
+  return true;
+}
+
 /// Set up, join, share or leave the emergency network.
 class SosNetworkScreen extends StatelessWidget {
   const SosNetworkScreen({super.key});
@@ -287,28 +317,8 @@ class _SosNetworkJoinScreenState extends State<SosNetworkJoinScreen> {
       return;
     }
     setState(() => _error = null);
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.sos_networkJoin),
-        content: Text(
-          l10n.sos_networkJoinConfirm(code.name, sosRoleLabel(l10n, code.role)),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext, false),
-            child: Text(l10n.common_cancel),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.pop(dialogContext, true),
-            child: Text(l10n.sos_networkJoinAction),
-          ),
-        ],
-      ),
-    );
-    if (confirmed != true || !mounted) return;
-    await context.read<SosService>().joinNetwork(code);
-    if (mounted) Navigator.pop(context);
+    final joined = await confirmJoinSosNetwork(context, code);
+    if (joined && mounted) Navigator.pop(context);
   }
 
   @override

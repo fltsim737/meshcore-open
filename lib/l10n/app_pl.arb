@@ -1179,6 +1179,13 @@
     }
   },
   "repeater_ownerInfo": "Informacje o operatorze",
+  "repeater_ownerInfoSubtitle": "Dane kontaktowe i uwagi operatora.",
+  "ownerInfo_empty": "Operator nie dodał żadnych informacji.",
+  "ownerInfo_timedOut": "Brak odpowiedzi. Przemiennik może być poza zasięgiem lub jego firmware jest zbyt stary, by udostępniać informacje o operatorze.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Kod sieci alarmowej",
+  "ownerInfo_sosCodeBody": "Operator podaje tę sieć alarmową dla tego obszaru.",
+  "ownerInfo_sosJoined": "Dołączono",
   "repeater_ownerInfoHelper": "Publiczne metadane dla tego urządzenia powielającego",
   "repeater_refreshOwnerInfo": "Aktualizacja danych dotyczących operatora",
   "repeater_floodMax": "Maksymalna liczba skoków flood",

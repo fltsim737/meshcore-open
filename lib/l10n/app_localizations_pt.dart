@@ -3037,6 +3037,31 @@ class AppLocalizationsPt extends AppLocalizations {
   String get repeater_ownerInfo => 'Informações sobre o operador';
 
   @override
+  String get repeater_ownerInfoSubtitle => 'Contactos e notas do operador.';
+
+  @override
+  String get ownerInfo_empty => 'O operador não adicionou informações.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Sem resposta. O repetidor pode estar fora de alcance ou o firmware é demasiado antigo para partilhar as informações do operador.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Código da rede de emergência';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'O operador indica esta rede de emergência para a zona.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Aderiu';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Metadados públicos para este repetidor';
 

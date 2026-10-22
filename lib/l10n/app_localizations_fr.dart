@@ -3048,6 +3048,32 @@ class AppLocalizationsFr extends AppLocalizations {
   String get repeater_ownerInfo => 'Informations sur le propriétaire';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Coordonnées et notes de l\'opérateur.';
+
+  @override
+  String get ownerInfo_empty => 'L\'opérateur n\'a ajouté aucune information.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Pas de réponse. Le répéteur est peut-être hors de portée, ou son firmware est trop ancien pour partager les informations de l\'opérateur.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Code du réseau d\'urgence';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'L\'opérateur indique ce réseau d\'urgence pour la zone.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Rejoint';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Métadonnées publiques pour cet appareil';
 

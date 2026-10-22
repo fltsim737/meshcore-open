@@ -3018,6 +3018,33 @@ class AppLocalizationsNl extends AppLocalizations {
   String get repeater_ownerInfo => 'Informatie over de operator';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Contactgegevens en notities van de beheerder.';
+
+  @override
+  String get ownerInfo_empty =>
+      'De beheerder heeft geen informatie toegevoegd.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Geen antwoord. De repeater is mogelijk buiten bereik, of de firmware is te oud om beheerdersinformatie te delen.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Noodnetwerkcode';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'De beheerder vermeldt dit noodnetwerk voor het gebied.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Lid';
+
+  @override
   String get repeater_ownerInfoHelper => 'Openbare metadata voor deze repeater';
 
   @override

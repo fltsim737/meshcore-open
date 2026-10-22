@@ -3024,6 +3024,32 @@ class AppLocalizationsSk extends AppLocalizations {
   String get repeater_ownerInfo => 'Informácie o poskytovateľovi';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Kontaktné údaje a poznámky prevádzkovateľa.';
+
+  @override
+  String get ownerInfo_empty => 'Prevádzkovateľ nepridal žiadne informácie.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Žiadna odpoveď. Opakovač môže byť mimo dosahu alebo má príliš starý firmvér na zdieľanie informácií o prevádzkovateľovi.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmvér $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Kód núdzovej siete';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Prevádzkovateľ uvádza túto núdzovú sieť pre oblasť.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Pripojené';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Veľké dátové informácie pre tento vysielací zdroj';
 

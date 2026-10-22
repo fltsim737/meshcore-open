@@ -3030,6 +3030,32 @@ class AppLocalizationsHu extends AppLocalizations {
   String get repeater_ownerInfo => 'Üzemeltető információ';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Az üzemeltető elérhetőségei és megjegyzései.';
+
+  @override
+  String get ownerInfo_empty => 'Az üzemeltető nem adott meg információt.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Nincs válasz. Az átjátszó hatótávon kívül lehet, vagy a firmware-je túl régi az üzemeltetői adatok megosztásához.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Vészhelyzeti hálózat kódja';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Az üzemeltető ezt a vészhelyzeti hálózatot adja meg a térségre.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Csatlakozva';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Nyilvános metaadatok ehhez az átjátszóhoz';
 

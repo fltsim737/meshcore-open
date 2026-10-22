@@ -2908,6 +2908,30 @@ class AppLocalizationsJa extends AppLocalizations {
   String get repeater_ownerInfo => '事業者の情報';
 
   @override
+  String get repeater_ownerInfoSubtitle => '運用者の連絡先とメモ。';
+
+  @override
+  String get ownerInfo_empty => '運用者は情報を追加していません。';
+
+  @override
+  String get ownerInfo_timedOut =>
+      '応答がありません。リピーターが圏外か、ファームウェアが古く運用者情報を共有できない可能性があります。';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'ファームウェア $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => '緊急ネットワークコード';
+
+  @override
+  String get ownerInfo_sosCodeBody => '運用者はこの地域の緊急ネットワークとしてこれを掲載しています。';
+
+  @override
+  String get ownerInfo_sosJoined => '参加済み';
+
+  @override
   String get repeater_ownerInfoHelper => 'このリピータに関する公開メタデータ';
 
   @override

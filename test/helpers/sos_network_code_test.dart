@@ -54,4 +54,18 @@ void main() {
     expect(a, hasLength(SosNetworkCode.keySize));
     expect(a, isNot(b));
   });
+
+  test('finds valid codes in free text', () {
+    final member = SosNetworkCode(role: SosNetworkRole.member, key: key);
+    final responder = member.withRole(SosNetworkRole.responder);
+    final broken = '${member.text.substring(0, member.text.length - 1)}A';
+    final text =
+        'Jo Smith, 0400 000 000\nArea SOS: ${member.text.toLowerCase()}.\n'
+        'Again ${member.text}, bad $broken, '
+        'team ${responder.withRole(SosNetworkRole.responder).qrData}';
+    final found = SosNetworkCode.findIn(text);
+    expect(found.map((c) => c.text), [member.text, responder.text]);
+    expect(found.last.role, SosNetworkRole.responder);
+    expect(SosNetworkCode.findIn('no codes here'), isEmpty);
+  });
 }

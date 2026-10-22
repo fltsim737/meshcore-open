@@ -1169,6 +1169,13 @@
     }
   },
   "repeater_ownerInfo": "Informacije o operaterju",
+  "repeater_ownerInfoSubtitle": "Kontaktni podatki in opombe upravljavca.",
+  "ownerInfo_empty": "Upravljavec ni dodal podatkov.",
+  "ownerInfo_timedOut": "Ni odgovora. Repetitor je morda izven dosega ali pa je njegova programska oprema prestara za deljenje podatkov o upravljavcu.",
+  "ownerInfo_firmware": "Programska oprema {version}",
+  "ownerInfo_sosCodeTitle": "Koda omrežja za nujne primere",
+  "ownerInfo_sosCodeBody": "Upravljavec navaja to omrežje za nujne primere za območje.",
+  "ownerInfo_sosJoined": "Pridruženo",
   "repeater_ownerInfoHelper": "javni podatki o tej napravi",
   "repeater_refreshOwnerInfo": "Prejmi informacije o operaterju",
   "repeater_floodMax": "Največji možni odmerek",

@@ -3010,6 +3010,33 @@ class AppLocalizationsSv extends AppLocalizations {
   String get repeater_ownerInfo => 'Operatörsinformation';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Kontaktuppgifter och anteckningar från operatören.';
+
+  @override
+  String get ownerInfo_empty =>
+      'Operatören har inte lagt till någon information.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Inget svar. Repeatern kan vara utom räckhåll, eller så är dess firmware för gammal för att dela operatörsinformation.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Kod för nödnätverk';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Operatören anger det här nödnätverket för området.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Ansluten';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Publik metadata för den här repeatern';
 

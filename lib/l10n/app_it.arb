@@ -1236,6 +1236,13 @@
     }
   },
   "repeater_ownerInfo": "Informazioni sull'operatore",
+  "repeater_ownerInfoSubtitle": "Contatti e note dell'operatore.",
+  "ownerInfo_empty": "L'operatore non ha aggiunto informazioni.",
+  "ownerInfo_timedOut": "Nessuna risposta. Il ripetitore potrebbe essere fuori portata o il suo firmware troppo vecchio per condividere le informazioni dell'operatore.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Codice rete di emergenza",
+  "ownerInfo_sosCodeBody": "L'operatore indica questa rete di emergenza per la zona.",
+  "ownerInfo_sosJoined": "Iscritto",
   "repeater_ownerInfoHelper": "Metadati pubblici per questo ripetitore",
   "repeater_refreshOwnerInfo": "Aggiorna le informazioni sull'operatore",
   "repeater_floodMax": "Numero massimo di salti in flood",

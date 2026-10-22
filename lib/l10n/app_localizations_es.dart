@@ -3035,6 +3035,32 @@ class AppLocalizationsEs extends AppLocalizations {
   String get repeater_ownerInfo => 'Información del propietario';
 
   @override
+  String get repeater_ownerInfoSubtitle =>
+      'Datos de contacto y notas del operador.';
+
+  @override
+  String get ownerInfo_empty => 'El operador no ha añadido información.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Sin respuesta. El repetidor puede estar fuera de alcance o su firmware es demasiado antiguo para compartir la información del operador.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Código de red de emergencia';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'El operador indica esta red de emergencia para la zona.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Unido';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Metadatos públicos para este repetidor';
 

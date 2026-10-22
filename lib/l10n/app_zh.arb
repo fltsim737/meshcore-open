@@ -1199,6 +1199,13 @@
     }
   },
   "repeater_ownerInfo": "运营商信息",
+  "repeater_ownerInfoSubtitle": "运营者的联系方式和备注。",
+  "ownerInfo_empty": "运营者尚未添加任何信息。",
+  "ownerInfo_timedOut": "无应答。中继器可能超出范围，或其固件过旧，无法共享运营者信息。",
+  "ownerInfo_firmware": "固件 {version}",
+  "ownerInfo_sosCodeTitle": "应急网络代码",
+  "ownerInfo_sosCodeBody": "运营者为该地区列出了这个应急网络。",
+  "ownerInfo_sosJoined": "已加入",
   "repeater_ownerInfoHelper": "此复播器的公共元数据",
   "repeater_refreshOwnerInfo": "刷新操作员信息",
   "repeater_floodMax": "最大跳数",

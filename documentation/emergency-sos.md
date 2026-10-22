@@ -36,6 +36,8 @@ The coordinator joins as a responder and can show the codes again at any time.
 
 **Join (everyone else, once).** **Emergency network → Join with a code**, then scan the QR code or type the code (for example `SOS1-R-ABCD-…`; case, spaces and dashes do not matter). The app confirms the network name and role before joining.
 
+**Sharing a code for an area.** A repeater operator can put a member code in the repeater's owner info (Settings → Owner Info), for example `Area SOS: SOS1-M-ABCD-…`. Anyone who logs in to the repeater as a guest can open **Operator info**, where the app picks out the code and offers **Join**. A code written this way carries no network name, so it joins as "Emergency". Only post a member code: owner info is readable by every guest.
+
 **On the radio.** The app adds the network's channel to a free slot on the connected radio, and again on any other radio you connect later. If the radio has no free slot, the settings say so; remove a channel to make room. **Leave network** removes the channel from the radio and deletes alerts heard on it.
 
 **What the roles do and do not protect.** Both codes contain the same channel key, because anyone who sends an SOS needs it to encrypt. The difference between member and responder is enforced by the app: a member using modified software could read alerts. Anyone given a code can send alerts. If a code leaks, set up a new network and share new codes. Other MeshCore apps connected to the same radio will list the network's channel.

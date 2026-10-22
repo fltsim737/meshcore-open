@@ -1373,6 +1373,13 @@
     }
   },
   "repeater_ownerInfo": "事業者の情報",
+  "repeater_ownerInfoSubtitle": "運用者の連絡先とメモ。",
+  "ownerInfo_empty": "運用者は情報を追加していません。",
+  "ownerInfo_timedOut": "応答がありません。リピーターが圏外か、ファームウェアが古く運用者情報を共有できない可能性があります。",
+  "ownerInfo_firmware": "ファームウェア {version}",
+  "ownerInfo_sosCodeTitle": "緊急ネットワークコード",
+  "ownerInfo_sosCodeBody": "運用者はこの地域の緊急ネットワークとしてこれを掲載しています。",
+  "ownerInfo_sosJoined": "参加済み",
   "repeater_ownerInfoHelper": "このリピータに関する公開メタデータ",
   "repeater_refreshOwnerInfo": "オペレーター情報の更新",
   "repeater_floodMax": "最大ホップ数",

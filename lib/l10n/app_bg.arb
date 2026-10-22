@@ -1169,6 +1169,13 @@
     }
   },
   "repeater_ownerInfo": "Информация за оператора",
+  "repeater_ownerInfoSubtitle": "Данни за контакт и бележки от оператора.",
+  "ownerInfo_empty": "Операторът не е добавил информация.",
+  "ownerInfo_timedOut": "Няма отговор. Повторителят може да е извън обхват или фърмуерът му е твърде стар, за да споделя информация за оператора.",
+  "ownerInfo_firmware": "Фърмуер {version}",
+  "ownerInfo_sosCodeTitle": "Код на аварийна мрежа",
+  "ownerInfo_sosCodeBody": "Операторът посочва тази аварийна мрежа за района.",
+  "ownerInfo_sosJoined": "Присъединен",
   "repeater_ownerInfoHelper": "Публични метаданни за този повторител",
   "repeater_refreshOwnerInfo": "Обновете информацията за оператора",
   "repeater_floodMax": "Максимален брой скокове при Flood",
