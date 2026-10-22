@@ -228,6 +228,8 @@ const int reqTypeKeepAlive = 0x02;
 const int reqTypeGetTelemetry = 0x03;
 const int reqTypeGetAccessList = 0x05;
 const int reqTypeGetNeighbors = 0x06;
+// Any logged-in client, guests included; repeater firmware level 2 and up.
+const int reqTypeGetOwnerInfo = 0x07;
 
 Uint8List buildTelemetryBinaryPayload() {
   // Room servers/repeaters read byte 1 as an inverse telemetry permission mask.

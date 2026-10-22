@@ -3044,6 +3044,31 @@ class AppLocalizationsRu extends AppLocalizations {
   String get repeater_ownerInfo => 'Информация о операторе';
 
   @override
+  String get repeater_ownerInfoSubtitle => 'Контакты и заметки оператора.';
+
+  @override
+  String get ownerInfo_empty => 'Оператор не добавил информацию.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Нет ответа. Ретранслятор может быть вне зоны действия, или его прошивка слишком старая, чтобы передавать сведения об операторе.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Прошивка $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Код аварийной сети';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'Оператор указывает эту аварийную сеть для района.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Вы участник';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Общая метаинформация для этого ретранслятора';
 

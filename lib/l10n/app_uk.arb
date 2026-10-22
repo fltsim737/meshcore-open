@@ -1179,6 +1179,13 @@
     }
   },
   "repeater_ownerInfo": "Інформація про оператора",
+  "repeater_ownerInfoSubtitle": "Контакти та нотатки оператора.",
+  "ownerInfo_empty": "Оператор не додав інформації.",
+  "ownerInfo_timedOut": "Немає відповіді. Ретранслятор може бути поза зоною дії, або його прошивка надто стара, щоб передавати відомості про оператора.",
+  "ownerInfo_firmware": "Прошивка {version}",
+  "ownerInfo_sosCodeTitle": "Код аварійної мережі",
+  "ownerInfo_sosCodeBody": "Оператор зазначає цю аварійну мережу для району.",
+  "ownerInfo_sosJoined": "Ви учасник",
   "repeater_ownerInfoHelper": "Публічні метадані для цього ретранслятора",
   "repeater_refreshOwnerInfo": "Оновити інформацію про оператора",
   "repeater_floodMax": "Максимальна кількість переходів під час поширення через всю мережу (flood)",

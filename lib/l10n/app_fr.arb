@@ -1191,6 +1191,13 @@
     }
   },
   "repeater_ownerInfo": "Informations sur le propriétaire",
+  "repeater_ownerInfoSubtitle": "Coordonnées et notes de l'opérateur.",
+  "ownerInfo_empty": "L'opérateur n'a ajouté aucune information.",
+  "ownerInfo_timedOut": "Pas de réponse. Le répéteur est peut-être hors de portée, ou son firmware est trop ancien pour partager les informations de l'opérateur.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Code du réseau d'urgence",
+  "ownerInfo_sosCodeBody": "L'opérateur indique ce réseau d'urgence pour la zone.",
+  "ownerInfo_sosJoined": "Rejoint",
   "repeater_ownerInfoHelper": "Métadonnées publiques pour cet appareil",
   "repeater_refreshOwnerInfo": "Rafraîchir les informations du propriétaire",
   "repeater_floodMax": "Nombre maximal de sauts en flood",

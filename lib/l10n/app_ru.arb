@@ -1585,6 +1585,13 @@
     }
   },
   "repeater_ownerInfo": "Информация о операторе",
+  "repeater_ownerInfoSubtitle": "Контакты и заметки оператора.",
+  "ownerInfo_empty": "Оператор не добавил информацию.",
+  "ownerInfo_timedOut": "Нет ответа. Ретранслятор может быть вне зоны действия, или его прошивка слишком старая, чтобы передавать сведения об операторе.",
+  "ownerInfo_firmware": "Прошивка {version}",
+  "ownerInfo_sosCodeTitle": "Код аварийной сети",
+  "ownerInfo_sosCodeBody": "Оператор указывает эту аварийную сеть для района.",
+  "ownerInfo_sosJoined": "Вы участник",
   "repeater_ownerInfoHelper": "Общая метаинформация для этого ретранслятора",
   "repeater_refreshOwnerInfo": "Обновить информацию о операторе",
   "repeater_floodMax": "Максимальное количество хопов при рассылке",

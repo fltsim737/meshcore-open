@@ -5372,6 +5372,48 @@ abstract class AppLocalizations {
   /// **'Operator info'**
   String get repeater_ownerInfo;
 
+  /// No description provided for @repeater_ownerInfoSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact details and notes from the operator.'**
+  String get repeater_ownerInfoSubtitle;
+
+  /// No description provided for @ownerInfo_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'The operator has not added any information.'**
+  String get ownerInfo_empty;
+
+  /// No description provided for @ownerInfo_timedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'No reply. The repeater may be out of range, or its firmware may be too old to share operator info.'**
+  String get ownerInfo_timedOut;
+
+  /// No description provided for @ownerInfo_firmware.
+  ///
+  /// In en, this message translates to:
+  /// **'Firmware {version}'**
+  String ownerInfo_firmware(String version);
+
+  /// No description provided for @ownerInfo_sosCodeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency network code'**
+  String get ownerInfo_sosCodeTitle;
+
+  /// No description provided for @ownerInfo_sosCodeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The operator lists this emergency network for the area.'**
+  String get ownerInfo_sosCodeBody;
+
+  /// No description provided for @ownerInfo_sosJoined.
+  ///
+  /// In en, this message translates to:
+  /// **'Joined'**
+  String get ownerInfo_sosJoined;
+
   /// No description provided for @repeater_ownerInfoHelper.
   ///
   /// In en, this message translates to:

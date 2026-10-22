@@ -2916,6 +2916,30 @@ class AppLocalizationsKo extends AppLocalizations {
   String get repeater_ownerInfo => '운영자 정보';
 
   @override
+  String get repeater_ownerInfoSubtitle => '운영자의 연락처와 메모입니다.';
+
+  @override
+  String get ownerInfo_empty => '운영자가 정보를 추가하지 않았습니다.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      '응답이 없습니다. 리피터가 범위를 벗어났거나 펌웨어가 너무 오래되어 운영자 정보를 공유할 수 없을 수 있습니다.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return '펌웨어 $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => '비상 네트워크 코드';
+
+  @override
+  String get ownerInfo_sosCodeBody => '운영자가 이 지역의 비상 네트워크로 등록해 두었습니다.';
+
+  @override
+  String get ownerInfo_sosJoined => '참여함';
+
+  @override
   String get repeater_ownerInfoHelper => '이 리피터에 대한 공개 메타데이터';
 
   @override

@@ -1191,6 +1191,13 @@
     }
   },
   "repeater_ownerInfo": "Betreiberinformationen",
+  "repeater_ownerInfoSubtitle": "Kontaktdaten und Hinweise des Betreibers.",
+  "ownerInfo_empty": "Der Betreiber hat keine Informationen hinterlegt.",
+  "ownerInfo_timedOut": "Keine Antwort. Der Repeater ist eventuell außer Reichweite, oder seine Firmware ist zu alt, um Betreiberinformationen zu teilen.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Notfallnetz-Code",
+  "ownerInfo_sosCodeBody": "Der Betreiber nennt dieses Notfallnetz für die Region.",
+  "ownerInfo_sosJoined": "Beigetreten",
   "repeater_ownerInfoHelper": "Öffentliche Metadaten für diesen Repeater",
   "repeater_refreshOwnerInfo": "Betreiberinformationen aktualisieren",
   "repeater_floodMax": "Maximale Flood-Sprünge",

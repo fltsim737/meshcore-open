@@ -1196,6 +1196,13 @@
     }
   },
   "repeater_ownerInfo": "Informatie over de operator",
+  "repeater_ownerInfoSubtitle": "Contactgegevens en notities van de beheerder.",
+  "ownerInfo_empty": "De beheerder heeft geen informatie toegevoegd.",
+  "ownerInfo_timedOut": "Geen antwoord. De repeater is mogelijk buiten bereik, of de firmware is te oud om beheerdersinformatie te delen.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Noodnetwerkcode",
+  "ownerInfo_sosCodeBody": "De beheerder vermeldt dit noodnetwerk voor het gebied.",
+  "ownerInfo_sosJoined": "Lid",
   "repeater_ownerInfoHelper": "Openbare metadata voor deze repeater",
   "repeater_refreshOwnerInfo": "Operatorinformatie vernieuwen",
   "repeater_floodMax": "Max. flood-hops",

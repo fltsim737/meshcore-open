@@ -1355,6 +1355,13 @@
     }
   },
   "repeater_ownerInfo": "Üzemeltető információ",
+  "repeater_ownerInfoSubtitle": "Az üzemeltető elérhetőségei és megjegyzései.",
+  "ownerInfo_empty": "Az üzemeltető nem adott meg információt.",
+  "ownerInfo_timedOut": "Nincs válasz. Az átjátszó hatótávon kívül lehet, vagy a firmware-je túl régi az üzemeltetői adatok megosztásához.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Vészhelyzeti hálózat kódja",
+  "ownerInfo_sosCodeBody": "Az üzemeltető ezt a vészhelyzeti hálózatot adja meg a térségre.",
+  "ownerInfo_sosJoined": "Csatlakozva",
   "repeater_ownerInfoHelper": "Nyilvános metaadatok ehhez az átjátszóhoz",
   "repeater_refreshOwnerInfo": "Frissítse az operátor adatait",
   "repeater_floodMax": "Elárasztás max ugrás",

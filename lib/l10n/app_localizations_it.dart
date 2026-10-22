@@ -3039,6 +3039,31 @@ class AppLocalizationsIt extends AppLocalizations {
   String get repeater_ownerInfo => 'Informazioni sull\'operatore';
 
   @override
+  String get repeater_ownerInfoSubtitle => 'Contatti e note dell\'operatore.';
+
+  @override
+  String get ownerInfo_empty => 'L\'operatore non ha aggiunto informazioni.';
+
+  @override
+  String get ownerInfo_timedOut =>
+      'Nessuna risposta. Il ripetitore potrebbe essere fuori portata o il suo firmware troppo vecchio per condividere le informazioni dell\'operatore.';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return 'Firmware $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => 'Codice rete di emergenza';
+
+  @override
+  String get ownerInfo_sosCodeBody =>
+      'L\'operatore indica questa rete di emergenza per la zona.';
+
+  @override
+  String get ownerInfo_sosJoined => 'Iscritto';
+
+  @override
   String get repeater_ownerInfoHelper =>
       'Metadati pubblici per questo ripetitore';
 

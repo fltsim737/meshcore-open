@@ -1169,6 +1169,13 @@
     }
   },
   "repeater_ownerInfo": "Informações sobre o operador",
+  "repeater_ownerInfoSubtitle": "Contactos e notas do operador.",
+  "ownerInfo_empty": "O operador não adicionou informações.",
+  "ownerInfo_timedOut": "Sem resposta. O repetidor pode estar fora de alcance ou o firmware é demasiado antigo para partilhar as informações do operador.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Código da rede de emergência",
+  "ownerInfo_sosCodeBody": "O operador indica esta rede de emergência para a zona.",
+  "ownerInfo_sosJoined": "Aderiu",
   "repeater_ownerInfoHelper": "Metadados públicos para este repetidor",
   "repeater_refreshOwnerInfo": "Atualizar informações do operador",
   "repeater_floodMax": "Número máximo de saltos em caso de inundação",

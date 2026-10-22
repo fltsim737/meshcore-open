@@ -1170,6 +1170,13 @@
     }
   },
   "repeater_ownerInfo": "Operatörsinformation",
+  "repeater_ownerInfoSubtitle": "Kontaktuppgifter och anteckningar från operatören.",
+  "ownerInfo_empty": "Operatören har inte lagt till någon information.",
+  "ownerInfo_timedOut": "Inget svar. Repeatern kan vara utom räckhåll, eller så är dess firmware för gammal för att dela operatörsinformation.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Kod för nödnätverk",
+  "ownerInfo_sosCodeBody": "Operatören anger det här nödnätverket för området.",
+  "ownerInfo_sosJoined": "Ansluten",
   "repeater_ownerInfoHelper": "Publik metadata för den här repeatern",
   "repeater_refreshOwnerInfo": "Uppdatera operatörsinformation",
   "repeater_floodMax": "Max antal flood-hopp",

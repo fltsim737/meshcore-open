@@ -1191,6 +1191,13 @@
     }
   },
   "repeater_ownerInfo": "Información del propietario",
+  "repeater_ownerInfoSubtitle": "Datos de contacto y notas del operador.",
+  "ownerInfo_empty": "El operador no ha añadido información.",
+  "ownerInfo_timedOut": "Sin respuesta. El repetidor puede estar fuera de alcance o su firmware es demasiado antiguo para compartir la información del operador.",
+  "ownerInfo_firmware": "Firmware {version}",
+  "ownerInfo_sosCodeTitle": "Código de red de emergencia",
+  "ownerInfo_sosCodeBody": "El operador indica esta red de emergencia para la zona.",
+  "ownerInfo_sosJoined": "Unido",
   "repeater_ownerInfoHelper": "Metadatos públicos para este repetidor",
   "repeater_refreshOwnerInfo": "Actualizar información del propietario",
   "repeater_floodMax": "Máximo de saltos por inundación",

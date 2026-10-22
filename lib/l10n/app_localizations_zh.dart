@@ -2874,6 +2874,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String get repeater_ownerInfo => '运营商信息';
 
   @override
+  String get repeater_ownerInfoSubtitle => '运营者的联系方式和备注。';
+
+  @override
+  String get ownerInfo_empty => '运营者尚未添加任何信息。';
+
+  @override
+  String get ownerInfo_timedOut => '无应答。中继器可能超出范围，或其固件过旧，无法共享运营者信息。';
+
+  @override
+  String ownerInfo_firmware(String version) {
+    return '固件 $version';
+  }
+
+  @override
+  String get ownerInfo_sosCodeTitle => '应急网络代码';
+
+  @override
+  String get ownerInfo_sosCodeBody => '运营者为该地区列出了这个应急网络。';
+
+  @override
+  String get ownerInfo_sosJoined => '已加入';
+
+  @override
   String get repeater_ownerInfoHelper => '此复播器的公共元数据';
 
   @override

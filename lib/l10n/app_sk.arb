@@ -1169,6 +1169,13 @@
     }
   },
   "repeater_ownerInfo": "Informácie o poskytovateľovi",
+  "repeater_ownerInfoSubtitle": "Kontaktné údaje a poznámky prevádzkovateľa.",
+  "ownerInfo_empty": "Prevádzkovateľ nepridal žiadne informácie.",
+  "ownerInfo_timedOut": "Žiadna odpoveď. Opakovač môže byť mimo dosahu alebo má príliš starý firmvér na zdieľanie informácií o prevádzkovateľovi.",
+  "ownerInfo_firmware": "Firmvér {version}",
+  "ownerInfo_sosCodeTitle": "Kód núdzovej siete",
+  "ownerInfo_sosCodeBody": "Prevádzkovateľ uvádza túto núdzovú sieť pre oblasť.",
+  "ownerInfo_sosJoined": "Pripojené",
   "repeater_ownerInfoHelper": "Veľké dátové informácie pre tento vysielací zdroj",
   "repeater_refreshOwnerInfo": "Zísť informácie o operátore",
   "repeater_floodMax": "Maximálny počet skokov flood",
