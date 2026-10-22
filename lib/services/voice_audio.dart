@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -41,19 +42,25 @@ class UnavailableVoiceAudio implements VoiceAudio {
   Future<void> dispose() async {}
 }
 
-/// [VoiceAudio] on the phone, using the record and audioplayers plugins.
+/// [VoiceAudio] using the record plugin for the microphone. Android plays
+/// clips with the audioplayers plugin; Linux pipes them to PulseAudio's or
+/// PipeWire's player, as it does for notification sounds, which avoids
+/// needing GStreamer.
 class DeviceVoiceAudio implements VoiceAudio {
   final AudioRecorder _recorder = AudioRecorder();
-  final AudioPlayer _player = AudioPlayer();
+  final AudioPlayer? _player = Platform.isLinux ? null : AudioPlayer();
   StreamController<Int16List>? _frames;
   StreamSubscription<Uint8List>? _micSub;
   Completer<void>? _playing;
   StreamSubscription<void>? _completeSub;
+  Process? _linuxPlayer;
 
   DeviceVoiceAudio() {
-    _completeSub = _player.onPlayerComplete.listen((_) => _donePlaying());
+    final player = _player;
+    if (player == null) return;
+    _completeSub = player.onPlayerComplete.listen((_) => _donePlaying());
     unawaited(
-      _player.setAudioContext(
+      player.setAudioContext(
         AudioContextConfig(focus: AudioContextConfigFocus.duckOthers).build(),
       ),
     );
@@ -115,8 +122,35 @@ class DeviceVoiceAudio implements VoiceAudio {
     await stopPlayback();
     final done = Completer<void>();
     _playing = done;
-    await _player.play(BytesSource(wavBytes(pcm), mimeType: 'audio/wav'));
+    final player = _player;
+    if (player == null) {
+      unawaited(_playOnLinux(pcm));
+    } else {
+      await player.play(BytesSource(wavBytes(pcm), mimeType: 'audio/wav'));
+    }
     return done.future;
+  }
+
+  Future<void> _playOnLinux(Int16List pcm) async {
+    final dir = await Directory.systemTemp.createTemp('meshcore_voice');
+    final file = File('${dir.path}/clip.wav');
+    try {
+      await file.writeAsBytes(wavBytes(pcm));
+      for (final bin in const ['paplay', 'pw-play']) {
+        try {
+          final process = await Process.start(bin, [file.path]);
+          _linuxPlayer = process;
+          await process.exitCode;
+          break;
+        } on ProcessException {
+          continue;
+        }
+      }
+    } finally {
+      _linuxPlayer = null;
+      await dir.delete(recursive: true);
+      _donePlaying();
+    }
   }
 
   void _donePlaying() {
@@ -128,7 +162,8 @@ class DeviceVoiceAudio implements VoiceAudio {
   @override
   Future<void> stopPlayback() async {
     if (_playing == null) return;
-    await _player.stop();
+    _linuxPlayer?.kill();
+    await _player?.stop();
     _donePlaying();
   }
 
@@ -137,7 +172,7 @@ class DeviceVoiceAudio implements VoiceAudio {
     await stopMic();
     await stopPlayback();
     await _completeSub?.cancel();
-    await _player.dispose();
+    await _player?.dispose();
     await _recorder.dispose();
   }
 }

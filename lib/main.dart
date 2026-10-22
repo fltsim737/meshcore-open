@@ -193,14 +193,14 @@ void main(List<String> args) async {
     alerter: NotificationSosAlerter(),
   )..load();
 
-  // Voice clips need the Codec2 library, which is built for Android only.
+  // Voice clips need the Codec2 library, which is built for Android and
+  // Linux only.
+  final voiceSupported = PlatformInfo.isAndroid || PlatformInfo.isLinux;
   final sosVoiceService = SosVoiceService(
     sos: sosService,
     transport: ConnectorSosVoiceTransport(connector),
-    audio: PlatformInfo.isAndroid
-        ? DeviceVoiceAudio()
-        : const UnavailableVoiceAudio(),
-    codec: PlatformInfo.isAndroid ? Codec2VoiceCodec() : null,
+    audio: voiceSupported ? DeviceVoiceAudio() : const UnavailableVoiceAudio(),
+    codec: voiceSupported ? Codec2VoiceCodec() : null,
     setBackgroundMic: backgroundService.setMicrophoneInUse,
     loadQuality: () async =>
         PrefsManager.instance.getString(SosVoiceService.qualityPrefsKey),
