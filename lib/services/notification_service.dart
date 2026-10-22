@@ -119,9 +119,9 @@ class NotificationService {
       requestSoundPermission: true,
     );
     const windowsSettings = WindowsInitializationSettings(
-      appName: 'MeshCore Open',
-      appUserModelId: 'org.meshcore.open.app',
-      guid: 'e7ea8f85-72f5-4f36-91f6-038f740ccf86',
+      appName: 'MeshCore Open SOS Voice',
+      appUserModelId: 'org.meshcore.open.sosvoice',
+      guid: '219a5aca-b878-4c2d-8177-ef54a9f3465d',
     );
     const linuxSettings = LinuxInitializationSettings(
       defaultActionName: 'Open notification',
