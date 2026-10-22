@@ -92,10 +92,10 @@ BEGIN
             VALUE "CompanyName", "com.meshcore" "\0"
             VALUE "FileDescription", "MeshCore Open SOS Voice" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "meshcore_open_voice" "\0"
+            VALUE "InternalName", "meshcore_open_sos_voice" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.meshcore. All rights reserved." "\0"
-            VALUE "OriginalFilename", "meshcore_open_voice.exe" "\0"
-            VALUE "ProductName", "meshcore_open_voice" "\0"
+            VALUE "OriginalFilename", "meshcore_open_sos_voice.exe" "\0"
+            VALUE "ProductName", "meshcore_open_sos_voice" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
