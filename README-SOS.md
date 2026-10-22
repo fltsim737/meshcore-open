@@ -98,7 +98,7 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the installer for your platform from the Releases page. Pick **SOS** or **SOS Voice**; both can be installed together.
+Download the installer for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page. Pick **SOS** or **SOS Voice**; both can be installed together. Each release also has a short walkthrough video.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|

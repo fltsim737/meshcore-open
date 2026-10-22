@@ -1,5 +1,7 @@
 # MeshCore Open
 
+> **This fork adds MeshCore Open SOS and MeshCore Open SOS Voice**: emergency SOS alerts, and voice clips during an SOS, over a MeshCore mesh. See [README-SOS.md](README-SOS.md) and the [Releases](https://github.com/fltsim737/meshcore-open/releases) page.
+
 Open-source Flutter client for MeshCore LoRa mesh networking devices.
 
 ## Overview
