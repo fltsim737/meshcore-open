@@ -8,7 +8,7 @@ import 'login_autostart.dart';
 /// turns it off here too.
 class LinuxAutostart implements LoginAutostart {
   static const String hiddenArgument = LoginAutostart.hiddenArgument;
-  static const String _fileName = 'meshcore-open.desktop';
+  static const String _fileName = 'meshcore-open-sos-voice.desktop';
 
   final String _configHome;
   final String _launchPath;
@@ -62,7 +62,7 @@ class LinuxAutostart implements LoginAutostart {
       '''
 [Desktop Entry]
 Type=Application
-Name=MeshCore Open
+Name=MeshCore Open SOS Voice
 Comment=Listens for messages and SOS alerts
 TryExec=${_launchPath.replaceAll('\\', '\\\\')}
 Exec=${_quote(_launchPath)} $hiddenArgument

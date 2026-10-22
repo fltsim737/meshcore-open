@@ -14,13 +14,13 @@
 #
 # APP_NAME, APP_SLUG (file names of the menu entry, autostart entry and
 # watcher) and APP_ID (linux/CMakeLists.txt's APPLICATION_ID, which also
-# names the data folder) keep two builds' desktop integration apart; the
-# scripts are written for the defaults and adjusted as they are copied.
+# names the data folder) keep two builds' desktop integration apart. The
+# scripts use MeshCore Open's names and are adjusted as they are copied.
 set -eu
 APPIMAGETOOL="${1:?usage: $0 /path/to/appimagetool}"
-APP_NAME="${APP_NAME:-MeshCore Open}"
-APP_SLUG="${APP_SLUG:-meshcore-open}"
-APP_ID="${APP_ID:-com.meshcore.meshcore_open}"
+APP_NAME="${APP_NAME:-MeshCore Open SOS Voice}"
+APP_SLUG="${APP_SLUG:-meshcore-open-sos-voice}"
+APP_ID="${APP_ID:-com.meshcore.meshcore_open_voice}"
 SRC="$(cd "$(dirname "$0")" && pwd)"
 BUNDLE="build/linux/x64/release/bundle"
 OUT="build/appimage"
