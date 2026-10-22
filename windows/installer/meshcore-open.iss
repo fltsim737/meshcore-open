@@ -9,7 +9,7 @@
   #define AppVersion "0.0.0"
 #endif
 #define AppName "MeshCore Open SOS Voice"
-#define AppExe "meshcore_open_voice.exe"
+#define AppExe "meshcore_open_sos_voice.exe"
 ; Must match appUserModelId in lib/services/notification_service.dart.
 #define AppUserModelId "org.meshcore.open.sosvoice"
 #define RunKey "Software\Microsoft\Windows\CurrentVersion\Run"
@@ -77,8 +77,8 @@ begin
         + #13#10#13#10 + 'Choose No to keep them for a later reinstall.',
         mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     begin
-      DelTree(ExpandConstant('{userappdata}\com.meshcore\meshcore_open_voice'), True, True, True);
-      DelTree(ExpandConstant('{localappdata}\com.meshcore\meshcore_open_voice'), True, True, True);
+      DelTree(ExpandConstant('{userappdata}\com.meshcore\meshcore_open_sos_voice'), True, True, True);
+      DelTree(ExpandConstant('{localappdata}\com.meshcore\meshcore_open_sos_voice'), True, True, True);
     end;
   end;
 end;
