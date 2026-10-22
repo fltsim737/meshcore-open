@@ -23,3 +23,10 @@ cp build/codec2/version.h src/codec2/codec2/
 ```
 
 The FreeDV modem files are left out.
+
+Microsoft's C compiler has no variable-length arrays, which Codec2 uses in
+its speech code. `src/codec2/vla.h` turns them into `_alloca` allocations
+there and leaves them unchanged elsewhere; the declarations were rewritten
+to use it (and `levinson_durbin` in `lpc.c` to index one flat array).
+Building with `-DCODEC2_FORCE_ALLOCA` uses the `_alloca` form with gcc; it
+encodes Codec2's sample speech bit for bit as the reference `c2enc` does.

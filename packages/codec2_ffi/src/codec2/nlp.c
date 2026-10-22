@@ -37,6 +37,7 @@
 
 #include "machdep.h"
 #include "os.h"
+#include "vla.h"
 
 /*---------------------------------------------------------------------------*\
 
@@ -252,7 +253,7 @@ float nlp(
     m /= 2;
     n /= 2;
 
-    float Sn8k[n];
+    VLA(float, Sn8k, n);
     fdmdv_16_to_8(Sn8k, &nlp->Sn16k[FDMDV_OS_TAPS_16K], n);
 
     /* Square latest input samples */

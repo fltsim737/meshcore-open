@@ -79,6 +79,8 @@ _Bindings _load() => _bindings ??= _Bindings(
     codec2LibraryPath ??
         (Platform.isAndroid || Platform.isLinux
             ? 'libcodec2_ffi.so'
+            : Platform.isWindows
+            ? 'codec2_ffi.dll'
             : throw UnsupportedError('Codec2 is not built for this platform')),
   ),
 );

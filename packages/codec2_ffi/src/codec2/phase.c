@@ -38,6 +38,7 @@
 #include "defines.h"
 #include "kiss_fft.h"
 #include "sine.h"
+#include "vla.h"
 
 /*---------------------------------------------------------------------------*\
 
@@ -225,7 +226,7 @@ void mag_to_phase(
     float phase[], /* Nfft/2+1 output phase samples in radians       */
     float Gdbfk[], /* Nfft/2+1 positive freq amplitudes samples in dB */
     int Nfft, codec2_fft_cfg fft_fwd_cfg, codec2_fft_cfg fft_inv_cfg) {
-  COMP Sdb[Nfft], c[Nfft], cf[Nfft], Cf[Nfft];
+  VLA(COMP, Sdb, Nfft); VLA(COMP, c, Nfft); VLA(COMP, cf, Nfft); VLA(COMP, Cf, Nfft);
   int Ns = Nfft / 2 + 1;
   int i;
 
