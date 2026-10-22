@@ -6645,4 +6645,83 @@ class AppLocalizationsNl extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Nog $count open meldingen';
   }
+
+  @override
+  String get sosVoice_title => 'Spraak';
+
+  @override
+  String get sosVoice_qualityLow => 'Laag';
+
+  @override
+  String get sosVoice_qualityClear => 'Helder';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Laag: tot 20 s per clip. Helder: tot 10 s, met twee keer zoveel zendtijd.';
+
+  @override
+  String get sosVoice_noNetwork => 'Spraak vereist een noodnetwerk.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Spraak vereist een verbonden radio met firmware v1.15 of nieuwer.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Sta microfoontoegang toe om spraak te gebruiken.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Ingedrukt houden om te praten';
+
+  @override
+  String get sosVoice_releaseToSend => 'Loslaten om te verzenden';
+
+  @override
+  String get sosVoice_handsFree => 'Handsfree';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Verstuurt wat je zegt bij elke pauze en speelt antwoorden hardop af.';
+
+  @override
+  String get sosVoice_listening => 'Luistert…';
+
+  @override
+  String get sosVoice_hearingYou => 'Hoort je…';
+
+  @override
+  String get sosVoice_you => 'Jij';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Afspelen';
+
+  @override
+  String get sosVoice_stop => 'Stoppen';
+
+  @override
+  String get sosVoice_statusQueued => 'Wacht op verzenden';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Verzenden $sent van $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Verzonden';
+
+  @override
+  String get sosVoice_statusFailed => 'Niet verzonden';
+
+  @override
+  String get sosVoice_statusReceived => 'Ontvangen';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Deels ontvangen ($received van $total)';
+  }
 }

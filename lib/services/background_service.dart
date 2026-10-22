@@ -13,6 +13,7 @@ class BackgroundService {
   static const String _batteryPromptedKey = 'background_battery_prompted';
 
   bool _initialized = false;
+  bool _microphoneInUse = false;
   String? Function()? _languageOverrideProvider;
 
   /// Runs when the user taps Stop on the service notification.
@@ -63,6 +64,12 @@ class BackgroundService {
     if (running) return;
     final l10n = await _loadLocalizations();
     await FlutterForegroundTask.startService(
+      // Always explicit: with none given, Android uses every type in the
+      // manifest, and a microphone type without permission is fatal.
+      serviceTypes: [
+        ForegroundServiceTypes.connectedDevice,
+        if (_microphoneInUse) ForegroundServiceTypes.microphone,
+      ],
       notificationTitle: l10n.background_serviceTitle,
       notificationText: l10n.background_serviceRunningText,
       notificationButtons: [
@@ -70,6 +77,17 @@ class BackgroundService {
       ],
       callback: startCallback,
     );
+  }
+
+  /// Lets hands-free voice keep the microphone open in the background, by
+  /// restarting the service with the microphone type. Call only while the
+  /// app is in the foreground and has microphone permission.
+  Future<void> setMicrophoneInUse(bool inUse) async {
+    if (!PlatformInfo.isAndroid || inUse == _microphoneInUse) return;
+    _microphoneInUse = inUse;
+    if (!await FlutterForegroundTask.isRunningService) return;
+    await FlutterForegroundTask.stopService();
+    await start();
   }
 
   /// Asks once to be exempt from battery optimisation, which otherwise lets

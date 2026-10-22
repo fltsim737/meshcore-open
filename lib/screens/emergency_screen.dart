@@ -16,6 +16,7 @@ import '../utils/disconnect_navigation_mixin.dart';
 import '../utils/route_transitions.dart';
 import '../widgets/mesh_ui.dart';
 import '../widgets/quick_switch_bar.dart';
+import '../widgets/sos_voice_panel.dart';
 import 'channels_screen.dart';
 import 'chat_screen.dart';
 import 'contacts_screen.dart';
@@ -311,6 +312,7 @@ class _ActiveSosCard extends StatelessWidget {
                 for (final contact in contacts)
                   Text('• ${contact.name}  ${_dmStatus(l10n, contact)}'),
               ],
+              SosVoicePanel(sosId: sos.id),
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
@@ -528,6 +530,7 @@ class _IncomingSosCard extends StatelessWidget {
                   ],
                 ],
               ),
+              SosVoicePanel(sosId: alert.id),
             ],
           ),
         ),

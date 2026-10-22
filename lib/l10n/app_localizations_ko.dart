@@ -6379,4 +6379,79 @@ class AppLocalizationsKo extends AppLocalizations {
   String sos_warningMore(int count) {
     return '열린 경보 $count개 더 있음';
   }
+
+  @override
+  String get sosVoice_title => '음성';
+
+  @override
+  String get sosVoice_qualityLow => '낮음';
+
+  @override
+  String get sosVoice_qualityClear => '선명';
+
+  @override
+  String get sosVoice_qualityHelp => '낮음: 클립당 최대 20초. 선명: 최대 10초, 방송 시간 두 배.';
+
+  @override
+  String get sosVoice_noNetwork => '음성에는 비상 네트워크가 필요합니다.';
+
+  @override
+  String get sosVoice_needsRadio => '음성에는 펌웨어 v1.15 이상의 무전기 연결이 필요합니다.';
+
+  @override
+  String get sosVoice_micDenied => '음성을 사용하려면 마이크 접근을 허용하세요.';
+
+  @override
+  String get sosVoice_holdToTalk => '눌러서 말하기';
+
+  @override
+  String get sosVoice_releaseToSend => '놓으면 전송';
+
+  @override
+  String get sosVoice_handsFree => '핸즈프리';
+
+  @override
+  String get sosVoice_handsFreeHelp => '말을 멈출 때마다 전송하고 답장을 소리 내어 재생합니다.';
+
+  @override
+  String get sosVoice_listening => '듣는 중…';
+
+  @override
+  String get sosVoice_hearingYou => '목소리 감지 중…';
+
+  @override
+  String get sosVoice_you => '나';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds초';
+  }
+
+  @override
+  String get sosVoice_play => '재생';
+
+  @override
+  String get sosVoice_stop => '정지';
+
+  @override
+  String get sosVoice_statusQueued => '전송 대기 중';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return '전송 중 $sent/$total';
+  }
+
+  @override
+  String get sosVoice_statusSent => '전송됨';
+
+  @override
+  String get sosVoice_statusFailed => '전송 안 됨';
+
+  @override
+  String get sosVoice_statusReceived => '수신됨';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return '일부 수신 ($received/$total)';
+  }
 }

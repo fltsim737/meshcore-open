@@ -22,6 +22,7 @@ import '../helpers/channel_resend_coverage.dart';
 import '../helpers/cyr2lat.dart';
 import '../helpers/smaz.dart';
 import '../helpers/sos_codec.dart';
+import '../helpers/sos_voice_packet.dart';
 import '../services/app_debug_log_service.dart';
 import '../services/ble_debug_log_service.dart';
 import '../services/linux_ble_error_classifier.dart';
@@ -324,6 +325,7 @@ class MeshCoreConnector extends ChangeNotifier {
   void Function(SosInboundText inbound)? sosTextListener;
   void Function(int channelIndex, Uint8List payload)? sosDataListener;
   void Function(int ackHash)? sosAckListener;
+  void Function(int channelIndex, Uint8List payload)? sosVoiceListener;
   void Function(int senderPrefix)? _onImageSenderPrefix;
   // Intentionally global (not per-contact): tracks overall network activity.
   // Frequent RX from any source indicates a busy network with more collisions.
@@ -4973,6 +4975,38 @@ class MeshCoreConnector extends ChangeNotifier {
     }, region: _channelSendScope(channelIndex));
   }
 
+  /// Sends one voice clip's chunks as channel data (flood), paced by [gap],
+  /// in a single scoped send so another channel cannot interleave. Returns
+  /// false if the radio disconnected before every chunk went out.
+  Future<bool> sendSosVoiceChunks(
+    int channelIndex,
+    List<Uint8List> blobs, {
+    required Duration gap,
+    void Function(int sent, int total)? onProgress,
+  }) async {
+    if (blobs.isEmpty || !supportsChannelData) return false;
+    var sentAll = true;
+    await _runScopedChannelSend(() async {
+      for (var i = 0; i < blobs.length; i++) {
+        if (!isConnected) {
+          sentAll = false;
+          return;
+        }
+        if (i > 0) await Future<void>.delayed(gap);
+        await _waitForRadioQuiet(lastInboundRxTime: _lastChannelMsgRxTime);
+        await _sendFrameAndWaitForCommandAck(
+          buildSendChannelDataFrame(
+            channelIndex: channelIndex,
+            dataType: dataTypeSosVoice,
+            payload: blobs[i],
+          ),
+        );
+        onProgress?.call(i + 1, blobs.length);
+      }
+    }, region: _channelSendScope(channelIndex));
+    return sentAll;
+  }
+
   /// Sends an SOS text straight to the radio, bypassing the retry service so
   /// it never enters the conversation. Returns the ACK hash the recipient's
   /// radio will confirm with, or null if it could not be sent.
@@ -7487,14 +7521,23 @@ class MeshCoreConnector extends ChangeNotifier {
   /// Handles RESP_CODE_CHANNEL_DATA_RECV (GRP_DATA). Frames whose dataType is
   /// not 0xAE1C — or that arrive before an [ImageChunkTransport] is installed —
   /// are ignored without disturbing any other behaviour.
-  /// Hands an SOS GRP_DATA packet to [sosDataListener]; false for any other
+  /// Hands an SOS GRP_DATA packet to [sosDataListener], or an SOS voice chunk
+  /// to [sosVoiceListener]; false for any other
   /// data type.
   bool _handleSosChannelData(Uint8List frame) {
     final parsed = parseChannelDataFrame(frame);
-    if (parsed == null || parsed.dataType != dataTypeSos) return false;
-    _lastChannelMsgRxTime = DateTime.now();
-    sosDataListener?.call(parsed.channelIndex, parsed.payload);
-    return true;
+    if (parsed == null) return false;
+    if (parsed.dataType == dataTypeSos) {
+      _lastChannelMsgRxTime = DateTime.now();
+      sosDataListener?.call(parsed.channelIndex, parsed.payload);
+      return true;
+    }
+    if (parsed.dataType == dataTypeSosVoice) {
+      _lastChannelMsgRxTime = DateTime.now();
+      sosVoiceListener?.call(parsed.channelIndex, parsed.payload);
+      return true;
+    }
+    return false;
   }
 
   void _handleIncomingChannelData(Uint8List frame) {

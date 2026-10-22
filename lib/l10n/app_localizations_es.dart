@@ -6680,4 +6680,83 @@ class AppLocalizationsEs extends AppLocalizations {
   String sos_warningMore(int count) {
     return '$count alertas abiertas más';
   }
+
+  @override
+  String get sosVoice_title => 'Voz';
+
+  @override
+  String get sosVoice_qualityLow => 'Baja';
+
+  @override
+  String get sosVoice_qualityClear => 'Clara';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Baja: hasta 20 s por clip. Clara: hasta 10 s, con el doble de tiempo en el aire.';
+
+  @override
+  String get sosVoice_noNetwork => 'La voz necesita una red de emergencia.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'La voz necesita una radio conectada con firmware v1.15 o posterior.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Permite el acceso al micrófono para usar la voz.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Mantén pulsado para hablar';
+
+  @override
+  String get sosVoice_releaseToSend => 'Suelta para enviar';
+
+  @override
+  String get sosVoice_handsFree => 'Manos libres';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Envía lo que dices en cada pausa y reproduce las respuestas en voz alta.';
+
+  @override
+  String get sosVoice_listening => 'Escuchando…';
+
+  @override
+  String get sosVoice_hearingYou => 'Te oye…';
+
+  @override
+  String get sosVoice_you => 'Tú';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Reproducir';
+
+  @override
+  String get sosVoice_stop => 'Detener';
+
+  @override
+  String get sosVoice_statusQueued => 'Esperando para enviar';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Enviando $sent de $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Enviado';
+
+  @override
+  String get sosVoice_statusFailed => 'No enviado';
+
+  @override
+  String get sosVoice_statusReceived => 'Recibido';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Recibido en parte ($received de $total)';
+  }
 }

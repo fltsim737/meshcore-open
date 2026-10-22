@@ -6229,4 +6229,79 @@ class AppLocalizationsZh extends AppLocalizations {
   String sos_warningMore(int count) {
     return '还有 $count 个未处理的警报';
   }
+
+  @override
+  String get sosVoice_title => '语音';
+
+  @override
+  String get sosVoice_qualityLow => '低';
+
+  @override
+  String get sosVoice_qualityClear => '清晰';
+
+  @override
+  String get sosVoice_qualityHelp => '低：每段最长 20 秒。清晰：最长 10 秒，占用两倍发射时间。';
+
+  @override
+  String get sosVoice_noNetwork => '语音需要应急网络。';
+
+  @override
+  String get sosVoice_needsRadio => '语音需要连接固件 v1.15 或更新版本的电台。';
+
+  @override
+  String get sosVoice_micDenied => '请允许访问麦克风以使用语音。';
+
+  @override
+  String get sosVoice_holdToTalk => '按住说话';
+
+  @override
+  String get sosVoice_releaseToSend => '松开发送';
+
+  @override
+  String get sosVoice_handsFree => '免提';
+
+  @override
+  String get sosVoice_handsFreeHelp => '每次停顿时发送你说的话，并大声播放回复。';
+
+  @override
+  String get sosVoice_listening => '正在聆听…';
+
+  @override
+  String get sosVoice_hearingYou => '听到你的声音…';
+
+  @override
+  String get sosVoice_you => '你';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds 秒';
+  }
+
+  @override
+  String get sosVoice_play => '播放';
+
+  @override
+  String get sosVoice_stop => '停止';
+
+  @override
+  String get sosVoice_statusQueued => '等待发送';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return '正在发送 $sent/$total';
+  }
+
+  @override
+  String get sosVoice_statusSent => '已发送';
+
+  @override
+  String get sosVoice_statusFailed => '未发送';
+
+  @override
+  String get sosVoice_statusReceived => '已接收';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return '部分接收（$received/$total）';
+  }
 }

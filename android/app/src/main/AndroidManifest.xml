@@ -21,6 +21,10 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <!-- Ask to be exempt from battery optimisation so the app keeps running in the background -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <!-- SOS voice clips, and keeping the microphone open for hands-free in the background -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
     <!-- Camera permission for QR code scanning -->
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
@@ -33,7 +37,7 @@
         <service
             android:name="com.pravera.flutter_foreground_task.service.ForegroundService"
             android:exported="false"
-            android:foregroundServiceType="connectedDevice"
+            android:foregroundServiceType="connectedDevice|microphone"
             android:stopWithTask="false" />
         <!-- Handles reply / mark-as-read actions on message notifications -->
         <receiver

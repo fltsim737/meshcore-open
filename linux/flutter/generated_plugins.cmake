@@ -3,8 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  audioplayers_linux
   file_selector_linux
   flutter_onnxruntime
+  record_linux
   screen_retriever_linux
   tray_manager
   url_launcher_linux
@@ -12,6 +14,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  codec2_ffi
   flserial
   jni
 )

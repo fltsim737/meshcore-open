@@ -6679,4 +6679,83 @@ class AppLocalizationsBg extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Още $count отворени сигнала';
   }
+
+  @override
+  String get sosVoice_title => 'Глас';
+
+  @override
+  String get sosVoice_qualityLow => 'Ниско';
+
+  @override
+  String get sosVoice_qualityClear => 'Ясно';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Ниско: до 20 с на клип. Ясно: до 10 с, с двойно повече ефирно време.';
+
+  @override
+  String get sosVoice_noNetwork => 'Гласът изисква аварийна мрежа.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Гласът изисква свързано радио с фърмуер v1.15 или по-нов.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Разрешете достъп до микрофона, за да използвате глас.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Задръжте, за да говорите';
+
+  @override
+  String get sosVoice_releaseToSend => 'Пуснете, за да изпратите';
+
+  @override
+  String get sosVoice_handsFree => 'Свободни ръце';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Изпраща казаното при всяка пауза и пуска отговорите на глас.';
+
+  @override
+  String get sosVoice_listening => 'Слуша…';
+
+  @override
+  String get sosVoice_hearingYou => 'Чува ви…';
+
+  @override
+  String get sosVoice_you => 'Вие';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds с';
+  }
+
+  @override
+  String get sosVoice_play => 'Пусни';
+
+  @override
+  String get sosVoice_stop => 'Спри';
+
+  @override
+  String get sosVoice_statusQueued => 'Чака изпращане';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Изпращане $sent от $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Изпратено';
+
+  @override
+  String get sosVoice_statusFailed => 'Не е изпратено';
+
+  @override
+  String get sosVoice_statusReceived => 'Получено';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Частично получено ($received от $total)';
+  }
 }

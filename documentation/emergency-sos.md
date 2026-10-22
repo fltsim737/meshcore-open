@@ -157,6 +157,19 @@ A **Message** button then appears on the alert (for the responder) and next to e
 
 The active SOS and live alerts survive an app restart; alerts that expired while the app was closed are deleted when it starts.
 
+## Voice
+
+While an SOS is live, the person who raised it and the responders can talk. On Android, a **Voice** panel appears in the active SOS card and in each alert a responder receives. It needs the emergency network: voice travels on its channel, like the alert itself.
+
+- **Hold to talk** records while held and sends when released. Under half a second is treated as an accidental tap and not sent.
+- **Hands-free** keeps the microphone open: each stretch of speech is sent when you pause for about a second, and a long speech goes out in pieces. Turning it on keeps the microphone available with the screen off (the background service adds the microphone type).
+- Clips heard play aloud straight away, one after another. While one plays, hands-free ignores the microphone, so a reply is never picked up from the speaker and sent back out. Each clip can be played again from the list.
+- **Low** quality (Codec2 at 700 bit/s) is the default and allows up to 20 s a clip; **Clear** (1300 bit/s) is easier to understand but allows up to 10 s and uses about twice the airtime.
+
+Voice is not a live call. LoRa is far too slow to stream speech to a whole mesh, so speech is compressed with [Codec2](https://github.com/drowe67/codec2) and sent as a short clip of channel data packets, like an image. Each packet carries up to 1.7 s of speech in Low quality (0.9 s in Clear) and takes roughly 0.5–1 s to transmit, depending on the radio settings, at every hop. Expect a few seconds' delay, and keep clips short: every clip uses airtime that everyone on the mesh shares. A packet lost on the way leaves a gap in the clip; a clip whose last packet is lost is not played.
+
+Voice packets use channel data type `0x5356` ("SV"). Layout (little-endian): `[version=1][quality][SOS id u16][sender key prefix x6][clip id u16][index][total][frame count]`, then the Codec2 frames bit-packed, most significant bit first. A clip has at most 12 packets of at most 163 bytes. Clients accept a clip only for their own active SOS or, as a responder, for an alert they hold, so voice stops when the SOS is cancelled.
+
 ## Platform behaviour
 
 | Platform | Phone GPS | Incoming alert sound | Repeats while in the background |

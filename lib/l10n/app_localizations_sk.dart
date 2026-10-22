@@ -6656,4 +6656,83 @@ class AppLocalizationsSk extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Ďalšie otvorené poplachy: $count';
   }
+
+  @override
+  String get sosVoice_title => 'Hlas';
+
+  @override
+  String get sosVoice_qualityLow => 'Nízka';
+
+  @override
+  String get sosVoice_qualityClear => 'Čistá';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Nízka: do 20 s na klip. Čistá: do 10 s, s dvojnásobným vysielacím časom.';
+
+  @override
+  String get sosVoice_noNetwork => 'Hlas vyžaduje núdzovú sieť.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Hlas vyžaduje pripojenú vysielačku s firmvérom v1.15 alebo novším.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Povoľte prístup k mikrofónu, aby ste mohli používať hlas.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Podržte a hovorte';
+
+  @override
+  String get sosVoice_releaseToSend => 'Pustite a odošlite';
+
+  @override
+  String get sosVoice_handsFree => 'Hands-free';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Pri každej pauze odošle, čo ste povedali, a odpovede prehrá nahlas.';
+
+  @override
+  String get sosVoice_listening => 'Počúva…';
+
+  @override
+  String get sosVoice_hearingYou => 'Počuje vás…';
+
+  @override
+  String get sosVoice_you => 'Vy';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Prehrať';
+
+  @override
+  String get sosVoice_stop => 'Zastaviť';
+
+  @override
+  String get sosVoice_statusQueued => 'Čaká na odoslanie';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Odosiela sa $sent z $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Odoslané';
+
+  @override
+  String get sosVoice_statusFailed => 'Neodoslané';
+
+  @override
+  String get sosVoice_statusReceived => 'Prijaté';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Prijaté čiastočne ($received z $total)';
+  }
 }
