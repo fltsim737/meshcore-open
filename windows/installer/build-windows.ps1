@@ -1,5 +1,5 @@
 # Builds MeshCore Open for Windows and packages it as an installer,
-# build\windows\installer\MeshCore-Open-Setup.exe.
+# build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe.
 #
 # Needs Flutter, Visual Studio 2022 with "Desktop development with C++",
 # Inno Setup 6 and Windows Developer Mode. From the project folder:
@@ -45,7 +45,7 @@ if (-not $iscc) { Fail 'Inno Setup 6 was not found.' }
 
 # pubspec.yaml "version: 9.5.0+19" -> 9.5.0
 $version = (Select-String -Path pubspec.yaml -Pattern '^version:\s*([0-9.]+)').Matches[0].Groups[1].Value
-Write-Host "MeshCore Open $version"
+Write-Host "MeshCore Open SOS Voice $version"
 
 Step 'Fetching packages'
 flutter pub get
@@ -67,5 +67,5 @@ Step 'Packaging the installer'
 & $iscc "/DAppVersion=$version" 'windows\installer\meshcore-open.iss'
 if ($LASTEXITCODE) { Fail 'Inno Setup failed (see above).' }
 
-$setup = Resolve-Path 'build\windows\installer\MeshCore-Open-Setup.exe'
+$setup = Resolve-Path 'build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe'
 Write-Host "`nDone: $setup" -ForegroundColor Green

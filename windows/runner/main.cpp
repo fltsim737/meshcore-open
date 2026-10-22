@@ -8,14 +8,14 @@
 #include "utils.h"
 
 // The window title, also used to find a running copy.
-constexpr const wchar_t kWindowTitle[] = L"MeshCore Open";
+constexpr const wchar_t kWindowTitle[] = L"MeshCore Open SOS Voice";
 
 int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
                       _In_ wchar_t *command_line, _In_ int show_command) {
   // One copy only: launching the app again (it may be running in the tray)
   // brings its window back instead of connecting a second copy to the radio.
   HANDLE single_instance =
-      ::CreateMutexW(nullptr, TRUE, L"Local\\MeshCoreOpen.SingleInstance");
+      ::CreateMutexW(nullptr, TRUE, L"Local\\MeshCoreOpenSosVoice.SingleInstance");
   if (::GetLastError() == ERROR_ALREADY_EXISTS) {
     HWND existing =
         ::FindWindowW(L"FLUTTER_RUNNER_WIN32_WINDOW", kWindowTitle);
