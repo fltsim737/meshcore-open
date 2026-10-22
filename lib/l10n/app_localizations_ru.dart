@@ -6695,4 +6695,83 @@ class AppLocalizationsRu extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Ещё открытых сигналов: $count';
   }
+
+  @override
+  String get sosVoice_title => 'Голос';
+
+  @override
+  String get sosVoice_qualityLow => 'Низкое';
+
+  @override
+  String get sosVoice_qualityClear => 'Чёткое';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Низкое: до 20 с на клип. Чёткое: до 10 с, вдвое больше эфирного времени.';
+
+  @override
+  String get sosVoice_noNetwork => 'Для голоса нужна аварийная сеть.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Для голоса нужна подключённая рация с прошивкой v1.15 или новее.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Разрешите доступ к микрофону, чтобы использовать голос.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Удерживайте, чтобы говорить';
+
+  @override
+  String get sosVoice_releaseToSend => 'Отпустите, чтобы отправить';
+
+  @override
+  String get sosVoice_handsFree => 'Громкая связь';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Отправляет сказанное при каждой паузе и воспроизводит ответы вслух.';
+
+  @override
+  String get sosVoice_listening => 'Слушает…';
+
+  @override
+  String get sosVoice_hearingYou => 'Слышит вас…';
+
+  @override
+  String get sosVoice_you => 'Вы';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds с';
+  }
+
+  @override
+  String get sosVoice_play => 'Воспроизвести';
+
+  @override
+  String get sosVoice_stop => 'Стоп';
+
+  @override
+  String get sosVoice_statusQueued => 'Ожидает отправки';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Отправка $sent из $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Отправлено';
+
+  @override
+  String get sosVoice_statusFailed => 'Не отправлено';
+
+  @override
+  String get sosVoice_statusReceived => 'Получено';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Получено частично ($received из $total)';
+  }
 }

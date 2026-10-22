@@ -6591,4 +6591,82 @@ class AppLocalizationsEn extends AppLocalizations {
   String sos_warningMore(int count) {
     return '$count more open alerts';
   }
+
+  @override
+  String get sosVoice_title => 'Voice';
+
+  @override
+  String get sosVoice_qualityLow => 'Low';
+
+  @override
+  String get sosVoice_qualityClear => 'Clear';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Low: up to 20 s a clip. Clear: up to 10 s, with twice the airtime.';
+
+  @override
+  String get sosVoice_noNetwork => 'Voice needs an emergency network.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Voice needs a connected radio with firmware v1.15 or newer.';
+
+  @override
+  String get sosVoice_micDenied => 'Allow microphone access to use voice.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Hold to talk';
+
+  @override
+  String get sosVoice_releaseToSend => 'Release to send';
+
+  @override
+  String get sosVoice_handsFree => 'Hands-free';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Sends what you say each time you pause, and plays replies aloud.';
+
+  @override
+  String get sosVoice_listening => 'Listening…';
+
+  @override
+  String get sosVoice_hearingYou => 'Hearing you…';
+
+  @override
+  String get sosVoice_you => 'You';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Play';
+
+  @override
+  String get sosVoice_stop => 'Stop';
+
+  @override
+  String get sosVoice_statusQueued => 'Waiting to send';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Sending $sent of $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Sent';
+
+  @override
+  String get sosVoice_statusFailed => 'Not sent';
+
+  @override
+  String get sosVoice_statusReceived => 'Received';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Partly received ($received of $total)';
+  }
 }

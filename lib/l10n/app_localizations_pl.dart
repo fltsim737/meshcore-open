@@ -6708,4 +6708,83 @@ class AppLocalizationsPl extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Otwarte alarmy: jeszcze $count';
   }
+
+  @override
+  String get sosVoice_title => 'Głos';
+
+  @override
+  String get sosVoice_qualityLow => 'Niska';
+
+  @override
+  String get sosVoice_qualityClear => 'Wyraźna';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Niska: do 20 s na klip. Wyraźna: do 10 s, z dwukrotnie dłuższym czasem nadawania.';
+
+  @override
+  String get sosVoice_noNetwork => 'Głos wymaga sieci alarmowej.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Głos wymaga podłączonego radia z firmware v1.15 lub nowszym.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Zezwól na dostęp do mikrofonu, aby używać głosu.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Przytrzymaj, aby mówić';
+
+  @override
+  String get sosVoice_releaseToSend => 'Puść, aby wysłać';
+
+  @override
+  String get sosVoice_handsFree => 'Tryb głośnomówiący';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Wysyła to, co mówisz, przy każdej pauzie i odtwarza odpowiedzi na głos.';
+
+  @override
+  String get sosVoice_listening => 'Nasłuchuje…';
+
+  @override
+  String get sosVoice_hearingYou => 'Słyszy cię…';
+
+  @override
+  String get sosVoice_you => 'Ty';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Odtwórz';
+
+  @override
+  String get sosVoice_stop => 'Zatrzymaj';
+
+  @override
+  String get sosVoice_statusQueued => 'Czeka na wysłanie';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Wysyłanie $sent z $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Wysłano';
+
+  @override
+  String get sosVoice_statusFailed => 'Nie wysłano';
+
+  @override
+  String get sosVoice_statusReceived => 'Odebrano';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Odebrano częściowo ($received z $total)';
+  }
 }

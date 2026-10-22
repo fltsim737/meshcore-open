@@ -6626,4 +6626,83 @@ class AppLocalizationsSv extends AppLocalizations {
   String sos_warningMore(int count) {
     return '$count fler öppna larm';
   }
+
+  @override
+  String get sosVoice_title => 'Röst';
+
+  @override
+  String get sosVoice_qualityLow => 'Låg';
+
+  @override
+  String get sosVoice_qualityClear => 'Tydlig';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Låg: upp till 20 s per klipp. Tydlig: upp till 10 s, med dubbel sändtid.';
+
+  @override
+  String get sosVoice_noNetwork => 'Röst kräver ett nödnätverk.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Röst kräver en ansluten radio med firmware v1.15 eller senare.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Tillåt mikrofonåtkomst för att använda röst.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Håll ned för att prata';
+
+  @override
+  String get sosVoice_releaseToSend => 'Släpp för att skicka';
+
+  @override
+  String get sosVoice_handsFree => 'Handsfree';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Skickar det du säger vid varje paus och spelar upp svar högt.';
+
+  @override
+  String get sosVoice_listening => 'Lyssnar…';
+
+  @override
+  String get sosVoice_hearingYou => 'Hör dig…';
+
+  @override
+  String get sosVoice_you => 'Du';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Spela';
+
+  @override
+  String get sosVoice_stop => 'Stoppa';
+
+  @override
+  String get sosVoice_statusQueued => 'Väntar på att skickas';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Skickar $sent av $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Skickat';
+
+  @override
+  String get sosVoice_statusFailed => 'Inte skickat';
+
+  @override
+  String get sosVoice_statusReceived => 'Mottaget';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Delvis mottaget ($received av $total)';
+  }
 }

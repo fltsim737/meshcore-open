@@ -1,0 +1,5 @@
+The Dart bindings in lib/ are part of MeshCore Open and use its MIT licence.
+
+The Codec2 sources in src/codec2/ are Copyright David Rowe and contributors,
+licensed under the GNU Lesser General Public License version 2.1; the full
+text is in src/codec2/COPYING.

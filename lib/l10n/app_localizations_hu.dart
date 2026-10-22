@@ -6670,4 +6670,83 @@ class AppLocalizationsHu extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Még $count nyitott riasztás';
   }
+
+  @override
+  String get sosVoice_title => 'Hang';
+
+  @override
+  String get sosVoice_qualityLow => 'Alacsony';
+
+  @override
+  String get sosVoice_qualityClear => 'Tiszta';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Alacsony: klipenként legfeljebb 20 mp. Tiszta: legfeljebb 10 mp, kétszeres adásidővel.';
+
+  @override
+  String get sosVoice_noNetwork => 'A hanghoz vészhelyzeti hálózat kell.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'A hanghoz csatlakoztatott rádió kell v1.15 vagy újabb firmware-rel.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Engedélyezze a mikrofont a hang használatához.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Tartsa nyomva a beszédhez';
+
+  @override
+  String get sosVoice_releaseToSend => 'Engedje el a küldéshez';
+
+  @override
+  String get sosVoice_handsFree => 'Kihangosítás';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Minden szünetnél elküldi, amit mondott, és hangosan lejátssza a válaszokat.';
+
+  @override
+  String get sosVoice_listening => 'Figyel…';
+
+  @override
+  String get sosVoice_hearingYou => 'Hallja Önt…';
+
+  @override
+  String get sosVoice_you => 'Ön';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds mp';
+  }
+
+  @override
+  String get sosVoice_play => 'Lejátszás';
+
+  @override
+  String get sosVoice_stop => 'Leállítás';
+
+  @override
+  String get sosVoice_statusQueued => 'Küldésre vár';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Küldés: $sent/$total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Elküldve';
+
+  @override
+  String get sosVoice_statusFailed => 'Nincs elküldve';
+
+  @override
+  String get sosVoice_statusReceived => 'Megérkezett';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Részben megérkezett ($received/$total)';
+  }
 }

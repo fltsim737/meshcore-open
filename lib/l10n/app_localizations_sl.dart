@@ -6658,4 +6658,83 @@ class AppLocalizationsSl extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Še $count odprtih opozoril';
   }
+
+  @override
+  String get sosVoice_title => 'Glas';
+
+  @override
+  String get sosVoice_qualityLow => 'Nizka';
+
+  @override
+  String get sosVoice_qualityClear => 'Jasna';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Nizka: do 20 s na posnetek. Jasna: do 10 s, z dvakrat daljšim časom oddajanja.';
+
+  @override
+  String get sosVoice_noNetwork => 'Glas potrebuje omrežje za nujne primere.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Glas potrebuje povezan radio s programsko opremo v1.15 ali novejšo.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Dovolite dostop do mikrofona za uporabo glasu.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Pridržite za govor';
+
+  @override
+  String get sosVoice_releaseToSend => 'Spustite za pošiljanje';
+
+  @override
+  String get sosVoice_handsFree => 'Prostoročno';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Ob vsakem premoru pošlje, kar ste rekli, in odgovore predvaja na glas.';
+
+  @override
+  String get sosVoice_listening => 'Posluša…';
+
+  @override
+  String get sosVoice_hearingYou => 'Vas sliši…';
+
+  @override
+  String get sosVoice_you => 'Vi';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Predvajaj';
+
+  @override
+  String get sosVoice_stop => 'Ustavi';
+
+  @override
+  String get sosVoice_statusQueued => 'Čaka na pošiljanje';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Pošiljanje $sent od $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Poslano';
+
+  @override
+  String get sosVoice_statusFailed => 'Ni poslano';
+
+  @override
+  String get sosVoice_statusReceived => 'Prejeto';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Delno prejeto ($received od $total)';
+  }
 }

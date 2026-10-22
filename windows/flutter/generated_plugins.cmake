@@ -3,10 +3,12 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  audioplayers_windows
   file_selector_windows
   flutter_blue_plus_winrt
   flutter_onnxruntime
   geolocator_windows
+  record_windows
   screen_retriever_windows
   share_plus
   tray_manager

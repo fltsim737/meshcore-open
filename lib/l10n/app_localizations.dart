@@ -11214,6 +11214,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} more open alerts'**
   String sos_warningMore(int count);
+
+  /// No description provided for @sosVoice_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice'**
+  String get sosVoice_title;
+
+  /// No description provided for @sosVoice_qualityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get sosVoice_qualityLow;
+
+  /// No description provided for @sosVoice_qualityClear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get sosVoice_qualityClear;
+
+  /// No description provided for @sosVoice_qualityHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Low: up to 20 s a clip. Clear: up to 10 s, with twice the airtime.'**
+  String get sosVoice_qualityHelp;
+
+  /// No description provided for @sosVoice_noNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice needs an emergency network.'**
+  String get sosVoice_noNetwork;
+
+  /// No description provided for @sosVoice_needsRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice needs a connected radio with firmware v1.15 or newer.'**
+  String get sosVoice_needsRadio;
+
+  /// No description provided for @sosVoice_micDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow microphone access to use voice.'**
+  String get sosVoice_micDenied;
+
+  /// No description provided for @sosVoice_holdToTalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold to talk'**
+  String get sosVoice_holdToTalk;
+
+  /// No description provided for @sosVoice_releaseToSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Release to send'**
+  String get sosVoice_releaseToSend;
+
+  /// No description provided for @sosVoice_handsFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Hands-free'**
+  String get sosVoice_handsFree;
+
+  /// No description provided for @sosVoice_handsFreeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sends what you say each time you pause, and plays replies aloud.'**
+  String get sosVoice_handsFreeHelp;
+
+  /// No description provided for @sosVoice_listening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening…'**
+  String get sosVoice_listening;
+
+  /// No description provided for @sosVoice_hearingYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Hearing you…'**
+  String get sosVoice_hearingYou;
+
+  /// No description provided for @sosVoice_you.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get sosVoice_you;
+
+  /// No description provided for @sosVoice_seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} s'**
+  String sosVoice_seconds(String seconds);
+
+  /// No description provided for @sosVoice_play.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get sosVoice_play;
+
+  /// No description provided for @sosVoice_stop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get sosVoice_stop;
+
+  /// No description provided for @sosVoice_statusQueued.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting to send'**
+  String get sosVoice_statusQueued;
+
+  /// No description provided for @sosVoice_statusSending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending {sent} of {total}'**
+  String sosVoice_statusSending(int sent, int total);
+
+  /// No description provided for @sosVoice_statusSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get sosVoice_statusSent;
+
+  /// No description provided for @sosVoice_statusFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sent'**
+  String get sosVoice_statusFailed;
+
+  /// No description provided for @sosVoice_statusReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get sosVoice_statusReceived;
+
+  /// No description provided for @sosVoice_statusPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partly received ({received} of {total})'**
+  String sosVoice_statusPartial(int received, int total);
 }
 
 class _AppLocalizationsDelegate

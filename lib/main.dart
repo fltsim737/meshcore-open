@@ -22,6 +22,9 @@ import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
 import 'services/sos_service.dart';
+import 'services/sos_voice_service.dart';
+import 'services/voice_audio.dart';
+import 'services/voice_codec.dart';
 import 'services/desktop_tray_service.dart';
 import 'services/login_autostart.dart';
 import 'widgets/sos_warning_overlay.dart';
@@ -190,6 +193,21 @@ void main(List<String> args) async {
     alerter: NotificationSosAlerter(),
   )..load();
 
+  // Voice clips need the Codec2 library, which is built for Android only.
+  final sosVoiceService = SosVoiceService(
+    sos: sosService,
+    transport: ConnectorSosVoiceTransport(connector),
+    audio: PlatformInfo.isAndroid
+        ? DeviceVoiceAudio()
+        : const UnavailableVoiceAudio(),
+    codec: PlatformInfo.isAndroid ? Codec2VoiceCodec() : null,
+    setBackgroundMic: backgroundService.setMicrophoneInUse,
+    loadQuality: () async =>
+        PrefsManager.instance.getString(SosVoiceService.qualityPrefsKey),
+    saveQuality: (value) async =>
+        PrefsManager.instance.setString(SosVoiceService.qualityPrefsKey, value),
+  );
+
   await connector.loadContactCache();
   await connector.loadCachedChannels();
   await connector.loadUnreadState();
@@ -213,6 +231,7 @@ void main(List<String> args) async {
       imageReassembler: imageReassembler,
       networkMapUploadService: networkMapUploadService,
       sosService: sosService,
+      sosVoiceService: sosVoiceService,
     ),
   );
 
@@ -395,6 +414,7 @@ class MeshCoreApp extends StatefulWidget {
   final ImageStreamReassembler imageReassembler;
   final NetworkMapUploadService networkMapUploadService;
   final SosService sosService;
+  final SosVoiceService sosVoiceService;
 
   const MeshCoreApp({
     super.key,
@@ -415,6 +435,7 @@ class MeshCoreApp extends StatefulWidget {
     required this.imageReassembler,
     required this.networkMapUploadService,
     required this.sosService,
+    required this.sosVoiceService,
   });
 
   @override
@@ -500,6 +521,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
         ChangeNotifierProvider.value(value: widget.receivedImageStore),
         ChangeNotifierProvider.value(value: widget.networkMapUploadService),
         ChangeNotifierProvider.value(value: widget.sosService),
+        ChangeNotifierProvider.value(value: widget.sosVoiceService),
       ],
       child: Consumer<AppSettingsService>(
         builder: (context, settingsService, child) {

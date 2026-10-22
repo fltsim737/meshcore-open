@@ -6369,4 +6369,79 @@ class AppLocalizationsJa extends AppLocalizations {
   String sos_warningMore(int count) {
     return '未対応のアラートがあと$count件';
   }
+
+  @override
+  String get sosVoice_title => '音声';
+
+  @override
+  String get sosVoice_qualityLow => '低';
+
+  @override
+  String get sosVoice_qualityClear => 'クリア';
+
+  @override
+  String get sosVoice_qualityHelp => '低: 1クリップ最大20秒。クリア: 最大10秒、送信時間は2倍。';
+
+  @override
+  String get sosVoice_noNetwork => '音声には緊急ネットワークが必要です。';
+
+  @override
+  String get sosVoice_needsRadio => '音声にはファームウェアv1.15以降の無線機の接続が必要です。';
+
+  @override
+  String get sosVoice_micDenied => '音声を使うにはマイクへのアクセスを許可してください。';
+
+  @override
+  String get sosVoice_holdToTalk => '押して話す';
+
+  @override
+  String get sosVoice_releaseToSend => '離して送信';
+
+  @override
+  String get sosVoice_handsFree => 'ハンズフリー';
+
+  @override
+  String get sosVoice_handsFreeHelp => '話の区切りごとに送信し、返答を読み上げます。';
+
+  @override
+  String get sosVoice_listening => '聞き取り中…';
+
+  @override
+  String get sosVoice_hearingYou => '音声を検出中…';
+
+  @override
+  String get sosVoice_you => '自分';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds 秒';
+  }
+
+  @override
+  String get sosVoice_play => '再生';
+
+  @override
+  String get sosVoice_stop => '停止';
+
+  @override
+  String get sosVoice_statusQueued => '送信待ち';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return '送信中 $sent/$total';
+  }
+
+  @override
+  String get sosVoice_statusSent => '送信済み';
+
+  @override
+  String get sosVoice_statusFailed => '未送信';
+
+  @override
+  String get sosVoice_statusReceived => '受信済み';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return '一部受信 ($received/$total)';
+  }
 }

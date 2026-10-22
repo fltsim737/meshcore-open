@@ -6696,4 +6696,83 @@ class AppLocalizationsUk extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Ще відкритих сигналів: $count';
   }
+
+  @override
+  String get sosVoice_title => 'Голос';
+
+  @override
+  String get sosVoice_qualityLow => 'Низька';
+
+  @override
+  String get sosVoice_qualityClear => 'Чітка';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Низька: до 20 с на кліп. Чітка: до 10 с, удвічі більше ефірного часу.';
+
+  @override
+  String get sosVoice_noNetwork => 'Для голосу потрібна аварійна мережа.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'Для голосу потрібна підключена рація з прошивкою v1.15 або новішою.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Дозвольте доступ до мікрофона, щоб користуватися голосом.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Утримуйте, щоб говорити';
+
+  @override
+  String get sosVoice_releaseToSend => 'Відпустіть, щоб надіслати';
+
+  @override
+  String get sosVoice_handsFree => 'Гучний зв\'язок';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Надсилає сказане під час кожної паузи й відтворює відповіді вголос.';
+
+  @override
+  String get sosVoice_listening => 'Слухає…';
+
+  @override
+  String get sosVoice_hearingYou => 'Чує вас…';
+
+  @override
+  String get sosVoice_you => 'Ви';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds с';
+  }
+
+  @override
+  String get sosVoice_play => 'Відтворити';
+
+  @override
+  String get sosVoice_stop => 'Стоп';
+
+  @override
+  String get sosVoice_statusQueued => 'Очікує надсилання';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Надсилання $sent з $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Надіслано';
+
+  @override
+  String get sosVoice_statusFailed => 'Не надіслано';
+
+  @override
+  String get sosVoice_statusReceived => 'Отримано';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Отримано частково ($received з $total)';
+  }
 }

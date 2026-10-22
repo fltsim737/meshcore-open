@@ -6708,4 +6708,83 @@ class AppLocalizationsFr extends AppLocalizations {
   String sos_warningMore(int count) {
     return '$count autres alertes ouvertes';
   }
+
+  @override
+  String get sosVoice_title => 'Voix';
+
+  @override
+  String get sosVoice_qualityLow => 'Basse';
+
+  @override
+  String get sosVoice_qualityClear => 'Claire';
+
+  @override
+  String get sosVoice_qualityHelp =>
+      'Basse : jusqu\'à 20 s par clip. Claire : jusqu\'à 10 s, avec deux fois plus de temps d\'antenne.';
+
+  @override
+  String get sosVoice_noNetwork => 'La voix nécessite un réseau d\'urgence.';
+
+  @override
+  String get sosVoice_needsRadio =>
+      'La voix nécessite une radio connectée avec un firmware v1.15 ou plus récent.';
+
+  @override
+  String get sosVoice_micDenied =>
+      'Autorisez l\'accès au micro pour utiliser la voix.';
+
+  @override
+  String get sosVoice_holdToTalk => 'Maintenir pour parler';
+
+  @override
+  String get sosVoice_releaseToSend => 'Relâcher pour envoyer';
+
+  @override
+  String get sosVoice_handsFree => 'Mains libres';
+
+  @override
+  String get sosVoice_handsFreeHelp =>
+      'Envoie ce que vous dites à chaque pause et lit les réponses à voix haute.';
+
+  @override
+  String get sosVoice_listening => 'Écoute…';
+
+  @override
+  String get sosVoice_hearingYou => 'Vous entend…';
+
+  @override
+  String get sosVoice_you => 'Vous';
+
+  @override
+  String sosVoice_seconds(String seconds) {
+    return '$seconds s';
+  }
+
+  @override
+  String get sosVoice_play => 'Lire';
+
+  @override
+  String get sosVoice_stop => 'Arrêter';
+
+  @override
+  String get sosVoice_statusQueued => 'En attente d\'envoi';
+
+  @override
+  String sosVoice_statusSending(int sent, int total) {
+    return 'Envoi $sent sur $total';
+  }
+
+  @override
+  String get sosVoice_statusSent => 'Envoyé';
+
+  @override
+  String get sosVoice_statusFailed => 'Non envoyé';
+
+  @override
+  String get sosVoice_statusReceived => 'Reçu';
+
+  @override
+  String sosVoice_statusPartial(int received, int total) {
+    return 'Reçu en partie ($received sur $total)';
+  }
 }
