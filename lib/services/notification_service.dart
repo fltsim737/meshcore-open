@@ -641,7 +641,12 @@ class NotificationService {
         ? '${fix.latitude!.toStringAsFixed(5)}, '
               '${fix.longitude!.toStringAsFixed(5)}'
         : l10n.sos_noPosition;
-    final body = '$position\n${l10n.sos_notificationOpenToRespond}';
+    final info = alert.info;
+    final body = [
+      if (info != null) l10n.sos_alertInfo(info),
+      position,
+      l10n.sos_notificationOpenToRespond,
+    ].join('\n');
 
     final androidDetails = AndroidNotificationDetails(
       'sos_alerts',

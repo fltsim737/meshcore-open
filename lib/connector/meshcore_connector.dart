@@ -7144,6 +7144,12 @@ class MeshCoreConnector extends ChangeNotifier {
             senderKeyHex: message.senderKeyHex,
           ),
         );
+        // Also kept in the chat, so the text (and any Info line) can be read,
+        // but without a message notification: its sound would cut off the
+        // SOS alarm that the alert has just started.
+        _addMessage(message.senderKeyHex, message);
+        _maybeIncrementContactUnread(message);
+        notifyListeners();
         return;
       }
       _addMessage(message.senderKeyHex, message);

@@ -73,11 +73,11 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 ### Receiving
 
-A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, position, position source and the times the alert was first and last heard. On Android an alarm-volume sound loops until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
+A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. On Android an alarm-volume sound loops until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
 
 Each SOS and ACK carries the sender's public key, so the two phones save each other as contacts automatically. A **Message** button then opens an ordinary direct chat, with no exchange of adverts beforehand.
 
-When the sender cancels, a cancellation goes out on the network and to every emergency contact. Each responder's alarm stops and the alert, along with its position, is deleted.
+When the sender cancels, a cancellation goes out on the network and to every emergency contact. Each responder's alarm stops and the live alert closes. A record of it, with its positions, acknowledgements and outcome, stays in the **SOS history** until the user deletes it, ready to share as a text report.
 
 ### Voice (SOS Voice)
 
@@ -98,7 +98,7 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the installer for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page. Pick **SOS** or **SOS Voice**; both can be installed together. Each release also has a short walkthrough video.
+Download the installer for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page. What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. Each release also has a short walkthrough video.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
@@ -207,11 +207,12 @@ Clips play aloud as they arrive, one after another. While a clip is playing, han
 
 ## Privacy and security
 
-An SOS carries your position, so the apps keep it out of anything that can be scrolled back through later:
+An SOS carries your position, so the apps keep it out of anything that can be scrolled back through later, except with the emergency contacts you chose:
 
 - Channel alerts are hidden data packets and never appear in a channel chat, in this app or any other MeshCore app.
-- SOS DMs are sent straight to the radio and kept out of chat history. A receiving MeshCore Open diverts them to the Emergency tab.
-- A received alert and its position are deleted when the sender cancels, when you dismiss it, or after 60 minutes with no repeat.
+- SOS DMs go only to your chosen emergency contacts. The sending app keeps them out of its own chat history; a receiving MeshCore Open raises the alarm and also keeps the message in the chat with you, so the contact can read it.
+- A live alert leaves the Emergency tab when the sender cancels, when you dismiss it, or after 60 minutes with no repeat.
+- The **SOS history** keeps a record of every alert received or sent, positions included, until you delete it, so it can be handed to paramedics or emergency services afterwards.
 - Voice clips are kept in memory for the live SOS only.
 
 What it can't protect against:
@@ -241,7 +242,7 @@ What it can't protect against:
 
 **3. It is designed for how emergencies actually go.** It repeats until cancelled, not until the first ACK. Position falls back from phone GPS to radio GPS to a stored location. The alarm can't be swiped away. Responders can see each other's ACKs so they coordinate instead of all driving out. The sender and responders become contacts automatically. A disconnected radio catches up when it reconnects. These choices come from thinking about a person who is injured, panicked, or has a flat phone battery.
 
-**4. It treats location as sensitive.** Positions never land in chat history and are deleted when the emergency ends. This matters for people who are rightly wary of broadcasting where they live and work.
+**4. It treats location as sensitive, and keeps a record.** Positions only reach the chats of the emergency contacts the sender chose, and live alerts close when the emergency ends. A record of each alert stays in the SOS history, on that phone only, until the user deletes it, so it can be passed on to paramedics or emergency services. This matters for people who are rightly wary of broadcasting where they live and work.
 
 **5. It grows the mesh.** Emergency networks give communities a concrete reason to put up repeaters, and the owner-info code lets travellers join the local network. Every repeater that goes up for safety also carries everyday traffic.
 

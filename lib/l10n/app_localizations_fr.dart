@@ -6577,6 +6577,84 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sos_notSentYet => 'En attente d\'envoi par la radio';
 
   @override
+  String get sos_historyTitle => 'SOS history';
+
+  @override
+  String get sos_historyTooltip => 'SOS history';
+
+  @override
+  String get sos_historyEmpty =>
+      'No SOS alerts yet. Every alert this phone receives or sends is kept here until you delete it, so it can be passed on to paramedics or emergency services afterwards.';
+
+  @override
+  String get sos_historyReceived => 'Received';
+
+  @override
+  String get sos_historySent => 'Sent';
+
+  @override
+  String get sos_historyOngoing => 'In progress';
+
+  @override
+  String get sos_historyCancelledBySender => 'Cancelled by the sender';
+
+  @override
+  String get sos_historyCancelledByMe => 'Cancelled by you';
+
+  @override
+  String get sos_historyDismissed => 'Dismissed';
+
+  @override
+  String get sos_historyExpired => 'Expired';
+
+  @override
+  String get sos_historyLeftNetwork => 'Left the network';
+
+  @override
+  String get sos_historyAcknowledged => 'Acknowledged';
+
+  @override
+  String get sos_historyDeleteTitle => 'Delete this record?';
+
+  @override
+  String get sos_historyDeleteMessage =>
+      'It can\'t be recovered. Share it first if it may be needed later.';
+
+  @override
+  String get sos_historyDeleteAll => 'Delete all finished';
+
+  @override
+  String sos_historyDeleteAllTitle(int count) {
+    return 'Delete $count records?';
+  }
+
+  @override
+  String get sos_historyDeleteAllMessage =>
+      'Records of alerts still in progress are kept. Deleted records can\'t be recovered.';
+
+  @override
+  String sos_historySubject(String id) {
+    return 'SOS #$id record';
+  }
+
+  @override
+  String sos_historyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count records, kept until you delete them',
+      one: '1 record, kept until you delete it',
+      zero: 'No records yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String sos_alertInfo(String info) {
+    return 'Info: $info';
+  }
+
+  @override
   String sos_locationSource(String source) {
     return 'Source de position : $source';
   }

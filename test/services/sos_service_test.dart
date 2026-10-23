@@ -6,6 +6,7 @@ import 'package:meshcore_open/helpers/sos_network_code.dart';
 import 'package:meshcore_open/models/channel.dart';
 import 'package:meshcore_open/models/contact.dart';
 import 'package:meshcore_open/models/sos_alert.dart';
+import 'package:meshcore_open/models/sos_history.dart';
 import 'package:meshcore_open/services/app_settings_service.dart';
 import 'package:meshcore_open/services/sos_location_service.dart';
 import 'package:meshcore_open/services/sos_service.dart';
@@ -604,8 +605,10 @@ void main() {
 
     test('sounds for every repeat until acknowledged', () async {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      now = now.add(const Duration(minutes: 1));
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       await service.acknowledge(service.incoming.single);
+      now = now.add(const Duration(minutes: 1));
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       expect(alerter.events, [
         'alert:Ridge#a1b2',
@@ -614,10 +617,158 @@ void main() {
       ]);
     });
 
+    test('the DM copy arriving moments later does not re-sound the alarm', () {
+      // re-posting Android's looping alarm that soon silences it
+      final ridge = contactFor('Ridge', 9);
+      transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      now = now.add(const Duration(seconds: 2));
+      service.handleInbound(
+        SosInboundText(
+          text: SosCodec.encodeSos(
+            id: 'a1b2',
+            time: now,
+            fix: const SosFix.none(),
+            info: 'Back gate',
+          ),
+          senderName: 'Ridge',
+          senderKeyHex: ridge.publicKeyHex,
+        ),
+      );
+      final alert = service.incoming.single;
+      expect(alert.receivedCount, 2);
+      expect(alert.info, 'Back gate');
+      expect(alerter.events, ['alert:Ridge#a1b2']);
+
+      now = now.add(SosService.resoundGap);
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(alerter.events, ['alert:Ridge#a1b2', 'alert:Ridge#a1b2']);
+    });
+
+    test('keeps the info line, also after a restart', () {
+      transport.dataListener!(
+        2,
+        SosPacket(
+          kind: SosPacketKind.sos,
+          id: 'c3d4',
+          senderPrefix: Uint8List.fromList(List.filled(6, 4)),
+          senderName: 'Hut',
+          senderKey: Uint8List.fromList(List.filled(32, 4)),
+          time: now,
+          info: 'Lot 14, gate 2',
+        ).encode(),
+      );
+      expect(service.incoming.single.info, 'Lot 14, gate 2');
+      hear(sosPacketFrom('Hut', 4, 'c3d4')); // a repeat without it keeps it
+      expect(service.incoming.single.info, 'Lot 14, gate 2');
+      final reloaded = newService()..load();
+      expect(reloaded.incoming.single.info, 'Lot 14, gate 2');
+      reloaded.dispose();
+    });
+
     test('notes other responders', () {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       hear(sosPacketFrom('Valley', 5, 'a1b2', kind: SosPacketKind.ack));
       expect(service.incoming.single.ackedBy, {'Valley'});
+    });
+  });
+
+  group('history', () {
+    test('keeps a received alert after the sender cancels it', () async {
+      final ridge = contactFor('Ridge', 9);
+      transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      now = now.add(const Duration(seconds: 2));
+      service.handleInbound(
+        SosInboundText(
+          text: SosCodec.encodeSos(
+            id: 'a1b2',
+            time: now,
+            fix: const SosFix(
+              latitude: -41.5,
+              longitude: 174.5,
+              source: SosLocationSource.stored,
+            ),
+            info: 'Back gate',
+          ),
+          senderName: 'Ridge',
+          senderKeyHex: ridge.publicKeyHex,
+        ),
+      );
+      await service.acknowledge(service.incoming.single);
+      hear(sosPacketFrom('Valley', 5, 'a1b2', kind: SosPacketKind.ack));
+      now = now.add(const Duration(minutes: 3));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+
+      expect(service.incoming, isEmpty);
+      final record = service.history.single;
+      expect(record.direction, SosHistoryDirection.received);
+      expect(record.senderName, 'Ridge');
+      expect(record.senderKeyHex, ridge.publicKeyHex);
+      expect(record.info, 'Back gate');
+      expect(record.count, 2);
+      expect(record.heardVia, {'network', 'DM'});
+      expect(record.positions.map((p) => p.fix.latitude), [-41, -41.5]);
+      expect(record.ackSentAt, isNotNull);
+      expect(record.acks.map((a) => a.name), ['Valley']);
+      expect(record.outcome, SosHistoryOutcome.cancelledBySender);
+      expect(record.endedAt, now);
+
+      final report = record.toReport();
+      expect(report, contains('Alert: #a1b2 (received by this phone)'));
+      expect(report, contains('Info: Back gate'));
+      expect(report, contains('Latest position: -41.50000, 174.50000'));
+      expect(report, contains('Valley at'));
+      expect(report, contains('Outcome: cancelled by the sender at'));
+
+      final reloaded = newService()..load();
+      expect(reloaded.history.single.toReport(), report);
+      reloaded.dispose();
+    });
+
+    test('a dismissed alert heard again gets a new record', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      await service.dismiss(service.incoming.single);
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(service.history.map((r) => r.outcome), [
+        SosHistoryOutcome.ongoing,
+        SosHistoryOutcome.dismissed,
+      ]);
+      await service.deleteFinishedHistory();
+      expect(service.history.single.isOngoing, isTrue);
+    });
+
+    test('records an expired alert', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      now = now.add(SosService.alertExpiry + const Duration(minutes: 1));
+      service.purgeExpired();
+      expect(service.history.single.outcome, SosHistoryOutcome.expired);
+    });
+
+    test('keeps our own SOS after we cancel it', () async {
+      final alice = contactFor('Alice', 1);
+      transport.contacts = [alice];
+      await settings.setSosContact(alice.publicKeyHex, true);
+      phone.fix = const SosFix(
+        latitude: -41.28646,
+        longitude: 174.77624,
+        source: SosLocationSource.phoneGps,
+      );
+      await service.activate();
+      final id = service.active!.id;
+      transport.confirmDelivery('Alice');
+      hear(sosPacketFrom('Valley', 5, id, kind: SosPacketKind.ack));
+      await service.cancel();
+
+      final record = service.history.single;
+      expect(record.direction, SosHistoryDirection.sent);
+      expect(record.senderName, 'Farmhouse');
+      expect(record.count, 1);
+      expect(record.positions.single.fix.latitude, closeTo(-41.28646, 1e-6));
+      expect(record.deliveredTo.map((d) => d.name), ['Alice']);
+      expect(record.acks.map((a) => a.name), ['Valley']);
+      expect(record.outcome, SosHistoryOutcome.cancelledByMe);
+      expect(record.toReport(), contains('sent from this phone'));
     });
   });
 

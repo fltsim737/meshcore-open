@@ -135,6 +135,50 @@ void main() {
     expect(SosPacket.decode(received.single.$2)!.senderName, 'Ridge');
   });
 
+  test('an SOS DM reaches the alarm and stays in the chat', () async {
+    await _connect();
+    await _waitFor(() => connector.contacts.isNotEmpty);
+    final sender = connector.contacts.first;
+    final heard = <String>[];
+    connector.sosTextListener = (inbound) => heard.add(inbound.text);
+    final secs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    final sos = SosCodec.encodeSos(
+      id: 'e5f6',
+      time: DateTime.now(),
+      fix: const SosFix(
+        latitude: -30.98665,
+        longitude: 151.60138,
+        source: SosLocationSource.stored,
+      ),
+      info: 'test only',
+    );
+    radio.emitForTest(
+      ReviewFrames.contactMessage(
+        senderPublicKey: sender.publicKey,
+        text: sos,
+        timestampSecs: secs,
+      ),
+    );
+    radio.emitForTest(
+      ReviewFrames.contactMessage(
+        senderPublicKey: sender.publicKey,
+        text: SosCodec.encodeCancel('e5f6', DateTime.now()),
+        timestampSecs: secs + 1,
+      ),
+    );
+    await _waitFor(() => heard.length == 2);
+    List<String> chat() =>
+        connector.getMessages(sender).map((m) => m.text).toList();
+    await _waitFor(() => chat().contains(sos));
+
+    // both stay in the chat as a record, the SOS with its Info line
+    expect(chat().where((t) => t.contains('Info: test only')), hasLength(1));
+    expect(
+      chat().where((t) => t.startsWith(SosCodec.cancelHeader)),
+      hasLength(1),
+    );
+  });
+
   test('a hidden channel is left out of the list and its chat', () async {
     await _connect();
     final hidden = connector.allChannels.firstWhere((c) => c.index == 1);

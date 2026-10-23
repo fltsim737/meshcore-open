@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:convert/convert.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/connector/meshcore_protocol.dart';
 import 'package:meshcore_open/helpers/sos_codec.dart';
@@ -214,6 +216,81 @@ void main() {
       expect(decoded.senderName.length, SosPacket.maxNameBytes);
       expect(SosPacket.decode(Uint8List.fromList([1, 2, 3])), isNull);
       expect(SosPacket.decode(Uint8List.fromList(List.filled(20, 9))), isNull);
+    });
+  });
+
+  group('info line from the MeshCore SOS button', () {
+    // made by the button firmware (examples/sos_button/SosCodec.cpp)
+    final buttonPacket = Uint8List.fromList(
+      hex.decode(
+        '0101b2a1a0a1a2a3a4a51f4e616e277320706c6163652c203134204c6f6e6720'
+        '47756c6c7920526f6164b03cfa6802019602bffd0c0a5cf7a0a1a2a3a4a5a6a7'
+        'a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebf204c6f7420313420'
+        '4c6f6e672047756c6c792052642c20576f6d62617420466c61',
+      ),
+    );
+
+    test('reads the info after the full key', () {
+      final packet = SosPacket.decode(buttonPacket)!;
+      expect(packet.kind, SosPacketKind.sos);
+      expect(packet.senderName, "Nan's place, 14 Long Gully Road");
+      expect(packet.senderKey, isNotNull);
+      expect(packet.fix.latitude, closeTo(-37.81361, 1e-6));
+      expect(packet.info, 'Lot 14 Long Gully Rd, Wombat Fla');
+    });
+
+    test('reads the Info line of the DM', () {
+      final payload = SosCodec.parseSos(
+        '*** EMERGENCY SOS *** #a1b2\n'
+        'Info: Lot 14 Long Gully Rd, Wombat Fla\n'
+        'Time: 10-23 14:33Z\n'
+        'Source: Stored location\n'
+        'Lat: -37.81361\n'
+        'Lon: -144.96306\n'
+        'Reply ACK #a1b2',
+      )!;
+      expect(payload.info, 'Lot 14 Long Gully Rd, Wombat Fla');
+      expect(payload.node, isNull);
+      expect(payload.fix.longitude, closeTo(-144.96306, 1e-6));
+    });
+
+    test('round-trips info, and leaves it out when there is none', () {
+      SosPacket sos({String? info}) => SosPacket(
+        kind: SosPacketKind.sos,
+        id: 'a1b2',
+        senderPrefix: Uint8List.fromList(List.filled(6, 3)),
+        senderName: 'Hut',
+        senderKey: Uint8List.fromList(List.filled(32, 3)),
+        time: time,
+        info: info,
+      );
+      final plain = sos().encode();
+      expect(SosPacket.decode(plain)!.info, isNull);
+      final withInfo = sos(info: 'Gate 2').encode();
+      expect(withInfo.length, plain.length + 7);
+      expect(SosPacket.decode(withInfo)!.info, 'Gate 2');
+      expect(
+        SosPacket.decode(sos(info: 'x' * 50).encode())!.info!.length,
+        SosPacket.maxInfoBytes,
+      );
+      expect(
+        SosCodec.encodeSos(
+          id: 'a1b2',
+          time: time,
+          fix: const SosFix.none(),
+          info: 'Gate 2',
+        ),
+        contains('\nInfo: Gate 2\n'),
+      );
+    });
+
+    test('ignores a malformed info field', () {
+      final cut = Uint8List.fromList([
+        ...buttonPacket.sublist(0, buttonPacket.length - 5),
+      ]);
+      final packet = SosPacket.decode(cut)!;
+      expect(packet.info, isNull);
+      expect(packet.senderKey, isNotNull);
     });
   });
 

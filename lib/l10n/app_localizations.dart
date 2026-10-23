@@ -10987,6 +10987,126 @@ abstract class AppLocalizations {
   /// **'Waiting for the radio to send'**
   String get sos_notSentYet;
 
+  /// No description provided for @sos_historyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS history'**
+  String get sos_historyTitle;
+
+  /// No description provided for @sos_historyTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS history'**
+  String get sos_historyTooltip;
+
+  /// No description provided for @sos_historyEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No SOS alerts yet. Every alert this phone receives or sends is kept here until you delete it, so it can be passed on to paramedics or emergency services afterwards.'**
+  String get sos_historyEmpty;
+
+  /// No description provided for @sos_historyReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get sos_historyReceived;
+
+  /// No description provided for @sos_historySent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent'**
+  String get sos_historySent;
+
+  /// No description provided for @sos_historyOngoing.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get sos_historyOngoing;
+
+  /// No description provided for @sos_historyCancelledBySender.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled by the sender'**
+  String get sos_historyCancelledBySender;
+
+  /// No description provided for @sos_historyCancelledByMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled by you'**
+  String get sos_historyCancelledByMe;
+
+  /// No description provided for @sos_historyDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed'**
+  String get sos_historyDismissed;
+
+  /// No description provided for @sos_historyExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get sos_historyExpired;
+
+  /// No description provided for @sos_historyLeftNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Left the network'**
+  String get sos_historyLeftNetwork;
+
+  /// No description provided for @sos_historyAcknowledged.
+  ///
+  /// In en, this message translates to:
+  /// **'Acknowledged'**
+  String get sos_historyAcknowledged;
+
+  /// No description provided for @sos_historyDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this record?'**
+  String get sos_historyDeleteTitle;
+
+  /// No description provided for @sos_historyDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'It can\'t be recovered. Share it first if it may be needed later.'**
+  String get sos_historyDeleteMessage;
+
+  /// No description provided for @sos_historyDeleteAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all finished'**
+  String get sos_historyDeleteAll;
+
+  /// No description provided for @sos_historyDeleteAllTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {count} records?'**
+  String sos_historyDeleteAllTitle(int count);
+
+  /// No description provided for @sos_historyDeleteAllMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Records of alerts still in progress are kept. Deleted records can\'t be recovered.'**
+  String get sos_historyDeleteAllMessage;
+
+  /// No description provided for @sos_historySubject.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS #{id} record'**
+  String sos_historySubject(String id);
+
+  /// No description provided for @sos_historyCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No records yet} =1{1 record, kept until you delete it} other{{count} records, kept until you delete them}}'**
+  String sos_historyCount(int count);
+
+  /// A line of text the sender added to the SOS, such as a short address
+  ///
+  /// In en, this message translates to:
+  /// **'Info: {info}'**
+  String sos_alertInfo(String info);
+
   /// No description provided for @sos_locationSource.
   ///
   /// In en, this message translates to:

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
+import '../connector/meshcore_protocol.dart' show utf8BoundaryLength;
+
 /// Where the position in an SOS came from, in priority order.
 enum SosLocationSource {
   phoneGps('Phone GPS'),
@@ -42,7 +44,10 @@ class SosPayload {
   final String? node;
   final SosFix fix;
 
-  const SosPayload({required this.id, required this.fix, this.node});
+  /// The sender's line of text, such as a short address (`Info:` line).
+  final String? info;
+
+  const SosPayload({required this.id, required this.fix, this.node, this.info});
 }
 
 /// Plain-text SOS and ACK messages carried in ordinary MeshCore text frames.
@@ -50,6 +55,7 @@ class SosPayload {
 /// ```
 /// *** EMERGENCY SOS *** #a1b2
 /// Node: <node>          (direct messages only)
+/// Info: <text>          (optional, e.g. a short address)
 /// Time: 10-21 14:32Z
 /// Source: Phone GPS
 /// Lat: -45.12345
@@ -93,11 +99,13 @@ class SosCodec {
     required DateTime time,
     required SosFix fix,
     String? node,
+    String? info,
     int? maxBytes,
   }) {
     String build(String? nodeName) => [
       '$header #$id',
       if (nodeName != null && nodeName.isNotEmpty) 'Node: $nodeName',
+      if (info != null && info.isNotEmpty) 'Info: $info',
       'Time: ${formatTime(time)}',
       'Source: ${fix.source.wireLabel}',
       if (fix.hasPosition) 'Lat: ${fix.latitude!.toStringAsFixed(5)}',
@@ -145,9 +153,11 @@ class SosCodec {
     final lon = double.tryParse(fields['lon'] ?? '');
     final valid =
         lat != null && lon != null && lat.abs() <= 90 && lon.abs() <= 180;
+    final info = fields['info'];
     return SosPayload(
       id: match.group(1)!,
       node: fields['node'],
+      info: info == null || info.isEmpty ? null : info,
       fix: valid
           ? SosFix(
               latitude: lat,
@@ -196,11 +206,15 @@ enum SosPacketKind {
 /// `[version=1][kind][id u16][sender key prefix x6][name len][name...]`
 /// then for an SOS `[time u32][source][has position][lat i32][lon i32]`
 /// (degrees x 1e6), or for a cancellation `[time u32]`.
+///
+/// An SOS may carry, after the full key, `[info len][info...]`: a line of
+/// text such as a short address, sent by the MeshCore SOS button firmware.
 class SosPacket {
   static const int version = 1;
   static const int keyPrefixSize = 6;
   static const int publicKeySize = 32;
   static const int maxNameBytes = 31;
+  static const int maxInfoBytes = 32;
 
   final SosPacketKind kind;
   final String id;
@@ -214,6 +228,10 @@ class SosPacket {
   /// ignore it.
   final Uint8List? senderKey;
 
+  /// The sender's line of text, if any. Only sent with an SOS that also
+  /// carries [senderKey]; older builds stop reading before it.
+  final String? info;
+
   const SosPacket({
     required this.kind,
     required this.id,
@@ -222,6 +240,7 @@ class SosPacket {
     this.time,
     this.fix = const SosFix.none(),
     this.senderKey,
+    this.info,
   });
 
   bool get _carriesKey =>
@@ -253,7 +272,21 @@ class SosPacket {
       ..addByte(fix.hasPosition ? 1 : 0)
       ..add(_i32(((fix.latitude ?? 0) * 1e6).round()))
       ..add(_i32(((fix.longitude ?? 0) * 1e6).round()));
-    if (_carriesKey) out.add(senderKey!);
+    if (_carriesKey) {
+      out.add(senderKey!);
+      var infoBytes = utf8.encode(info ?? '');
+      if (infoBytes.length > maxInfoBytes) {
+        infoBytes = infoBytes.sublist(
+          0,
+          utf8BoundaryLength(infoBytes, maxInfoBytes),
+        );
+      }
+      if (infoBytes.isNotEmpty) {
+        out
+          ..addByte(infoBytes.length)
+          ..add(infoBytes);
+      }
+    }
     return out.toBytes();
   }
 
@@ -303,13 +336,17 @@ class SosPacket {
       final lat = _readI32(data, offset + 2) / 1e6;
       final lon = _readI32(data, offset + 6) / 1e6;
       final valid = hasPosition && lat.abs() <= 90 && lon.abs() <= 180;
+      final senderKey = _readKey(data, offset + 10, prefix);
       return SosPacket(
         kind: kind,
         id: id,
         senderPrefix: prefix,
         senderName: name,
         time: time,
-        senderKey: _readKey(data, offset + 10, prefix),
+        senderKey: senderKey,
+        info: senderKey == null
+            ? null
+            : _readInfo(data, offset + 10 + publicKeySize),
         fix: valid
             ? SosFix(
                 latitude: lat,
@@ -335,6 +372,25 @@ class SosPacket {
       if (key[i] != prefix[i]) return null;
     }
     return key;
+  }
+
+  /// The optional `[len][text]` at [offset]; null if absent or malformed.
+  static String? _readInfo(Uint8List data, int offset) {
+    if (data.length <= offset) return null;
+    final length = data[offset];
+    if (length == 0 ||
+        length > maxInfoBytes ||
+        data.length < offset + 1 + length) {
+      return null;
+    }
+    final text = utf8
+        .decode(
+          data.sublist(offset + 1, offset + 1 + length),
+          allowMalformed: true,
+        )
+        .replaceAll(RegExp(r'[\x00-\x1f\x7f]'), ' ')
+        .trim();
+    return text.isEmpty ? null : text;
   }
 
   static Uint8List _prefix(Uint8List key) {

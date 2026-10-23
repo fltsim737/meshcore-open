@@ -65,6 +65,17 @@ class SosWarningOverlay extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
+                      if (alert.info != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            l10n.sos_alertInfo(alert.info!),
+                            style: textTheme.titleLarge?.copyWith(
+                              color: white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
                       const SizedBox(height: 16),
                       Text(
                         fix.hasPosition
