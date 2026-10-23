@@ -7,6 +7,7 @@ import '../l10n/l10n.dart';
 import '../services/app_settings_service.dart';
 import '../services/sos_location_service.dart';
 import '../services/sos_service.dart';
+import '../screens/sos_history_screen.dart';
 import '../screens/sos_network_screen.dart';
 import 'mesh_nav_tile.dart';
 
@@ -70,6 +71,16 @@ class SosSettingsSection extends StatelessWidget {
             isScrollControlled: true,
             showDragHandle: true,
             builder: (_) => const _SosContactsSheet(),
+          ),
+        ),
+        const Divider(height: 1, indent: 16),
+        MeshNavTile(
+          icon: Icons.history,
+          title: l10n.sos_historyTitle,
+          subtitle: l10n.sos_historyCount(sos.history.length),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const SosHistoryScreen()),
           ),
         ),
       ],

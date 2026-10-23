@@ -20,6 +20,7 @@ import 'channels_screen.dart';
 import 'chat_screen.dart';
 import 'contacts_screen.dart';
 import 'map_screen.dart';
+import 'sos_history_screen.dart';
 
 String sosSourceLabel(AppLocalizations l10n, SosLocationSource source) =>
     switch (source) {
@@ -77,6 +78,16 @@ class _EmergencyScreenState extends State<EmergencyScreen>
         title: Text(l10n.sos_title),
         centerTitle: true,
         automaticallyImplyLeading: !widget.hideBackButton,
+        actions: [
+          IconButton(
+            tooltip: l10n.sos_historyTooltip,
+            icon: const Icon(Icons.history),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const SosHistoryScreen()),
+            ),
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
@@ -440,6 +451,17 @@ class _IncomingSosCard extends StatelessWidget {
                   Text('#${alert.id}'),
                 ],
               ),
+              if (alert.info != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    l10n.sos_alertInfo(alert.info!),
+                    style: textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: emphasis,
+                    ),
+                  ),
+                ),
               const SizedBox(height: 8),
               Text(
                 fix.hasPosition ? sosCoordinates(fix) : l10n.sos_noPosition,

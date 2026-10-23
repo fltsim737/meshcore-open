@@ -116,6 +116,9 @@ class IncomingSos {
   int receivedCount;
   bool ackSent;
 
+  /// The sender's line of text, such as a short address, if it sent one.
+  String? info;
+
   /// Other nodes seen acknowledging this SOS.
   final Set<String> ackedBy;
 
@@ -129,6 +132,7 @@ class IncomingSos {
     this.channelIndex,
     this.receivedCount = 1,
     this.ackSent = false,
+    this.info,
     Set<String>? ackedBy,
   }) : ackedBy = ackedBy ?? {};
 
@@ -150,6 +154,7 @@ class IncomingSos {
     'fix': _fixToJson(fix),
     'received_count': receivedCount,
     'ack_sent': ackSent,
+    'info': info,
     'acked_by': ackedBy.toList(),
   };
 
@@ -165,6 +170,7 @@ class IncomingSos {
       fix: _fixFromJson(json['fix']),
       receivedCount: json['received_count'] as int? ?? 1,
       ackSent: json['ack_sent'] as bool? ?? false,
+      info: json['info'] as String?,
       ackedBy: (json['acked_by'] as List<dynamic>? ?? const [])
           .map((e) => e.toString())
           .toSet(),

@@ -10,6 +10,7 @@ import '../helpers/sos_network_code.dart';
 import '../models/channel.dart';
 import '../models/contact.dart';
 import '../models/sos_alert.dart';
+import '../models/sos_history.dart';
 import '../storage/sos_store.dart';
 import '../utils/app_logger.dart';
 import 'app_settings_service.dart';
@@ -170,6 +171,21 @@ class SosService extends ChangeNotifier {
   /// has been heard for this long.
   static const Duration alertExpiry = Duration(minutes: 60);
 
+  /// An open alert heard again within this time doesn't sound again. The
+  /// same SOS usually arrives twice within a second or two, on the network
+  /// and by DM, and re-posting Android's looping alarm notification that
+  /// soon silences it instead of sounding it again.
+  static const Duration resoundGap = Duration(seconds: 30);
+
+  /// When each open alert last sounded, by [IncomingSos.key].
+  final Map<String, DateTime> _lastSounded = {};
+
+  final List<SosHistoryRecord> _history = [];
+
+  /// Every SOS received or sent, newest first, kept after the alert itself
+  /// is gone so it can be reported afterwards. Only the user deletes them.
+  List<SosHistoryRecord> get history => List.unmodifiable(_history);
+
   /// How long the first broadcast waits for a phone fix; repeats wait longer.
   static const Duration firstFixTimeout = Duration(seconds: 8);
   static const Duration repeatFixTimeout = Duration(seconds: 20);
@@ -248,6 +264,9 @@ class SosService extends ChangeNotifier {
     _incoming
       ..clear()
       ..addAll(_store.loadIncoming());
+    _history
+      ..clear()
+      ..addAll(_store.loadHistory());
     purgeExpired();
     notifyListeners();
     _schedule();
@@ -459,7 +478,9 @@ class SosService extends ChangeNotifier {
     final fromChannel = _incoming.where((a) => a.channelIndex != null).toList();
     for (final alert in fromChannel) {
       _incoming.remove(alert);
-      _alerter?.clear(alert);
+      _clearAlarm(alert, 'left the network');
+      _receivedRecord(alert)?.end(SosHistoryOutcome.leftNetwork, _now());
+      _saveHistory();
     }
     await _store.saveIncoming(_incoming);
     _syncNetwork();
@@ -532,6 +553,18 @@ class SosService extends ChangeNotifier {
     if (_active != null) return;
     final sos = OutgoingSos(id: SosCodec.newId(), startedAt: _now());
     _active = sos;
+    _history.insert(
+      0,
+      SosHistoryRecord(
+        direction: SosHistoryDirection.sent,
+        id: sos.id,
+        senderName: _transport.selfName ?? '',
+        senderKeyHex: _selfKeyHex,
+        startedAt: sos.startedAt,
+        lastAt: sos.startedAt,
+      ),
+    );
+    _saveHistory();
     _dmAckHashes.clear();
     notifyListeners();
     await _store.saveOutgoing(sos);
@@ -548,6 +581,8 @@ class SosService extends ChangeNotifier {
     _active = null;
     _dmAckHashes.clear();
     _pendingCancelId = sos.id;
+    _sentRecord(sos.id)?.end(SosHistoryOutcome.cancelledByMe, _now());
+    _saveHistory();
     notifyListeners();
     await _store.saveOutgoing(null);
     await _store.savePendingCancel(sos.id);
@@ -580,6 +615,14 @@ class SosService extends ChangeNotifier {
       ..lastFix = fix
       ..lastBroadcastAt = now
       ..broadcastCount += 1;
+    final record = _sentRecord(sos.id);
+    if (record != null) {
+      record
+        ..lastAt = now
+        ..count = sos.broadcastCount
+        ..addPosition(now, fix);
+      _saveHistory();
+    }
     notifyListeners();
     await _store.saveOutgoing(sos);
 
@@ -656,6 +699,12 @@ class SosService extends ChangeNotifier {
     final key = _dmAckHashes.remove(ackHash);
     if (sos == null || key == null) return;
     if (sos.deliveredContactKeys.add(key)) {
+      final record = _sentRecord(sos.id);
+      final name = contactFor(key)?.name ?? key.substring(0, 8);
+      if (record != null &&
+          SosHistoryRecord.addEvent(record.deliveredTo, name, _now())) {
+        _saveHistory();
+      }
       unawaited(_store.saveOutgoing(sos));
       notifyListeners();
     }
@@ -689,6 +738,8 @@ class SosService extends ChangeNotifier {
       senderKeyHex: inbound.senderKeyHex,
       channelIndex: inbound.channelIndex,
       fix: payload.fix,
+      info: payload.info,
+      via: inbound.channelIndex == null ? 'DM' : 'channel text',
     );
   }
 
@@ -736,6 +787,8 @@ class SosService extends ChangeNotifier {
           senderKeyHex: senderKeyHex,
           channelIndex: channelIndex,
           fix: packet.fix,
+          info: packet.info,
+          via: 'network',
         );
       case SosPacketKind.ack:
         _handleAck(packet.id, packet.senderName, senderKeyHex);
@@ -790,6 +843,15 @@ class SosService extends ChangeNotifier {
         sos.acks.add(ack);
         _alerter?.acknowledged(sos, ack);
         changed = true;
+        final record = _sentRecord(id);
+        if (record != null &&
+            SosHistoryRecord.addEvent(
+              record.acks,
+              senderName,
+              ack.receivedAt,
+            )) {
+          _saveHistory();
+        }
       } else if (sos.acks[index].senderKeyHex == null && senderKeyHex != null) {
         final known = sos.acks[index];
         sos.acks[index] = SosAck(
@@ -805,6 +867,11 @@ class SosService extends ChangeNotifier {
     for (final alert in _incoming) {
       if (alert.id == id && alert.ackedBy.add(senderName)) {
         incomingChanged = true;
+        final record = _receivedRecord(alert);
+        if (record != null &&
+            SosHistoryRecord.addEvent(record.acks, senderName, _now())) {
+          _saveHistory();
+        }
       }
     }
     if (incomingChanged) unawaited(_store.saveIncoming(_incoming));
@@ -824,7 +891,9 @@ class SosService extends ChangeNotifier {
         .firstOrNull;
     if (alert == null) return;
     _incoming.remove(alert);
-    _alerter?.clear(alert);
+    _clearAlarm(alert, 'cancelled by the sender');
+    _receivedRecord(alert)?.end(SosHistoryOutcome.cancelledBySender, _now());
+    _saveHistory();
     _alerter?.cancelled(alert);
     unawaited(_store.saveIncoming(_incoming));
     notifyListeners();
@@ -836,10 +905,13 @@ class SosService extends ChangeNotifier {
     required String? senderKeyHex,
     required int? channelIndex,
     required SosFix fix,
+    required String via,
+    String? info,
   }) {
     final key = IncomingSos.keyFor(senderName, id);
     final now = _now();
     var alert = _incoming.where((a) => a.key == key).firstOrNull;
+    final isNew = alert == null;
     if (alert != null) {
       final existing = alert;
       existing
@@ -848,6 +920,7 @@ class SosService extends ChangeNotifier {
         ..senderKeyHex ??= senderKeyHex
         ..channelIndex ??= channelIndex;
       if (fix.hasPosition || !existing.fix.hasPosition) existing.fix = fix;
+      if (info != null) existing.info = info;
     } else {
       alert = IncomingSos(
         id: id,
@@ -857,14 +930,107 @@ class SosService extends ChangeNotifier {
         firstSeen: now,
         lastSeen: now,
         fix: fix,
+        info: info,
       );
       _incoming.insert(0, alert);
       _trimIncoming();
     }
-    // Every repeat of a still-open alert sounds again.
-    if (alert.isOpen) _alerter?.alert(alert);
+    _recordHeard(alert, now, fix, via, info);
+
+    // A repeat of a still-open alert sounds again, unless it sounded moments
+    // ago: then the alarm is still going, and sounding it again would stop it.
+    final last = _lastSounded[key];
+    final sound =
+        alert.isOpen &&
+        (isNew || last == null || now.difference(last) >= resoundGap);
+    if (sound) {
+      _lastSounded[key] = now;
+      _alerter?.alert(alert);
+    }
+    appLogger.info(
+      'SOS #$id from $senderName by $via: '
+      '${isNew ? 'new alert' : 'repeat ${alert.receivedCount}'}, '
+      '${sound ? 'alarm sounded' : (alert.isOpen ? 'alarm already sounding, not re-sounded' : 'already acknowledged')}'
+      '${info != null ? ', info "$info"' : ''}',
+      tag: 'SOS',
+    );
     unawaited(_store.saveIncoming(_incoming));
     notifyListeners();
+  }
+
+  // ---------------------------------------------------------------------
+  // History
+  // ---------------------------------------------------------------------
+
+  String? get _selfKeyHex => _transport.selfPublicKey
+      ?.map((b) => b.toRadixString(16).padLeft(2, '0'))
+      .join();
+
+  SosHistoryRecord? _sentRecord(String id) => _history
+      .where((r) => r.direction == SosHistoryDirection.sent && r.id == id)
+      .firstOrNull;
+
+  /// The live record of [alert]; a new alert after one ended gets its own.
+  SosHistoryRecord? _receivedRecord(IncomingSos alert) => _history
+      .where(
+        (r) =>
+            r.direction == SosHistoryDirection.received &&
+            r.isOngoing &&
+            r.id == alert.id &&
+            r.senderName == alert.senderName,
+      )
+      .firstOrNull;
+
+  void _recordHeard(
+    IncomingSos alert,
+    DateTime now,
+    SosFix fix,
+    String via,
+    String? info,
+  ) {
+    var record = _receivedRecord(alert);
+    if (record == null) {
+      record = SosHistoryRecord(
+        direction: SosHistoryDirection.received,
+        id: alert.id,
+        senderName: alert.senderName,
+        startedAt: now,
+        lastAt: now,
+      );
+      _history.insert(0, record);
+    }
+    record
+      ..lastAt = now
+      ..count += 1
+      ..senderKeyHex ??= alert.senderKeyHex
+      ..heardVia.add(via)
+      ..addPosition(now, fix);
+    if (info != null) record.info = info;
+    _saveHistory();
+  }
+
+  void _saveHistory() => unawaited(_store.saveHistory(_history));
+
+  Future<void> deleteHistory(SosHistoryRecord record) async {
+    _history.remove(record);
+    notifyListeners();
+    await _store.saveHistory(_history);
+  }
+
+  /// Deletes every finished record; live ones stay until they end.
+  Future<void> deleteFinishedHistory() async {
+    _history.removeWhere((r) => !r.isOngoing);
+    notifyListeners();
+    await _store.saveHistory(_history);
+  }
+
+  void _clearAlarm(IncomingSos alert, String reason) {
+    _lastSounded.remove(alert.key);
+    _alerter?.clear(alert);
+    appLogger.info(
+      'SOS #${alert.id} from ${alert.senderName}: alarm cleared ($reason)',
+      tag: 'SOS',
+    );
   }
 
   /// Drops the oldest acknowledged alerts; open ones are never dropped.
@@ -888,7 +1054,9 @@ class SosService extends ChangeNotifier {
     if (expired.isEmpty) return;
     for (final alert in expired) {
       _incoming.remove(alert);
-      _alerter?.clear(alert);
+      _clearAlarm(alert, 'expired');
+      _receivedRecord(alert)?.end(SosHistoryOutcome.expired, _now());
+      _saveHistory();
     }
     unawaited(_store.saveIncoming(_incoming));
     notifyListeners();
@@ -901,7 +1069,9 @@ class SosService extends ChangeNotifier {
   Future<void> acknowledge(IncomingSos alert) async {
     if (!_transport.isConnected) return;
     alert.ackSent = true;
-    _alerter?.clear(alert);
+    _clearAlarm(alert, 'acknowledged');
+    _receivedRecord(alert)?.ackSentAt ??= _now();
+    _saveHistory();
     notifyListeners();
     await _store.saveIncoming(_incoming);
 
@@ -932,7 +1102,9 @@ class SosService extends ChangeNotifier {
   /// Deletes the alert and its position from this phone without replying.
   Future<void> dismiss(IncomingSos alert) async {
     _incoming.remove(alert);
-    _alerter?.clear(alert);
+    _clearAlarm(alert, 'dismissed');
+    _receivedRecord(alert)?.end(SosHistoryOutcome.dismissed, _now());
+    _saveHistory();
     notifyListeners();
     await _store.saveIncoming(_incoming);
   }

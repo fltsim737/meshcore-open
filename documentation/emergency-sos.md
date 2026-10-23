@@ -2,7 +2,7 @@
 
 The **Emergency** tab sends a repeating distress alert over the mesh and shows alerts from other nodes. It is built for remote areas and farms with no internet or mobile coverage, so everything runs over the radio. No firmware change is needed.
 
-Because an SOS carries your position, it never lands in any chat history where it could be scrolled back through: see [Privacy](#privacy).
+Because an SOS carries your position, it only reaches a chat history on the phones of the emergency contacts you chose; channel alerts never do. See [Privacy](#privacy).
 
 > An SOS is best effort. LoRa delivery is never guaranteed, and an ACK only means someone received your alert, not that help is on the way. Keep using every other means of calling for help that you have.
 
@@ -95,6 +95,7 @@ The source is included in the message.
 ```
 *** EMERGENCY SOS *** #a1b2
 Node: Farmhouse
+Info: Lot 14, back gate   (optional)
 Time: 10-21 14:32Z
 Source: Phone GPS
 Lat: -41.28646
@@ -118,23 +119,24 @@ These texts are always sent uncompressed (Smaz and Cyr2Lat are skipped), so ever
 
 ## Privacy
 
-An SOS carries your position, so MeshCore Open never keeps it where it could be scrolled back through:
+An SOS carries your position, so MeshCore Open keeps it out of chat history everywhere except with the emergency contacts you chose:
 
 - **Channel alerts are hidden data packets.** They never appear in a channel chat on any device, in MeshCore Open or other MeshCore apps.
-- **SOS direct messages bypass chat history.** The sending phone sends them straight to the radio without adding them to the conversation, and a receiving MeshCore Open diverts SOS, ACK and cancellation texts to the Emergency tab instead of the chat.
-- **Received alerts are short-lived.** An alert, with its position, is deleted when the sender cancels, when you dismiss it, or once no repeat has been heard for 60 minutes. Until then a responder who acknowledged keeps the position to navigate by.
+- **SOS direct messages go only to people you chose.** The sending phone sends them straight to the radio without adding them to its own conversation. A receiving MeshCore Open raises the alarm from them and also keeps them in the chat with you, without a message notification, so the contact can read the text and any info line. They stay there like any message: you listed that person as an emergency contact, so they already have your trust.
+- **Live alerts are short-lived.** An alert, with its position, leaves the Emergency tab when the sender cancels, when you dismiss it, or once no repeat has been heard for 60 minutes. Until then a responder who acknowledged keeps the position to navigate by.
+- **The SOS history keeps a record of every alert** received or sent on this phone, positions included, until you delete it. See [SOS history](#sos-history).
 - **Your own SOS** is cleared from the Emergency tab when you cancel it, and the alarm notification (which shows the position) is removed when an alert closes.
 
 What the app cannot control:
 
 - Anyone holding a network code and running modified software can capture its packets; see [what the roles protect](#emergency-network).
-- An emergency contact using a different MeshCore app sees the SOS direct message in that app's chat.
+- An emergency contact keeps your SOS direct messages in their chat, in MeshCore Open or any other MeshCore app, until they delete them.
 
 ## Receiving an SOS
 
 When an SOS arrives on your emergency network (responders only) or by direct message from someone who listed you as an emergency contact:
 
-- A full-screen red **EMERGENCY SOS** warning covers the app, showing who sent it, the position and source, and when it was first and last heard. It cannot be navigated away from. It stays until you press **Send ACK** or **Dismiss**, or the sender cancels, and if several alerts are open they are shown one at a time, oldest first.
+- A full-screen red **EMERGENCY SOS** warning covers the app, showing who sent it, its info line if it has one (such as a short address), the position and source, and when it was first and last heard. It cannot be navigated away from. It stays until you press **Send ACK** or **Dismiss**, or the sender cancels, and if several alerts are open they are shown one at a time, oldest first.
 - A dedicated SOS notification replaces the ordinary message notification (see [platform behaviour](#platform-behaviour)).
 - The alert is listed in the Emergency tab with **Send ACK**, **Dismiss**, **Map** and copy-coordinates actions. The Emergency tab icon shows a badge while any alert is open.
 
@@ -143,6 +145,10 @@ When an SOS arrives on your emergency network (responders only) or by direct mes
 When the sender cancels, the alert is deleted: the alarm and warning screen stop, and an "SOS from … cancelled" notification (without the position) replaces the alarm. Only a cancellation from the same sender does this.
 
 **Dismiss** deletes the alert and its position from this phone without replying. If the sender is still broadcasting, the next repeat raises it again. Repeats of an acknowledged alert update its position and counts but don't sound again.
+
+The same alert often arrives twice within a second or two: on the network and by direct message, when you are both a responder and one of the sender's emergency contacts. Both copies update the one alert, and the alarm sounds again only for a repeat heard 30 seconds or more after it last sounded. Sounding it again sooner would silence Android's looping alarm instead.
+
+**Info line.** A sender's radio can add a line of text to the SOS, such as a short address, a gate code or how to find the house. The MeshCore SOS button firmware does this. It is shown on the warning screen, the alert in the Emergency tab and the notification. It travels after the public key in the channel packet and as an `Info:` line in the direct message, so older builds ignore it.
 
 On the sending phone, each new responder's ACK raises an "SOS acknowledged by …" notification.
 
@@ -153,9 +159,23 @@ The SOS and each ACK on the emergency network carry the sender's full public key
 - A responder's radio saves whoever sent an SOS it heard.
 - The sending radio saves each responder who acknowledged its SOS (ACKs for other people's alerts are not saved).
 
-A **Message** button then appears on the alert (for the responder) and next to each responder in the active SOS card (for the sender), and opens an ordinary direct-message chat. New contacts are reached by flood until a route is learned. These messages are normal chat messages and stay in chat history; only the SOS, ACK and cancellation themselves are kept out of it. Alerts from builds without this, or from emergency contacts by DM, show the button only when the sender is already a contact.
+A **Message** button then appears on the alert (for the responder) and next to each responder in the active SOS card (for the sender), and opens an ordinary direct-message chat. New contacts are reached by flood until a route is learned. These messages are normal chat messages and stay in chat history. Received SOS direct messages appear there too; channel alerts never do. Alerts from builds without this, or from emergency contacts by DM, show the button only when the sender is already a contact.
 
 The active SOS and live alerts survive an app restart; alerts that expired while the app was closed are deleted when it starts.
+
+## SOS history
+
+Every SOS this phone receives or sends is recorded, so it can be passed on afterwards to paramedics, emergency services or an incident report. Open it from the **history** icon on the Emergency tab, or **Settings → App Settings → Emergency SOS → SOS history**, which also works with no radio connected.
+
+Each record keeps:
+
+- the alert ID, sender (name and public key) and info line;
+- when it was first and last heard (or sent), how many times, and how (network, DM);
+- every position heard, with its time and source;
+- when this phone acknowledged, who else acknowledged and when, and, for your own SOS, whose radio confirmed the direct message;
+- how it ended: cancelled by the sender, cancelled by you, dismissed, expired or left the network, and when.
+
+Tap a record to see the full report. **Share** sends it as plain text (times in local time and UTC, positions and a map link) by SMS, email or any messaging app. Records are kept until you delete them: one at a time, or **Delete all finished**, which keeps records of alerts still in progress.
 
 ## Platform behaviour
 

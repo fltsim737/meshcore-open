@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../models/sos_alert.dart';
+import '../models/sos_history.dart';
 import '../utils/app_logger.dart';
 import 'prefs_manager.dart';
 
@@ -11,6 +12,7 @@ class SosStore {
   static const String _outgoingKey = 'sos_outgoing';
   static const String _incomingKey = 'sos_incoming';
   static const String _pendingCancelKey = 'sos_pending_cancel';
+  static const String _historyKey = 'sos_history';
 
   /// Unreadable state is discarded rather than allowed to block startup.
   OutgoingSos? loadOutgoing() {
@@ -58,6 +60,29 @@ class SosStore {
       return [];
     }
   }
+
+  /// Records of past and live alerts, newest first; kept until deleted.
+  List<SosHistoryRecord> loadHistory() {
+    final raw = PrefsManager.instance.getString(_historyKey);
+    if (raw == null) return [];
+    try {
+      return (jsonDecode(raw) as List<dynamic>)
+          .map(
+            (e) =>
+                SosHistoryRecord.fromJson(Map<String, dynamic>.from(e as Map)),
+          )
+          .toList();
+    } catch (e) {
+      appLogger.warn('Discarding unreadable SOS history: $e', tag: 'SOS');
+      return [];
+    }
+  }
+
+  Future<void> saveHistory(List<SosHistoryRecord> records) =>
+      PrefsManager.instance.setString(
+        _historyKey,
+        jsonEncode(records.map((r) => r.toJson()).toList()),
+      );
 
   Future<void> saveIncoming(List<IncomingSos> alerts) =>
       PrefsManager.instance.setString(
