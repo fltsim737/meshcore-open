@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../connector/meshcore_connector.dart';
 import '../l10n/l10n.dart';
+import '../services/linux_serial_access.dart';
 import '../theme/mesh_theme.dart';
 import '../utils/app_logger.dart';
 import '../utils/platform_info.dart';
@@ -441,7 +442,7 @@ class _UsbScreenState extends State<UsbScreen> with WidgetsBindingObserver {
     }
   }
 
-  Future<void> _connectPort(String port) async {
+  Future<void> _connectPort(String port, {bool retry = false}) async {
     if (_connector.state != MeshCoreConnectionState.disconnected) return;
 
     final rawPortName = normalizeUsbPortName(port);
@@ -458,9 +459,94 @@ class _UsbScreenState extends State<UsbScreen> with WidgetsBindingObserver {
         tag: 'UsbScreen',
       );
       if (!mounted) return;
-      _showError(error);
+      if (PlatformInfo.isLinux &&
+          error is StateError &&
+          error.message.contains('Failed to open')) {
+        await _explainLinuxOpenFailure(port, rawPortName, retry: retry);
+      } else {
+        _showError(error);
+      }
       unawaited(_loadPorts());
     }
+  }
+
+  /// The serial library reports every failed open the same way, so check the
+  /// device file itself: on Ubuntu-based systems a new user may not open it.
+  Future<void> _explainLinuxOpenFailure(
+    String port,
+    String rawPortName, {
+    required bool retry,
+  }) async {
+    final l10n = context.l10n;
+    final problem = await LinuxSerialAccess.diagnose(rawPortName);
+    appLogger.info('Open failure for $rawPortName: $problem', tag: 'UsbScreen');
+    if (!mounted) return;
+    switch (problem) {
+      case SerialOpenProblem.missing:
+        _showErrorText(l10n.usbErrorDeviceMissing);
+      case SerialOpenProblem.unknown:
+        _showErrorText(l10n.usbErrorPortInUse);
+      case SerialOpenProblem.permission:
+        if (retry) {
+          _showErrorText(l10n.usbAccessStillDenied);
+          return;
+        }
+        final canGrant = await LinuxSerialAccess.canGrantAccess();
+        if (!mounted) return;
+        final allow = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(l10n.usbAccessTitle),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (canGrant) Text(l10n.usbAccessMessage),
+                  const SizedBox(height: 12),
+                  SelectableText(l10n.usbAccessManual),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: Text(l10n.common_cancel),
+              ),
+              if (canGrant)
+                FilledButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text(l10n.usbAccessAllow),
+                ),
+            ],
+          ),
+        );
+        if (allow != true) return;
+        final grant = await LinuxSerialAccess.grantAccess();
+        if (!mounted) return;
+        switch (grant) {
+          case SerialAccessGrant.granted:
+            showDismissibleSnackBar(
+              context,
+              content: Text(l10n.usbAccessGranted),
+            );
+            await _connectPort(port, retry: true);
+          case SerialAccessGrant.cancelled:
+            break;
+          case SerialAccessGrant.failed:
+          case SerialAccessGrant.unavailable:
+            _showErrorText(l10n.usbAccessFailed);
+        }
+    }
+  }
+
+  void _showErrorText(String text) {
+    if (!mounted) return;
+    showDismissibleSnackBar(
+      context,
+      content: Text(text),
+      backgroundColor: Theme.of(context).colorScheme.error,
+    );
   }
 
   void _showError(Object error) {

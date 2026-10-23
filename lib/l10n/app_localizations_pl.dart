@@ -273,6 +273,35 @@ class AppLocalizationsPl extends AppLocalizations {
       'Nie udało się otworzyć wybranego urządzenia USB.';
 
   @override
+  String get usbErrorPortInUse =>
+      'The port can\'t be opened. Another program may be using it, such as a flasher or a serial monitor: close it and try again.';
+
+  @override
+  String get usbAccessTitle => 'Allow access to USB radios?';
+
+  @override
+  String get usbAccessMessage =>
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+
+  @override
+  String get usbAccessManual =>
+      'Or do it yourself in a terminal, then log out and back in:\nsudo usermod -aG dialout \$USER';
+
+  @override
+  String get usbAccessAllow => 'Allow access';
+
+  @override
+  String get usbAccessGranted => 'USB radios allowed. Connecting…';
+
+  @override
+  String get usbAccessFailed =>
+      'Couldn\'t change the access settings. In a terminal run: sudo usermod -aG dialout \$USER, then log out and back in.';
+
+  @override
+  String get usbAccessStillDenied =>
+      'Access was changed, but the radio still can\'t be opened. Unplug it, plug it back in, and try again.';
+
+  @override
   String get usbErrorConnectFailed =>
       'Nie udało się połączyć z wybranym urządzeniem USB.';
 

@@ -287,7 +287,7 @@ On every launch `AppRun` runs `integrate.sh`, which adds a menu entry (`~/.local
 
 The uninstaller removes the menu entry, start on login, the watcher and itself. It keeps messages, contacts and settings (`~/.local/share/com.meshcore.meshcore_open`) so a newer AppImage carries on, and remembers start on login for that case; `uninstall.sh --purge` deletes them too.
 
-Not bundled: GTK 3 and a sound player (`paplay` or `pw-play`), present on any desktop with sound; FUSE, which the AppImage needs to start (without it, run it with `--appimage-extract-and-run`); BlueZ for Bluetooth; and membership of the serial-port group (`dialout` on Debian and Ubuntu) for USB radios. The AppImage runs on distributions with glibc at least as new as the build machine's.
+Not bundled: GTK 3 and a sound player (`paplay` or `pw-play`), present on any desktop with sound; FUSE, which the AppImage needs to start (without it, run it with `--appimage-extract-and-run`); BlueZ for Bluetooth; and permission to use USB serial ports. On Debian, Ubuntu and their flavours a new user doesn't have it. When a USB radio won't open for that reason, the app says so and offers **Allow access**: after one password prompt it installs `/etc/udev/rules.d/70-meshcore-open-serial.rules`, which gives whoever is logged in at the desktop access to USB serial radios without logging out, and keeps ModemManager from probing common radio USB chips. The alternative is `sudo usermod -aG dialout $USER`, then logging out and back in. Delete the rules file to undo it. The AppImage runs on distributions with glibc at least as new as the build machine's.
 
 ## Windows
 

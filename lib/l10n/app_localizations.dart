@@ -586,6 +586,54 @@ abstract class AppLocalizations {
   /// **'Failed to open the selected USB device.'**
   String get usbErrorOpenFailed;
 
+  /// No description provided for @usbErrorPortInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'The port can\'t be opened. Another program may be using it, such as a flasher or a serial monitor: close it and try again.'**
+  String get usbErrorPortInUse;
+
+  /// No description provided for @usbAccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow access to USB radios?'**
+  String get usbAccessTitle;
+
+  /// No description provided for @usbAccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.'**
+  String get usbAccessMessage;
+
+  /// No description provided for @usbAccessManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Or do it yourself in a terminal, then log out and back in:\nsudo usermod -aG dialout \$USER'**
+  String get usbAccessManual;
+
+  /// No description provided for @usbAccessAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow access'**
+  String get usbAccessAllow;
+
+  /// No description provided for @usbAccessGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'USB radios allowed. Connecting…'**
+  String get usbAccessGranted;
+
+  /// No description provided for @usbAccessFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t change the access settings. In a terminal run: sudo usermod -aG dialout \$USER, then log out and back in.'**
+  String get usbAccessFailed;
+
+  /// No description provided for @usbAccessStillDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Access was changed, but the radio still can\'t be opened. Unplug it, plug it back in, and try again.'**
+  String get usbAccessStillDenied;
+
   /// No description provided for @usbErrorConnectFailed.
   ///
   /// In en, this message translates to:
