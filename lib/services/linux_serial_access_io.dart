@@ -52,11 +52,15 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4|1a86|303a|239a|1915|2886|0403", ENV{ID_
   static Future<SerialAccessGrant> grantAccess() async {
     final pkexec = await _pkexec();
     if (pkexec == null) return SerialAccessGrant.unavailable;
+    // Stops at the first failure, so a rule that wasn't written is never
+    // reported as access granted.
     final script =
+        'set -e\n'
+        "mkdir -p '${File(rulePath).parent.path}'\n"
         "cat > '$rulePath' <<'RULE'\n${rule}RULE\n"
-        'udevadm control --reload-rules && '
-        'udevadm trigger --subsystem-match=tty --action=change && '
-        'udevadm settle --timeout=5';
+        'udevadm control --reload-rules\n'
+        'udevadm trigger --subsystem-match=tty --action=change\n'
+        'udevadm settle --timeout=5 || true\n';
     try {
       final result = await Process.run(pkexec, ['/bin/sh', '-c', script]);
       appLogger.info(
