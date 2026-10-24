@@ -12,6 +12,7 @@ class SosStore {
   static const String _outgoingKey = 'sos_outgoing';
   static const String _incomingKey = 'sos_incoming';
   static const String _pendingCancelKey = 'sos_pending_cancel';
+  static const String _cancellationKey = 'sos_cancellation';
   static const String _historyKey = 'sos_history';
 
   /// Unreadable state is discarded rather than allowed to block startup.
@@ -35,16 +36,38 @@ class SosStore {
     }
   }
 
-  /// ID of a cancelled SOS whose cancellation notice has not gone out yet.
-  String? loadPendingCancel() =>
-      PrefsManager.instance.getString(_pendingCancelKey);
-
-  Future<void> savePendingCancel(String? id) async {
+  /// A cancellation still being sent. Older versions stored only the ID of
+  /// one not yet sent; that is read as a cancellation with no copies out.
+  SosCancellation? loadCancellation() {
     final prefs = PrefsManager.instance;
-    if (id == null) {
-      await prefs.remove(_pendingCancelKey);
+    final raw = prefs.getString(_cancellationKey);
+    if (raw != null) {
+      try {
+        return SosCancellation.fromJson(
+          jsonDecode(raw) as Map<String, dynamic>,
+        );
+      } catch (e) {
+        appLogger.warn(
+          'Discarding unreadable SOS cancellation: $e',
+          tag: 'SOS',
+        );
+      }
+    }
+    final legacyId = prefs.getString(_pendingCancelKey);
+    if (legacyId == null) return null;
+    return SosCancellation(id: legacyId, cancelledAt: DateTime.now());
+  }
+
+  Future<void> saveCancellation(SosCancellation? cancellation) async {
+    final prefs = PrefsManager.instance;
+    await prefs.remove(_pendingCancelKey);
+    if (cancellation == null) {
+      await prefs.remove(_cancellationKey);
     } else {
-      await prefs.setString(_pendingCancelKey, id);
+      await prefs.setString(
+        _cancellationKey,
+        jsonEncode(cancellation.toJson()),
+      );
     }
   }
 

@@ -104,6 +104,57 @@ class OutgoingSos {
   );
 }
 
+/// A cancelled SOS whose cancellation is still being sent. The channel copy
+/// repeats a few times, and direct copies repeat until delivered, so a
+/// responder who misses one still hears that the SOS is over.
+class SosCancellation {
+  final String id;
+  final DateTime cancelledAt;
+
+  /// Responders who acknowledged, who get a direct copy even when they are
+  /// not emergency contacts.
+  final Set<String> responderKeys;
+
+  /// Contacts whose radio confirmed delivery of a direct copy.
+  final Set<String> deliveredKeys;
+
+  int sends;
+  DateTime? lastSentAt;
+
+  SosCancellation({
+    required this.id,
+    required this.cancelledAt,
+    Set<String>? responderKeys,
+    Set<String>? deliveredKeys,
+    this.sends = 0,
+    this.lastSentAt,
+  }) : responderKeys = responderKeys ?? {},
+       deliveredKeys = deliveredKeys ?? {};
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'cancelled_at': cancelledAt.millisecondsSinceEpoch,
+    'responder_keys': responderKeys.toList(),
+    'delivered_keys': deliveredKeys.toList(),
+    'sends': sends,
+    'last_sent_at': lastSentAt?.millisecondsSinceEpoch,
+  };
+
+  factory SosCancellation.fromJson(Map<String, dynamic> json) =>
+      SosCancellation(
+        id: json['id'] as String,
+        cancelledAt: _timeFromJson(json['cancelled_at']) ?? DateTime.now(),
+        responderKeys: (json['responder_keys'] as List<dynamic>? ?? const [])
+            .map((e) => e.toString())
+            .toSet(),
+        deliveredKeys: (json['delivered_keys'] as List<dynamic>? ?? const [])
+            .map((e) => e.toString())
+            .toSet(),
+        sends: json['sends'] as int? ?? 0,
+        lastSentAt: _timeFromJson(json['last_sent_at']),
+      );
+}
+
 /// An SOS heard from another node, merged across repeats, channel and DM.
 class IncomingSos {
   final String id;

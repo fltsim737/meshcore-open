@@ -171,6 +171,20 @@ class SosService extends ChangeNotifier {
   /// has been heard for this long.
   static const Duration alertExpiry = Duration(minutes: 60);
 
+  /// A cancellation goes out on the network this many times, this far
+  /// apart. Direct copies repeat with it until each recipient's radio
+  /// confirms one, since a single copy is easily lost.
+  static const int cancelSends = 3;
+  static const Duration cancelInterval = Duration(minutes: 1);
+
+  /// A responder who acknowledged an alert and has heard nothing more for
+  /// this long, two missed repeats, sends its ACK again. A sender who has
+  /// cancelled answers with the cancellation the responder missed.
+  static const Duration quietCheckAfter = Duration(minutes: 12);
+
+  /// The least time between cancellations sent again to one responder.
+  static const Duration lateCancelGap = Duration(minutes: 1);
+
   /// An open alert heard again within this time doesn't sound again. The
   /// same SOS usually arrives twice within a second or two, on the network
   /// and by DM, and re-posting Android's looping alarm notification that
@@ -204,15 +218,26 @@ class SosService extends ChangeNotifier {
   final DateTime Function() _now;
 
   OutgoingSos? _active;
-  String? _pendingCancelId;
+  SosCancellation? _cancellation;
   final List<IncomingSos> _incoming = [];
   bool _wasConnected;
   Timer? _timer;
+  Timer? _cancelTimer;
   Timer? _expiryTimer;
   bool _broadcasting = false;
+  bool _sendingCancel = false;
 
   /// ACK hash of each SOS direct message sent, mapped to its recipient.
   final Map<int, String> _dmAckHashes = {};
+
+  /// The same for direct copies of the cancellation.
+  final Map<int, String> _cancelAckHashes = {};
+
+  /// When a cancellation was last sent again, by SOS ID and responder name.
+  final Map<String, DateTime> _lateCancelSentAt = {};
+
+  /// When each quiet acknowledged alert was last asked about, by key.
+  final Map<String, DateTime> _lastQuietCheck = {};
 
   SosService({
     required SosTransport transport,
@@ -233,10 +258,10 @@ class SosService extends ChangeNotifier {
     _transport.sosAckListener = handleDeliveryAck;
     _transport.addListener(_onTransportChanged);
     _settings.addListener(_syncNetwork);
-    _expiryTimer = Timer.periodic(
-      const Duration(minutes: 1),
-      (_) => purgeExpired(),
-    );
+    _expiryTimer = Timer.periodic(const Duration(minutes: 1), (_) {
+      purgeExpired();
+      checkQuietAlerts();
+    });
   }
 
   PhoneLocationProvider? get phoneLocation => _phoneLocation;
@@ -251,7 +276,12 @@ class SosService extends ChangeNotifier {
   bool get supportsChannelAlerts => _transport.supportsChannelData;
 
   /// The ID of a cancellation still waiting for the radio, if any.
-  String? get pendingCancelId => _pendingCancelId;
+  String? get pendingCancelId {
+    final cancellation = _cancellation;
+    return cancellation != null && cancellation.sends == 0
+        ? cancellation.id
+        : null;
+  }
 
   /// Newest first. Only live alerts are kept.
   List<IncomingSos> get incoming => List.unmodifiable(_incoming);
@@ -260,7 +290,7 @@ class SosService extends ChangeNotifier {
 
   void load() {
     _active = _store.loadOutgoing();
-    _pendingCancelId = _store.loadPendingCancel();
+    _cancellation = _store.loadCancellation();
     _incoming
       ..clear()
       ..addAll(_store.loadIncoming());
@@ -270,6 +300,7 @@ class SosService extends ChangeNotifier {
     purgeExpired();
     notifyListeners();
     _schedule();
+    _scheduleCancel();
   }
 
   // ---------------------------------------------------------------------
@@ -324,7 +355,9 @@ class SosService extends ChangeNotifier {
   /// up as soon as it is back in the foreground.
   void onAppResumed() {
     purgeExpired();
+    checkQuietAlerts();
     unawaited(broadcastIfDue());
+    unawaited(sendCancelIfDue());
   }
 
   void _onTransportChanged() {
@@ -335,7 +368,7 @@ class SosService extends ChangeNotifier {
     notifyListeners();
     // Anything that fell due while disconnected goes out right away.
     if (connected) {
-      unawaited(_sendPendingCancel());
+      unawaited(sendCancelIfDue());
       unawaited(broadcastIfDue());
     }
   }
@@ -580,27 +613,116 @@ class SosService extends ChangeNotifier {
     _timer = null;
     _active = null;
     _dmAckHashes.clear();
-    _pendingCancelId = sos.id;
+    final cancellation = SosCancellation(
+      id: sos.id,
+      cancelledAt: _now(),
+      responderKeys: {for (final ack in sos.acks) ?ack.senderKeyHex},
+    );
+    _cancellation = cancellation;
+    _cancelAckHashes.clear();
     _sentRecord(sos.id)?.end(SosHistoryOutcome.cancelledByMe, _now());
     _saveHistory();
     notifyListeners();
     await _store.saveOutgoing(null);
-    await _store.savePendingCancel(sos.id);
-    await _sendPendingCancel();
+    await _store.saveCancellation(cancellation);
+    await sendCancelIfDue();
   }
 
-  Future<void> _sendPendingCancel() async {
-    final id = _pendingCancelId;
-    if (id == null || !_transport.isConnected) return;
-    _pendingCancelId = null;
-    notifyListeners();
-    await _store.savePendingCancel(null);
+  /// When the next copy of the cancellation is due, or null when done.
+  DateTime? get _nextCancelAt {
+    final cancellation = _cancellation;
+    if (cancellation == null) return null;
+    final last = cancellation.lastSentAt;
+    return last == null ? cancellation.cancelledAt : last.add(cancelInterval);
+  }
 
-    await _sendChannelPacket(_packet(SosPacketKind.cancel, id));
-    // Everyone who may have heard the SOS, including those who acknowledged.
-    final text = SosCodec.encodeCancel(id, _now());
-    for (final contact in emergencyContacts) {
-      await _sendDirect(contact, text);
+  void _scheduleCancel() {
+    _cancelTimer?.cancel();
+    _cancelTimer = null;
+    final next = _nextCancelAt;
+    if (next == null) return;
+    final wait = next.difference(_now());
+    _cancelTimer = Timer(wait.isNegative ? Duration.zero : wait, () {
+      unawaited(sendCancelIfDue());
+    });
+  }
+
+  /// Sends the next copy of the cancellation if one is due: on the network
+  /// each time, and directly to every emergency contact and responder whose
+  /// radio has not confirmed one yet. While disconnected it waits for the
+  /// radio to come back.
+  @visibleForTesting
+  Future<void> sendCancelIfDue() async {
+    final cancellation = _cancellation;
+    final next = _nextCancelAt;
+    if (cancellation == null || next == null || _sendingCancel) return;
+    if (_now().isBefore(next)) {
+      _scheduleCancel();
+      return;
+    }
+    if (!_transport.isConnected) return;
+    _sendingCancel = true;
+    try {
+      cancellation
+        ..sends += 1
+        ..lastSentAt = _now();
+      final isLast = cancellation.sends >= cancelSends;
+      if (isLast) _cancellation = null;
+      notifyListeners();
+      await _store.saveCancellation(_cancellation);
+
+      await _sendChannelPacket(_packet(SosPacketKind.cancel, cancellation.id));
+      final text = SosCodec.encodeCancel(cancellation.id, _now());
+      for (final contact in _cancelRecipients(cancellation)) {
+        if (cancellation.deliveredKeys.contains(contact.publicKeyHex)) {
+          continue;
+        }
+        final hash = await _sendDirect(contact, text);
+        if (hash != null && !isLast) {
+          _cancelAckHashes[hash] = contact.publicKeyHex;
+        }
+      }
+      if (isLast) _cancelAckHashes.clear();
+    } finally {
+      _sendingCancel = false;
+    }
+    _scheduleCancel();
+  }
+
+  /// Everyone who may have heard the SOS: emergency contacts, and the
+  /// responders who acknowledged it, each once.
+  List<Contact> _cancelRecipients(SosCancellation cancellation) {
+    final byKey = {
+      for (final contact in emergencyContacts) contact.publicKeyHex: contact,
+    };
+    for (final key in cancellation.responderKeys) {
+      if (contactFor(key) case final contact?) {
+        byKey.putIfAbsent(key, () => contact);
+      }
+    }
+    return byKey.values.toList();
+  }
+
+  bool _isCancelledByMe(String id) =>
+      _sentRecord(id)?.outcome == SosHistoryOutcome.cancelledByMe;
+
+  /// An ACK for an SOS this phone already cancelled: the responder missed
+  /// the cancellation, so send it again, directly when they are a contact.
+  void _answerLateAck(String id, String senderName, String? senderKeyHex) {
+    if (!_isCancelledByMe(id) || !_transport.isConnected) return;
+    final key = '$id/$senderName';
+    final last = _lateCancelSentAt[key];
+    if (last != null && _now().difference(last) < lateCancelGap) return;
+    _lateCancelSentAt[key] = _now();
+    appLogger.info(
+      'SOS $id: $senderName acknowledged after it was cancelled; '
+      'sending the cancellation again',
+      tag: 'SOS',
+    );
+    if (contactFor(senderKeyHex) case final contact?) {
+      unawaited(_sendDirect(contact, SosCodec.encodeCancel(id, _now())));
+    } else {
+      unawaited(_sendChannelPacket(_packet(SosPacketKind.cancel, id)));
     }
   }
 
@@ -695,6 +817,14 @@ class SosService extends ChangeNotifier {
   /// A recipient's radio confirmed one of our SOS direct messages.
   @visibleForTesting
   void handleDeliveryAck(int ackHash) {
+    final cancelKey = _cancelAckHashes.remove(ackHash);
+    if (cancelKey != null) {
+      final cancellation = _cancellation;
+      if (cancellation != null && cancellation.deliveredKeys.add(cancelKey)) {
+        unawaited(_store.saveCancellation(cancellation));
+      }
+      return;
+    }
     final sos = _active;
     final key = _dmAckHashes.remove(ackHash);
     if (sos == null || key == null) return;
@@ -769,7 +899,8 @@ class SosService extends ChangeNotifier {
     final fullKey = packet.senderKey;
     final involvesUs =
         packet.kind == SosPacketKind.sos ||
-        (packet.kind == SosPacketKind.ack && _active?.id == packet.id);
+        (packet.kind == SosPacketKind.ack &&
+            (_active?.id == packet.id || _isCancelledByMe(packet.id)));
     if (fullKey != null && involvesUs) {
       final known = _contactKeyForKey(fullKey);
       if (known == null) {
@@ -862,6 +993,8 @@ class SosService extends ChangeNotifier {
         changed = true;
       }
       if (changed) unawaited(_store.saveOutgoing(sos));
+    } else {
+      _answerLateAck(id, senderName, senderKeyHex);
     }
     var incomingChanged = false;
     for (final alert in _incoming) {
@@ -1074,7 +1207,36 @@ class SosService extends ChangeNotifier {
     _saveHistory();
     notifyListeners();
     await _store.saveIncoming(_incoming);
+    await _sendAck(alert);
+  }
 
+  /// Sends the ACK again for each acknowledged alert not heard for
+  /// [quietCheckAfter], then at most once per that period. A sender who
+  /// cancelled answers with the cancellation this phone missed; one still
+  /// sending just hears the same ACK again.
+  @visibleForTesting
+  void checkQuietAlerts() {
+    if (!_transport.isConnected) return;
+    final now = _now();
+    for (final alert in _incoming) {
+      if (!alert.ackSent) continue;
+      final asked = _lastQuietCheck[alert.key];
+      final since = asked != null && asked.isAfter(alert.lastSeen)
+          ? asked
+          : alert.lastSeen;
+      if (now.difference(since) < quietCheckAfter) continue;
+      _lastQuietCheck[alert.key] = now;
+      appLogger.info(
+        'SOS ${alert.id} from ${alert.senderName}: nothing heard for '
+        '${now.difference(alert.lastSeen).inMinutes} min, sending the ACK '
+        'again to check it is still open',
+        tag: 'SOS',
+      );
+      unawaited(_sendAck(alert));
+    }
+  }
+
+  Future<void> _sendAck(IncomingSos alert) async {
     final channelIndex = alert.channelIndex;
     final channel = channelIndex == null
         ? (alert.senderKeyHex == null ? sosChannel : null)
@@ -1112,6 +1274,7 @@ class SosService extends ChangeNotifier {
   @override
   void dispose() {
     _timer?.cancel();
+    _cancelTimer?.cancel();
     _expiryTimer?.cancel();
     _transport.removeListener(_onTransportChanged);
     _settings.removeListener(_syncNetwork);

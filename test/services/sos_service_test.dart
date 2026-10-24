@@ -492,6 +492,121 @@ void main() {
       expect(transport.channelPackets.single.$2.kind, SosPacketKind.cancel);
       expect(service.pendingCancelId, isNull);
     });
+
+    test('reads a cancel left pending by an older version', () async {
+      await PrefsManager.instance.setString('sos_pending_cancel', 'beef');
+      final reloaded = newService()..load();
+      expect(reloaded.pendingCancelId, 'beef');
+      reloaded.dispose();
+    });
+
+    test('repeats the cancel, and its DMs until each is delivered', () async {
+      await service.activate();
+      final id = service.active!.id;
+      transport.channelPackets.clear();
+      await service.cancel();
+      transport.confirmDelivery('Alice');
+      transport.directSends.clear();
+
+      for (var i = 1; i <= SosService.cancelSends; i++) {
+        now = now.add(SosService.cancelInterval);
+        await service.sendCancelIfDue();
+      }
+
+      final cancels = transport.channelPackets.where(
+        (p) => p.$2.kind == SosPacketKind.cancel && p.$2.id == id,
+      );
+      expect(cancels, hasLength(SosService.cancelSends));
+      expect(transport.directSends.map((s) => s.$1), ['Bob', 'Bob']);
+    });
+
+    test('a responder who ACKed gets the cancel by DM', () async {
+      final dana = contactFor('Dana', 4);
+      transport.contacts = [...transport.contacts, dana];
+      await service.activate();
+      hear(
+        sosPacketFrom('Dana', 4, service.active!.id, kind: SosPacketKind.ack),
+      );
+      transport.directSends.clear();
+
+      await service.cancel();
+
+      expect(transport.directSends.map((s) => s.$1), ['Alice', 'Bob', 'Dana']);
+    });
+
+    test('an ACK after the cancel gets the cancel again', () async {
+      final dana = contactFor('Dana', 4);
+      transport.contacts = [...transport.contacts, dana];
+      await service.activate();
+      final id = service.active!.id;
+      await service.cancel();
+      transport.directSends.clear();
+      transport.channelPackets.clear();
+
+      hear(sosPacketFrom('Dana', 4, id, kind: SosPacketKind.ack));
+      await pumpEventQueue();
+      expect(transport.directSends.single.$1, 'Dana');
+      expect(SosCodec.parseCancel(transport.directSends.single.$2), id);
+
+      // The same ACK by DM moments later doesn't send it twice.
+      service.handleInbound(
+        SosInboundText(
+          text: SosCodec.encodeAck(id),
+          senderName: 'Dana',
+          senderKeyHex: dana.publicKeyHex,
+        ),
+      );
+      await pumpEventQueue();
+      expect(transport.directSends, hasLength(1));
+
+      // Someone who isn't a contact hears it on the network.
+      hear(sosPacketFrom('Eve', 5, id, kind: SosPacketKind.ack));
+      await pumpEventQueue();
+      expect(transport.channelPackets.single.$2.kind, SosPacketKind.cancel);
+    });
+  });
+
+  group('quiet alerts', () {
+    test('an ACKed alert that goes quiet is ACKed again', () async {
+      final ridge = contactFor('Ridge', 9);
+      transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      hear(sosPacketFrom('Ridge', 9, 'c3d4'));
+      await service.acknowledge(
+        service.incoming.firstWhere((a) => a.id == 'a1b2'),
+      );
+      transport.directSends.clear();
+      transport.channelPackets.clear();
+
+      now = now.add(SosService.quietCheckAfter - const Duration(minutes: 1));
+      service.checkQuietAlerts();
+      await pumpEventQueue();
+      expect(transport.directSends, isEmpty);
+
+      now = now.add(const Duration(minutes: 1));
+      service.checkQuietAlerts();
+      await pumpEventQueue();
+      // Only the alert this phone acknowledged.
+      expect(transport.directSends, [('Ridge', 'ACK #a1b2')]);
+      expect(transport.channelPackets.single.$2.kind, SosPacketKind.ack);
+
+      service.checkQuietAlerts();
+      await pumpEventQueue();
+      expect(transport.directSends, hasLength(1));
+    });
+
+    test('an alert still repeating is not ACKed again', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      await service.acknowledge(service.incoming.single);
+      transport.channelPackets.clear();
+      for (var i = 0; i < 4; i++) {
+        now = now.add(SosService.repeatInterval);
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        service.checkQuietAlerts();
+      }
+      await pumpEventQueue();
+      expect(transport.channelPackets, isEmpty);
+    });
   });
 
   group('receiving', () {
