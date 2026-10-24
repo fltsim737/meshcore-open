@@ -2,6 +2,18 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.2 (2026-10-24)
+
+### Fixed
+
+- **Responders no longer miss a cancelled SOS.** A cancellation used to go out once on the emergency network and once by direct message to the sender's emergency contacts. A responder who acknowledged but missed it, or who wasn't an emergency contact, kept a live alert for up to an hour. Now:
+  - every responder who acknowledged gets the cancellation by direct message, even if they aren't an emergency contact;
+  - it goes out on the network three times, a minute apart, and each direct message is sent again until that person's radio confirms delivery;
+  - if an acknowledgement arrives after the SOS was cancelled, the sender's app sends that responder the cancellation again;
+  - a responder whose acknowledged alert has gone quiet for 12 minutes (two missed repeats) sends the acknowledgement again, so the sender can answer with the cancellation. A sender still in trouble just hears the acknowledgement again. Alerts you haven't acknowledged are never answered automatically.
+
+Only the sender can cancel an SOS for everyone; a responder can still **Dismiss** an alert on their own phone.
+
 ## 9.5.1 (2026-10-23)
 
 ### Fixed
