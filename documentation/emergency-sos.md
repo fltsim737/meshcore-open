@@ -67,9 +67,13 @@ So broadcasts go out at 0, 1, 2, 3, 4 and 5 minutes, then at 10, 15, 20 minutes 
 **Cancel SOS** (after a confirmation) stops everything at once:
 
 - no further repeats, and a broadcast that is partway through sending stops before its remaining DMs;
-- a cancellation notice goes out on the emergency network and by DM to every emergency contact, including those who already acknowledged.
+- a cancellation notice goes out on the emergency network and by DM to every emergency contact and to every responder who acknowledged, even one who isn't an emergency contact.
 
-If the radio is disconnected when you cancel, the notice is sent as soon as it reconnects, even after an app restart.
+A single copy is easily lost, so the notice goes out on the network three times, a minute apart, and each DM is sent again with it until that person's radio confirms delivery. If the radio is disconnected when you cancel, the notice is sent as soon as it reconnects, even after an app restart.
+
+If an ACK for the SOS still arrives after you cancelled, that responder missed the notice, so the app sends it to them again (by DM when they are a contact, otherwise on the network), at most once a minute each.
+
+Only the sender can cancel an SOS for everyone. A responder can't, because one person's mistaken guess would silence the alert for every other responder. A responder who is sure it's over can **Dismiss** it on their own phone.
 
 Direct messages stop going to a contact once their radio confirms delivery or they reply ACK (on the channel or by DM). The channel alert always continues.
 
@@ -141,6 +145,8 @@ When an SOS arrives on your emergency network (responders only) or by direct mes
 - The alert is listed in the Emergency tab with **Send ACK**, **Dismiss**, **Map** and copy-coordinates actions. The Emergency tab icon shows a badge while any alert is open.
 
 **Send ACK** replies with an ACK packet on the channel the alert arrived on, and also by direct message when the sender is one of your contacts. The alert stays in the Emergency tab, with its position, until the sender cancels or it expires. It is disabled while no radio is connected, so an alert is never marked answered when no ACK went out. Other responders' ACKs are shown on the alert ("Also acknowledged by …"), so a group can see who has already answered.
+
+If an acknowledged alert goes quiet, with no repeat heard for 12 minutes (two missed repeats), the app sends the ACK again, then at most every 12 minutes until the alert closes. A sender who has cancelled answers with the cancellation this phone missed, and the alert closes. A sender who is still sending just hears the ACK again. Alerts you haven't acknowledged are never answered automatically.
 
 When the sender cancels, the alert is deleted: the alarm and warning screen stop, and an "SOS from … cancelled" notification (without the position) replaces the alarm. Only a cancellation from the same sender does this.
 

@@ -77,7 +77,7 @@ A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the s
 
 Each SOS and ACK carries the sender's public key, so the two phones save each other as contacts automatically. A **Message** button then opens an ordinary direct chat, with no exchange of adverts beforehand.
 
-When the sender cancels, a cancellation goes out on the network and to every emergency contact. Each responder's alarm stops and the live alert closes. A record of it, with its positions, acknowledgements and outcome, stays in the **SOS history** until the user deletes it, ready to share as a text report.
+When the sender cancels, a cancellation goes out on the network and by direct message to every emergency contact and every responder who acknowledged. It is repeated, and direct copies are re-sent until delivered. A responder whose acknowledged alert goes quiet checks back with the sender, so a missed cancellation still arrives. Each responder's alarm stops and the live alert closes. A record of it, with its positions, acknowledgements and outcome, stays in the **SOS history** until the user deletes it, ready to share as a text report.
 
 ### Voice (SOS Voice)
 
