@@ -3689,5 +3689,10 @@
   "sosLocator_keepMoving": "Weitergehen und horchen",
   "sosLocator_warmer": "Wärmer: näher dran",
   "sosLocator_colder": "Kälter: weiter weg",
-  "sosLocator_steady": "Etwa gleich"
+  "sosLocator_steady": "Etwa gleich",
+  "sos_alarmSound": "Alarmton",
+  "sos_alarmSoundMorse": "SOS im Morsecode",
+  "sos_alarmSoundClassic": "Klassischer Alarmton",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Standard: nicht mit Alarmen anderer Notfall-Apps zu verwechseln",
+  "sos_alarmSoundClassicDetail": "Der Zweiklang-Alarm früherer Versionen"
 }

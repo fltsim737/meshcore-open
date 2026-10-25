@@ -6431,4 +6431,20 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sosLocator_steady => '差不多';
+
+  @override
+  String get sos_alarmSound => '警报声音';
+
+  @override
+  String get sos_alarmSoundMorse => '摩尔斯电码 SOS';
+
+  @override
+  String get sos_alarmSoundClassic => '经典警报音';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  默认：不会与其他紧急应用的警报混淆';
+
+  @override
+  String get sos_alarmSoundClassicDetail => '早期版本的双音警报';
 }

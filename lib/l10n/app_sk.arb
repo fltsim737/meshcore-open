@@ -3555,5 +3555,10 @@
   "sosLocator_keepMoving": "Pokračujte a počúvajte",
   "sosLocator_warmer": "Teplejšie: bližšie",
   "sosLocator_colder": "Chladnejšie: ďalej",
-  "sosLocator_steady": "Približne rovnako"
+  "sosLocator_steady": "Približne rovnako",
+  "sos_alarmSound": "Zvuk alarmu",
+  "sos_alarmSoundMorse": "SOS Morseovou abecedou",
+  "sos_alarmSoundClassic": "Klasický tón alarmu",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Predvolený: nedá sa zameniť s upozorneniami iných núdzových aplikácií",
+  "sos_alarmSoundClassicDetail": "Dvojtónový alarm starších verzií"
 }

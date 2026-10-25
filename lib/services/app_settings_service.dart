@@ -73,11 +73,33 @@ class AppSettingsService extends ChangeNotifier {
     try {
       return PrefsManager.instance.getBool(_autoConnectKey) ?? true;
     } catch (_) {
-      return false;   // no settings store (as in tests): leave it to the user
+      return false; // no settings store (as in tests): leave it to the user
     }
   }
+
   Future<void> setAutoConnectOnLaunch(bool value) async {
     await PrefsManager.instance.setBool(_autoConnectKey, value);
+    notifyListeners();
+  }
+
+  /// The alarm for an incoming SOS: SOS in Morse code (the default) or the
+  /// classic two-tone alert of earlier versions.
+  static const String _alarmToneKey = 'sos_alarm_tone';
+  static const String alarmToneMorse = 'morse';
+  static const String alarmToneClassic = 'classic';
+  String get sosAlarmTone => sosAlarmToneSaved;
+  static String get sosAlarmToneSaved {
+    try {
+      return PrefsManager.instance.getString(_alarmToneKey) == alarmToneClassic
+          ? alarmToneClassic
+          : alarmToneMorse;
+    } catch (_) {
+      return alarmToneMorse;
+    }
+  }
+
+  Future<void> setSosAlarmTone(String tone) async {
+    await PrefsManager.instance.setString(_alarmToneKey, tone);
     notifyListeners();
   }
 

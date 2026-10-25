@@ -14,6 +14,7 @@ import '../l10n/app_localizations.dart';
 import '../models/sos_alert.dart';
 import '../storage/prefs_manager.dart';
 import '../utils/platform_info.dart';
+import 'app_settings_service.dart';
 import 'linux_sound_player.dart';
 import 'sos_morse_sound.dart';
 import 'notification_reply.dart';
@@ -88,6 +89,7 @@ class NotificationService {
   final LinuxSoundPlayer? _linuxSound = PlatformInfo.isLinux
       ? LinuxSoundPlayer()
       : null;
+
   /// Windows loops the Morse SOS itself; see [WindowsMorseAlarm].
   WindowsMorseAlarm? _windowsAlarm;
   static const _batchWindow = Duration(seconds: 5);
@@ -631,9 +633,15 @@ class NotificationService {
 
   static int _sosAlertId(String key) => 'sos:$key'.hashCode & 0x7FFFFFFF;
 
-  /// A new channel for the Morse SOS alarm: Android fixes a channel's sound
-  /// when it is created, so the old 'sos_alerts' channel is deleted at start.
-  static const _sosChannelId = 'sos_alerts_morse';
+  /// One channel per alarm sound: Android fixes a channel's sound when it is
+  /// created. The old 'sos_alerts' channel (before 9.5.3) is deleted at start.
+  static const _sosChannelMorse = 'sos_alerts_morse';
+  static const _sosChannelClassic = 'sos_alerts_classic';
+  String? _morseFile;
+
+  static bool get _classicAlarm =>
+      AppSettingsService.sosAlarmToneSaved ==
+      AppSettingsService.alarmToneClassic;
 
   /// The Morse alarm for the desktops, and the old Android channel removed.
   Future<void> _setUpSosSound() async {
@@ -651,7 +659,7 @@ class NotificationService {
     if (!PlatformInfo.isLinux && !PlatformInfo.isWindows) return;
     final file = await extractSosMorseSound();
     if (file == null) return;
-    if (_linuxSound != null) _linuxSound.alarmSound = file;
+    _morseFile = file;
     if (PlatformInfo.isWindows) _windowsAlarm = WindowsMorseAlarm(file);
   }
 
@@ -660,6 +668,7 @@ class NotificationService {
   /// repeat the alert's sender broadcasts.
   Future<void> showSosAlert(IncomingSos alert) async {
     if (!await _ensureCanNotify()) return;
+    final classic = _classicAlarm;
     final l10n = _l10n;
     final sender = alert.senderName.isEmpty
         ? l10n.sos_unknownSender
@@ -677,14 +686,16 @@ class NotificationService {
     ].join('\n');
 
     final androidDetails = AndroidNotificationDetails(
-      _sosChannelId,
+      classic ? _sosChannelClassic : _sosChannelMorse,
       l10n.sos_notificationChannelName,
       channelDescription: l10n.sos_notificationChannelDescription,
       importance: Importance.max,
       priority: Priority.max,
       category: AndroidNotificationCategory.alarm,
       visibility: NotificationVisibility.public,
-      sound: const RawResourceAndroidNotificationSound('sos_alarm_morse'),
+      sound: RawResourceAndroidNotificationSound(
+        classic ? 'sos_alarm_classic' : 'sos_alarm_morse',
+      ),
       audioAttributesUsage: AudioAttributesUsage.alarm,
       // FLAG_INSISTENT: loop the sound until the notification is cancelled.
       additionalFlags: Int32List.fromList(const [4]),
@@ -716,7 +727,7 @@ class NotificationService {
             scenario: WindowsNotificationScenario.alarm,
             // the Morse alarm plays from the app instead (WindowsMorseAlarm);
             // Windows' own alarm if it couldn't be set up
-            audio: _windowsAlarm != null
+            audio: _windowsAlarm != null && !classic
                 ? WindowsNotificationAudio.silent()
                 : WindowsNotificationAudio.preset(
                     sound: WindowsNotificationSound.alarm1,
@@ -729,8 +740,16 @@ class NotificationService {
         ),
         payload: 'sos:${alert.key}',
       );
-      _linuxSound?.startAlarm(_sosAlertId(alert.key));
-      _windowsAlarm?.start(_sosAlertId(alert.key));
+      // Linux: the Morse file, or the desktop theme's alarm as before 9.5.3
+      _linuxSound
+        ?..alarmSound = classic || _morseFile == null
+            ? LinuxSoundPlayer.themeAlarm
+            : _morseFile!
+        ..alarmRepeat = classic
+            ? const Duration(seconds: 4)
+            : const Duration(milliseconds: 3600)
+        ..startAlarm(_sosAlertId(alert.key));
+      if (!classic) _windowsAlarm?.start(_sosAlertId(alert.key));
     } catch (e) {
       debugPrint('Failed to show SOS notification: $e');
     }

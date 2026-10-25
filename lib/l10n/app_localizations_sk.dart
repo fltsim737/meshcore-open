@@ -6859,4 +6859,20 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Približne rovnako';
+
+  @override
+  String get sos_alarmSound => 'Zvuk alarmu';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS Morseovou abecedou';
+
+  @override
+  String get sos_alarmSoundClassic => 'Klasický tón alarmu';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Predvolený: nedá sa zameniť s upozorneniami iných núdzových aplikácií';
+
+  @override
+  String get sos_alarmSoundClassicDetail => 'Dvojtónový alarm starších verzií';
 }

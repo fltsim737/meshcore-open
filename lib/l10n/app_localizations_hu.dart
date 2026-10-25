@@ -6873,4 +6873,21 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Nagyjából ugyanaz';
+
+  @override
+  String get sos_alarmSound => 'Riasztási hang';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS morzejelekkel';
+
+  @override
+  String get sos_alarmSoundClassic => 'Klasszikus riasztóhang';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Alapértelmezett: nem téveszthető össze más segélyhívó alkalmazások jelzéseivel';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'A korábbi verziók kéthangú riasztása';
 }

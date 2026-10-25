@@ -2851,5 +2851,10 @@
   "sosLocator_keepMoving": "Продолжайте идти и слушать",
   "sosLocator_warmer": "Теплее: ближе",
   "sosLocator_colder": "Холоднее: дальше",
-  "sosLocator_steady": "Примерно так же"
+  "sosLocator_steady": "Примерно так же",
+  "sos_alarmSound": "Звук тревоги",
+  "sos_alarmSoundMorse": "SOS азбукой Морзе",
+  "sos_alarmSoundClassic": "Классический сигнал",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  По умолчанию: не спутать с сигналами других экстренных приложений",
+  "sos_alarmSoundClassicDetail": "Двухтональная тревога прежних версий"
 }

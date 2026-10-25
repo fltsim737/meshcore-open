@@ -73,7 +73,7 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 ### Receiving
 
-A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·), so it can't be mistaken for other emergency apps' alerts; on Android it loops at alarm volume until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
+A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android it loops at alarm volume until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
 
 **Locate** helps a responder close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and the responder's screen shows how strong each one is and whether they're getting warmer or colder.
 

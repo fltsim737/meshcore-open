@@ -6572,4 +6572,20 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'ほぼ同じ';
+
+  @override
+  String get sos_alarmSound => 'アラーム音';
+
+  @override
+  String get sos_alarmSoundMorse => 'モールス信号のSOS';
+
+  @override
+  String get sos_alarmSoundClassic => '従来のアラーム音';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  既定: 他の緊急アプリの警報と区別できます';
+
+  @override
+  String get sos_alarmSoundClassicDetail => '以前のバージョンの2音アラーム';
 }

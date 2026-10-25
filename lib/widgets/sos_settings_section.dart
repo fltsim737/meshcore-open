@@ -12,6 +12,46 @@ import '../screens/sos_network_screen.dart';
 import 'mesh_nav_tile.dart';
 
 /// Stored emergency location, emergency network and emergency contacts.
+/// Morse (the default: it can't be mistaken for other emergency apps' alerts)
+/// or the classic two-tone alert of earlier versions.
+Future<void> _chooseAlarmSound(
+  BuildContext context,
+  AppSettingsService settingsService,
+) async {
+  final l10n = context.l10n;
+  final picked = await showDialog<String>(
+    context: context,
+    builder: (dialogContext) => SimpleDialog(
+      title: Text(l10n.sos_alarmSound),
+      children: [
+        for (final (tone, label, detail) in [
+          (
+            AppSettingsService.alarmToneMorse,
+            l10n.sos_alarmSoundMorse,
+            l10n.sos_alarmSoundMorseDetail,
+          ),
+          (
+            AppSettingsService.alarmToneClassic,
+            l10n.sos_alarmSoundClassic,
+            l10n.sos_alarmSoundClassicDetail,
+          ),
+        ])
+          ListTile(
+            leading: Icon(
+              settingsService.sosAlarmTone == tone
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+            ),
+            title: Text(label),
+            subtitle: Text(detail),
+            onTap: () => Navigator.pop(dialogContext, tone),
+          ),
+      ],
+    ),
+  );
+  if (picked != null) await settingsService.setSosAlarmTone(picked);
+}
+
 class SosSettingsSection extends StatelessWidget {
   const SosSettingsSection({super.key});
 
@@ -60,6 +100,21 @@ class SosSettingsSection extends StatelessWidget {
           subtitle: Text(l10n.sos_includeFavouritesSubtitle),
           value: settings.sosIncludeFavourites,
           onChanged: settingsService.setSosIncludeFavourites,
+        ),
+        const Divider(height: 1, indent: 16),
+        ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 4,
+          ),
+          leading: const Icon(Icons.notifications_active_outlined, size: 24),
+          title: Text(l10n.sos_alarmSound),
+          subtitle: Text(
+            settingsService.sosAlarmTone == AppSettingsService.alarmToneClassic
+                ? l10n.sos_alarmSoundClassic
+                : l10n.sos_alarmSoundMorse,
+          ),
+          onTap: () => _chooseAlarmSound(context, settingsService),
         ),
         const Divider(height: 1, indent: 16),
         MeshNavTile(

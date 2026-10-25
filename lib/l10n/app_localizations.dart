@@ -11544,6 +11544,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'About the same'**
   String get sosLocator_steady;
+
+  /// No description provided for @sos_alarmSound.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarm sound'**
+  String get sos_alarmSound;
+
+  /// No description provided for @sos_alarmSoundMorse.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS in Morse code'**
+  String get sos_alarmSoundMorse;
+
+  /// No description provided for @sos_alarmSoundClassic.
+  ///
+  /// In en, this message translates to:
+  /// **'Classic alert tone'**
+  String get sos_alarmSoundClassic;
+
+  /// No description provided for @sos_alarmSoundMorseDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'· · · – – – · · ·  The default: it can\'t be mistaken for other emergency apps\' alerts'**
+  String get sos_alarmSoundMorseDetail;
+
+  /// No description provided for @sos_alarmSoundClassicDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'The two-tone alarm of earlier versions'**
+  String get sos_alarmSoundClassicDetail;
 }
 
 class _AppLocalizationsDelegate

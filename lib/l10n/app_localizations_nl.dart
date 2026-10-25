@@ -6848,4 +6848,21 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Ongeveer gelijk';
+
+  @override
+  String get sos_alarmSound => 'Alarmgeluid';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS in morsecode';
+
+  @override
+  String get sos_alarmSoundClassic => 'Klassieke alarmtoon';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Standaard: niet te verwarren met meldingen van andere nood-apps';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'Het tweetonige alarm van eerdere versies';
 }

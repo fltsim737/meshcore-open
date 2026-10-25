@@ -3587,5 +3587,10 @@
   "sosLocator_keepMoving": "Idź dalej i nasłuchuj",
   "sosLocator_warmer": "Cieplej: zbliżasz się",
   "sosLocator_colder": "Zimniej: oddalasz się",
-  "sosLocator_steady": "Mniej więcej tak samo"
+  "sosLocator_steady": "Mniej więcej tak samo",
+  "sos_alarmSound": "Dźwięk alarmu",
+  "sos_alarmSoundMorse": "SOS alfabetem Morse'a",
+  "sos_alarmSoundClassic": "Klasyczny sygnał alarmu",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Domyślny: nie pomylisz go z alarmami innych aplikacji ratunkowych",
+  "sos_alarmSoundClassicDetail": "Dwutonowy alarm z wcześniejszych wersji"
 }

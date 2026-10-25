@@ -3534,5 +3534,10 @@
   "sosLocator_keepMoving": "Продовжуйте йти й слухати",
   "sosLocator_warmer": "Тепліше: ближче",
   "sosLocator_colder": "Холодніше: далі",
-  "sosLocator_steady": "Приблизно так само"
+  "sosLocator_steady": "Приблизно так само",
+  "sos_alarmSound": "Звук тривоги",
+  "sos_alarmSoundMorse": "SOS абеткою Морзе",
+  "sos_alarmSoundClassic": "Класичний сигнал",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Типово: не сплутати із сигналами інших екстрених застосунків",
+  "sos_alarmSoundClassicDetail": "Двотональна тривога попередніх версій"
 }

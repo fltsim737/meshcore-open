@@ -6582,4 +6582,20 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sosLocator_steady => '비슷함';
+
+  @override
+  String get sos_alarmSound => '경보음';
+
+  @override
+  String get sos_alarmSoundMorse => '모스 부호 SOS';
+
+  @override
+  String get sos_alarmSoundClassic => '기존 경보음';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  기본값: 다른 긴급 앱의 경보와 헷갈리지 않습니다';
+
+  @override
+  String get sos_alarmSoundClassicDetail => '이전 버전의 2음 경보';
 }

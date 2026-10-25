@@ -6829,4 +6829,21 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Ungefär samma';
+
+  @override
+  String get sos_alarmSound => 'Larmljud';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS i morsekod';
+
+  @override
+  String get sos_alarmSoundClassic => 'Klassisk larmsignal';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Standard: kan inte förväxlas med andra nödappars larm';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'Tvåtonslarmet från tidigare versioner';
 }
