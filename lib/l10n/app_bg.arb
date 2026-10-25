@@ -3577,5 +3577,10 @@
   "sosLocator_keepMoving": "Продължете и слушайте",
   "sosLocator_warmer": "По-топло: по-близо",
   "sosLocator_colder": "По-студено: по-далеч",
-  "sosLocator_steady": "Горе-долу същото"
+  "sosLocator_steady": "Горе-долу същото",
+  "sos_alarmSound": "Звук на тревогата",
+  "sos_alarmSoundMorse": "SOS на морзов код",
+  "sos_alarmSoundClassic": "Класически сигнал",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  По подразбиране: не може да се обърка със сигналите на други спешни приложения",
+  "sos_alarmSoundClassicDetail": "Двутоновата тревога от предишните версии"
 }

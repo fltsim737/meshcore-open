@@ -6970,4 +6970,21 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Più o meno uguale';
+
+  @override
+  String get sos_alarmSound => 'Suono dell\'allarme';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS in codice Morse';
+
+  @override
+  String get sos_alarmSoundClassic => 'Allarme classico';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Predefinito: non si confonde con gli avvisi di altre app di emergenza';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'L\'allarme a due toni delle versioni precedenti';
 }

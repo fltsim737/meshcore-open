@@ -3711,5 +3711,10 @@
   "sosLocator_keepMoving": "계속 이동하며 들어 보세요",
   "sosLocator_warmer": "가까워지는 중",
   "sosLocator_colder": "멀어지는 중",
-  "sosLocator_steady": "비슷함"
+  "sosLocator_steady": "비슷함",
+  "sos_alarmSound": "경보음",
+  "sos_alarmSoundMorse": "모스 부호 SOS",
+  "sos_alarmSoundClassic": "기존 경보음",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  기본값: 다른 긴급 앱의 경보와 헷갈리지 않습니다",
+  "sos_alarmSoundClassicDetail": "이전 버전의 2음 경보"
 }

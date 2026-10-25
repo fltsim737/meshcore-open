@@ -3582,5 +3582,10 @@
   "sosLocator_keepMoving": "继续移动并收听",
   "sosLocator_warmer": "变热：越来越近",
   "sosLocator_colder": "变冷：越来越远",
-  "sosLocator_steady": "差不多"
+  "sosLocator_steady": "差不多",
+  "sos_alarmSound": "警报声音",
+  "sos_alarmSoundMorse": "摩尔斯电码 SOS",
+  "sos_alarmSoundClassic": "经典警报音",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  默认：不会与其他紧急应用的警报混淆",
+  "sos_alarmSoundClassicDetail": "早期版本的双音警报"
 }

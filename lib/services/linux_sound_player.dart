@@ -9,18 +9,24 @@ import 'package:flutter/foundation.dart';
 class LinuxSoundPlayer {
   static const String _systemSoundDir = '/usr/share/sounds/freedesktop/stereo';
 
-  /// How often an SOS alarm sounds again until it is cleared.
-  final Duration alarmRepeat;
+  /// How often an SOS alarm sounds again until it is cleared (set to suit the
+  /// chosen alarm before it starts).
+  Duration alarmRepeat;
 
   /// The SOS alarm: a theme sound by name, or a file path (the Morse SOS,
   /// once the app has copied it out).
-  String alarmSound = 'alarm-clock-elapsed';
+  String alarmSound = themeAlarm;
+
+  /// The desktop theme's alarm: the classic SOS alarm on Linux.
+  static const String themeAlarm = 'alarm-clock-elapsed';
 
   /// Plays a theme sound by name; replaced in tests.
   final Future<void> Function(String name) _play;
 
   LinuxSoundPlayer({
-    this.alarmRepeat = const Duration(milliseconds: 3600),   // the Morse SOS, with its gap
+    this.alarmRepeat = const Duration(
+      milliseconds: 3600,
+    ), // the Morse SOS, with its gap
     Future<void> Function(String name)? play,
   }) : _play = play ?? _playThemeSound;
 
@@ -64,7 +70,7 @@ class LinuxSoundPlayer {
     final bundled = Platform.environment['MESHCORE_SOUND_DIR'];
     var file = '$_systemSoundDir/$name.oga';
     if (name.startsWith('/')) {
-      file = name;   // a file of our own
+      file = name; // a file of our own
     } else if (bundled != null && File('$bundled/$name.oga').existsSync()) {
       file = '$bundled/$name.oga';
     }

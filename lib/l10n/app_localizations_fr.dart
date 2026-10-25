@@ -6990,4 +6990,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'À peu près pareil';
+
+  @override
+  String get sos_alarmSound => 'Son de l\'alarme';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS en code Morse';
+
+  @override
+  String get sos_alarmSoundClassic => 'Alerte classique';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Par défaut : impossible à confondre avec les alertes d\'autres apps d\'urgence';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'L\'alarme à deux tons des versions précédentes';
 }

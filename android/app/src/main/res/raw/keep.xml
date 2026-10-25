@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Referenced by name from the SOS notification channel, so resource
+<!-- Referenced by name from the SOS notification channels, so resource
      shrinking cannot see the use. -->
 <resources xmlns:tools="http://schemas.android.com/tools"
-    tools:keep="@raw/sos_alarm_morse" />
+    tools:keep="@raw/sos_alarm_morse,@raw/sos_alarm_classic" />

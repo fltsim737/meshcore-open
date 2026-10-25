@@ -3478,5 +3478,10 @@
   "sosLocator_keepMoving": "Blijf bewegen en luisteren",
   "sosLocator_warmer": "Warmer: dichterbij",
   "sosLocator_colder": "Kouder: verder weg",
-  "sosLocator_steady": "Ongeveer gelijk"
+  "sosLocator_steady": "Ongeveer gelijk",
+  "sos_alarmSound": "Alarmgeluid",
+  "sos_alarmSoundMorse": "SOS in morsecode",
+  "sos_alarmSoundClassic": "Klassieke alarmtoon",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Standaard: niet te verwarren met meldingen van andere nood-apps",
+  "sos_alarmSoundClassicDetail": "Het tweetonige alarm van eerdere versies"
 }

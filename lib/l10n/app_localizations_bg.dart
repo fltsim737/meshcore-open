@@ -6961,4 +6961,21 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Горе-долу същото';
+
+  @override
+  String get sos_alarmSound => 'Звук на тревогата';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS на морзов код';
+
+  @override
+  String get sos_alarmSoundClassic => 'Класически сигнал';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  По подразбиране: не може да се обърка със сигналите на други спешни приложения';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'Двутоновата тревога от предишните версии';
 }

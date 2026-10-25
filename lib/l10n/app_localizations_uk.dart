@@ -6978,4 +6978,21 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sosLocator_steady => 'Приблизно так само';
+
+  @override
+  String get sos_alarmSound => 'Звук тривоги';
+
+  @override
+  String get sos_alarmSoundMorse => 'SOS абеткою Морзе';
+
+  @override
+  String get sos_alarmSoundClassic => 'Класичний сигнал';
+
+  @override
+  String get sos_alarmSoundMorseDetail =>
+      '· · · – – – · · ·  Типово: не сплутати із сигналами інших екстрених застосунків';
+
+  @override
+  String get sos_alarmSoundClassicDetail =>
+      'Двотональна тривога попередніх версій';
 }

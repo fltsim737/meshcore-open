@@ -3572,5 +3572,10 @@
   "sosLocator_keepMoving": "Fortsätt gå och lyssna",
   "sosLocator_warmer": "Varmare: närmare",
   "sosLocator_colder": "Kallare: längre bort",
-  "sosLocator_steady": "Ungefär samma"
+  "sosLocator_steady": "Ungefär samma",
+  "sos_alarmSound": "Larmljud",
+  "sos_alarmSoundMorse": "SOS i morsekod",
+  "sos_alarmSoundClassic": "Klassisk larmsignal",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Standard: kan inte förväxlas med andra nödappars larm",
+  "sos_alarmSoundClassicDetail": "Tvåtonslarmet från tidigare versioner"
 }

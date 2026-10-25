@@ -3711,5 +3711,10 @@
   "sosLocator_keepMoving": "Continua a muoverti e ascoltare",
   "sosLocator_warmer": "Caldo: ti avvicini",
   "sosLocator_colder": "Freddo: ti allontani",
-  "sosLocator_steady": "Più o meno uguale"
+  "sosLocator_steady": "Più o meno uguale",
+  "sos_alarmSound": "Suono dell'allarme",
+  "sos_alarmSoundMorse": "SOS in codice Morse",
+  "sos_alarmSoundClassic": "Allarme classico",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Predefinito: non si confonde con gli avvisi di altre app di emergenza",
+  "sos_alarmSoundClassicDetail": "L'allarme a due toni delle versioni precedenti"
 }

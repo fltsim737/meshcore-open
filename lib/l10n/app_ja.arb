@@ -3711,5 +3711,10 @@
   "sosLocator_keepMoving": "移動しながら聞き続けてください",
   "sosLocator_warmer": "近づいています",
   "sosLocator_colder": "遠ざかっています",
-  "sosLocator_steady": "ほぼ同じ"
+  "sosLocator_steady": "ほぼ同じ",
+  "sos_alarmSound": "アラーム音",
+  "sos_alarmSoundMorse": "モールス信号のSOS",
+  "sos_alarmSoundClassic": "従来のアラーム音",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  既定: 他の緊急アプリの警報と区別できます",
+  "sos_alarmSoundClassicDetail": "以前のバージョンの2音アラーム"
 }

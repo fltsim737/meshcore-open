@@ -2,6 +2,12 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.5 (2026-10-26)
+
+### Added
+
+- **Choose the SOS alarm sound.** Settings → App Settings → Emergency SOS → **Alarm sound**: **SOS in Morse code** (the default since 9.5.3, which can't be mistaken for other emergency apps' alerts) or the **classic alert tone**, the two-tone alarm of earlier versions. Android plays each at alarm volume on its own notification channel; Linux plays the Morse alarm or the desktop's alarm sound; Windows plays the Morse alarm or Windows' looping alarm.
+
 ## 9.5.4 (2026-10-26)
 
 ### Added

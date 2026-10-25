@@ -3616,5 +3616,10 @@
   "sosLocator_keepMoving": "Haladj tovább és figyelj",
   "sosLocator_warmer": "Melegebb: közeledsz",
   "sosLocator_colder": "Hidegebb: távolodsz",
-  "sosLocator_steady": "Nagyjából ugyanaz"
+  "sosLocator_steady": "Nagyjából ugyanaz",
+  "sos_alarmSound": "Riasztási hang",
+  "sos_alarmSoundMorse": "SOS morzejelekkel",
+  "sos_alarmSoundClassic": "Klasszikus riasztóhang",
+  "sos_alarmSoundMorseDetail": "· · · – – – · · ·  Alapértelmezett: nem téveszthető össze más segélyhívó alkalmazások jelzéseivel",
+  "sos_alarmSoundClassicDetail": "A korábbi verziók kéthangú riasztása"
 }
