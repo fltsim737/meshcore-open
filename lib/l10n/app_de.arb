@@ -3662,5 +3662,13 @@
   "sos_networkStatusInstalling": "Kanal wird zu diesem Funkgerät hinzugefügt…",
   "sos_networkStatusNoFreeSlot": "Kein freier Kanalplatz auf diesem Funkgerät. Entferne einen Kanal, um das Netz zu nutzen.",
   "sos_networkStatusDisconnected": "Verbinde ein Funkgerät, um den Kanal einzurichten",
-  "sos_networkSecurityNote": "Jeder mit einem Code kann Alarme senden, und ein Mitglied mit veränderter Software könnte sie lesen. Wenn ein Code bekannt wird, richte ein neues Netz ein und teile neue Codes."
+  "sos_networkSecurityNote": "Jeder mit einem Code kann Alarme senden, und ein Mitglied mit veränderter Software könnte sie lesen. Wenn ein Code bekannt wird, richte ein neues Netz ein und teile neue Codes.",
+  "appSettings_autoConnect": "Mit dem letzten Funkgerät verbinden",
+  "appSettings_autoConnectSubtitle": "Beim Start der App wieder mit dem zuletzt genutzten Funkgerät verbinden, per Bluetooth, USB oder Netzwerk",
+  "scanner_autoConnecting": "Verbinde mit {name}…",
+  "scanner_autoConnectLastRadio": "dem letzten Funkgerät",
+  "battery_lowChannelName": "Funkgerät-Akku",
+  "battery_lowTitle": "Funkgerät-Akku schwach: {percent} %",
+  "battery_lowBody": "{name} bald aufladen. Mit leerem Akku kann es kein SOS senden.",
+  "contacts_lastHeard": "Zuletzt gehört"
 }

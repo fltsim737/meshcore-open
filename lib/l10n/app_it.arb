@@ -3661,5 +3661,13 @@
   "sos_networkStatusInstalling": "Aggiunta del canale a questa radio…",
   "sos_networkStatusNoFreeSlot": "Nessuno slot canale libero su questa radio. Rimuovi un canale per usare la rete.",
   "sos_networkStatusDisconnected": "Collega una radio per configurare il canale",
-  "sos_networkSecurityNote": "Chiunque abbia un codice può inviare avvisi, e un membro con software modificato potrebbe leggerli. Se un codice trapela, configura una nuova rete e condividi nuovi codici."
+  "sos_networkSecurityNote": "Chiunque abbia un codice può inviare avvisi, e un membro con software modificato potrebbe leggerli. Se un codice trapela, configura una nuova rete e condividi nuovi codici.",
+  "appSettings_autoConnect": "Connetti all'ultima radio",
+  "appSettings_autoConnectSubtitle": "All'avvio dell'app, riconnetti l'ultima radio usata, via Bluetooth, USB o rete",
+  "scanner_autoConnecting": "Connessione a {name}…",
+  "scanner_autoConnectLastRadio": "l'ultima radio",
+  "battery_lowChannelName": "Batteria della radio",
+  "battery_lowTitle": "Batteria della radio scarica: {percent}%",
+  "battery_lowBody": "Ricarica presto {name}. Con la batteria scarica non può inviare un SOS.",
+  "contacts_lastHeard": "Ultimo ascolto"
 }

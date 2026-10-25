@@ -11382,6 +11382,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} more open alerts'**
   String sos_warningMore(int count);
+
+  /// No description provided for @appSettings_autoConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to the last radio'**
+  String get appSettings_autoConnect;
+
+  /// No description provided for @appSettings_autoConnectSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When the app starts, connect again to the radio it last used, by Bluetooth, USB or network'**
+  String get appSettings_autoConnectSubtitle;
+
+  /// No description provided for @scanner_autoConnecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to {name}…'**
+  String scanner_autoConnecting(String name);
+
+  /// No description provided for @scanner_autoConnectLastRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'the last radio'**
+  String get scanner_autoConnectLastRadio;
+
+  /// No description provided for @battery_lowChannelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Radio battery'**
+  String get battery_lowChannelName;
+
+  /// No description provided for @battery_lowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Radio battery low: {percent}%'**
+  String battery_lowTitle(int percent);
+
+  /// No description provided for @battery_lowBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Charge {name} soon. It can\'t send an SOS once its battery is flat.'**
+  String battery_lowBody(String name);
+
+  /// No description provided for @contacts_lastHeard.
+  ///
+  /// In en, this message translates to:
+  /// **'Last heard'**
+  String get contacts_lastHeard;
 }
 
 class _AppLocalizationsDelegate

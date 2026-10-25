@@ -2,6 +2,18 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.3 (2026-10-25)
+
+### Changed
+
+- **The SOS alarm is now SOS in Morse code** (· · · – – – · · ·), repeating until you acknowledge or dismiss the alert. The old two-tone alarm was too close to the alert tones of other emergency apps, and a responder must never mistake one for the other. Android plays it at alarm volume as before, on a new **SOS alerts** notification channel (Android fixes a channel's sound when the channel is made, so the old one is removed at start: set any custom alert settings again). Linux and Windows play the same Morse alarm; on Windows the alarm notification stays silent so the two don't clash.
+
+### Added
+
+- **Connects to your radio by itself.** When the app starts it connects again to the radio it was last connected to, the same way: Bluetooth, USB or network. A bar says *Connecting to …* with **Cancel**; if the radio isn't there, the list is ready as before. Turn it off under Settings → App Settings → **Connect to the last radio**. A computer that starts the app hidden in the tray at login is now connected and listening without opening the window.
+- **A warning when the radio's battery reaches 20%:** a notification with the ordinary warning sound (deliberately nothing like the SOS alarm), a red battery icon, and a red card at the top of the Emergency tab while it stays low. It warns once each time, and again only after the radio has been charged.
+- **"Last heard" on contacts**, above the time on each contact, so it's clear the time is when your radio last heard from them.
+
 ## 9.5.2 (2026-10-24)
 
 ### Fixed

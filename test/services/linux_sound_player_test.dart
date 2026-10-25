@@ -55,4 +55,12 @@ void main() {
     await wait(2);
     expect(played, isEmpty);
   });
+
+  test('the alarm plays the Morse file once it is set, and warnings differ', () async {
+    sound.alarmSound = '/tmp/meshcore_sos_morse.wav';
+    sound.startAlarm(1);
+    sound.playWarning();
+    expect(played, ['/tmp/meshcore_sos_morse.wav', 'dialog-warning']);
+    sound.stopAll();
+  });
 }

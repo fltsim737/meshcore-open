@@ -3528,5 +3528,13 @@
   "sos_networkStatusInstalling": "Pridávam kanál do tohto rádia…",
   "sos_networkStatusNoFreeSlot": "Na tomto rádiu nie je voľné miesto pre kanál. Odstráňte kanál, aby ste mohli sieť používať.",
   "sos_networkStatusDisconnected": "Pripojte rádio na nastavenie kanála",
-  "sos_networkSecurityNote": "Ktokoľvek s kódom môže posielať poplachy a člen s upraveným softvérom by ich mohol čítať. Ak kód unikne, nastavte novú sieť a zdieľajte nové kódy."
+  "sos_networkSecurityNote": "Ktokoľvek s kódom môže posielať poplachy a člen s upraveným softvérom by ich mohol čítať. Ak kód unikne, nastavte novú sieť a zdieľajte nové kódy.",
+  "appSettings_autoConnect": "Pripojiť k poslednému rádiu",
+  "appSettings_autoConnectSubtitle": "Po spustení aplikácie sa znova pripojiť k naposledy použitému rádiu cez Bluetooth, USB alebo sieť",
+  "scanner_autoConnecting": "Pripája sa k {name}…",
+  "scanner_autoConnectLastRadio": "poslednému rádiu",
+  "battery_lowChannelName": "Batéria rádia",
+  "battery_lowTitle": "Slabá batéria rádia: {percent} %",
+  "battery_lowBody": "Čoskoro nabite {name}. S vybitou batériou nemôže poslať SOS.",
+  "contacts_lastHeard": "Naposledy počuté"
 }

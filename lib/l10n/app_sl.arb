@@ -3528,5 +3528,13 @@
   "sos_networkStatusInstalling": "Dodajanje kanala na ta radio…",
   "sos_networkStatusNoFreeSlot": "Na tem radiu ni prostega mesta za kanal. Odstranite kanal, da uporabite omrežje.",
   "sos_networkStatusDisconnected": "Povežite radio, da nastavite kanal",
-  "sos_networkSecurityNote": "Kdorkoli s kodo lahko pošilja opozorila, član s spremenjeno programsko opremo pa bi jih lahko bral. Če koda uide, nastavite novo omrežje in delite nove kode."
+  "sos_networkSecurityNote": "Kdorkoli s kodo lahko pošilja opozorila, član s spremenjeno programsko opremo pa bi jih lahko bral. Če koda uide, nastavite novo omrežje in delite nove kode.",
+  "appSettings_autoConnect": "Poveži se z zadnjim radiem",
+  "appSettings_autoConnectSubtitle": "Ob zagonu aplikacije se znova poveži z nazadnje uporabljenim radiem prek Bluetootha, USB ali omrežja",
+  "scanner_autoConnecting": "Povezovanje z {name}…",
+  "scanner_autoConnectLastRadio": "zadnjim radiem",
+  "battery_lowChannelName": "Baterija radia",
+  "battery_lowTitle": "Baterija radia skoraj prazna: {percent} %",
+  "battery_lowBody": "Kmalu napolnite {name}. S prazno baterijo ne more poslati SOS.",
+  "contacts_lastHeard": "Nazadnje slišan"
 }

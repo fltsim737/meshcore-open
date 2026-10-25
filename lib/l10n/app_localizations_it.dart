@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -5477,8 +5478,7 @@ class AppLocalizationsIt extends AppLocalizations {
       locale: localeName,
       other:
           '$count salti non hanno una posizione specifica — il percorso mostrato è parziale',
-      one:
-          '1 salto non ha una posizione specifica — il percorso mostrato è parziale',
+      one: '1 salto non ha una posizione specifica — il percorso mostrato è parziale',
     );
     return '$_temp0';
   }
@@ -6795,4 +6795,35 @@ class AppLocalizationsIt extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Altri $count avvisi aperti';
   }
+
+  @override
+  String get appSettings_autoConnect => 'Connetti all\'ultima radio';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      'All\'avvio dell\'app, riconnetti l\'ultima radio usata, via Bluetooth, USB o rete';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return 'Connessione a $name…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => 'l\'ultima radio';
+
+  @override
+  String get battery_lowChannelName => 'Batteria della radio';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return 'Batteria della radio scarica: $percent%';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return 'Ricarica presto $name. Con la batteria scarica non può inviare un SOS.';
+  }
+
+  @override
+  String get contacts_lastHeard => 'Ultimo ascolto';
 }

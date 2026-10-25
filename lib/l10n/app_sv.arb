@@ -3522,5 +3522,13 @@
   "sos_networkStatusInstalling": "Lägger till kanalen på den här radion…",
   "sos_networkStatusNoFreeSlot": "Ingen ledig kanalplats på den här radion. Ta bort en kanal för att använda nätverket.",
   "sos_networkStatusDisconnected": "Anslut en radio för att konfigurera kanalen",
-  "sos_networkSecurityNote": "Alla som har en kod kan skicka larm, och en medlem med modifierad programvara skulle kunna läsa dem. Om en kod läcker, skapa ett nytt nätverk och dela nya koder."
+  "sos_networkSecurityNote": "Alla som har en kod kan skicka larm, och en medlem med modifierad programvara skulle kunna läsa dem. Om en kod läcker, skapa ett nytt nätverk och dela nya koder.",
+  "appSettings_autoConnect": "Anslut till den senaste radion",
+  "appSettings_autoConnectSubtitle": "När appen startar, anslut igen till den senast använda radion via Bluetooth, USB eller nätverk",
+  "scanner_autoConnecting": "Ansluter till {name}…",
+  "scanner_autoConnectLastRadio": "den senaste radion",
+  "battery_lowChannelName": "Radions batteri",
+  "battery_lowTitle": "Radions batteri lågt: {percent} %",
+  "battery_lowBody": "Ladda {name} snart. Med tomt batteri kan den inte skicka SOS.",
+  "contacts_lastHeard": "Senast hörd"
 }

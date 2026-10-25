@@ -3566,5 +3566,13 @@
   "sos_networkStatusInstalling": "Csatorna hozzáadása ehhez a rádióhoz…",
   "sos_networkStatusNoFreeSlot": "Nincs szabad csatornahely ezen a rádión. Törölj egy csatornát a hálózat használatához.",
   "sos_networkStatusDisconnected": "Csatlakoztass rádiót a csatorna beállításához",
-  "sos_networkSecurityNote": "Bárki, akinek van kódja, küldhet riasztást, és egy módosított szoftvert használó tag elolvashatná őket. Ha egy kód kiszivárog, állíts be új hálózatot és oszd meg az új kódokat."
+  "sos_networkSecurityNote": "Bárki, akinek van kódja, küldhet riasztást, és egy módosított szoftvert használó tag elolvashatná őket. Ha egy kód kiszivárog, állíts be új hálózatot és oszd meg az új kódokat.",
+  "appSettings_autoConnect": "Csatlakozás az utolsó rádióhoz",
+  "appSettings_autoConnectSubtitle": "Az alkalmazás indításakor újracsatlakozás az utoljára használt rádióhoz Bluetooth-on, USB-n vagy hálózaton",
+  "scanner_autoConnecting": "Csatlakozás: {name}…",
+  "scanner_autoConnectLastRadio": "az utolsó rádió",
+  "battery_lowChannelName": "Rádió akkumulátora",
+  "battery_lowTitle": "A rádió akkumulátora lemerülőben: {percent}%",
+  "battery_lowBody": "Hamarosan töltse fel: {name}. Lemerült akkumulátorral nem tud SOS-t küldeni.",
+  "contacts_lastHeard": "Utoljára hallott"
 }

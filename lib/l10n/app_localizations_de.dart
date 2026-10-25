@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -5482,8 +5483,7 @@ class AppLocalizationsDe extends AppLocalizations {
       locale: localeName,
       other:
           '$count Sprünge haben keinen Standort - der angezeigte Pfad ist unvollständig',
-      one:
-          '1 Sprung hat keinen Standort - der angezeigte Pfad ist unvollständig',
+      one: '1 Sprung hat keinen Standort - der angezeigte Pfad ist unvollständig',
     );
     return '$_temp0';
   }
@@ -6804,4 +6804,35 @@ class AppLocalizationsDe extends AppLocalizations {
   String sos_warningMore(int count) {
     return '$count weitere offene Alarme';
   }
+
+  @override
+  String get appSettings_autoConnect => 'Mit dem letzten Funkgerät verbinden';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      'Beim Start der App wieder mit dem zuletzt genutzten Funkgerät verbinden, per Bluetooth, USB oder Netzwerk';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return 'Verbinde mit $name…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => 'dem letzten Funkgerät';
+
+  @override
+  String get battery_lowChannelName => 'Funkgerät-Akku';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return 'Funkgerät-Akku schwach: $percent %';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return '$name bald aufladen. Mit leerem Akku kann es kein SOS senden.';
+  }
+
+  @override
+  String get contacts_lastHeard => 'Zuletzt gehört';
 }

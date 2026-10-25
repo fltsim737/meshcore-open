@@ -15,6 +15,7 @@ import '../models/sos_alert.dart';
 import '../storage/prefs_manager.dart';
 import '../utils/platform_info.dart';
 import 'linux_sound_player.dart';
+import 'sos_morse_sound.dart';
 import 'notification_reply.dart';
 
 class NotificationService {
@@ -87,6 +88,8 @@ class NotificationService {
   final LinuxSoundPlayer? _linuxSound = PlatformInfo.isLinux
       ? LinuxSoundPlayer()
       : null;
+  /// Windows loops the Morse SOS itself; see [WindowsMorseAlarm].
+  WindowsMorseAlarm? _windowsAlarm;
   static const _batchWindow = Duration(seconds: 5);
 
   DateTime? _lastNotificationTime;
@@ -156,6 +159,7 @@ class NotificationService {
     } catch (e) {
       debugPrint('Error initializing notifications: $e');
     }
+    await _setUpSosSound();
   }
 
   void _registerReplyPort() {
@@ -627,6 +631,30 @@ class NotificationService {
 
   static int _sosAlertId(String key) => 'sos:$key'.hashCode & 0x7FFFFFFF;
 
+  /// A new channel for the Morse SOS alarm: Android fixes a channel's sound
+  /// when it is created, so the old 'sos_alerts' channel is deleted at start.
+  static const _sosChannelId = 'sos_alerts_morse';
+
+  /// The Morse alarm for the desktops, and the old Android channel removed.
+  Future<void> _setUpSosSound() async {
+    if (PlatformInfo.isAndroid) {
+      try {
+        await _notifications
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >()
+            ?.deleteNotificationChannel(channelId: 'sos_alerts');
+      } catch (e) {
+        debugPrint('Removing the old SOS channel failed: $e');
+      }
+    }
+    if (!PlatformInfo.isLinux && !PlatformInfo.isWindows) return;
+    final file = await extractSosMorseSound();
+    if (file == null) return;
+    if (_linuxSound != null) _linuxSound.alarmSound = file;
+    if (PlatformInfo.isWindows) _windowsAlarm = WindowsMorseAlarm(file);
+  }
+
   /// Android: alarm audio, repeats until cancelled, cannot be swiped away.
   /// Elsewhere: an ordinary notification with sound, re-posted on each
   /// repeat the alert's sender broadcasts.
@@ -649,14 +677,14 @@ class NotificationService {
     ].join('\n');
 
     final androidDetails = AndroidNotificationDetails(
-      'sos_alerts',
+      _sosChannelId,
       l10n.sos_notificationChannelName,
       channelDescription: l10n.sos_notificationChannelDescription,
       importance: Importance.max,
       priority: Priority.max,
       category: AndroidNotificationCategory.alarm,
       visibility: NotificationVisibility.public,
-      sound: const RawResourceAndroidNotificationSound('sos_alarm'),
+      sound: const RawResourceAndroidNotificationSound('sos_alarm_morse'),
       audioAttributesUsage: AudioAttributesUsage.alarm,
       // FLAG_INSISTENT: loop the sound until the notification is cancelled.
       additionalFlags: Int32List.fromList(const [4]),
@@ -686,10 +714,14 @@ class NotificationService {
           // only treats it as one when it has a button.
           windows: WindowsNotificationDetails(
             scenario: WindowsNotificationScenario.alarm,
-            audio: WindowsNotificationAudio.preset(
-              sound: WindowsNotificationSound.alarm1,
-              shouldLoop: true,
-            ),
+            // the Morse alarm plays from the app instead (WindowsMorseAlarm);
+            // Windows' own alarm if it couldn't be set up
+            audio: _windowsAlarm != null
+                ? WindowsNotificationAudio.silent()
+                : WindowsNotificationAudio.preset(
+                    sound: WindowsNotificationSound.alarm1,
+                    shouldLoop: true,
+                  ),
             actions: [
               WindowsAction(content: l10n.chat_open, arguments: 'sos_open'),
             ],
@@ -698,6 +730,7 @@ class NotificationService {
         payload: 'sos:${alert.key}',
       );
       _linuxSound?.startAlarm(_sosAlertId(alert.key));
+      _windowsAlarm?.start(_sosAlertId(alert.key));
     } catch (e) {
       debugPrint('Failed to show SOS notification: $e');
     }
@@ -705,6 +738,7 @@ class NotificationService {
 
   Future<void> cancelSosAlert(IncomingSos alert) async {
     _linuxSound?.stopAlarm(_sosAlertId(alert.key));
+    _windowsAlarm?.stop(_sosAlertId(alert.key));
     if (!_isInitialized) return;
     try {
       await _notifications.cancel(id: _sosAlertId(alert.key));
@@ -713,9 +747,47 @@ class NotificationService {
     }
   }
 
+  /// The connected radio's battery is down to 20%: a warning with the usual
+  /// notification sound, deliberately unlike the SOS alarm.
+  Future<void> showLowBattery(int percent, String radioName) async {
+    if (!await _ensureCanNotify()) return;
+    final l10n = _l10n;
+    final androidDetails = AndroidNotificationDetails(
+      'radio_battery',
+      l10n.battery_lowChannelName,
+      importance: Importance.high,
+      priority: Priority.high,
+      category: AndroidNotificationCategory.status,
+      color: const Color(0xFFF59E0B),
+      icon: '@mipmap/ic_launcher',
+    );
+    const darwinDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBanner: true,
+      presentSound: true,
+    );
+    try {
+      await _notifications.show(
+        id: 'radio_battery'.hashCode & 0x7FFFFFFF,
+        title: l10n.battery_lowTitle(percent),
+        body: l10n.battery_lowBody(radioName),
+        notificationDetails: NotificationDetails(
+          android: androidDetails,
+          iOS: darwinDetails,
+          macOS: darwinDetails,
+          windows: const WindowsNotificationDetails(),
+        ),
+      );
+      _linuxSound?.playWarning();
+    } catch (e) {
+      debugPrint('Failed to show the low battery notification: $e');
+    }
+  }
+
   /// Posted in place of the alarm, so the alert no longer sounds.
   Future<void> showSosCancelled(IncomingSos alert) async {
     _linuxSound?.stopAlarm(_sosAlertId(alert.key));
+    _windowsAlarm?.stop(_sosAlertId(alert.key));
     if (!await _ensureCanNotify()) return;
     final l10n = _l10n;
     final sender = alert.senderName.isEmpty
@@ -798,6 +870,7 @@ class NotificationService {
 
   Future<void> cancelAll() async {
     _linuxSound?.stopAll();
+    _windowsAlarm?.stopAll();
     _conversations.clear();
     await _notifications.cancelAll();
     await _updateBadge(0);

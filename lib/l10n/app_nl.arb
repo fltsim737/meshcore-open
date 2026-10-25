@@ -3428,5 +3428,13 @@
   "sos_networkStatusInstalling": "Kanaal toevoegen aan deze radio…",
   "sos_networkStatusNoFreeSlot": "Geen vrije kanaalplek op deze radio. Verwijder een kanaal om het netwerk te gebruiken.",
   "sos_networkStatusDisconnected": "Verbind een radio om het kanaal in te stellen",
-  "sos_networkSecurityNote": "Iedereen met een code kan meldingen sturen, en een lid met aangepaste software zou ze kunnen lezen. Als een code uitlekt, stel dan een nieuw netwerk in en deel nieuwe codes."
+  "sos_networkSecurityNote": "Iedereen met een code kan meldingen sturen, en een lid met aangepaste software zou ze kunnen lezen. Als een code uitlekt, stel dan een nieuw netwerk in en deel nieuwe codes.",
+  "appSettings_autoConnect": "Verbinden met de laatste radio",
+  "appSettings_autoConnectSubtitle": "Bij het starten van de app opnieuw verbinden met de laatst gebruikte radio, via Bluetooth, USB of netwerk",
+  "scanner_autoConnecting": "Verbinden met {name}…",
+  "scanner_autoConnectLastRadio": "de laatste radio",
+  "battery_lowChannelName": "Radiobatterij",
+  "battery_lowTitle": "Radiobatterij bijna leeg: {percent}%",
+  "battery_lowBody": "Laad {name} binnenkort op. Met een lege batterij kan hij geen SOS sturen.",
+  "contacts_lastHeard": "Laatst gehoord"
 }

@@ -3527,5 +3527,13 @@
   "sos_networkStatusInstalling": "A adicionar o canal a este rádio…",
   "sos_networkStatusNoFreeSlot": "Não há espaço de canal livre neste rádio. Remova um canal para usar a rede.",
   "sos_networkStatusDisconnected": "Ligue um rádio para configurar o canal",
-  "sos_networkSecurityNote": "Qualquer pessoa com um código pode enviar alertas, e um membro com software modificado poderia lê-los. Se um código for divulgado, configure uma nova rede e partilhe novos códigos."
+  "sos_networkSecurityNote": "Qualquer pessoa com um código pode enviar alertas, e um membro com software modificado poderia lê-los. Se um código for divulgado, configure uma nova rede e partilhe novos códigos.",
+  "appSettings_autoConnect": "Ligar ao último rádio",
+  "appSettings_autoConnectSubtitle": "Ao iniciar a app, voltar a ligar ao último rádio usado, por Bluetooth, USB ou rede",
+  "scanner_autoConnecting": "A ligar a {name}…",
+  "scanner_autoConnectLastRadio": "o último rádio",
+  "battery_lowChannelName": "Bateria do rádio",
+  "battery_lowTitle": "Bateria do rádio fraca: {percent}%",
+  "battery_lowBody": "Carregue {name} em breve. Com a bateria vazia não consegue enviar um SOS.",
+  "contacts_lastHeard": "Ouvido há"
 }

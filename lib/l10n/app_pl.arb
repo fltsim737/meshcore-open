@@ -3560,5 +3560,13 @@
   "sos_networkStatusInstalling": "Dodawanie kanału do tego radia…",
   "sos_networkStatusNoFreeSlot": "Brak wolnego miejsca na kanał w tym radiu. Usuń kanał, aby korzystać z sieci.",
   "sos_networkStatusDisconnected": "Połącz radio, aby skonfigurować kanał",
-  "sos_networkSecurityNote": "Każdy, kto ma kod, może wysyłać alarmy, a członek ze zmodyfikowanym oprogramowaniem mógłby je odczytać. Jeśli kod wycieknie, utwórz nową sieć i udostępnij nowe kody."
+  "sos_networkSecurityNote": "Każdy, kto ma kod, może wysyłać alarmy, a członek ze zmodyfikowanym oprogramowaniem mógłby je odczytać. Jeśli kod wycieknie, utwórz nową sieć i udostępnij nowe kody.",
+  "appSettings_autoConnect": "Połącz z ostatnim radiem",
+  "appSettings_autoConnectSubtitle": "Po uruchomieniu aplikacji połącz ponownie z ostatnio używanym radiem, przez Bluetooth, USB lub sieć",
+  "scanner_autoConnecting": "Łączenie z {name}…",
+  "scanner_autoConnectLastRadio": "ostatnim radiem",
+  "battery_lowChannelName": "Bateria radia",
+  "battery_lowTitle": "Niski poziom baterii radia: {percent}%",
+  "battery_lowBody": "Wkrótce naładuj {name}. Z rozładowaną baterią nie wyśle SOS.",
+  "contacts_lastHeard": "Ostatnio słyszany"
 }

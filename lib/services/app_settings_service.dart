@@ -66,6 +66,21 @@ class AppSettingsService extends ChangeNotifier {
     await prefs.setString(_settingsKey, jsonStr);
   }
 
+  /// Connect to the last radio by itself when the app starts (on by default).
+  static const String _autoConnectKey = 'auto_connect_on_launch';
+  bool get autoConnectOnLaunch => autoConnectOnLaunchSaved;
+  static bool get autoConnectOnLaunchSaved {
+    try {
+      return PrefsManager.instance.getBool(_autoConnectKey) ?? true;
+    } catch (_) {
+      return false;   // no settings store (as in tests): leave it to the user
+    }
+  }
+  Future<void> setAutoConnectOnLaunch(bool value) async {
+    await PrefsManager.instance.setBool(_autoConnectKey, value);
+    notifyListeners();
+  }
+
   Future<void> setClearPathOnMaxRetry(bool value) async {
     await updateSettings(_settings.copyWith(clearPathOnMaxRetry: value));
   }

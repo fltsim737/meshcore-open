@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6765,4 +6766,35 @@ class AppLocalizationsSl extends AppLocalizations {
   String sos_warningMore(int count) {
     return 'Še $count odprtih opozoril';
   }
+
+  @override
+  String get appSettings_autoConnect => 'Poveži se z zadnjim radiem';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      'Ob zagonu aplikacije se znova poveži z nazadnje uporabljenim radiem prek Bluetootha, USB ali omrežja';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return 'Povezovanje z $name…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => 'zadnjim radiem';
+
+  @override
+  String get battery_lowChannelName => 'Baterija radia';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return 'Baterija radia skoraj prazna: $percent %';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return 'Kmalu napolnite $name. S prazno baterijo ne more poslati SOS.';
+  }
+
+  @override
+  String get contacts_lastHeard => 'Nazadnje slišan';
 }

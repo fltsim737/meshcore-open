@@ -2,4 +2,4 @@
 <!-- Referenced by name from the SOS notification channel, so resource
      shrinking cannot see the use. -->
 <resources xmlns:tools="http://schemas.android.com/tools"
-    tools:keep="@raw/sos_alarm" />
+    tools:keep="@raw/sos_alarm_morse" />
