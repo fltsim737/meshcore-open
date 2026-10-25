@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 
 import '../connector/meshcore_connector.dart';
 import '../l10n/l10n.dart';
+import '../services/app_settings_service.dart';
 import '../services/linux_ble_error_classifier.dart';
+import '../utils/usb_port_labels.dart';
 import '../theme/mesh_theme.dart';
 import '../utils/app_logger.dart';
 import '../widgets/adaptive_app_bar_title.dart';
@@ -30,6 +32,12 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
+  // Connecting to the last radio by itself happens once per app start, not
+  // each time this screen comes back after a disconnect.
+  static bool _autoConnectTried = false;
+  String? _autoConnectName;   // shown while connecting to the last radio
+  bool _autoConnectCancelled = false;
+  bool _autoUsb = false;      // USB from here: this screen moves on, not UsbScreen
   bool _changedNavigation = false;
   String? _connectingDeviceId;
   late final MeshCoreConnector _connector;
@@ -52,7 +60,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
           // TCP lands here after an auto-reconnect: a dropped link popped
           // back to this screen, and the TCP screen is no longer on the stack.
           (_connector.activeTransport == MeshCoreTransportType.bluetooth ||
-              _connector.activeTransport == MeshCoreTransportType.tcp) &&
+              _connector.activeTransport == MeshCoreTransportType.tcp ||
+              (_autoUsb &&
+                  _connector.activeTransport == MeshCoreTransportType.usb)) &&
           isCurrentRoute &&
           !_changedNavigation) {
         _changedNavigation = true;
@@ -63,6 +73,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
     };
 
     _connector.addListener(_connectionListener);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _autoConnect());
 
     _bluetoothStateSubscription = FlutterBluePlus.adapterState.listen(
       (state) {
@@ -158,6 +169,25 @@ class _ScannerScreenState extends State<ScannerScreen> {
                         )
                       : const SizedBox.shrink(),
                 ),
+
+                // Connecting to the last radio by itself, with a way out
+                if (_autoConnectName != null)
+                  MaterialBanner(
+                    leading: const SizedBox(
+                      width: 22,
+                      height: 22,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    content: Text(
+                      context.l10n.scanner_autoConnecting(_autoConnectName!),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: _cancelAutoConnect,
+                        child: Text(context.l10n.common_cancel),
+                      ),
+                    ],
+                  ),
 
                 // Connection status header
                 _ConnectionStatusHeader(connector: connector),
@@ -331,6 +361,95 @@ class _ScannerScreenState extends State<ScannerScreen> {
           _connectingDeviceId = null;
         });
       }
+    }
+  }
+
+  /// When the app starts, connect to the radio it was last connected to, the
+  /// same way (Bluetooth, USB or network), unless turned off in App Settings.
+  Future<void> _autoConnect() async {
+    if (_autoConnectTried || !mounted) return;
+    _autoConnectTried = true;
+    if (!AppSettingsService.autoConnectOnLaunchSaved) return;
+    final saved = MeshCoreConnector.savedConnection;
+    if (saved == null ||
+        _connector.state != MeshCoreConnectionState.disconnected) {
+      return;
+    }
+    final type = saved['type'];
+    final name = (saved['name'] as String?)?.trim();
+    setState(() {
+      _autoConnectName = (name == null || name.isEmpty)
+          ? context.l10n.scanner_autoConnectLastRadio
+          : name;
+      _autoConnectCancelled = false;
+    });
+    appLogger.info('Connecting to the last radio ($type)', tag: 'AutoConnect');
+    try {
+      if (type == 'tcp' && saved['host'] is String && saved['port'] is int) {
+        await _connector.connectTcp(
+          host: saved['host'] as String,
+          port: saved['port'] as int,
+        );
+      } else if (type == 'usb' &&
+          saved['port'] is String &&
+          PlatformInfo.supportsUsbSerial) {
+        final want = saved['port'] as String;
+        final ports = await _connector.listUsbPorts();
+        final port = ports
+            .map(normalizeUsbPortName)
+            .where((p) => p == want)
+            .firstOrNull;
+        if (port != null && !_autoConnectCancelled) {
+          _autoUsb = true;
+          await _connector.connectUsb(portName: port);
+        }
+      } else if (type == 'ble' &&
+          saved['id'] is String &&
+          !PlatformInfo.isWeb &&
+          _bluetoothState != BluetoothAdapterState.off) {
+        await _autoConnectBle(saved['id'] as String);
+      }
+    } catch (e) {
+      // Not there, or it failed: the list is still here to choose from.
+      appLogger.info('Auto-connect failed: $e', tag: 'AutoConnect');
+    } finally {
+      if (mounted) setState(() => _autoConnectName = null);
+    }
+  }
+
+  /// Scans for up to 15 s for the remembered radio, then connects as a tap
+  /// on it would (so Linux can still ask for its pairing PIN).
+  Future<void> _autoConnectBle(String id) async {
+    unawaited(
+      _connector
+          .startScan(timeout: const Duration(seconds: 15))
+          .catchError((Object _) {}),
+    );
+    final until = DateTime.now().add(const Duration(seconds: 15));
+    while (mounted &&
+        !_autoConnectCancelled &&
+        DateTime.now().isBefore(until)) {
+      final found = _connector.scanResults
+          .where((r) => r.device.remoteId.toString() == id)
+          .firstOrNull;
+      if (found != null) {
+        await _connector.stopScan();
+        if (!mounted || _autoConnectCancelled) return;
+        await _connectToDevice(context, _connector, found);
+        return;
+      }
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+    }
+  }
+
+  void _cancelAutoConnect() {
+    setState(() {
+      _autoConnectCancelled = true;
+      _autoConnectName = null;
+    });
+    unawaited(_connector.stopScan());
+    if (_connector.state == MeshCoreConnectionState.connecting) {
+      unawaited(_connector.disconnect(manual: true));
     }
   }
 

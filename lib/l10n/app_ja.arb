@@ -3684,5 +3684,13 @@
   "sosVoice_statusSent": "送信済み",
   "sosVoice_statusFailed": "未送信",
   "sosVoice_statusReceived": "受信済み",
-  "sosVoice_statusPartial": "一部受信 ({received}/{total})"
+  "sosVoice_statusPartial": "一部受信 ({received}/{total})",
+  "appSettings_autoConnect": "前回の無線機に接続",
+  "appSettings_autoConnectSubtitle": "アプリ起動時に、前回使った無線機へBluetooth・USB・ネットワークで再接続します",
+  "scanner_autoConnecting": "{name} に接続中…",
+  "scanner_autoConnectLastRadio": "前回の無線機",
+  "battery_lowChannelName": "無線機のバッテリー",
+  "battery_lowTitle": "無線機のバッテリー残量低下: {percent}%",
+  "battery_lowBody": "{name} を早めに充電してください。バッテリーが切れるとSOSを送信できません。",
+  "contacts_lastHeard": "最終受信"
 }

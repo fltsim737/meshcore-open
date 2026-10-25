@@ -1930,6 +1930,16 @@ class _ContactTile extends StatelessWidget {
                     const SizedBox(height: 4),
                   ],
                   Text(
+                    context.l10n.contacts_lastHeard,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 10.5,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                  ),
+                  Text(
                     formatContactLastSeen(context.l10n, lastSeen),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,

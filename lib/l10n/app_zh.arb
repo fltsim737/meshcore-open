@@ -3555,5 +3555,13 @@
   "sosVoice_statusSent": "已发送",
   "sosVoice_statusFailed": "未发送",
   "sosVoice_statusReceived": "已接收",
-  "sosVoice_statusPartial": "部分接收（{received}/{total}）"
+  "sosVoice_statusPartial": "部分接收（{received}/{total}）",
+  "appSettings_autoConnect": "连接上次使用的电台",
+  "appSettings_autoConnectSubtitle": "应用启动时，通过蓝牙、USB 或网络重新连接上次使用的电台",
+  "scanner_autoConnecting": "正在连接 {name}…",
+  "scanner_autoConnectLastRadio": "上次使用的电台",
+  "battery_lowChannelName": "电台电池",
+  "battery_lowTitle": "电台电量低：{percent}%",
+  "battery_lowBody": "请尽快为 {name} 充电。电量耗尽后将无法发送 SOS。",
+  "contacts_lastHeard": "上次收到"
 }

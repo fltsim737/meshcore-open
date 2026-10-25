@@ -3684,5 +3684,13 @@
   "sosVoice_statusSent": "Enviado",
   "sosVoice_statusFailed": "No enviado",
   "sosVoice_statusReceived": "Recibido",
-  "sosVoice_statusPartial": "Recibido en parte ({received} de {total})"
+  "sosVoice_statusPartial": "Recibido en parte ({received} de {total})",
+  "appSettings_autoConnect": "Conectar a la última radio",
+  "appSettings_autoConnectSubtitle": "Al iniciar la app, volver a conectar con la última radio usada, por Bluetooth, USB o red",
+  "scanner_autoConnecting": "Conectando con {name}…",
+  "scanner_autoConnectLastRadio": "la última radio",
+  "battery_lowChannelName": "Batería de la radio",
+  "battery_lowTitle": "Batería de la radio baja: {percent} %",
+  "battery_lowBody": "Carga {name} pronto. Con la batería agotada no puede enviar un SOS.",
+  "contacts_lastHeard": "Oído por última vez"
 }

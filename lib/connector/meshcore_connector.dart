@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_blue_plus_platform_interface/flutter_blue_plus_platform_interface.dart';
 
+import '../storage/prefs_manager.dart';
 import '../models/channel.dart';
 import '../models/channel_message.dart';
 import '../models/companion_radio_stats.dart';
@@ -302,6 +303,57 @@ class MeshCoreConnector extends ChangeNotifier {
   Stopwatch? _airtimeBumpStopwatch;
   int _prevTotalAirSecs = 0;
   int? _batteryMillivolts;
+  // the 20% warning went out for this connection; cleared once it's charged
+  bool _lowBatteryWarned = false;
+  // the USB port, and network address, of the current (or last) connection,
+  // to remember it (the reconnect target is only set once the link is up)
+  String? _usbPortName;
+  String? _tcpHostTried;
+  int? _tcpPortTried;
+
+  /// The last radio this app connected to, remembered so the app can
+  /// connect to it again when it starts: {type: ble|usb|tcp, name, and id
+  /// (ble), port (usb) or host and port (tcp)}. Null if none yet.
+  static const String lastConnectionKey = 'last_connection';
+  static Map<String, dynamic>? get savedConnection {
+    try {
+      final raw = PrefsManager.instance.getString(lastConnectionKey);
+      if (raw == null) return null;
+      final value = jsonDecode(raw);
+      return value is Map<String, dynamic> ? value : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  void _rememberConnection() {
+    final Map<String, dynamic> saved;
+    switch (_activeTransport) {
+      case MeshCoreTransportType.bluetooth:
+        if (_deviceId == null) return;
+        saved = {'type': 'ble', 'id': _deviceId, 'name': deviceDisplayName};
+      case MeshCoreTransportType.usb:
+        if (_usbPortName == null) return;
+        saved = {'type': 'usb', 'port': _usbPortName, 'name': deviceDisplayName};
+      case MeshCoreTransportType.tcp:
+        final host = _tcpReconnectHost ?? _tcpHostTried;
+        final port = _tcpReconnectPort ?? _tcpPortTried;
+        if (host == null || port == null) return;
+        saved = {
+          'type': 'tcp',
+          'host': host,
+          'port': port,
+          'name': deviceDisplayName,
+        };
+      default:
+        return;   // review mode isn't a radio
+    }
+    unawaited(
+      PrefsManager.instance
+          .setString(lastConnectionKey, jsonEncode(saved))
+          .catchError((Object _) => false),
+    );
+  }
   double? _selfLatitude;
   double? _selfLongitude;
   final List<DirectRepeater> _directRepeaters = List.empty(growable: true);
@@ -785,6 +837,10 @@ class MeshCoreConnector extends ChangeNotifier {
       _isSyncingChannels && _totalChannelsToRequest > 0
       ? ((_nextChannelIndexToRequest / _totalChannelsToRequest) * 100).round()
       : 0;
+  /// The connected radio's battery is at 20% or below.
+  bool get batteryLow => (batteryPercent ?? 100) <= lowBatteryPercent;
+  static const int lowBatteryPercent = 20;
+
   int? get batteryPercent => _batteryMillivolts == null
       ? null
       : estimateBatteryPercentFromMillivolts(
@@ -2370,6 +2426,7 @@ class MeshCoreConnector extends ChangeNotifier {
       'connectUsb: port=$portName baud=$baudRate',
       tag: 'USB',
     );
+    _usbPortName = portName;
 
     await _awaitActiveDisconnect();
     // The await is a suspension point: another connect may have claimed the
@@ -2471,6 +2528,8 @@ class MeshCoreConnector extends ChangeNotifier {
   }
 
   Future<void> connectTcp({required String host, required int port}) async {
+    _tcpHostTried = host;
+    _tcpPortTried = port;
     if (_state == MeshCoreConnectionState.connecting ||
         _state == MeshCoreConnectionState.connected) {
       _appDebugLogService?.warn(
@@ -6295,6 +6354,8 @@ class MeshCoreConnector extends ChangeNotifier {
 
       _selfName = reader.readCString();
       _notificationService.setSelfName(_selfName);
+      // remembered again now its name is known
+      if (_state == MeshCoreConnectionState.connected) _rememberConnection();
 
       // The local public key only exists once SELF_INFO has arrived, so the
       // image sender prefix (first 2 bytes, big-endian) is refreshed here.
@@ -6588,6 +6649,24 @@ class MeshCoreConnector extends ChangeNotifier {
     radioStatsNotifier.value = stats;
   }
 
+  /// Down to 20%: one warning (a notification with its own sound, not the
+  /// SOS alarm), then again only after it has been charged past 25%.
+  void _checkLowBattery() {
+    final percent = batteryPercent;
+    if (percent == null || _activeTransport == MeshCoreTransportType.review) {
+      return;
+    }
+    if (percent <= lowBatteryPercent && !_lowBatteryWarned) {
+      _lowBatteryWarned = true;
+      _appDebugLogService?.warn('Radio battery low: $percent%', tag: 'Battery');
+      unawaited(
+        _notificationService.showLowBattery(percent, deviceDisplayName),
+      );
+    } else if (percent >= lowBatteryPercent + 5) {
+      _lowBatteryWarned = false;
+    }
+  }
+
   void _handleBatteryAndStorage(Uint8List frame) {
     // Frame format from C++:
     // [0] = RESP_CODE_BATT_AND_STORAGE
@@ -6605,6 +6684,7 @@ class MeshCoreConnector extends ChangeNotifier {
         'Pulled battery: $volts V ($_batteryMillivolts mV)',
         tag: 'Battery',
       );
+      _checkLowBattery();
       notifyListeners();
     } catch (e) {
       _appDebugLogService?.error(
@@ -8748,6 +8828,7 @@ class MeshCoreConnector extends ChangeNotifier {
     _selfInfoRetryTimer = null;
     _hasReceivedDeviceInfo = false;
     _batteryMillivolts = null;
+    _lowBatteryWarned = false;
     _batteryRequested = false;
     _pathHashByteWidth = 1;
     _maxContacts = _defaultMaxContacts;
@@ -8848,6 +8929,7 @@ class MeshCoreConnector extends ChangeNotifier {
     if (_state != newState) {
       _state = newState;
       if (newState == MeshCoreConnectionState.connected) {
+        _rememberConnection();
         if (_appSettingsService?.settings.notificationsEnabled ?? false) {
           unawaited(_notificationService.requestPermissionsOnce());
         }

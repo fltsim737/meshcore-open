@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6894,4 +6895,35 @@ class AppLocalizationsFr extends AppLocalizations {
   String sosVoice_statusPartial(int received, int total) {
     return 'Reçu en partie ($received sur $total)';
   }
+
+  @override
+  String get appSettings_autoConnect => 'Se connecter à la dernière radio';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      'Au démarrage de l\'app, se reconnecter à la dernière radio utilisée, par Bluetooth, USB ou réseau';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return 'Connexion à $name…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => 'la dernière radio';
+
+  @override
+  String get battery_lowChannelName => 'Batterie de la radio';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return 'Batterie de la radio faible : $percent %';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return 'Rechargez $name bientôt. Batterie vide, elle ne peut plus envoyer de SOS.';
+  }
+
+  @override
+  String get contacts_lastHeard => 'Entendu il y a';
 }

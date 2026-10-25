@@ -94,6 +94,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
         children: [
           const ReviewModeBanner(),
+          if (connector.batteryLow) _LowBatteryCard(connector: connector),
           const SizedBox(height: 8),
           if (active == null)
             _SosHoldButton(onActivated: sos.activate)
@@ -556,6 +557,35 @@ class _IncomingSosCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// The connected radio's battery is at 20% or below. Shown at the top of the
+/// Emergency tab, never hidden, while it stays low.
+class _LowBatteryCard extends StatelessWidget {
+  final MeshCoreConnector connector;
+
+  const _LowBatteryCard({required this.connector});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final percent = connector.batteryPercent ?? 0;
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(14),
+        side: const BorderSide(color: Color(0xFFD32F2F), width: 1.5),
+      ),
+      child: ListTile(
+        leading: const Icon(Icons.battery_alert, color: Color(0xFFD32F2F)),
+        title: Text(
+          l10n.battery_lowTitle(percent),
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+        subtitle: Text(l10n.battery_lowBody(connector.deviceDisplayName)),
       ),
     );
   }

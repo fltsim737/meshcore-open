@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6561,4 +6562,35 @@ class AppLocalizationsKo extends AppLocalizations {
   String sosVoice_statusPartial(int received, int total) {
     return '일부 수신 ($received/$total)';
   }
+
+  @override
+  String get appSettings_autoConnect => '마지막 무전기에 연결';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      '앱을 시작할 때 마지막으로 사용한 무전기에 Bluetooth, USB 또는 네트워크로 다시 연결합니다';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return '$name에 연결 중…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => '마지막 무전기';
+
+  @override
+  String get battery_lowChannelName => '무전기 배터리';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return '무전기 배터리 부족: $percent%';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return '$name을(를) 곧 충전하세요. 배터리가 다 되면 SOS를 보낼 수 없습니다.';
+  }
+
+  @override
+  String get contacts_lastHeard => '마지막 수신';
 }

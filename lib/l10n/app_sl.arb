@@ -3551,5 +3551,13 @@
   "sosVoice_statusSent": "Poslano",
   "sosVoice_statusFailed": "Ni poslano",
   "sosVoice_statusReceived": "Prejeto",
-  "sosVoice_statusPartial": "Delno prejeto ({received} od {total})"
+  "sosVoice_statusPartial": "Delno prejeto ({received} od {total})",
+  "appSettings_autoConnect": "Poveži se z zadnjim radiem",
+  "appSettings_autoConnectSubtitle": "Ob zagonu aplikacije se znova poveži z nazadnje uporabljenim radiem prek Bluetootha, USB ali omrežja",
+  "scanner_autoConnecting": "Povezovanje z {name}…",
+  "scanner_autoConnectLastRadio": "zadnjim radiem",
+  "battery_lowChannelName": "Baterija radia",
+  "battery_lowTitle": "Baterija radia skoraj prazna: {percent} %",
+  "battery_lowBody": "Kmalu napolnite {name}. S prazno baterijo ne more poslati SOS.",
+  "contacts_lastHeard": "Nazadnje slišan"
 }

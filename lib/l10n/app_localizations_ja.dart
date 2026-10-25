@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6551,4 +6552,35 @@ class AppLocalizationsJa extends AppLocalizations {
   String sosVoice_statusPartial(int received, int total) {
     return '一部受信 ($received/$total)';
   }
+
+  @override
+  String get appSettings_autoConnect => '前回の無線機に接続';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      'アプリ起動時に、前回使った無線機へBluetooth・USB・ネットワークで再接続します';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return '$name に接続中…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => '前回の無線機';
+
+  @override
+  String get battery_lowChannelName => '無線機のバッテリー';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return '無線機のバッテリー残量低下: $percent%';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return '$name を早めに充電してください。バッテリーが切れるとSOSを送信できません。';
+  }
+
+  @override
+  String get contacts_lastHeard => '最終受信';
 }

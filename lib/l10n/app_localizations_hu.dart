@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6856,4 +6857,35 @@ class AppLocalizationsHu extends AppLocalizations {
   String sosVoice_statusPartial(int received, int total) {
     return 'Részben megérkezett ($received/$total)';
   }
+
+  @override
+  String get appSettings_autoConnect => 'Csatlakozás az utolsó rádióhoz';
+
+  @override
+  String get appSettings_autoConnectSubtitle =>
+      'Az alkalmazás indításakor újracsatlakozás az utoljára használt rádióhoz Bluetooth-on, USB-n vagy hálózaton';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return 'Csatlakozás: $name…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => 'az utolsó rádió';
+
+  @override
+  String get battery_lowChannelName => 'Rádió akkumulátora';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return 'A rádió akkumulátora lemerülőben: $percent%';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return 'Hamarosan töltse fel: $name. Lemerült akkumulátorral nem tud SOS-t küldeni.';
+  }
+
+  @override
+  String get contacts_lastHeard => 'Utoljára hallott';
 }

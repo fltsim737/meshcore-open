@@ -3451,5 +3451,13 @@
   "sosVoice_statusSent": "Verzonden",
   "sosVoice_statusFailed": "Niet verzonden",
   "sosVoice_statusReceived": "Ontvangen",
-  "sosVoice_statusPartial": "Deels ontvangen ({received} van {total})"
+  "sosVoice_statusPartial": "Deels ontvangen ({received} van {total})",
+  "appSettings_autoConnect": "Verbinden met de laatste radio",
+  "appSettings_autoConnectSubtitle": "Bij het starten van de app opnieuw verbinden met de laatst gebruikte radio, via Bluetooth, USB of netwerk",
+  "scanner_autoConnecting": "Verbinden met {name}…",
+  "scanner_autoConnectLastRadio": "de laatste radio",
+  "battery_lowChannelName": "Radiobatterij",
+  "battery_lowTitle": "Radiobatterij bijna leeg: {percent}%",
+  "battery_lowBody": "Laad {name} binnenkort op. Met een lege batterij kan hij geen SOS sturen.",
+  "contacts_lastHeard": "Laatst gehoord"
 }

@@ -3589,5 +3589,13 @@
   "sosVoice_statusSent": "Elküldve",
   "sosVoice_statusFailed": "Nincs elküldve",
   "sosVoice_statusReceived": "Megérkezett",
-  "sosVoice_statusPartial": "Részben megérkezett ({received}/{total})"
+  "sosVoice_statusPartial": "Részben megérkezett ({received}/{total})",
+  "appSettings_autoConnect": "Csatlakozás az utolsó rádióhoz",
+  "appSettings_autoConnectSubtitle": "Az alkalmazás indításakor újracsatlakozás az utoljára használt rádióhoz Bluetooth-on, USB-n vagy hálózaton",
+  "scanner_autoConnecting": "Csatlakozás: {name}…",
+  "scanner_autoConnectLastRadio": "az utolsó rádió",
+  "battery_lowChannelName": "Rádió akkumulátora",
+  "battery_lowTitle": "A rádió akkumulátora lemerülőben: {percent}%",
+  "battery_lowBody": "Hamarosan töltse fel: {name}. Lemerült akkumulátorral nem tud SOS-t küldeni.",
+  "contacts_lastHeard": "Utoljára hallott"
 }

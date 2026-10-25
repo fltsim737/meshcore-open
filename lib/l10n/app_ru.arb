@@ -2847,5 +2847,13 @@
   "sosVoice_statusSent": "Отправлено",
   "sosVoice_statusFailed": "Не отправлено",
   "sosVoice_statusReceived": "Получено",
-  "sosVoice_statusPartial": "Получено частично ({received} из {total})"
+  "sosVoice_statusPartial": "Получено частично ({received} из {total})",
+  "appSettings_autoConnect": "Подключаться к последнему радио",
+  "appSettings_autoConnectSubtitle": "При запуске приложения снова подключаться к последнему использованному радио по Bluetooth, USB или сети",
+  "scanner_autoConnecting": "Подключение к {name}…",
+  "scanner_autoConnectLastRadio": "последнему радио",
+  "battery_lowChannelName": "Батарея радио",
+  "battery_lowTitle": "Низкий заряд батареи радио: {percent}%",
+  "battery_lowBody": "Скоро зарядите {name}. С разряженной батареей оно не сможет отправить SOS.",
+  "contacts_lastHeard": "Последний сигнал"
 }

@@ -3545,5 +3545,13 @@
   "sosVoice_statusSent": "Skickat",
   "sosVoice_statusFailed": "Inte skickat",
   "sosVoice_statusReceived": "Mottaget",
-  "sosVoice_statusPartial": "Delvis mottaget ({received} av {total})"
+  "sosVoice_statusPartial": "Delvis mottaget ({received} av {total})",
+  "appSettings_autoConnect": "Anslut till den senaste radion",
+  "appSettings_autoConnectSubtitle": "När appen startar, anslut igen till den senast använda radion via Bluetooth, USB eller nätverk",
+  "scanner_autoConnecting": "Ansluter till {name}…",
+  "scanner_autoConnectLastRadio": "den senaste radion",
+  "battery_lowChannelName": "Radions batteri",
+  "battery_lowTitle": "Radions batteri lågt: {percent} %",
+  "battery_lowBody": "Ladda {name} snart. Med tomt batteri kan den inte skicka SOS.",
+  "contacts_lastHeard": "Senast hörd"
 }

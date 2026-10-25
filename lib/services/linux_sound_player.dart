@@ -12,11 +12,15 @@ class LinuxSoundPlayer {
   /// How often an SOS alarm sounds again until it is cleared.
   final Duration alarmRepeat;
 
+  /// The SOS alarm: a theme sound by name, or a file path (the Morse SOS,
+  /// once the app has copied it out).
+  String alarmSound = 'alarm-clock-elapsed';
+
   /// Plays a theme sound by name; replaced in tests.
   final Future<void> Function(String name) _play;
 
   LinuxSoundPlayer({
-    this.alarmRepeat = const Duration(seconds: 4),
+    this.alarmRepeat = const Duration(milliseconds: 3600),   // the Morse SOS, with its gap
     Future<void> Function(String name)? play,
   }) : _play = play ?? _playThemeSound;
 
@@ -27,14 +31,17 @@ class LinuxSoundPlayer {
 
   void playEvent() => unawaited(_play('complete'));
 
+  /// A warning (the radio's battery is low): not the SOS alarm.
+  void playWarning() => unawaited(_play('dialog-warning'));
+
   /// Sounds the alarm for [id] now and every [alarmRepeat] until
   /// [stopAlarm], like Android's insistent SOS notification.
   void startAlarm(int id) {
     _alarms.add(id);
-    unawaited(_play('alarm-clock-elapsed'));
+    unawaited(_play(alarmSound));
     _alarmTimer ??= Timer.periodic(
       alarmRepeat,
-      (_) => unawaited(_play('alarm-clock-elapsed')),
+      (_) => unawaited(_play(alarmSound)),
     );
   }
 
@@ -56,7 +63,9 @@ class LinuxSoundPlayer {
     // The AppImage bundles the sounds and points here at them.
     final bundled = Platform.environment['MESHCORE_SOUND_DIR'];
     var file = '$_systemSoundDir/$name.oga';
-    if (bundled != null && File('$bundled/$name.oga').existsSync()) {
+    if (name.startsWith('/')) {
+      file = name;   // a file of our own
+    } else if (bundled != null && File('$bundled/$name.oga').existsSync()) {
       file = '$bundled/$name.oga';
     }
     for (final player in const ['paplay', 'pw-play']) {

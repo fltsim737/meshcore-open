@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6411,4 +6412,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String sosVoice_statusPartial(int received, int total) {
     return '部分接收（$received/$total）';
   }
+
+  @override
+  String get appSettings_autoConnect => '连接上次使用的电台';
+
+  @override
+  String get appSettings_autoConnectSubtitle => '应用启动时，通过蓝牙、USB 或网络重新连接上次使用的电台';
+
+  @override
+  String scanner_autoConnecting(String name) {
+    return '正在连接 $name…';
+  }
+
+  @override
+  String get scanner_autoConnectLastRadio => '上次使用的电台';
+
+  @override
+  String get battery_lowChannelName => '电台电池';
+
+  @override
+  String battery_lowTitle(int percent) {
+    return '电台电量低：$percent%';
+  }
+
+  @override
+  String battery_lowBody(String name) {
+    return '请尽快为 $name 充电。电量耗尽后将无法发送 SOS。';
+  }
+
+  @override
+  String get contacts_lastHeard => '上次收到';
 }

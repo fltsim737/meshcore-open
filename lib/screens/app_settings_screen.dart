@@ -323,6 +323,18 @@ class AppSettingsScreen extends StatelessWidget {
             horizontal: 16,
             vertical: 4,
           ),
+          secondary: const Icon(Icons.autorenew, size: 24),
+          title: Text(context.l10n.appSettings_autoConnect),
+          subtitle: Text(context.l10n.appSettings_autoConnectSubtitle),
+          value: settingsService.autoConnectOnLaunch,
+          onChanged: settingsService.setAutoConnectOnLaunch,
+        ),
+        const Divider(height: 1, indent: 16),
+        SwitchListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 4,
+          ),
           secondary: Icon(
             Icons.forum_outlined,
             size: 24,
