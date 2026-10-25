@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6765,4 +6764,69 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Senast hörd';
+
+  @override
+  String get sosLocator_button => 'Lokalisera';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Lokalisera $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Väntar på första signalen…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Senaste signal för $seconds s sedan · $count mottagna';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Så fungerar det';
+
+  @override
+  String get sosLocator_how =>
+      'Din radio ber den andra skicka en signal var 5:e sekund. Signalerna går direkt mellan radiorna, aldrig via en repeater, så du hör dem bara inom direkt räckvidd. Gå till senast kända position tills dess.';
+
+  @override
+  String get sosLocator_tip =>
+      'När du hör signaler: gå en bit, stanna och vänta på nästa. Starkare betyder närmare. Vänd dig långsamt på stället, din kropp skymmer signalen bakifrån.';
+
+  @override
+  String get sosLocator_lastPosition => 'Senast kända position';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Frågat $count gånger · igen om $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Ingen signal än';
+
+  @override
+  String get sosLocator_veryClose => 'Mycket nära';
+
+  @override
+  String get sosLocator_close => 'Nära';
+
+  @override
+  String get sosLocator_nearby => 'I närheten';
+
+  @override
+  String get sosLocator_faint => 'Svag';
+
+  @override
+  String get sosLocator_lost => 'Tappade signalen: gå tillbaka lite';
+
+  @override
+  String get sosLocator_keepMoving => 'Fortsätt gå och lyssna';
+
+  @override
+  String get sosLocator_warmer => 'Varmare: närmare';
+
+  @override
+  String get sosLocator_colder => 'Kallare: längre bort';
+
+  @override
+  String get sosLocator_steady => 'Ungefär samma';
 }

@@ -50,11 +50,17 @@ abstract class SosTransport implements Listenable {
 
   set sosTextListener(void Function(SosInboundText inbound)? listener);
   set sosDataListener(
-    void Function(int channelIndex, Uint8List payload)? listener,
+    void Function(int channelIndex, Uint8List payload, SosSignal signal)?
+    listener,
   );
   set sosAckListener(void Function(int ackHash)? listener);
 
-  Future<void> sendChannelData(Channel channel, Uint8List payload);
+  /// Flooded across the mesh, or [zeroHop]: only radios in direct range.
+  Future<void> sendChannelData(
+    Channel channel,
+    Uint8List payload, {
+    bool zeroHop = false,
+  });
 
   /// Returns the ACK hash the recipient's radio will confirm delivery with.
   Future<int?> sendDirectText(Contact contact, String text);
@@ -103,14 +109,18 @@ class ConnectorSosTransport implements SosTransport {
       connector.sosTextListener = listener;
   @override
   set sosDataListener(
-    void Function(int channelIndex, Uint8List payload)? listener,
+    void Function(int channelIndex, Uint8List payload, SosSignal signal)?
+    listener,
   ) => connector.sosDataListener = listener;
   @override
   set sosAckListener(void Function(int ackHash)? listener) =>
       connector.sosAckListener = listener;
   @override
-  Future<void> sendChannelData(Channel channel, Uint8List payload) =>
-      connector.sendSosChannelData(channel.index, payload);
+  Future<void> sendChannelData(
+    Channel channel,
+    Uint8List payload, {
+    bool zeroHop = false,
+  }) => connector.sendSosChannelData(channel.index, payload, zeroHop: zeroHop);
   @override
   Future<int?> sendDirectText(Contact contact, String text) =>
       connector.sendSosDirectText(contact, text);
@@ -223,6 +233,113 @@ class SosService extends ChangeNotifier {
   bool _wasConnected;
   Timer? _timer;
   Timer? _cancelTimer;
+
+  // ---- the radio locator ----
+  /// While our SOS is live and a responder is searching: a zero-hop beacon
+  /// every [beaconInterval], until [beaconWindow] after the last request.
+  static const Duration beaconInterval = Duration(seconds: 5);
+  static const Duration beaconWindow = Duration(minutes: 10);
+
+  /// How often a responder searching repeats its request.
+  static const Duration locateRepeat = Duration(minutes: 2);
+
+  Timer? _beaconTimer;
+  DateTime? _beaconUntil;
+  int _beaconSeq = 0;
+
+  SosLocatorSession? _locator;
+  Timer? _locateTimer;
+
+  /// The search this device is running for someone's SOS, if any.
+  SosLocatorSession? get locator => _locator;
+
+  /// A responder starts searching for [alert]'s radio: asks it for beacons
+  /// now, and again every [locateRepeat] while the search screen is open.
+  void startLocating(IncomingSos alert) {
+    if (_locator?.alertKey == alert.key) return;
+    _locator = SosLocatorSession(alertKey: alert.key, id: alert.id);
+    _locateTimer?.cancel();
+    _locateTimer = Timer.periodic(locateRepeat, (_) => _requestBeacons());
+    unawaited(_requestBeacons());
+    notifyListeners();
+  }
+
+  void stopLocating({bool notify = true}) {
+    _locateTimer?.cancel();
+    _locateTimer = null;
+    if (_locator == null) return;
+    _locator = null;
+    if (notify) notifyListeners();
+  }
+
+  Future<void> _requestBeacons() async {
+    final session = _locator;
+    if (session == null) return;
+    session.lastRequestAt = _now();
+    session.requests++;
+    notifyListeners();
+    await _sendChannelPacket(_packet(SosPacketKind.locate, session.id));
+  }
+
+  /// Someone searching for our SOS: (re)start our beacons.
+  void _onLocateRequest(String id, String from) {
+    if (_active?.id != id) return;
+    if (_beaconTimer == null) {
+      appLogger.info(
+        '$from is searching nearby: sending locator beacons',
+        tag: 'SOS',
+      );
+    }
+    _beaconUntil = _now().add(beaconWindow);
+    _beaconTimer ??= Timer.periodic(beaconInterval, (_) => _sendBeacon());
+    unawaited(_sendBeacon());
+  }
+
+  Future<void> _sendBeacon() async {
+    final sos = _active;
+    final until = _beaconUntil;
+    if (sos == null || until == null || _now().isAfter(until)) {
+      _stopBeacons();
+      return;
+    }
+    final channel = sosChannel;
+    if (channel == null || !_transport.supportsChannelData) return;
+    final packet = SosPacket(
+      kind: SosPacketKind.beacon,
+      id: sos.id,
+      senderPrefix: _transport.selfPublicKey ?? Uint8List(0),
+      senderName: _transport.selfName ?? '',
+      seq: _beaconSeq++ & 0xFF,
+    );
+    try {
+      await _transport.sendChannelData(channel, packet.encode(), zeroHop: true);
+    } catch (e) {
+      appLogger.warn('Locator beacon failed: $e', tag: 'SOS');
+    }
+  }
+
+  void _stopBeacons() {
+    _beaconTimer?.cancel();
+    _beaconTimer = null;
+    _beaconUntil = null;
+    _beaconSeq = 0;
+  }
+
+  /// A beacon from the radio being searched for.
+  void _onBeacon(SosPacket packet, SosSignal signal) {
+    final session = _locator;
+    if (session == null || session.id != packet.id || !signal.direct) return;
+    session.add(
+      SosBeaconSample(
+        at: _now(),
+        snrDb: signal.snrDb,
+        rssiDbm: signal.rssiDbm,
+        seq: packet.seq,
+      ),
+    );
+    notifyListeners();
+  }
+
   Timer? _expiryTimer;
   bool _broadcasting = false;
   bool _sendingCancel = false;
@@ -611,6 +728,7 @@ class SosService extends ChangeNotifier {
     if (sos == null) return;
     _timer?.cancel();
     _timer = null;
+    _stopBeacons();
     _active = null;
     _dmAckHashes.clear();
     final cancellation = SosCancellation(
@@ -875,7 +993,11 @@ class SosService extends ChangeNotifier {
 
   /// A channel data packet of type [dataTypeSos].
   @visibleForTesting
-  void handleInboundData(int channelIndex, Uint8List data) {
+  void handleInboundData(
+    int channelIndex,
+    Uint8List data, [
+    SosSignal signal = SosSignal.unknown,
+  ]) {
     // Only the network's own channel carries alerts.
     final networkIndex = _transport.channelsReady
         ? sosChannel?.index
@@ -883,8 +1005,12 @@ class SosService extends ChangeNotifier {
     if (networkIndex != channelIndex) return;
     final packet = SosPacket.decode(data);
     if (packet == null) return;
-    // Members only hear ACKs for their own SOS.
-    if (!isResponder && packet.kind != SosPacketKind.ack) return;
+    // Members only hear ACKs for their own SOS, and requests to locate it.
+    if (!isResponder &&
+        packet.kind != SosPacketKind.ack &&
+        packet.kind != SosPacketKind.locate) {
+      return;
+    }
     final self = _transport.selfPublicKey;
     if (self != null &&
         self.length >= SosPacket.keyPrefixSize &&
@@ -925,6 +1051,10 @@ class SosService extends ChangeNotifier {
         _handleAck(packet.id, packet.senderName, senderKeyHex);
       case SosPacketKind.cancel:
         _handleCancel(packet.id, packet.senderName, senderKeyHex);
+      case SosPacketKind.locate:
+        _onLocateRequest(packet.id, packet.senderName);
+      case SosPacketKind.beacon:
+        _onBeacon(packet, signal);
     }
   }
 
@@ -1276,11 +1406,66 @@ class SosService extends ChangeNotifier {
     _timer?.cancel();
     _cancelTimer?.cancel();
     _expiryTimer?.cancel();
+    _beaconTimer?.cancel();
+    _locateTimer?.cancel();
     _transport.removeListener(_onTransportChanged);
     _settings.removeListener(_syncNetwork);
     _transport.sosTextListener = null;
     _transport.sosDataListener = null;
     _transport.sosAckListener = null;
     super.dispose();
+  }
+}
+
+/// One beacon heard from the radio being searched for.
+class SosBeaconSample {
+  final DateTime at;
+  final double snrDb;
+  final int? rssiDbm;
+  final int? seq;
+
+  const SosBeaconSample({
+    required this.at,
+    required this.snrDb,
+    this.rssiDbm,
+    this.seq,
+  });
+
+  /// The strength the meter shows: RSSI when known (it tracks distance more
+  /// smoothly), otherwise SNR.
+  double get strength => rssiDbm?.toDouble() ?? snrDb;
+}
+
+/// A responder's search for the radio that sent an SOS: the beacons heard,
+/// newest last, and whether the signal is getting stronger.
+class SosLocatorSession {
+  final String alertKey;
+  final String id;
+  final List<SosBeaconSample> samples = [];
+  DateTime? lastRequestAt;
+  int requests = 0;
+
+  SosLocatorSession({required this.alertKey, required this.id});
+
+  static const int _keep = 120;
+
+  void add(SosBeaconSample sample) {
+    samples.add(sample);
+    if (samples.length > _keep) samples.removeAt(0);
+  }
+
+  SosBeaconSample? get latest => samples.isEmpty ? null : samples.last;
+
+  /// Stronger (positive) or weaker (negative) than a short while ago: the
+  /// mean of the last three beacons against the three before them, so one
+  /// odd reading doesn't swing it. Null until there are enough.
+  double? get trend {
+    if (samples.length < 4) return null;
+    final n = samples.length;
+    final recent = samples.sublist(n - 3);
+    final before = samples.sublist(n >= 6 ? n - 6 : 0, n - 3);
+    double mean(List<SosBeaconSample> s) =>
+        s.map((e) => e.strength).reduce((a, b) => a + b) / s.length;
+    return mean(recent) - mean(before);
   }
 }

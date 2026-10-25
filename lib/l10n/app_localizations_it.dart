@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -5478,7 +5477,8 @@ class AppLocalizationsIt extends AppLocalizations {
       locale: localeName,
       other:
           '$count salti non hanno una posizione specifica — il percorso mostrato è parziale',
-      one: '1 salto non ha una posizione specifica — il percorso mostrato è parziale',
+      one:
+          '1 salto non ha una posizione specifica — il percorso mostrato è parziale',
     );
     return '$_temp0';
   }
@@ -6826,4 +6826,69 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Ultimo ascolto';
+
+  @override
+  String get sosLocator_button => 'Localizza';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Localizza $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'In attesa del primo segnale…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Ultimo segnale $seconds s fa · $count ricevuti';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Come funziona';
+
+  @override
+  String get sosLocator_how =>
+      'La tua radio chiede alla sua un segnale ogni 5 secondi. I segnali vanno da radio a radio, mai tramite un ripetitore, quindi li senti solo nel suo raggio diretto. Fino ad allora, vai all\'ultima posizione nota.';
+
+  @override
+  String get sosLocator_tip =>
+      'Quando senti i segnali, cammina un po\', fermati e aspetta il successivo: più forte vuol dire più vicino. Gira lentamente sul posto, il tuo corpo blocca il segnale da dietro.';
+
+  @override
+  String get sosLocator_lastPosition => 'Ultima posizione nota';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Richiesto $count volte · di nuovo tra $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Ancora nessun segnale';
+
+  @override
+  String get sosLocator_veryClose => 'Vicinissimo';
+
+  @override
+  String get sosLocator_close => 'Vicino';
+
+  @override
+  String get sosLocator_nearby => 'Nei paraggi';
+
+  @override
+  String get sosLocator_faint => 'Debole';
+
+  @override
+  String get sosLocator_lost => 'Segnale perso: torna un po\' indietro';
+
+  @override
+  String get sosLocator_keepMoving => 'Continua a muoverti e ascoltare';
+
+  @override
+  String get sosLocator_warmer => 'Caldo: ti avvicini';
+
+  @override
+  String get sosLocator_colder => 'Freddo: ti allontani';
+
+  @override
+  String get sosLocator_steady => 'Più o meno uguale';
 }

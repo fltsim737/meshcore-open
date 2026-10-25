@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6508,4 +6507,69 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => '最終受信';
+
+  @override
+  String get sosLocator_button => '位置を探す';
+
+  @override
+  String sosLocator_title(String name) {
+    return '$name を探す';
+  }
+
+  @override
+  String get sosLocator_waiting => '最初のビーコンを待っています…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return '最後のビーコン $seconds 秒前 · $count 回受信';
+  }
+
+  @override
+  String get sosLocator_howTitle => '仕組み';
+
+  @override
+  String get sosLocator_how =>
+      'あなたの無線機が相手に5秒ごとのビーコン送信を依頼します。ビーコンは中継器を通らず無線機どうしで直接届くため、直接届く範囲に入るまでは聞こえません。それまでは最後の既知の位置へ向かってください。';
+
+  @override
+  String get sosLocator_tip =>
+      'ビーコンが聞こえたら、少し歩いて止まり、次を待ちます。強いほど近くです。体が背後の電波を遮るので、その場でゆっくり向きを変えてください。';
+
+  @override
+  String get sosLocator_lastPosition => '最後の既知の位置';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return '$count 回依頼 · $seconds 秒後に再依頼';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'まだ信号なし';
+
+  @override
+  String get sosLocator_veryClose => 'すぐ近く';
+
+  @override
+  String get sosLocator_close => '近い';
+
+  @override
+  String get sosLocator_nearby => '付近';
+
+  @override
+  String get sosLocator_faint => '弱い';
+
+  @override
+  String get sosLocator_lost => '信号を見失いました: 少し戻ってください';
+
+  @override
+  String get sosLocator_keepMoving => '移動しながら聞き続けてください';
+
+  @override
+  String get sosLocator_warmer => '近づいています';
+
+  @override
+  String get sosLocator_colder => '遠ざかっています';
+
+  @override
+  String get sosLocator_steady => 'ほぼ同じ';
 }

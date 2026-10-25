@@ -374,7 +374,13 @@ class MeshCoreConnector extends ChangeNotifier {
   /// SOS hooks; see SosService. SOS, ACK and cancellation texts go only to
   /// [sosTextListener] and never into chat history.
   void Function(SosInboundText inbound)? sosTextListener;
-  void Function(int channelIndex, Uint8List payload)? sosDataListener;
+  void Function(int channelIndex, Uint8List payload, SosSignal signal)?
+  sosDataListener;
+  // the latest raw packet heard (from the RX log), to give an SOS packet its
+  // received signal strength: the log frame arrives just before the decoded one
+  int? _lastRxRssi;
+  int? _lastRxSnrRaw;
+  DateTime? _lastRxAt;
   void Function(int ackHash)? sosAckListener;
   void Function(int senderPrefix)? _onImageSenderPrefix;
   // Intentionally global (not per-contact): tracks overall network activity.
@@ -5017,8 +5023,13 @@ class MeshCoreConnector extends ChangeNotifier {
   /// (unsupported command), 2 (bad channel index), 3 (packet pool full, worth
   /// retrying) or 6 (illegal arg — blob too long or bad data type), or a
   /// TimeoutException after _commandAckTimeout.
-  /// Sends an SOS packet as channel data (flood), outside chat history.
-  Future<void> sendSosChannelData(int channelIndex, Uint8List payload) async {
+  /// Sends an SOS packet as channel data, outside chat history: flooded, or
+  /// [zeroHop] (a locator beacon), which only radios in direct range hear.
+  Future<void> sendSosChannelData(
+    int channelIndex,
+    Uint8List payload, {
+    bool zeroHop = false,
+  }) async {
     if (!supportsChannelData) return;
     await _runScopedChannelSend(() async {
       await _waitForRadioQuiet(lastInboundRxTime: _lastChannelMsgRxTime);
@@ -5027,6 +5038,8 @@ class MeshCoreConnector extends ChangeNotifier {
           channelIndex: channelIndex,
           dataType: dataTypeSos,
           payload: payload,
+          pathLen: zeroHop ? 0 : outPathUnknown,
+          path: zeroHop ? Uint8List(0) : null,
         ),
       );
     }, region: _channelSendScope(channelIndex));
@@ -7579,7 +7592,22 @@ class MeshCoreConnector extends ChangeNotifier {
     final parsed = parseChannelDataFrame(frame);
     if (parsed == null || parsed.dataType != dataTypeSos) return false;
     _lastChannelMsgRxTime = DateTime.now();
-    sosDataListener?.call(parsed.channelIndex, parsed.payload);
+    final logAt = _lastRxAt;
+    final rssi =
+        logAt != null &&
+            DateTime.now().difference(logAt) < const Duration(seconds: 1) &&
+            _lastRxSnrRaw == parsed.snrRaw
+        ? _lastRxRssi
+        : null;
+    sosDataListener?.call(
+      parsed.channelIndex,
+      parsed.payload,
+      SosSignal(
+        snrDb: parsed.snrDb,
+        direct: !parsed.arrivedByFlood,
+        rssiDbm: rssi,
+      ),
+    );
     return true;
   }
 
@@ -7645,6 +7673,9 @@ class MeshCoreConnector extends ChangeNotifier {
 
   void _handleLogRxData(Uint8List frame) async {
     if (frame.length < 4) return;
+    _lastRxSnrRaw = frame[1] >= 128 ? frame[1] - 256 : frame[1];
+    _lastRxRssi = frame[2] >= 128 ? frame[2] - 256 : frame[2];
+    _lastRxAt = DateTime.now();
     try {
       final reader = BufferReader(frame);
       reader.skipBytes(3); // Skip header

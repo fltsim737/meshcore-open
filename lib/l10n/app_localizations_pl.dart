@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6847,4 +6846,69 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Ostatnio słyszany';
+
+  @override
+  String get sosLocator_button => 'Zlokalizuj';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Zlokalizuj $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Czekam na pierwszy sygnał…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Ostatni sygnał $seconds s temu · odebrano $count';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Jak to działa';
+
+  @override
+  String get sosLocator_how =>
+      'Twoje radio prosi tamto o sygnał co 5 sekund. Sygnały idą bezpośrednio od radia do radia, nigdy przez przekaźnik, więc słyszysz je tylko w bezpośrednim zasięgu. Do tego czasu idź do ostatniej znanej pozycji.';
+
+  @override
+  String get sosLocator_tip =>
+      'Gdy słyszysz sygnały: przejdź kawałek, zatrzymaj się i poczekaj na następny. Silniejszy znaczy bliżej. Obracaj się powoli w miejscu, bo twoje ciało zasłania sygnał z tyłu.';
+
+  @override
+  String get sosLocator_lastPosition => 'Ostatnia znana pozycja';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Zapytano $count razy · ponownie za $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Brak sygnału';
+
+  @override
+  String get sosLocator_veryClose => 'Bardzo blisko';
+
+  @override
+  String get sosLocator_close => 'Blisko';
+
+  @override
+  String get sosLocator_nearby => 'W pobliżu';
+
+  @override
+  String get sosLocator_faint => 'Słaby';
+
+  @override
+  String get sosLocator_lost => 'Sygnał utracony: cofnij się trochę';
+
+  @override
+  String get sosLocator_keepMoving => 'Idź dalej i nasłuchuj';
+
+  @override
+  String get sosLocator_warmer => 'Cieplej: zbliżasz się';
+
+  @override
+  String get sosLocator_colder => 'Zimniej: oddalasz się';
+
+  @override
+  String get sosLocator_steady => 'Mniej więcej tak samo';
 }

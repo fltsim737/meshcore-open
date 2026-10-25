@@ -154,6 +154,8 @@ When the sender cancels, the alert is deleted: the alarm and warning screen stop
 
 The same alert often arrives twice within a second or two: on the network and by direct message, when you are both a responder and one of the sender's emergency contacts. Both copies update the one alert, and the alarm sounds again only for a repeat heard 30 seconds or more after it last sounded. Sounding it again sooner would silence Android's looping alarm instead.
 
+**Locate.** A responder on the emergency network can press **Locate** on an incoming alert to home in on the sender's radio. Their radio sends a locate request on the network; while its SOS is active, the sender's radio (MeshCore Open SOS 9.5.4 or later, or a radio that supports it) answers with a beacon every 5 seconds, for 10 minutes after the last request, and stops when the SOS is cancelled. Beacons are sent zero hop, so they are only heard within direct range and never passed on by a repeater: their strength (RSSI and SNR) tells the responder how close they are. The Locate screen shows a gauge, a warmer or colder trend, the time since the last beacon and a graph, and repeats the request every 2 minutes while open. Members' phones answer requests for their own SOS but never search.
+
 **Info line.** A sender's radio can add a line of text to the SOS, such as a short address, a gate code or how to find the house. The MeshCore SOS button firmware does this. It is shown on the warning screen, the alert in the Emergency tab and the notification. It travels after the public key in the channel packet and as an `Info:` line in the direct message, so older builds ignore it.
 
 On the sending phone, each new responder's ACK raises an "SOS acknowledged by …" notification.

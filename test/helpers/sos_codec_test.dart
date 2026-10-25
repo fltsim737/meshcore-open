@@ -299,4 +299,30 @@ void main() {
     expect(SosCodec.isStructured('ACK #a1b2'), isTrue);
     expect(SosCodec.isStructured('ACK received'), isFalse);
   });
+
+  test('locate and beacon round trip, and match the firmware bytes', () {
+    final prefix = Uint8List.fromList(List.generate(6, (i) => 0x10 + i));
+    final locate = SosPacket(
+      kind: SosPacketKind.locate,
+      id: 'a1b2',
+      senderPrefix: prefix,
+      senderName: 'Pat',
+    ).encode();
+    // [1][4][b2 a1][prefix x6][3]"Pat", as SosCodec::encodeLocator writes it
+    expect(locate, [1, 4, 0xb2, 0xa1, ...prefix, 3, 0x50, 0x61, 0x74]);
+    final back = SosPacket.decode(locate)!;
+    expect(back.kind, SosPacketKind.locate);
+    expect(back.senderName, 'Pat');
+
+    final beacon = SosPacket(
+      kind: SosPacketKind.beacon,
+      id: 'a1b2',
+      senderPrefix: prefix,
+      senderName: 'Nan',
+      seq: 7,
+    ).encode();
+    expect(beacon.length, 11 + 3 + 1);
+    expect(beacon.last, 7);
+    expect(SosPacket.decode(beacon)!.seq, 7);
+  });
 }

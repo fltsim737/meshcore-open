@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6795,4 +6794,69 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Naposledy počuté';
+
+  @override
+  String get sosLocator_button => 'Lokalizovať';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Lokalizovať $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Čaká sa na prvý signál…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Posledný signál pred $seconds s · prijatých $count';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Ako to funguje';
+
+  @override
+  String get sosLocator_how =>
+      'Vaše rádio žiada to druhé o signál každých 5 sekúnd. Signály idú priamo z rádia do rádia, nikdy cez opakovač, takže ich počujete len v priamom dosahu. Dovtedy choďte na poslednú známu polohu.';
+
+  @override
+  String get sosLocator_tip =>
+      'Keď počujete signály: prejdite kúsok, zastavte sa a počkajte na ďalší. Silnejší znamená bližšie. Pomaly sa otáčajte na mieste, vaše telo tieni signál zozadu.';
+
+  @override
+  String get sosLocator_lastPosition => 'Posledná známa poloha';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Vyžiadané $count× · znova o $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Zatiaľ bez signálu';
+
+  @override
+  String get sosLocator_veryClose => 'Veľmi blízko';
+
+  @override
+  String get sosLocator_close => 'Blízko';
+
+  @override
+  String get sosLocator_nearby => 'Nablízku';
+
+  @override
+  String get sosLocator_faint => 'Slabý';
+
+  @override
+  String get sosLocator_lost => 'Signál stratený: vráťte sa kúsok';
+
+  @override
+  String get sosLocator_keepMoving => 'Pokračujte a počúvajte';
+
+  @override
+  String get sosLocator_warmer => 'Teplejšie: bližšie';
+
+  @override
+  String get sosLocator_colder => 'Chladnejšie: ďalej';
+
+  @override
+  String get sosLocator_steady => 'Približne rovnako';
 }

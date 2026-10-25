@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6518,4 +6517,69 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => '마지막 수신';
+
+  @override
+  String get sosLocator_button => '위치 찾기';
+
+  @override
+  String sosLocator_title(String name) {
+    return '$name 찾기';
+  }
+
+  @override
+  String get sosLocator_waiting => '첫 비콘을 기다리는 중…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return '마지막 비콘 $seconds초 전 · $count회 수신';
+  }
+
+  @override
+  String get sosLocator_howTitle => '작동 방식';
+
+  @override
+  String get sosLocator_how =>
+      '내 무전기가 상대 무전기에 5초마다 비콘을 보내 달라고 요청합니다. 비콘은 중계기를 거치지 않고 무전기끼리 직접 전달되므로 직접 닿는 거리 안에서만 들립니다. 그 전까지는 마지막으로 알려진 위치로 가세요.';
+
+  @override
+  String get sosLocator_tip =>
+      '비콘이 들리면 조금 걷고 멈춰서 다음 비콘을 기다리세요. 강할수록 가깝습니다. 몸이 뒤쪽 신호를 막으므로 제자리에서 천천히 돌아보세요.';
+
+  @override
+  String get sosLocator_lastPosition => '마지막으로 알려진 위치';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return '$count회 요청 · $seconds초 후 다시 요청';
+  }
+
+  @override
+  String get sosLocator_noSignal => '아직 신호 없음';
+
+  @override
+  String get sosLocator_veryClose => '매우 가까움';
+
+  @override
+  String get sosLocator_close => '가까움';
+
+  @override
+  String get sosLocator_nearby => '근처';
+
+  @override
+  String get sosLocator_faint => '약함';
+
+  @override
+  String get sosLocator_lost => '신호를 잃었습니다: 조금 돌아가세요';
+
+  @override
+  String get sosLocator_keepMoving => '계속 이동하며 들어 보세요';
+
+  @override
+  String get sosLocator_warmer => '가까워지는 중';
+
+  @override
+  String get sosLocator_colder => '멀어지는 중';
+
+  @override
+  String get sosLocator_steady => '비슷함';
 }

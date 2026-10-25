@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6367,4 +6366,69 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => '上次收到';
+
+  @override
+  String get sosLocator_button => '定位';
+
+  @override
+  String sosLocator_title(String name) {
+    return '定位 $name';
+  }
+
+  @override
+  String get sosLocator_waiting => '正在等待第一个信标…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return '上个信标 $seconds 秒前 · 已收到 $count 个';
+  }
+
+  @override
+  String get sosLocator_howTitle => '工作原理';
+
+  @override
+  String get sosLocator_how =>
+      '你的电台请求对方每 5 秒发送一次信标。信标只在电台之间直接传送，从不经过中继，所以只有进入直接通信范围才能收到。在此之前，请前往最后已知位置。';
+
+  @override
+  String get sosLocator_tip =>
+      '收到信标后，走一小段、停下，等待下一个：越强越近。在原地慢慢转身，因为你的身体会挡住背后的信号。';
+
+  @override
+  String get sosLocator_lastPosition => '最后已知位置';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return '已请求 $count 次 · $seconds 秒后再次请求';
+  }
+
+  @override
+  String get sosLocator_noSignal => '尚无信号';
+
+  @override
+  String get sosLocator_veryClose => '非常近';
+
+  @override
+  String get sosLocator_close => '近';
+
+  @override
+  String get sosLocator_nearby => '附近';
+
+  @override
+  String get sosLocator_faint => '微弱';
+
+  @override
+  String get sosLocator_lost => '信号丢失：往回走一点';
+
+  @override
+  String get sosLocator_keepMoving => '继续移动并收听';
+
+  @override
+  String get sosLocator_warmer => '变热：越来越近';
+
+  @override
+  String get sosLocator_colder => '变冷：越来越远';
+
+  @override
+  String get sosLocator_steady => '差不多';
 }

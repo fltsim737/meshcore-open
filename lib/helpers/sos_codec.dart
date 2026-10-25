@@ -194,7 +194,14 @@ const int dataTypeSos = 0x5053;
 enum SosPacketKind {
   sos(1),
   ack(2),
-  cancel(3);
+  cancel(3),
+
+  /// A responder asks the SOS sender to send [beacon]s, to home in on it.
+  locate(4),
+
+  /// Sent zero hop by the SOS sender while someone is locating it: only radios
+  /// in direct range hear one, so its signal strength says how near it is.
+  beacon(5);
 
   final int code;
   const SosPacketKind(this.code);
@@ -209,6 +216,9 @@ enum SosPacketKind {
 ///
 /// An SOS may carry, after the full key, `[info len][info...]`: a line of
 /// text such as a short address, sent by the MeshCore SOS button firmware.
+///
+/// A locate request is just the header up to the name; a beacon adds
+/// `[seq]`. Builds before 9.5.3 don't know these kinds and ignore them.
 class SosPacket {
   static const int version = 1;
   static const int keyPrefixSize = 6;
@@ -232,6 +242,9 @@ class SosPacket {
   /// carries [senderKey]; older builds stop reading before it.
   final String? info;
 
+  /// A beacon's number, counting up from 0; null for other kinds.
+  final int? seq;
+
   const SosPacket({
     required this.kind,
     required this.id,
@@ -241,6 +254,7 @@ class SosPacket {
     this.fix = const SosFix.none(),
     this.senderKey,
     this.info,
+    this.seq,
   });
 
   bool get _carriesKey =>
@@ -260,6 +274,11 @@ class SosPacket {
     out
       ..addByte(name.length)
       ..add(name);
+    if (kind == SosPacketKind.locate) return out.toBytes();
+    if (kind == SosPacketKind.beacon) {
+      out.addByte((seq ?? 0) & 0xFF);
+      return out.toBytes();
+    }
     if (kind == SosPacketKind.ack) {
       if (_carriesKey) out.add(senderKey!);
       return out.toBytes();
@@ -307,6 +326,17 @@ class SosPacket {
         allowMalformed: true,
       );
       offset += nameLength;
+      if (kind == SosPacketKind.locate || kind == SosPacketKind.beacon) {
+        return SosPacket(
+          kind: kind,
+          id: id,
+          senderPrefix: prefix,
+          senderName: name,
+          seq: kind == SosPacketKind.beacon && data.length > offset
+              ? data[offset]
+              : null,
+        );
+      }
       if (kind == SosPacketKind.ack) {
         return SosPacket(
           kind: kind,
@@ -415,4 +445,17 @@ class SosPacket {
     final v = _readU32(d, o);
     return v >= 0x80000000 ? v - 0x100000000 : v;
   }
+}
+
+/// How a packet was heard: its signal-to-noise ratio, whether it came straight
+/// from the sender's radio (no repeater between), and its received signal
+/// strength when the radio's raw packet log gave it.
+class SosSignal {
+  final double snrDb;
+  final bool direct;
+  final int? rssiDbm;
+
+  const SosSignal({required this.snrDb, required this.direct, this.rssiDbm});
+
+  static const unknown = SosSignal(snrDb: 0, direct: false);
 }
