@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6891,4 +6890,69 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Ouvido há';
+
+  @override
+  String get sosLocator_button => 'Localizar';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Localizar $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'À espera do primeiro sinal…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Último sinal há $seconds s · $count recebidos';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Como funciona';
+
+  @override
+  String get sosLocator_how =>
+      'O seu rádio pede ao dela um sinal a cada 5 segundos. Os sinais vão de rádio para rádio, nunca por um repetidor, por isso só os ouve ao alcance direto. Até lá, dirija-se à última posição conhecida.';
+
+  @override
+  String get sosLocator_tip =>
+      'Quando ouvir sinais, ande um pouco, pare e espere pelo seguinte: mais forte é mais perto. Rode devagar no local, o seu corpo bloqueia o sinal por trás.';
+
+  @override
+  String get sosLocator_lastPosition => 'Última posição conhecida';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Pedido $count vezes · novamente em $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Ainda sem sinal';
+
+  @override
+  String get sosLocator_veryClose => 'Muito perto';
+
+  @override
+  String get sosLocator_close => 'Perto';
+
+  @override
+  String get sosLocator_nearby => 'Por perto';
+
+  @override
+  String get sosLocator_faint => 'Fraco';
+
+  @override
+  String get sosLocator_lost => 'Sinal perdido: volte um pouco';
+
+  @override
+  String get sosLocator_keepMoving => 'Continue a andar e a ouvir';
+
+  @override
+  String get sosLocator_warmer => 'Quente: mais perto';
+
+  @override
+  String get sosLocator_colder => 'Frio: mais longe';
+
+  @override
+  String get sosLocator_steady => 'Mais ou menos igual';
 }

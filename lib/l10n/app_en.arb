@@ -4241,5 +4241,51 @@
       }
     }
   },
-  "contacts_lastHeard": "Last heard"
+  "contacts_lastHeard": "Last heard",
+  "sosLocator_button": "Locate",
+  "sosLocator_title": "Locate {name}",
+  "@sosLocator_title": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sosLocator_waiting": "Waiting for the first beacon…",
+  "sosLocator_lastBeacon": "Last beacon {seconds} s ago · {count} heard",
+  "@sosLocator_lastBeacon": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sosLocator_howTitle": "How it works",
+  "sosLocator_how": "Your radio asks theirs to send a beacon every 5 seconds. Beacons go radio to radio, never through a repeater, so you only hear them within direct range of it. Until then, head for the last known position.",
+  "sosLocator_tip": "When you hear beacons, walk a short way, stop, and wait for the next one: stronger means closer. Turn slowly on the spot, as your body blocks the signal from behind you.",
+  "sosLocator_lastPosition": "Last known position",
+  "sosLocator_requests": "{count, plural, =1{Asked once} other{Asked {count} times}} · asking again in {seconds} s",
+  "@sosLocator_requests": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "sosLocator_noSignal": "No signal yet",
+  "sosLocator_veryClose": "Very close",
+  "sosLocator_close": "Close",
+  "sosLocator_nearby": "Nearby",
+  "sosLocator_faint": "Faint",
+  "sosLocator_lost": "Lost the signal: go back a little",
+  "sosLocator_keepMoving": "Keep moving and listening",
+  "sosLocator_warmer": "Warmer: getting closer",
+  "sosLocator_colder": "Colder: getting further",
+  "sosLocator_steady": "About the same"
 }

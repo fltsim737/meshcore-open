@@ -22,6 +22,7 @@ import 'chat_screen.dart';
 import 'contacts_screen.dart';
 import 'map_screen.dart';
 import 'sos_history_screen.dart';
+import 'sos_locator_screen.dart';
 
 String sosSourceLabel(AppLocalizations l10n, SosLocationSource source) =>
     switch (source) {
@@ -513,6 +514,20 @@ class _IncomingSosCard extends StatelessWidget {
                       icon: const Icon(Icons.chat_bubble_outline),
                       label: Text(l10n.sos_message),
                       onPressed: () => _openChat(context, contact),
+                    ),
+                  // Responders on the network: home in on the radio, close up
+                  if (service.isResponder &&
+                      service.sosChannel != null &&
+                      service.isConnected)
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.radar),
+                      label: Text(l10n.sosLocator_button),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SosLocatorScreen(alert: alert),
+                        ),
+                      ),
                     ),
                   // Deletes the alert and its position from this phone.
                   OutlinedButton(

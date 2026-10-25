@@ -75,7 +75,8 @@ void main() {
     'SOS packets held until the channel list is read are delivered',
     () async {
       final received = <(int, Uint8List)>[];
-      connector.sosDataListener = (index, data) => received.add((index, data));
+      connector.sosDataListener = (index, data, _) =>
+          received.add((index, data));
       radio = ReviewRadio(
         scheduledMessageInterval: const Duration(hours: 1),
         replyDelay: const Duration(hours: 1),
@@ -114,7 +115,8 @@ void main() {
   test('SOS packets reach the listener with image messages off', () async {
     await _connect();
     final received = <(int, Uint8List)>[];
-    connector.sosDataListener = (index, data) => received.add((index, data));
+    connector.sosDataListener = (index, data, _) =>
+          received.add((index, data));
     final packet = SosPacket(
       kind: SosPacketKind.sos,
       id: 'a1b2',

@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6888,4 +6887,69 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Utoljára hallott';
+
+  @override
+  String get sosLocator_button => 'Bemérés';
+
+  @override
+  String sosLocator_title(String name) {
+    return '$name bemérése';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Várakozás az első jelre…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Utolsó jel $seconds mp-e · $count fogadva';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Hogyan működik';
+
+  @override
+  String get sosLocator_how =>
+      'A rádiód 5 másodpercenként jelet kér a másiktól. A jelek közvetlenül rádióról rádióra mennek, sosem átjátszón át, így csak közvetlen hatótávon belül hallod őket. Addig menj az utolsó ismert helyre.';
+
+  @override
+  String get sosLocator_tip =>
+      'Ha hallod a jeleket: menj egy kicsit, állj meg, és várd a következőt. Erősebb = közelebb. Fordulj lassan körbe, a tested hátulról leárnyékolja a jelet.';
+
+  @override
+  String get sosLocator_lastPosition => 'Utolsó ismert hely';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return '$count× kérve · újra $seconds mp múlva';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Még nincs jel';
+
+  @override
+  String get sosLocator_veryClose => 'Nagyon közel';
+
+  @override
+  String get sosLocator_close => 'Közel';
+
+  @override
+  String get sosLocator_nearby => 'A közelben';
+
+  @override
+  String get sosLocator_faint => 'Gyenge';
+
+  @override
+  String get sosLocator_lost => 'Elveszett a jel: menj vissza kicsit';
+
+  @override
+  String get sosLocator_keepMoving => 'Haladj tovább és figyelj';
+
+  @override
+  String get sosLocator_warmer => 'Melegebb: közeledsz';
+
+  @override
+  String get sosLocator_colder => 'Hidegebb: távolodsz';
+
+  @override
+  String get sosLocator_steady => 'Nagyjából ugyanaz';
 }

@@ -73,7 +73,9 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 ### Receiving
 
-A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. On Android an alarm-volume sound loops until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
+A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·), so it can't be mistaken for other emergency apps' alerts; on Android it loops at alarm volume until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
+
+**Locate** helps a responder close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and the responder's screen shows how strong each one is and whether they're getting warmer or colder.
 
 Each SOS and ACK carries the sender's public key, so the two phones save each other as contacts automatically. A **Message** button then opens an ordinary direct chat, with no exchange of adverts beforehand.
 
@@ -88,6 +90,7 @@ Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on e
 | Packet | Carried as | Who can read it |
 |---|---|---|
 | SOS, ACK, cancel | Channel data type `0x5053` on the emergency network | MeshCore Open SOS / SOS Voice holders of the network code |
+| Locate request, locator beacon | Channel data type `0x5053`; beacons are sent zero hop | MeshCore Open SOS / SOS Voice holders of the network code |
 | Voice clip | Channel data type `0x5356` (SV) on the emergency network | SOS Voice holders of the network code |
 | SOS DM to emergency contacts | Plain text, under 160 bytes | Any MeshCore app |
 | Repeater owner info | Existing `GET_OWNER_INFO` request (`0x07`) | Any guest of the repeater |
@@ -171,7 +174,8 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 2. Press **Send ACK** so the sender knows they've been heard. Other responders see that you've acknowledged.
 3. Use **Map** or copy the coordinates to navigate.
 4. Press **Message** to chat with the sender directly.
-5. **Dismiss** removes it from your phone without replying. A repeat brings it back.
+5. Near the sender but can't find them? Press **Locate** and follow the signal: walk a little, stop, and wait for the next beacon. Stronger means closer.
+6. **Dismiss** removes it from your phone without replying. A repeat brings it back.
 
 ### 6. Talking (SOS Voice only)
 

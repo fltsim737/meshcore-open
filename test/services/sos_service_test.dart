@@ -58,7 +58,8 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   }
 
   void Function(SosInboundText inbound)? textListener;
-  void Function(int channelIndex, Uint8List payload)? dataListener;
+  void Function(int channelIndex, Uint8List payload, SosSignal signal)?
+  dataListener;
   void Function(int ackHash)? ackListener;
 
   /// (channel index, decoded packet) for every channel send.
@@ -73,14 +74,23 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   set sosTextListener(void Function(SosInboundText inbound)? value) =>
       textListener = value;
   @override
-  set sosDataListener(void Function(int, Uint8List)? value) =>
+  set sosDataListener(void Function(int, Uint8List, SosSignal)? value) =>
       dataListener = value;
   @override
   set sosAckListener(void Function(int ackHash)? value) => ackListener = value;
 
   @override
-  Future<void> sendChannelData(Channel channel, Uint8List payload) async =>
-      channelPackets.add((channel.index, SosPacket.decode(payload)!));
+  Future<void> sendChannelData(
+    Channel channel,
+    Uint8List payload, {
+    bool zeroHop = false,
+  }) async {
+    channelPackets.add((channel.index, SosPacket.decode(payload)!));
+    if (zeroHop) zeroHopPackets.add(SosPacket.decode(payload)!);
+  }
+
+  /// Packets sent zero hop (locator beacons).
+  final zeroHopPackets = <SosPacket>[];
 
   @override
   Future<int?> sendDirectText(Contact contact, String text) async {
@@ -225,8 +235,11 @@ void main() {
   );
 
   /// A packet on the network channel (slot 2) unless [channel] says not.
-  void hear(Uint8List packet, {int channel = 2}) =>
-      transport.dataListener!(channel, packet);
+  void hear(
+    Uint8List packet, {
+    int channel = 2,
+    SosSignal signal = SosSignal.unknown,
+  }) => transport.dataListener!(channel, packet, signal);
 
   setUp(() async {
     now = DateTime(2026, 10, 21, 9);
@@ -609,6 +622,82 @@ void main() {
     });
   });
 
+  group('locator', () {
+    Future<void> settle() async {
+      for (var i = 0; i < 5; i++) {
+        await Future<void>.delayed(Duration.zero);
+      }
+    }
+
+    const direct = SosSignal(snrDb: 6.5, direct: true, rssiDbm: -92);
+
+    test('a locate request for our SOS sends a beacon zero hop', () async {
+      await service.activate();
+      final id = service.active!.id;
+      hear(sosPacketFrom('Pat', 5, 'ffff', kind: SosPacketKind.locate));
+      await settle();
+      expect(transport.zeroHopPackets, isEmpty); // not our SOS
+      hear(sosPacketFrom('Pat', 5, id, kind: SosPacketKind.locate));
+      await settle();
+      final beacon = transport.zeroHopPackets.single;
+      expect(beacon.kind, SosPacketKind.beacon);
+      expect(beacon.id, id);
+      expect(beacon.seq, 0);
+      await service.cancel(); // stops the beacons with the SOS
+    });
+
+    test('a member still answers a locate request for its own SOS', () async {
+      await service.joinNetwork(farmNetwork(SosNetworkRole.member));
+      await service.activate();
+      hear(
+        sosPacketFrom('Pat', 5, service.active!.id, kind: SosPacketKind.locate),
+      );
+      await settle();
+      expect(transport.zeroHopPackets, hasLength(1));
+      await service.cancel();
+    });
+
+    test(
+      'a responder searching asks for beacons and counts direct ones',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+        final alert = service.incoming.single;
+        service.startLocating(alert);
+        await settle();
+        final (_, request) = transport.channelPackets.last;
+        expect(request.kind, SosPacketKind.locate);
+        expect(request.id, 'a1b2');
+
+        Uint8List beacon(int seq) => SosPacket(
+          kind: SosPacketKind.beacon,
+          id: 'a1b2',
+          senderPrefix: Uint8List.fromList(List.filled(6, 9)),
+          senderName: 'Ridge',
+          seq: seq,
+        ).encode();
+        hear(beacon(0), signal: const SosSignal(snrDb: 3, direct: false));
+        expect(service.locator!.samples, isEmpty); // came through a repeater
+        for (var i = 0; i < 6; i++) {
+          hear(
+            beacon(i),
+            signal: SosSignal(
+              snrDb: i.toDouble(),
+              direct: true,
+              rssiDbm: -110 + i * 3,
+            ),
+          );
+        }
+        expect(service.locator!.samples, hasLength(6));
+        expect(service.locator!.latest!.rssiDbm, -95);
+        expect(service.locator!.trend, greaterThan(0)); // getting closer
+        hear(beacon(9), signal: direct);
+        expect(service.locator!.latest!.seq, 9);
+        service.stopLocating();
+        expect(service.locator, isNull);
+      },
+    );
+  });
+
   group('receiving', () {
     test('a channel packet raises an alert linked to the contact', () {
       final ridge = contactFor('Ridge', 9);
@@ -772,6 +861,7 @@ void main() {
           time: now,
           info: 'Lot 14, gate 2',
         ).encode(),
+        SosSignal.unknown,
       );
       expect(service.incoming.single.info, 'Lot 14, gate 2');
       hear(sosPacketFrom('Hut', 4, 'c3d4')); // a repeat without it keeps it

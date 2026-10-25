@@ -11568,6 +11568,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last heard'**
   String get contacts_lastHeard;
+
+  /// No description provided for @sosLocator_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Locate'**
+  String get sosLocator_button;
+
+  /// No description provided for @sosLocator_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Locate {name}'**
+  String sosLocator_title(String name);
+
+  /// No description provided for @sosLocator_waiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for the first beacon…'**
+  String get sosLocator_waiting;
+
+  /// No description provided for @sosLocator_lastBeacon.
+  ///
+  /// In en, this message translates to:
+  /// **'Last beacon {seconds} s ago · {count} heard'**
+  String sosLocator_lastBeacon(int seconds, int count);
+
+  /// No description provided for @sosLocator_howTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How it works'**
+  String get sosLocator_howTitle;
+
+  /// No description provided for @sosLocator_how.
+  ///
+  /// In en, this message translates to:
+  /// **'Your radio asks theirs to send a beacon every 5 seconds. Beacons go radio to radio, never through a repeater, so you only hear them within direct range of it. Until then, head for the last known position.'**
+  String get sosLocator_how;
+
+  /// No description provided for @sosLocator_tip.
+  ///
+  /// In en, this message translates to:
+  /// **'When you hear beacons, walk a short way, stop, and wait for the next one: stronger means closer. Turn slowly on the spot, as your body blocks the signal from behind you.'**
+  String get sosLocator_tip;
+
+  /// No description provided for @sosLocator_lastPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Last known position'**
+  String get sosLocator_lastPosition;
+
+  /// No description provided for @sosLocator_requests.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Asked once} other{Asked {count} times}} · asking again in {seconds} s'**
+  String sosLocator_requests(int count, int seconds);
+
+  /// No description provided for @sosLocator_noSignal.
+  ///
+  /// In en, this message translates to:
+  /// **'No signal yet'**
+  String get sosLocator_noSignal;
+
+  /// No description provided for @sosLocator_veryClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Very close'**
+  String get sosLocator_veryClose;
+
+  /// No description provided for @sosLocator_close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get sosLocator_close;
+
+  /// No description provided for @sosLocator_nearby.
+  ///
+  /// In en, this message translates to:
+  /// **'Nearby'**
+  String get sosLocator_nearby;
+
+  /// No description provided for @sosLocator_faint.
+  ///
+  /// In en, this message translates to:
+  /// **'Faint'**
+  String get sosLocator_faint;
+
+  /// No description provided for @sosLocator_lost.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost the signal: go back a little'**
+  String get sosLocator_lost;
+
+  /// No description provided for @sosLocator_keepMoving.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep moving and listening'**
+  String get sosLocator_keepMoving;
+
+  /// No description provided for @sosLocator_warmer.
+  ///
+  /// In en, this message translates to:
+  /// **'Warmer: getting closer'**
+  String get sosLocator_warmer;
+
+  /// No description provided for @sosLocator_colder.
+  ///
+  /// In en, this message translates to:
+  /// **'Colder: getting further'**
+  String get sosLocator_colder;
+
+  /// No description provided for @sosLocator_steady.
+  ///
+  /// In en, this message translates to:
+  /// **'About the same'**
+  String get sosLocator_steady;
 }
 
 class _AppLocalizationsDelegate

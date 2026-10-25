@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6898,4 +6897,69 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Oído por última vez';
+
+  @override
+  String get sosLocator_button => 'Localizar';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Localizar a $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Esperando la primera baliza…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Última baliza hace $seconds s · $count recibidas';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Cómo funciona';
+
+  @override
+  String get sosLocator_how =>
+      'Tu radio pide a la suya una baliza cada 5 segundos. Las balizas van de radio a radio, nunca por un repetidor, así que solo las oyes dentro de su alcance directo. Hasta entonces, dirígete a la última posición conocida.';
+
+  @override
+  String get sosLocator_tip =>
+      'Cuando oigas balizas, camina un poco, detente y espera la siguiente: más fuerte es más cerca. Gira despacio en el sitio, ya que tu cuerpo bloquea la señal por detrás.';
+
+  @override
+  String get sosLocator_lastPosition => 'Última posición conocida';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Pedido $count veces · de nuevo en $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Aún sin señal';
+
+  @override
+  String get sosLocator_veryClose => 'Muy cerca';
+
+  @override
+  String get sosLocator_close => 'Cerca';
+
+  @override
+  String get sosLocator_nearby => 'Por aquí';
+
+  @override
+  String get sosLocator_faint => 'Débil';
+
+  @override
+  String get sosLocator_lost => 'Señal perdida: retrocede un poco';
+
+  @override
+  String get sosLocator_keepMoving => 'Sigue moviéndote y escuchando';
+
+  @override
+  String get sosLocator_warmer => 'Caliente: te acercas';
+
+  @override
+  String get sosLocator_colder => 'Frío: te alejas';
+
+  @override
+  String get sosLocator_steady => 'Más o menos igual';
 }

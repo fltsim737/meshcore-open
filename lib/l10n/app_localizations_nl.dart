@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6863,4 +6862,69 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Laatst gehoord';
+
+  @override
+  String get sosLocator_button => 'Lokaliseren';
+
+  @override
+  String sosLocator_title(String name) {
+    return '$name lokaliseren';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Wachten op het eerste baken…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Laatste baken $seconds s geleden · $count ontvangen';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Hoe het werkt';
+
+  @override
+  String get sosLocator_how =>
+      'Je radio vraagt de hare elke 5 seconden een baken te sturen. Bakens gaan van radio naar radio, nooit via een repeater, dus je hoort ze alleen binnen direct bereik. Ga tot dan naar de laatst bekende positie.';
+
+  @override
+  String get sosLocator_tip =>
+      'Hoor je bakens: loop een stukje, stop en wacht op het volgende. Sterker is dichterbij. Draai langzaam ter plaatse, want je lichaam blokkeert het signaal achter je.';
+
+  @override
+  String get sosLocator_lastPosition => 'Laatst bekende positie';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return '$count keer gevraagd · opnieuw over $seconds s';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Nog geen signaal';
+
+  @override
+  String get sosLocator_veryClose => 'Heel dichtbij';
+
+  @override
+  String get sosLocator_close => 'Dichtbij';
+
+  @override
+  String get sosLocator_nearby => 'In de buurt';
+
+  @override
+  String get sosLocator_faint => 'Zwak';
+
+  @override
+  String get sosLocator_lost => 'Signaal kwijt: ga een stukje terug';
+
+  @override
+  String get sosLocator_keepMoving => 'Blijf bewegen en luisteren';
+
+  @override
+  String get sosLocator_warmer => 'Warmer: dichterbij';
+
+  @override
+  String get sosLocator_colder => 'Kouder: verder weg';
+
+  @override
+  String get sosLocator_steady => 'Ongeveer gelijk';
 }

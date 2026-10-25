@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:meshcore_open/helpers/sos_codec.dart';
 import 'package:meshcore_open/helpers/sos_network_code.dart';
 import 'package:meshcore_open/helpers/sos_voice_packet.dart';
 import 'package:meshcore_open/models/contact.dart';
@@ -305,6 +306,7 @@ void main() {
     sosTransport.dataListener!(
       2,
       sosPacketFrom('Jo', 9, 'beef', withKey: true),
+      SosSignal.unknown,
     );
     expect(sos.incoming.single.id, 'beef');
     expect(voice.blockFor('beef'), isNull);

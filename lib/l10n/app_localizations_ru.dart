@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -6913,4 +6912,69 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get contacts_lastHeard => 'Последний сигнал';
+
+  @override
+  String get sosLocator_button => 'Найти';
+
+  @override
+  String sosLocator_title(String name) {
+    return 'Найти $name';
+  }
+
+  @override
+  String get sosLocator_waiting => 'Ожидание первого сигнала…';
+
+  @override
+  String sosLocator_lastBeacon(int seconds, int count) {
+    return 'Последний сигнал $seconds с назад · принято $count';
+  }
+
+  @override
+  String get sosLocator_howTitle => 'Как это работает';
+
+  @override
+  String get sosLocator_how =>
+      'Ваше радио просит другое присылать сигнал каждые 5 секунд. Сигналы идут напрямую от радио к радио, никогда через ретранслятор, поэтому вы слышите их только в зоне прямой связи. А пока идите к последней известной точке.';
+
+  @override
+  String get sosLocator_tip =>
+      'Когда слышите сигналы: пройдите немного, остановитесь и дождитесь следующего. Сильнее — значит ближе. Медленно поворачивайтесь на месте: ваше тело закрывает сигнал сзади.';
+
+  @override
+  String get sosLocator_lastPosition => 'Последнее известное место';
+
+  @override
+  String sosLocator_requests(int count, int seconds) {
+    return 'Запрошено $count раз · снова через $seconds с';
+  }
+
+  @override
+  String get sosLocator_noSignal => 'Сигнала пока нет';
+
+  @override
+  String get sosLocator_veryClose => 'Совсем близко';
+
+  @override
+  String get sosLocator_close => 'Близко';
+
+  @override
+  String get sosLocator_nearby => 'Рядом';
+
+  @override
+  String get sosLocator_faint => 'Слабый';
+
+  @override
+  String get sosLocator_lost => 'Сигнал потерян: вернитесь немного';
+
+  @override
+  String get sosLocator_keepMoving => 'Продолжайте идти и слушать';
+
+  @override
+  String get sosLocator_warmer => 'Теплее: ближе';
+
+  @override
+  String get sosLocator_colder => 'Холоднее: дальше';
+
+  @override
+  String get sosLocator_steady => 'Примерно так же';
 }

@@ -2,6 +2,12 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.4 (2026-10-26)
+
+### Added
+
+- **Locate: finding the person in trouble, close in.** A responder on the emergency network can tap **Locate** on an incoming alert. Their radio asks the radio that sent the SOS for a short beacon every 5 seconds, for 10 minutes after the last request; the request repeats every 2 minutes while the Locate screen is open. Beacons go radio to radio only, never through a repeater, so one heard at all was heard directly and its strength says how near the sender is. The screen shows each beacon's strength (RSSI and SNR) on a gauge from *Faint* to *Very close*, whether the responder is getting **warmer** or **colder**, when the last beacon came and a graph of them all, and the phone vibrates with each beacon. **Last known position** opens the alert's position on the map. Beacons are encrypted like every SOS message and stop as soon as the SOS is cancelled. The sender needs 9.5.4, or a radio that supports Locate; older versions ignore the request.
+
 ## 9.5.3 (2026-10-25)
 
 ### Changed
