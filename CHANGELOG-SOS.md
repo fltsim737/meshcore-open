@@ -2,6 +2,12 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.9 (2026-10-27)
+
+### Fixed
+
+- **SOS messages to emergency contacts now always flood**, as the alert on the emergency network already did and as the MeshCore SOS radio firmware sends them. They used to follow the route the radio had stored for the contact, so a stale route could lose them. The same goes for cancellations and acknowledgements sent by direct message. The radio learns the contact's route again from their reply; a path you set by hand in the app is kept.
+
 ## 9.5.8 (2026-10-27)
 
 ### Changed
