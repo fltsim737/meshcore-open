@@ -7001,4 +7001,22 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get backup_sosActive =>
       'Beende zuerst das SOS, bevor du eine Konfiguration importierst.';
+
+  @override
+  String get sos_fullScreen => 'SOS-Alarme im Vollbild';
+
+  @override
+  String get sos_fullScreenOn =>
+      'An: Ein SOS öffnet den roten Alarm, ob das Handy gesperrt ist oder benutzt wird';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Nur bei gesperrtem Handy. Tippe und erlaube „Über anderen Apps einblenden“, damit ein SOS den roten Alarm auch bei benutztem Handy öffnet';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Aus: Ein SOS zeigt nur eine Benachrichtigung. Tippe und erlaube Vollbild-Benachrichtigungen für diese App';
+
+  @override
+  String get sos_fullScreenAllow => 'Erlauben';
 }

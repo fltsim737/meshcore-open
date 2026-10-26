@@ -3714,5 +3714,10 @@
   "backup_importedRestart": "La radio si riavvia con l'identità ripristinata: ricollegati quando è di nuovo attiva.",
   "backup_importedRadioOnly": "Il file contiene anche le impostazioni WiFi e del pulsante della radio SOS. Solo la pagina web della radio le ripristina: Impostazioni → Backup e ripristino.",
   "backup_importProblems": "Non tutto è stato ripristinato:",
-  "backup_sosActive": "Annulla l'SOS prima di importare una configurazione."
+  "backup_sosActive": "Annulla l'SOS prima di importare una configurazione.",
+  "sos_fullScreen": "Avvisi SOS a schermo intero",
+  "sos_fullScreenOn": "Attivi: un SOS apre l'avviso rosso, con il telefono bloccato o in uso",
+  "sos_fullScreenLockedOnly": "Solo con il telefono bloccato. Tocca e consenti \"Mostra sopra altre app\" perché un SOS apra l'avviso rosso anche con il telefono in uso",
+  "sos_fullScreenOff": "Disattivati: un SOS mostra solo una notifica. Tocca e consenti le notifiche a schermo intero per questa app",
+  "sos_fullScreenAllow": "Consenti"
 }

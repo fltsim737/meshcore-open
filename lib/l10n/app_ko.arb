@@ -3714,5 +3714,10 @@
   "backup_importedRestart": "무전기가 복원된 신원으로 다시 시작합니다. 돌아오면 다시 연결하세요.",
   "backup_importedRadioOnly": "파일에 SOS 무전기의 WiFi와 버튼 설정도 있습니다. 이 설정은 무전기 웹 페이지에서만 복원됩니다: 설정 → 백업 및 복원.",
   "backup_importProblems": "일부는 복원되지 않았습니다:",
-  "backup_sosActive": "설정을 가져오기 전에 SOS를 취소하세요."
+  "backup_sosActive": "설정을 가져오기 전에 SOS를 취소하세요.",
+  "sos_fullScreen": "SOS 전체 화면 알림",
+  "sos_fullScreenOn": "켜짐: 휴대폰이 잠겨 있든 사용 중이든 SOS가 빨간 경보를 엽니다",
+  "sos_fullScreenLockedOnly": "잠금 상태에서만 됩니다. 탭하여 '다른 앱 위에 표시'를 허용하면 사용 중에도 SOS가 빨간 경보를 엽니다",
+  "sos_fullScreenOff": "꺼짐: SOS가 알림으로만 표시됩니다. 탭하여 이 앱의 전체 화면 알림을 허용하세요",
+  "sos_fullScreenAllow": "허용"
 }

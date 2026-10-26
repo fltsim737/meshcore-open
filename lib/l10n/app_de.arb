@@ -3715,5 +3715,10 @@
   "backup_importedRestart": "Das Funkgerät startet mit der wiederhergestellten Identität neu: Verbinde dich danach wieder.",
   "backup_importedRadioOnly": "Die Datei enthält auch WLAN- und Tasten-Einstellungen des SOS-Funkgeräts. Nur dessen Webseite spielt diese zurück: Einstellungen → Sichern und wiederherstellen.",
   "backup_importProblems": "Nicht alles wurde wiederhergestellt:",
-  "backup_sosActive": "Beende zuerst das SOS, bevor du eine Konfiguration importierst."
+  "backup_sosActive": "Beende zuerst das SOS, bevor du eine Konfiguration importierst.",
+  "sos_fullScreen": "SOS-Alarme im Vollbild",
+  "sos_fullScreenOn": "An: Ein SOS öffnet den roten Alarm, ob das Handy gesperrt ist oder benutzt wird",
+  "sos_fullScreenLockedOnly": "Nur bei gesperrtem Handy. Tippe und erlaube „Über anderen Apps einblenden“, damit ein SOS den roten Alarm auch bei benutztem Handy öffnet",
+  "sos_fullScreenOff": "Aus: Ein SOS zeigt nur eine Benachrichtigung. Tippe und erlaube Vollbild-Benachrichtigungen für diese App",
+  "sos_fullScreenAllow": "Erlauben"
 }

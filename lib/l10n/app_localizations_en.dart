@@ -6898,4 +6898,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backup_sosActive => 'Cancel the SOS before importing a config.';
+
+  @override
+  String get sos_fullScreen => 'Full-screen SOS alerts';
+
+  @override
+  String get sos_fullScreenOn =>
+      'On: an SOS opens the red alert, whether the phone is locked or in use';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Only while the phone is locked. Tap and allow \"Display over other apps\" so an SOS also opens the red alert while the phone is in use';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Off: an SOS only shows a notification. Tap and allow full-screen notifications for this app';
+
+  @override
+  String get sos_fullScreenAllow => 'Allow';
 }

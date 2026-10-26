@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/sos_screen_access_tile.dart';
 import '../connector/meshcore_connector.dart';
 import '../helpers/snack_bar_builder.dart';
 import '../helpers/sos_codec.dart';
@@ -97,6 +98,8 @@ class _EmergencyScreenState extends State<EmergencyScreen>
         children: [
           const ReviewModeBanner(),
           if (connector.batteryLow) _LowBatteryCard(connector: connector),
+          // Android: an SOS would be only a notification while the app is closed
+          const SosScreenAccessTile(onlyWhenMissing: true),
           const SizedBox(height: 8),
           if (active == null)
             _SosHoldButton(onActivated: sos.activate)

@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <!-- An incoming SOS wakes the screen and shows the alert over the lock screen -->
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+    <!-- ...and, unlocked, lets the app open its alert from the background ("Display over other apps") -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <!-- Install-time permission that lets the connected-device service start before a radio
          is connected (Android 14 requires one such permission) -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>

@@ -6959,4 +6959,22 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get backup_sosActive => 'Pred uvozom konfiguracije prekličite SOS.';
+
+  @override
+  String get sos_fullScreen => 'Opozorila SOS na celem zaslonu';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Vklopljeno: SOS odpre rdeče opozorilo, ne glede na to, ali je telefon zaklenjen ali v uporabi';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Le pri zaklenjenem telefonu. Tapnite in dovolite »Prikaz čez druge aplikacije«, da SOS odpre rdeče opozorilo tudi med uporabo telefona';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Izklopljeno: SOS prikaže le obvestilo. Tapnite in tej aplikaciji dovolite obvestila na celem zaslonu';
+
+  @override
+  String get sos_fullScreenAllow => 'Dovoli';
 }

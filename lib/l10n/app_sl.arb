@@ -3581,5 +3581,10 @@
   "backup_importedRestart": "Radio se znova zaganja z obnovljeno identiteto: ko se vrne, se znova povežite.",
   "backup_importedRadioOnly": "Datoteka vsebuje tudi nastavitve WiFi in gumba radia SOS. Te vrne le spletna stran radia: Nastavitve → Varnostna kopija in obnovitev.",
   "backup_importProblems": "Ni bilo vse obnovljeno:",
-  "backup_sosActive": "Pred uvozom konfiguracije prekličite SOS."
+  "backup_sosActive": "Pred uvozom konfiguracije prekličite SOS.",
+  "sos_fullScreen": "Opozorila SOS na celem zaslonu",
+  "sos_fullScreenOn": "Vklopljeno: SOS odpre rdeče opozorilo, ne glede na to, ali je telefon zaklenjen ali v uporabi",
+  "sos_fullScreenLockedOnly": "Le pri zaklenjenem telefonu. Tapnite in dovolite »Prikaz čez druge aplikacije«, da SOS odpre rdeče opozorilo tudi med uporabo telefona",
+  "sos_fullScreenOff": "Izklopljeno: SOS prikaže le obvestilo. Tapnite in tej aplikaciji dovolite obvestila na celem zaslonu",
+  "sos_fullScreenAllow": "Dovoli"
 }

@@ -4269,5 +4269,10 @@
   "backup_importedRestart": "The radio is restarting with the restored identity: connect to it again once it's back.",
   "backup_importedRadioOnly": "The file also has the SOS radio's WiFi and button settings. Only the radio's web page puts those back: Settings → Backup and restore.",
   "backup_importProblems": "Not everything went back:",
-  "backup_sosActive": "Cancel the SOS before importing a config."
+  "backup_sosActive": "Cancel the SOS before importing a config.",
+  "sos_fullScreen": "Full-screen SOS alerts",
+  "sos_fullScreenOn": "On: an SOS opens the red alert, whether the phone is locked or in use",
+  "sos_fullScreenLockedOnly": "Only while the phone is locked. Tap and allow \"Display over other apps\" so an SOS also opens the red alert while the phone is in use",
+  "sos_fullScreenOff": "Off: an SOS only shows a notification. Tap and allow full-screen notifications for this app",
+  "sos_fullScreenAllow": "Allow"
 }

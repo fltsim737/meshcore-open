@@ -3581,5 +3581,10 @@
   "backup_importedRestart": "Rádio sa reštartuje s obnovenou identitou: po návrate sa znova pripojte.",
   "backup_importedRadioOnly": "Súbor obsahuje aj nastavenia WiFi a tlačidla rádia SOS. Tie vráti iba webová stránka rádia: Nastavenia → Záloha a obnovenie.",
   "backup_importProblems": "Nie všetko sa obnovilo:",
-  "backup_sosActive": "Pred importom konfigurácie zrušte SOS."
+  "backup_sosActive": "Pred importom konfigurácie zrušte SOS.",
+  "sos_fullScreen": "SOS upozornenia na celú obrazovku",
+  "sos_fullScreenOn": "Zapnuté: SOS otvorí červené upozornenie, či je telefón zamknutý alebo sa používa",
+  "sos_fullScreenLockedOnly": "Len pri zamknutom telefóne. Ťuknite a povoľte „Zobrazovať cez iné aplikácie“, aby SOS otvorilo červené upozornenie aj počas používania telefónu",
+  "sos_fullScreenOff": "Vypnuté: SOS zobrazí len upozornenie. Ťuknite a povoľte tejto aplikácii upozornenia na celú obrazovku",
+  "sos_fullScreenAllow": "Povoliť"
 }

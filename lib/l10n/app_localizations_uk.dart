@@ -6997,4 +6997,22 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get backup_sosActive => 'Скасуйте SOS перед імпортом конфігурації.';
+
+  @override
+  String get sos_fullScreen => 'SOS-тривоги на весь екран';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Увімк.: SOS відкриває червону тривогу, коли телефон заблоковано або він у використанні';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Лише коли телефон заблоковано. Торкніться й дозвольте «Поверх інших програм», щоб SOS відкривав червону тривогу й під час використання телефона';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Вимк.: SOS показує лише сповіщення. Торкніться й дозвольте цій програмі повноекранні сповіщення';
+
+  @override
+  String get sos_fullScreenAllow => 'Дозволити';
 }

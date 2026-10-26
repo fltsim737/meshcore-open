@@ -11700,6 +11700,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel the SOS before importing a config.'**
   String get backup_sosActive;
+
+  /// No description provided for @sos_fullScreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Full-screen SOS alerts'**
+  String get sos_fullScreen;
+
+  /// No description provided for @sos_fullScreenOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On: an SOS opens the red alert, whether the phone is locked or in use'**
+  String get sos_fullScreenOn;
+
+  /// No description provided for @sos_fullScreenLockedOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Only while the phone is locked. Tap and allow \"Display over other apps\" so an SOS also opens the red alert while the phone is in use'**
+  String get sos_fullScreenLockedOnly;
+
+  /// No description provided for @sos_fullScreenOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off: an SOS only shows a notification. Tap and allow full-screen notifications for this app'**
+  String get sos_fullScreenOff;
+
+  /// No description provided for @sos_fullScreenAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get sos_fullScreenAllow;
 }
 
 class _AppLocalizationsDelegate

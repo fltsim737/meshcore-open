@@ -6665,4 +6665,20 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get backup_sosActive => '設定をインポートする前にSOSを取り消してください。';
+
+  @override
+  String get sos_fullScreen => 'SOSアラートを全画面表示';
+
+  @override
+  String get sos_fullScreenOn => 'オン: ロック中でも使用中でも、SOSで赤いアラートが開きます';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'ロック中のみ。タップして「他のアプリの上に重ねて表示」を許可すると、使用中でもSOSで赤いアラートが開きます';
+
+  @override
+  String get sos_fullScreenOff => 'オフ: SOSは通知のみです。タップしてこのアプリの全画面通知を許可してください';
+
+  @override
+  String get sos_fullScreenAllow => '許可';
 }

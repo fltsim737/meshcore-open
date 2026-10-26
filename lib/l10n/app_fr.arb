@@ -3714,5 +3714,10 @@
   "backup_importedRestart": "La radio redémarre avec l'identité restaurée : reconnectez-vous une fois qu'elle est revenue.",
   "backup_importedRadioOnly": "Le fichier contient aussi les réglages WiFi et du bouton de la radio SOS. Seule la page web de la radio les remet : Réglages → Sauvegarde et restauration.",
   "backup_importProblems": "Tout n'a pas été restauré :",
-  "backup_sosActive": "Annulez le SOS avant d'importer une configuration."
+  "backup_sosActive": "Annulez le SOS avant d'importer une configuration.",
+  "sos_fullScreen": "Alertes SOS en plein écran",
+  "sos_fullScreenOn": "Activées : un SOS ouvre l'alerte rouge, téléphone verrouillé ou en cours d'utilisation",
+  "sos_fullScreenLockedOnly": "Seulement téléphone verrouillé. Touchez et autorisez « Afficher par-dessus les autres applis » pour qu'un SOS ouvre aussi l'alerte rouge pendant l'utilisation",
+  "sos_fullScreenOff": "Désactivées : un SOS n'affiche qu'une notification. Touchez et autorisez les notifications plein écran pour cette appli",
+  "sos_fullScreenAllow": "Autoriser"
 }

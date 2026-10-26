@@ -114,6 +114,7 @@ Download the installer for your platform from the [Releases](https://github.com/
 1. Copy the APK to the phone and open it. Allow "install unknown apps" for your file manager if asked.
 2. On first launch, allow Bluetooth, location and notifications. SOS Voice also asks for the microphone the first time you talk.
 3. To keep alerts arriving with the screen off, allow the app to run in the background when asked (battery optimisation off). A notification shows while it is listening.
+4. So an SOS opens the red alert even when the app isn't open, check **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** and tap it to allow what it asks for: **Display over other apps**, and on Samsung and Android 14 or later, **full-screen notifications**.
 
 ### Linux
 

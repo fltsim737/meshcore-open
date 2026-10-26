@@ -3714,5 +3714,10 @@
   "backup_importedRestart": "無線機は復元したIDで再起動します。戻ったら再接続してください。",
   "backup_importedRadioOnly": "このファイルにはSOS無線機のWiFiとボタンの設定も含まれます。これらは無線機のウェブページでのみ戻せます: 設定 → バックアップと復元。",
   "backup_importProblems": "一部は復元されませんでした:",
-  "backup_sosActive": "設定をインポートする前にSOSを取り消してください。"
+  "backup_sosActive": "設定をインポートする前にSOSを取り消してください。",
+  "sos_fullScreen": "SOSアラートを全画面表示",
+  "sos_fullScreenOn": "オン: ロック中でも使用中でも、SOSで赤いアラートが開きます",
+  "sos_fullScreenLockedOnly": "ロック中のみ。タップして「他のアプリの上に重ねて表示」を許可すると、使用中でもSOSで赤いアラートが開きます",
+  "sos_fullScreenOff": "オフ: SOSは通知のみです。タップしてこのアプリの全画面通知を許可してください",
+  "sos_fullScreenAllow": "許可"
 }

@@ -3580,5 +3580,10 @@
   "backup_importedRestart": "O rádio está a reiniciar com a identidade restaurada: volte a ligar-se quando estiver pronto.",
   "backup_importedRadioOnly": "O ficheiro também tem as definições de WiFi e do botão do rádio SOS. Só a página web do rádio as repõe: Definições → Cópia de segurança e restauro.",
   "backup_importProblems": "Nem tudo foi reposto:",
-  "backup_sosActive": "Cancele o SOS antes de importar uma configuração."
+  "backup_sosActive": "Cancele o SOS antes de importar uma configuração.",
+  "sos_fullScreen": "Alertas SOS em ecrã inteiro",
+  "sos_fullScreenOn": "Ativados: um SOS abre o alerta vermelho, com o telemóvel bloqueado ou em uso",
+  "sos_fullScreenLockedOnly": "Só com o telemóvel bloqueado. Toque e permita \"Mostrar sobre outras apps\" para que um SOS abra o alerta vermelho também com o telemóvel em uso",
+  "sos_fullScreenOff": "Desativados: um SOS só mostra uma notificação. Toque e permita notificações em ecrã inteiro para esta app",
+  "sos_fullScreenAllow": "Permitir"
 }

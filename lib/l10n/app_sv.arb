@@ -3575,5 +3575,10 @@
   "backup_importedRestart": "Radion startar om med den återställda identiteten: anslut igen när den är tillbaka.",
   "backup_importedRadioOnly": "Filen innehåller också SOS-radions WiFi- och knappinställningar. Bara radions webbsida lägger tillbaka dem: Inställningar → Säkerhetskopiera och återställ.",
   "backup_importProblems": "Allt kom inte tillbaka:",
-  "backup_sosActive": "Avbryt SOS innan du importerar en konfiguration."
+  "backup_sosActive": "Avbryt SOS innan du importerar en konfiguration.",
+  "sos_fullScreen": "SOS-larm i helskärm",
+  "sos_fullScreenOn": "På: ett SOS öppnar det röda larmet, både när telefonen är låst och när den används",
+  "sos_fullScreenLockedOnly": "Bara när telefonen är låst. Tryck och tillåt ”Visa ovanpå andra appar” så att ett SOS också öppnar det röda larmet när telefonen används",
+  "sos_fullScreenOff": "Av: ett SOS visar bara en avisering. Tryck och tillåt helskärmsaviseringar för appen",
+  "sos_fullScreenAllow": "Tillåt"
 }
