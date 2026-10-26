@@ -7008,4 +7008,22 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get backup_sosActive =>
       'Avbryt SOS innan du importerar en konfiguration.';
+
+  @override
+  String get sos_fullScreen => 'SOS-larm i helskärm';
+
+  @override
+  String get sos_fullScreenOn =>
+      'På: ett SOS öppnar det röda larmet, både när telefonen är låst och när den används';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Bara när telefonen är låst. Tryck och tillåt ”Visa ovanpå andra appar” så att ett SOS också öppnar det röda larmet när telefonen används';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Av: ett SOS visar bara en avisering. Tryck och tillåt helskärmsaviseringar för appen';
+
+  @override
+  String get sos_fullScreenAllow => 'Tillåt';
 }

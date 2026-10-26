@@ -7052,4 +7052,22 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get backup_sosActive =>
       'Konfiguráció importálása előtt szakítsd meg az SOS-t.';
+
+  @override
+  String get sos_fullScreen => 'Teljes képernyős SOS-riasztások';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Be: az SOS megnyitja a piros riasztást, akár zárolt, akár használatban van a telefon';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Csak zárolt telefonon. Koppints, és engedélyezd a „Megjelenítés más alkalmazások felett” beállítást, hogy az SOS használat közben is megnyissa a piros riasztást';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Ki: az SOS csak értesítést jelenít meg. Koppints, és engedélyezd ennek az alkalmazásnak a teljes képernyős értesítéseket';
+
+  @override
+  String get sos_fullScreenAllow => 'Engedélyezés';
 }

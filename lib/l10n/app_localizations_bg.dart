@@ -7060,4 +7060,22 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get backup_sosActive => 'Отменете SOS преди импорт на конфигурация.';
+
+  @override
+  String get sos_fullScreen => 'SOS тревоги на цял екран';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Вкл.: SOS отваря червената тревога, независимо дали телефонът е заключен или се ползва';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Само при заключен телефон. Докоснете и разрешете „Показване върху други приложения“, за да отваря SOS червената тревога и докато ползвате телефона';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Изкл.: SOS показва само известие. Докоснете и разрешете известия на цял екран за това приложение';
+
+  @override
+  String get sos_fullScreenAllow => 'Разрешаване';
 }

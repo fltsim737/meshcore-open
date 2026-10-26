@@ -7088,4 +7088,22 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get backup_sosActive => 'Anuluj SOS przed importem konfiguracji.';
+
+  @override
+  String get sos_fullScreen => 'Alarmy SOS na pełnym ekranie';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Włączone: SOS otwiera czerwony alarm, gdy telefon jest zablokowany lub w użyciu';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Tylko przy zablokowanym telefonie. Stuknij i zezwól na „Wyświetlanie nad innymi aplikacjami”, by SOS otwierał czerwony alarm także podczas używania telefonu';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Wyłączone: SOS pokazuje tylko powiadomienie. Stuknij i zezwól tej aplikacji na powiadomienia pełnoekranowe';
+
+  @override
+  String get sos_fullScreenAllow => 'Zezwól';
 }

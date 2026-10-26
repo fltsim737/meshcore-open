@@ -7056,4 +7056,22 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get backup_sosActive =>
       'Cancele o SOS antes de importar uma configuração.';
+
+  @override
+  String get sos_fullScreen => 'Alertas SOS em ecrã inteiro';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Ativados: um SOS abre o alerta vermelho, com o telemóvel bloqueado ou em uso';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Só com o telemóvel bloqueado. Toque e permita \"Mostrar sobre outras apps\" para que um SOS abra o alerta vermelho também com o telemóvel em uso';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Desativados: um SOS só mostra uma notificação. Toque e permita notificações em ecrã inteiro para esta app';
+
+  @override
+  String get sos_fullScreenAllow => 'Permitir';
 }

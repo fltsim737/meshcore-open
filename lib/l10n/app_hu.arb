@@ -3642,5 +3642,10 @@
   "backup_importedRestart": "A rádió újraindul a visszaállított identitással: csatlakozz újra, ha visszajött.",
   "backup_importedRadioOnly": "A fájl az SOS rádió WiFi- és gombbeállításait is tartalmazza. Ezeket csak a rádió weboldala állítja vissza: Beállítások → Biztonsági mentés és visszaállítás.",
   "backup_importProblems": "Nem minden állt vissza:",
-  "backup_sosActive": "Konfiguráció importálása előtt szakítsd meg az SOS-t."
+  "backup_sosActive": "Konfiguráció importálása előtt szakítsd meg az SOS-t.",
+  "sos_fullScreen": "Teljes képernyős SOS-riasztások",
+  "sos_fullScreenOn": "Be: az SOS megnyitja a piros riasztást, akár zárolt, akár használatban van a telefon",
+  "sos_fullScreenLockedOnly": "Csak zárolt telefonon. Koppints, és engedélyezd a „Megjelenítés más alkalmazások felett” beállítást, hogy az SOS használat közben is megnyissa a piros riasztást",
+  "sos_fullScreenOff": "Ki: az SOS csak értesítést jelenít meg. Koppints, és engedélyezd ennek az alkalmazásnak a teljes képernyős értesítéseket",
+  "sos_fullScreenAllow": "Engedélyezés"
 }

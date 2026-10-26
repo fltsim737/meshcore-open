@@ -3608,5 +3608,10 @@
   "backup_importedRestart": "电台正以恢复的身份重启:恢复后请重新连接。",
   "backup_importedRadioOnly": "该文件还包含 SOS 电台的 WiFi 和按钮设置,只有电台的网页能恢复它们:设置 → 备份与恢复。",
   "backup_importProblems": "并非所有内容都已恢复:",
-  "backup_sosActive": "请先取消 SOS,再导入配置。"
+  "backup_sosActive": "请先取消 SOS,再导入配置。",
+  "sos_fullScreen": "全屏 SOS 警报",
+  "sos_fullScreenOn": "开启:无论手机锁定还是正在使用,SOS 都会打开红色警报",
+  "sos_fullScreenLockedOnly": "仅在手机锁定时。点按并允许“显示在其他应用上层”,手机使用中 SOS 也会打开红色警报",
+  "sos_fullScreenOff": "关闭:SOS 只显示通知。点按并允许此应用使用全屏通知",
+  "sos_fullScreenAllow": "允许"
 }

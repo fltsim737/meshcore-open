@@ -6750,4 +6750,21 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get backup_sosActive => '설정을 가져오기 전에 SOS를 취소하세요.';
+
+  @override
+  String get sos_fullScreen => 'SOS 전체 화면 알림';
+
+  @override
+  String get sos_fullScreenOn => '켜짐: 휴대폰이 잠겨 있든 사용 중이든 SOS가 빨간 경보를 엽니다';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      '잠금 상태에서만 됩니다. 탭하여 \'다른 앱 위에 표시\'를 허용하면 사용 중에도 SOS가 빨간 경보를 엽니다';
+
+  @override
+  String get sos_fullScreenOff =>
+      '꺼짐: SOS가 알림으로만 표시됩니다. 탭하여 이 앱의 전체 화면 알림을 허용하세요';
+
+  @override
+  String get sos_fullScreenAllow => '허용';
 }

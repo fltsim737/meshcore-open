@@ -7036,4 +7036,22 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get backup_sosActive => 'Pred importom konfigurácie zrušte SOS.';
+
+  @override
+  String get sos_fullScreen => 'SOS upozornenia na celú obrazovku';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Zapnuté: SOS otvorí červené upozornenie, či je telefón zamknutý alebo sa používa';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Len pri zamknutom telefóne. Ťuknite a povoľte „Zobrazovať cez iné aplikácie“, aby SOS otvorilo červené upozornenie aj počas používania telefónu';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Vypnuté: SOS zobrazí len upozornenie. Ťuknite a povoľte tejto aplikácii upozornenia na celú obrazovku';
+
+  @override
+  String get sos_fullScreenAllow => 'Povoliť';
 }

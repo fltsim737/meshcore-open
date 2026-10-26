@@ -3504,5 +3504,10 @@
   "backup_importedRestart": "De radio herstart met de herstelde identiteit: maak opnieuw verbinding zodra hij terug is.",
   "backup_importedRadioOnly": "Het bestand bevat ook de wifi- en knopinstellingen van de SOS-radio. Alleen de webpagina van de radio zet die terug: Instellingen → Back-up en herstel.",
   "backup_importProblems": "Niet alles is teruggezet:",
-  "backup_sosActive": "Annuleer de SOS voordat je een configuratie importeert."
+  "backup_sosActive": "Annuleer de SOS voordat je een configuratie importeert.",
+  "sos_fullScreen": "SOS-meldingen op volledig scherm",
+  "sos_fullScreenOn": "Aan: een SOS opent de rode melding, of de telefoon nu vergrendeld is of in gebruik",
+  "sos_fullScreenLockedOnly": "Alleen als de telefoon vergrendeld is. Tik en sta 'Weergeven boven andere apps' toe zodat een SOS de rode melding ook opent als de telefoon in gebruik is",
+  "sos_fullScreenOff": "Uit: een SOS toont alleen een melding. Tik en sta meldingen op volledig scherm toe voor deze app",
+  "sos_fullScreenAllow": "Toestaan"
 }

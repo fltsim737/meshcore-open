@@ -3737,5 +3737,10 @@
   "backup_importedRestart": "La radio se reinicia con la identidad restaurada: vuelve a conectarte cuando esté lista.",
   "backup_importedRadioOnly": "El archivo también tiene los ajustes de WiFi y del botón de la radio SOS. Solo la página web de la radio los restaura: Ajustes → Copia de seguridad y restauración.",
   "backup_importProblems": "No se restauró todo:",
-  "backup_sosActive": "Cancela el SOS antes de importar una configuración."
+  "backup_sosActive": "Cancela el SOS antes de importar una configuración.",
+  "sos_fullScreen": "Alertas SOS a pantalla completa",
+  "sos_fullScreenOn": "Activadas: un SOS abre la alerta roja, con el teléfono bloqueado o en uso",
+  "sos_fullScreenLockedOnly": "Solo con el teléfono bloqueado. Toca y permite «Mostrar sobre otras apps» para que un SOS abra la alerta roja también con el teléfono en uso",
+  "sos_fullScreenOff": "Desactivadas: un SOS solo muestra una notificación. Toca y permite las notificaciones a pantalla completa para esta app",
+  "sos_fullScreenAllow": "Permitir"
 }

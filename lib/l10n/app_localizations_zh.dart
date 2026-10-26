@@ -6598,4 +6598,20 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get backup_sosActive => '请先取消 SOS,再导入配置。';
+
+  @override
+  String get sos_fullScreen => '全屏 SOS 警报';
+
+  @override
+  String get sos_fullScreenOn => '开启:无论手机锁定还是正在使用,SOS 都会打开红色警报';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      '仅在手机锁定时。点按并允许“显示在其他应用上层”,手机使用中 SOS 也会打开红色警报';
+
+  @override
+  String get sos_fullScreenOff => '关闭:SOS 只显示通知。点按并允许此应用使用全屏通知';
+
+  @override
+  String get sos_fullScreenAllow => '允许';
 }

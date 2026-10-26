@@ -1,3 +1,4 @@
+import 'sos_screen_service.dart';
 import 'dart:async';
 import 'dart:io' show Platform, File;
 import 'dart:isolate';
@@ -759,6 +760,8 @@ class NotificationService {
         ),
         payload: 'sos:${alert.key}',
       );
+      // Android: the red alert when the phone is in use too, not a banner
+      unawaited(SosScreenService.showAlert('sos:${alert.key}'));
       // Linux: the Morse file, or the desktop theme's alarm as before 9.5.3
       _linuxSound
         ?..alarmSound = classic || _morseFile == null

@@ -2,6 +2,13 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.7 (2026-10-26)
+
+### Fixed
+
+- **The red SOS alert now opens when the app isn't on screen** (Android). In 9.5.6 an incoming SOS still came through as an ordinary notification unless the app was open: Android only shows a notification full screen while the phone is locked, and Samsung phones and Android 14 can switch that off for an app installed from an APK. Now, with **Display over other apps** allowed, the app opens the red alert itself, whether the phone is locked or in use.
+- **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** says whether this works on the phone, and a tap opens the system page to allow what's missing. While it's missing, a red card on the Emergency tab says so.
+
 ## 9.5.6 (2026-10-26)
 
 ### Added

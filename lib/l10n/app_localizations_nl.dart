@@ -7028,4 +7028,22 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get backup_sosActive =>
       'Annuleer de SOS voordat je een configuratie importeert.';
+
+  @override
+  String get sos_fullScreen => 'SOS-meldingen op volledig scherm';
+
+  @override
+  String get sos_fullScreenOn =>
+      'Aan: een SOS opent de rode melding, of de telefoon nu vergrendeld is of in gebruik';
+
+  @override
+  String get sos_fullScreenLockedOnly =>
+      'Alleen als de telefoon vergrendeld is. Tik en sta \'Weergeven boven andere apps\' toe zodat een SOS de rode melding ook opent als de telefoon in gebruik is';
+
+  @override
+  String get sos_fullScreenOff =>
+      'Uit: een SOS toont alleen een melding. Tik en sta meldingen op volledig scherm toe voor deze app';
+
+  @override
+  String get sos_fullScreenAllow => 'Toestaan';
 }

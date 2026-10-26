@@ -21,6 +21,7 @@ class MainActivity : FlutterActivity() {
         val appContext = context.applicationContext
         val engine = FlutterEngine(appContext)
         MeshcoreUsbFunctions(appContext).configureFlutterEngine(engine)
+        SosScreenFunctions(appContext).configureFlutterEngine(engine)
         engine.dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
         FlutterEngineCache.getInstance().put(ENGINE_ID, engine)
         return engine
@@ -58,9 +59,12 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    /** The intent flutter_local_notifications gives the SOS alert (payload "sos:<key>"). */
+    /**
+     * The intent flutter_local_notifications gives the SOS alert (payload "sos:<key>"), or the one
+     * SosScreenFunctions opens the app with.
+     */
     private fun showOverLockScreenForSos(intent: Intent?) {
-        if (intent?.action != "SELECT_NOTIFICATION") return
+        if (intent?.action != "SELECT_NOTIFICATION" && intent?.action != ACTION_SOS_ALERT) return
         if (intent.getStringExtra("payload")?.startsWith("sos:") != true) return
         overLockScreen = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
@@ -75,7 +79,8 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    private companion object {
-        const val ENGINE_ID = "meshcore_main"
+    companion object {
+        private const val ENGINE_ID = "meshcore_main"
+        const val ACTION_SOS_ALERT = "com.meshcore.meshcore_open.SOS_ALERT"
     }
 }
