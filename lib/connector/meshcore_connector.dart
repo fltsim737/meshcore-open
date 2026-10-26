@@ -5055,8 +5055,13 @@ class MeshCoreConnector extends ChangeNotifier {
   /// it never enters the conversation. Returns the ACK hash the recipient's
   /// radio will confirm with, or null if it could not be sent.
   Future<int?> sendSosDirectText(Contact contact, String text) async {
-    final self = _selfPublicKey;
+    final self = selfPublicKey;
     if (!isConnected || self == null) return null;
+    // Always by flood, as the SOS firmware sends them: a stored route may be
+    // stale, and in an emergency every repeater should carry it. The radio
+    // learns the route again from the reply.
+    await clearContactPath(contact);
+    if (!isConnected) return null;
     final timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     await sendFrame(
       buildSendTextMsgFrame(
