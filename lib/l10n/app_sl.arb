@@ -3376,6 +3376,8 @@
   "sos_sourceNone": "Brez lokacije",
   "sos_acksNone": "Še ni potrditev",
   "sos_acksHeader": "Potrdil",
+  "sos_heardRepeats": "Slišane ponovitve: {count}",
+  "sos_repeatsNone": "Še noben repetitor ni bil slišan, da bi ga posredoval",
   "sos_incomingHeader": "Dohodna opozorila",
   "sos_incomingEmpty": "Ni prejetih opozoril SOS",
   "sos_sendAck": "Pošlji ACK",

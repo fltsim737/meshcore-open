@@ -315,6 +315,19 @@ class _ActiveSosCard extends StatelessWidget {
               Text(l10n.sos_locationSource(sosSourceLabel(l10n, fix.source))),
               if (fix.hasPosition) Text(sosCoordinates(fix)),
               const SizedBox(height: 12),
+              // Repeaters heard passing it on: it is travelling, though that
+              // does not mean anyone has read it.
+              Text(
+                l10n.sos_heardRepeats(sos.heardRepeats),
+                style: textTheme.titleSmall?.merge(onRed),
+              ),
+              if (sos.repeaters.isEmpty) Text(l10n.sos_repeatsNone),
+              for (final entry in sos.repeaters.entries)
+                Text(
+                  '• ${service.repeaterName(entry.key)}'
+                  '${entry.value > 1 ? '  ×${entry.value}' : ''}',
+                ),
+              const SizedBox(height: 12),
               Text(
                 sos.acks.isEmpty ? l10n.sos_acksNone : l10n.sos_acksHeader,
                 style: textTheme.titleSmall?.merge(onRed),

@@ -3414,6 +3414,8 @@
   "sos_sourceNone": "Nincs hely",
   "sos_acksNone": "Még nincs visszaigazolás",
   "sos_acksHeader": "Visszaigazolta",
+  "sos_heardRepeats": "Hallott továbbítások: {count}",
+  "sos_repeatsNone": "Még nem hallatszott átjátszó továbbítani",
   "sos_incomingHeader": "Bejövő riasztások",
   "sos_incomingEmpty": "Nem érkezett SOS-riasztás",
   "sos_sendAck": "ACK küldése",

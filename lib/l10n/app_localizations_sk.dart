@@ -6655,6 +6655,15 @@ class AppLocalizationsSk extends AppLocalizations {
   String get sos_acksHeader => 'Potvrdil';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Počuté opakovania: $count';
+  }
+
+  @override
+  String get sos_repeatsNone =>
+      'Zatiaľ nebol počuť žiadny opakovač, ktorý by ho posielal ďalej';
+
+  @override
   String get sos_incomingHeader => 'Prichádzajúce poplachy';
 
   @override

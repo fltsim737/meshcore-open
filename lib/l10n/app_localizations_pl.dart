@@ -6707,6 +6707,15 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sos_acksHeader => 'Potwierdzone przez';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Usłyszane powtórzenia: $count';
+  }
+
+  @override
+  String get sos_repeatsNone =>
+      'Jeszcze nie usłyszano przekaźnika, który go przekazuje';
+
+  @override
   String get sos_incomingHeader => 'Alarmy przychodzące';
 
   @override

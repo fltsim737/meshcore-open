@@ -2672,6 +2672,8 @@
   "sos_sourceNone": "Нет координат",
   "sos_acksNone": "Подтверждений пока нет",
   "sos_acksHeader": "Подтвердили",
+  "sos_heardRepeats": "Услышано повторов: {count}",
+  "sos_repeatsNone": "Пока не слышно, чтобы ретранслятор его передавал",
   "sos_incomingHeader": "Входящие сигналы",
   "sos_incomingEmpty": "SOS-сигналы не получены",
   "sos_sendAck": "Отправить ACK",

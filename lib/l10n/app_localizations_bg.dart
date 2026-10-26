@@ -6678,6 +6678,15 @@ class AppLocalizationsBg extends AppLocalizations {
   String get sos_acksHeader => 'Потвърдено от';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Чути препредавания: $count';
+  }
+
+  @override
+  String get sos_repeatsNone =>
+      'Все още не е чут ретранслатор да го препредава';
+
+  @override
   String get sos_incomingHeader => 'Входящи сигнали';
 
   @override

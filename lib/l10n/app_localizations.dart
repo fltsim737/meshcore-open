@@ -11197,6 +11197,18 @@ abstract class AppLocalizations {
   /// **'Acknowledged by'**
   String get sos_acksHeader;
 
+  /// No description provided for @sos_heardRepeats.
+  ///
+  /// In en, this message translates to:
+  /// **'Heard repeats: {count}'**
+  String sos_heardRepeats(int count);
+
+  /// No description provided for @sos_repeatsNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No repeater heard passing it on yet'**
+  String get sos_repeatsNone;
+
   /// No description provided for @sos_incomingHeader.
   ///
   /// In en, this message translates to:

@@ -61,6 +61,8 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   void Function(int channelIndex, Uint8List payload, SosSignal signal)?
   dataListener;
   void Function(int ackHash)? ackListener;
+  void Function(int channelIndex, Uint8List payload, String lastHopHex)?
+  repeatListener;
 
   /// (channel index, decoded packet) for every channel send.
   final List<(int, SosPacket)> channelPackets = [];
@@ -78,6 +80,11 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
       dataListener = value;
   @override
   set sosAckListener(void Function(int ackHash)? value) => ackListener = value;
+  @override
+  set sosRepeatListener(
+    void Function(int channelIndex, Uint8List payload, String lastHopHex)?
+    value,
+  ) => repeatListener = value;
 
   @override
   Future<void> sendChannelData(
@@ -257,6 +264,7 @@ void main() {
     expect(transport.textListener, isNotNull);
     expect(transport.dataListener, isNotNull);
     expect(transport.ackListener, isNotNull);
+    expect(transport.repeatListener, isNotNull);
   });
 
   test('location priority: phone, radio, stored, none', () async {
@@ -348,6 +356,43 @@ void main() {
       expect(service.active!.acks, hasLength(1));
       expect(service.active!.acks.single.senderKeyHex, bob.publicKeyHex);
       expect(alerter.events, ['ack:Bob']);
+    });
+
+    test('counts heard repeats of our own SOS, by repeater', () async {
+      transport.contacts = [
+        Contact(
+          publicKey: Uint8List.fromList([0x3a, ...List.filled(31, 1)]),
+          name: 'Hill repeater',
+          type: advTypeRepeater,
+          pathLength: -1,
+          path: Uint8List(0),
+          lastSeen: now,
+        ),
+      ];
+      await service.activate();
+      final ours = transport.channelPackets.single.$2.encode();
+      transport.repeatListener!(2, ours, '3a');
+      transport.repeatListener!(2, ours, '7c');
+      transport.repeatListener!(2, ours, '3a');
+      // not counted: another channel, someone else's SOS, an ACK
+      transport.repeatListener!(5, ours, '3a');
+      transport.repeatListener!(2, sosPacketFrom('Bob', 2, 'beef'), '3a');
+      transport.repeatListener!(
+        2,
+        sosPacketFrom('Bob', 2, service.active!.id, kind: SosPacketKind.ack),
+        '3a',
+      );
+
+      final sos = service.active!;
+      expect(sos.heardRepeats, 3);
+      expect(sos.repeaters, {'3a': 2, '7c': 1});
+      expect(service.repeaterName('3a'), 'Hill repeater');
+      expect(service.repeaterName('7c'), '7c');
+
+      final reloaded = newService()..load();
+      expect(reloaded.active?.heardRepeats, 3);
+      expect(reloaded.active?.repeaters, {'3a': 2, '7c': 1});
+      reloaded.dispose();
     });
 
     test('an active SOS survives a restart', () async {

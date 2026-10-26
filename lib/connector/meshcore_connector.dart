@@ -381,6 +381,12 @@ class MeshCoreConnector extends ChangeNotifier {
   void Function(SosInboundText inbound)? sosTextListener;
   void Function(int channelIndex, Uint8List payload, SosSignal signal)?
   sosDataListener;
+
+  /// A copy of an SOS packet heard passed on by a repeater: the channel it
+  /// was on, the SOS packet, and the path hash of the repeater that sent this
+  /// copy (the last hop), in hex.
+  void Function(int channelIndex, Uint8List payload, String lastHopHex)?
+  sosRepeatListener;
   // the latest raw packet heard (from the RX log), to give an SOS packet its
   // received signal strength: the log frame arrives just before the decoded one
   int? _lastRxRssi;
@@ -7738,6 +7744,10 @@ class MeshCoreConnector extends ChangeNotifier {
 
       final raw = reader.readRemainingBytes();
       final packet = _parseRawPacket(raw);
+      if (packet != null && packet.payloadType == _payloadTypeGroupData) {
+        _handleSosRepeatLog(packet);
+        return;
+      }
       if (packet == null || packet.payloadType != _payloadTypeGroupText) return;
 
       final payload = BufferReader(packet.payload);
@@ -7835,6 +7845,42 @@ class MeshCoreConnector extends ChangeNotifier {
       }
     } catch (e) {
       appLogger.warn('Error handling log RX data frame: $e');
+    }
+  }
+
+  /// Every packet the radio hears comes here, repeats included, while the
+  /// radio itself passes on only the first copy. A flooded SOS packet with a
+  /// path is a copy some repeater passed on; the SOS service counts those of
+  /// its own SOS.
+  void _handleSosRepeatLog(_RawPacket packet) {
+    final listener = sosRepeatListener;
+    if (listener == null || !packet.isFlood || packet.hopCount == 0) return;
+    final width = packet.pathHashWidth;
+    if (packet.pathBytes.length < packet.hopCount * width) return;
+    final payload = BufferReader(packet.payload);
+    final channelHash = payload.readByte();
+    final encrypted = Uint8List.fromList(payload.readRemainingBytes());
+    final channelsToSearch = _channels.isNotEmpty ? _channels : _cachedChannels;
+    for (final channel in channelsToSearch) {
+      if (channel.isEmpty || _computeChannelHash(channel.psk) != channelHash) {
+        continue;
+      }
+      final data = _decryptPayload(channel.psk, encrypted);
+      // [data type u16][length][SOS packet]
+      if (data == null || data.length < 3) continue;
+      final dataType = data[0] | (data[1] << 8);
+      final length = data[2];
+      if (dataType != dataTypeSos || length > data.length - 3) return;
+      final last = packet.pathBytes.sublist(
+        (packet.hopCount - 1) * width,
+        packet.hopCount * width,
+      );
+      listener(
+        channel.index,
+        Uint8List.fromList(data.sublist(3, 3 + length)),
+        last.map((b) => b.toRadixString(16).padLeft(2, '0')).join(),
+      );
+      return;
     }
   }
 
@@ -9609,6 +9655,7 @@ const int _routeFlood = 0x01;
 const int _routeTransportDirect = 0x03;
 
 const int _payloadTypeGroupText = 0x05;
+const int _payloadTypeGroupData = 0x06;
 const int _cipherMacSize = 2;
 
 bool _isPathLenValidForMode(

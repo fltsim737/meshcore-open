@@ -3375,6 +3375,8 @@
   "sos_sourceNone": "Без местоположение",
   "sos_acksNone": "Все още няма потвърждения",
   "sos_acksHeader": "Потвърдено от",
+  "sos_heardRepeats": "Чути препредавания: {count}",
+  "sos_repeatsNone": "Все още не е чут ретранслатор да го препредава",
   "sos_incomingHeader": "Входящи сигнали",
   "sos_incomingEmpty": "Няма получени SOS сигнали",
   "sos_sendAck": "Изпрати ACK",

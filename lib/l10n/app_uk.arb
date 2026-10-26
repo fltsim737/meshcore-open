@@ -3355,6 +3355,8 @@
   "sos_sourceNone": "Немає координат",
   "sos_acksNone": "Підтверджень поки немає",
   "sos_acksHeader": "Підтвердили",
+  "sos_heardRepeats": "Почуто повторів: {count}",
+  "sos_repeatsNone": "Поки не чути, щоб ретранслятор його передавав",
   "sos_incomingHeader": "Вхідні сигнали",
   "sos_incomingEmpty": "SOS-сигналів не отримано",
   "sos_sendAck": "Надіслати ACK",

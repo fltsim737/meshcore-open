@@ -59,6 +59,14 @@ class OutgoingSos {
   /// Contacts whose radio confirmed delivery of an SOS direct message.
   final Set<String> deliveredContactKeys;
 
+  /// Copies of this SOS heard passed on by repeaters, every broadcast
+  /// together: proof it is travelling, not that anyone has read it.
+  int heardRepeats;
+
+  /// The repeaters heard passing it on, by path hash (hex), with how many
+  /// copies each.
+  final Map<String, int> repeaters;
+
   OutgoingSos({
     required this.id,
     required this.startedAt,
@@ -67,8 +75,11 @@ class OutgoingSos {
     this.lastFix = const SosFix.none(),
     List<SosAck>? acks,
     Set<String>? deliveredContactKeys,
+    this.heardRepeats = 0,
+    Map<String, int>? repeaters,
   }) : acks = acks ?? [],
-       deliveredContactKeys = deliveredContactKeys ?? {};
+       deliveredContactKeys = deliveredContactKeys ?? {},
+       repeaters = repeaters ?? {};
 
   bool get isAcknowledged => acks.isNotEmpty;
 
@@ -86,6 +97,8 @@ class OutgoingSos {
     'last_fix': _fixToJson(lastFix),
     'acks': acks.map((ack) => ack.toJson()).toList(),
     'delivered_contact_keys': deliveredContactKeys.toList(),
+    'heard_repeats': heardRepeats,
+    'repeaters': repeaters,
   };
 
   factory OutgoingSos.fromJson(Map<String, dynamic> json) => OutgoingSos(
@@ -101,6 +114,12 @@ class OutgoingSos {
         (json['delivered_contact_keys'] as List<dynamic>? ?? const [])
             .map((e) => e.toString())
             .toSet(),
+    heardRepeats: json['heard_repeats'] as int? ?? 0,
+    repeaters: {
+      for (final e
+          in (json['repeaters'] as Map<dynamic, dynamic>? ?? const {}).entries)
+        e.key.toString(): (e.value as num).toInt(),
+    },
   );
 }
 

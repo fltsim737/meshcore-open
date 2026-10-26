@@ -3509,6 +3509,8 @@
   "sos_sourceNone": "위치 없음",
   "sos_acksNone": "아직 응답 없음",
   "sos_acksHeader": "응답한 사람",
+  "sos_heardRepeats": "들린 중계: {count}",
+  "sos_repeatsNone": "아직 중계하는 리피터가 들리지 않음",
   "sos_incomingHeader": "수신 경보",
   "sos_incomingEmpty": "수신된 SOS 경보 없음",
   "sos_sendAck": "ACK 보내기",

@@ -6381,6 +6381,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sos_acksHeader => '응답한 사람';
 
   @override
+  String sos_heardRepeats(int count) {
+    return '들린 중계: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => '아직 중계하는 리피터가 들리지 않음';
+
+  @override
   String get sos_incomingHeader => '수신 경보';
 
   @override

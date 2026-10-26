@@ -6657,6 +6657,15 @@ class AppLocalizationsSl extends AppLocalizations {
   String get sos_acksHeader => 'Potrdil';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Slišane ponovitve: $count';
+  }
+
+  @override
+  String get sos_repeatsNone =>
+      'Še noben repetitor ni bil slišan, da bi ga posredoval';
+
+  @override
   String get sos_incomingHeader => 'Dohodna opozorila';
 
   @override

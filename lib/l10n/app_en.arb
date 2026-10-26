@@ -4077,6 +4077,15 @@
   "sos_sourceNone": "No location",
   "sos_acksNone": "No acknowledgements yet",
   "sos_acksHeader": "Acknowledged by",
+  "sos_heardRepeats": "Heard repeats: {count}",
+  "@sos_heardRepeats": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sos_repeatsNone": "No repeater heard passing it on yet",
   "sos_incomingHeader": "Incoming alerts",
   "sos_incomingEmpty": "No SOS alerts received",
   "sos_sendAck": "Send ACK",

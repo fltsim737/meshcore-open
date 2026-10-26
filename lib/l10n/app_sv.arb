@@ -3370,6 +3370,8 @@
   "sos_sourceNone": "Ingen plats",
   "sos_acksNone": "Inga kvittenser än",
   "sos_acksHeader": "Kvitterat av",
+  "sos_heardRepeats": "Hörda repeteringar: {count}",
+  "sos_repeatsNone": "Ingen repeater har hörts skicka det vidare än",
   "sos_incomingHeader": "Inkommande larm",
   "sos_incomingEmpty": "Inga SOS-larm mottagna",
   "sos_sendAck": "Skicka ACK",

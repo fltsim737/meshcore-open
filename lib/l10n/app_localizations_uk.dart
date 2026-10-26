@@ -6695,6 +6695,14 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sos_acksHeader => 'Підтвердили';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Почуто повторів: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => 'Поки не чути, щоб ретранслятор його передавав';
+
+  @override
   String get sos_incomingHeader => 'Вхідні сигнали';
 
   @override

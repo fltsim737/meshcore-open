@@ -6643,6 +6643,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sos_acksHeader => 'Bevestigd door';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Gehoorde herhalingen: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => 'Nog geen repeater gehoord die het doorgeeft';
+
+  @override
   String get sos_incomingHeader => 'Inkomende meldingen';
 
   @override

@@ -6371,6 +6371,14 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sos_acksHeader => '応答者';
 
   @override
+  String sos_heardRepeats(int count) {
+    return '聞こえた中継: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => '中継するリピーターはまだ聞こえていません';
+
+  @override
   String get sos_incomingHeader => '受信したアラート';
 
   @override
