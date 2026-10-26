@@ -6978,4 +6978,86 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'Двутоновата тревога от предишните версии';
+
+  @override
+  String get backup_title => 'Архивиране и възстановяване';
+
+  @override
+  String get backup_export => 'Експорт на конфигурация';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Запазване във файл на идентичността, настройките, каналите и контактите на това радио';
+
+  @override
+  String get backup_import => 'Импорт на конфигурация';
+
+  @override
+  String get backup_importSubtitle =>
+      'Връщане на запазена конфигурация на това радио, включително идентичността';
+
+  @override
+  String get backup_exportButton => 'Експорт';
+
+  @override
+  String get backup_importButton => 'Импорт';
+
+  @override
+  String get backup_exportConfirm =>
+      'Файлът съдържа частния ключ на това радио: всеки, който го има, може да се представя за него. Пазете го на сигурно място.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Конфигурацията е запазена в $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Неуспешен експорт: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'Фърмуерът на това радио не позволява експорт на идентичността му.';
+
+  @override
+  String get backup_notConfig => 'Този файл не е конфигурация на MeshCore SOS.';
+
+  @override
+  String get backup_tooLarge =>
+      'Този файл е твърде голям, за да е конфигурация.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Да се импортира ли конфигурацията на „$name“ (идентичност $key…)? Това радио приема тази идентичност и настройките ѝ, а контактите и каналите от файла се добавят. Не използвайте една идентичност на две радиа едновременно.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Импорт: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Нищо не е променено: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Конфигурацията е импортирана: добавени са $contacts контакта и $channels канала.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'Радиото се рестартира с възстановената идентичност: свържете се отново, когато се върне.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'Файлът съдържа и WiFi настройките и тези на бутона на SOS радиото. Само уеб страницата на радиото ги връща: Настройки → Архивиране и възстановяване.';
+
+  @override
+  String get backup_importProblems => 'Не всичко беше възстановено:';
+
+  @override
+  String get backup_sosActive => 'Отменете SOS преди импорт на конфигурация.';
 }

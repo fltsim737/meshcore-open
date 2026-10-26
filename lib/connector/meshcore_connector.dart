@@ -334,7 +334,11 @@ class MeshCoreConnector extends ChangeNotifier {
         saved = {'type': 'ble', 'id': _deviceId, 'name': deviceDisplayName};
       case MeshCoreTransportType.usb:
         if (_usbPortName == null) return;
-        saved = {'type': 'usb', 'port': _usbPortName, 'name': deviceDisplayName};
+        saved = {
+          'type': 'usb',
+          'port': _usbPortName,
+          'name': deviceDisplayName,
+        };
       case MeshCoreTransportType.tcp:
         final host = _tcpReconnectHost ?? _tcpHostTried;
         final port = _tcpReconnectPort ?? _tcpPortTried;
@@ -346,7 +350,7 @@ class MeshCoreConnector extends ChangeNotifier {
           'name': deviceDisplayName,
         };
       default:
-        return;   // review mode isn't a radio
+        return; // review mode isn't a radio
     }
     unawaited(
       PrefsManager.instance
@@ -354,6 +358,7 @@ class MeshCoreConnector extends ChangeNotifier {
           .catchError((Object _) => false),
     );
   }
+
   double? _selfLatitude;
   double? _selfLongitude;
   final List<DirectRepeater> _directRepeaters = List.empty(growable: true);
@@ -843,6 +848,7 @@ class MeshCoreConnector extends ChangeNotifier {
       _isSyncingChannels && _totalChannelsToRequest > 0
       ? ((_nextChannelIndexToRequest / _totalChannelsToRequest) * 100).round()
       : 0;
+
   /// The connected radio's battery is at 20% or below.
   bool get batteryLow => (batteryPercent ?? 100) <= lowBatteryPercent;
   static const int lowBatteryPercent = 20;
@@ -5601,6 +5607,51 @@ class MeshCoreConnector extends ChangeNotifier {
   Future<void> rebootDevice() async {
     if (!isConnected) return;
     await sendFrame(buildRebootFrame());
+  }
+
+  /// The radio's private key (64 bytes) for a config backup. Throws
+  /// [StateError] when the firmware was built without key export.
+  Future<Uint8List> exportPrivateKey() async {
+    if (!isConnected) throw Exception("Not connected to a MeshCore device");
+    final reply = receivedFrames
+        .firstWhere(
+          (f) =>
+              f.isNotEmpty &&
+              (f[0] == respCodePrivateKey ||
+                  f[0] == respCodeDisabled ||
+                  f[0] == respCodeErr),
+        )
+        .timeout(const Duration(seconds: 5));
+    await sendFrame(buildExportPrivateKeyFrame());
+    final frame = await reply;
+    if (frame[0] == respCodePrivateKey && frame.length >= 65) {
+      return Uint8List.fromList(frame.sublist(1, 65));
+    }
+    throw StateError('private key export is disabled on this radio');
+  }
+
+  /// Gives the radio another identity, from a config backup. The radio
+  /// reloads its contacts; a reboot afterwards lets the app start afresh.
+  /// Throws [StateError] when the firmware refuses or forbids it.
+  Future<void> importPrivateKey(Uint8List privateKey) async {
+    if (!isConnected) throw Exception("Not connected to a MeshCore device");
+    final reply = receivedFrames
+        .firstWhere(
+          (f) =>
+              f.isNotEmpty &&
+              (f[0] == respCodeOk ||
+                  f[0] == respCodeDisabled ||
+                  f[0] == respCodeErr),
+        )
+        .timeout(const Duration(seconds: 5));
+    await sendFrame(buildImportPrivateKeyFrame(privateKey));
+    final frame = await reply;
+    if (frame[0] == respCodeDisabled) {
+      throw StateError('private key import is disabled on this radio');
+    }
+    if (frame[0] != respCodeOk) {
+      throw StateError('the radio refused the private key');
+    }
   }
 
   Future<void> setTelemetryModeBase(

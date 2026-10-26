@@ -6957,4 +6957,85 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'Dvotonski alarm prejšnjih različic';
+
+  @override
+  String get backup_title => 'Varnostna kopija in obnovitev';
+
+  @override
+  String get backup_export => 'Izvozi konfiguracijo';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Shrani identiteto, nastavitve, kanale in stike tega radia v datoteko';
+
+  @override
+  String get backup_import => 'Uvozi konfiguracijo';
+
+  @override
+  String get backup_importSubtitle =>
+      'Vrni shranjeno konfiguracijo na ta radio, vključno z identiteto';
+
+  @override
+  String get backup_exportButton => 'Izvozi';
+
+  @override
+  String get backup_importButton => 'Uvozi';
+
+  @override
+  String get backup_exportConfirm =>
+      'Datoteka vsebuje zasebni ključ tega radia: kdor jo ima, se lahko izdaja za ta radio. Hranite jo na varnem.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Konfiguracija shranjena v $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Izvoz ni uspel: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'Strojna programska oprema tega radia ne dovoli izvoza identitete.';
+
+  @override
+  String get backup_notConfig => 'Ta datoteka ni konfiguracija MeshCore SOS.';
+
+  @override
+  String get backup_tooLarge => 'Ta datoteka je prevelika za konfiguracijo.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Uvozim konfiguracijo »$name« (identiteta $key…)? Ta radio prevzame to identiteto in nastavitve, stiki in kanali iz datoteke pa se dodajo. Iste identitete ne uporabljajte na dveh radiih hkrati.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Uvažanje: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Nič ni bilo spremenjeno: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Konfiguracija uvožena: dodanih $contacts stikov in $channels kanalov.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'Radio se znova zaganja z obnovljeno identiteto: ko se vrne, se znova povežite.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'Datoteka vsebuje tudi nastavitve WiFi in gumba radia SOS. Te vrne le spletna stran radia: Nastavitve → Varnostna kopija in obnovitev.';
+
+  @override
+  String get backup_importProblems => 'Ni bilo vse obnovljeno:';
+
+  @override
+  String get backup_sosActive => 'Pred uvozom konfiguracije prekličite SOS.';
 }

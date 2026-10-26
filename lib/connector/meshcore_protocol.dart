@@ -195,6 +195,8 @@ const int cmdImportContact = 18;
 const int cmdReboot = 19;
 const int cmdGetBattAndStorage = 20;
 const int cmdDeviceQuery = 22;
+const int cmdExportPrivateKey = 23;
+const int cmdImportPrivateKey = 24;
 const int cmdSendLogin = 26;
 const int cmdSendStatusReq = 27;
 const int cmdGetContactByKey = 30;
@@ -261,6 +263,8 @@ const int respCodeNoMoreMessages = 10;
 const int respCodeExportContact = 11;
 const int respCodeBattAndStorage = 12;
 const int respCodeDeviceInfo = 13;
+const int respCodePrivateKey = 14;
+const int respCodeDisabled = 15;
 const int respCodeContactMsgRecvV3 = 16;
 const int respCodeChannelMsgRecvV3 = 17;
 const int respCodeChannelInfo = 18;
@@ -681,6 +685,18 @@ Uint8List buildSetCustomVarFrame(String value) {
 
 // Build CMD_REBOOT frame
 // Format: [cmd]["reboot"]
+// Build CMD_EXPORT_PRIVATE_KEY frame: the reply is RESP_CODE_PRIVATE_KEY
+// [code][private key x64], or RESP_CODE_DISABLED when the firmware forbids it
+Uint8List buildExportPrivateKeyFrame() {
+  return Uint8List.fromList([cmdExportPrivateKey]);
+}
+
+// Build CMD_IMPORT_PRIVATE_KEY frame
+// Format: [cmd][private key x64]
+Uint8List buildImportPrivateKeyFrame(Uint8List privateKey) {
+  return Uint8List.fromList([cmdImportPrivateKey, ...privateKey]);
+}
+
 Uint8List buildRebootFrame() {
   return Uint8List.fromList([cmdReboot, ...utf8.encode('reboot')]);
 }

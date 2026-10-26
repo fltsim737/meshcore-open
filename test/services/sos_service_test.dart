@@ -753,6 +753,32 @@ void main() {
       expect(transport.directSends, [('Ridge', 'ACK #a1b2')]);
     });
 
+    test('opening a chat sends the network ACK again, with its key', () async {
+      final ridge = contactFor('Ridge', 9);
+      transport.contacts = [ridge];
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'), channel: 2);
+      final alert = service.incoming.single;
+      // not before an ACK: it would answer for the responder
+      await service.reintroduceBeforeMessage(alert);
+      expect(transport.channelPackets, isEmpty);
+      await service.acknowledge(alert);
+      transport.channelPackets.clear();
+      transport.directSends.clear();
+      await service.reintroduceBeforeMessage(alert);
+      final (channelIndex, packet) = transport.channelPackets.single;
+      expect(channelIndex, 2);
+      expect(packet.kind, SosPacketKind.ack);
+      expect(packet.senderKey, isNotNull);
+      // the radio can't read a DM from a phone it doesn't know yet
+      expect(transport.directSends, isEmpty);
+      // at most every 30 s
+      await service.reintroduceBeforeMessage(alert);
+      expect(transport.channelPackets, hasLength(1));
+      now = now.add(SosService.reintroduceEvery);
+      await service.reintroduceBeforeMessage(alert);
+      expect(transport.channelPackets, hasLength(2));
+    });
+
     test('acknowledging while disconnected leaves the alert open', () async {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       transport.setConnected(false);

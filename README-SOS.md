@@ -73,7 +73,7 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 ### Receiving
 
-A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android it loops at alarm volume until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
+A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android it loops at alarm volume until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh; **Message** opens a chat with the sender (sending the ACK again first, so their radio knows the responder). On Android the alert wakes the screen and shows over the lock screen. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
 
 **Locate** helps a responder close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and the responder's screen shows how strong each one is and whether they're getting warmer or colder.
 
@@ -180,6 +180,10 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 ### 6. Talking (SOS Voice only)
 
 See [Voice](#voice-sos-voice-only) below.
+
+### Backing up your radio
+
+**Settings → Backup and restore → Export config** saves the radio's identity (its private key), name, radio settings, channels and contacts, with this app's emergency network, home location and emergency contacts, in one file. **Import config** puts it back after a firmware update or erase, or onto a new radio that takes over the old one's identity. A MeshCore SOS radio's web page reads and writes the same file; its WiFi and button settings come back only through that page. Keep the file private: anyone with it can pretend to be your radio.
 
 ### Practising
 

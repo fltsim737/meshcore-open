@@ -6969,4 +6969,87 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'A korábbi verziók kéthangú riasztása';
+
+  @override
+  String get backup_title => 'Biztonsági mentés és visszaállítás';
+
+  @override
+  String get backup_export => 'Konfiguráció exportálása';
+
+  @override
+  String get backup_exportSubtitle =>
+      'A rádió identitásának, beállításainak, csatornáinak és kontaktjainak mentése fájlba';
+
+  @override
+  String get backup_import => 'Konfiguráció importálása';
+
+  @override
+  String get backup_importSubtitle =>
+      'Mentett konfiguráció visszaállítása erre a rádióra, identitással együtt';
+
+  @override
+  String get backup_exportButton => 'Exportálás';
+
+  @override
+  String get backup_importButton => 'Importálás';
+
+  @override
+  String get backup_exportConfirm =>
+      'A fájl a rádió privát kulcsát tartalmazza: akinél megvan, ennek a rádiónak adhatja ki magát. Tartsd biztonságos helyen.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Konfiguráció mentve ide: $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Az exportálás nem sikerült: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'A rádió firmware-e nem engedi az identitás exportálását.';
+
+  @override
+  String get backup_notConfig => 'Ez a fájl nem MeshCore SOS konfiguráció.';
+
+  @override
+  String get backup_tooLarge =>
+      'Ez a fájl túl nagy ahhoz, hogy konfiguráció legyen.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Importálod „$name” konfigurációját (identitás: $key…)? Ez a rádió átveszi az identitást és a beállításokat, a fájl kontaktjai és csatornái pedig hozzáadódnak. Ugyanazt az identitást ne használd egyszerre két rádión.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Importálás: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Semmi sem változott: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Konfiguráció importálva: $contacts kontakt és $channels csatorna hozzáadva.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'A rádió újraindul a visszaállított identitással: csatlakozz újra, ha visszajött.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'A fájl az SOS rádió WiFi- és gombbeállításait is tartalmazza. Ezeket csak a rádió weboldala állítja vissza: Beállítások → Biztonsági mentés és visszaállítás.';
+
+  @override
+  String get backup_importProblems => 'Nem minden állt vissza:';
+
+  @override
+  String get backup_sosActive =>
+      'Konfiguráció importálása előtt szakítsd meg az SOS-t.';
 }

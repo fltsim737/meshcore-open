@@ -6895,4 +6895,85 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'The two-tone alarm of earlier versions';
+
+  @override
+  String get backup_title => 'Backup and restore';
+
+  @override
+  String get backup_export => 'Export config';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Save this radio\'s identity, settings, channels and contacts to a file';
+
+  @override
+  String get backup_import => 'Import config';
+
+  @override
+  String get backup_importSubtitle =>
+      'Put a saved config back on this radio, identity included';
+
+  @override
+  String get backup_exportButton => 'Export';
+
+  @override
+  String get backup_importButton => 'Import';
+
+  @override
+  String get backup_exportConfirm =>
+      'The file holds this radio\'s private key: anyone with it can pretend to be this radio. Keep it somewhere private.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Config saved to $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Couldn\'t export: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'This radio\'s firmware doesn\'t allow its identity to be exported.';
+
+  @override
+  String get backup_notConfig => 'That file isn\'t a MeshCore SOS config.';
+
+  @override
+  String get backup_tooLarge => 'That file is too large to be a config.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Import the config of \"$name\" (identity $key…)? This radio takes that identity and its settings, and the file\'s contacts and channels are added. Don\'t use the same identity on two radios at once.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Importing: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Nothing was changed: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Config imported: $contacts contacts and $channels channels added.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'The radio is restarting with the restored identity: connect to it again once it\'s back.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'The file also has the SOS radio\'s WiFi and button settings. Only the radio\'s web page puts those back: Settings → Backup and restore.';
+
+  @override
+  String get backup_importProblems => 'Not everything went back:';
+
+  @override
+  String get backup_sosActive => 'Cancel the SOS before importing a config.';
 }

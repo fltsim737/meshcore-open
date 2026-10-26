@@ -6663,4 +6663,81 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_alarmSoundClassicDetail => '以前のバージョンの2音アラーム';
+
+  @override
+  String get backup_title => 'バックアップと復元';
+
+  @override
+  String get backup_export => '設定をエクスポート';
+
+  @override
+  String get backup_exportSubtitle => 'この無線機のID、設定、チャンネル、連絡先をファイルに保存';
+
+  @override
+  String get backup_import => '設定をインポート';
+
+  @override
+  String get backup_importSubtitle => '保存した設定をIDごとこの無線機に戻す';
+
+  @override
+  String get backup_exportButton => 'エクスポート';
+
+  @override
+  String get backup_importButton => 'インポート';
+
+  @override
+  String get backup_exportConfirm =>
+      'このファイルには無線機の秘密鍵が含まれます。持っている人は誰でもこの無線機になりすませます。安全な場所に保管してください。';
+
+  @override
+  String backup_exported(String path) {
+    return '設定を $path に保存しました';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'エクスポートできませんでした: $error';
+  }
+
+  @override
+  String get backup_exportDisabled => 'この無線機のファームウェアはIDのエクスポートを許可していません。';
+
+  @override
+  String get backup_notConfig => 'このファイルはMeshCore SOSの設定ではありません。';
+
+  @override
+  String get backup_tooLarge => '設定ファイルとしては大きすぎます。';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return '「$name」(ID $key…)の設定をインポートしますか? この無線機はそのIDと設定を引き継ぎ、ファイルの連絡先とチャンネルが追加されます。同じIDを2台の無線機で同時に使わないでください。';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'インポート中: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return '何も変更されませんでした: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return '設定をインポートしました: 連絡先 $contacts 件、チャンネル $channels 件を追加。';
+  }
+
+  @override
+  String get backup_importedRestart => '無線機は復元したIDで再起動します。戻ったら再接続してください。';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'このファイルにはSOS無線機のWiFiとボタンの設定も含まれます。これらは無線機のウェブページでのみ戻せます: 設定 → バックアップと復元。';
+
+  @override
+  String get backup_importProblems => '一部は復元されませんでした:';
+
+  @override
+  String get backup_sosActive => '設定をインポートする前にSOSを取り消してください。';
 }

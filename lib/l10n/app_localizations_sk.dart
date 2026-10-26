@@ -6954,4 +6954,86 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_alarmSoundClassicDetail => 'Dvojtónový alarm starších verzií';
+
+  @override
+  String get backup_title => 'Záloha a obnovenie';
+
+  @override
+  String get backup_export => 'Exportovať konfiguráciu';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Uložiť do súboru identitu, nastavenia, kanály a kontakty tohto rádia';
+
+  @override
+  String get backup_import => 'Importovať konfiguráciu';
+
+  @override
+  String get backup_importSubtitle =>
+      'Vrátiť na toto rádio uloženú konfiguráciu vrátane identity';
+
+  @override
+  String get backup_exportButton => 'Exportovať';
+
+  @override
+  String get backup_importButton => 'Importovať';
+
+  @override
+  String get backup_exportConfirm =>
+      'Súbor obsahuje súkromný kľúč tohto rádia: ktokoľvek ho má, sa môže vydávať za toto rádio. Uchovávajte ho na bezpečnom mieste.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Konfigurácia uložená do $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Export zlyhal: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'Firmvér tohto rádia nepovoľuje export jeho identity.';
+
+  @override
+  String get backup_notConfig =>
+      'Tento súbor nie je konfigurácia MeshCore SOS.';
+
+  @override
+  String get backup_tooLarge => 'Tento súbor je príliš veľký na konfiguráciu.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Importovať konfiguráciu „$name“ (identita $key…)? Toto rádio prevezme túto identitu a jej nastavenia a pridajú sa kontakty a kanály zo súboru. Nepoužívajte rovnakú identitu na dvoch rádiách naraz.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Importuje sa: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Nič sa nezmenilo: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Konfigurácia importovaná: pridané kontakty: $contacts, kanály: $channels.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'Rádio sa reštartuje s obnovenou identitou: po návrate sa znova pripojte.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'Súbor obsahuje aj nastavenia WiFi a tlačidla rádia SOS. Tie vráti iba webová stránka rádia: Nastavenia → Záloha a obnovenie.';
+
+  @override
+  String get backup_importProblems => 'Nie všetko sa obnovilo:';
+
+  @override
+  String get backup_sosActive => 'Pred importom konfigurácie zrušte SOS.';
 }

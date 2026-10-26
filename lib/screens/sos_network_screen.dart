@@ -7,6 +7,7 @@ import '../helpers/sos_network_code.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/l10n.dart';
 import '../services/sos_service.dart';
+import '../services/notification_service.dart';
 import '../widgets/mesh_ui.dart';
 import '../widgets/qr_code_display.dart';
 import '../widgets/qr_scanner_widget.dart';
@@ -54,6 +55,8 @@ Future<bool> confirmJoinSosNetwork(
   );
   if (confirmed != true || !context.mounted) return false;
   await context.read<SosService>().joinNetwork(code);
+  // so an SOS from the network can wake the screen
+  await NotificationService().allowFullScreenSosAlerts();
   return true;
 }
 

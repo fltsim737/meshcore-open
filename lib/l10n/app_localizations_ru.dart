@@ -6994,4 +6994,86 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'Двухтональная тревога прежних версий';
+
+  @override
+  String get backup_title => 'Резервная копия и восстановление';
+
+  @override
+  String get backup_export => 'Экспорт конфигурации';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Сохранить в файл идентичность, настройки, каналы и контакты этой рации';
+
+  @override
+  String get backup_import => 'Импорт конфигурации';
+
+  @override
+  String get backup_importSubtitle =>
+      'Вернуть на эту рацию сохранённую конфигурацию вместе с идентичностью';
+
+  @override
+  String get backup_exportButton => 'Экспорт';
+
+  @override
+  String get backup_importButton => 'Импорт';
+
+  @override
+  String get backup_exportConfirm =>
+      'Файл содержит закрытый ключ этой рации: любой, у кого он есть, может выдать себя за неё. Храните его в надёжном месте.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Конфигурация сохранена в $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Не удалось экспортировать: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'Прошивка этой рации не позволяет экспортировать её идентичность.';
+
+  @override
+  String get backup_notConfig =>
+      'Этот файл не является конфигурацией MeshCore SOS.';
+
+  @override
+  String get backup_tooLarge => 'Этот файл слишком большой для конфигурации.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Импортировать конфигурацию «$name» (идентичность $key…)? Эта рация получит эту идентичность и её настройки, а контакты и каналы из файла будут добавлены. Не используйте одну идентичность на двух рациях одновременно.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Импорт: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Ничего не изменено: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Конфигурация импортирована: добавлено контактов — $contacts, каналов — $channels.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'Рация перезапускается с восстановленной идентичностью: подключитесь снова, когда она запустится.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'В файле также есть настройки WiFi и кнопки рации SOS. Их восстанавливает только веб-страница рации: Настройки → Резервная копия и восстановление.';
+
+  @override
+  String get backup_importProblems => 'Восстановлено не всё:';
+
+  @override
+  String get backup_sosActive => 'Отмените SOS перед импортом конфигурации.';
 }

@@ -6996,4 +6996,88 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'Der Zweiklang-Alarm früherer Versionen';
+
+  @override
+  String get backup_title => 'Sichern und wiederherstellen';
+
+  @override
+  String get backup_export => 'Konfiguration exportieren';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Identität, Einstellungen, Kanäle und Kontakte dieses Funkgeräts in einer Datei speichern';
+
+  @override
+  String get backup_import => 'Konfiguration importieren';
+
+  @override
+  String get backup_importSubtitle =>
+      'Eine gespeicherte Konfiguration samt Identität auf dieses Funkgerät zurückspielen';
+
+  @override
+  String get backup_exportButton => 'Exportieren';
+
+  @override
+  String get backup_importButton => 'Importieren';
+
+  @override
+  String get backup_exportConfirm =>
+      'Die Datei enthält den privaten Schlüssel dieses Funkgeräts: Wer sie hat, kann sich als dieses Funkgerät ausgeben. Bewahre sie sicher auf.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Konfiguration gespeichert unter $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'Export fehlgeschlagen: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'Die Firmware dieses Funkgeräts erlaubt keinen Export seiner Identität.';
+
+  @override
+  String get backup_notConfig =>
+      'Diese Datei ist keine MeshCore-SOS-Konfiguration.';
+
+  @override
+  String get backup_tooLarge =>
+      'Diese Datei ist zu groß für eine Konfiguration.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return 'Die Konfiguration von „$name“ (Identität $key…) importieren? Dieses Funkgerät übernimmt diese Identität und ihre Einstellungen, und die Kontakte und Kanäle der Datei werden hinzugefügt. Verwende dieselbe Identität nie gleichzeitig auf zwei Funkgeräten.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Import: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'Nichts wurde geändert: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Konfiguration importiert: $contacts Kontakte und $channels Kanäle hinzugefügt.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'Das Funkgerät startet mit der wiederhergestellten Identität neu: Verbinde dich danach wieder.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'Die Datei enthält auch WLAN- und Tasten-Einstellungen des SOS-Funkgeräts. Nur dessen Webseite spielt diese zurück: Einstellungen → Sichern und wiederherstellen.';
+
+  @override
+  String get backup_importProblems => 'Nicht alles wurde wiederhergestellt:';
+
+  @override
+  String get backup_sosActive =>
+      'Beende zuerst das SOS, bevor du eine Konfiguration importierst.';
 }

@@ -279,6 +279,22 @@ class NotificationService {
     return true;
   }
 
+  /// Android 14+: lets an incoming SOS wake the screen. Granted by default to
+  /// an app installed from the APK; if it was taken away, this opens the
+  /// system page to allow it again. Earlier versions need nothing.
+  Future<void> allowFullScreenSosAlerts() async {
+    if (!PlatformInfo.isAndroid || !await _ensureInitialized()) return;
+    try {
+      await _notifications
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >()
+          ?.requestFullScreenIntentPermission();
+    } catch (e) {
+      debugPrint('Full-screen SOS alert permission: $e');
+    }
+  }
+
   /// Asks for the Android 13+ notification permission the first time it is
   /// needed. Never re-prompts after the user has answered once; iOS/macOS
   /// already prompt during [initialize].
@@ -701,6 +717,9 @@ class NotificationService {
       additionalFlags: Int32List.fromList(const [4]),
       ongoing: true,
       autoCancel: false,
+      // wakes the screen and opens the app over the lock screen, as a phone
+      // call does (MainActivity shows over it only for an SOS)
+      fullScreenIntent: true,
       color: const Color(0xFFD32F2F),
       styleInformation: BigTextStyleInformation(body),
       icon: '@mipmap/ic_launcher',
