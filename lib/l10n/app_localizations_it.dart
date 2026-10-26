@@ -7089,4 +7089,8 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Consenti';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Se la pagina delle impostazioni non mostra questa app o un\'impostazione non resta attiva: chiudi tutte le app, riavvia il telefono e riprova.';
 }

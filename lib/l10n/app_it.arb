@@ -3742,5 +3742,6 @@
   "sos_fullScreenOn": "Attivi: un SOS apre l'avviso rosso, con il telefono bloccato o in uso",
   "sos_fullScreenLockedOnly": "Solo con il telefono bloccato. Tocca e consenti \"Mostra sopra altre app\" perché un SOS apra l'avviso rosso anche con il telefono in uso",
   "sos_fullScreenOff": "Disattivati: un SOS mostra solo una notifica. Tocca e consenti le notifiche a schermo intero per questa app",
-  "sos_fullScreenAllow": "Consenti"
+  "sos_fullScreenAllow": "Consenti",
+  "sos_fullScreenRestartTip": "Se la pagina delle impostazioni non mostra questa app o un'impostazione non resta attiva: chiudi tutte le app, riavvia il telefono e riprova."
 }

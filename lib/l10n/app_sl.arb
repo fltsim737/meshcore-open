@@ -3609,5 +3609,6 @@
   "sos_fullScreenOn": "Vklopljeno: SOS odpre rdeče opozorilo, ne glede na to, ali je telefon zaklenjen ali v uporabi",
   "sos_fullScreenLockedOnly": "Le pri zaklenjenem telefonu. Tapnite in dovolite »Prikaz čez druge aplikacije«, da SOS odpre rdeče opozorilo tudi med uporabo telefona",
   "sos_fullScreenOff": "Izklopljeno: SOS prikaže le obvestilo. Tapnite in tej aplikaciji dovolite obvestila na celem zaslonu",
-  "sos_fullScreenAllow": "Dovoli"
+  "sos_fullScreenAllow": "Dovoli",
+  "sos_fullScreenRestartTip": "Če stran z nastavitvami ne prikaže te aplikacije ali nastavitev ne ostane vklopljena: zaprite vse aplikacije, znova zaženite telefon in poskusite znova."
 }

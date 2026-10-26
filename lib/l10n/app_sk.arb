@@ -3609,5 +3609,6 @@
   "sos_fullScreenOn": "Zapnuté: SOS otvorí červené upozornenie, či je telefón zamknutý alebo sa používa",
   "sos_fullScreenLockedOnly": "Len pri zamknutom telefóne. Ťuknite a povoľte „Zobrazovať cez iné aplikácie“, aby SOS otvorilo červené upozornenie aj počas používania telefónu",
   "sos_fullScreenOff": "Vypnuté: SOS zobrazí len upozornenie. Ťuknite a povoľte tejto aplikácii upozornenia na celú obrazovku",
-  "sos_fullScreenAllow": "Povoliť"
+  "sos_fullScreenAllow": "Povoliť",
+  "sos_fullScreenRestartTip": "Ak stránka nastavení nezobrazuje túto aplikáciu alebo nastavenie nezostane zapnuté: zatvorte všetky aplikácie, reštartujte telefón a skúste to znova."
 }

@@ -7094,4 +7094,8 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Дозволити';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Якщо сторінка налаштувань не показує цю програму або налаштування не зберігається: закрийте всі програми, перезапустіть телефон і спробуйте ще раз.';
 }

@@ -114,7 +114,8 @@ Download the installer for your platform from the [Releases](https://github.com/
 1. Copy the APK to the phone and open it. Allow "install unknown apps" for your file manager if asked.
 2. On first launch, allow Bluetooth, location and notifications. SOS Voice also asks for the microphone the first time you talk.
 3. To keep alerts arriving with the screen off, allow the app to run in the background when asked (battery optimisation off). A notification shows while it is listening.
-4. So an SOS opens the red alert even when the app isn't open, check **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** and tap it to allow what it asks for: **Display over other apps**, and on Samsung and Android 14 or later, **full-screen notifications**.
+4. So an SOS opens the red alert even when the app isn't open, check **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** and tap it to allow what it asks for: **Display over other apps**, and on Samsung and Android 14 or later, **full-screen notifications**. If the settings page doesn't show the app, or a setting won't stay on (seen on Samsung phones), close all apps, restart the phone and try again. Then also set the app's **Battery** to **Unrestricted** (long-press the app icon → App info → Battery).
+5. MeshCore Open SOS and MeshCore Open SOS Voice are separate apps from the original MeshCore Open and can be installed beside it (from 9.5.8; earlier MeshCore Open SOS builds replaced it).
 
 ### Linux
 

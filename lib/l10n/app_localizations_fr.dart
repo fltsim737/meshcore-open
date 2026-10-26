@@ -7109,4 +7109,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Autoriser';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Si la page des réglages n\'affiche pas cette appli ou qu\'un réglage ne reste pas activé : fermez toutes les applis, redémarrez le téléphone, puis réessayez.';
 }

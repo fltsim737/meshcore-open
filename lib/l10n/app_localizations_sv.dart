@@ -7026,4 +7026,8 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Tillåt';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Om inställningssidan inte visar den här appen eller en inställning inte stannar kvar: stäng alla appar, starta om telefonen och försök igen.';
 }

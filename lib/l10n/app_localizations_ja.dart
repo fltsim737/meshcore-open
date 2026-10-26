@@ -6756,4 +6756,8 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => '許可';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      '設定ページにこのアプリが表示されない、または設定がオンのままにならない場合は、すべてのアプリを閉じてスマートフォンを再起動し、もう一度お試しください。';
 }

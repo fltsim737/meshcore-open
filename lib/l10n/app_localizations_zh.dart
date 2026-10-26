@@ -6614,4 +6614,8 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => '允许';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      '如果设置页面不显示此应用,或某项设置无法保持开启:关闭所有应用,重启手机,然后再试一次。';
 }

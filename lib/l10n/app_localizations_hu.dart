@@ -7070,4 +7070,8 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Engedélyezés';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Ha a beállítási oldal nem mutatja ezt az alkalmazást, vagy egy beállítás nem marad bekapcsolva: zárj be minden alkalmazást, indítsd újra a telefont, és próbáld újra.';
 }

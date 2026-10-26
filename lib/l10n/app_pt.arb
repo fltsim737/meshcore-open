@@ -3608,5 +3608,6 @@
   "sos_fullScreenOn": "Ativados: um SOS abre o alerta vermelho, com o telemóvel bloqueado ou em uso",
   "sos_fullScreenLockedOnly": "Só com o telemóvel bloqueado. Toque e permita \"Mostrar sobre outras apps\" para que um SOS abra o alerta vermelho também com o telemóvel em uso",
   "sos_fullScreenOff": "Desativados: um SOS só mostra uma notificação. Toque e permita notificações em ecrã inteiro para esta app",
-  "sos_fullScreenAllow": "Permitir"
+  "sos_fullScreenAllow": "Permitir",
+  "sos_fullScreenRestartTip": "Se a página de definições não mostrar esta app ou uma definição não ficar ativa: feche todas as apps, reinicie o telemóvel e tente de novo."
 }

@@ -65,7 +65,11 @@ class _SosScreenAccessTileState extends State<SosScreenAccessTile>
         color: missing ? Colors.red.shade700 : null,
       ),
       title: Text(l10n.sos_fullScreen),
-      subtitle: Text(subtitle),
+      // Samsung especially: the system pages can hide a newly installed app, or not keep a
+      // setting, until the phone has restarted
+      subtitle: Text(
+        missing ? '$subtitle\n${l10n.sos_fullScreenRestartTip}' : subtitle,
+      ),
       trailing: missing ? Text(l10n.sos_fullScreenAllow) : null,
       onTap: missing ? () => SosScreenService.openSetting(access) : null,
     );
