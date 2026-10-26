@@ -3719,5 +3719,6 @@
   "sos_fullScreenOn": "Activadas: un SOS abre la alerta roja, con el teléfono bloqueado o en uso",
   "sos_fullScreenLockedOnly": "Solo con el teléfono bloqueado. Toca y permite «Mostrar sobre otras apps» para que un SOS abra la alerta roja también con el teléfono en uso",
   "sos_fullScreenOff": "Desactivadas: un SOS solo muestra una notificación. Toca y permite las notificaciones a pantalla completa para esta app",
-  "sos_fullScreenAllow": "Permitir"
+  "sos_fullScreenAllow": "Permitir",
+  "sos_fullScreenRestartTip": "Si la página de ajustes no muestra esta app o un ajuste no se mantiene: cierra todas las apps, reinicia el teléfono y vuelve a intentarlo."
 }

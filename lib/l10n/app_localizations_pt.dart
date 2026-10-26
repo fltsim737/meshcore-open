@@ -6995,4 +6995,8 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Permitir';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Se a página de definições não mostrar esta app ou uma definição não ficar ativa: feche todas as apps, reinicie o telemóvel e tente de novo.';
 }

@@ -11730,6 +11730,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Allow'**
   String get sos_fullScreenAllow;
+
+  /// No description provided for @sos_fullScreenRestartTip.
+  ///
+  /// In en, this message translates to:
+  /// **'If the settings page doesn\'t show this app, or a setting won\'t stay on: close all apps, restart the phone, then try again.'**
+  String get sos_fullScreenRestartTip;
 }
 
 class _AppLocalizationsDelegate

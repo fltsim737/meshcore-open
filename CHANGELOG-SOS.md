@@ -2,6 +2,19 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.8 (2026-10-27)
+
+### Changed
+
+- **MeshCore Open SOS is now its own app, named MeshCore Open SOS.** Until now it shared the original MeshCore Open's name and app ID (`com.meshcore.meshcore_open`), so a phone or computer saw the two as one app: they couldn't both be installed, and the SOS app showed as plain "MeshCore Open" in the phone's settings. It now has its own ID, `com.meshcore.meshcore_open_sos` (Windows and Linux too), as SOS Voice already has (`com.meshcore.meshcore_open_voice`).
+  - **Moving to 9.5.8 (MeshCore Open SOS only):** because the ID changed, 9.5.8 installs as a new app beside the old one rather than over it, and starts empty. Before installing it, open the old app and use **Settings → Backup and restore → Export config** (and write down your emergency network codes). Install 9.5.8, connect to your radio, use **Import config**, check everything is there, then uninstall the old "MeshCore Open" SOS app. A coordinator who imports the file keeps the same network, so its codes and QR codes, and every device already given them, keep working.
+  - **SOS Voice** keeps its ID and updates over 9.5.7 as usual.
+- On Android, the app's name in the recent-apps view now matches its name (MeshCore Open SOS / MeshCore Open SOS Voice).
+
+### Added
+
+- **Full-screen SOS alerts** (Settings → App Settings → Emergency SOS, and the red card on the Emergency tab) now also says what to do when Android's settings page doesn't show the app or won't keep a setting, as happens on some Samsung phones: close all apps, restart the phone, then try again.
+
 ## 9.5.7 (2026-10-26)
 
 ### Fixed

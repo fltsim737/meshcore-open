@@ -7015,4 +7015,8 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Разрешить';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Если страница настроек не показывает это приложение или настройка не сохраняется: закройте все приложения, перезапустите телефон и попробуйте снова.';
 }

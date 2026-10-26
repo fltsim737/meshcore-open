@@ -32,7 +32,7 @@ typedef CommandRunner =
 class WindowsAutostart implements LoginAutostart {
   static const String _runKey =
       r'HKCU\Software\Microsoft\Windows\CurrentVersion\Run';
-  static const String valueName = 'MeshCore Open';
+  static const String valueName = 'MeshCore Open SOS';
 
   final String _executable;
   final CommandRunner _run;

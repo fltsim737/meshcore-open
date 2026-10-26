@@ -4274,5 +4274,6 @@
   "sos_fullScreenOn": "On: an SOS opens the red alert, whether the phone is locked or in use",
   "sos_fullScreenLockedOnly": "Only while the phone is locked. Tap and allow \"Display over other apps\" so an SOS also opens the red alert while the phone is in use",
   "sos_fullScreenOff": "Off: an SOS only shows a notification. Tap and allow full-screen notifications for this app",
-  "sos_fullScreenAllow": "Allow"
+  "sos_fullScreenAllow": "Allow",
+  "sos_fullScreenRestartTip": "If the settings page doesn't show this app, or a setting won't stay on: close all apps, restart the phone, then try again."
 }

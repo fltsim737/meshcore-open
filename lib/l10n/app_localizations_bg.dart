@@ -6999,4 +6999,8 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Разрешаване';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Ако страницата с настройки не показва това приложение или настройка не остава включена: затворете всички приложения, рестартирайте телефона и опитайте отново.';
 }

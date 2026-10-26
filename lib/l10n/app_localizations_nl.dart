@@ -6967,4 +6967,8 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Toestaan';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Als de instellingenpagina deze app niet toont of een instelling niet aan blijft: sluit alle apps, start de telefoon opnieuw en probeer het nog eens.';
 }

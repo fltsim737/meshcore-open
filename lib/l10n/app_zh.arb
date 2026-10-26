@@ -3590,5 +3590,6 @@
   "sos_fullScreenOn": "开启:无论手机锁定还是正在使用,SOS 都会打开红色警报",
   "sos_fullScreenLockedOnly": "仅在手机锁定时。点按并允许“显示在其他应用上层”,手机使用中 SOS 也会打开红色警报",
   "sos_fullScreenOff": "关闭:SOS 只显示通知。点按并允许此应用使用全屏通知",
-  "sos_fullScreenAllow": "允许"
+  "sos_fullScreenAllow": "允许",
+  "sos_fullScreenRestartTip": "如果设置页面不显示此应用,或某项设置无法保持开启:关闭所有应用,重启手机,然后再试一次。"
 }

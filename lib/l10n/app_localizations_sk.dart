@@ -6975,4 +6975,8 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Povoliť';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'Ak stránka nastavení nezobrazuje túto aplikáciu alebo nastavenie nezostane zapnuté: zatvorte všetky aplikácie, reštartujte telefón a skúste to znova.';
 }

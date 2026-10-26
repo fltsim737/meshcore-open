@@ -8,14 +8,14 @@
 #ifndef AppVersion
   #define AppVersion "0.0.0"
 #endif
-#define AppName "MeshCore Open"
-#define AppExe "meshcore_open.exe"
+#define AppName "MeshCore Open SOS"
+#define AppExe "meshcore_open_sos.exe"
 ; Must match appUserModelId in lib/services/notification_service.dart.
-#define AppUserModelId "org.meshcore.open.app"
+#define AppUserModelId "org.meshcore.open.sos"
 #define RunKey "Software\Microsoft\Windows\CurrentVersion\Run"
 
 [Setup]
-AppId={{418F8944-F552-4FCC-85DE-3CD2D2470914}
+AppId={{C526490E-6F9A-44C8-AAF9-319EAE5087BC}
 AppName={#AppName}
 AppVersion={#AppVersion}
 AppPublisher=MeshCore Open contributors
@@ -28,7 +28,7 @@ PrivilegesRequiredOverridesAllowed=dialog
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 OutputDir=..\..\build\windows\installer
-OutputBaseFilename=MeshCore-Open-Setup
+OutputBaseFilename=MeshCore-Open-SOS-Setup
 SetupIconFile=..\runner\resources\app_icon.ico
 UninstallDisplayIcon={app}\{#AppExe}
 UninstallDisplayName={#AppName}
@@ -73,12 +73,12 @@ procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if (CurUninstallStep = usPostUninstall) and not UninstallSilent then
   begin
-    if MsgBox('Also delete MeshCore Open''s messages, contacts and settings from this computer?'
+    if MsgBox('Also delete MeshCore Open SOS''s messages, contacts and settings from this computer?'
         + #13#10#13#10 + 'Choose No to keep them for a later reinstall.',
         mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     begin
-      DelTree(ExpandConstant('{userappdata}\com.meshcore\meshcore_open'), True, True, True);
-      DelTree(ExpandConstant('{localappdata}\com.meshcore\meshcore_open'), True, True, True);
+      DelTree(ExpandConstant('{userappdata}\com.meshcore\meshcore_open_sos'), True, True, True);
+      DelTree(ExpandConstant('{localappdata}\com.meshcore\meshcore_open_sos'), True, True, True);
     end;
   end;
 end;

@@ -6916,4 +6916,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sos_fullScreenAllow => 'Allow';
+
+  @override
+  String get sos_fullScreenRestartTip =>
+      'If the settings page doesn\'t show this app, or a setting won\'t stay on: close all apps, restart the phone, then try again.';
 }

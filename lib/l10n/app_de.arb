@@ -3720,5 +3720,6 @@
   "sos_fullScreenOn": "An: Ein SOS öffnet den roten Alarm, ob das Handy gesperrt ist oder benutzt wird",
   "sos_fullScreenLockedOnly": "Nur bei gesperrtem Handy. Tippe und erlaube „Über anderen Apps einblenden“, damit ein SOS den roten Alarm auch bei benutztem Handy öffnet",
   "sos_fullScreenOff": "Aus: Ein SOS zeigt nur eine Benachrichtigung. Tippe und erlaube Vollbild-Benachrichtigungen für diese App",
-  "sos_fullScreenAllow": "Erlauben"
+  "sos_fullScreenAllow": "Erlauben",
+  "sos_fullScreenRestartTip": "Wenn die Einstellungsseite diese App nicht zeigt oder eine Einstellung nicht bleibt: alle Apps schließen, das Handy neu starten und es noch einmal versuchen."
 }

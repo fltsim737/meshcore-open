@@ -3486,5 +3486,6 @@
   "sos_fullScreenOn": "Aan: een SOS opent de rode melding, of de telefoon nu vergrendeld is of in gebruik",
   "sos_fullScreenLockedOnly": "Alleen als de telefoon vergrendeld is. Tik en sta 'Weergeven boven andere apps' toe zodat een SOS de rode melding ook opent als de telefoon in gebruik is",
   "sos_fullScreenOff": "Uit: een SOS toont alleen een melding. Tik en sta meldingen op volledig scherm toe voor deze app",
-  "sos_fullScreenAllow": "Toestaan"
+  "sos_fullScreenAllow": "Toestaan",
+  "sos_fullScreenRestartTip": "Als de instellingenpagina deze app niet toont of een instelling niet aan blijft: sluit alle apps, start de telefoon opnieuw en probeer het nog eens."
 }
