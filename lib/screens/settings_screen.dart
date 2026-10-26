@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meshcore_open/utils/gpx_export.dart';
 import 'package:meshcore_open/widgets/elements_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../connector/meshcore_connector.dart';
 import '../connector/meshcore_protocol.dart';
@@ -24,6 +28,9 @@ import 'telemetry_screen.dart';
 import '../widgets/sync_progress_overlay.dart';
 import 'region_management_screen.dart';
 import '../utils/share_origin.dart';
+import '../utils/config_backup.dart';
+import '../utils/platform_info.dart';
+import '../services/sos_service.dart';
 
 /// Companion firmware version that added CMD_SET_PATH_HASH_MODE (v1.14.0).
 const int _minFirmwareVerCodeForPathHashMode = 10;
@@ -145,6 +152,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: _selectConnector(
                 (c) => c.isConnected,
                 _buildActionsCardContent,
+              ),
+            ),
+
+            // BACKUP section: the radio's config, identity included
+            SectionHeader(l10n.backup_title),
+            MeshCard(
+              padding: EdgeInsets.zero,
+              child: _selectConnector(
+                (c) => c.isConnected,
+                _buildBackupCardContent,
               ),
             ),
 
@@ -667,6 +684,240 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onTap: () => _confirmDeleteAllPaths(context, connector),
         ),
       ],
+    );
+  }
+
+  Widget _buildBackupCardContent(
+    BuildContext context,
+    MeshCoreConnector connector,
+  ) {
+    final l10n = context.l10n;
+    final connected = connector.isConnected;
+    final offline = l10n.settings_requiresConnection;
+    return Column(
+      children: [
+        MeshNavTile(
+          icon: Icons.upload_file_outlined,
+          title: l10n.backup_export,
+          subtitle: connected ? l10n.backup_exportSubtitle : offline,
+          onTap: connected ? () => _exportConfig(connector) : null,
+        ),
+        const Divider(height: 1, indent: 16),
+        MeshNavTile(
+          icon: Icons.restore_page_outlined,
+          title: l10n.backup_import,
+          subtitle: connected ? l10n.backup_importSubtitle : offline,
+          titleColor: MeshPalette.warn,
+          iconColor: MeshPalette.warn,
+          onTap: connected ? () => _importConfig(connector) : null,
+        ),
+      ],
+    );
+  }
+
+  Future<bool> _askBackup(String title, String text, String action) async {
+    final l10n = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(text),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.common_cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(action),
+          ),
+        ],
+      ),
+    );
+    return ok == true;
+  }
+
+  Future<void> _exportConfig(MeshCoreConnector connector) async {
+    final l10n = context.l10n;
+    final settingsService = context.read<AppSettingsService>();
+    final shareOrigin = shareOriginOf(context);
+    void show(String text) {
+      if (!mounted) return;
+      showDismissibleSnackBar(context, content: Text(text));
+    }
+
+    if (!await _askBackup(
+      l10n.backup_export,
+      l10n.backup_exportConfirm,
+      l10n.backup_exportButton,
+    )) {
+      return;
+    }
+    if (!mounted || !_ensureConnected(context, connector)) return;
+    final ConfigBackup backup;
+    try {
+      backup = await ConfigBackup.read(
+        connector: connector,
+        settingsService: settingsService,
+        appVersion: _appVersion,
+      );
+    } on StateError {
+      show(l10n.backup_exportDisabled);
+      return;
+    } catch (e) {
+      show(l10n.backup_exportFailed(e.toString()));
+      return;
+    }
+    final filename = backup.suggestedFileName;
+    final file = XFile.fromData(
+      Uint8List.fromList(utf8.encode(backup.toJsonString())),
+      mimeType: 'application/json',
+      name: filename,
+    );
+    try {
+      if (PlatformInfo.isDesktop) {
+        final location = await getSaveLocation(
+          suggestedName: filename,
+          acceptedTypeGroups: [
+            const XTypeGroup(label: 'JSON', extensions: ['json']),
+          ],
+        );
+        if (location == null) return;
+        await file.saveTo(location.path);
+        show(l10n.backup_exported(location.path));
+        return;
+      }
+      final result = await SharePlus.instance.share(
+        ShareParams(
+          subject: filename,
+          files: [file],
+          fileNameOverrides: [filename],
+          sharePositionOrigin: shareOrigin,
+        ),
+      );
+      if (result.status == ShareResultStatus.success ||
+          (PlatformInfo.isWeb &&
+              result.status == ShareResultStatus.unavailable)) {
+        show(l10n.backup_exported(filename));
+      }
+    } catch (e) {
+      show(l10n.backup_exportFailed(e.toString()));
+    }
+  }
+
+  Future<void> _importConfig(MeshCoreConnector connector) async {
+    final l10n = context.l10n;
+    final settingsService = context.read<AppSettingsService>();
+    final sosService = context.read<SosService>();
+    void show(String text) {
+      if (!mounted) return;
+      showDismissibleSnackBar(context, content: Text(text));
+    }
+
+    if (sosService.isActive) {
+      show(l10n.backup_sosActive);
+      return;
+    }
+    final XFile? file;
+    try {
+      file = await openFile(
+        acceptedTypeGroups: [
+          const XTypeGroup(label: 'JSON', extensions: ['json']),
+        ],
+      );
+    } catch (e) {
+      show(l10n.backup_importFailed(e.toString()));
+      return;
+    }
+    if (file == null) return;
+    if (await file.length() > ConfigBackup.maxFileBytes) {
+      show(l10n.backup_tooLarge);
+      return;
+    }
+    final ConfigBackup? backup;
+    try {
+      backup = ConfigBackup.parse(utf8.decode(await file.readAsBytes()));
+    } on FormatException {
+      show(l10n.backup_notConfig);
+      return;
+    }
+    if (backup == null) {
+      show(l10n.backup_notConfig);
+      return;
+    }
+    final key = backup.publicKeyHex;
+    if (!await _askBackup(
+      l10n.backup_import,
+      l10n.backup_importConfirm(
+        backup.name,
+        key.length >= 8 ? key.substring(0, 8) : key,
+      ),
+      l10n.backup_importButton,
+    )) {
+      return;
+    }
+    if (!mounted || !_ensureConnected(context, connector)) return;
+
+    final step = ValueNotifier<String>('');
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => PopScope(
+        canPop: false,
+        child: AlertDialog(
+          content: Row(
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ValueListenableBuilder<String>(
+                  valueListenable: step,
+                  builder: (_, value, _) => Text(l10n.backup_importing(value)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    ConfigRestoreResult result;
+    try {
+      result = await backup.restore(
+        connector: connector,
+        settingsService: settingsService,
+        sosService: sosService,
+        onStep: (s) => step.value = s,
+      );
+    } catch (e) {
+      result = ConfigRestoreResult(failed: e.toString());
+    }
+    if (!mounted) return;
+    Navigator.of(context, rootNavigator: true).pop();
+    step.dispose();
+    final failed = result.failed;
+    if (failed != null) {
+      show(l10n.backup_importFailed(failed));
+      return;
+    }
+    final lines = <String>[
+      l10n.backup_imported(result.contactsAdded, result.channelsAdded),
+      if (result.identityChanged) l10n.backup_importedRestart,
+      if (result.radioOnlySkipped) l10n.backup_importedRadioOnly,
+      if (result.problems.isNotEmpty)
+        '${l10n.backup_importProblems}\n${result.problems.join('\n')}',
+    ];
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.backup_import),
+        content: SingleChildScrollView(child: Text(lines.join('\n\n'))),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.common_ok),
+          ),
+        ],
+      ),
     );
   }
 

@@ -6598,4 +6598,81 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_alarmSoundClassicDetail => '이전 버전의 2음 경보';
+
+  @override
+  String get backup_title => '백업 및 복원';
+
+  @override
+  String get backup_export => '설정 내보내기';
+
+  @override
+  String get backup_exportSubtitle => '이 무전기의 신원, 설정, 채널, 연락처를 파일로 저장';
+
+  @override
+  String get backup_import => '설정 가져오기';
+
+  @override
+  String get backup_importSubtitle => '저장한 설정을 신원과 함께 이 무전기에 복원';
+
+  @override
+  String get backup_exportButton => '내보내기';
+
+  @override
+  String get backup_importButton => '가져오기';
+
+  @override
+  String get backup_exportConfirm =>
+      '이 파일에는 무전기의 개인 키가 들어 있어, 파일을 가진 사람은 누구나 이 무전기를 사칭할 수 있습니다. 안전한 곳에 보관하세요.';
+
+  @override
+  String backup_exported(String path) {
+    return '설정을 $path에 저장했습니다';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return '내보내지 못했습니다: $error';
+  }
+
+  @override
+  String get backup_exportDisabled => '이 무전기의 펌웨어는 신원 내보내기를 허용하지 않습니다.';
+
+  @override
+  String get backup_notConfig => 'MeshCore SOS 설정 파일이 아닙니다.';
+
+  @override
+  String get backup_tooLarge => '설정 파일로 보기에는 너무 큽니다.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return '\"$name\"(신원 $key…)의 설정을 가져올까요? 이 무전기가 그 신원과 설정을 이어받고, 파일의 연락처와 채널이 추가됩니다. 같은 신원을 두 무전기에서 동시에 쓰지 마세요.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return '가져오는 중: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return '변경된 것이 없습니다: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return '설정을 가져왔습니다: 연락처 $contacts개, 채널 $channels개 추가.';
+  }
+
+  @override
+  String get backup_importedRestart => '무전기가 복원된 신원으로 다시 시작합니다. 돌아오면 다시 연결하세요.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      '파일에 SOS 무전기의 WiFi와 버튼 설정도 있습니다. 이 설정은 무전기 웹 페이지에서만 복원됩니다: 설정 → 백업 및 복원.';
+
+  @override
+  String get backup_importProblems => '일부는 복원되지 않았습니다:';
+
+  @override
+  String get backup_sosActive => '설정을 가져오기 전에 SOS를 취소하세요.';
 }

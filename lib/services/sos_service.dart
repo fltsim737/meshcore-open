@@ -192,6 +192,9 @@ class SosService extends ChangeNotifier {
   /// cancelled answers with the cancellation the responder missed.
   static const Duration quietCheckAfter = Duration(minutes: 12);
 
+  /// How often opening a chat with an SOS sender sends the network ACK again.
+  static const Duration reintroduceEvery = Duration(seconds: 30);
+
   /// The least time between cancellations sent again to one responder.
   static const Duration lateCancelGap = Duration(minutes: 1);
 
@@ -355,6 +358,7 @@ class SosService extends ChangeNotifier {
 
   /// When each quiet acknowledged alert was last asked about, by key.
   final Map<String, DateTime> _lastQuietCheck = {};
+  final Map<String, DateTime> _lastReintroduced = {};
 
   SosService({
     required SosTransport transport,
@@ -1366,7 +1370,36 @@ class SosService extends ChangeNotifier {
     }
   }
 
+  /// Before messaging an SOS sender: the network ACK again, as it is what
+  /// carries this phone's key. A radio that missed it can't read a message
+  /// from a phone it doesn't know: the message arrives but never shows.
+  /// Only for an acknowledged alert, and at most every [reintroduceEvery].
+  Future<void> reintroduceBeforeMessage(IncomingSos alert) async {
+    if (!_transport.isConnected || !alert.ackSent) return;
+    final now = _now();
+    final last = _lastReintroduced[alert.key];
+    if (last != null && now.difference(last) < reintroduceEvery) return;
+    _lastReintroduced[alert.key] = now;
+    appLogger.info(
+      'SOS ${alert.id} from ${alert.senderName}: sending the ACK again before '
+      'a message, so the sender knows this phone',
+      tag: 'SOS',
+    );
+    await _sendNetworkAck(alert);
+  }
+
   Future<void> _sendAck(IncomingSos alert) async {
+    await _sendNetworkAck(alert);
+    final contact = _transport.contacts
+        .where((c) => c.publicKeyHex == alert.senderKeyHex)
+        .firstOrNull;
+    if (contact != null) {
+      await _sendDirect(contact, SosCodec.encodeAck(alert.id));
+    }
+  }
+
+  /// The ACK on the channel the alert arrived on, with this phone's key.
+  Future<void> _sendNetworkAck(IncomingSos alert) async {
     final channelIndex = alert.channelIndex;
     final channel = channelIndex == null
         ? (alert.senderKeyHex == null ? sosChannel : null)
@@ -1382,12 +1415,6 @@ class SosService extends ChangeNotifier {
       } catch (e) {
         appLogger.warn('SOS ACK channel send failed: $e', tag: 'SOS');
       }
-    }
-    final contact = _transport.contacts
-        .where((c) => c.publicKeyHex == alert.senderKeyHex)
-        .firstOrNull;
-    if (contact != null) {
-      await _sendDirect(contact, SosCodec.encodeAck(alert.id));
     }
   }
 

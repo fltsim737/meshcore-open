@@ -2,6 +2,17 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.5.6 (2026-10-26)
+
+### Added
+
+- **Backup and restore.** Settings → **Backup and restore** → **Export config** saves one file with the radio's identity (its private key), name, radio settings, auto-add settings, channels and contacts, and this app's emergency network, home location, emergency contacts and alarm sound. **Import config** puts it all back: on the same radio after an update or erase, or on a new radio taking over the old one's identity (it restarts with it; connect again). The file is the same one the MeshCore SOS radio's web page exports, so either opens in the other. The SOS radio's own WiFi and button settings are only put back by its web page. The file is as sensitive as the radio itself: keep it private, and never run one identity on two radios at once.
+- **An incoming SOS wakes the screen** on Android and opens the alert over the lock screen, as a phone call does, instead of only a notification. The app shows over the lock screen only for that alert. On Android 14 and later the app checks, when it joins an emergency network, that it may do this and opens the system setting if it may not.
+
+### Fixed
+
+- **A message to the person in trouble now gets through more often.** Their radio can only read a message from a phone it knows, and it learns the responder's phone from the ACK sent on the emergency network. If that one ACK was lost, messages arrived but never showed. **Message** on an acknowledged alert now sends the network ACK again first (at most every 30 seconds).
+
 ## 9.5.5 (2026-10-26)
 
 ### Added

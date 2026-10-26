@@ -6447,4 +6447,80 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_alarmSoundClassicDetail => '早期版本的双音警报';
+
+  @override
+  String get backup_title => '备份与恢复';
+
+  @override
+  String get backup_export => '导出配置';
+
+  @override
+  String get backup_exportSubtitle => '将此电台的身份、设置、频道和联系人保存到文件';
+
+  @override
+  String get backup_import => '导入配置';
+
+  @override
+  String get backup_importSubtitle => '将已保存的配置(含身份)恢复到此电台';
+
+  @override
+  String get backup_exportButton => '导出';
+
+  @override
+  String get backup_importButton => '导入';
+
+  @override
+  String get backup_exportConfirm => '该文件包含此电台的私钥:任何拥有它的人都能冒充此电台。请妥善保管。';
+
+  @override
+  String backup_exported(String path) {
+    return '配置已保存到 $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return '无法导出:$error';
+  }
+
+  @override
+  String get backup_exportDisabled => '此电台的固件不允许导出其身份。';
+
+  @override
+  String get backup_notConfig => '该文件不是 MeshCore SOS 配置。';
+
+  @override
+  String get backup_tooLarge => '该文件太大,不像是配置文件。';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return '导入“$name”(身份 $key…)的配置?此电台将采用该身份及其设置,并添加文件中的联系人和频道。切勿在两台电台上同时使用同一身份。';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return '正在导入:$step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return '未做任何更改:$error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return '配置已导入:添加了 $contacts 个联系人和 $channels 个频道。';
+  }
+
+  @override
+  String get backup_importedRestart => '电台正以恢复的身份重启:恢复后请重新连接。';
+
+  @override
+  String get backup_importedRadioOnly =>
+      '该文件还包含 SOS 电台的 WiFi 和按钮设置,只有电台的网页能恢复它们:设置 → 备份与恢复。';
+
+  @override
+  String get backup_importProblems => '并非所有内容都已恢复:';
+
+  @override
+  String get backup_sosActive => '请先取消 SOS,再导入配置。';
 }

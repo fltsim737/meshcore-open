@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';
@@ -511,7 +513,10 @@ class _IncomingSosCard extends StatelessWidget {
                     OutlinedButton.icon(
                       icon: const Icon(Icons.chat_bubble_outline),
                       label: Text(l10n.sos_message),
-                      onPressed: () => _openChat(context, contact),
+                      onPressed: () {
+                        unawaited(service.reintroduceBeforeMessage(alert));
+                        _openChat(context, contact);
+                      },
                     ),
                   // Responders on the network: home in on the radio, close up
                   if (service.isResponder &&

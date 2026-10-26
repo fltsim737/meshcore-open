@@ -6900,4 +6900,88 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get sos_alarmSoundClassicDetail =>
       'La alarma de dos tonos de versiones anteriores';
+
+  @override
+  String get backup_title => 'Copia de seguridad y restauración';
+
+  @override
+  String get backup_export => 'Exportar configuración';
+
+  @override
+  String get backup_exportSubtitle =>
+      'Guarda en un archivo la identidad, los ajustes, los canales y los contactos de esta radio';
+
+  @override
+  String get backup_import => 'Importar configuración';
+
+  @override
+  String get backup_importSubtitle =>
+      'Restaura en esta radio una configuración guardada, identidad incluida';
+
+  @override
+  String get backup_exportButton => 'Exportar';
+
+  @override
+  String get backup_importButton => 'Importar';
+
+  @override
+  String get backup_exportConfirm =>
+      'El archivo contiene la clave privada de esta radio: quien lo tenga puede hacerse pasar por ella. Guárdalo en un lugar privado.';
+
+  @override
+  String backup_exported(String path) {
+    return 'Configuración guardada en $path';
+  }
+
+  @override
+  String backup_exportFailed(String error) {
+    return 'No se pudo exportar: $error';
+  }
+
+  @override
+  String get backup_exportDisabled =>
+      'El firmware de esta radio no permite exportar su identidad.';
+
+  @override
+  String get backup_notConfig =>
+      'Ese archivo no es una configuración de MeshCore SOS.';
+
+  @override
+  String get backup_tooLarge =>
+      'Ese archivo es demasiado grande para ser una configuración.';
+
+  @override
+  String backup_importConfirm(String name, String key) {
+    return '¿Importar la configuración de «$name» (identidad $key…)? Esta radio adopta esa identidad y sus ajustes, y se añaden los contactos y canales del archivo. No uses la misma identidad en dos radios a la vez.';
+  }
+
+  @override
+  String backup_importing(String step) {
+    return 'Importando: $step';
+  }
+
+  @override
+  String backup_importFailed(String error) {
+    return 'No se cambió nada: $error';
+  }
+
+  @override
+  String backup_imported(int contacts, int channels) {
+    return 'Configuración importada: $contacts contactos y $channels canales añadidos.';
+  }
+
+  @override
+  String get backup_importedRestart =>
+      'La radio se reinicia con la identidad restaurada: vuelve a conectarte cuando esté lista.';
+
+  @override
+  String get backup_importedRadioOnly =>
+      'El archivo también tiene los ajustes de WiFi y del botón de la radio SOS. Solo la página web de la radio los restaura: Ajustes → Copia de seguridad y restauración.';
+
+  @override
+  String get backup_importProblems => 'No se restauró todo:';
+
+  @override
+  String get backup_sosActive =>
+      'Cancela el SOS antes de importar una configuración.';
 }

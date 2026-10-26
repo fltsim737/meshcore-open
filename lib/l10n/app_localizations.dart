@@ -11574,6 +11574,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The two-tone alarm of earlier versions'**
   String get sos_alarmSoundClassicDetail;
+
+  /// No description provided for @backup_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup and restore'**
+  String get backup_title;
+
+  /// No description provided for @backup_export.
+  ///
+  /// In en, this message translates to:
+  /// **'Export config'**
+  String get backup_export;
+
+  /// No description provided for @backup_exportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save this radio\'s identity, settings, channels and contacts to a file'**
+  String get backup_exportSubtitle;
+
+  /// No description provided for @backup_import.
+  ///
+  /// In en, this message translates to:
+  /// **'Import config'**
+  String get backup_import;
+
+  /// No description provided for @backup_importSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Put a saved config back on this radio, identity included'**
+  String get backup_importSubtitle;
+
+  /// No description provided for @backup_exportButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get backup_exportButton;
+
+  /// No description provided for @backup_importButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get backup_importButton;
+
+  /// No description provided for @backup_exportConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'The file holds this radio\'s private key: anyone with it can pretend to be this radio. Keep it somewhere private.'**
+  String get backup_exportConfirm;
+
+  /// No description provided for @backup_exported.
+  ///
+  /// In en, this message translates to:
+  /// **'Config saved to {path}'**
+  String backup_exported(String path);
+
+  /// No description provided for @backup_exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t export: {error}'**
+  String backup_exportFailed(String error);
+
+  /// No description provided for @backup_exportDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'This radio\'s firmware doesn\'t allow its identity to be exported.'**
+  String get backup_exportDisabled;
+
+  /// No description provided for @backup_notConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'That file isn\'t a MeshCore SOS config.'**
+  String get backup_notConfig;
+
+  /// No description provided for @backup_tooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'That file is too large to be a config.'**
+  String get backup_tooLarge;
+
+  /// No description provided for @backup_importConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Import the config of \"{name}\" (identity {key}…)? This radio takes that identity and its settings, and the file\'s contacts and channels are added. Don\'t use the same identity on two radios at once.'**
+  String backup_importConfirm(String name, String key);
+
+  /// No description provided for @backup_importing.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing: {step}'**
+  String backup_importing(String step);
+
+  /// No description provided for @backup_importFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was changed: {error}'**
+  String backup_importFailed(String error);
+
+  /// No description provided for @backup_imported.
+  ///
+  /// In en, this message translates to:
+  /// **'Config imported: {contacts} contacts and {channels} channels added.'**
+  String backup_imported(int contacts, int channels);
+
+  /// No description provided for @backup_importedRestart.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio is restarting with the restored identity: connect to it again once it\'s back.'**
+  String get backup_importedRestart;
+
+  /// No description provided for @backup_importedRadioOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'The file also has the SOS radio\'s WiFi and button settings. Only the radio\'s web page puts those back: Settings → Backup and restore.'**
+  String get backup_importedRadioOnly;
+
+  /// No description provided for @backup_importProblems.
+  ///
+  /// In en, this message translates to:
+  /// **'Not everything went back:'**
+  String get backup_importProblems;
+
+  /// No description provided for @backup_sosActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel the SOS before importing a config.'**
+  String get backup_sosActive;
 }
 
 class _AppLocalizationsDelegate
