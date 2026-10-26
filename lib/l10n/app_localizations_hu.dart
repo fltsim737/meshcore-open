@@ -6669,6 +6669,14 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sos_acksHeader => 'Visszaigazolta';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Hallott továbbítások: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => 'Még nem hallatszott átjátszó továbbítani';
+
+  @override
   String get sos_incomingHeader => 'Bejövő riasztások';
 
   @override

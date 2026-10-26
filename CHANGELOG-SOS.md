@@ -2,6 +2,12 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.6.0 (2026-10-27)
+
+### Added
+
+- **Heard repeats** on your active SOS (Emergency tab): how many copies of your SOS your radio has heard passed on by repeaters, and which repeaters (by name when they're in your contacts), with how many copies each. It shows your SOS is travelling across the mesh, though not that anyone has read it; the people who acknowledged are listed below it as before. Your radio only hears repeaters within its own range, so ones further along aren't counted.
+
 ## 9.5.9 (2026-10-27)
 
 ### Fixed

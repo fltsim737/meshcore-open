@@ -6625,6 +6625,14 @@ class AppLocalizationsSv extends AppLocalizations {
   String get sos_acksHeader => 'Kvitterat av';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Hörda repeteringar: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => 'Ingen repeater har hörts skicka det vidare än';
+
+  @override
   String get sos_incomingHeader => 'Inkommande larm';
 
   @override

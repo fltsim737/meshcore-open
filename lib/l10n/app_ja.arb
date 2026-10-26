@@ -3509,6 +3509,8 @@
   "sos_sourceNone": "位置情報なし",
   "sos_acksNone": "まだ応答はありません",
   "sos_acksHeader": "応答者",
+  "sos_heardRepeats": "聞こえた中継: {count}",
+  "sos_repeatsNone": "中継するリピーターはまだ聞こえていません",
   "sos_incomingHeader": "受信したアラート",
   "sos_incomingEmpty": "SOSアラートは受信していません",
   "sos_sendAck": "ACKを送信",

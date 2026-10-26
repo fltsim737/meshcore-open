@@ -6686,6 +6686,15 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sos_acksHeader => 'Confermato da';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Ripetizioni sentite: $count';
+  }
+
+  @override
+  String get sos_repeatsNone =>
+      'Nessun ripetitore ancora sentito ritrasmetterlo';
+
+  @override
   String get sos_incomingHeader => 'Avvisi in arrivo';
 
   @override

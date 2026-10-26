@@ -6695,6 +6695,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sos_acksHeader => 'Bestätigt von';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Gehörte Weiterleitungen: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => 'Noch kein Repeater beim Weiterleiten gehört';
+
+  @override
   String get sos_incomingHeader => 'Eingehende Alarme';
 
   @override

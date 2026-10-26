@@ -6231,6 +6231,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_acksHeader => '确认者';
 
   @override
+  String sos_heardRepeats(int count) {
+    return '听到的转发：$count';
+  }
+
+  @override
+  String get sos_repeatsNone => '尚未听到中继器转发';
+
+  @override
   String get sos_incomingHeader => '收到的警报';
 
   @override

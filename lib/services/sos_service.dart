@@ -55,6 +55,13 @@ abstract class SosTransport implements Listenable {
   );
   set sosAckListener(void Function(int ackHash)? listener);
 
+  /// A copy of an SOS packet heard passed on by a repeater, with that
+  /// repeater's path hash (hex).
+  set sosRepeatListener(
+    void Function(int channelIndex, Uint8List payload, String lastHopHex)?
+    listener,
+  );
+
   /// Flooded across the mesh, or [zeroHop]: only radios in direct range.
   Future<void> sendChannelData(
     Channel channel,
@@ -115,6 +122,11 @@ class ConnectorSosTransport implements SosTransport {
   @override
   set sosAckListener(void Function(int ackHash)? listener) =>
       connector.sosAckListener = listener;
+  @override
+  set sosRepeatListener(
+    void Function(int channelIndex, Uint8List payload, String lastHopHex)?
+    listener,
+  ) => connector.sosRepeatListener = listener;
   @override
   Future<void> sendChannelData(
     Channel channel,
@@ -377,6 +389,7 @@ class SosService extends ChangeNotifier {
     _transport.sosTextListener = handleInbound;
     _transport.sosDataListener = handleInboundData;
     _transport.sosAckListener = handleDeliveryAck;
+    _transport.sosRepeatListener = handleHeardRepeat;
     _transport.addListener(_onTransportChanged);
     _settings.addListener(_syncNetwork);
     _expiryTimer = Timer.periodic(const Duration(minutes: 1), (_) {
@@ -997,6 +1010,47 @@ class SosService extends ChangeNotifier {
 
   /// A channel data packet of type [dataTypeSos].
   @visibleForTesting
+  /// Our own SOS heard again, passed on by the repeater [lastHopHex].
+  void handleHeardRepeat(int channelIndex, Uint8List data, String lastHopHex) {
+    final sos = _active;
+    if (sos == null) return;
+    final networkIndex = _transport.channelsReady
+        ? sosChannel?.index
+        : _knownSosChannelIndex;
+    if (networkIndex != channelIndex) return;
+    final packet = SosPacket.decode(data);
+    if (packet == null ||
+        packet.kind != SosPacketKind.sos ||
+        packet.id != sos.id) {
+      return;
+    }
+    final self = _transport.selfPublicKey;
+    if (self == null ||
+        self.length < SosPacket.keyPrefixSize ||
+        !listEquals(
+          self.sublist(0, SosPacket.keyPrefixSize),
+          packet.senderPrefix,
+        )) {
+      return;
+    }
+    sos.heardRepeats += 1;
+    sos.repeaters[lastHopHex] = (sos.repeaters[lastHopHex] ?? 0) + 1;
+    notifyListeners();
+    unawaited(_store.saveOutgoing(sos));
+  }
+
+  /// A repeater heard passing on our SOS: its name when it is a contact
+  /// whose key starts with [hashHex], else the hash itself.
+  String repeaterName(String hashHex) {
+    for (final contact in _transport.contacts) {
+      if (contact.type == advTypeRepeater &&
+          contact.publicKeyHex.toLowerCase().startsWith(hashHex)) {
+        return contact.name;
+      }
+    }
+    return hashHex;
+  }
+
   void handleInboundData(
     int channelIndex,
     Uint8List data, [
@@ -1440,6 +1494,7 @@ class SosService extends ChangeNotifier {
     _transport.sosTextListener = null;
     _transport.sosDataListener = null;
     _transport.sosAckListener = null;
+    _transport.sosRepeatListener = null;
     super.dispose();
   }
 }

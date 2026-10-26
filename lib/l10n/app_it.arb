@@ -3509,6 +3509,8 @@
   "sos_sourceNone": "Nessuna posizione",
   "sos_acksNone": "Ancora nessuna conferma",
   "sos_acksHeader": "Confermato da",
+  "sos_heardRepeats": "Ripetizioni sentite: {count}",
+  "sos_repeatsNone": "Nessun ripetitore ancora sentito ritrasmetterlo",
   "sos_incomingHeader": "Avvisi in arrivo",
   "sos_incomingEmpty": "Nessun avviso SOS ricevuto",
   "sos_sendAck": "Invia ACK",

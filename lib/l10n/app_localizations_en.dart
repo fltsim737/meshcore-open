@@ -6591,6 +6591,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sos_acksHeader => 'Acknowledged by';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Heard repeats: $count';
+  }
+
+  @override
+  String get sos_repeatsNone => 'No repeater heard passing it on yet';
+
+  @override
   String get sos_incomingHeader => 'Incoming alerts';
 
   @override

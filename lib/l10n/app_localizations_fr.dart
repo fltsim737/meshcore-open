@@ -6707,6 +6707,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sos_acksHeader => 'Accusé de réception par';
 
   @override
+  String sos_heardRepeats(int count) {
+    return 'Relais entendus : $count';
+  }
+
+  @override
+  String get sos_repeatsNone =>
+      'Aucun répéteur entendu le relayer pour l\'instant';
+
+  @override
   String get sos_incomingHeader => 'Alertes reçues';
 
   @override

@@ -3276,6 +3276,8 @@
   "sos_sourceNone": "Geen locatie",
   "sos_acksNone": "Nog geen bevestigingen",
   "sos_acksHeader": "Bevestigd door",
+  "sos_heardRepeats": "Gehoorde herhalingen: {count}",
+  "sos_repeatsNone": "Nog geen repeater gehoord die het doorgeeft",
   "sos_incomingHeader": "Inkomende meldingen",
   "sos_incomingEmpty": "Geen SOS-meldingen ontvangen",
   "sos_sendAck": "ACK sturen",

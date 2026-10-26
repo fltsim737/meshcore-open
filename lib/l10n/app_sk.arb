@@ -3376,6 +3376,8 @@
   "sos_sourceNone": "Bez polohy",
   "sos_acksNone": "Zatiaľ žiadne potvrdenia",
   "sos_acksHeader": "Potvrdil",
+  "sos_heardRepeats": "Počuté opakovania: {count}",
+  "sos_repeatsNone": "Zatiaľ nebol počuť žiadny opakovač, ktorý by ho posielal ďalej",
   "sos_incomingHeader": "Prichádzajúce poplachy",
   "sos_incomingEmpty": "Neprijali sa žiadne SOS poplachy",
   "sos_sendAck": "Poslať ACK",

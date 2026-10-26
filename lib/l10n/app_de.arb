@@ -3510,6 +3510,8 @@
   "sos_sourceNone": "Kein Standort",
   "sos_acksNone": "Noch keine Bestätigungen",
   "sos_acksHeader": "Bestätigt von",
+  "sos_heardRepeats": "Gehörte Weiterleitungen: {count}",
+  "sos_repeatsNone": "Noch kein Repeater beim Weiterleiten gehört",
   "sos_incomingHeader": "Eingehende Alarme",
   "sos_incomingEmpty": "Keine SOS-Alarme empfangen",
   "sos_sendAck": "ACK senden",

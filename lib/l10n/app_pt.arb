@@ -3375,6 +3375,8 @@
   "sos_sourceNone": "Sem localização",
   "sos_acksNone": "Ainda sem confirmações",
   "sos_acksHeader": "Confirmado por",
+  "sos_heardRepeats": "Repetições ouvidas: {count}",
+  "sos_repeatsNone": "Ainda nenhum repetidor ouvido a retransmiti-lo",
   "sos_incomingHeader": "Alertas recebidos",
   "sos_incomingEmpty": "Nenhum alerta SOS recebido",
   "sos_sendAck": "Enviar ACK",

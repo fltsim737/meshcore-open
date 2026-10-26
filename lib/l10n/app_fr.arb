@@ -3509,6 +3509,8 @@
   "sos_sourceNone": "Aucune position",
   "sos_acksNone": "Aucun accusé de réception pour l'instant",
   "sos_acksHeader": "Accusé de réception par",
+  "sos_heardRepeats": "Relais entendus : {count}",
+  "sos_repeatsNone": "Aucun répéteur entendu le relayer pour l'instant",
   "sos_incomingHeader": "Alertes reçues",
   "sos_incomingEmpty": "Aucune alerte SOS reçue",
   "sos_sendAck": "Envoyer ACK",

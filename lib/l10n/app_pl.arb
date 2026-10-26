@@ -3408,6 +3408,8 @@
   "sos_sourceNone": "Brak lokalizacji",
   "sos_acksNone": "Brak potwierdzeń",
   "sos_acksHeader": "Potwierdzone przez",
+  "sos_heardRepeats": "Usłyszane powtórzenia: {count}",
+  "sos_repeatsNone": "Jeszcze nie usłyszano przekaźnika, który go przekazuje",
   "sos_incomingHeader": "Alarmy przychodzące",
   "sos_incomingEmpty": "Nie odebrano alarmów SOS",
   "sos_sendAck": "Wyślij ACK",

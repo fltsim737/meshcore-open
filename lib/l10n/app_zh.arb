@@ -3380,6 +3380,8 @@
   "sos_sourceNone": "无位置",
   "sos_acksNone": "尚无确认",
   "sos_acksHeader": "确认者",
+  "sos_heardRepeats": "听到的转发：{count}",
+  "sos_repeatsNone": "尚未听到中继器转发",
   "sos_incomingHeader": "收到的警报",
   "sos_incomingEmpty": "未收到 SOS 警报",
   "sos_sendAck": "发送 ACK",
