@@ -5,7 +5,9 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/helpers/sos_codec.dart';
 import 'package:meshcore_open/helpers/sos_network_code.dart';
+import 'package:meshcore_open/helpers/sos_seal.dart';
 import 'package:meshcore_open/helpers/sos_voice_packet.dart';
+import 'package:meshcore_open/models/channel.dart';
 import 'package:meshcore_open/models/contact.dart';
 import 'package:meshcore_open/services/app_settings_service.dart';
 import 'package:meshcore_open/services/sos_service.dart';
@@ -123,7 +125,12 @@ Int16List quiet(int i) =>
     Int16List.fromList([for (var s = 0; s < 320; s++) (s * 7 + i) % 30 - 15]);
 
 /// A voice clip for [sosId] from a sender whose key starts with [seed].
-List<Uint8List> clipFrom(int seed, String sosId, {int frames = 60}) => [
+List<Uint8List> clipFrom(
+  int seed,
+  String sosId, {
+  int frames = 60,
+  bool sealed = false,
+}) => [
   for (final p in SosVoicePacket.split(
     frames: FakeCodec().encode([
       for (var i = 0; i < frames; i++) loud(i),
@@ -132,6 +139,7 @@ List<Uint8List> clipFrom(int seed, String sosId, {int frames = 60}) => [
     sosId: sosId,
     senderPrefix: Uint8List.fromList(List.filled(6, seed)),
     clipId: 3,
+    sealed: sealed,
   ))
     p.encode(),
 ];
@@ -316,5 +324,86 @@ void main() {
 
     await settings.joinSosNetwork(farmNetwork(SosNetworkRole.member));
     expect(voice.blockFor('beef'), SosVoiceBlock.noSos);
+  });
+
+  group('on a sealed (SOS2) network', () {
+    late SosNetworkCode net;
+    late SosSession responder;
+
+    setUp(() async {
+      net = SosNetworkCode.generateSealed(name: 'Farm');
+      sosTransport.allChannels = [
+        for (final c in sosTransport.allChannels)
+          if (c.index != 2) c,
+        Channel(index: 2, name: 'Farm', psk: net.key),
+      ];
+      await settings.joinSosNetwork(net.withRole(SosNetworkRole.member));
+      await sos.activate();
+      // What a responder works out from the sealed SOS this phone sent
+      final head = SosSeal.header(sosTransport.rawChannelData.last.$2)!;
+      responder = SosSeal.responderSession(
+        net.networkSecret!,
+        head.ephPublic!,
+      )!;
+    });
+
+    Uint8List seal(Uint8List b) =>
+        SosSeal.sealRaw([2, b[1], b[2], b[3]], responder, b.sublist(4));
+
+    test('clips are sealed, and only the network\'s responders can play '
+        'them', () async {
+      final id = sos.active!.id;
+      expect(await voice.startTalking(id), isTrue);
+      await say(loud, 50);
+      await voice.stopTalking();
+      await settle();
+
+      final (_, blobs) = transport.sent.single;
+      expect(blobs.every((b) => SosVoicePacket.decode(b) == null), isTrue);
+      expect(
+        blobs.every((b) => b.length <= SosVoicePacket.maxBlobBytes),
+        isTrue,
+      );
+      final frames = <Uint8List>[];
+      for (final b in blobs) {
+        final head = SosSeal.header(b, fullKeyKind: null)!;
+        final body = SosSeal.openRaw(b, head.length, responder)!;
+        final packet = SosVoicePacket.decode(
+          Uint8List.fromList([1, head.kind, b[2], b[3], ...body]),
+        )!;
+        frames.addAll(packet.frames);
+      }
+      expect(frames, hasLength(50));
+
+      // A responder's sealed reply plays; an unsealed one is ignored
+      hear([for (final b in clipFrom(5, id, sealed: true)) seal(b)]);
+      await settle();
+      expect(audio.played, hasLength(1));
+      hear(clipFrom(6, id));
+      await settle();
+      expect(audio.played, hasLength(1));
+    });
+
+    test('the longest clip still fits, sealed', () {
+      for (final quality in SosVoiceQuality.values) {
+        final packets = SosVoicePacket.split(
+          frames: FakeCodec().encode([
+            for (var i = 0; i < quality.maxFrames + 10; i++) loud(i),
+          ], quality),
+          quality: quality,
+          sosId: 'a1b2',
+          senderPrefix: Uint8List(6),
+          clipId: 1,
+          sealed: true,
+        );
+        expect(packets.length, lessThanOrEqualTo(SosVoicePacket.maxChunks));
+        for (final p in packets) {
+          expect(
+            seal(p.encode()).length,
+            lessThanOrEqualTo(SosVoicePacket.maxBlobBytes),
+          );
+        }
+      }
+    });
   });
 }

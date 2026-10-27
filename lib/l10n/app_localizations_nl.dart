@@ -6432,6 +6432,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'Voor mensen die meldingen krijgen en in het kanaal kunnen chatten.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Dit is een ouder netwerk: iedereen met de ledencode kan meldingen met andere software lezen. Maak een nieuw netwerk en geef iedereen de nieuwe codes.';
+
+  @override
   String get sos_copyCode => 'Code kopiëren';
 
   @override

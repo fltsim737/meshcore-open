@@ -3529,6 +3529,7 @@
   "sos_networkMemberCodeHelp": "Azoknak, akik SOS-t küldhetnek, de nem láthatják a riasztásokat.",
   "sos_networkResponderCode": "Segítőkód",
   "sos_networkResponderCodeHelp": "Azoknak, akik riasztásokat kapnak és cseveghetnek a csatornán.",
+  "sos_networkOldWarning": "Ez egy régebbi hálózat: aki ismeri a tagkódját, más szoftverrel elolvashatja a riasztásokat. Hozzon létre új hálózatot, és adja ki mindenkinek az új kódokat.",
   "sos_copyCode": "Kód másolása",
   "sos_networkCodeCopied": "Kód másolva",
   "sos_networkCodeLabel": "Hálózati kód",

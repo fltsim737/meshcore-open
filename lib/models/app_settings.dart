@@ -175,7 +175,8 @@ class AppSettings {
   final double? sosLatitude;
   final double? sosLongitude;
 
-  /// The emergency network this phone has joined; see [sosNetwork].
+  /// The emergency network this phone has joined; see [sosNetwork]. Holds
+  /// [SosNetworkCode.secret]: an SOS1 channel key or an SOS2 key.
   final String? sosNetworkKeyHex;
   final String? sosNetworkName;
   final String? sosNetworkRole;
@@ -193,12 +194,22 @@ class AppSettings {
     final role = SosNetworkRole.values
         .where((r) => r.name == sosNetworkRole)
         .firstOrNull;
-    if (hex == null || role == null || hex.length != 32) return null;
-    final key = Uint8List(SosNetworkCode.keySize);
-    for (var i = 0; i < key.length; i++) {
-      key[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+    // 16 bytes: an SOS1 channel key. 32: an SOS2 network secret (responder)
+    // or public key (member).
+    if (hex == null || role == null || (hex.length != 32 && hex.length != 64)) {
+      return null;
     }
-    return SosNetworkCode(role: role, key: key, name: sosNetworkName);
+    final secret = Uint8List(hex.length ~/ 2);
+    for (var i = 0; i < secret.length; i++) {
+      secret[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+    }
+    return hex.length == 64
+        ? SosNetworkCode.sealed(
+            role: role,
+            secret: secret,
+            name: sosNetworkName,
+          )
+        : SosNetworkCode(role: role, key: secret, name: sosNetworkName);
   }
 
   /// The five `imageCodec*` fields as the value object `ImageCodecService`

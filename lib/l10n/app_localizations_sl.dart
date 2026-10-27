@@ -6447,6 +6447,10 @@ class AppLocalizationsSl extends AppLocalizations {
       'Za ljudi, ki prejemajo opozorila in lahko klepetajo v kanalu.';
 
   @override
+  String get sos_networkOldWarning =>
+      'To je starejše omrežje: kdorkoli z njegovo kodo člana bi lahko z drugo programsko opremo bral opozorila. Ustvarite novo omrežje in vsem razdelite nove kode.';
+
+  @override
   String get sos_copyCode => 'Kopiraj kodo';
 
   @override

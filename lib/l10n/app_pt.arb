@@ -3490,6 +3490,7 @@
   "sos_networkMemberCodeHelp": "Para quem pode enviar um SOS mas não deve ver alertas.",
   "sos_networkResponderCode": "Código de socorrista",
   "sos_networkResponderCodeHelp": "Para quem recebe alertas e pode conversar no canal.",
+  "sos_networkOldWarning": "Esta é uma rede antiga: qualquer pessoa com o código de membro poderia ler os alertas com outro software. Crie uma rede nova e dê a todos os novos códigos.",
   "sos_copyCode": "Copiar código",
   "sos_networkCodeCopied": "Código copiado",
   "sos_networkCodeLabel": "Código da rede",

@@ -14,6 +14,7 @@ class SosStore {
   static const String _pendingCancelKey = 'sos_pending_cancel';
   static const String _cancellationKey = 'sos_cancellation';
   static const String _historyKey = 'sos_history';
+  static const String _sessionsKey = 'sos_sessions';
 
   /// Unreadable state is discarded rather than allowed to block startup.
   OutgoingSos? loadOutgoing() {
@@ -106,6 +107,21 @@ class SosStore {
         _historyKey,
         jsonEncode(records.map((r) => r.toJson()).toList()),
       );
+
+  /// The SOS2 keys this phone knows (see [SosSessionBook]).
+  Object? loadSessions() {
+    final raw = PrefsManager.instance.getString(_sessionsKey);
+    if (raw == null) return null;
+    try {
+      return jsonDecode(raw);
+    } catch (e) {
+      appLogger.warn('Discarding unreadable SOS keys: $e', tag: 'SOS');
+      return null;
+    }
+  }
+
+  Future<void> saveSessions(List<Map<String, dynamic>> sessions) =>
+      PrefsManager.instance.setString(_sessionsKey, jsonEncode(sessions));
 
   Future<void> saveIncoming(List<IncomingSos> alerts) =>
       PrefsManager.instance.setString(

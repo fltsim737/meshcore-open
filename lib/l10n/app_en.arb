@@ -3942,6 +3942,7 @@
   "sos_networkMemberCodeHelp": "For people who can send an SOS but should not see alerts.",
   "sos_networkResponderCode": "Responder code",
   "sos_networkResponderCodeHelp": "For people who receive alerts and can chat on the channel.",
+  "sos_networkOldWarning": "This is an older network: anyone with its member code could read alerts using other software. Set up a new network and give everyone its new codes.",
   "sos_copyCode": "Copy code",
   "sos_networkCodeCopied": "Code copied",
   "sos_networkCodeLabel": "Network code",

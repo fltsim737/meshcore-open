@@ -6374,6 +6374,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'For people who receive alerts and can chat on the channel.';
 
   @override
+  String get sos_networkOldWarning =>
+      'This is an older network: anyone with its member code could read alerts using other software. Set up a new network and give everyone its new codes.';
+
+  @override
   String get sos_copyCode => 'Copy code';
 
   @override

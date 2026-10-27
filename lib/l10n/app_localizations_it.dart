@@ -6474,6 +6474,10 @@ class AppLocalizationsIt extends AppLocalizations {
       'Per chi riceve gli avvisi e può chattare sul canale.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Questa è una rete precedente: chiunque abbia il suo codice membro potrebbe leggere gli avvisi con un altro software. Crea una nuova rete e dai a tutti i nuovi codici.';
+
+  @override
   String get sos_copyCode => 'Copia codice';
 
   @override

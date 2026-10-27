@@ -18,7 +18,8 @@ enum SosVoiceQuality {
   final int code;
   final int bitsPerFrame;
 
-  /// Longest clip, which keeps it within [SosVoicePacket.maxChunks].
+  /// Longest clip, which keeps it within [SosVoicePacket.maxChunks], sealed
+  /// or not.
   final Duration maxClip;
 
   const SosVoiceQuality(this.code, this.bitsPerFrame, this.maxClip);
@@ -28,6 +29,13 @@ enum SosVoiceQuality {
 
   /// Frames that fit in one chunk.
   int get framesPerChunk => SosVoicePacket.maxBodyBytes * 8 ~/ bitsPerFrame;
+
+  /// Frames that fit in one chunk sealed on an SOS2 network, which leaves
+  /// [SosVoicePacket.sealOverhead] bytes less for audio.
+  int get sealedFramesPerChunk =>
+      (SosVoicePacket.maxBodyBytes - SosVoicePacket.sealOverhead) *
+      8 ~/
+      bitsPerFrame;
 
   int get maxFrames => maxClip.inMilliseconds ~/ SosVoicePacket.frameMs;
 }
@@ -40,6 +48,11 @@ enum SosVoiceQuality {
 ///
 /// Every chunk holds whole frames, so a clip with a lost chunk still plays,
 /// with a gap where the chunk was.
+///
+/// On an SOS2 network each chunk is sealed with its SOS's keys (see
+/// `SosSeal`): `[2][quality][sos id u16][ref x4][nonce x6]`, then the rest
+/// of the chunk after its first 4 bytes, encrypted, and an 8-byte tag. Only
+/// the sender and the network's responders can play it.
 class SosVoicePacket {
   static const int version = 1;
   static const int keyPrefixSize = 6;
@@ -48,7 +61,13 @@ class SosVoicePacket {
   /// Largest blob the companion firmware accepts as channel data.
   static const int maxBlobBytes = 163;
   static const int maxBodyBytes = maxBlobBytes - headerBytes;
-  static const int maxChunks = 12;
+
+  /// What sealing adds: the ref, nonce and tag, less the 4 bytes the sealed
+  /// header repeats.
+  static const int sealOverhead = 18;
+
+  /// 12 chunks hold the longest clip unsealed, 14 sealed.
+  static const int maxChunks = 14;
 
   /// Codec2 frames are 40 ms of 8 kHz audio.
   static const int frameMs = 40;
@@ -127,10 +146,11 @@ class SosVoicePacket {
     required String sosId,
     required Uint8List senderPrefix,
     required int clipId,
+    bool sealed = false,
   }) {
     final kept = frames.take(quality.maxFrames).toList();
     if (kept.isEmpty) return const [];
-    final per = quality.framesPerChunk;
+    final per = sealed ? quality.sealedFramesPerChunk : quality.framesPerChunk;
     final total = (kept.length + per - 1) ~/ per;
     return [
       for (var i = 0; i < total; i++)

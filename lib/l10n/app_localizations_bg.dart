@@ -6466,6 +6466,10 @@ class AppLocalizationsBg extends AppLocalizations {
       'За хора, които получават сигнали и могат да пишат в канала.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Това е по-стара мрежа: всеки с нейния код за член може да чете сигналите с друг софтуер. Създайте нова мрежа и дайте на всички новите кодове.';
+
+  @override
   String get sos_copyCode => 'Копирай кода';
 
   @override

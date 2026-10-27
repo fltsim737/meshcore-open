@@ -3391,6 +3391,7 @@
   "sos_networkMemberCodeHelp": "Voor mensen die een SOS kunnen sturen maar geen meldingen mogen zien.",
   "sos_networkResponderCode": "Hulpverlenerscode",
   "sos_networkResponderCodeHelp": "Voor mensen die meldingen krijgen en in het kanaal kunnen chatten.",
+  "sos_networkOldWarning": "Dit is een ouder netwerk: iedereen met de ledencode kan meldingen met andere software lezen. Maak een nieuw netwerk en geef iedereen de nieuwe codes.",
   "sos_copyCode": "Code kopiëren",
   "sos_networkCodeCopied": "Code gekopieerd",
   "sos_networkCodeLabel": "Netwerkcode",

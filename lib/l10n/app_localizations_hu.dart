@@ -6455,6 +6455,10 @@ class AppLocalizationsHu extends AppLocalizations {
       'Azoknak, akik riasztásokat kapnak és cseveghetnek a csatornán.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Ez egy régebbi hálózat: aki ismeri a tagkódját, más szoftverrel elolvashatja a riasztásokat. Hozzon létre új hálózatot, és adja ki mindenkinek az új kódokat.';
+
+  @override
   String get sos_copyCode => 'Kód másolása';
 
   @override

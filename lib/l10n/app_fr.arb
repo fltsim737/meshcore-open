@@ -3624,6 +3624,7 @@
   "sos_networkMemberCodeHelp": "Pour les personnes qui peuvent envoyer un SOS sans voir les alertes.",
   "sos_networkResponderCode": "Code secouriste",
   "sos_networkResponderCodeHelp": "Pour les personnes qui reçoivent les alertes et peuvent discuter sur le canal.",
+  "sos_networkOldWarning": "Ce réseau est ancien : toute personne ayant son code membre pourrait lire les alertes avec un autre logiciel. Créez un nouveau réseau et donnez à chacun ses nouveaux codes.",
   "sos_copyCode": "Copier le code",
   "sos_networkCodeCopied": "Code copié",
   "sos_networkCodeLabel": "Code du réseau",

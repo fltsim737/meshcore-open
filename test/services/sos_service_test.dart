@@ -92,12 +92,18 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
     Uint8List payload, {
     bool zeroHop = false,
   }) async {
-    channelPackets.add((channel.index, SosPacket.decode(payload)!));
-    if (zeroHop) zeroHopPackets.add(SosPacket.decode(payload)!);
+    rawChannelData.add((channel.index, payload, zeroHop));
+    final packet = SosPacket.decode(payload);
+    if (packet == null) return; // sealed (SOS2)
+    channelPackets.add((channel.index, packet));
+    if (zeroHop) zeroHopPackets.add(packet);
   }
 
   /// Packets sent zero hop (locator beacons).
   final zeroHopPackets = <SosPacket>[];
+
+  /// Every channel send as sent: (channel index, bytes, zero hop).
+  final List<(int, Uint8List, bool)> rawChannelData = [];
 
   @override
   Future<int?> sendDirectText(Contact contact, String text) async {

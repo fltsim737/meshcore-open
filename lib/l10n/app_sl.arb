@@ -3491,6 +3491,7 @@
   "sos_networkMemberCodeHelp": "Za ljudi, ki lahko pošljejo SOS, ne smejo pa videti opozoril.",
   "sos_networkResponderCode": "Koda reševalca",
   "sos_networkResponderCodeHelp": "Za ljudi, ki prejemajo opozorila in lahko klepetajo v kanalu.",
+  "sos_networkOldWarning": "To je starejše omrežje: kdorkoli z njegovo kodo člana bi lahko z drugo programsko opremo bral opozorila. Ustvarite novo omrežje in vsem razdelite nove kode.",
   "sos_copyCode": "Kopiraj kodo",
   "sos_networkCodeCopied": "Koda kopirana",
   "sos_networkCodeLabel": "Koda omrežja",

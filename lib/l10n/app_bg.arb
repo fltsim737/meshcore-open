@@ -3490,6 +3490,7 @@
   "sos_networkMemberCodeHelp": "За хора, които могат да изпращат SOS, но не трябва да виждат сигнали.",
   "sos_networkResponderCode": "Код за спасител",
   "sos_networkResponderCodeHelp": "За хора, които получават сигнали и могат да пишат в канала.",
+  "sos_networkOldWarning": "Това е по-стара мрежа: всеки с нейния код за член може да чете сигналите с друг софтуер. Създайте нова мрежа и дайте на всички новите кодове.",
   "sos_copyCode": "Копирай кода",
   "sos_networkCodeCopied": "Кодът е копиран",
   "sos_networkCodeLabel": "Код на мрежата",

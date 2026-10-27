@@ -394,8 +394,18 @@ class SosVoiceService extends ChangeNotifier {
       sosId: clip.sosId,
       senderPrefix: self.sublist(0, SosVoicePacket.keyPrefixSize),
       clipId: _nextClipId++ & 0xFFFF,
+      sealed: _sos.sealsNetwork,
     );
-    final blobs = [for (final p in packets) p.encode()];
+    final blobs = <Uint8List>[];
+    for (final p in packets) {
+      final blob = _sos.sealVoice(p.encode());
+      if (blob == null) {
+        clip.status = VoiceClipStatus.failed;
+        notifyListeners();
+        return;
+      }
+      blobs.add(blob);
+    }
     clip
       ..status = VoiceClipStatus.sending
       ..totalChunks = blobs.length;
@@ -427,7 +437,9 @@ class SosVoiceService extends ChangeNotifier {
   void handleInbound(int channelIndex, Uint8List data) {
     final codec = _codec;
     if (codec == null || _sos.sosChannel?.index != channelIndex) return;
-    final packet = SosVoicePacket.decode(data);
+    final plain = _sos.openVoice(data);
+    if (plain == null) return;
+    final packet = SosVoicePacket.decode(plain);
     if (packet == null || !_isLive(packet.sosId)) return;
     final self = _transport.selfPublicKey;
     if (self != null &&

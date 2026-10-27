@@ -6174,6 +6174,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sos_networkResponderCodeHelp => '경보를 받고 채널에서 채팅할 수 있는 사람용.';
 
   @override
+  String get sos_networkOldWarning =>
+      '이전 방식의 네트워크입니다. 멤버 코드를 가진 사람은 다른 소프트웨어로 경보를 읽을 수 있습니다. 새 네트워크를 만들고 모두에게 새 코드를 나눠 주세요.';
+
+  @override
   String get sos_copyCode => '코드 복사';
 
   @override

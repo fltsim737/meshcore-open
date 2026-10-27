@@ -6480,6 +6480,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Für Personen, die Alarme erhalten und im Kanal chatten können.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Dies ist ein älteres Netz: Wer seinen Mitgliedscode hat, könnte Alarme mit anderer Software mitlesen. Richte ein neues Netz ein und gib allen die neuen Codes.';
+
+  @override
   String get sos_copyCode => 'Code kopieren';
 
   @override

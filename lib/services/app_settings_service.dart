@@ -510,7 +510,7 @@ class AppSettingsService extends ChangeNotifier {
   }) async {
     await updateSettings(
       _settings.copyWith(
-        sosNetworkKeyHex: network.key
+        sosNetworkKeyHex: network.secret
             .map((b) => b.toRadixString(16).padLeft(2, '0'))
             .join(),
         sosNetworkName: network.name,

@@ -7,10 +7,12 @@ import '../connector/meshcore_connector.dart';
 import '../connector/meshcore_protocol.dart';
 import '../helpers/sos_codec.dart';
 import '../helpers/sos_network_code.dart';
+import '../helpers/sos_seal.dart';
 import '../models/channel.dart';
 import '../models/contact.dart';
 import '../models/sos_alert.dart';
 import '../models/sos_history.dart';
+import '../models/sos_session_book.dart';
 import '../storage/sos_store.dart';
 import '../utils/app_logger.dart';
 import 'app_settings_service.dart';
@@ -293,7 +295,11 @@ class SosService extends ChangeNotifier {
     session.lastRequestAt = _now();
     session.requests++;
     notifyListeners();
-    await _sendChannelPacket(_packet(SosPacketKind.locate, session.id));
+    final alert = _incoming.where((a) => a.key == session.alertKey).firstOrNull;
+    await _sendChannelPacket(
+      _packet(SosPacketKind.locate, session.id),
+      session: alert == null ? null : _alertSession(alert),
+    );
   }
 
   /// Someone searching for our SOS: (re)start our beacons.
@@ -326,8 +332,10 @@ class SosService extends ChangeNotifier {
       senderName: _transport.selfName ?? '',
       seq: _beaconSeq++ & 0xFF,
     );
+    final wire = _wire(packet, _ownSession(sos.id));
+    if (wire == null) return;
     try {
-      await _transport.sendChannelData(channel, packet.encode(), zeroHop: true);
+      await _transport.sendChannelData(channel, wire, zeroHop: true);
     } catch (e) {
       appLogger.warn('Locator beacon failed: $e', tag: 'SOS');
     }
@@ -357,6 +365,9 @@ class SosService extends ChangeNotifier {
 
   Timer? _expiryTimer;
   bool _broadcasting = false;
+
+  /// The keys of each SOS on an SOS2 network that this phone can read.
+  final SosSessionBook _sessions = SosSessionBook();
   bool _sendingCancel = false;
 
   /// ACK hash of each SOS direct message sent, mapped to its recipient.
@@ -431,6 +442,7 @@ class SosService extends ChangeNotifier {
     _history
       ..clear()
       ..addAll(_store.loadHistory());
+    _sessions.load(_store.loadSessions());
     purgeExpired();
     notifyListeners();
     _schedule();
@@ -610,11 +622,7 @@ class SosService extends ChangeNotifier {
   /// Creates a network with a new random key; this phone is its responder
   /// and coordinator.
   Future<SosNetworkCode> createNetwork(String name) async {
-    final net = SosNetworkCode(
-      role: SosNetworkRole.responder,
-      key: SosNetworkCode.generateKey(),
-      name: name,
-    );
+    final net = SosNetworkCode.generateSealed(name: name);
     await joinNetwork(net, coordinator: true);
     return net;
   }
@@ -733,6 +741,7 @@ class SosService extends ChangeNotifier {
     );
     _saveHistory();
     _dmAckHashes.clear();
+    _ownSession(sos.id, create: true);
     notifyListeners();
     await _store.saveOutgoing(sos);
     await broadcastIfDue();
@@ -885,6 +894,7 @@ class SosService extends ChangeNotifier {
 
     await _sendChannelPacket(
       _packet(SosPacketKind.sos, sos.id, fix: fix, withKey: true),
+      session: _ownSession(sos.id, create: true),
     );
 
     final dmText = SosCodec.encodeSos(
@@ -929,15 +939,167 @@ class SosService extends ChangeNotifier {
     }
   }
 
-  Future<void> _sendChannelPacket(SosPacket packet) async {
+  /// Sends [packet] on the network: sealed with [session] on an SOS2
+  /// network, or by default with our own SOS's keys.
+  Future<void> _sendChannelPacket(
+    SosPacket packet, {
+    SosSession? session,
+  }) async {
     if (network == null || !await _waitForChannels()) return;
     final channel = sosChannel;
     if (channel == null || !_transport.supportsChannelData) return;
+    final wire = _wire(packet, session ?? _ownSession(packet.id));
+    if (wire == null) return;
     try {
-      await _transport.sendChannelData(channel, packet.encode());
+      await _transport.sendChannelData(channel, wire);
     } catch (e) {
       appLogger.warn('SOS channel send failed: $e', tag: 'SOS');
     }
+  }
+
+  // ---- SOS2 sealing ----
+
+  bool get _sealed => network?.isSealed ?? false;
+
+  String? get _networkHex {
+    final key = network?.networkPublicKey;
+    return key == null ? null : _hex(key);
+  }
+
+  void _saveSessions() {
+    _sessions.prune(_now(), activeId: _active?.id);
+    unawaited(_store.saveSessions(_sessions.toJson()));
+  }
+
+  /// Our own SOS [id]'s keys on the SOS2 network, made when [create].
+  SosSession? _ownSession(String id, {bool create = false}) {
+    final net = network;
+    final hex = _networkHex;
+    if (net == null || hex == null) return null;
+    final entry = _sessions.own(id, hex);
+    if (entry != null) {
+      entry.lastUsed = _now();
+      return entry.session;
+    }
+    if (!create) return null;
+    final session = SosSeal.newSession(net.networkPublicKey!);
+    _sessions.add(
+      SosSessionEntry(
+        id: id,
+        session: session,
+        own: true,
+        networkHex: hex,
+        lastUsed: _now(),
+      ),
+    );
+    _saveSessions();
+    return session;
+  }
+
+  /// The keys of someone else's SOS, opened on the SOS2 network.
+  SosSession? _alertSession(IncomingSos alert) {
+    final ref = alert.sessionRef;
+    final entry = ref == null ? null : _sessions.byRef(ref);
+    if (entry == null || entry.networkHex != _networkHex) return null;
+    entry.lastUsed = _now();
+    return entry.session;
+  }
+
+  /// Whether network packets are sealed: an SOS2 network.
+  bool get sealsNetwork => _sealed;
+
+  /// The keys for voice about SOS [sosId]: our own live SOS's, or those of a
+  /// live alert this responder has opened.
+  SosSession? _sessionForSos(String sosId) {
+    if (_active?.id == sosId) return _ownSession(sosId);
+    for (final alert in _incoming) {
+      if (alert.id != sosId) continue;
+      final session = _alertSession(alert);
+      if (session != null) return session;
+    }
+    return null;
+  }
+
+  /// A voice chunk as sent on this network: [blob] as it is on SOS1, sealed
+  /// with its SOS's keys on SOS2. Null when there are no keys to seal with.
+  Uint8List? sealVoice(Uint8List blob) {
+    if (!_sealed) return blob;
+    if (blob.length < 4) return null;
+    final id = (blob[2] | (blob[3] << 8)).toRadixString(16).padLeft(4, '0');
+    final session = _sessionForSos(id);
+    if (session == null) return null;
+    return SosSeal.sealRaw(
+      [SosSeal.version, blob[1], blob[2], blob[3]],
+      session,
+      blob.sublist(4),
+    );
+  }
+
+  /// A voice chunk heard on this network, unsealed on SOS2; null when it
+  /// isn't one we can read (another SOS, a member's phone, or tampered).
+  Uint8List? openVoice(Uint8List data) {
+    if (!_sealed) return data;
+    final head = SosSeal.header(data, fullKeyKind: null);
+    if (head == null) return null;
+    final entry = _sessions.byRef(head.refHex);
+    if (entry == null ||
+        entry.networkHex != _networkHex ||
+        entry.id != head.id) {
+      return null;
+    }
+    final body = SosSeal.openRaw(data, head.length, entry.session);
+    if (body == null) return null;
+    return Uint8List.fromList([1, head.kind, data[2], data[3], ...body]);
+  }
+
+  /// [packet] as sent: as it is on an SOS1 network, sealed with [session] on
+  /// SOS2. Null when it has no keys to seal with (nothing is sent then).
+  Uint8List? _wire(SosPacket packet, SosSession? session) {
+    if (!_sealed) return packet.encode();
+    if (session == null) {
+      appLogger.warn(
+        'SOS ${packet.id}: no keys to seal its ${packet.kind.name}, not sent',
+        tag: 'SOS',
+      );
+      return null;
+    }
+    return SosSeal.sealPacket(packet, session);
+  }
+
+  /// Opens a packet heard on the SOS2 network, with the keys of an SOS we
+  /// know, or, for a responder, a new SOS's own (then kept). Null for
+  /// anything we can't read or that fails its check: members can't read
+  /// other people's alerts, and nobody without the keys can fake an ACK.
+  ({SosPacket packet, String ref})? _openSealed(Uint8List data) {
+    final head = SosSeal.header(data);
+    final hex = _networkHex;
+    if (head == null || hex == null) return null;
+    var entry = _sessions.byRef(head.refHex);
+    if (entry != null && entry.networkHex != hex) entry = null;
+    if (entry == null) {
+      final eph = head.ephPublic;
+      final secret = network?.networkSecret;
+      if (eph == null || secret == null) return null;
+      final session = SosSeal.responderSession(secret, eph);
+      if (session == null) return null;
+      final packet = SosSeal.openPacket(data, session);
+      if (packet == null) return null;
+      _sessions.add(
+        SosSessionEntry(
+          id: head.id,
+          session: session,
+          own: false,
+          networkHex: hex,
+          lastUsed: _now(),
+        ),
+      );
+      _saveSessions();
+      return (packet: packet, ref: head.refHex);
+    }
+    final packet = SosSeal.openPacket(data, entry.session);
+    if (packet == null || packet.id != entry.id) return null;
+    entry.lastUsed = _now();
+    return (packet: packet, ref: head.refHex);
   }
 
   Future<int?> _sendDirect(Contact contact, String text) async {
@@ -1018,20 +1180,33 @@ class SosService extends ChangeNotifier {
         ? sosChannel?.index
         : _knownSosChannelIndex;
     if (networkIndex != channelIndex) return;
-    final packet = SosPacket.decode(data);
-    if (packet == null ||
-        packet.kind != SosPacketKind.sos ||
-        packet.id != sos.id) {
-      return;
-    }
-    final self = _transport.selfPublicKey;
-    if (self == null ||
-        self.length < SosPacket.keyPrefixSize ||
-        !listEquals(
-          self.sublist(0, SosPacket.keyPrefixSize),
-          packet.senderPrefix,
-        )) {
-      return;
+    if (_sealed) {
+      // Ours if it carries our SOS's one-off key; no need to open it.
+      final head = SosSeal.header(data);
+      final own = _ownSession(sos.id);
+      if (head == null ||
+          own == null ||
+          head.kind != SosPacketKind.sos.code ||
+          head.id != sos.id ||
+          !listEquals(head.ephPublic, own.ephPublic)) {
+        return;
+      }
+    } else {
+      final packet = SosPacket.decode(data);
+      if (packet == null ||
+          packet.kind != SosPacketKind.sos ||
+          packet.id != sos.id) {
+        return;
+      }
+      final self = _transport.selfPublicKey;
+      if (self == null ||
+          self.length < SosPacket.keyPrefixSize ||
+          !listEquals(
+            self.sublist(0, SosPacket.keyPrefixSize),
+            packet.senderPrefix,
+          )) {
+        return;
+      }
     }
     sos.heardRepeats += 1;
     sos.repeaters[lastHopHex] = (sos.repeaters[lastHopHex] ?? 0) + 1;
@@ -1061,7 +1236,17 @@ class SosService extends ChangeNotifier {
         ? sosChannel?.index
         : _knownSosChannelIndex;
     if (networkIndex != channelIndex) return;
-    final packet = SosPacket.decode(data);
+    // An SOS2 network takes only sealed packets, so nobody can slip in an
+    // unsealed one; an SOS1 network takes only SOS1 packets.
+    String? sessionRef;
+    final SosPacket? packet;
+    if (_sealed) {
+      final opened = _openSealed(data);
+      packet = opened?.packet;
+      sessionRef = opened?.ref;
+    } else {
+      packet = SosPacket.decode(data);
+    }
     if (packet == null) return;
     // Members only hear ACKs for their own SOS, and requests to locate it.
     if (!isResponder &&
@@ -1104,6 +1289,7 @@ class SosService extends ChangeNotifier {
           fix: packet.fix,
           info: packet.info,
           via: 'network',
+          sessionRef: sessionRef,
         );
       case SosPacketKind.ack:
         _handleAck(packet.id, packet.senderName, senderKeyHex);
@@ -1228,6 +1414,7 @@ class SosService extends ChangeNotifier {
     required SosFix fix,
     required String via,
     String? info,
+    String? sessionRef,
   }) {
     final key = IncomingSos.keyFor(senderName, id);
     final now = _now();
@@ -1239,7 +1426,8 @@ class SosService extends ChangeNotifier {
         ..lastSeen = now
         ..receivedCount += 1
         ..senderKeyHex ??= senderKeyHex
-        ..channelIndex ??= channelIndex;
+        ..channelIndex ??= channelIndex
+        ..sessionRef = sessionRef ?? existing.sessionRef;
       if (fix.hasPosition || !existing.fix.hasPosition) existing.fix = fix;
       if (info != null) existing.info = info;
     } else {
@@ -1252,6 +1440,7 @@ class SosService extends ChangeNotifier {
         lastSeen: now,
         fix: fix,
         info: info,
+        sessionRef: sessionRef,
       );
       _incoming.insert(0, alert);
       _trimIncoming();
@@ -1461,11 +1650,13 @@ class SosService extends ChangeNotifier {
               .where((c) => c.index == channelIndex)
               .firstOrNull;
     if (channel != null && _transport.supportsChannelData) {
+      final wire = _wire(
+        _packet(SosPacketKind.ack, alert.id, withKey: true),
+        _alertSession(alert),
+      );
+      if (wire == null) return;
       try {
-        await _transport.sendChannelData(
-          channel,
-          _packet(SosPacketKind.ack, alert.id, withKey: true).encode(),
-        );
+        await _transport.sendChannelData(channel, wire);
       } catch (e) {
         appLogger.warn('SOS ACK channel send failed: $e', tag: 'SOS');
       }
