@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "uk",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Контакти",
   "nav_channels": "Канали",
   "nav_map": "Карта",
@@ -128,7 +128,7 @@
   "settings_appDebugLog": "Журнал налагодження застосунку",
   "settings_appDebugLogSubtitle": "Повідомлення налагодження застосунку",
   "settings_about": "Про застосунок",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS Voice v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -136,7 +136,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "Проєкт MeshCore Open Source 2026",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Клієнт Flutter з відкритим вихідним кодом для пристроїв мережі MeshCore LoRa.",
   "settings_infoName": "Ім'я",
   "settings_infoId": "Ідентифікатор",
@@ -2397,7 +2397,7 @@
   "background_serviceText": "Підтримує з'єднання BLE",
   "background_serviceRunningText": "Очікування повідомлень і сигналів SOS",
   "background_stop": "Зупинити",
-  "tray_show": "Показати MeshCore Open",
+  "tray_show": "Показати MeshCore Open SOS Voice",
   "tray_quit": "Вийти",
   "appSettings_translationModelDeleted": "Видалено {name}",
   "appSettings_translationModelDeleteFailed": "Не вдалось видалити: {error}",
@@ -2992,7 +2992,7 @@
     }
   },
   "appSettings_batteryOptimization": "Робота у фоні",
-  "appSettings_batteryOptimizationSubtitle": "Встановіть для MeshCore Open значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні",
+  "appSettings_batteryOptimizationSubtitle": "Встановіть для MeshCore Open SOS Voice значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні",
   "appSettings_startOnLogin": "Запускати під час входу",
   "appSettings_startOnLoginSubtitle": "Відкривається прихованою в треї та очікує повідомлення і сигнали SOS",
   "contacts_storageFull": "Сховище контактів на вузлі заповнене. Нові вузли неможливо додати, доки контакти не буде видалено.",
@@ -3055,11 +3055,11 @@
   "notification_replyHint": "Повідомлення",
   "notification_you": "Ви",
   "notification_replyFailedTitle": "Відповідь не надіслано",
-  "notification_replyNotConnected": "Немає з’єднання з радіо. Підключіться знову в MeshCore Open і надішліть відповідь ще раз.",
-  "notification_replyTooLong": "Ваша відповідь задовга для надсилання з повідомлення. Надішліть її з MeshCore Open.",
+  "notification_replyNotConnected": "Немає з’єднання з радіо. Підключіться знову в MeshCore Open SOS Voice і надішліть відповідь ще раз.",
+  "notification_replyTooLong": "Ваша відповідь задовга для надсилання з повідомлення. Надішліть її з MeshCore Open SOS Voice.",
   "notification_replyUnavailable": "Цей чат більше недоступний на підключеному радіо.",
-  "notification_replySendFailed": "Можливо, вашу відповідь не було надіслано. Перевірте у MeshCore Open і спробуйте ще раз.",
-  "notification_replyAppNotRunning": "MeshCore Open не запущено. Відкрийте його та надішліть відповідь ще раз.",
+  "notification_replySendFailed": "Можливо, вашу відповідь не було надіслано. Перевірте у MeshCore Open SOS Voice і спробуйте ще раз.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice не запущено. Відкрийте його та надішліть відповідь ще раз.",
   "snrIndicator_nearByRepeatersDescription": "Ретранслятори, почуті вашим радіо безпосередньо, спочатку найновіші.",
   "radioStats_sectionSignal": "Сигнал",
   "radioStats_sectionAirtime": "Час в ефірі",
@@ -3411,7 +3411,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Відкрийте MeshCore Open, щоб надіслати ACK",
+  "sos_notificationOpenToRespond": "Відкрийте MeshCore Open SOS Voice, щоб надіслати ACK",
   "sos_notificationChannelName": "Екстрені SOS-сигнали",
   "sos_notificationChannelDescription": "Тривога для SOS-повідомлень від інших вузлів",
   "sos_ackChannelName": "Підтвердження SOS",

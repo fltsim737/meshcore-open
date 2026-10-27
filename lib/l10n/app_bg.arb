@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "bg",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Контакти",
   "nav_channels": "Канали",
   "nav_map": "Карта",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Лог на отстраняване на грешки на приложението",
   "settings_appDebugLogSubtitle": "Съобщения за отстраняване на грешки на приложението",
   "settings_about": "За нас",
-  "settings_aboutVersion": "MeshCore Open, версия {version}",
+  "settings_aboutVersion": "MeshCore Open SOS Voice, версия {version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "Проект MeshCore с отворен код 2024 г.",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Отворен Flutter клиент за MeshCore LoRa мрежови устройства.",
   "settings_infoName": "Име",
   "settings_infoId": "ИД",
@@ -2395,7 +2395,7 @@
   "background_serviceText": "Поддържа BLE връзката активна",
   "background_serviceRunningText": "Следи за съобщения и SOS сигнали",
   "background_stop": "Спри",
-  "tray_show": "Покажи MeshCore Open",
+  "tray_show": "Покажи MeshCore Open SOS Voice",
   "tray_quit": "Изход",
   "appSettings_translationModelDeleted": "Изтрит {name}",
   "@appSettings_translationModelDeleted": {
@@ -3012,7 +3012,7 @@
     }
   },
   "appSettings_batteryOptimization": "Дейност във фона",
-  "appSettings_batteryOptimizationSubtitle": "Задайтете за MeshCore Open стойност „Не оптимизирай“ в настройките на батерията, за да продължават да пристигат съобщения във фона",
+  "appSettings_batteryOptimizationSubtitle": "Задайтете за MeshCore Open SOS Voice стойност „Не оптимизирай“ в настройките на батерията, за да продължават да пристигат съобщения във фона",
   "appSettings_startOnLogin": "Стартиране при вход",
   "appSettings_startOnLoginSubtitle": "Отваря се скрито в системната област и следи за съобщения и SOS сигнали",
   "contacts_storageFull": "Паметта за контакти на възела е запълнена. Нови възли не могат да се добавят, докато контактите не бъдат премахнати.",
@@ -3075,11 +3075,11 @@
   "notification_replyHint": "Съобщение",
   "notification_you": "Вие",
   "notification_replyFailedTitle": "Отговорът не е изпратен",
-  "notification_replyNotConnected": "Няма връзка с радиото. Свържете се отново в MeshCore Open и изпратете отговора си повторно.",
-  "notification_replyTooLong": "Отговорът ви е твърде дълъг, за да бъде изпратен от известие. Изпратете го от MeshCore Open.",
+  "notification_replyNotConnected": "Няма връзка с радиото. Свържете се отново в MeshCore Open SOS Voice и изпратете отговора си повторно.",
+  "notification_replyTooLong": "Отговорът ви е твърде дълъг, за да бъде изпратен от известие. Изпратете го от MeshCore Open SOS Voice.",
   "notification_replyUnavailable": "Този разговор вече не е налични в свързаното радио.",
-  "notification_replySendFailed": "Възможно отговорът ви да не е изпратен. Проверете в MeshCore Open и опитайте отново.",
-  "notification_replyAppNotRunning": "MeshCore Open не работи. Отворете го и изпратете отговора си повторно.",
+  "notification_replySendFailed": "Възможно отговорът ви да не е изпратен. Проверете в MeshCore Open SOS Voice и опитайте отново.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice не работи. Отворете го и изпратете отговора си повторно.",
   "snrIndicator_nearByRepeatersDescription": "Повторители, чути от вашето радио пряко, първо най-скорошните.",
   "radioStats_sectionSignal": "Сигнал",
   "radioStats_sectionAirtime": "Време на излъчване",
@@ -3431,7 +3431,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Отворете MeshCore Open, за да изпратите ACK",
+  "sos_notificationOpenToRespond": "Отворете MeshCore Open SOS Voice, за да изпратите ACK",
   "sos_notificationChannelName": "Спешни SOS сигнали",
   "sos_notificationChannelDescription": "Аларма за SOS съобщения от други възли",
   "sos_ackChannelName": "SOS потвърждения",

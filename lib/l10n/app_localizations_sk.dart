@@ -9,7 +9,7 @@ class AppLocalizationsSk extends AppLocalizations {
   AppLocalizationsSk([String locale = 'sk']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open';
+  String get appTitle => 'MeshCore Open SOS Voice';
 
   @override
   String get nav_contacts => 'Kontakty';
@@ -278,7 +278,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -723,7 +723,8 @@ class AppLocalizationsSk extends AppLocalizations {
   }
 
   @override
-  String get settings_aboutLegalese => 'MeshCore Open Source Projekt 2024';
+  String get settings_aboutLegalese =>
+      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -1001,7 +1002,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      'V nastaveniach batérie nastavte MeshCore Open na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí';
+      'V nastaveniach batérie nastavte MeshCore Open SOS Voice na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí';
 
   @override
   String get appSettings_startOnLogin => 'Spustiť po prihlásení';
@@ -4841,11 +4842,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      'Nie je pripojené k rádiu. Znova sa pripojte v MeshCore Open a odošlite odpoveď ešte raz.';
+      'Nie je pripojené k rádiu. Znova sa pripojte v MeshCore Open SOS Voice a odošlite odpoveď ešte raz.';
 
   @override
   String get notification_replyTooLong =>
-      'Vaša odpoveď je príliš dlhá na odoslanie z upozornenia. Pošlite ju namiesto toho z MeshCore Open.';
+      'Vaša odpoveď je príliš dlhá na odoslanie z upozornenia. Pošlite ju namiesto toho z MeshCore Open SOS Voice.';
 
   @override
   String get notification_replyUnavailable =>
@@ -4853,11 +4854,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get notification_replySendFailed =>
-      'Vaša odpoveď možno nebola odoslaná. Skontrolujte to v MeshCore Open a skúste to znova.';
+      'Vaša odpoveď možno nebola odoslaná. Skontrolujte to v MeshCore Open SOS Voice a skúste to znova.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open nebeží. Otvorte ho a odošlite odpoveď ešte raz.';
+      'MeshCore Open SOS Voice nebeží. Otvorte ho a odošlite odpoveď ešte raz.';
 
   @override
   String get settings_gpxExportRepeaters =>
@@ -5314,7 +5315,7 @@ class AppLocalizationsSk extends AppLocalizations {
   String get background_stop => 'Zastaviť';
 
   @override
-  String get tray_show => 'Zobraziť MeshCore Open';
+  String get tray_show => 'Zobraziť MeshCore Open SOS Voice';
 
   @override
   String get tray_quit => 'Ukončiť';
@@ -6733,7 +6734,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'Otvorte MeshCore Open a pošlite ACK';
+      'Otvorte MeshCore Open SOS Voice a pošlite ACK';
 
   @override
   String get sos_notificationChannelName => 'Núdzové SOS poplachy';

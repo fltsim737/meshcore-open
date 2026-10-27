@@ -7,6 +7,8 @@ Both apps share the SOS code, so each release applies to both: `sos-<version>` f
 ### Changed
 
 - **Settings → About** shows the app's own name, and its credits and licence: MeshCore Open © 2025 zjs81 and contributors, the SOS additions © 2026 fltsim737, under the MIT licence; not affiliated with the MeshCore project; provided as is, without warranty, and not a certified emergency alarm. It used to show the original MeshCore Open's name.
+- **The app's own name everywhere.** The Scanner screen's title, notifications (including replying from one), the tray menu, the battery-optimisation hint, the Linux USB fix and the SOS history report now say MeshCore Open SOS (or MeshCore Open SOS Voice), in every language, instead of MeshCore Open. Mentions of the original MeshCore Open project, such as its network map, are unchanged.
+- **Settings → About → View licenses** now includes MeshCore Open's own MIT licence notice, which the licence asks to go with every copy of the app.
 - **SOS Voice:** **Settings → About → View licenses** now includes the full licence text of Codec2 (GNU LGPL 2.1), the voice codec built into SOS Voice.
 
 ## 9.6.0 (2026-10-27)

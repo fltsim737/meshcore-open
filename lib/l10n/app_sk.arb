@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "sk",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Kontakty",
   "nav_channels": "Kanály",
   "nav_map": "Mapa",
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "MeshCore Open Source Projekt 2024",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Otvorený zdrojový Flutter klient pre MeshCore LoRa sieťové zariadenia.",
   "settings_infoName": "Meno",
   "settings_infoId": "Identifikátor",
@@ -2396,7 +2396,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Počúva správy a SOS výstrahy",
   "background_stop": "Zastaviť",
-  "tray_show": "Zobraziť MeshCore Open",
+  "tray_show": "Zobraziť MeshCore Open SOS Voice",
   "tray_quit": "Ukončiť",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -3013,7 +3013,7 @@
     }
   },
   "appSettings_batteryOptimization": "Aktivita na pozadí",
-  "appSettings_batteryOptimizationSubtitle": "V nastaveniach batérie nastavte MeshCore Open na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí",
+  "appSettings_batteryOptimizationSubtitle": "V nastaveniach batérie nastavte MeshCore Open SOS Voice na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí",
   "appSettings_startOnLogin": "Spustiť po prihlásení",
   "appSettings_startOnLoginSubtitle": "Otvorí sa skrytá v oblasti oznámení a počúva správy a SOS výstrahy",
   "contacts_storageFull": "Úložisko kontaktov v uzle je plné. Nové uzly nemožno pridať, kým neodstránite kontakty.",
@@ -3076,11 +3076,11 @@
   "notification_replyHint": "Správa",
   "notification_you": "Vy",
   "notification_replyFailedTitle": "Odpoveď nebola odoslaná",
-  "notification_replyNotConnected": "Nie je pripojené k rádiu. Znova sa pripojte v MeshCore Open a odošlite odpoveď ešte raz.",
-  "notification_replyTooLong": "Vaša odpoveď je príliš dlhá na odoslanie z upozornenia. Pošlite ju namiesto toho z MeshCore Open.",
+  "notification_replyNotConnected": "Nie je pripojené k rádiu. Znova sa pripojte v MeshCore Open SOS Voice a odošlite odpoveď ešte raz.",
+  "notification_replyTooLong": "Vaša odpoveď je príliš dlhá na odoslanie z upozornenia. Pošlite ju namiesto toho z MeshCore Open SOS Voice.",
   "notification_replyUnavailable": "Táto konverzácia už nie je na pripojenom rádiu.",
-  "notification_replySendFailed": "Vaša odpoveď možno nebola odoslaná. Skontrolujte to v MeshCore Open a skúste to znova.",
-  "notification_replyAppNotRunning": "MeshCore Open nebeží. Otvorte ho a odošlite odpoveď ešte raz.",
+  "notification_replySendFailed": "Vaša odpoveď možno nebola odoslaná. Skontrolujte to v MeshCore Open SOS Voice a skúste to znova.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice nebeží. Otvorte ho a odošlite odpoveď ešte raz.",
   "snrIndicator_nearByRepeatersDescription": "Opakovače, ktoré vaše rádio počulo priamo, najskôr tie naposledy počuté.",
   "radioStats_sectionSignal": "Signál",
   "radioStats_sectionAirtime": "Čas vysielania",
@@ -3432,7 +3432,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Otvorte MeshCore Open a pošlite ACK",
+  "sos_notificationOpenToRespond": "Otvorte MeshCore Open SOS Voice a pošlite ACK",
   "sos_notificationChannelName": "Núdzové SOS poplachy",
   "sos_notificationChannelDescription": "Poplach pre SOS správy z iných uzlov",
   "sos_ackChannelName": "Potvrdenia SOS",

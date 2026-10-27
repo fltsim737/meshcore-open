@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "sv",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Kontakter",
   "nav_channels": "Kanaler",
   "nav_map": "Karta",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Appens felsökningslogg",
   "settings_appDebugLogSubtitle": "Felsökningsmeddelanden från appen",
   "settings_about": "Om",
-  "settings_aboutVersion": "MeshCore Open version {version}",
+  "settings_aboutVersion": "MeshCore Open SOS Voice version {version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore Open Source Project",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "En Flutter-klient med öppen källkod för MeshCore-enheter i LoRa-meshnät.",
   "settings_infoName": "Namn",
   "settings_infoId": "ID",
@@ -2384,7 +2384,7 @@
   "background_serviceText": "Håller BLE-anslutningen aktiv",
   "background_serviceRunningText": "Lyssnar efter meddelanden och SOS-larm",
   "background_stop": "Stoppa",
-  "tray_show": "Visa MeshCore Open",
+  "tray_show": "Visa MeshCore Open SOS Voice",
   "tray_quit": "Avsluta",
   "appSettings_translationModelDeleted": "Tog bort {name}",
   "@appSettings_translationModelDeleted": {
@@ -3007,7 +3007,7 @@
     }
   },
   "appSettings_batteryOptimization": "Bakgrundsaktivitet",
-  "appSettings_batteryOptimizationSubtitle": "Sätt MeshCore Open till “Inte optimera” i batteriinställningarna så att meddelanden fortsätter att komma i bakgrunden",
+  "appSettings_batteryOptimizationSubtitle": "Sätt MeshCore Open SOS Voice till “Inte optimera” i batteriinställningarna så att meddelanden fortsätter att komma i bakgrunden",
   "appSettings_startOnLogin": "Starta vid inloggning",
   "appSettings_startOnLoginSubtitle": "Öppnas dold i systemfältet och lyssnar efter meddelanden och SOS-larm",
   "contacts_storageFull": "Kontaktlagringen på noden är full. Nya noder kan inte läggas till förrän kontakter har tagits bort.",
@@ -3070,11 +3070,11 @@
   "notification_replyHint": "Meddelande",
   "notification_you": "Du",
   "notification_replyFailedTitle": "Svaret skickades inte",
-  "notification_replyNotConnected": "Ingen anslutning till en radio. Anslut igen i MeshCore Open och skicka ditt svar igen.",
-  "notification_replyTooLong": "Ditt svar är för långt för att skickas från en notis. Skicka det från MeshCore Open i stället.",
+  "notification_replyNotConnected": "Ingen anslutning till en radio. Anslut igen i MeshCore Open SOS Voice och skicka ditt svar igen.",
+  "notification_replyTooLong": "Ditt svar är för långt för att skickas från en notis. Skicka det från MeshCore Open SOS Voice i stället.",
   "notification_replyUnavailable": "Det här samtalet finns inte längre på den anslutna radion.",
-  "notification_replySendFailed": "Ditt svar har kanske inte skickats. Kontrollera i MeshCore Open och försök igen.",
-  "notification_replyAppNotRunning": "MeshCore Open är inte igång. Öppna appen och skicka ditt svar igen.",
+  "notification_replySendFailed": "Ditt svar har kanske inte skickats. Kontrollera i MeshCore Open SOS Voice och försök igen.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice är inte igång. Öppna appen och skicka ditt svar igen.",
   "snrIndicator_nearByRepeatersDescription": "Repeatrar som din radio hörde direkt, senast hörda först.",
   "radioStats_sectionSignal": "Signal",
   "radioStats_sectionAirtime": "Sändningstid",
@@ -3426,7 +3426,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Öppna MeshCore Open för att skicka ACK",
+  "sos_notificationOpenToRespond": "Öppna MeshCore Open SOS Voice för att skicka ACK",
   "sos_notificationChannelName": "Nöd-SOS-larm",
   "sos_notificationChannelDescription": "Larm för SOS-meddelanden från andra noder",
   "sos_ackChannelName": "SOS-kvittenser",

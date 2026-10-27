@@ -292,7 +292,7 @@ class SosHistoryRecord {
         SosHistoryOutcome.leftNetwork => 'removed when this phone left the network$ended',
       }}',
     );
-    lines.add('Recorded by MeshCore Open. LoRa delivery is best effort.');
+    lines.add('Recorded by MeshCore Open SOS Voice. LoRa delivery is best effort.');
     return lines.join('\n');
   }
 }

@@ -9,7 +9,7 @@ class AppLocalizationsUk extends AppLocalizations {
   AppLocalizationsUk([String locale = 'uk']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open';
+  String get appTitle => 'MeshCore Open SOS Voice';
 
   @override
   String get nav_contacts => 'Контакти';
@@ -276,7 +276,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -721,11 +721,12 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open v$version';
+    return 'MeshCore Open SOS Voice v$version';
   }
 
   @override
-  String get settings_aboutLegalese => 'Проєкт MeshCore Open Source 2026';
+  String get settings_aboutLegalese =>
+      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -1003,7 +1004,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      'Встановіть для MeshCore Open значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні';
+      'Встановіть для MeshCore Open SOS Voice значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні';
 
   @override
   String get appSettings_startOnLogin => 'Запускати під час входу';
@@ -4869,11 +4870,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      'Немає з’єднання з радіо. Підключіться знову в MeshCore Open і надішліть відповідь ще раз.';
+      'Немає з’єднання з радіо. Підключіться знову в MeshCore Open SOS Voice і надішліть відповідь ще раз.';
 
   @override
   String get notification_replyTooLong =>
-      'Ваша відповідь задовга для надсилання з повідомлення. Надішліть її з MeshCore Open.';
+      'Ваша відповідь задовга для надсилання з повідомлення. Надішліть її з MeshCore Open SOS Voice.';
 
   @override
   String get notification_replyUnavailable =>
@@ -4881,11 +4882,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get notification_replySendFailed =>
-      'Можливо, вашу відповідь не було надіслано. Перевірте у MeshCore Open і спробуйте ще раз.';
+      'Можливо, вашу відповідь не було надіслано. Перевірте у MeshCore Open SOS Voice і спробуйте ще раз.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open не запущено. Відкрийте його та надішліть відповідь ще раз.';
+      'MeshCore Open SOS Voice не запущено. Відкрийте його та надішліть відповідь ще раз.';
 
   @override
   String get settings_gpxExportRepeaters =>
@@ -5348,7 +5349,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get background_stop => 'Зупинити';
 
   @override
-  String get tray_show => 'Показати MeshCore Open';
+  String get tray_show => 'Показати MeshCore Open SOS Voice';
 
   @override
   String get tray_quit => 'Вийти';
@@ -6772,7 +6773,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'Відкрийте MeshCore Open, щоб надіслати ACK';
+      'Відкрийте MeshCore Open SOS Voice, щоб надіслати ACK';
 
   @override
   String get sos_notificationChannelName => 'Екстрені SOS-сигнали';

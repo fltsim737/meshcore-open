@@ -191,7 +191,7 @@ See [Voice](#voice-sos-voice-only) below.
 
 ### Practising
 
-Agree on a time with your group, then send a test SOS, acknowledge it and cancel it. Make sure everyone's phone actually sounds, and that background running is allowed on each Android phone. To explore the screens without a radio, use review mode: on the Connect screen, long-press the "MeshCore Open" title and tap **Enter**.
+Agree on a time with your group, then send a test SOS, acknowledge it and cancel it. Make sure everyone's phone actually sounds, and that background running is allowed on each Android phone. To explore the screens without a radio, use review mode: on the Connect screen, long-press the app's name at the top ("MeshCore Open SOS" or "MeshCore Open SOS Voice") and tap **Enter**.
 
 ---
 

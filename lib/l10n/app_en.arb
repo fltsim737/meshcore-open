@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Contacts",
   "nav_channels": "Channels",
   "nav_map": "Map",
@@ -90,7 +90,7 @@
   },
   "common_autoRefresh": "Autorefresh",
   "common_interval": "Interval",
-  "scanner_title": "MeshCore Open",
+  "scanner_title": "MeshCore Open SOS Voice",
   "connectionChoiceUsbLabel": "USB",
   "connectionChoiceBluetoothLabel": "Bluetooth",
   "connectionChoiceTcpLabel": "TCP",
@@ -133,7 +133,7 @@
   "usbErrorOpenFailed": "Failed to open the selected USB device.",
   "usbErrorPortInUse": "The port can't be opened. Another program may be using it, such as a flasher or a serial monitor: close it and try again.",
   "usbAccessTitle": "Allow access to USB radios?",
-  "usbAccessMessage": "This computer doesn't let you use USB serial devices yet, so the radio can't be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.",
+  "usbAccessMessage": "This computer doesn't let you use USB serial devices yet, so the radio can't be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.",
   "usbAccessManual": "Or do it yourself in a terminal, then log out and back in:\nsudo usermod -aG dialout $USER",
   "usbAccessAllow": "Allow access",
   "usbAccessGranted": "USB radios allowed. Connecting…",
@@ -298,7 +298,7 @@
   "settings_appDebugLog": "App Debug Log",
   "settings_appDebugLogSubtitle": "Application debug messages",
   "settings_about": "About",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS Voice v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -306,7 +306,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore Open Source Project",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "An open-source Flutter client for MeshCore LoRa mesh networking devices.",
   "settings_aboutOpenMeteoAttribution": "LOS elevation data: Open-Meteo (CC BY 4.0)",
   "settings_infoName": "Name",
@@ -436,7 +436,7 @@
   "appSettings_messageNotifications": "Message Notifications",
   "appSettings_messageNotificationsSubtitle": "Show notification when receiving new messages",
   "appSettings_batteryOptimization": "Background Activity",
-  "appSettings_batteryOptimizationSubtitle": "Set MeshCore Open to \"Don't optimize\" in battery settings so messages keep arriving in the background",
+  "appSettings_batteryOptimizationSubtitle": "Set MeshCore Open SOS Voice to \"Don't optimize\" in battery settings so messages keep arriving in the background",
   "appSettings_startOnLogin": "Start when you log in",
   "appSettings_startOnLoginSubtitle": "Opens hidden in the tray, listening for messages and SOS alerts",
   "appSettings_channelMessageNotifications": "Channel Message Notifications",
@@ -2742,11 +2742,11 @@
   "notification_replyHint": "Message",
   "notification_you": "You",
   "notification_replyFailedTitle": "Reply not sent",
-  "notification_replyNotConnected": "Not connected to a radio. Reconnect in MeshCore Open and send your reply again.",
-  "notification_replyTooLong": "Your reply is too long to send from a notification. Send it from MeshCore Open instead.",
+  "notification_replyNotConnected": "Not connected to a radio. Reconnect in MeshCore Open SOS Voice and send your reply again.",
+  "notification_replyTooLong": "Your reply is too long to send from a notification. Send it from MeshCore Open SOS Voice instead.",
   "notification_replyUnavailable": "This conversation is no longer on the connected radio.",
-  "notification_replySendFailed": "Your reply may not have been sent. Check in MeshCore Open and try again.",
-  "notification_replyAppNotRunning": "MeshCore Open isn't running. Open it and send your reply again.",
+  "notification_replySendFailed": "Your reply may not have been sent. Check in MeshCore Open SOS Voice and try again.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice isn't running. Open it and send your reply again.",
   "settings_gpxExportRepeaters": "Export repeaters / room server to GPX",
   "settings_gpxExportRepeatersSubtitle": "Exports repeaters / roomserver with a location to GPX file.",
   "settings_gpxExportContacts": "Export companions to GPX",
@@ -2960,7 +2960,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Listening for messages and SOS alerts",
   "background_stop": "Stop",
-  "tray_show": "Show MeshCore Open",
+  "tray_show": "Show MeshCore Open SOS Voice",
   "tray_quit": "Quit",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -4140,7 +4140,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Open MeshCore Open to send ACK",
+  "sos_notificationOpenToRespond": "Open MeshCore Open SOS Voice to send ACK",
   "sos_notificationChannelName": "Emergency SOS alerts",
   "sos_notificationChannelDescription": "Alarm for SOS messages from other nodes",
   "sos_ackChannelName": "SOS acknowledgements",

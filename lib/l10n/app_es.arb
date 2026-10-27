@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "es",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Contactos",
   "nav_channels": "Canales",
   "nav_map": "Mapa",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open",
+  "scanner_title": "MeshCore Open SOS Voice",
   "scanner_scanning": "Escaneando dispositivos...",
   "scanner_connecting": "Conectando...",
   "scanner_disconnecting": "Desconectando...",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Registro de Depuración de la App",
   "settings_appDebugLogSubtitle": "Mensajes de depuración de la aplicación",
   "settings_about": "Acerca de",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS Voice v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "Proyecto MeshCore Open Source 2026",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Un cliente Flutter de código abierto para dispositivos MeshCore de malla LoRa.",
   "settings_infoName": "Nombre",
   "settings_infoId": "ID",
@@ -2523,7 +2523,7 @@
   "background_serviceText": "Manteniendo BLE conectado",
   "background_serviceRunningText": "Escuchando mensajes y alertas SOS",
   "background_stop": "Detener",
-  "tray_show": "Mostrar MeshCore Open",
+  "tray_show": "Mostrar MeshCore Open SOS Voice",
   "tray_quit": "Salir",
   "appSettings_translationModelDeleted": "Eliminado {name}",
   "@appSettings_translationModelDeleted": {
@@ -3146,7 +3146,7 @@
     }
   },
   "appSettings_batteryOptimization": "Actividad en segundo plano",
-  "appSettings_batteryOptimizationSubtitle": "Establece MeshCore Open en \"No optimizar\" en los ajustes de batería para que los mensajes sigan llegando en segundo plano",
+  "appSettings_batteryOptimizationSubtitle": "Establece MeshCore Open SOS Voice en \"No optimizar\" en los ajustes de batería para que los mensajes sigan llegando en segundo plano",
   "appSettings_startOnLogin": "Iniciar al iniciar sesión",
   "appSettings_startOnLoginSubtitle": "Se abre oculta en la bandeja, escuchando mensajes y alertas SOS",
   "contacts_storageFull": "El almacenamiento de contactos del nodo está lleno. No se pueden añadir nodos nuevos hasta que se eliminen contactos.",
@@ -3209,11 +3209,11 @@
   "notification_replyHint": "Mensaje",
   "notification_you": "Tú",
   "notification_replyFailedTitle": "Respuesta no enviada",
-  "notification_replyNotConnected": "Sin conexión con una radio. Vuelve a conectarte en MeshCore Open y envía tu respuesta de nuevo.",
-  "notification_replyTooLong": "Tu respuesta es demasiado larga para enviarla desde una notificación. Envíala desde MeshCore Open.",
+  "notification_replyNotConnected": "Sin conexión con una radio. Vuelve a conectarte en MeshCore Open SOS Voice y envía tu respuesta de nuevo.",
+  "notification_replyTooLong": "Tu respuesta es demasiado larga para enviarla desde una notificación. Envíala desde MeshCore Open SOS Voice.",
   "notification_replyUnavailable": "Esta conversación ya no está en la radio conectada.",
-  "notification_replySendFailed": "Puede que tu respuesta no se haya enviado. Compruébalo en MeshCore Open e inténtalo de nuevo.",
-  "notification_replyAppNotRunning": "MeshCore Open no está en ejecución. Ábrelo y envía tu respuesta de nuevo.",
+  "notification_replySendFailed": "Puede que tu respuesta no se haya enviado. Compruébalo en MeshCore Open SOS Voice e inténtalo de nuevo.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice no está en ejecución. Ábrelo y envía tu respuesta de nuevo.",
   "snrIndicator_nearByRepeatersDescription": "Repetidores que tu radio ha oído directamente, del más reciente al más antiguo.",
   "radioStats_sectionSignal": "Señal",
   "radioStats_sectionAirtime": "Tiempo de emisión",
@@ -3565,7 +3565,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Abre MeshCore Open para enviar ACK",
+  "sos_notificationOpenToRespond": "Abre MeshCore Open SOS Voice para enviar ACK",
   "sos_notificationChannelName": "Alertas SOS de emergencia",
   "sos_notificationChannelDescription": "Alarma para mensajes SOS de otros nodos",
   "sos_ackChannelName": "Confirmaciones de SOS",

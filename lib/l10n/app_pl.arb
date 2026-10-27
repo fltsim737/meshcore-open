@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "pl",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS Voice",
   "nav_contacts": "Kontakty",
   "nav_channels": "Kanały",
   "nav_map": "Mapa",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Dziennik debugowania aplikacji",
   "settings_appDebugLogSubtitle": "Komunikaty debugowania aplikacji",
   "settings_about": "O aplikacji",
-  "settings_aboutVersion": "MeshCore Open w wersji {version}",
+  "settings_aboutVersion": "MeshCore Open SOS Voice w wersji {version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "Projekt MeshCore Open Source 2026",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Otwartoźródłowy klient Flutter dla urządzeń MeshCore LoRa do sieci mesh.",
   "settings_infoName": "Nazwa",
   "settings_infoId": "ID",
@@ -2427,7 +2427,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Nasłuchiwanie wiadomości i alarmów SOS",
   "background_stop": "Zatrzymaj",
-  "tray_show": "Pokaż MeshCore Open",
+  "tray_show": "Pokaż MeshCore Open SOS Voice",
   "tray_quit": "Zakończ",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -3045,7 +3045,7 @@
     }
   },
   "appSettings_batteryOptimization": "Działanie w tle",
-  "appSettings_batteryOptimizationSubtitle": "Ustaw w ustawieniach baterii aplikacji MeshCore Open opcję „Nie optymalizuj”, aby wiadomości przychodziły w tle",
+  "appSettings_batteryOptimizationSubtitle": "Ustaw w ustawieniach baterii aplikacji MeshCore Open SOS Voice opcję „Nie optymalizuj”, aby wiadomości przychodziły w tle",
   "appSettings_startOnLogin": "Uruchamiaj po zalogowaniu",
   "appSettings_startOnLoginSubtitle": "Otwiera się ukryta w zasobniku i nasłuchuje wiadomości oraz alarmów SOS",
   "contacts_storageFull": "Pamięć kontaktów w węźle jest pełna. Nowe węzły nie mogą być dodane, dopóki nie usuniesz kontaktów.",
@@ -3108,11 +3108,11 @@
   "notification_replyHint": "Wiadomość",
   "notification_you": "Ty",
   "notification_replyFailedTitle": "Odpowiedź nie została wysłana",
-  "notification_replyNotConnected": "Brak połączenia z radiem. Połącz się ponownie w MeshCore Open i wyślij odpowiedź jeszcze raz.",
-  "notification_replyTooLong": "Twoja odpowiedź jest za długa, aby wysłać ją z powiadomienia. Wyślij ją zamiast tego z MeshCore Open.",
+  "notification_replyNotConnected": "Brak połączenia z radiem. Połącz się ponownie w MeshCore Open SOS Voice i wyślij odpowiedź jeszcze raz.",
+  "notification_replyTooLong": "Twoja odpowiedź jest za długa, aby wysłać ją z powiadomienia. Wyślij ją zamiast tego z MeshCore Open SOS Voice.",
   "notification_replyUnavailable": "Tej rozmowy nie ma już na podłączonym radiu.",
-  "notification_replySendFailed": "Twoja odpowiedź mogła nie zostać wysłana. Sprawdź w MeshCore Open i spróbuj ponownie.",
-  "notification_replyAppNotRunning": "MeshCore Open nie jest uruchomiony. Otwórz go i wyślij odpowiedź jeszcze raz.",
+  "notification_replySendFailed": "Twoja odpowiedź mogła nie zostać wysłana. Sprawdź w MeshCore Open SOS Voice i spróbuj ponownie.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS Voice nie jest uruchomiony. Otwórz go i wyślij odpowiedź jeszcze raz.",
   "snrIndicator_nearByRepeatersDescription": "Przekaźniki usłyszane bezpośrednio przez Twoje radio, najpierw te ostatnio usłyszane.",
   "radioStats_sectionSignal": "Sygnał",
   "radioStats_sectionAirtime": "Czas w eterze",
@@ -3464,7 +3464,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Otwórz MeshCore Open, aby wysłać ACK",
+  "sos_notificationOpenToRespond": "Otwórz MeshCore Open SOS Voice, aby wysłać ACK",
   "sos_notificationChannelName": "Alarmy SOS",
   "sos_notificationChannelDescription": "Alarm dla wiadomości SOS od innych węzłów",
   "sos_ackChannelName": "Potwierdzenia SOS",
