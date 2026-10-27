@@ -11,7 +11,7 @@ Map<String, dynamic> _webFile() => {
   'format': 'meshcore-sos-backup',
   'format_version': 1,
   'made': '2026-10-26T07:00:00.000Z',
-  'firmware': 'sos-1.2.4',
+  'firmware': 'v1.18.0',
   'settings': {
     'name': 'MeshCore SOS 845B',
     'radio': {

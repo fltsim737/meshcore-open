@@ -220,7 +220,7 @@ void main() {
   });
 
   group('info line from the MeshCore SOS button', () {
-    // made by the button firmware (examples/sos_button/SosCodec.cpp)
+    // a packet as a MeshCore SOS radio sends it
     final buttonPacket = Uint8List.fromList(
       hex.decode(
         '0101b2a1a0a1a2a3a4a51f4e616e277320706c6163652c203134204c6f6e6720'

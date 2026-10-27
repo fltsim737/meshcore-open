@@ -215,7 +215,7 @@ enum SosPacketKind {
 /// (degrees x 1e6), or for a cancellation `[time u32]`.
 ///
 /// An SOS may carry, after the full key, `[info len][info...]`: a line of
-/// text such as a short address, sent by the MeshCore SOS button firmware.
+/// text such as a short address, sent by a MeshCore SOS radio.
 ///
 /// A locate request is just the header up to the name; a beacon adds
 /// `[seq]`. Builds before 9.5.3 don't know these kinds and ignore them.
