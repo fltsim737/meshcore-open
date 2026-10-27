@@ -7,12 +7,14 @@ Two builds of [MeshCore Open](README.md) that add emergency calling over a MeshC
 | What it adds | Emergency SOS alerts, acknowledgements, emergency networks, and messaging between the sender and responders | Everything in MeshCore Open SOS, plus short voice clips between the sender and responders during a live SOS |
 | Platforms | Android, Linux (AppImage), Windows | Android, Linux (AppImage), Windows |
 | Branch | `feat/emergency-sos` | `feat/sos-voice` (built on `feat/emergency-sos`) |
-| Android package | `com.meshcore.meshcore_open` | `com.meshcore.meshcore_open_voice` |
+| Android package | `com.meshcore.meshcore_open_sos` (from 9.5.8) | `com.meshcore.meshcore_open_voice` |
 | Status | Tested between two radios on Android, Linux and Windows | Tested between two radios on Android and Linux. Windows build is new |
 
 The two apps can be installed side by side, and each keeps its own settings and messages. Only one of them can be connected to a radio at a time.
 
 **Neither build needs a firmware change.** They run on any standard MeshCore companion radio and work alongside people using other MeshCore apps.
+
+**About the MeshCore SOS radio.** The changelog mentions the *MeshCore SOS radio*, a stand-alone SOS radio that sends and understands the same alerts. Its firmware is a separate, proprietary product that is still being tested: it isn't part of this repository, isn't covered by its licence, and isn't publicly released. The apps don't need it.
 
 > **An SOS is best effort.** LoRa delivery is never guaranteed. An acknowledgement means someone received your alert, not that help is on the way. Keep using every other way of calling for help that you have: a PLB, satellite messenger, UHF radio or phone.
 
@@ -30,7 +32,7 @@ The two apps can be installed side by side, and each keeps its own settings and 
 - [Why it should be included, used and developed further](#why-it-should-be-included-used-and-developed-further)
 - [Roadmap and help wanted](#roadmap-and-help-wanted)
 - [Building from source](#building-from-source)
-- [Licences](#licences)
+- [Licences, credits and disclaimer](#licences-credits-and-disclaimer)
 
 ---
 
@@ -258,7 +260,7 @@ What it can't protect against:
 
 **6. Voice is used carefully.** Codec2 at 700 bit/s fits a usable spoken message into a dozen LoRa packets. Limiting voice to a live SOS gives an injured person who can't type a way to be understood, without opening the network to general voice traffic that would swamp it. It is also groundwork: the same chunked-clip transport could later carry voice to a single contact if the community wants that.
 
-**7. It is ready for review.** Both builds pass the project's analyzer and tests (1,003 tests on the voice branch), the strings are translated into all 18 locales, the behaviour is documented, and there are installers for Android, Linux and Windows. The changes are on their own branches and can be reviewed and merged in pieces.
+**7. It is ready for review.** Both builds pass the project's analyzer and tests (over 1,000 tests on each branch), the strings are translated into all 18 locales, the behaviour is documented, and there are installers for Android, Linux and Windows. The changes are on their own branches and can be reviewed and merged in pieces.
 
 **8. Separate builds keep the risk low.** SOS and SOS Voice are separate apps with separate IDs, so voice can be field-tested without risking the stable SOS build that people may already depend on.
 
@@ -308,6 +310,18 @@ SOS Voice builds Codec2 from source as part of the app (`packages/codec2_ffi`), 
 
 ---
 
-## Licences
+## Licences, credits and disclaimer
 
-MeshCore Open is under the MIT licence; see [LICENSE](LICENSE). SOS Voice includes the speech subset of Codec2 1.2.0, which is licensed under the **GNU LGPL 2.1**. Its source, licence and the changes made to it, which replace variable-length arrays so it builds with MSVC, are in [packages/codec2_ffi](packages/codec2_ffi).
+**MeshCore Open** is © 2025 zjs81 and contributors, under the MIT licence: see [LICENSE](LICENSE). MeshCore Open SOS and MeshCore Open SOS Voice build on it.
+
+**The SOS and SOS Voice additions** are © 2026 fltsim737 and released under the same MIT licence.
+
+**Codec2** (SOS Voice only): SOS Voice includes the speech subset of Codec2 1.2.0, © David Rowe and contributors, under the **GNU Lesser General Public License 2.1**. It's built as a separate library that the app loads, and its full source, licence text (`src/codec2/COPYING`) and the changes made to it (variable-length arrays replaced so it builds with MSVC) are in [packages/codec2_ffi](packages/codec2_ffi), and in each release's Windows source zip. You may replace it with your own modified build of Codec2.
+
+**flserial** (USB serial on Windows and Linux), in [third_party/flserial](third_party/flserial), is © 2024 Grzegorz Leśniak, under the MIT licence.
+
+**Other Flutter and Dart packages** used by the apps keep their own licences (mostly BSD, MIT and Apache 2.0). The app lists them all under **Settings → About → View licenses**.
+
+**Not affiliated.** MeshCore Open SOS and SOS Voice are independent community builds. They aren't made, endorsed or supported by the MeshCore project, rippleradios.com or the MeshCore Open maintainers; "MeshCore" is used only to say what they work with. The separate MeshCore SOS radio firmware is proprietary and isn't covered by this repository's licence.
+
+**No warranty.** The apps are provided "as is", without warranty of any kind, as the MIT licence says. They aren't a certified emergency, medical or personal alarm, and an SOS over LoRa is best effort: keep using every other way of calling for help that you have, including 000 and a registered PLB.
