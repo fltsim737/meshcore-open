@@ -3664,7 +3664,7 @@
   "sos_networkStatusInstalling": "Aggiunta del canale a questa radio…",
   "sos_networkStatusNoFreeSlot": "Nessuno slot canale libero su questa radio. Rimuovi un canale per usare la rete.",
   "sos_networkStatusDisconnected": "Collega una radio per configurare il canale",
-  "sos_networkSecurityNote": "Chiunque abbia un codice può inviare avvisi, e un membro con software modificato potrebbe leggerli. Se un codice trapela, configura una nuova rete e condividi nuovi codici.",
+  "sos_networkSecurityNote": "Chiunque abbia un codice può inviare avvisi, veri o no. Solo un codice soccorritore può leggerli, quindi tienilo riservato. Se trapela, crea una nuova rete e condividi nuovi codici.",
   "sosVoice_title": "Voce",
   "sosVoice_qualityLow": "Bassa",
   "sosVoice_qualityClear": "Chiara",

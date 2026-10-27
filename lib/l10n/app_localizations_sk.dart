@@ -6503,7 +6503,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Ktokoľvek s kódom môže posielať poplachy a člen s upraveným softvérom by ich mohol čítať. Ak kód unikne, nastavte novú sieť a zdieľajte nové kódy.';
+      'Ktokoľvek s kódom môže posielať poplachy, skutočné aj nie. Čítať ich môže len kód záchrancu, preto ho držte v tajnosti. Ak unikne, vytvorte novú sieť a rozdajte nové kódy.';
 
   @override
   String get sos_channelNeedsFirmware =>

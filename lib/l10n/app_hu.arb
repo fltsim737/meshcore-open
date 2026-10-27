@@ -3569,7 +3569,7 @@
   "sos_networkStatusInstalling": "Csatorna hozzáadása ehhez a rádióhoz…",
   "sos_networkStatusNoFreeSlot": "Nincs szabad csatornahely ezen a rádión. Törölj egy csatornát a hálózat használatához.",
   "sos_networkStatusDisconnected": "Csatlakoztass rádiót a csatorna beállításához",
-  "sos_networkSecurityNote": "Bárki, akinek van kódja, küldhet riasztást, és egy módosított szoftvert használó tag elolvashatná őket. Ha egy kód kiszivárog, állíts be új hálózatot és oszd meg az új kódokat.",
+  "sos_networkSecurityNote": "Bárki, akinek van kódja, küldhet riasztást, valódit vagy nem. Csak a segítői kód olvashatja őket, ezért tartsa titokban. Ha kiszivárog, hozzon létre új hálózatot, és ossza meg az új kódokat.",
   "sosVoice_title": "Hang",
   "sosVoice_qualityLow": "Alacsony",
   "sosVoice_qualityClear": "Tiszta",

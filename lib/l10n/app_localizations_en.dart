@@ -6434,7 +6434,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Anyone given a code can send alerts, and a member using modified software could read them. If a code leaks, set up a new network and share new codes.';
+      'Anyone given a code can send alerts, real or not. Only a responder code can read them, so keep it private. If a responder code leaks, set up a new network and share new codes.';
 
   @override
   String get sos_channelNeedsFirmware =>

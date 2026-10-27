@@ -3530,7 +3530,7 @@
   "sos_networkStatusInstalling": "A adicionar o canal a este rádio…",
   "sos_networkStatusNoFreeSlot": "Não há espaço de canal livre neste rádio. Remova um canal para usar a rede.",
   "sos_networkStatusDisconnected": "Ligue um rádio para configurar o canal",
-  "sos_networkSecurityNote": "Qualquer pessoa com um código pode enviar alertas, e um membro com software modificado poderia lê-los. Se um código for divulgado, configure uma nova rede e partilhe novos códigos.",
+  "sos_networkSecurityNote": "Qualquer pessoa com um código pode enviar alertas, reais ou não. Só um código de socorrista pode lê-los, por isso mantenha-o privado. Se vazar, crie uma rede nova e partilhe códigos novos.",
   "sosVoice_title": "Voz",
   "sosVoice_qualityLow": "Baixa",
   "sosVoice_qualityClear": "Clara",

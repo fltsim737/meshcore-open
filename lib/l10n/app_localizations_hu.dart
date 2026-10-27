@@ -6516,7 +6516,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Bárki, akinek van kódja, küldhet riasztást, és egy módosított szoftvert használó tag elolvashatná őket. Ha egy kód kiszivárog, állíts be új hálózatot és oszd meg az új kódokat.';
+      'Bárki, akinek van kódja, küldhet riasztást, valódit vagy nem. Csak a segítői kód olvashatja őket, ezért tartsa titokban. Ha kiszivárog, hozzon létre új hálózatot, és ossza meg az új kódokat.';
 
   @override
   String get sos_channelNeedsFirmware =>

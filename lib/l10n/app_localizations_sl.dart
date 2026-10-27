@@ -6506,7 +6506,7 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Kdorkoli s kodo lahko pošilja opozorila, član s spremenjeno programsko opremo pa bi jih lahko bral. Če koda uide, nastavite novo omrežje in delite nove kode.';
+      'Vsakdo s kodo lahko pošilja opozorila, resnična ali ne. Brati jih lahko le koda reševalca, zato jo hranite zasebno. Če uide, ustvarite novo omrežje in razdelite nove kode.';
 
   @override
   String get sos_channelNeedsFirmware =>

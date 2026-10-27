@@ -3431,7 +3431,7 @@
   "sos_networkStatusInstalling": "Kanaal toevoegen aan deze radio…",
   "sos_networkStatusNoFreeSlot": "Geen vrije kanaalplek op deze radio. Verwijder een kanaal om het netwerk te gebruiken.",
   "sos_networkStatusDisconnected": "Verbind een radio om het kanaal in te stellen",
-  "sos_networkSecurityNote": "Iedereen met een code kan meldingen sturen, en een lid met aangepaste software zou ze kunnen lezen. Als een code uitlekt, stel dan een nieuw netwerk in en deel nieuwe codes.",
+  "sos_networkSecurityNote": "Iedereen met een code kan meldingen sturen, echt of niet. Alleen een hulpverlenerscode kan ze lezen, dus houd die privé. Lekt die uit, maak dan een nieuw netwerk en deel nieuwe codes.",
   "sosVoice_title": "Spraak",
   "sosVoice_qualityLow": "Laag",
   "sosVoice_qualityClear": "Helder",

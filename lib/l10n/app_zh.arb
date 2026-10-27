@@ -3535,7 +3535,7 @@
   "sos_networkStatusInstalling": "正在向此电台添加频道…",
   "sos_networkStatusNoFreeSlot": "此电台没有空闲的频道位置。请删除一个频道以使用该网络。",
   "sos_networkStatusDisconnected": "连接电台以设置频道",
-  "sos_networkSecurityNote": "任何持有代码的人都能发送警报，使用修改版软件的成员可能读取警报。如果代码泄露，请设置新网络并分享新代码。",
+  "sos_networkSecurityNote": "任何持有代码的人都可以发送警报，无论真假。只有响应者代码能读取警报，请妥善保密。如果响应者代码泄露，请创建新网络并分享新代码。",
   "sosVoice_title": "语音",
   "sosVoice_qualityLow": "低",
   "sosVoice_qualityClear": "清晰",

@@ -3665,7 +3665,7 @@
   "sos_networkStatusInstalling": "Kanal wird zu diesem Funkgerät hinzugefügt…",
   "sos_networkStatusNoFreeSlot": "Kein freier Kanalplatz auf diesem Funkgerät. Entferne einen Kanal, um das Netz zu nutzen.",
   "sos_networkStatusDisconnected": "Verbinde ein Funkgerät, um den Kanal einzurichten",
-  "sos_networkSecurityNote": "Jeder mit einem Code kann Alarme senden, und ein Mitglied mit veränderter Software könnte sie lesen. Wenn ein Code bekannt wird, richte ein neues Netz ein und teile neue Codes.",
+  "sos_networkSecurityNote": "Wer einen Code hat, kann Alarme senden, echte oder nicht. Nur ein Helfercode kann sie lesen, halte ihn also geheim. Wird ein Helfercode bekannt, richte ein neues Netz ein und gib neue Codes aus.",
   "sosVoice_title": "Sprache",
   "sosVoice_qualityLow": "Niedrig",
   "sosVoice_qualityClear": "Klar",

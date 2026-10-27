@@ -3664,7 +3664,7 @@
   "sos_networkStatusInstalling": "この無線機にチャンネルを追加中…",
   "sos_networkStatusNoFreeSlot": "この無線機に空きチャンネルがありません。ネットワークを使うにはチャンネルを削除してください。",
   "sos_networkStatusDisconnected": "チャンネルを設定するには無線機を接続してください",
-  "sos_networkSecurityNote": "コードを持つ人は誰でも通知を送信でき、改造ソフトを使うメンバーは内容を読める可能性があります。コードが漏れた場合は、新しいネットワークを作成して新しいコードを共有してください。",
+  "sos_networkSecurityNote": "コードを持つ人は誰でも通報を送れます（本物かどうかに関係なく）。通報を読めるのは応答者コードだけなので、非公開にしてください。漏れた場合は新しいネットワークを作り、新しいコードを配ってください。",
   "sosVoice_title": "音声",
   "sosVoice_qualityLow": "低",
   "sosVoice_qualityClear": "クリア",

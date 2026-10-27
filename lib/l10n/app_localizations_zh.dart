@@ -6083,7 +6083,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      '任何持有代码的人都能发送警报，使用修改版软件的成员可能读取警报。如果代码泄露，请设置新网络并分享新代码。';
+      '任何持有代码的人都可以发送警报，无论真假。只有响应者代码能读取警报，请妥善保密。如果响应者代码泄露，请创建新网络并分享新代码。';
 
   @override
   String get sos_channelNeedsFirmware =>

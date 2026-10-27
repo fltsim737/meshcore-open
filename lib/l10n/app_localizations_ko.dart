@@ -6231,7 +6231,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      '코드를 가진 사람은 누구나 경보를 보낼 수 있고, 수정된 소프트웨어를 쓰는 구성원은 내용을 읽을 수도 있습니다. 코드가 유출되면 새 네트워크를 만들고 새 코드를 공유하세요.';
+      '코드를 가진 사람은 누구나 경보를 보낼 수 있습니다(진짜든 아니든). 경보를 읽을 수 있는 것은 응답자 코드뿐이니 비공개로 지키세요. 유출되면 새 네트워크를 만들고 새 코드를 공유하세요.';
 
   @override
   String get sos_channelNeedsFirmware =>
