@@ -377,6 +377,24 @@ class ImageStreamReassembler extends ImageReassembler {
 }
 
 void _registerThirdPartyLicenses() {
+  // Codec2 is built into SOS Voice as a separate library; the LGPL 2.1 asks
+  // for its licence text to go with the app.
+  LicenseRegistry.addLicense(() async* {
+    final lgpl = await rootBundle.loadString(
+      'assets/licenses/codec2-COPYING.txt',
+    );
+    yield LicenseEntryWithLineBreaks(
+      <String>['Codec2'],
+      '''
+Codec2 1.2.0 (speech subset), copyright David Rowe and contributors.
+Licensed under the GNU Lesser General Public License version 2.1.
+Its source, and the changes made to it, are in packages/codec2_ffi in the
+MeshCore Open SOS Voice source (each release's Windows source zip, and the
+feat/sos-voice branch of github.com/fltsim737/meshcore-open).
+
+$lgpl''',
+    );
+  });
   LicenseRegistry.addLicense(() async* {
     yield const LicenseEntryWithLineBreaks(
       <String>['Open-Meteo Elevation API Data'],
