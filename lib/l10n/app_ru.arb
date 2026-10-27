@@ -2787,6 +2787,7 @@
   "sos_networkMemberCodeHelp": "Для тех, кто может отправить SOS, но не должен видеть сигналы.",
   "sos_networkResponderCode": "Код спасателя",
   "sos_networkResponderCodeHelp": "Для тех, кто получает сигналы и может общаться в канале.",
+  "sos_networkOldWarning": "Это сеть старого типа: любой, у кого есть код участника, может читать тревоги с помощью другой программы. Создайте новую сеть и раздайте всем новые коды.",
   "sos_copyCode": "Копировать код",
   "sos_networkCodeCopied": "Код скопирован",
   "sos_networkCodeLabel": "Код сети",

@@ -186,6 +186,20 @@ class _Joined extends StatelessWidget {
             ],
           ),
         ),
+        if (!network.isSealed)
+          MeshCard(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.warning_amber_rounded,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                const SizedBox(width: 12),
+                Expanded(child: Text(l10n.sos_networkOldWarning)),
+              ],
+            ),
+          ),
         if (sos.isCoordinator) ...[
           SectionHeader(l10n.sos_networkCodesTitle),
           _CodeCard(
@@ -193,11 +207,12 @@ class _Joined extends StatelessWidget {
             help: l10n.sos_networkMemberCodeHelp,
             code: network.withRole(SosNetworkRole.member),
           ),
-          _CodeCard(
-            title: l10n.sos_networkResponderCode,
-            help: l10n.sos_networkResponderCodeHelp,
-            code: network.withRole(SosNetworkRole.responder),
-          ),
+          if (network.canMakeRole(SosNetworkRole.responder))
+            _CodeCard(
+              title: l10n.sos_networkResponderCode,
+              help: l10n.sos_networkResponderCodeHelp,
+              code: network.withRole(SosNetworkRole.responder),
+            ),
         ],
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -346,7 +361,7 @@ class _SosNetworkJoinScreenState extends State<SosNetworkJoinScreen> {
               autocorrect: false,
               decoration: InputDecoration(
                 labelText: l10n.sos_networkCodeLabel,
-                hintText: 'SOS1-R-XXXX-XXXX-…',
+                hintText: 'SOS2-R-XXXX-XXXX-…',
                 errorText: _error,
               ),
               onSubmitted: _join,

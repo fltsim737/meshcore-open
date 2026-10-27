@@ -6444,6 +6444,10 @@ class AppLocalizationsSk extends AppLocalizations {
       'Pre ľudí, ktorí dostávajú poplachy a môžu chatovať v kanáli.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Toto je staršia sieť: ktokoľvek s jej kódom člena by mohol čítať poplachy iným softvérom. Vytvorte novú sieť a dajte všetkým jej nové kódy.';
+
+  @override
   String get sos_copyCode => 'Kopírovať kód';
 
   @override

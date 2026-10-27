@@ -3625,6 +3625,7 @@
   "sos_networkMemberCodeHelp": "Für Personen, die ein SOS senden können, aber keine Alarme sehen sollen.",
   "sos_networkResponderCode": "Helfer-Code",
   "sos_networkResponderCodeHelp": "Für Personen, die Alarme erhalten und im Kanal chatten können.",
+  "sos_networkOldWarning": "Dies ist ein älteres Netz: Wer seinen Mitgliedscode hat, könnte Alarme mit anderer Software mitlesen. Richte ein neues Netz ein und gib allen die neuen Codes.",
   "sos_copyCode": "Code kopieren",
   "sos_networkCodeCopied": "Code kopiert",
   "sos_networkCodeLabel": "Netz-Code",

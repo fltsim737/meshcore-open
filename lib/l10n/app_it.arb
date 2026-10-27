@@ -3624,6 +3624,7 @@
   "sos_networkMemberCodeHelp": "Per chi può inviare un SOS ma non deve vedere gli avvisi.",
   "sos_networkResponderCode": "Codice soccorritore",
   "sos_networkResponderCodeHelp": "Per chi riceve gli avvisi e può chattare sul canale.",
+  "sos_networkOldWarning": "Questa è una rete precedente: chiunque abbia il suo codice membro potrebbe leggere gli avvisi con un altro software. Crea una nuova rete e dai a tutti i nuovi codici.",
   "sos_copyCode": "Copia codice",
   "sos_networkCodeCopied": "Codice copiato",
   "sos_networkCodeLabel": "Codice di rete",

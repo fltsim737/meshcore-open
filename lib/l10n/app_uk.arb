@@ -3470,6 +3470,7 @@
   "sos_networkMemberCodeHelp": "Для тих, хто може надіслати SOS, але не має бачити сигнали.",
   "sos_networkResponderCode": "Код рятувальника",
   "sos_networkResponderCodeHelp": "Для тих, хто отримує сигнали й може спілкуватися в каналі.",
+  "sos_networkOldWarning": "Це мережа старого типу: будь-хто з кодом учасника може читати тривоги за допомогою іншої програми. Створіть нову мережу й роздайте всім нові коди.",
   "sos_copyCode": "Копіювати код",
   "sos_networkCodeCopied": "Код скопійовано",
   "sos_networkCodeLabel": "Код мережі",

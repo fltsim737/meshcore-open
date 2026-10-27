@@ -355,7 +355,7 @@ class ConfigBackup {
       await step('Emergency network', () async {
         final appName = app is Map ? app['network_name'] as String? : null;
         await sosService.joinNetwork(
-          SosNetworkCode(role: code.role, key: code.key, name: appName),
+          code.withName(appName),
           coordinator: app is Map && app['coordinator'] == true,
         );
       });

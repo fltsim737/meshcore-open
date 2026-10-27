@@ -3491,6 +3491,7 @@
   "sos_networkMemberCodeHelp": "Pre ľudí, ktorí môžu poslať SOS, ale nemajú vidieť poplachy.",
   "sos_networkResponderCode": "Kód záchranára",
   "sos_networkResponderCodeHelp": "Pre ľudí, ktorí dostávajú poplachy a môžu chatovať v kanáli.",
+  "sos_networkOldWarning": "Toto je staršia sieť: ktokoľvek s jej kódom člena by mohol čítať poplachy iným softvérom. Vytvorte novú sieť a dajte všetkým jej nové kódy.",
   "sos_copyCode": "Kopírovať kód",
   "sos_networkCodeCopied": "Kód skopírovaný",
   "sos_networkCodeLabel": "Kód siete",

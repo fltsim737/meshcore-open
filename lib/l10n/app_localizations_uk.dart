@@ -6485,6 +6485,10 @@ class AppLocalizationsUk extends AppLocalizations {
       'Для тих, хто отримує сигнали й може спілкуватися в каналі.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Це мережа старого типу: будь-хто з кодом учасника може читати тривоги за допомогою іншої програми. Створіть нову мережу й роздайте всім нові коди.';
+
+  @override
   String get sos_copyCode => 'Копіювати код';
 
   @override

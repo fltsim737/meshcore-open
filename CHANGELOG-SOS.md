@@ -2,6 +2,15 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.7.0 (2026-10-27)
+
+### Changed: sealed emergency networks
+
+- **A member code can no longer read alerts.** New networks (codes starting `SOS2-`) are sealed. The responder code holds the network's secret key; the member code holds only its public key. Each SOS gets its own one-off key and is encrypted to the network's public key, so only responders can read it, even with modified software, and a member code can't be turned into a responder code. Acknowledgements, cancellations, Locate and (SOS Voice) voice clips for that SOS are sealed with that SOS's own keys, so members can't read them, and nobody without the keys can fake an acknowledgement or a cancellation. A member code is now safe to post on a repeater for travellers: it lets people send an SOS, not read anyone's.
+- **Older networks** (`SOS1-` codes) still work, so a group can move over at its own pace, but both of their codes hold the same key. **Emergency network** shows a warning on them: set up a new network and hand out the new codes. Everyone on a network needs 9.7.0 or later (or MeshCore SOS radio firmware 1.4.0 or later) to use an `SOS2-` network.
+- The codes are longer (scan the QR code where you can). A coordinator's phone shows the member code and, only while it holds the network secret, the responder code.
+- SOS Voice clips on a sealed network carry a little less audio per packet, so a 20-second clip takes up to 14 packets instead of 12.
+
 ## 9.6.1 (2026-10-27)
 
 ### Changed

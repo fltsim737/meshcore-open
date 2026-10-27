@@ -192,6 +192,10 @@ class IncomingSos {
   /// Other nodes seen acknowledging this SOS.
   final Set<String> ackedBy;
 
+  /// On an SOS2 network: the ref of this SOS's keys, which seal our ACK and
+  /// Locate requests to it.
+  String? sessionRef;
+
   IncomingSos({
     required this.id,
     required this.senderName,
@@ -203,6 +207,7 @@ class IncomingSos {
     this.receivedCount = 1,
     this.ackSent = false,
     this.info,
+    this.sessionRef,
     Set<String>? ackedBy,
   }) : ackedBy = ackedBy ?? {};
 
@@ -226,6 +231,7 @@ class IncomingSos {
     'ack_sent': ackSent,
     'info': info,
     'acked_by': ackedBy.toList(),
+    'session_ref': sessionRef,
   };
 
   factory IncomingSos.fromJson(Map<String, dynamic> json) {
@@ -241,6 +247,7 @@ class IncomingSos {
       receivedCount: json['received_count'] as int? ?? 1,
       ackSent: json['ack_sent'] as bool? ?? false,
       info: json['info'] as String?,
+      sessionRef: json['session_ref'] as String?,
       ackedBy: (json['acked_by'] as List<dynamic>? ?? const [])
           .map((e) => e.toString())
           .toSet(),

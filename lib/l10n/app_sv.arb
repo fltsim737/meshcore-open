@@ -3485,6 +3485,7 @@
   "sos_networkMemberCodeHelp": "För personer som kan skicka SOS men inte ska se larm.",
   "sos_networkResponderCode": "Räddarkod",
   "sos_networkResponderCodeHelp": "För personer som får larm och kan chatta i kanalen.",
+  "sos_networkOldWarning": "Det här är ett äldre nätverk: den som har dess medlemskod kan läsa larm med annan programvara. Skapa ett nytt nätverk och ge alla de nya koderna.",
   "sos_copyCode": "Kopiera kod",
   "sos_networkCodeCopied": "Koden kopierad",
   "sos_networkCodeLabel": "Nätverkskod",

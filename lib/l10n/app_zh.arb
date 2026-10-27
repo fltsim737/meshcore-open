@@ -3495,6 +3495,7 @@
   "sos_networkMemberCodeHelp": "适用于可以发送 SOS 但不应看到警报的人。",
   "sos_networkResponderCode": "救援人员代码",
   "sos_networkResponderCodeHelp": "适用于接收警报并可在频道中聊天的人。",
+  "sos_networkOldWarning": "这是旧版网络：任何持有成员代码的人都可以用其他软件读取警报。请创建一个新网络，并把新代码发给所有人。",
   "sos_copyCode": "复制代码",
   "sos_networkCodeCopied": "已复制代码",
   "sos_networkCodeLabel": "网络代码",

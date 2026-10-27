@@ -10849,6 +10849,12 @@ abstract class AppLocalizations {
   /// **'For people who receive alerts and can chat on the channel.'**
   String get sos_networkResponderCodeHelp;
 
+  /// No description provided for @sos_networkOldWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This is an older network: anyone with its member code could read alerts using other software. Set up a new network and give everyone its new codes.'**
+  String get sos_networkOldWarning;
+
   /// No description provided for @sos_copyCode.
   ///
   /// In en, this message translates to:

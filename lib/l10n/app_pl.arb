@@ -3523,6 +3523,7 @@
   "sos_networkMemberCodeHelp": "Dla osób, które mogą wysłać SOS, ale nie powinny widzieć alarmów.",
   "sos_networkResponderCode": "Kod ratownika",
   "sos_networkResponderCodeHelp": "Dla osób, które otrzymują alarmy i mogą rozmawiać na kanale.",
+  "sos_networkOldWarning": "To starsza sieć: każdy, kto ma jej kod członka, mógłby czytać alarmy za pomocą innego oprogramowania. Utwórz nową sieć i przekaż wszystkim nowe kody.",
   "sos_copyCode": "Kopiuj kod",
   "sos_networkCodeCopied": "Skopiowano kod",
   "sos_networkCodeLabel": "Kod sieci",

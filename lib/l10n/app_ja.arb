@@ -3624,6 +3624,7 @@
   "sos_networkMemberCodeHelp": "SOSを送信できるが通知は見るべきでない人向け。",
   "sos_networkResponderCode": "対応者コード",
   "sos_networkResponderCodeHelp": "通知を受け取り、チャンネルでチャットできる人向け。",
+  "sos_networkOldWarning": "これは旧形式のネットワークです。メンバーコードを持つ人は、別のソフトウェアで通報を読めてしまいます。新しいネットワークを作成し、全員に新しいコードを配ってください。",
   "sos_copyCode": "コードをコピー",
   "sos_networkCodeCopied": "コードをコピーしました",
   "sos_networkCodeLabel": "ネットワークコード",

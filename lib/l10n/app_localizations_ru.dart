@@ -6483,6 +6483,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Для тех, кто получает сигналы и может общаться в канале.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Это сеть старого типа: любой, у кого есть код участника, может читать тревоги с помощью другой программы. Создайте новую сеть и раздайте всем новые коды.';
+
+  @override
   String get sos_copyCode => 'Копировать код';
 
   @override

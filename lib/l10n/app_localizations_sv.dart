@@ -6413,6 +6413,10 @@ class AppLocalizationsSv extends AppLocalizations {
       'För personer som får larm och kan chatta i kanalen.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Det här är ett äldre nätverk: den som har dess medlemskod kan läsa larm med annan programvara. Skapa ett nytt nätverk och ge alla de nya koderna.';
+
+  @override
   String get sos_copyCode => 'Kopiera kod';
 
   @override

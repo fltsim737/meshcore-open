@@ -6494,6 +6494,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Pour les personnes qui reçoivent les alertes et peuvent discuter sur le canal.';
 
   @override
+  String get sos_networkOldWarning =>
+      'Ce réseau est ancien : toute personne ayant son code membre pourrait lire les alertes avec un autre logiciel. Créez un nouveau réseau et donnez à chacun ses nouveaux codes.';
+
+  @override
   String get sos_copyCode => 'Copier le code';
 
   @override

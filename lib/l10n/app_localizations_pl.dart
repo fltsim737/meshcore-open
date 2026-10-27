@@ -6496,6 +6496,10 @@ class AppLocalizationsPl extends AppLocalizations {
       'Dla osób, które otrzymują alarmy i mogą rozmawiać na kanale.';
 
   @override
+  String get sos_networkOldWarning =>
+      'To starsza sieć: każdy, kto ma jej kod członka, mógłby czytać alarmy za pomocą innego oprogramowania. Utwórz nową sieć i przekaż wszystkim nowe kody.';
+
+  @override
   String get sos_copyCode => 'Kopiuj kod';
 
   @override

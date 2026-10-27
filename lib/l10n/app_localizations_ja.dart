@@ -6164,6 +6164,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sos_networkResponderCodeHelp => '通知を受け取り、チャンネルでチャットできる人向け。';
 
   @override
+  String get sos_networkOldWarning =>
+      'これは旧形式のネットワークです。メンバーコードを持つ人は、別のソフトウェアで通報を読めてしまいます。新しいネットワークを作成し、全員に新しいコードを配ってください。';
+
+  @override
   String get sos_copyCode => 'コードをコピー';
 
   @override

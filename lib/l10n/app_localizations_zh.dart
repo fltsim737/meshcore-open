@@ -6027,6 +6027,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_networkResponderCodeHelp => '适用于接收警报并可在频道中聊天的人。';
 
   @override
+  String get sos_networkOldWarning =>
+      '这是旧版网络：任何持有成员代码的人都可以用其他软件读取警报。请创建一个新网络，并把新代码发给所有人。';
+
+  @override
   String get sos_copyCode => '复制代码';
 
   @override

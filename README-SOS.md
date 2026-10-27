@@ -54,10 +54,14 @@ MeshCore already gives communities cheap, solar-powered repeaters and pocket rad
 
 ### The emergency network
 
-A group, such as a farm team, a station, a volunteer brigade or a park crew, shares a private, hidden channel called an **emergency network**. The coordinator creates it once, and the app makes a random key and two codes, each shown as text and as a QR code:
+A group, such as a farm team, a station, a volunteer brigade or a park crew, shares a private, hidden channel called an **emergency network**. The coordinator creates it once, and the app makes the network's keys and two codes, each shown as text and as a QR code:
 
-- A **member code** is for people who may need to *send* an SOS. The channel stays hidden from them.
-- A **responder code** is for people who *receive* alerts. The channel shows in their channel list, and an SOS on it raises the alarm.
+- A **member code** (`SOS2-M-…`) is for people who may need to *send* an SOS. It can send alerts but can't read anyone's, and the channel stays hidden.
+- A **responder code** (`SOS2-R-…`) is for people who *receive* alerts. It holds the network's secret key, which reads them. The channel shows in their channel list, and an SOS on it raises the alarm.
+
+Networks made since 9.7.0 are **sealed**. Each SOS gets its own one-off key and is encrypted to the network's public key, which the member code holds, so only a responder code can read it, even with modified software. Acknowledgements, cancellations, Locate and voice for that SOS are sealed with that SOS's keys, so members can't read them, and nobody without the keys can fake them. A member code can't be turned into a responder code.
+
+Networks made before 9.7.0 (`SOS1-` codes) still work, but both of their codes hold the same key, so anyone with a member code could read alerts with modified software. The app warns about them: set up a new network and hand out the new codes. Everyone on an `SOS2-` network needs 9.7.0 or later.
 
 Repeater operators can also put a member code in the repeater's **owner info**. A traveller who logs in to that repeater as a guest sees **Operator info**, and the app offers to join the area's network. A visitor can join a local emergency network without ever meeting the people who run it.
 
@@ -229,9 +233,10 @@ An SOS carries your position, so the apps keep it out of anything that can be sc
 
 What it can't protect against:
 
-- **Member and responder roles are enforced by the app, not by cryptography.** Both codes hold the same channel key, because a sender needs it to encrypt. Someone with a member code and modified software could read alerts. If a code leaks, set up a new network.
-- **Anyone with a code can send an alert**, and sender names on channels are not verified.
-- Only put a **member** code in repeater owner info, because every guest can read it.
+- **Keep responder codes private.** On a sealed (`SOS2-`) network a responder code reads every alert; a member code reads none. If a responder code leaks, set up a new network.
+- **Anyone with a code can send an alert**, including a fake one, and a sender's name isn't verified. A member code posted on a repeater lets anyone send alerts to that network's responders, so an area network for travellers should be separate from a family's or team's own.
+- **Older (`SOS1-`) networks** hold the same key in both codes, so their members could read alerts with modified software, and fake acknowledgements. Set up a new network.
+- **How it's sealed:** X25519 between each SOS's one-off key and the network key; AES-128-CTR and an 8-byte HMAC-SHA256 tag, inside MeshCore's own channel encryption. Repeaters and radios outside the network see only MeshCore's encrypted channel packets.
 
 ---
 
