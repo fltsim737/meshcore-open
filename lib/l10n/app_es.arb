@@ -3664,7 +3664,7 @@
   "sos_networkStatusInstalling": "Añadiendo el canal a esta radio…",
   "sos_networkStatusNoFreeSlot": "No hay ninguna ranura de canal libre en esta radio. Quita un canal para usar la red.",
   "sos_networkStatusDisconnected": "Conecta una radio para configurar el canal",
-  "sos_networkSecurityNote": "Cualquiera con un código puede enviar alertas, y un miembro con software modificado podría leerlas. Si un código se filtra, configura una red nueva y comparte códigos nuevos.",
+  "sos_networkSecurityNote": "Cualquiera con un código puede enviar alertas, reales o no. Solo un código de respuesta puede leerlas, así que guárdalo en privado. Si se filtra, crea una red nueva y comparte códigos nuevos.",
   "appSettings_autoConnect": "Conectar a la última radio",
   "appSettings_autoConnectSubtitle": "Al iniciar la app, volver a conectar con la última radio usada, por Bluetooth, USB o red",
   "scanner_autoConnecting": "Conectando con {name}…",

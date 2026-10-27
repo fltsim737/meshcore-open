@@ -6556,7 +6556,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Każdy, kto ma kod, może wysyłać alarmy, a członek ze zmodyfikowanym oprogramowaniem mógłby je odczytać. Jeśli kod wycieknie, utwórz nową sieć i udostępnij nowe kody.';
+      'Każdy, kto ma kod, może wysyłać alarmy, prawdziwe lub nie. Tylko kod ratownika pozwala je czytać, więc trzymaj go w tajemnicy. Jeśli wycieknie, utwórz nową sieć i przekaż nowe kody.';
 
   @override
   String get sos_channelNeedsFirmware =>

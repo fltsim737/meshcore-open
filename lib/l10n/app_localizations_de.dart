@@ -6542,7 +6542,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Jeder mit einem Code kann Alarme senden, und ein Mitglied mit veränderter Software könnte sie lesen. Wenn ein Code bekannt wird, richte ein neues Netz ein und teile neue Codes.';
+      'Wer einen Code hat, kann Alarme senden, echte oder nicht. Nur ein Helfercode kann sie lesen, halte ihn also geheim. Wird ein Helfercode bekannt, richte ein neues Netz ein und gib neue Codes aus.';
 
   @override
   String get sos_channelNeedsFirmware =>

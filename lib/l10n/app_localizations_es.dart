@@ -6528,7 +6528,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Cualquiera con un código puede enviar alertas, y un miembro con software modificado podría leerlas. Si un código se filtra, configura una red nueva y comparte códigos nuevos.';
+      'Cualquiera con un código puede enviar alertas, reales o no. Solo un código de respuesta puede leerlas, así que guárdalo en privado. Si se filtra, crea una red nueva y comparte códigos nuevos.';
 
   @override
   String get sos_channelNeedsFirmware =>

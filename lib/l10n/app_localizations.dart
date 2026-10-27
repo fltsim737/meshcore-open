@@ -10948,7 +10948,7 @@ abstract class AppLocalizations {
   /// No description provided for @sos_networkSecurityNote.
   ///
   /// In en, this message translates to:
-  /// **'Anyone given a code can send alerts, and a member using modified software could read them. If a code leaks, set up a new network and share new codes.'**
+  /// **'Anyone given a code can send alerts, real or not. Only a responder code can read them, so keep it private. If a responder code leaks, set up a new network and share new codes.'**
   String get sos_networkSecurityNote;
 
   /// No description provided for @sos_channelNeedsFirmware.

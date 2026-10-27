@@ -6535,7 +6535,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Chiunque abbia un codice può inviare avvisi, e un membro con software modificato potrebbe leggerli. Se un codice trapela, configura una nuova rete e condividi nuovi codici.';
+      'Chiunque abbia un codice può inviare avvisi, veri o no. Solo un codice soccorritore può leggerli, quindi tienilo riservato. Se trapela, crea una nuova rete e condividi nuovi codici.';
 
   @override
   String get sos_channelNeedsFirmware =>

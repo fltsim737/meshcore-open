@@ -6474,7 +6474,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Alla som har en kod kan skicka larm, och en medlem med modifierad programvara skulle kunna läsa dem. Om en kod läcker, skapa ett nytt nätverk och dela nya koder.';
+      'Alla med en kod kan skicka larm, äkta eller inte. Bara en hjälparkod kan läsa dem, så håll den hemlig. Om den läcker, skapa ett nytt nätverk och dela nya koder.';
 
   @override
   String get sos_channelNeedsFirmware =>

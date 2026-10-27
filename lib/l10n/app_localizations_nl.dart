@@ -6491,7 +6491,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'Iedereen met een code kan meldingen sturen, en een lid met aangepaste software zou ze kunnen lezen. Als een code uitlekt, stel dan een nieuw netwerk in en deel nieuwe codes.';
+      'Iedereen met een code kan meldingen sturen, echt of niet. Alleen een hulpverlenerscode kan ze lezen, dus houd die privé. Lekt die uit, maak dan een nieuw netwerk en deel nieuwe codes.';
 
   @override
   String get sos_channelNeedsFirmware =>

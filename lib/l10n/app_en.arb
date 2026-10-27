@@ -3982,7 +3982,7 @@
   "sos_networkStatusInstalling": "Adding the channel to this radio…",
   "sos_networkStatusNoFreeSlot": "No free channel slot on this radio. Remove a channel to use the network.",
   "sos_networkStatusDisconnected": "Connect a radio to set up the channel",
-  "sos_networkSecurityNote": "Anyone given a code can send alerts, and a member using modified software could read them. If a code leaks, set up a new network and share new codes.",
+  "sos_networkSecurityNote": "Anyone given a code can send alerts, real or not. Only a responder code can read them, so keep it private. If a responder code leaks, set up a new network and share new codes.",
   "sos_channelNeedsFirmware": "This radio needs firmware 1.15 or newer for channel alerts. Emergency contacts still get direct messages.",
   "sos_includeFavourites": "Include favourite contacts",
   "sos_includeFavouritesSubtitle": "Also send the SOS by direct message to every favourite",

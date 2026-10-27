@@ -6221,7 +6221,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_networkSecurityNote =>
-      'コードを持つ人は誰でも通知を送信でき、改造ソフトを使うメンバーは内容を読める可能性があります。コードが漏れた場合は、新しいネットワークを作成して新しいコードを共有してください。';
+      'コードを持つ人は誰でも通報を送れます（本物かどうかに関係なく）。通報を読めるのは応答者コードだけなので、非公開にしてください。漏れた場合は新しいネットワークを作り、新しいコードを配ってください。';
 
   @override
   String get sos_channelNeedsFirmware =>
