@@ -2,6 +2,13 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.6.1 (2026-10-27)
+
+### Changed
+
+- **Settings → About** shows the app's own name, and its credits and licence: MeshCore Open © 2025 zjs81 and contributors, the SOS additions © 2026 fltsim737, under the MIT licence; not affiliated with the MeshCore project; provided as is, without warranty, and not a certified emergency alarm. It used to show the original MeshCore Open's name.
+- **SOS Voice:** **Settings → About → View licenses** now includes the full licence text of Codec2 (GNU LGPL 2.1), the voice codec built into SOS Voice.
+
 ## 9.6.0 (2026-10-27)
 
 ### Added

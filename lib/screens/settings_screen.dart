@@ -1282,11 +1282,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final l10n = context.l10n;
     showAboutDialog(
       context: context,
-      applicationName: l10n.appTitle,
+      applicationName: 'MeshCore Open SOS',
       applicationVersion: _appVersion.isEmpty
           ? l10n.common_loading
           : _appVersion,
-      applicationLegalese: l10n.settings_aboutLegalese,
+      // Credits and licence: the same in every language
+      applicationLegalese:
+          'MeshCore Open © 2025 zjs81 and contributors. '
+          'SOS additions © 2026 fltsim737. MIT licence.\n'
+          'Not affiliated with or endorsed by the MeshCore project. '
+          'Provided as is, without warranty; not a certified emergency alarm.',
       children: [
         const SizedBox(height: 16),
         Text(l10n.settings_aboutDescription),
