@@ -1291,7 +1291,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           'MeshCore Open © 2025 zjs81 and contributors. '
           'SOS additions © 2026 fltsim737. MIT licence.\n'
           'Not affiliated with or endorsed by the MeshCore project. '
-          'Provided as is, without warranty; not a certified emergency alarm.',
+          'Provided as is, without warranty: not a certified or monitored '
+          'emergency alarm. An SOS is best effort; don\'t rely on it as your '
+          'only way of calling for help.',
       children: [
         const SizedBox(height: 16),
         Text(l10n.settings_aboutDescription),
