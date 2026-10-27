@@ -324,4 +324,8 @@ SOS Voice builds Codec2 from source as part of the app (`packages/codec2_ffi`), 
 
 **Not affiliated.** MeshCore Open SOS and SOS Voice are independent community builds. They aren't made, endorsed or supported by the MeshCore project, rippleradios.com or the MeshCore Open maintainers; "MeshCore" is used only to say what they work with. The separate MeshCore SOS radio firmware is proprietary and isn't covered by this repository's licence.
 
-**No warranty.** The apps are provided "as is", without warranty of any kind, as the MIT licence says. They aren't a certified emergency, medical or personal alarm, and an SOS over LoRa is best effort: keep using every other way of calling for help that you have, including 000 and a registered PLB.
+**Disclaimer.** The apps are provided "as is", without warranty of any kind, as the MIT licence says; that licence's disclaimer and limitation of liability cover all their authors and copyright holders, zjs81 and contributors and fltsim737 alike. In plain words:
+- they **aren't a certified emergency, medical or personal alarm**, and nobody monitors them;
+- an SOS sent over a LoRa mesh is **best effort**: it can be late or not arrive at all, and an acknowledgement means someone received it, not that help is coming;
+- **don't rely on them as your only way of calling for help**: keep using 000, a registered PLB, a satellite messenger or a phone;
+- to the maximum extent the law allows, the authors aren't liable for any loss, damage, injury or death arising from using them or from them not working. Nothing here excludes rights you have under the Australian Consumer Law, or similar laws, that can't be excluded.
