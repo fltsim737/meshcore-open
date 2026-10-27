@@ -357,6 +357,21 @@ class ImageStreamReassembler extends ImageReassembler {
 }
 
 void _registerThirdPartyLicenses() {
+  // The app's own licence: Flutter lists the packages it uses, not the app
+  // itself, and the MIT licence asks for its notice in every copy.
+  LicenseRegistry.addLicense(() async* {
+    final mit = await rootBundle.loadString(
+      'assets/licenses/meshcore-open-LICENSE.txt',
+    );
+    yield LicenseEntryWithLineBreaks(
+      <String>['MeshCore Open'],
+      '''
+MeshCore Open SOS and MeshCore Open SOS Voice are built on MeshCore Open.
+The SOS additions are copyright (c) 2026 fltsim737, under the same licence.
+
+$mit''',
+    );
+  });
   LicenseRegistry.addLicense(() async* {
     yield const LicenseEntryWithLineBreaks(
       <String>['Open-Meteo Elevation API Data'],

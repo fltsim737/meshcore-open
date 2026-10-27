@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "de",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "Kontakte",
   "nav_channels": "Kanäle",
   "nav_map": "Karte",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open",
+  "scanner_title": "MeshCore Open SOS",
   "scanner_scanning": "Suche nach Geräten...",
   "scanner_connecting": "Verbinde...",
   "scanner_disconnecting": "Trenne...",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "App-Debug-Protokoll",
   "settings_appDebugLogSubtitle": "App-Debug-Nachrichten",
   "settings_about": "Über",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore Open-Source-Projekt",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Ein Open-Source-Flutter-Client für MeshCore LoRa-Meshnetzwerkgeräte.",
   "settings_infoName": "Name",
   "settings_infoId": "ID",
@@ -2522,7 +2522,7 @@
   "background_serviceText": "BLE-Verbindung bleibt aktiv",
   "background_serviceRunningText": "Empfängt Nachrichten und SOS-Alarme",
   "background_stop": "Beenden",
-  "tray_show": "MeshCore Open anzeigen",
+  "tray_show": "MeshCore Open SOS anzeigen",
   "tray_quit": "Beenden",
   "appSettings_translationModelDeleted": "Übersetzungsmodell {name} gelöscht",
   "@appSettings_translationModelDeleted": {
@@ -3147,7 +3147,7 @@
     }
   },
   "appSettings_batteryOptimization": "Hintergrundaktivität",
-  "appSettings_batteryOptimizationSubtitle": "Setzen Sie MeshCore Open in den Akkueinstellungen auf „Nicht optimieren“, damit Nachrichten auch im Hintergrund ankommen",
+  "appSettings_batteryOptimizationSubtitle": "Setzen Sie MeshCore Open SOS in den Akkueinstellungen auf „Nicht optimieren“, damit Nachrichten auch im Hintergrund ankommen",
   "appSettings_startOnLogin": "Beim Anmelden starten",
   "appSettings_startOnLoginSubtitle": "Startet ausgeblendet im Infobereich und empfängt Nachrichten und SOS-Alarme",
   "contacts_storageFull": "Der Kontaktspeicher auf dem Knoten ist voll. Neue Knoten lassen sich erst wieder hinzufügen, wenn Kontakte entfernt wurden.",
@@ -3210,11 +3210,11 @@
   "notification_replyHint": "Nachricht",
   "notification_you": "Du",
   "notification_replyFailedTitle": "Antwort nicht gesendet",
-  "notification_replyNotConnected": "Keine Verbindung zu einem Funkgerät. Stellen Sie die Verbindung in MeshCore Open wieder her und senden Sie Ihre Antwort erneut.",
-  "notification_replyTooLong": "Ihre Antwort ist zu lang, um aus einer Benachrichtigung heraus gesendet zu werden. Senden Sie sie stattdessen aus MeshCore Open.",
+  "notification_replyNotConnected": "Keine Verbindung zu einem Funkgerät. Stellen Sie die Verbindung in MeshCore Open SOS wieder her und senden Sie Ihre Antwort erneut.",
+  "notification_replyTooLong": "Ihre Antwort ist zu lang, um aus einer Benachrichtigung heraus gesendet zu werden. Senden Sie sie stattdessen aus MeshCore Open SOS.",
   "notification_replyUnavailable": "Diese Unterhaltung ist auf dem verbundenen Funkgerät nicht mehr vorhanden.",
-  "notification_replySendFailed": "Ihre Antwort wurde möglicherweise nicht gesendet. Prüfen Sie dies in MeshCore Open und versuchen Sie es erneut.",
-  "notification_replyAppNotRunning": "MeshCore Open wird nicht ausgeführt. Öffnen Sie die App und senden Sie Ihre Antwort erneut.",
+  "notification_replySendFailed": "Ihre Antwort wurde möglicherweise nicht gesendet. Prüfen Sie dies in MeshCore Open SOS und versuchen Sie es erneut.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS wird nicht ausgeführt. Öffnen Sie die App und senden Sie Ihre Antwort erneut.",
   "snrIndicator_nearByRepeatersDescription": "Repeater, die Ihr Funkgerät direkt gehört hat, zuletzt gehört zuerst.",
   "radioStats_sectionSignal": "Signal",
   "radioStats_sectionAirtime": "Sendezeit",
@@ -3566,7 +3566,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "MeshCore Open öffnen, um ACK zu senden",
+  "sos_notificationOpenToRespond": "MeshCore Open SOS öffnen, um ACK zu senden",
   "sos_notificationChannelName": "Notfall-SOS-Alarme",
   "sos_notificationChannelDescription": "Alarm für SOS-Nachrichten anderer Knoten",
   "sos_ackChannelName": "SOS-Bestätigungen",

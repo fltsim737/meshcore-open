@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open';
+  String get appTitle => 'MeshCore Open SOS';
 
   @override
   String get nav_contacts => '联系人';
@@ -265,7 +265,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -675,11 +675,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open v$version';
+    return 'MeshCore Open SOS v$version';
   }
 
   @override
-  String get settings_aboutLegalese => '2026 MeshCore 开源项目';
+  String get settings_aboutLegalese =>
+      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -947,7 +948,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      '在电池设置中将 MeshCore Open 设为“不优化”，这样后台也能继续接收消息';
+      '在电池设置中将 MeshCore Open SOS 设为“不优化”，这样后台也能继续接收消息';
 
   @override
   String get appSettings_startOnLogin => '登录时启动';
@@ -4510,21 +4511,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      '未连接到无线电。请在 MeshCore Open 中重新连接后再次发送回复。';
+      '未连接到无线电。请在 MeshCore Open SOS 中重新连接后再次发送回复。';
 
   @override
   String get notification_replyTooLong =>
-      '回复太长，无法从通知中发送。请改为在 MeshCore Open 中发送。';
+      '回复太长，无法从通知中发送。请改为在 MeshCore Open SOS 中发送。';
 
   @override
   String get notification_replyUnavailable => '此对话已不在所连接的无线电上。';
 
   @override
-  String get notification_replySendFailed => '回复可能未发送。请在 MeshCore Open 中检查后重试。';
+  String get notification_replySendFailed =>
+      '回复可能未发送。请在 MeshCore Open SOS 中检查后重试。';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open 未在运行。请打开它并再次发送回复。';
+      'MeshCore Open SOS 未在运行。请打开它并再次发送回复。';
 
   @override
   String get settings_gpxExportRepeaters => '导出转发节点/房间服务器到 GPX';
@@ -4940,7 +4942,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get background_stop => '停止';
 
   @override
-  String get tray_show => '显示 MeshCore Open';
+  String get tray_show => '显示 MeshCore Open SOS';
 
   @override
   String get tray_quit => '退出';
@@ -6307,7 +6309,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get sos_notificationOpenToRespond => '打开 MeshCore Open 以发送 ACK';
+  String get sos_notificationOpenToRespond => '打开 MeshCore Open SOS 以发送 ACK';
 
   @override
   String get sos_notificationChannelName => '紧急 SOS 警报';

@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "zh",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "联系人",
   "nav_channels": "频道",
   "nav_map": "地图",
@@ -132,7 +132,7 @@
   "settings_appDebugLog": "应用调试日志",
   "settings_appDebugLogSubtitle": "应用调试消息",
   "settings_about": "关于",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -140,7 +140,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore 开源项目",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "一个开源的 Flutter 客户端，用于 MeshCore LoRa 无线网络设备。",
   "settings_infoName": "名称",
   "settings_infoId": "MAC ID",
@@ -2394,7 +2394,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "正在接收消息和 SOS 警报",
   "background_stop": "停止",
-  "tray_show": "显示 MeshCore Open",
+  "tray_show": "显示 MeshCore Open SOS",
   "tray_quit": "退出",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -3017,7 +3017,7 @@
     }
   },
   "appSettings_batteryOptimization": "后台活动",
-  "appSettings_batteryOptimizationSubtitle": "在电池设置中将 MeshCore Open 设为“不优化”，这样后台也能继续接收消息",
+  "appSettings_batteryOptimizationSubtitle": "在电池设置中将 MeshCore Open SOS 设为“不优化”，这样后台也能继续接收消息",
   "appSettings_startOnLogin": "登录时启动",
   "appSettings_startOnLoginSubtitle": "在托盘中隐藏启动，接收消息和 SOS 警报",
   "contacts_storageFull": "节点上的联系人存储已满。在删除联系人之前无法添加新节点。",
@@ -3080,11 +3080,11 @@
   "notification_replyHint": "消息",
   "notification_you": "我",
   "notification_replyFailedTitle": "回复未发送",
-  "notification_replyNotConnected": "未连接到无线电。请在 MeshCore Open 中重新连接后再次发送回复。",
-  "notification_replyTooLong": "回复太长，无法从通知中发送。请改为在 MeshCore Open 中发送。",
+  "notification_replyNotConnected": "未连接到无线电。请在 MeshCore Open SOS 中重新连接后再次发送回复。",
+  "notification_replyTooLong": "回复太长，无法从通知中发送。请改为在 MeshCore Open SOS 中发送。",
   "notification_replyUnavailable": "此对话已不在所连接的无线电上。",
-  "notification_replySendFailed": "回复可能未发送。请在 MeshCore Open 中检查后重试。",
-  "notification_replyAppNotRunning": "MeshCore Open 未在运行。请打开它并再次发送回复。",
+  "notification_replySendFailed": "回复可能未发送。请在 MeshCore Open SOS 中检查后重试。",
+  "notification_replyAppNotRunning": "MeshCore Open SOS 未在运行。请打开它并再次发送回复。",
   "snrIndicator_nearByRepeatersDescription": "你的无线电直接听到的中继器，最近听到的排在前面。",
   "radioStats_sectionSignal": "信号",
   "radioStats_sectionAirtime": "空中时间",
@@ -3436,7 +3436,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "打开 MeshCore Open 以发送 ACK",
+  "sos_notificationOpenToRespond": "打开 MeshCore Open SOS 以发送 ACK",
   "sos_notificationChannelName": "紧急 SOS 警报",
   "sos_notificationChannelDescription": "其他节点 SOS 消息的警报",
   "sos_ackChannelName": "SOS 确认",

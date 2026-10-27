@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "nl",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "Contacten",
   "nav_channels": "Kanalen",
   "nav_map": "Kaart",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open",
+  "scanner_title": "MeshCore Open SOS",
   "scanner_scanning": "Scannen naar apparaten...",
   "scanner_connecting": "Verbinden...",
   "scanner_disconnecting": "Verbinding verbreken...",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Debuglog van de app",
   "settings_appDebugLogSubtitle": "Toepassingsdebugberichten",
   "settings_about": "Over",
-  "settings_aboutVersion": "MeshCore Open versie {version}",
+  "settings_aboutVersion": "MeshCore Open SOS versie {version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore Open Source Project",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Een open-source Flutter client voor MeshCore LoRa mesh netwerkapparaten.",
   "settings_infoName": "Naam",
   "settings_infoId": "ID",
@@ -195,7 +195,7 @@
   "appSettings_messageNotifications": "Berichtnotificaties",
   "appSettings_messageNotificationsSubtitle": "Toon notificatie bij het ontvangen van nieuwe berichten",
   "appSettings_batteryOptimization": "Achtergrondactiviteit",
-  "appSettings_batteryOptimizationSubtitle": "Zet MeshCore Open op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen",
+  "appSettings_batteryOptimizationSubtitle": "Zet MeshCore Open SOS op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen",
   "appSettings_startOnLogin": "Starten bij inloggen",
   "appSettings_startOnLoginSubtitle": "Opent verborgen in het systeemvak en luistert naar berichten en SOS-meldingen",
   "appSettings_channelMessageNotifications": "Kanaalberichtnotificaties",
@@ -2442,7 +2442,7 @@
   "background_serviceText": "BLE-verbinding actief houden",
   "background_serviceRunningText": "Luistert naar berichten en SOS-meldingen",
   "background_stop": "Stoppen",
-  "tray_show": "MeshCore Open tonen",
+  "tray_show": "MeshCore Open SOS tonen",
   "tray_quit": "Afsluiten",
   "appSettings_translationModelDeleted": "{name} verwijderd",
   "@appSettings_translationModelDeleted": {
@@ -3011,11 +3011,11 @@
   "notification_replyHint": "Bericht",
   "notification_you": "Jij",
   "notification_replyFailedTitle": "Antwoord niet verzonden",
-  "notification_replyNotConnected": "Niet verbonden met een radio. Maak opnieuw verbinding in MeshCore Open en verzend je antwoord opnieuw.",
-  "notification_replyTooLong": "Je antwoord is te lang om vanuit een melding te verzenden. Verzend het vanuit MeshCore Open.",
+  "notification_replyNotConnected": "Niet verbonden met een radio. Maak opnieuw verbinding in MeshCore Open SOS en verzend je antwoord opnieuw.",
+  "notification_replyTooLong": "Je antwoord is te lang om vanuit een melding te verzenden. Verzend het vanuit MeshCore Open SOS.",
   "notification_replyUnavailable": "Dit gesprek staat niet meer op de verbonden radio.",
-  "notification_replySendFailed": "Je antwoord is mogelijk niet verzonden. Controleer dit in MeshCore Open en probeer het opnieuw.",
-  "notification_replyAppNotRunning": "MeshCore Open is niet actief. Open de app en verzend je antwoord opnieuw.",
+  "notification_replySendFailed": "Je antwoord is mogelijk niet verzonden. Controleer dit in MeshCore Open SOS en probeer het opnieuw.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS is niet actief. Open de app en verzend je antwoord opnieuw.",
   "reviewMode_dialogTitle": "Beoordelingsmodus starten?",
   "reviewMode_dialogBody": "De beoordelingsmodus maakt verbinding met een gesimuleerde radio met voorbeeldcontacten, kanalen en berichten. Een echte radio is niet nodig.",
   "reviewMode_confirm": "Starten",
@@ -3332,7 +3332,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Open MeshCore Open om ACK te sturen",
+  "sos_notificationOpenToRespond": "Open MeshCore Open SOS om ACK te sturen",
   "sos_notificationChannelName": "Nood-SOS-meldingen",
   "sos_notificationChannelDescription": "Alarm voor SOS-berichten van andere nodes",
   "sos_ackChannelName": "SOS-bevestigingen",

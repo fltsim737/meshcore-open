@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "pt",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "Contactos",
   "nav_channels": "Canais",
   "nav_map": "Mapa",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Log de Depuração do Aplicativo",
   "settings_appDebugLogSubtitle": "Mensagens de depuração do aplicativo",
   "settings_about": "Sobre",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "Projeto MeshCore de Código Aberto 2024",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Um cliente Flutter de código aberto para dispositivos de rede mesh LoRa Core da MeshCore.",
   "settings_infoName": "Nome",
   "settings_infoId": "ID",
@@ -2396,7 +2396,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "A aguardar mensagens e alertas SOS",
   "background_stop": "Parar",
-  "tray_show": "Mostrar MeshCore Open",
+  "tray_show": "Mostrar MeshCore Open SOS",
   "tray_quit": "Sair",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -3012,7 +3012,7 @@
     }
   },
   "appSettings_batteryOptimization": "Atividade em segundo plano",
-  "appSettings_batteryOptimizationSubtitle": "Defina o MeshCore Open como \"Não otimizar\" nas configurações de bateria para que as mensagens continuem a chegar em segundo plano",
+  "appSettings_batteryOptimizationSubtitle": "Defina o MeshCore Open SOS como \"Não otimizar\" nas configurações de bateria para que as mensagens continuem a chegar em segundo plano",
   "appSettings_startOnLogin": "Iniciar ao entrar na sessão",
   "appSettings_startOnLoginSubtitle": "Abre oculta na área de notificação, a aguardar mensagens e alertas SOS",
   "contacts_storageFull": "O armazenamento de contatos no nó está cheio. Não é possível adicionar novos nós até que contatos sejam removidos.",
@@ -3075,11 +3075,11 @@
   "notification_replyHint": "Mensagem",
   "notification_you": "Você",
   "notification_replyFailedTitle": "Resposta não enviada",
-  "notification_replyNotConnected": "Não conectado a um rádio. Reconecte no MeshCore Open e envie a sua resposta novamente.",
-  "notification_replyTooLong": "A sua resposta é demasiado longa para ser enviada a partir de uma notificação. Envie-a pelo MeshCore Open.",
+  "notification_replyNotConnected": "Não conectado a um rádio. Reconecte no MeshCore Open SOS e envie a sua resposta novamente.",
+  "notification_replyTooLong": "A sua resposta é demasiado longa para ser enviada a partir de uma notificação. Envie-a pelo MeshCore Open SOS.",
   "notification_replyUnavailable": "Esta conversa já não está no rádio conectado.",
-  "notification_replySendFailed": "A sua resposta pode não ter sido enviada. Verifique no MeshCore Open e tente novamente.",
-  "notification_replyAppNotRunning": "O MeshCore Open não está em execução. Abra-o e envie a sua resposta novamente.",
+  "notification_replySendFailed": "A sua resposta pode não ter sido enviada. Verifique no MeshCore Open SOS e tente novamente.",
+  "notification_replyAppNotRunning": "O MeshCore Open SOS não está em execução. Abra-o e envie a sua resposta novamente.",
   "snrIndicator_nearByRepeatersDescription": "Repetidores que o seu rádio ouviu diretamente, do mais recente para o mais antigo.",
   "radioStats_sectionSignal": "Sinal",
   "radioStats_sectionAirtime": "Tempo de transmissão",
@@ -3431,7 +3431,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Abra o MeshCore Open para enviar ACK",
+  "sos_notificationOpenToRespond": "Abra o MeshCore Open SOS para enviar ACK",
   "sos_notificationChannelName": "Alertas SOS de emergência",
   "sos_notificationChannelDescription": "Alarme para mensagens SOS de outros nós",
   "sos_ackChannelName": "Confirmações de SOS",

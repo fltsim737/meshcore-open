@@ -1,6 +1,6 @@
 {
   "@@locale": "ja",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "連絡先",
   "nav_channels": "チャンネル",
   "nav_map": "地図",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open",
+  "scanner_title": "MeshCore Open SOS",
   "connectionChoiceUsbLabel": "USB",
   "connectionChoiceBluetoothLabel": "Bluetooth",
   "connectionChoiceTcpLabel": "TCP",
@@ -196,7 +196,7 @@
   "settings_appDebugLog": "アプリのデバッグログ",
   "settings_appDebugLogSubtitle": "アプリケーションのデバッグメッセージ",
   "settings_about": "概要",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -204,7 +204,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore オープンソースプロジェクト",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "MeshCore LoRa メッシュネットワークデバイス向けのオープンソース Flutter クライアント。",
   "settings_aboutOpenMeteoAttribution": "LOS 標高データ：Open-Meteo (CC BY 4.0)",
   "settings_infoName": "名前",
@@ -2528,7 +2528,7 @@
   "background_serviceText": "BLE 接続を維持しています",
   "background_serviceRunningText": "メッセージとSOSアラートを待ち受け中",
   "background_stop": "停止",
-  "tray_show": "MeshCore Open を表示",
+  "tray_show": "MeshCore Open SOS を表示",
   "tray_quit": "終了",
   "appSettings_translationModelDeleted": "{name} を削除しました",
   "@appSettings_translationModelDeleted": {
@@ -3146,7 +3146,7 @@
     }
   },
   "appSettings_batteryOptimization": "バックグラウンド動作",
-  "appSettings_batteryOptimizationSubtitle": "バッテリー設定で MeshCore Open を「最適化しない」に設定すると、バックグラウンドでもメッセージを受信し続けられます",
+  "appSettings_batteryOptimizationSubtitle": "バッテリー設定で MeshCore Open SOS を「最適化しない」に設定すると、バックグラウンドでもメッセージを受信し続けられます",
   "appSettings_startOnLogin": "ログイン時に起動",
   "appSettings_startOnLoginSubtitle": "トレイに隠れた状態で起動し、メッセージとSOSアラートを待ち受けます",
   "contacts_storageFull": "ノードの連絡先ストレージが満杯です。連絡先を削除するまで、新しいノードを追加できません。",
@@ -3209,11 +3209,11 @@
   "notification_replyHint": "メッセージ",
   "notification_you": "自分",
   "notification_replyFailedTitle": "返信を送信できませんでした",
-  "notification_replyNotConnected": "ラジオに接続されていません。MeshCore Open で再接続してから、もう一度返信を送信してください。",
-  "notification_replyTooLong": "返信が長すぎて通知から送信できません。MeshCore Open から送信してください。",
+  "notification_replyNotConnected": "ラジオに接続されていません。MeshCore Open SOS で再接続してから、もう一度返信を送信してください。",
+  "notification_replyTooLong": "返信が長すぎて通知から送信できません。MeshCore Open SOS から送信してください。",
   "notification_replyUnavailable": "この会話は接続中のラジオにありません。",
-  "notification_replySendFailed": "返信が送信されていない可能性があります。MeshCore Open で確認してから再試行してください。",
-  "notification_replyAppNotRunning": "MeshCore Open が起動していません。起動してから、もう一度返信を送信してください。",
+  "notification_replySendFailed": "返信が送信されていない可能性があります。MeshCore Open SOS で確認してから再試行してください。",
+  "notification_replyAppNotRunning": "MeshCore Open SOS が起動していません。起動してから、もう一度返信を送信してください。",
   "snrIndicator_nearByRepeatersDescription": "ラジオが直接受信したリピータ（最近受信した順）",
   "radioStats_sectionSignal": "信号",
   "radioStats_sectionAirtime": "放送時間",
@@ -3565,7 +3565,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "ACKを送るには MeshCore Open を開いてください",
+  "sos_notificationOpenToRespond": "ACKを送るには MeshCore Open SOS を開いてください",
   "sos_notificationChannelName": "緊急SOSアラート",
   "sos_notificationChannelDescription": "他のノードからのSOSメッセージのアラーム",
   "sos_ackChannelName": "SOSの応答",

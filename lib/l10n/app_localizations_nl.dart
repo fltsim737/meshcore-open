@@ -9,7 +9,7 @@ class AppLocalizationsNl extends AppLocalizations {
   AppLocalizationsNl([String locale = 'nl']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open';
+  String get appTitle => 'MeshCore Open SOS';
 
   @override
   String get nav_contacts => 'Contacten';
@@ -177,7 +177,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get common_interval => 'Tijdsinterval';
 
   @override
-  String get scanner_title => 'MeshCore Open';
+  String get scanner_title => 'MeshCore Open SOS';
 
   @override
   String get connectionChoiceUsbLabel => 'USB';
@@ -277,7 +277,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -720,11 +720,12 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open versie $version';
+    return 'MeshCore Open SOS versie $version';
   }
 
   @override
-  String get settings_aboutLegalese => '2026 MeshCore Open Source Project';
+  String get settings_aboutLegalese =>
+      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -1002,7 +1003,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      'Zet MeshCore Open op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen';
+      'Zet MeshCore Open SOS op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen';
 
   @override
   String get appSettings_startOnLogin => 'Starten bij inloggen';
@@ -4831,11 +4832,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      'Niet verbonden met een radio. Maak opnieuw verbinding in MeshCore Open en verzend je antwoord opnieuw.';
+      'Niet verbonden met een radio. Maak opnieuw verbinding in MeshCore Open SOS en verzend je antwoord opnieuw.';
 
   @override
   String get notification_replyTooLong =>
-      'Je antwoord is te lang om vanuit een melding te verzenden. Verzend het vanuit MeshCore Open.';
+      'Je antwoord is te lang om vanuit een melding te verzenden. Verzend het vanuit MeshCore Open SOS.';
 
   @override
   String get notification_replyUnavailable =>
@@ -4843,11 +4844,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get notification_replySendFailed =>
-      'Je antwoord is mogelijk niet verzonden. Controleer dit in MeshCore Open en probeer het opnieuw.';
+      'Je antwoord is mogelijk niet verzonden. Controleer dit in MeshCore Open SOS en probeer het opnieuw.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open is niet actief. Open de app en verzend je antwoord opnieuw.';
+      'MeshCore Open SOS is niet actief. Open de app en verzend je antwoord opnieuw.';
 
   @override
   String get settings_gpxExportRepeaters =>
@@ -5303,7 +5304,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get background_stop => 'Stoppen';
 
   @override
-  String get tray_show => 'MeshCore Open tonen';
+  String get tray_show => 'MeshCore Open SOS tonen';
 
   @override
   String get tray_quit => 'Afsluiten';
@@ -6720,7 +6721,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'Open MeshCore Open om ACK te sturen';
+      'Open MeshCore Open SOS om ACK te sturen';
 
   @override
   String get sos_notificationChannelName => 'Nood-SOS-meldingen';

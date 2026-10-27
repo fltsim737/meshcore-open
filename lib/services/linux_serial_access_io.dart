@@ -16,7 +16,7 @@ class LinuxSerialAccess {
   /// 73-seat-late.rules. ModemManager is kept off the USB-serial chips radios
   /// use, as its probing garbles the first frames. It still sees modems.
   static const String rule = '''
-# Installed by MeshCore Open: lets the person at the desktop use USB serial
+# Installed by MeshCore Open SOS: lets the person at the desktop use USB serial
 # radios, and keeps ModemManager from probing common radio USB chips.
 SUBSYSTEM=="tty", KERNEL=="ttyUSB[0-9]*|ttyACM[0-9]*", TAG+="uaccess"
 SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4|1a86|303a|239a|1915|2886|0403", ENV{ID_MM_DEVICE_IGNORE}="1"

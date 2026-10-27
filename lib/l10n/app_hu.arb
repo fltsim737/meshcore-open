@@ -1,6 +1,6 @@
 {
   "@@locale": "hu",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "Kapcsolatok",
   "nav_channels": "Csatornák",
   "nav_map": "Térkép",
@@ -48,7 +48,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open",
+  "scanner_title": "MeshCore Open SOS",
   "connectionChoiceUsbLabel": "USB",
   "connectionChoiceBluetoothLabel": "Bluetooth",
   "connectionChoiceTcpLabel": "TCP",
@@ -190,7 +190,7 @@
   "settings_appDebugLog": "Alkalmazás hibakeresési naplója",
   "settings_appDebugLogSubtitle": "Alkalmazás hibakeresési üzenetei",
   "settings_about": "Körülbelül",
-  "settings_aboutVersion": "MeshCore Open v{version}",
+  "settings_aboutVersion": "MeshCore Open SOS v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -198,7 +198,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "2026 MeshCore nyílt forráskódú projekt",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Nyílt forráskódú Flutter kliens MeshCore LoRa mesh hálózati eszközökhöz.",
   "settings_aboutOpenMeteoAttribution": "LOS magassági adatok: Open-Meteo (CC BY 4.0)",
   "settings_infoName": "Név",
@@ -2433,7 +2433,7 @@
   "background_serviceText": "A BLE-kapcsolat fenntartása",
   "background_serviceRunningText": "Üzenetek és SOS-riasztások figyelése",
   "background_stop": "Leállítás",
-  "tray_show": "MeshCore Open megjelenítése",
+  "tray_show": "MeshCore Open SOS megjelenítése",
   "tray_quit": "Kilépés",
   "appSettings_translationModelDeleted": "Törölve {name}",
   "@appSettings_translationModelDeleted": {
@@ -3051,7 +3051,7 @@
     }
   },
   "appSettings_batteryOptimization": "Háttérben futó tevékenység",
-  "appSettings_batteryOptimizationSubtitle": "Állítsa be a MeshCore Open alkalmazást az akkumulátorbeállításokban a „Ne optimalizálja” értékre, hogy az üzenetek a háttérben is érkezzenek",
+  "appSettings_batteryOptimizationSubtitle": "Állítsa be a MeshCore Open SOS alkalmazást az akkumulátorbeállításokban a „Ne optimalizálja” értékre, hogy az üzenetek a háttérben is érkezzenek",
   "appSettings_startOnLogin": "Indítás bejelentkezéskor",
   "appSettings_startOnLoginSubtitle": "Rejtve indul a tálcán, és figyeli az üzeneteket és SOS-riasztásokat",
   "contacts_storageFull": "A csomópont névjegytárhelye megtelt. Új csomópontokat nem lehet hozzáadni, amíg nem távolít el névjegyeket.",
@@ -3114,11 +3114,11 @@
   "notification_replyHint": "Üzenet",
   "notification_you": "Ön",
   "notification_replyFailedTitle": "A válasz nem lett elküldve",
-  "notification_replyNotConnected": "Nincs csatlakozás rádióhoz. Csatlakozzon újra a MeshCore Open alkalmazásban, és küldje el a választ újra.",
-  "notification_replyTooLong": "A válasz túl hosszú ahhoz, hogy értesítésből küldhető legyen. Küldje el helyette a MeshCore Open alkalmazásból.",
+  "notification_replyNotConnected": "Nincs csatlakozás rádióhoz. Csatlakozzon újra a MeshCore Open SOS alkalmazásban, és küldje el a választ újra.",
+  "notification_replyTooLong": "A válasz túl hosszú ahhoz, hogy értesítésből küldhető legyen. Küldje el helyette a MeshCore Open SOS alkalmazásból.",
   "notification_replyUnavailable": "Ez a beszélgetés már nincs a csatlakoztatott rádión.",
-  "notification_replySendFailed": "Előfordulhat, hogy a válasz nem ment el. Ellenőrizze a MeshCore Open alkalmazásban, és próbálja újra.",
-  "notification_replyAppNotRunning": "A MeshCore Open nem fut. Nyissa meg, és küldje el a választ újra.",
+  "notification_replySendFailed": "Előfordulhat, hogy a válasz nem ment el. Ellenőrizze a MeshCore Open SOS alkalmazásban, és próbálja újra.",
+  "notification_replyAppNotRunning": "A MeshCore Open SOS nem fut. Nyissa meg, és küldje el a választ újra.",
   "snrIndicator_nearByRepeatersDescription": "Azok az átjátszók, amelyeket a rádió közvetlenül hallott, a legutóbb hallottak elöl.",
   "radioStats_sectionSignal": "Jel",
   "radioStats_sectionAirtime": "Műsoridő",
@@ -3470,7 +3470,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Nyissa meg a MeshCore Opent az ACK küldéséhez",
+  "sos_notificationOpenToRespond": "Nyissa meg a MeshCore Open SOSt az ACK küldéséhez",
   "sos_notificationChannelName": "Vészhelyzeti SOS-riasztások",
   "sos_notificationChannelDescription": "Riasztás más csomópontok SOS-üzeneteihez",
   "sos_ackChannelName": "SOS-visszaigazolások",

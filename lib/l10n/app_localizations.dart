@@ -133,7 +133,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open'**
+  /// **'MeshCore Open SOS'**
   String get appTitle;
 
   /// No description provided for @nav_contacts.
@@ -427,7 +427,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanner_title.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open'**
+  /// **'MeshCore Open SOS'**
   String get scanner_title;
 
   /// No description provided for @connectionChoiceUsbLabel.
@@ -601,7 +601,7 @@ abstract class AppLocalizations {
   /// No description provided for @usbAccessMessage.
   ///
   /// In en, this message translates to:
-  /// **'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.'**
+  /// **'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.'**
   String get usbAccessMessage;
 
   /// No description provided for @usbAccessManual.
@@ -1381,13 +1381,13 @@ abstract class AppLocalizations {
   /// No description provided for @settings_aboutVersion.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open v{version}'**
+  /// **'MeshCore Open SOS v{version}'**
   String settings_aboutVersion(String version);
 
   /// No description provided for @settings_aboutLegalese.
   ///
   /// In en, this message translates to:
-  /// **'2026 MeshCore Open Source Project'**
+  /// **'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.'**
   String get settings_aboutLegalese;
 
   /// No description provided for @settings_aboutDescription.
@@ -1855,7 +1855,7 @@ abstract class AppLocalizations {
   /// No description provided for @appSettings_batteryOptimizationSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Set MeshCore Open to \"Don\'t optimize\" in battery settings so messages keep arriving in the background'**
+  /// **'Set MeshCore Open SOS to \"Don\'t optimize\" in battery settings so messages keep arriving in the background'**
   String get appSettings_batteryOptimizationSubtitle;
 
   /// No description provided for @appSettings_startOnLogin.
@@ -8285,13 +8285,13 @@ abstract class AppLocalizations {
   /// No description provided for @notification_replyNotConnected.
   ///
   /// In en, this message translates to:
-  /// **'Not connected to a radio. Reconnect in MeshCore Open and send your reply again.'**
+  /// **'Not connected to a radio. Reconnect in MeshCore Open SOS and send your reply again.'**
   String get notification_replyNotConnected;
 
   /// No description provided for @notification_replyTooLong.
   ///
   /// In en, this message translates to:
-  /// **'Your reply is too long to send from a notification. Send it from MeshCore Open instead.'**
+  /// **'Your reply is too long to send from a notification. Send it from MeshCore Open SOS instead.'**
   String get notification_replyTooLong;
 
   /// No description provided for @notification_replyUnavailable.
@@ -8303,13 +8303,13 @@ abstract class AppLocalizations {
   /// No description provided for @notification_replySendFailed.
   ///
   /// In en, this message translates to:
-  /// **'Your reply may not have been sent. Check in MeshCore Open and try again.'**
+  /// **'Your reply may not have been sent. Check in MeshCore Open SOS and try again.'**
   String get notification_replySendFailed;
 
   /// No description provided for @notification_replyAppNotRunning.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open isn\'t running. Open it and send your reply again.'**
+  /// **'MeshCore Open SOS isn\'t running. Open it and send your reply again.'**
   String get notification_replyAppNotRunning;
 
   /// No description provided for @settings_gpxExportRepeaters.
@@ -9071,7 +9071,7 @@ abstract class AppLocalizations {
   /// No description provided for @tray_show.
   ///
   /// In en, this message translates to:
-  /// **'Show MeshCore Open'**
+  /// **'Show MeshCore Open SOS'**
   String get tray_show;
 
   /// No description provided for @tray_quit.
@@ -11332,7 +11332,7 @@ abstract class AppLocalizations {
   /// No description provided for @sos_notificationOpenToRespond.
   ///
   /// In en, this message translates to:
-  /// **'Open MeshCore Open to send ACK'**
+  /// **'Open MeshCore Open SOS to send ACK'**
   String get sos_notificationOpenToRespond;
 
   /// No description provided for @sos_notificationChannelName.

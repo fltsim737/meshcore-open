@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "sl",
-  "appTitle": "MeshCore Open",
+  "appTitle": "MeshCore Open SOS",
   "nav_contacts": "Stiki",
   "nav_channels": "Kanali",
   "nav_map": "Karta",
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "Odprtokodni projekt MeshCore 2024",
+  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Odprtokodni Flutter klient za naprave za LoRa omrežje MeshCore.",
   "settings_infoName": "Ime",
   "settings_infoId": "ID",
@@ -2388,7 +2388,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Posluša sporočila in opozorila SOS",
   "background_stop": "Ustavi",
-  "tray_show": "Prikaži MeshCore Open",
+  "tray_show": "Prikaži MeshCore Open SOS",
   "tray_quit": "Izhod",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -3013,7 +3013,7 @@
     }
   },
   "appSettings_batteryOptimization": "Dejavnost v ozadju",
-  "appSettings_batteryOptimizationSubtitle": "V nastavitvah baterije nastavite MeshCore Open na „Ne optimiziraj“, da bodo sporočila še naprej prihajala v ozadju",
+  "appSettings_batteryOptimizationSubtitle": "V nastavitvah baterije nastavite MeshCore Open SOS na „Ne optimiziraj“, da bodo sporočila še naprej prihajala v ozadju",
   "appSettings_startOnLogin": "Zaženi ob prijavi",
   "appSettings_startOnLoginSubtitle": "Odpre se skrita v sistemski vrstici in posluša sporočila ter opozorila SOS",
   "contacts_storageFull": "Pomnilnik stikov v vozlišču je poln. Novih vozlišč ni mogoče dodati, dokler ne odstranite stikov.",
@@ -3076,11 +3076,11 @@
   "notification_replyHint": "Sporočilo",
   "notification_you": "Vi",
   "notification_replyFailedTitle": "Odgovor ni bil poslan",
-  "notification_replyNotConnected": "Ni povezave z radiom. Ponovno se povežite v MeshCore Open in ponovno pošite odgovor.",
-  "notification_replyTooLong": "Vaš odgovor je predolg za pošiljanje iz obvestila. Pošite ga namesto tega iz MeshCore Open.",
+  "notification_replyNotConnected": "Ni povezave z radiom. Ponovno se povežite v MeshCore Open SOS in ponovno pošite odgovor.",
+  "notification_replyTooLong": "Vaš odgovor je predolg za pošiljanje iz obvestila. Pošite ga namesto tega iz MeshCore Open SOS.",
   "notification_replyUnavailable": "Ta pogovor ni več na povezanem radiu.",
-  "notification_replySendFailed": "Vaš odgovor morda ni bil poslan. Preverite v MeshCore Open in poskusite znova.",
-  "notification_replyAppNotRunning": "MeshCore Open ne teče. Odprite ga in ponovno pošite odgovor.",
+  "notification_replySendFailed": "Vaš odgovor morda ni bil poslan. Preverite v MeshCore Open SOS in poskusite znova.",
+  "notification_replyAppNotRunning": "MeshCore Open SOS ne teče. Odprite ga in ponovno pošite odgovor.",
   "snrIndicator_nearByRepeatersDescription": "Ponovitelji, ki jih je vaše radio slišalo neposredno, najprej nazadnje slišani.",
   "radioStats_sectionSignal": "Signal",
   "radioStats_sectionAirtime": "Čas v etru",
@@ -3432,7 +3432,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Odprite MeshCore Open in pošljite ACK",
+  "sos_notificationOpenToRespond": "Odprite MeshCore Open SOS in pošljite ACK",
   "sos_notificationChannelName": "Nujna opozorila SOS",
   "sos_notificationChannelDescription": "Alarm za sporočila SOS drugih vozlišč",
   "sos_ackChannelName": "Potrditve SOS",
