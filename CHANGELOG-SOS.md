@@ -2,6 +2,15 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.8.0 (2026-10-29)
+
+### New: a coordinated search with Locate
+
+- **Searchers can turn the beacons down as they close in.** On the Locate screen, **Beacon power** shows the power the SOS radio's beacons go at and who last set it. Any searcher can choose Full, High (14 dBm), Medium (8), Low (2) or Very low (−9): agree it among yourselves over the radio first. At low power only searchers close by still hear the beacons, which narrows the search. Only the beacons change: the SOS itself, its repeats, ACKs and messages always go at full power, and the beacons go back to full power when the search ends. It needs the sender to be using a MeshCore SOS radio with current firmware; an SOS sent from a phone app keeps its beacons at full power.
+- **Searchers share what they hear.** Every 30 seconds, each searcher's app shares its position and the latest beacon's strength with the other searchers (sealed on SOS2 networks, so only responders can read it).
+- **Search map.** Each searcher's reading is a ring on the map: how far their signal strength puts the radio. Where the rings from two or more places meet, the shaded **search area** is where to look first. It's an estimate, not a pin: terrain, trees and bodies weaken the signal. It gets smaller as more readings come in and the power is turned down.
+- **Find the direction:** a guide to using your own body to block the signal from behind and work out which way to go.
+
 ## 9.7.2 (2026-10-28)
 
 ### Changed: an SOS sounds when it matters

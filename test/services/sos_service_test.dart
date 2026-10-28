@@ -747,6 +747,135 @@ void main() {
         expect(service.locator, isNull);
       },
     );
+
+    Uint8List powerBeacon(
+      int seq,
+      int power, {
+      bool full = false,
+      String by = '',
+    }) => SosPacket(
+      kind: SosPacketKind.beacon,
+      id: 'a1b2',
+      senderPrefix: Uint8List.fromList(List.filled(6, 9)),
+      senderName: 'Ridge',
+      seq: seq,
+      power: power,
+      fullPower: full,
+      setBy: by,
+    ).encode();
+
+    test(
+      'any searcher can set the beacon power; a beacon confirms it',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+        service.startLocating(service.incoming.single);
+        await settle();
+        hear(powerBeacon(0, 22, full: true), signal: direct);
+        expect(service.locator!.beaconPower, 22);
+        expect(service.locator!.beaconFull, isTrue);
+        service.setBeaconPower(2);
+        await settle();
+        final (_, ask) = transport.channelPackets.last;
+        expect(ask.kind, SosPacketKind.locate);
+        expect(ask.power, 2);
+        expect(service.locator!.askedPower, 2); // until a beacon says so
+        hear(powerBeacon(1, 2, by: 'Farmhouse'), signal: direct);
+        expect(service.locator!.askedPower, isNull);
+        expect(service.locator!.setBy, 'Farmhouse');
+        expect(service.locator!.latest!.beaconPower, 2);
+        // back to the radio's own power
+        service.setBeaconPower(null);
+        await settle();
+        expect(transport.channelPackets.last.$2.power, SosPacket.powerFull);
+        service.stopLocating(); // and the resends with it
+      },
+    );
+
+    test('shares a reading with its position, and maps the others', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      service.startLocating(service.incoming.single);
+      await settle();
+      phone.fix = const SosFix(
+        latitude: -41.001,
+        longitude: 174.002,
+        source: SosLocationSource.phoneGps,
+      );
+      await service.shareReading();
+      expect(
+        transport.channelPackets.where(
+          (p) => p.$2.kind == SosPacketKind.report,
+        ),
+        isEmpty,
+      ); // no beacon yet
+      hear(
+        powerBeacon(0, 8),
+        signal: const SosSignal(snrDb: -3.5, direct: true, rssiDbm: -97),
+      );
+      await service.shareReading();
+      final report = transport.channelPackets.last.$2;
+      expect(report.kind, SosPacketKind.report);
+      expect(report.reading!.rssiDbm, -97);
+      expect(report.reading!.beaconPower, 8);
+      expect(report.reading!.latitude, closeTo(-41.001, 1e-6));
+      // another searcher's
+      hear(
+        SosPacket(
+          kind: SosPacketKind.report,
+          id: 'a1b2',
+          senderPrefix: Uint8List.fromList(List.filled(6, 7)),
+          senderName: 'Sam',
+          reading: const SosReading(
+            latitude: -40.998,
+            longitude: 174.0,
+            rssiDbm: -88,
+            snrDb: 2,
+            beaconPower: 8,
+          ),
+        ).encode(),
+      );
+      final searchers = service.locator!.searchers.values.toList();
+      expect(searchers.map((s) => s.name), containsAll(['Farmhouse', 'Sam']));
+      expect(searchers.firstWhere((s) => s.name == 'Farmhouse').mine, isTrue);
+      expect(service.locator!.readings, hasLength(2));
+      expect(
+        service.locator!.estimate(now: now),
+        isNotNull,
+      ); // two places: an area
+      service.stopLocating();
+    });
+
+    test(
+      'a phone app\'s beacons, which don\'t say their power, aren\'t shared',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+        service.startLocating(service.incoming.single);
+        await settle();
+        phone.fix = const SosFix(
+          latitude: -41.001,
+          longitude: 174.002,
+          source: SosLocationSource.phoneGps,
+        );
+        hear(
+          SosPacket(
+            kind: SosPacketKind.beacon,
+            id: 'a1b2',
+            senderPrefix: Uint8List.fromList(List.filled(6, 9)),
+            senderName: 'Ridge',
+            seq: 0,
+          ).encode(),
+          signal: direct,
+        );
+        expect(service.locator!.beaconPower, isNull); // can't be changed
+        await service.shareReading();
+        expect(
+          transport.channelPackets.where(
+            (p) => p.$2.kind == SosPacketKind.report,
+          ),
+          isEmpty,
+        );
+        service.stopLocating();
+      },
+    );
   });
 
   group('receiving', () {

@@ -4298,6 +4298,70 @@
   "sosLocator_warmer": "Warmer: getting closer",
   "sosLocator_colder": "Colder: getting further",
   "sosLocator_steady": "About the same",
+  "sosLocator_powerTitle": "Beacon power",
+  "sosLocator_powerNow": "Beacons at {dbm} dBm",
+  "@sosLocator_powerNow": {
+    "placeholders": {
+      "dbm": {
+        "type": "int"
+      }
+    }
+  },
+  "sosLocator_powerNowFull": "Beacons at full power",
+  "sosLocator_powerSetBy": "set by {name}",
+  "@sosLocator_powerSetBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sosLocator_powerUnknown": "This radio's beacon power can't be changed (an SOS from a phone app, or older firmware).",
+  "sosLocator_powerAsking": "Asking for {step}…",
+  "@sosLocator_powerAsking": {
+    "placeholders": {
+      "step": {
+        "type": "String"
+      }
+    }
+  },
+  "sosLocator_powerFull": "Full",
+  "sosLocator_powerHigh": "High",
+  "sosLocator_powerMedium": "Medium",
+  "sosLocator_powerLow": "Low",
+  "sosLocator_powerVeryLow": "Very low",
+  "sosLocator_powerHelp": "Any searcher can change it: agree it with the others first. Turn it down as you close in, so only searchers near enough still hear the beacons. The SOS itself always goes at full power.",
+  "sosLocator_mapButton": "Search map",
+  "sosLocator_sharing": "{count, plural, =0{Your readings are shared with the other searchers} =1{Readings from 1 searcher} other{Readings from {count} searchers}}",
+  "@sosLocator_sharing": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sosLocator_directionTitle": "Find the direction",
+  "sosLocator_direction": "Hold your radio flat against your chest and turn slowly on the spot, a quarter turn at a time, waiting for a beacon at each. Your body blocks the signal from behind you: where it is weakest, the radio is behind your back. Then walk the other way.",
+  "sosSearchMap_title": "Search map",
+  "sosSearchMap_you": "You",
+  "sosSearchMap_lastPosition": "Last known position",
+  "sosSearchMap_estimate": "Search area about {metres} m across, from {readings} readings at {places} places",
+  "@sosSearchMap_estimate": {
+    "placeholders": {
+      "metres": {
+        "type": "int"
+      },
+      "readings": {
+        "type": "int"
+      },
+      "places": {
+        "type": "int"
+      }
+    }
+  },
+  "sosSearchMap_needMore": "One place gives a ring, not an area: a reading from a second place, or from another searcher, is needed.",
+  "sosSearchMap_noReadings": "No readings yet. Yours are shared every 30 s once a beacon is heard and your phone knows where it is.",
+  "sosSearchMap_explain": "Each ring is how far a searcher's reading puts the radio. It is rough: terrain, trees and bodies weaken the signal. Search where the rings meet, the shaded area first.",
   "sos_alarmSound": "Alarm sound",
   "sos_alarmSoundMorse": "SOS in Morse code",
   "sos_alarmSoundClassic": "Classic alert tone",

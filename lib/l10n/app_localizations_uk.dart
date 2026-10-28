@@ -6993,6 +6993,100 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sosLocator_steady => 'Приблизно так само';
 
   @override
+  String get sosLocator_powerTitle => 'Потужність маяка';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Маяки на $dbm дБм';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Маяки на повній потужності';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'встановив(ла) $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Потужність маяка цієї рації змінити не можна (SOS із застосунку на телефоні або стара прошивка).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Запит: $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Повна';
+
+  @override
+  String get sosLocator_powerHigh => 'Висока';
+
+  @override
+  String get sosLocator_powerMedium => 'Середня';
+
+  @override
+  String get sosLocator_powerLow => 'Низька';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Дуже низька';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Будь-хто з тих, хто шукає, може її змінити: спершу домовтеся з іншими. Зменшуйте її в міру наближення, щоб маяки чули лише ті, хто поруч. Сам SOS завжди йде на повній потужності.';
+
+  @override
+  String get sosLocator_mapButton => 'Мапа пошуку';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Виміри від $count пошуковців',
+      many: 'Виміри від $count пошуковців',
+      few: 'Виміри від $count пошуковців',
+      one: 'Виміри від 1 пошуковця',
+      zero: 'Ваші виміри передаються іншим, хто шукає',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Знайти напрямок';
+
+  @override
+  String get sosLocator_direction =>
+      'Притисніть рацію пласко до грудей і повільно повертайтеся на місці, по чверті оберту, чекаючи на маяк на кожній. Тіло закриває сигнал ззаду: де він найслабший, рація у вас за спиною. Потім ідіть у протилежний бік.';
+
+  @override
+  String get sosSearchMap_title => 'Мапа пошуку';
+
+  @override
+  String get sosSearchMap_you => 'Ви';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Останнє відоме місце';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Район пошуку приблизно $metres м завширшки, за $readings вимірами в $places місцях';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Одне місце дає кільце, а не район: потрібен вимір з другого місця або від іншого пошуковця.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Вимірів поки немає. Ваші передаються кожні 30 с, коли чути маяк і телефон знає своє місцезнаходження.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Кожне кільце показує, на якій відстані вимір пошуковця розміщує рацію. Це приблизно: рельєф, дерева й тіла послаблюють сигнал. Шукайте там, де кільця перетинаються, спершу в затіненому районі.';
+
+  @override
   String get sos_alarmSound => 'Звук тривоги';
 
   @override

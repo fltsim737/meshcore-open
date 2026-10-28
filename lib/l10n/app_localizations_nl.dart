@@ -6942,6 +6942,98 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sosLocator_steady => 'Ongeveer gelijk';
 
   @override
+  String get sosLocator_powerTitle => 'Bakenvermogen';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Bakens op $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Bakens op vol vermogen';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'ingesteld door $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Het bakenvermogen van deze radio kan niet worden gewijzigd (een SOS vanuit een telefoonapp, of oudere firmware).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Vraagt om $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Vol';
+
+  @override
+  String get sosLocator_powerHigh => 'Hoog';
+
+  @override
+  String get sosLocator_powerMedium => 'Middel';
+
+  @override
+  String get sosLocator_powerLow => 'Laag';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Zeer laag';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Elke zoeker kan het wijzigen: spreek het eerst met de anderen af. Zet het lager als je dichterbij komt, zodat alleen zoekers dichtbij de bakens nog horen. De SOS zelf gaat altijd op vol vermogen.';
+
+  @override
+  String get sosLocator_mapButton => 'Zoekkaart';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Metingen van $count zoekers',
+      one: 'Metingen van 1 zoeker',
+      zero: 'Je metingen worden gedeeld met de andere zoekers',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'De richting vinden';
+
+  @override
+  String get sosLocator_direction =>
+      'Houd je radio plat tegen je borst en draai langzaam op de plek, telkens een kwartslag, en wacht bij elke kwartslag op een baken. Je lichaam blokkeert het signaal van achteren: waar het het zwakst is, zit de radio achter je rug. Loop dan de andere kant op.';
+
+  @override
+  String get sosSearchMap_title => 'Zoekkaart';
+
+  @override
+  String get sosSearchMap_you => 'Jij';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Laatst bekende positie';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Zoekgebied ongeveer $metres m breed, uit $readings metingen op $places plekken';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Eén plek geeft een ring, geen gebied: er is een meting nodig vanaf een tweede plek of van een andere zoeker.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Nog geen metingen. De jouwe worden elke 30 s gedeeld zodra een baken te horen is en je telefoon zijn positie weet.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Elke ring geeft aan hoe ver de radio volgens de meting van een zoeker is. Dat is grof: terrein, bomen en lichamen verzwakken het signaal. Zoek waar de ringen elkaar raken, eerst in het gearceerde gebied.';
+
+  @override
   String get sos_alarmSound => 'Alarmgeluid';
 
   @override

@@ -6524,6 +6524,95 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sosLocator_steady => '差不多';
 
   @override
+  String get sosLocator_powerTitle => '信标功率';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return '信标 $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => '信标满功率';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return '由 $name 设置';
+  }
+
+  @override
+  String get sosLocator_powerUnknown => '无法更改此电台的信标功率（来自手机应用的 SOS，或旧版固件）。';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return '正在请求 $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => '满';
+
+  @override
+  String get sosLocator_powerHigh => '高';
+
+  @override
+  String get sosLocator_powerMedium => '中';
+
+  @override
+  String get sosLocator_powerLow => '低';
+
+  @override
+  String get sosLocator_powerVeryLow => '极低';
+
+  @override
+  String get sosLocator_powerHelp =>
+      '任何搜索者都可以更改：请先与其他人商定。接近时调低，让只有足够近的搜索者还能收到信标。SOS 本身始终以满功率发送。';
+
+  @override
+  String get sosLocator_mapButton => '搜索地图';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '来自 $count 名搜索者的读数',
+      zero: '你的读数会与其他搜索者共享',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => '判断方向';
+
+  @override
+  String get sosLocator_direction =>
+      '把电台平贴在胸前，原地慢慢转身，每次转四分之一圈，并在每个方向等待一个信标。身体会挡住来自背后的信号：信号最弱时，电台在你背后。然后朝相反方向走。';
+
+  @override
+  String get sosSearchMap_title => '搜索地图';
+
+  @override
+  String get sosSearchMap_you => '你';
+
+  @override
+  String get sosSearchMap_lastPosition => '最后已知位置';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return '搜索区域直径约 $metres 米，来自 $places 个地点的 $readings 个读数';
+  }
+
+  @override
+  String get sosSearchMap_needMore => '一个地点只能得出一个圆环，而不是区域：需要第二个地点或另一名搜索者的读数。';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      '还没有读数。一旦收到信标且手机知道自己的位置，你的读数会每 30 秒共享一次。';
+
+  @override
+  String get sosSearchMap_explain =>
+      '每个圆环表示根据某位搜索者的读数推算的电台距离。这只是粗略估计：地形、树木和人体都会削弱信号。请在圆环交汇处搜索，先搜索阴影区域。';
+
+  @override
   String get sos_alarmSound => '警报声音';
 
   @override

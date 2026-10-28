@@ -8,8 +8,10 @@ import 'package:provider/provider.dart';
 
 import '../l10n/l10n.dart';
 import '../models/sos_alert.dart';
+import '../helpers/sos_codec.dart';
 import '../services/sos_service.dart';
 import 'map_screen.dart';
+import 'sos_search_map_screen.dart';
 
 /// A responder closing in on the radio that sent an SOS. While this screen is
 /// open the app asks that radio for a beacon every few seconds; beacons go
@@ -110,6 +112,45 @@ class _SosLocatorScreenState extends State<SosLocatorScreen> {
               ),
             ),
           const SizedBox(height: 16),
+          _PowerCard(session: session, service: service),
+          const SizedBox(height: 8),
+          FilledButton.icon(
+            icon: const Icon(Icons.travel_explore),
+            label: Text(l10n.sosLocator_mapButton),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => SosSearchMapScreen(alert: widget.alert),
+              ),
+            ),
+          ),
+          if (session != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(
+                l10n.sosLocator_sharing(session.searchers.length),
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant),
+              ),
+            ),
+          const SizedBox(height: 12),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.sosLocator_directionTitle,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(l10n.sosLocator_direction),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
           Card(
             child: Padding(
               padding: const EdgeInsets.all(14),
@@ -158,6 +199,101 @@ class _SosLocatorScreenState extends State<SosLocatorScreen> {
               style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// The beacons' power: what it is now and who set it, and the steps any
+/// searcher can choose (agreed with the others over the radio).
+class _PowerCard extends StatelessWidget {
+  final SosLocatorSession? session;
+  final SosService service;
+
+  const _PowerCard({required this.session, required this.service});
+
+  /// The steps offered, in dBm (null: the radio's own power).
+  static const List<int?> steps = [null, 14, 8, 2, -9];
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final scheme = Theme.of(context).colorScheme;
+    final s = session;
+    final known = s?.beaconPower != null;
+    final asked = s?.askedPower;
+    String stepLabel(int? dbm) => switch (dbm) {
+      null => l10n.sosLocator_powerFull,
+      14 => l10n.sosLocator_powerHigh,
+      8 => l10n.sosLocator_powerMedium,
+      2 => l10n.sosLocator_powerLow,
+      _ => l10n.sosLocator_powerVeryLow,
+    };
+    int? current;
+    if (s != null && known) current = s.beaconFull ? null : s.beaconPower;
+    final now = s == null || !known
+        ? l10n.sosLocator_powerUnknown
+        : s.beaconFull
+        ? l10n.sosLocator_powerNowFull
+        : l10n.sosLocator_powerNow(s.beaconPower!);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              l10n.sosLocator_powerTitle,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              [
+                now,
+                if (known && s!.setBy.isNotEmpty)
+                  l10n.sosLocator_powerSetBy(s.setBy),
+              ].join(' · '),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: known ? scheme.primary : scheme.onSurfaceVariant,
+              ),
+            ),
+            if (asked != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  l10n.sosLocator_powerAsking(
+                    stepLabel(asked == SosPacket.powerFull ? null : asked),
+                  ),
+                  style: TextStyle(color: scheme.tertiary),
+                ),
+              ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                for (final step in steps)
+                  ChoiceChip(
+                    label: Text(
+                      step == null
+                          ? stepLabel(step)
+                          : '${stepLabel(step)} · $step dBm',
+                    ),
+                    selected: known && current == step,
+                    onSelected: known
+                        ? (_) => service.setBeaconPower(step)
+                        : null,
+                  ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              l10n.sosLocator_powerHelp,
+              style: const TextStyle(fontSize: 13),
+            ),
+          ],
+        ),
       ),
     );
   }

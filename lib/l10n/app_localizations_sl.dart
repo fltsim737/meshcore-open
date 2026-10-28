@@ -6956,6 +6956,100 @@ class AppLocalizationsSl extends AppLocalizations {
   String get sosLocator_steady => 'Približno enako';
 
   @override
+  String get sosLocator_powerTitle => 'Moč svetilnika';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Svetilniki na $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Svetilniki s polno močjo';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'nastavil(a) $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Moči svetilnika tega radia ni mogoče spremeniti (SOS iz aplikacije na telefonu ali starejša programska oprema).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Zahtevam $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Polna';
+
+  @override
+  String get sosLocator_powerHigh => 'Visoka';
+
+  @override
+  String get sosLocator_powerMedium => 'Srednja';
+
+  @override
+  String get sosLocator_powerLow => 'Nizka';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Zelo nizka';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Spremeni jo lahko kdorkoli od iskalcev: najprej se dogovorite z drugimi. Ko se približujete, jo zmanjšujte, da svetilnike slišijo le še iskalci v bližini. Sam SOS gre vedno s polno močjo.';
+
+  @override
+  String get sosLocator_mapButton => 'Iskalni zemljevid';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Meritve $count iskalcev',
+      few: 'Meritve $count iskalcev',
+      two: 'Meritve $count iskalcev',
+      one: 'Meritve 1 iskalca',
+      zero: 'Vaše meritve se delijo z drugimi iskalci',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Najdi smer';
+
+  @override
+  String get sosLocator_direction =>
+      'Radio držite ploščato ob prsih in se počasi obračajte na mestu, vsakič za četrt obrata, ter pri vsakem počakajte na svetilnik. Telo zastira signal od zadaj: kjer je najšibkejši, je radio za vašim hrbtom. Nato pojdite v nasprotno smer.';
+
+  @override
+  String get sosSearchMap_title => 'Iskalni zemljevid';
+
+  @override
+  String get sosSearchMap_you => 'Vi';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Zadnji znani položaj';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Iskalno območje, široko približno $metres m, iz $readings meritev na $places mestih';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'En kraj da obroč, ne območja: potrebna je meritev z drugega kraja ali od drugega iskalca.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Še ni meritev. Vaše se delijo vsakih 30 s, ko se sliši svetilnik in telefon pozna svoj položaj.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Vsak obroč kaže, kako daleč je radio po meritvi enega iskalca. To je grobo: teren, drevesa in telesa slabijo signal. Iščite tam, kjer se obroči srečajo, najprej v osenčenem območju.';
+
+  @override
   String get sos_alarmSound => 'Zvok alarma';
 
   @override

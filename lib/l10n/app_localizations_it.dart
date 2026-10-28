@@ -6986,6 +6986,98 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sosLocator_steady => 'Più o meno uguale';
 
   @override
+  String get sosLocator_powerTitle => 'Potenza del radiofaro';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Radiofari a $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Radiofari a piena potenza';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'impostata da $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'La potenza del radiofaro di questa radio non può essere cambiata (un SOS da un\'app del telefono o firmware vecchio).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Richiesta di $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Piena';
+
+  @override
+  String get sosLocator_powerHigh => 'Alta';
+
+  @override
+  String get sosLocator_powerMedium => 'Media';
+
+  @override
+  String get sosLocator_powerLow => 'Bassa';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Molto bassa';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Qualsiasi soccorritore può cambiarla: mettetevi d\'accordo prima. Abbassatela avvicinandovi, così solo chi è abbastanza vicino sente ancora i radiofari. L\'SOS vero e proprio parte sempre a piena potenza.';
+
+  @override
+  String get sosLocator_mapButton => 'Mappa di ricerca';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Letture da $count soccorritori',
+      one: 'Letture da 1 soccorritore',
+      zero: 'Le tue letture sono condivise con gli altri soccorritori',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Trovare la direzione';
+
+  @override
+  String get sosLocator_direction =>
+      'Tieni la radio piatta contro il petto e gira lentamente su te stesso, un quarto di giro alla volta, aspettando un radiofaro a ogni quarto. Il tuo corpo blocca il segnale da dietro: dove è più debole, la radio è alle tue spalle. Poi cammina nell\'altra direzione.';
+
+  @override
+  String get sosSearchMap_title => 'Mappa di ricerca';
+
+  @override
+  String get sosSearchMap_you => 'Tu';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Ultima posizione nota';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Area di ricerca larga circa $metres m, da $readings letture in $places punti';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Un punto dà un anello, non un\'area: serve una lettura da un secondo punto o da un altro soccorritore.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Ancora nessuna lettura. Le tue vengono condivise ogni 30 s quando si sente un radiofaro e il telefono conosce la sua posizione.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Ogni anello indica a che distanza la lettura di un soccorritore colloca la radio. È approssimativo: terreno, alberi e corpi indeboliscono il segnale. Cerca dove gli anelli si incontrano, prima nell\'area ombreggiata.';
+
+  @override
   String get sos_alarmSound => 'Suono dell\'allarme';
 
   @override

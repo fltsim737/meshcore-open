@@ -7006,6 +7006,100 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sosLocator_steady => 'Mniej więcej tak samo';
 
   @override
+  String get sosLocator_powerTitle => 'Moc beaconu';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Beacony z mocą $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Beacony z pełną mocą';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'ustawił(a) $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Mocy beaconu tego radia nie można zmienić (SOS z aplikacji na telefonie lub starsze oprogramowanie).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Prośba o $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Pełna';
+
+  @override
+  String get sosLocator_powerHigh => 'Wysoka';
+
+  @override
+  String get sosLocator_powerMedium => 'Średnia';
+
+  @override
+  String get sosLocator_powerLow => 'Niska';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Bardzo niska';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Każdy szukający może ją zmienić: najpierw uzgodnijcie to między sobą. Zmniejszajcie ją w miarę zbliżania się, aby beacony słyszeli tylko szukający w pobliżu. Samo SOS zawsze idzie z pełną mocą.';
+
+  @override
+  String get sosLocator_mapButton => 'Mapa poszukiwań';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Odczyty od $count szukających',
+      many: 'Odczyty od $count szukających',
+      few: 'Odczyty od $count szukających',
+      one: 'Odczyty od 1 szukającego',
+      zero: 'Twoje odczyty są udostępniane innym szukającym',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Znajdź kierunek';
+
+  @override
+  String get sosLocator_direction =>
+      'Przyłóż radio płasko do klatki piersiowej i obracaj się powoli w miejscu, o ćwierć obrotu, czekając przy każdym na beacon. Twoje ciało blokuje sygnał z tyłu: tam, gdzie jest najsłabszy, radio jest za twoimi plecami. Potem idź w przeciwną stronę.';
+
+  @override
+  String get sosSearchMap_title => 'Mapa poszukiwań';
+
+  @override
+  String get sosSearchMap_you => 'Ty';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Ostatnia znana pozycja';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Obszar poszukiwań o szerokości około $metres m, z $readings odczytów w $places miejscach';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Jedno miejsce daje pierścień, nie obszar: potrzebny jest odczyt z drugiego miejsca lub od innego szukającego.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Brak odczytów. Twoje są udostępniane co 30 s, gdy słychać beacon, a telefon zna swoją pozycję.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Każdy pierścień pokazuje, jak daleko według odczytu szukającego jest radio. To przybliżenie: teren, drzewa i ciała osłabiają sygnał. Szukaj tam, gdzie pierścienie się przecinają, najpierw w zacieniowanym obszarze.';
+
+  @override
   String get sos_alarmSound => 'Dźwięk alarmu';
 
   @override

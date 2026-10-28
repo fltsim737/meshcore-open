@@ -201,7 +201,11 @@ enum SosPacketKind {
 
   /// Sent zero hop by the SOS sender while someone is locating it: only radios
   /// in direct range hear one, so its signal strength says how near it is.
-  beacon(5);
+  beacon(5),
+
+  /// A searcher sharing what they hear: their own position and the beacon's
+  /// strength there, so every searcher's map can combine them (9.8.0).
+  report(6);
 
   final int code;
   const SosPacketKind(this.code);
@@ -219,12 +223,23 @@ enum SosPacketKind {
 ///
 /// A locate request is just the header up to the name; a beacon adds
 /// `[seq]`. Builds before 9.5.3 don't know these kinds and ignore them.
+///
+/// A coordinated search (9.8.0, MeshCore SOS firmware 1.6.1): a locate
+/// request may add `[power i8]`, the dBm any searcher asks the beacons to go
+/// at ([powerFull]: the radio's own); a beacon then adds `[power i8][flags,
+/// bit 0 full power][set-by len][set-by]`. A [SosPacketKind.report] is the
+/// header plus `[lat i32][lon i32][rssi i8][snr i8, 1/4 dB][beacon power i8]
+/// [age secs u8]`. Older builds skip the bytes they don't know.
 class SosPacket {
   static const int version = 1;
   static const int keyPrefixSize = 6;
   static const int publicKeySize = 32;
   static const int maxNameBytes = 31;
   static const int maxInfoBytes = 32;
+  static const int maxSetByBytes = 16;
+
+  /// In a locate request: back to the radio's own TX power.
+  static const int powerFull = 127;
 
   final SosPacketKind kind;
   final String id;
@@ -245,6 +260,20 @@ class SosPacket {
   /// A beacon's number, counting up from 0; null for other kinds.
   final int? seq;
 
+  /// A locate request: the beacon power asked for (dBm, or [powerFull]); null
+  /// asks for no change. A beacon: the power it was sent at, null when the
+  /// sender doesn't say (a phone app's, or an older radio's).
+  final int? power;
+
+  /// A beacon sent at the radio's own power (nobody has turned it down).
+  final bool fullPower;
+
+  /// A beacon: who last set its power; empty when nobody has.
+  final String setBy;
+
+  /// A [SosPacketKind.report]'s reading.
+  final SosReading? reading;
+
   const SosPacket({
     required this.kind,
     required this.id,
@@ -255,6 +284,10 @@ class SosPacket {
     this.senderKey,
     this.info,
     this.seq,
+    this.power,
+    this.fullPower = false,
+    this.setBy = '',
+    this.reading,
   });
 
   bool get _carriesKey =>
@@ -274,9 +307,34 @@ class SosPacket {
     out
       ..addByte(name.length)
       ..add(name);
-    if (kind == SosPacketKind.locate) return out.toBytes();
+    if (kind == SosPacketKind.locate) {
+      if (power != null) out.addByte(power! & 0xFF);
+      return out.toBytes();
+    }
     if (kind == SosPacketKind.beacon) {
       out.addByte((seq ?? 0) & 0xFF);
+      if (power != null) {
+        var by = utf8.encode(setBy);
+        if (by.length > maxSetByBytes) {
+          by = by.sublist(0, utf8BoundaryLength(by, maxSetByBytes));
+        }
+        out
+          ..addByte(power! & 0xFF)
+          ..addByte(fullPower ? 1 : 0)
+          ..addByte(by.length)
+          ..add(by);
+      }
+      return out.toBytes();
+    }
+    if (kind == SosPacketKind.report) {
+      final r = reading!;
+      out
+        ..add(_i32((r.latitude * 1e6).round()))
+        ..add(_i32((r.longitude * 1e6).round()))
+        ..addByte(r.rssiDbm.clamp(-128, 127) & 0xFF)
+        ..addByte((r.snrDb * 4).round().clamp(-128, 127) & 0xFF)
+        ..addByte(r.beaconPower.clamp(-128, 127) & 0xFF)
+        ..addByte(r.ageSeconds.clamp(0, 255));
       return out.toBytes();
     }
     if (kind == SosPacketKind.ack) {
@@ -327,14 +385,63 @@ class SosPacket {
       );
       offset += nameLength;
       if (kind == SosPacketKind.locate || kind == SosPacketKind.beacon) {
+        if (kind == SosPacketKind.locate) {
+          return SosPacket(
+            kind: kind,
+            id: id,
+            senderPrefix: prefix,
+            senderName: name,
+            power: data.length > offset ? _i8(data[offset]) : null,
+          );
+        }
+        int? seq;
+        int? power;
+        var full = false;
+        var setBy = '';
+        if (data.length > offset) seq = data[offset++];
+        if (data.length >= offset + 2) {
+          power = _i8(data[offset]);
+          full = data[offset + 1] & 1 == 1;
+          offset += 2;
+          if (data.length > offset) {
+            final n = data[offset++];
+            if (n <= maxSetByBytes && data.length >= offset + n) {
+              setBy = utf8.decode(
+                data.sublist(offset, offset + n),
+                allowMalformed: true,
+              );
+            }
+          }
+        }
         return SosPacket(
           kind: kind,
           id: id,
           senderPrefix: prefix,
           senderName: name,
-          seq: kind == SosPacketKind.beacon && data.length > offset
-              ? data[offset]
-              : null,
+          seq: seq,
+          power: power,
+          fullPower: full,
+          setBy: setBy,
+        );
+      }
+      if (kind == SosPacketKind.report) {
+        if (data.length < offset + 12) return null;
+        final lat = _readI32(data, offset) / 1e6;
+        final lon = _readI32(data, offset + 4) / 1e6;
+        if (lat.abs() > 90 || lon.abs() > 180) return null;
+        return SosPacket(
+          kind: kind,
+          id: id,
+          senderPrefix: prefix,
+          senderName: name,
+          reading: SosReading(
+            latitude: lat,
+            longitude: lon,
+            rssiDbm: _i8(data[offset + 8]),
+            snrDb: _i8(data[offset + 9]) / 4,
+            beaconPower: _i8(data[offset + 10]),
+            ageSeconds: data[offset + 11],
+          ),
         );
       }
       if (kind == SosPacketKind.ack) {
@@ -445,6 +552,28 @@ class SosPacket {
     final v = _readU32(d, o);
     return v >= 0x80000000 ? v - 0x100000000 : v;
   }
+
+  static int _i8(int b) => b >= 0x80 ? b - 0x100 : b;
+}
+
+/// What a searcher heard, and where: their own position, the beacon's
+/// strength there, and the power that beacon was sent at.
+class SosReading {
+  final double latitude;
+  final double longitude;
+  final int rssiDbm;
+  final double snrDb;
+  final int beaconPower;
+  final int ageSeconds; // how old the beacon heard was when this was sent
+
+  const SosReading({
+    required this.latitude,
+    required this.longitude,
+    required this.rssiDbm,
+    required this.snrDb,
+    required this.beaconPower,
+    this.ageSeconds = 0,
+  });
 }
 
 /// How a packet was heard: its signal-to-noise ratio, whether it came straight

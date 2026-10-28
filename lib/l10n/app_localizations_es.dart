@@ -6978,6 +6978,98 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sosLocator_steady => 'Más o menos igual';
 
   @override
+  String get sosLocator_powerTitle => 'Potencia de la baliza';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Balizas a $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Balizas a plena potencia';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'ajustada por $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'La potencia de baliza de esta radio no se puede cambiar (un SOS desde una app de teléfono o firmware antiguo).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Pidiendo $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Plena';
+
+  @override
+  String get sosLocator_powerHigh => 'Alta';
+
+  @override
+  String get sosLocator_powerMedium => 'Media';
+
+  @override
+  String get sosLocator_powerLow => 'Baja';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Muy baja';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Cualquier buscador puede cambiarla: acordadlo antes entre todos. Bajadla al acercaros, para que solo la oigan los buscadores cercanos. El SOS en sí siempre sale a plena potencia.';
+
+  @override
+  String get sosLocator_mapButton => 'Mapa de búsqueda';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Lecturas de $count buscadores',
+      one: 'Lecturas de 1 buscador',
+      zero: 'Tus lecturas se comparten con los demás buscadores',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Encontrar la dirección';
+
+  @override
+  String get sosLocator_direction =>
+      'Sujeta la radio plana contra el pecho y gira despacio sobre ti mismo, un cuarto de vuelta cada vez, esperando una baliza en cada uno. Tu cuerpo bloquea la señal que viene de detrás: donde sea más débil, la radio está a tu espalda. Luego camina hacia el otro lado.';
+
+  @override
+  String get sosSearchMap_title => 'Mapa de búsqueda';
+
+  @override
+  String get sosSearchMap_you => 'Tú';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Última posición conocida';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Zona de búsqueda de unos $metres m de ancho, con $readings lecturas en $places lugares';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Un lugar da un anillo, no una zona: hace falta una lectura desde un segundo lugar o de otro buscador.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Aún no hay lecturas. Las tuyas se comparten cada 30 s cuando se oye una baliza y el teléfono sabe dónde está.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Cada anillo indica a qué distancia sitúa la radio la lectura de un buscador. Es aproximado: el terreno, los árboles y los cuerpos debilitan la señal. Busca donde se cruzan los anillos, primero en la zona sombreada.';
+
+  @override
   String get sos_alarmSound => 'Sonido de alarma';
 
   @override

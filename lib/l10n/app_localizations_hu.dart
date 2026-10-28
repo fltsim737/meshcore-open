@@ -6967,6 +6967,98 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sosLocator_steady => 'Nagyjából ugyanaz';
 
   @override
+  String get sosLocator_powerTitle => 'Jeladó teljesítménye';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Jeladók $dbm dBm-en';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Jeladók teljes teljesítményen';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'beállította: $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Ennek a rádiónak a jeladó-teljesítménye nem módosítható (telefonos alkalmazásból küldött SOS vagy régebbi firmware).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return '$step kérése…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Teljes';
+
+  @override
+  String get sosLocator_powerHigh => 'Magas';
+
+  @override
+  String get sosLocator_powerMedium => 'Közepes';
+
+  @override
+  String get sosLocator_powerLow => 'Alacsony';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Nagyon alacsony';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Bármelyik kereső módosíthatja: előbb egyeztessetek. Csökkentsétek, ahogy közelebb értek, hogy csak a közeli keresők hallják a jeladókat. Maga az SOS mindig teljes teljesítménnyel megy.';
+
+  @override
+  String get sosLocator_mapButton => 'Keresési térkép';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kereső mérései',
+      one: '1 kereső mérései',
+      zero: 'A méréseid megosztásra kerülnek a többi keresővel',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Az irány megtalálása';
+
+  @override
+  String get sosLocator_direction =>
+      'Tartsd a rádiót laposan a mellkasodhoz, és fordulj lassan körbe egy helyben, negyed fordulatonként, mindegyiknél várva egy jeladót. A tested hátulról leárnyékolja a jelet: ahol a leggyengébb, ott a rádió a hátad mögött van. Aztán menj az ellenkező irányba.';
+
+  @override
+  String get sosSearchMap_title => 'Keresési térkép';
+
+  @override
+  String get sosSearchMap_you => 'Te';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Utolsó ismert hely';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Kb. $metres m széles keresési terület, $readings mérésből, $places helyről';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Egy hely egy gyűrűt ad, nem területet: egy második helyről vagy egy másik keresőtől származó mérés kell.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Még nincs mérés. A tieid 30 másodpercenként megosztásra kerülnek, ha hallatszik jeladó, és a telefon tudja a helyét.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Minden gyűrű azt mutatja, milyen messze helyezi a rádiót egy kereső mérése. Durva becslés: a terep, a fák és a testek gyengítik a jelet. Ott keress, ahol a gyűrűk találkoznak, először a satírozott területen.';
+
+  @override
   String get sos_alarmSound => 'Riasztási hang';
 
   @override

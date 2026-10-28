@@ -81,7 +81,7 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android the app plays it as alarm audio, so silent and vibrate mode don't mute it: it turns the alarm volume up, takes the sound from other apps (music, videos, a call in Discord), vibrates SOS in Morse and loops until the responder acknowledges or dismisses it, then puts everything back. With **SOS through Do Not Disturb** allowed it also breaks through Do Not Disturb. During a phone call Android only lets it play quietly, so it vibrates and shows full screen as well. **Send ACK** answers on the mesh; **Message** opens a chat with the sender (sending the ACK again first, so their radio knows the responder). On Android the alert wakes the screen and shows over the lock screen. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
 
-**Locate** helps a responder close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and the responder's screen shows how strong each one is and whether they're getting warmer or colder.
+**Locate** helps responders close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and each responder's screen shows how strong each one is and whether they're getting warmer or colder. Several searchers can work together: any of them can turn the beacons' power down as they close in (from a MeshCore SOS radio), so only those near still hear them, and each searcher's app shares its position and what it hears every 30 seconds. The **Search map** shows each reading as a ring, how far that signal puts the radio, and shades the area where the rings agree. It's an estimate to search, not a pin.
 
 Each SOS and ACK carries the sender's public key, so the two phones save each other as contacts automatically. A **Message** button then opens an ordinary direct chat, with no exchange of adverts beforehand.
 
@@ -96,7 +96,7 @@ Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on e
 | Packet | Carried as | Who can read it |
 |---|---|---|
 | SOS, ACK, cancel | Channel data type `0x5053` on the emergency network | MeshCore Open SOS / SOS Voice holders of the network code |
-| Locate request, locator beacon | Channel data type `0x5053`; beacons are sent zero hop | MeshCore Open SOS / SOS Voice holders of the network code |
+| Locate request, locator beacon, searcher's reading | Channel data type `0x5053`; beacons are sent zero hop | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
 | Voice clip | Channel data type `0x5356` (SV) on the emergency network | SOS Voice holders of the network code |
 | SOS DM to emergency contacts | Plain text, under 160 bytes | Any MeshCore app |
 | Repeater owner info | Existing `GET_OWNER_INFO` request (`0x07`) | Any guest of the repeater |
@@ -182,7 +182,7 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 2. Press **Send ACK** so the sender knows they've been heard. Other responders see that you've acknowledged.
 3. Use **Map** or copy the coordinates to navigate.
 4. Press **Message** to chat with the sender directly.
-5. Near the sender but can't find them? Press **Locate** and follow the signal: walk a little, stop, and wait for the next beacon. Stronger means closer.
+5. Near the sender but can't find them? Press **Locate** and follow the signal: walk a little, stop, and wait for the next beacon. Stronger means closer. With other searchers, open **Search map** to see everyone's readings and the area to search, and agree among yourselves when to turn the **Beacon power** down.
 6. **Dismiss** removes it from your phone without replying. A repeat brings it back.
 
 ### 6. Talking (SOS Voice only)
