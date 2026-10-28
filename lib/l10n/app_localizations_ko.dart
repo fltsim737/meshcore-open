@@ -3122,7 +3122,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get repeater_refreshAll => '모두 새로고침';
 
   @override
-  String get repeater_settingsNotLoaded => '이 리피터에서 아직 설정을 불러오지 않았습니다.';
+  String get repeater_settingsNotLoaded =>
+      '전파 사용 시간을 아끼기 위해 요청하기 전까지 이 리피터에서 아무것도 읽지 않습니다. 설정 옆의 ⟳ 을 탭하면 그 설정만 읽습니다.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

@@ -217,12 +217,8 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
     _commandService = RepeaterCommandService(connector);
     _setupMessageListener();
     _loadSettings();
-    // Fetch current values on open instead of showing disabled fields.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      final connector = Provider.of<MeshCoreConnector>(context, listen: false);
-      if (connector.isConnected) _refreshAll();
-    });
+    // Nothing is read from the repeater on open: over several hops twenty
+    // requests congest the mesh and time out. Each setting has its own refresh.
   }
 
   /// Returns true when the radio is connected; otherwise tells the user.
@@ -1419,12 +1415,6 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
                                 child: Text(
                                   context.l10n.repeater_settingsNotLoaded,
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: _isLoading || !connected
-                                    ? null
-                                    : _refreshAll,
-                                child: Text(context.l10n.repeater_refreshAll),
                               ),
                             ],
                           ),

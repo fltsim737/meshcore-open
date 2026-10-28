@@ -3257,7 +3257,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'As configurações ainda não foram carregadas deste repetidor.';
+      'Para poupar tempo de transmissão, nada é lido deste repetidor até que peça. Toque em ⟳ junto a uma configuração para ler apenas essa.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

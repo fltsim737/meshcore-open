@@ -3196,7 +3196,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "INVITADO",
   "repeater_refreshAll": "Actualizar todo",
-  "repeater_settingsNotLoaded": "Los ajustes aún no se han cargado desde este repetidor.",
+  "repeater_settingsNotLoaded": "Para ahorrar tiempo de aire, no se lee nada de este repetidor hasta que lo pidas. Toca ⟳ junto a un ajuste para leer solo ese.",
   "repeater_settingsLoadIncomplete": "Algunos ajustes no se han podido cargar. Usa los botones de actualización para reintentarlo.",
   "contacts_scanQrCode": "Escanear un Código QR",
   "contacts_scanQrInstructions": "Apunta la cámara a un código QR de contacto de MeshCore",

@@ -3208,7 +3208,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Settings haven\'t been loaded from this repeater yet.';
+      'Nothing is read from this repeater until you ask, to save air time. Tap ⟳ next to a setting to read just that one.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

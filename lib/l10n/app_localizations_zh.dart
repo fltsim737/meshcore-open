@@ -3077,7 +3077,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get repeater_refreshAll => '全部刷新';
 
   @override
-  String get repeater_settingsNotLoaded => '尚未从此中继器加载设置。';
+  String get repeater_settingsNotLoaded =>
+      '为节省空中时间，在您请求之前不会从此中继器读取任何内容。点按设置旁的 ⟳ 只读取该项。';
 
   @override
   String get repeater_settingsLoadIncomplete => '部分设置无法加载。请使用刷新按钮重试。';

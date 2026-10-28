@@ -1776,7 +1776,7 @@
   "repeater_refreshGuestAccess": "Refresh Guest Access",
   "repeater_refreshPrivacyMode": "Refresh Privacy Mode",
   "repeater_refreshAll": "Refresh all",
-  "repeater_settingsNotLoaded": "Settings haven't been loaded from this repeater yet.",
+  "repeater_settingsNotLoaded": "Nothing is read from this repeater until you ask, to save air time. Tap ⟳ next to a setting to read just that one.",
   "repeater_settingsLoadIncomplete": "Some settings could not be loaded. Use the refresh buttons to retry.",
   "repeater_refreshed": "{label} refreshed",
   "@repeater_refreshed": {

@@ -3196,7 +3196,7 @@
   "repeater_roleAdmin": "관리자",
   "repeater_roleGuest": "게스트",
   "repeater_refreshAll": "모두 새로고침",
-  "repeater_settingsNotLoaded": "이 리피터에서 아직 설정을 불러오지 않았습니다.",
+  "repeater_settingsNotLoaded": "전파 사용 시간을 아끼기 위해 요청하기 전까지 이 리피터에서 아무것도 읽지 않습니다. 설정 옆의 ⟳ 을 탭하면 그 설정만 읽습니다.",
   "repeater_settingsLoadIncomplete": "일부 설정을 불러오지 못했습니다. 새로고침 버튼을 사용해 다시 시도하세요.",
   "contacts_scanQrCode": "QR 코드 스캔",
   "contacts_scanQrInstructions": "카메라를 MeshCore 연락처 QR 코드에 비추세요",

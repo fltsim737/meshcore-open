@@ -3261,7 +3261,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Настройки ещё не загружены с этого ретранслятора.';
+      'Чтобы экономить эфирное время, с этого ретранслятора ничего не считывается, пока вы не попросите. Нажмите ⟳ рядом с настройкой, чтобы считать только её.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

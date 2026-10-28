@@ -3067,7 +3067,7 @@
   "repeater_roleAdmin": "管理员",
   "repeater_roleGuest": "访客",
   "repeater_refreshAll": "全部刷新",
-  "repeater_settingsNotLoaded": "尚未从此中继器加载设置。",
+  "repeater_settingsNotLoaded": "为节省空中时间，在您请求之前不会从此中继器读取任何内容。点按设置旁的 ⟳ 只读取该项。",
   "repeater_settingsLoadIncomplete": "部分设置无法加载。请使用刷新按钮重试。",
   "contacts_scanQrCode": "扫描二维码",
   "contacts_scanQrInstructions": "将摄像头对准 MeshCore 联系人二维码",

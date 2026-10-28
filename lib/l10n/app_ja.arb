@@ -3196,7 +3196,7 @@
   "repeater_roleAdmin": "管理者",
   "repeater_roleGuest": "ゲスト",
   "repeater_refreshAll": "すべて更新",
-  "repeater_settingsNotLoaded": "このリピータからまだ設定を読み込んでいません。",
+  "repeater_settingsNotLoaded": "通信時間を節約するため、要求するまでこのリピータからは何も読み込みません。読み込みたい設定の横にある ⟳ をタップすると、その設定だけを読み込みます。",
   "repeater_settingsLoadIncomplete": "一部の設定を読み込めませんでした。更新ボタンから再試行してください。",
   "contacts_scanQrCode": "QRコードをスキャン",
   "contacts_scanQrInstructions": "カメラを MeshCore の連絡先 QR コードに向けてください",

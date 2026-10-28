@@ -3201,7 +3201,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "OSPITE",
   "repeater_refreshAll": "Aggiorna tutto",
-  "repeater_settingsNotLoaded": "Le impostazioni non sono ancora state caricate da questo ripetitore.",
+  "repeater_settingsNotLoaded": "Per risparmiare tempo di trasmissione, nulla viene letto da questo ripetitore finché non lo chiedi. Tocca ⟳ accanto a un'impostazione per leggere solo quella.",
   "repeater_settingsLoadIncomplete": "Alcune impostazioni non sono state caricate. Usa i pulsanti di aggiornamento per riprovare.",
   "notification_actionReply": "Rispondi",
   "notification_actionMarkRead": "Segna come letto",

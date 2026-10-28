@@ -3062,7 +3062,7 @@
   "repeater_roleAdmin": "Администратор",
   "repeater_roleGuest": "Гост",
   "repeater_refreshAll": "Обнови всички",
-  "repeater_settingsNotLoaded": "Настройките още не са заредени от този повторител.",
+  "repeater_settingsNotLoaded": "За да се пести ефирно време, нищо не се чете от този повторител, докато не поискате. Докоснете ⟳ до настройка, за да прочетете само нея.",
   "repeater_settingsLoadIncomplete": "Някои настройки не можаха да бъдат заредени. Използвайте бутоните за опресняване, за да опитате отново.",
   "contacts_scanQrCode": "Сканиране на QR код",
   "contacts_scanQrInstructions": "Насочете камерата към QR код на контакт в MeshCore",

@@ -3063,7 +3063,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "GOST",
   "repeater_refreshAll": "Osveži vse",
-  "repeater_settingsNotLoaded": "Nastavitve še niso naložene s tega ponovitelja.",
+  "repeater_settingsNotLoaded": "Da prihranimo čas oddajanja, s tega ponovitelja ni nič prebrano, dokler tega ne zahtevate. Tapnite ⟳ ob nastavitvi, da preberete samo njo.",
   "repeater_settingsLoadIncomplete": "Nekaterih nastavitev ni bilo mogoče naložiti. Za poskus uporabite gumbe za osvežitev.",
   "contacts_scanQrCode": "Skeniraj QR kodo",
   "contacts_scanQrInstructions": "Usmerite kamero na QR kodo stika MeshCore",

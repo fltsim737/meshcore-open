@@ -2,6 +2,12 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.7.1 (2026-10-28)
+
+### Changed: repeater settings save air time
+
+- **Opening a repeater's Settings no longer reads every setting.** Logging in as admin and opening **Settings** used to send about 20 requests to the repeater straight away, one after another. Over several hops that congested the mesh and the reads failed. Now nothing is read until you ask: tap **⟳** next to the setting you want to see or change, and only that one is read. Each field stays greyed out until it has been read. The **⟳** at the top of the screen still reads everything, when you tap it.
+
 ## 9.7.0 (2026-10-27)
 
 ### Changed: sealed emergency networks

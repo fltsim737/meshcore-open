@@ -2359,7 +2359,7 @@
   "repeater_roleAdmin": "Админ",
   "repeater_roleGuest": "Гость",
   "repeater_refreshAll": "Обновить все",
-  "repeater_settingsNotLoaded": "Настройки ещё не загружены с этого ретранслятора.",
+  "repeater_settingsNotLoaded": "Чтобы экономить эфирное время, с этого ретранслятора ничего не считывается, пока вы не попросите. Нажмите ⟳ рядом с настройкой, чтобы считать только её.",
   "repeater_settingsLoadIncomplete": "Некоторые настройки не удалось загрузить. Используйте кнопки обновления, чтобы повторить попытку.",
   "contacts_scanQrCode": "Сканировать QR-код",
   "contacts_scanQrInstructions": "Наведите камеру на QR-код контакта MeshCore",

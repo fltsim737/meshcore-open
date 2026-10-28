@@ -3062,7 +3062,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "CONVIDADO",
   "repeater_refreshAll": "Atualizar tudo",
-  "repeater_settingsNotLoaded": "As configurações ainda não foram carregadas deste repetidor.",
+  "repeater_settingsNotLoaded": "Para poupar tempo de transmissão, nada é lido deste repetidor até que peça. Toque em ⟳ junto a uma configuração para ler apenas essa.",
   "repeater_settingsLoadIncomplete": "Algumas configurações não puderam ser carregadas. Use os botões de atualização para tentar novamente.",
   "contacts_scanQrCode": "Digitalizar um Código QR",
   "contacts_scanQrInstructions": "Aponte a câmera para um código QR de contato do MeshCore",

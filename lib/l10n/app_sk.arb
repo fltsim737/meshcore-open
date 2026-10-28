@@ -3063,7 +3063,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "HOSŤ",
   "repeater_refreshAll": "Obnoviť všetko",
-  "repeater_settingsNotLoaded": "Nastavenia zatiaľ neboli načítané z tohto opakovača.",
+  "repeater_settingsNotLoaded": "Aby sa šetril vysielací čas, z tohto opakovača sa nič nenačíta, kým o to nepožiadate. Ťuknite na ⟳ pri nastavení a načíta sa len to.",
   "repeater_settingsLoadIncomplete": "Niektoré nastavenia sa nepodarilo načítať. Na opakovanie použite tlačidlá obnovenia.",
   "contacts_scanQrCode": "Skenovať QR kód",
   "contacts_scanQrInstructions": "Namerte kameru na QR kód kontaktu MeshCore",

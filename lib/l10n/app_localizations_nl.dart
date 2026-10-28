@@ -3237,7 +3237,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'De instellingen van deze repeater zijn nog niet geladen.';
+      'Om zendtijd te besparen wordt niets van deze repeater gelezen totdat je erom vraagt. Tik op ⟳ naast een instelling om alleen die te lezen.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

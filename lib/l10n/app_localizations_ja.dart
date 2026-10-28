@@ -3113,7 +3113,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get repeater_refreshAll => 'すべて更新';
 
   @override
-  String get repeater_settingsNotLoaded => 'このリピータからまだ設定を読み込んでいません。';
+  String get repeater_settingsNotLoaded =>
+      '通信時間を節約するため、要求するまでこのリピータからは何も読み込みません。読み込みたい設定の横にある ⟳ をタップすると、その設定だけを読み込みます。';
 
   @override
   String get repeater_settingsLoadIncomplete =>

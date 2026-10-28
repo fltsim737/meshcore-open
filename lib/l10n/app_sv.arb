@@ -3057,7 +3057,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "GÄST",
   "repeater_refreshAll": "Uppdatera alla",
-  "repeater_settingsNotLoaded": "Inställningarna har ännu inte hämtats från den här repeatern.",
+  "repeater_settingsNotLoaded": "För att spara sändningstid hämtas inget från den här repeatern förrän du ber om det. Tryck på ⟳ bredvid en inställning för att hämta bara den.",
   "repeater_settingsLoadIncomplete": "Vissa inställningar kunde inte hämtas. Använd uppdateringsknapparna för att försöka igen.",
   "contacts_scanQrCode": "Skanna QR-kod",
   "contacts_scanQrInstructions": "Rikta kameran mot en QR-kod för en MeshCore-kontakt",
