@@ -22,6 +22,7 @@ class MainActivity : FlutterActivity() {
         val engine = FlutterEngine(appContext)
         MeshcoreUsbFunctions(appContext).configureFlutterEngine(engine)
         SosScreenFunctions(appContext).configureFlutterEngine(engine)
+        SosAlarmFunctions(appContext).configureFlutterEngine(engine)
         engine.dartExecutor.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
         FlutterEngineCache.getInstance().put(ENGINE_ID, engine)
         return engine

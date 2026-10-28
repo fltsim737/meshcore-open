@@ -3131,7 +3131,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Visa ett kanalmeddelandes region på samma rad som dess hoppantal i stället för under det.",
   "channels_regionRadioDefaultSuffix": "(radions standard)",
   "channels_regionRadioDefaultApplies": "Den här radion skickar floods utan region i sin standardregion: {region}.",
-  "chat_futureTimestampWarning": "Det här meddelandets tid ligger i framtiden, så avsändarens klocka kan vara fel. Det visas i den ordning det kom in.",
+  "chat_futureTimestampWarning": "Avsändarens klocka verkar gå fel, så här visas när meddelandet kom fram.",
   "discoveredContacts_scan": "Sök efter noder i närheten",
   "discoveredContacts_scanTitle": "Noder i närheten",
   "discoveredContacts_scanExplanation": "Ber noder inom direkt radioräckvidd att identifiera sig. Repeatrar och sensorer svarar. Rumsservrar och companions gör det oftast inte.",
@@ -3607,5 +3607,8 @@
   "sos_fullScreenLockedOnly": "Bara när telefonen är låst. Tryck och tillåt ”Visa ovanpå andra appar” så att ett SOS också öppnar det röda larmet när telefonen används",
   "sos_fullScreenOff": "Av: ett SOS visar bara en avisering. Tryck och tillåt helskärmsaviseringar för appen",
   "sos_fullScreenAllow": "Tillåt",
-  "sos_fullScreenRestartTip": "Om inställningssidan inte visar den här appen eller en inställning inte stannar kvar: stäng alla appar, starta om telefonen och försök igen."
+  "sos_fullScreenRestartTip": "Om inställningssidan inte visar den här appen eller en inställning inte stannar kvar: stäng alla appar, starta om telefonen och försök igen.",
+  "sos_dndAccess": "SOS genom Stör ej",
+  "sos_dndAccessOn": "På: ett SOS hörs även när Stör ej är på, telefonen är ljudlös eller en annan app spelar upp ljud",
+  "sos_dndAccessOff": "Av: Stör ej kan tysta ett SOS. Tryck och tillåt åtkomst till Stör ej för den här appen"
 }

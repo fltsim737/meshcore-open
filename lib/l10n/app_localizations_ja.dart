@@ -1670,7 +1670,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'このメッセージの時刻は未来です。送信者の時計がずれている可能性があります。届いた順に表示しています。';
+      '送信者の時計が正しくないようなので、メッセージが届いた時刻を表示しています。';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -6775,4 +6775,14 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       '設定ページにこのアプリが表示されない、または設定がオンのままにならない場合は、すべてのアプリを閉じてスマートフォンを再起動し、もう一度お試しください。';
+
+  @override
+  String get sos_dndAccess => 'おやすみモード中もSOSを鳴らす';
+
+  @override
+  String get sos_dndAccessOn => 'オン：おやすみモード、マナーモード中や、他のアプリが音を再生中でもSOSが鳴ります';
+
+  @override
+  String get sos_dndAccessOff =>
+      'オフ：おやすみモードでSOSが鳴らないことがあります。タップして、このアプリにおやすみモードへのアクセスを許可してください';
 }

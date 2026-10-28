@@ -1771,7 +1771,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Czas tej wiadomości jest w przyszłości, więc zegar nadawcy może być błędny. Wiadomość jest pokazana w kolejności odbioru.';
+      'Zegar nadawcy wydaje się błędny, więc pokazano, kiedy wiadomość dotarła.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7124,4 +7124,15 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Jeśli strona ustawień nie pokazuje tej aplikacji albo ustawienie nie zostaje włączone: zamknij wszystkie aplikacje, uruchom telefon ponownie i spróbuj jeszcze raz.';
+
+  @override
+  String get sos_dndAccess => 'SOS mimo trybu Nie przeszkadzać';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Wł.: SOS zabrzmi nawet przy włączonym trybie Nie przeszkadzać, wyciszonym telefonie lub gdy inna aplikacja odtwarza dźwięk';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Wył.: tryb Nie przeszkadzać może wyciszyć SOS. Stuknij i zezwól tej aplikacji na dostęp do trybu Nie przeszkadzać';
 }

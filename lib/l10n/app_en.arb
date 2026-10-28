@@ -888,7 +888,7 @@
   },
   "chat_location": "Location",
   "chat_typeMessage": "Type a message...",
-  "chat_futureTimestampWarning": "This message's time is in the future, so the sender's clock may be wrong. It is shown in the order it arrived.",
+  "chat_futureTimestampWarning": "The sender's clock looks wrong, so this shows when the message arrived.",
   "chat_messageTooLong": "Message too long (max {maxBytes} bytes).",
   "@chat_messageTooLong": {
     "placeholders": {
@@ -4335,5 +4335,8 @@
   "sos_fullScreenLockedOnly": "Only while the phone is locked. Tap and allow \"Display over other apps\" so an SOS also opens the red alert while the phone is in use",
   "sos_fullScreenOff": "Off: an SOS only shows a notification. Tap and allow full-screen notifications for this app",
   "sos_fullScreenAllow": "Allow",
-  "sos_fullScreenRestartTip": "If the settings page doesn't show this app, or a setting won't stay on: close all apps, restart the phone, then try again."
+  "sos_fullScreenRestartTip": "If the settings page doesn't show this app, or a setting won't stay on: close all apps, restart the phone, then try again.",
+  "sos_dndAccess": "SOS through Do Not Disturb",
+  "sos_dndAccessOn": "On: an SOS sounds even with Do Not Disturb on, the phone on silent, or another app playing sound",
+  "sos_dndAccessOff": "Off: Do Not Disturb can silence an SOS. Tap and allow Do Not Disturb access for this app"
 }

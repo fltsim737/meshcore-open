@@ -3037,7 +3037,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Toon de regio van een kanaalbericht op dezelfde regel als het aantal hops in plaats van eronder.",
   "channels_regionRadioDefaultSuffix": "(standaard van radio)",
   "channels_regionRadioDefaultApplies": "Deze radio verstuurt floods zonder regio in zijn standaardregio: {region}.",
-  "chat_futureTimestampWarning": "De tijd van dit bericht ligt in de toekomst, dus de klok van de afzender klopt mogelijk niet. Het wordt getoond in de volgorde van ontvangst.",
+  "chat_futureTimestampWarning": "De klok van de afzender lijkt verkeerd te staan, dus dit toont wanneer het bericht aankwam.",
   "discoveredContacts_scan": "Zoeken naar nodes in de buurt",
   "discoveredContacts_scanTitle": "Nodes in de buurt",
   "discoveredContacts_scanExplanation": "Vraagt nodes binnen direct radiobereik zich bekend te maken. Repeaters en sensoren antwoorden. Room servers en companions meestal niet.",
@@ -3513,5 +3513,8 @@
   "sos_fullScreenLockedOnly": "Alleen als de telefoon vergrendeld is. Tik en sta 'Weergeven boven andere apps' toe zodat een SOS de rode melding ook opent als de telefoon in gebruik is",
   "sos_fullScreenOff": "Uit: een SOS toont alleen een melding. Tik en sta meldingen op volledig scherm toe voor deze app",
   "sos_fullScreenAllow": "Toestaan",
-  "sos_fullScreenRestartTip": "Als de instellingenpagina deze app niet toont of een instelling niet aan blijft: sluit alle apps, start de telefoon opnieuw en probeer het nog eens."
+  "sos_fullScreenRestartTip": "Als de instellingenpagina deze app niet toont of een instelling niet aan blijft: sluit alle apps, start de telefoon opnieuw en probeer het nog eens.",
+  "sos_dndAccess": "SOS door Niet storen heen",
+  "sos_dndAccessOn": "Aan: een SOS klinkt ook als Niet storen aan staat, de telefoon op stil staat of een andere app geluid afspeelt",
+  "sos_dndAccessOff": "Uit: Niet storen kan een SOS dempen. Tik en sta toegang tot Niet storen toe voor deze app"
 }

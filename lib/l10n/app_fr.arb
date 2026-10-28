@@ -3270,7 +3270,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Afficher la région d'un message de canal sur la même ligne que son nombre de sauts plutôt qu'en dessous.",
   "channels_regionRadioDefaultSuffix": "(défaut de la radio)",
   "channels_regionRadioDefaultApplies": "Cette radio envoie les floods sans région dans sa région par défaut : {region}.",
-  "chat_futureTimestampWarning": "L'heure de ce message est dans le futur, l'horloge de l'expéditeur est peut-être incorrecte. Il est affiché dans l'ordre d'arrivée.",
+  "chat_futureTimestampWarning": "L'horloge de l'expéditeur semble fausse : l'heure affichée est celle de l'arrivée du message.",
   "discoveredContacts_scan": "Rechercher les nœuds proches",
   "discoveredContacts_scanTitle": "Nœuds proches",
   "discoveredContacts_scanExplanation": "Demande aux nœuds à portée radio directe de s'identifier. Les répéteurs et les capteurs répondent. Les serveurs de salon et les compagnons généralement pas.",
@@ -3746,5 +3746,8 @@
   "sos_fullScreenLockedOnly": "Seulement téléphone verrouillé. Touchez et autorisez « Afficher par-dessus les autres applis » pour qu'un SOS ouvre aussi l'alerte rouge pendant l'utilisation",
   "sos_fullScreenOff": "Désactivées : un SOS n'affiche qu'une notification. Touchez et autorisez les notifications plein écran pour cette appli",
   "sos_fullScreenAllow": "Autoriser",
-  "sos_fullScreenRestartTip": "Si la page des réglages n'affiche pas cette appli ou qu'un réglage ne reste pas activé : fermez toutes les applis, redémarrez le téléphone, puis réessayez."
+  "sos_fullScreenRestartTip": "Si la page des réglages n'affiche pas cette appli ou qu'un réglage ne reste pas activé : fermez toutes les applis, redémarrez le téléphone, puis réessayez.",
+  "sos_dndAccess": "SOS malgré Ne pas déranger",
+  "sos_dndAccessOn": "Activé : un SOS sonne même avec Ne pas déranger, le téléphone en silencieux ou une autre application qui joue du son",
+  "sos_dndAccessOff": "Désactivé : Ne pas déranger peut rendre un SOS silencieux. Touchez et autorisez l'accès à Ne pas déranger pour cette application"
 }

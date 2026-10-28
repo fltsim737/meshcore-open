@@ -906,13 +906,13 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                formatChatTime(context, message.timestamp),
+                                formatChatTime(context, message.shownTime),
                                 style: MeshTheme.mono(
                                   fontSize: 12 * textScale,
                                   color: metaColor,
                                 ),
                               ),
-                              if (message.hasFutureTimestamp) ...[
+                              if (message.hasWrongClock) ...[
                                 const SizedBox(width: 4),
                                 FutureTimestampIndicator(size: 16 * textScale),
                               ],

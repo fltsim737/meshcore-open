@@ -1745,7 +1745,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Čas tejto správy je v budúcnosti, takže hodiny odosielateľa môžu byť nesprávne. Zobrazuje sa v poradí, v akom prišla.';
+      'Hodiny odosielateľa sa zdajú nesprávne, preto sa zobrazuje čas doručenia správy.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7072,4 +7072,15 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Ak stránka nastavení nezobrazuje túto aplikáciu alebo nastavenie nezostane zapnuté: zatvorte všetky aplikácie, reštartujte telefón a skúste to znova.';
+
+  @override
+  String get sos_dndAccess => 'SOS aj v režime Nerušiť';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Zap.: SOS zaznie, aj keď je zapnutý režim Nerušiť, telefón je stlmený alebo iná aplikácia prehráva zvuk';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Vyp.: režim Nerušiť môže SOS stlmiť. Ťuknite a povoľte tejto aplikácii prístup k režimu Nerušiť';
 }

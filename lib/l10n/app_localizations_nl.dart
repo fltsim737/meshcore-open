@@ -1742,7 +1742,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'De tijd van dit bericht ligt in de toekomst, dus de klok van de afzender klopt mogelijk niet. Het wordt getoond in de volgorde van ontvangst.';
+      'De klok van de afzender lijkt verkeerd te staan, dus dit toont wanneer het bericht aankwam.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7063,4 +7063,15 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Als de instellingenpagina deze app niet toont of een instelling niet aan blijft: sluit alle apps, start de telefoon opnieuw en probeer het nog eens.';
+
+  @override
+  String get sos_dndAccess => 'SOS door Niet storen heen';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Aan: een SOS klinkt ook als Niet storen aan staat, de telefoon op stil staat of een andere app geluid afspeelt';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Uit: Niet storen kan een SOS dempen. Tik en sta toegang tot Niet storen toe voor deze app';
 }

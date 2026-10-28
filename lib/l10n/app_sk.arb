@@ -3137,7 +3137,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Zobraziť región správy kanála v rovnakom riadku ako počet skokov namiesto pod ním.",
   "channels_regionRadioDefaultSuffix": "(predvolený pre rádio)",
   "channels_regionRadioDefaultApplies": "Toto rádio odosiela flood správy bez regiónu vo svojom predvolenom regióne: {region}.",
-  "chat_futureTimestampWarning": "Čas tejto správy je v budúcnosti, takže hodiny odosielateľa môžu byť nesprávne. Zobrazuje sa v poradí, v akom prišla.",
+  "chat_futureTimestampWarning": "Hodiny odosielateľa sa zdajú nesprávne, preto sa zobrazuje čas doručenia správy.",
   "discoveredContacts_scan": "Vyhľadať blízke uzly",
   "discoveredContacts_scanTitle": "Blízke uzly",
   "discoveredContacts_scanExplanation": "Požiada uzly v priamom dosahu rádia, aby sa identifikovali. Odpovedajú opakovače a senzory. Room servery a companiony zvyčajne nie.",
@@ -3613,5 +3613,8 @@
   "sos_fullScreenLockedOnly": "Len pri zamknutom telefóne. Ťuknite a povoľte „Zobrazovať cez iné aplikácie“, aby SOS otvorilo červené upozornenie aj počas používania telefónu",
   "sos_fullScreenOff": "Vypnuté: SOS zobrazí len upozornenie. Ťuknite a povoľte tejto aplikácii upozornenia na celú obrazovku",
   "sos_fullScreenAllow": "Povoliť",
-  "sos_fullScreenRestartTip": "Ak stránka nastavení nezobrazuje túto aplikáciu alebo nastavenie nezostane zapnuté: zatvorte všetky aplikácie, reštartujte telefón a skúste to znova."
+  "sos_fullScreenRestartTip": "Ak stránka nastavení nezobrazuje túto aplikáciu alebo nastavenie nezostane zapnuté: zatvorte všetky aplikácie, reštartujte telefón a skúste to znova.",
+  "sos_dndAccess": "SOS aj v režime Nerušiť",
+  "sos_dndAccessOn": "Zap.: SOS zaznie, aj keď je zapnutý režim Nerušiť, telefón je stlmený alebo iná aplikácia prehráva zvuk",
+  "sos_dndAccessOff": "Vyp.: režim Nerušiť môže SOS stlmiť. Ťuknite a povoľte tejto aplikácii prístup k režimu Nerušiť"
 }

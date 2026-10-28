@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import '../connector/meshcore_protocol.dart';
 import '../helpers/reaction_helper.dart';
 import '../helpers/smaz.dart';
-import 'message.dart' show futureTimestampTolerance;
+import 'message.dart' show futureTimestampTolerance, pastTimestampTolerance;
 import 'translation_support.dart';
 import '../utils/app_logger.dart';
 
@@ -104,6 +104,15 @@ class ChannelMessage {
   /// this device received the message.
   bool get hasFutureTimestamp =>
       timestamp.difference(receivedAt) > futureTimestampTolerance;
+
+  /// True when the sender's clock is clearly wrong either way; the chat then
+  /// shows when the message arrived.
+  bool get hasWrongClock =>
+      hasFutureTimestamp ||
+      receivedAt.difference(timestamp) > pastTimestampTolerance;
+
+  /// The time to show for this message.
+  DateTime get shownTime => hasWrongClock ? receivedAt : timestamp;
 
   ChannelMessage copyWith({
     ChannelMessageStatus? status,

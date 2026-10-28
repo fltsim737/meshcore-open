@@ -237,9 +237,7 @@ class Contact {
         pathHashWidth: width,
         latitude: lat,
         longitude: lon,
-        lastSeen: DateTime.fromMillisecondsSinceEpoch(
-          lastAdvertTimestamp * 1000,
-        ),
+        lastSeen: _heardAt(lastModified, lastAdvertTimestamp),
         lastModified: lastModified,
         isActive: true,
         rawPacket: null,
@@ -248,6 +246,20 @@ class Contact {
       appLogger.error('Failed to parse contact frame: $e');
       return null;
     }
+  }
+
+  /// When our radio last heard this contact: its own last-modified time (the
+  /// app sets the radio's clock), not the advert's timestamp, which is the
+  /// sender's clock and can be months out. The advert time only if the radio
+  /// gave no usable time.
+  static DateTime _heardAt(DateTime? lastModified, int lastAdvertTimestamp) {
+    final now = DateTime.now();
+    if (lastModified != null &&
+        lastModified.year >= 2024 &&
+        !lastModified.isAfter(now.add(const Duration(minutes: 5)))) {
+      return lastModified;
+    }
+    return DateTime.fromMillisecondsSinceEpoch(lastAdvertTimestamp * 1000);
   }
 
   @override

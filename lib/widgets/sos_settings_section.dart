@@ -11,6 +11,7 @@ import '../screens/sos_history_screen.dart';
 import '../screens/sos_network_screen.dart';
 import 'mesh_nav_tile.dart';
 import 'sos_screen_access_tile.dart';
+import 'sos_dnd_access_tile.dart';
 
 /// Stored emergency location, emergency network and emergency contacts.
 /// Morse (the default: it can't be mistaken for other emergency apps' alerts)
@@ -119,6 +120,7 @@ class SosSettingsSection extends StatelessWidget {
         ),
         const Divider(height: 1, indent: 16),
         const SosScreenAccessTile(),
+        const SosDndAccessTile(),
         const Divider(height: 1, indent: 16),
         MeshNavTile(
           icon: Icons.contact_emergency_outlined,

@@ -1675,7 +1675,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      '이 메시지의 시간이 미래입니다. 보낸 사람의 시계가 잘못되었을 수 있습니다. 도착한 순서대로 표시됩니다.';
+      '보낸 사람의 시계가 잘못된 것 같아 메시지가 도착한 시간을 표시합니다.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -6786,4 +6786,15 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       '설정 페이지에 이 앱이 보이지 않거나 설정이 유지되지 않으면 모든 앱을 닫고 휴대폰을 다시 시작한 뒤 다시 시도하세요.';
+
+  @override
+  String get sos_dndAccess => '방해 금지 모드에서도 SOS 울림';
+
+  @override
+  String get sos_dndAccessOn =>
+      '켜짐: 방해 금지 모드, 무음 모드이거나 다른 앱이 소리를 재생 중이어도 SOS가 울립니다';
+
+  @override
+  String get sos_dndAccessOff =>
+      '꺼짐: 방해 금지 모드가 SOS를 무음으로 만들 수 있습니다. 탭하여 이 앱의 방해 금지 모드 접근을 허용하세요';
 }

@@ -1753,7 +1753,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'O horário desta mensagem está no futuro, então o relógio do remetente pode estar errado. Ela é exibida na ordem em que chegou.';
+      'O relógio do remetente parece estar errado, por isso é mostrada a hora em que a mensagem chegou.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7092,4 +7092,15 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Se a página de definições não mostrar esta app ou uma definição não ficar ativa: feche todas as apps, reinicie o telemóvel e tente de novo.';
+
+  @override
+  String get sos_dndAccess => 'SOS mesmo com Não incomodar';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Ativado: um SOS toca mesmo com Não incomodar ativo, o telefone em silêncio ou outra app a reproduzir som';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Desativado: Não incomodar pode silenciar um SOS. Toque e permita o acesso a Não incomodar para esta app';
 }

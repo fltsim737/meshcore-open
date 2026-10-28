@@ -1744,7 +1744,7 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Čas tega sporočila je v prihodnosti, zato je ura pošiljatelja morda napačna. Prikazano je v vrstnem redu prispetja.';
+      'Ura pošiljatelja se zdi napačna, zato je prikazan čas, ko je sporočilo prispelo.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7074,4 +7074,15 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Če stran z nastavitvami ne prikaže te aplikacije ali nastavitev ne ostane vklopljena: zaprite vse aplikacije, znova zaženite telefon in poskusite znova.';
+
+  @override
+  String get sos_dndAccess => 'SOS tudi pri načinu Ne moti';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Vklopljeno: SOS se oglasi tudi pri vklopljenem načinu Ne moti, utišanem telefonu ali ko druga aplikacija predvaja zvok';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Izklopljeno: način Ne moti lahko utiša SOS. Tapnite in tej aplikaciji dovolite dostop do načina Ne moti';
 }

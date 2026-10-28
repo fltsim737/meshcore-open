@@ -124,6 +124,47 @@ void main() {
     });
   });
 
+  group('wrong sender clock', () {
+    final arrived = DateTime(2026, 10, 28, 15);
+
+    test('a clock months behind is wrong, and arrival time is shown', () {
+      final m = _ch('hi', timestamp: DateTime(2026, 3, 2), receivedAt: arrived);
+      expect(m.hasWrongClock, isTrue);
+      expect(m.shownTime, arrived);
+    });
+
+    test('a clock ahead is wrong too', () {
+      final m = _ch(
+        'hi',
+        timestamp: arrived.add(const Duration(hours: 3)),
+        receivedAt: arrived,
+      );
+      expect(m.hasWrongClock, isTrue);
+      expect(m.shownTime, arrived);
+    });
+
+    test('a message held by the radio for a day keeps its own time', () {
+      final sent = arrived.subtract(const Duration(days: 1));
+      final m = _ch('hi', timestamp: sent, receivedAt: arrived);
+      expect(m.hasWrongClock, isFalse);
+      expect(m.shownTime, sent);
+    });
+
+    test('direct messages behave the same', () {
+      final m = Message(
+        senderKey: Uint8List(32),
+        text: 'hi',
+        timestamp: DateTime(2026, 3, 2),
+        receivedAt: arrived,
+        isOutgoing: false,
+        isCli: false,
+        status: MessageStatus.delivered,
+      );
+      expect(m.hasWrongClock, isTrue);
+      expect(m.shownTime, arrived);
+    });
+  });
+
   group('receivedAt persistence', () {
     test('channel store round-trips receivedAt', () async {
       await _init();

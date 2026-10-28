@@ -1726,7 +1726,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'This message\'s time is in the future, so the sender\'s clock may be wrong. It is shown in the order it arrived.';
+      'The sender\'s clock looks wrong, so this shows when the message arrived.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7012,4 +7012,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'If the settings page doesn\'t show this app, or a setting won\'t stay on: close all apps, restart the phone, then try again.';
+
+  @override
+  String get sos_dndAccess => 'SOS through Do Not Disturb';
+
+  @override
+  String get sos_dndAccessOn =>
+      'On: an SOS sounds even with Do Not Disturb on, the phone on silent, or another app playing sound';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Off: Do Not Disturb can silence an SOS. Tap and allow Do Not Disturb access for this app';
 }

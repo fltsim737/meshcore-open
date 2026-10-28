@@ -1,3 +1,4 @@
+import 'sos_alarm_service.dart';
 import 'sos_screen_service.dart';
 import 'dart:async';
 import 'dart:io' show Platform, File;
@@ -654,6 +655,13 @@ class NotificationService {
   /// created. The old 'sos_alerts' channel (before 9.5.3) is deleted at start.
   static const _sosChannelMorse = 'sos_alerts_morse';
   static const _sosChannelClassic = 'sos_alerts_classic';
+
+  /// No sound of its own: for when the app plays the alarm (SosAlarmService).
+  static const _sosChannelQuiet = 'sos_alerts_quiet';
+
+  /// The same channels once the app has Do Not Disturb access, made to break
+  /// through it. Android fixes that when a channel is created too.
+  static const _dndSuffix = '_dnd';
   String? _morseFile;
 
   static bool get _classicAlarm =>
@@ -686,6 +694,14 @@ class NotificationService {
   Future<void> showSosAlert(IncomingSos alert) async {
     if (!await _ensureCanNotify()) return;
     final classic = _classicAlarm;
+    // Android: the app plays the alarm itself so that silent mode, other
+    // apps' audio and Do Not Disturb can't keep it quiet; the notification
+    // sounds only if that couldn't start.
+    final appAlarm = await SosAlarmService.start(
+      _sosAlertId(alert.key),
+      classic: classic,
+    );
+    final channelId = await _sosChannel(classic: classic, quiet: appAlarm);
     final l10n = _l10n;
     final sender = alert.senderName.isEmpty
         ? l10n.sos_unknownSender
@@ -703,19 +719,23 @@ class NotificationService {
     ].join('\n');
 
     final androidDetails = AndroidNotificationDetails(
-      classic ? _sosChannelClassic : _sosChannelMorse,
+      channelId,
       l10n.sos_notificationChannelName,
       channelDescription: l10n.sos_notificationChannelDescription,
       importance: Importance.max,
       priority: Priority.max,
       category: AndroidNotificationCategory.alarm,
       visibility: NotificationVisibility.public,
-      sound: RawResourceAndroidNotificationSound(
-        classic ? 'sos_alarm_classic' : 'sos_alarm_morse',
-      ),
+      playSound: !appAlarm,
+      enableVibration: !appAlarm,
+      sound: appAlarm
+          ? null
+          : RawResourceAndroidNotificationSound(
+              classic ? 'sos_alarm_classic' : 'sos_alarm_morse',
+            ),
       audioAttributesUsage: AudioAttributesUsage.alarm,
       // FLAG_INSISTENT: loop the sound until the notification is cancelled.
-      additionalFlags: Int32List.fromList(const [4]),
+      additionalFlags: appAlarm ? null : Int32List.fromList(const [4]),
       ongoing: true,
       autoCancel: false,
       // wakes the screen and opens the app over the lock screen, as a phone
@@ -777,7 +797,49 @@ class NotificationService {
     }
   }
 
+  /// The Android channel for an SOS alert, made first so that it breaks
+  /// through Do Not Disturb when the app has that access.
+  Future<String> _sosChannel({
+    required bool classic,
+    required bool quiet,
+  }) async {
+    final base = quiet
+        ? _sosChannelQuiet
+        : (classic ? _sosChannelClassic : _sosChannelMorse);
+    if (!PlatformInfo.isAndroid) return base;
+    final dnd = await SosAlarmService.hasDndAccess() ?? false;
+    final id = dnd ? '$base$_dndSuffix' : base;
+    final l10n = _l10n;
+    try {
+      await _notifications
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >()
+          ?.createNotificationChannel(
+            AndroidNotificationChannel(
+              id,
+              l10n.sos_notificationChannelName,
+              description: l10n.sos_notificationChannelDescription,
+              importance: Importance.max,
+              bypassDnd: dnd,
+              playSound: !quiet,
+              enableVibration: !quiet,
+              sound: quiet
+                  ? null
+                  : RawResourceAndroidNotificationSound(
+                      classic ? 'sos_alarm_classic' : 'sos_alarm_morse',
+                    ),
+              audioAttributesUsage: AudioAttributesUsage.alarm,
+            ),
+          );
+    } catch (e) {
+      debugPrint('Setting up the SOS channel failed: $e');
+    }
+    return id;
+  }
+
   Future<void> cancelSosAlert(IncomingSos alert) async {
+    unawaited(SosAlarmService.stop(_sosAlertId(alert.key)));
     _linuxSound?.stopAlarm(_sosAlertId(alert.key));
     _windowsAlarm?.stop(_sosAlertId(alert.key));
     if (!_isInitialized) return;

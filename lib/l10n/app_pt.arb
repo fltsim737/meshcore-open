@@ -3136,7 +3136,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Mostra a região de uma mensagem de canal na mesma linha da contagem de saltos, em vez de abaixo dela.",
   "channels_regionRadioDefaultSuffix": "(padrão do rádio)",
   "channels_regionRadioDefaultApplies": "Este rádio envia floods sem região na sua região padrão: {region}.",
-  "chat_futureTimestampWarning": "O horário desta mensagem está no futuro, então o relógio do remetente pode estar errado. Ela é exibida na ordem em que chegou.",
+  "chat_futureTimestampWarning": "O relógio do remetente parece estar errado, por isso é mostrada a hora em que a mensagem chegou.",
   "discoveredContacts_scan": "Buscar nós próximos",
   "discoveredContacts_scanTitle": "Nós próximos",
   "discoveredContacts_scanExplanation": "Pede aos nós ao alcance direto do rádio que se identifiquem. Repetidores e sensores respondem. Servidores de sala e companheiros geralmente não.",
@@ -3612,5 +3612,8 @@
   "sos_fullScreenLockedOnly": "Só com o telemóvel bloqueado. Toque e permita \"Mostrar sobre outras apps\" para que um SOS abra o alerta vermelho também com o telemóvel em uso",
   "sos_fullScreenOff": "Desativados: um SOS só mostra uma notificação. Toque e permita notificações em ecrã inteiro para esta app",
   "sos_fullScreenAllow": "Permitir",
-  "sos_fullScreenRestartTip": "Se a página de definições não mostrar esta app ou uma definição não ficar ativa: feche todas as apps, reinicie o telemóvel e tente de novo."
+  "sos_fullScreenRestartTip": "Se a página de definições não mostrar esta app ou uma definição não ficar ativa: feche todas as apps, reinicie o telemóvel e tente de novo.",
+  "sos_dndAccess": "SOS mesmo com Não incomodar",
+  "sos_dndAccessOn": "Ativado: um SOS toca mesmo com Não incomodar ativo, o telefone em silêncio ou outra app a reproduzir som",
+  "sos_dndAccessOff": "Desativado: Não incomodar pode silenciar um SOS. Toque e permita o acesso a Não incomodar para esta app"
 }

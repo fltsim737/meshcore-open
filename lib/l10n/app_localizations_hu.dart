@@ -1747,7 +1747,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Az üzenet időpontja a jövőben van, ezért a feladó órája hibás lehet. Az érkezés sorrendjében látható.';
+      'A küldő órája hibásnak tűnik, ezért itt az üzenet megérkezésének ideje látható.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7087,4 +7087,15 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Ha a beállítási oldal nem mutatja ezt az alkalmazást, vagy egy beállítás nem marad bekapcsolva: zárj be minden alkalmazást, indítsd újra a telefont, és próbáld újra.';
+
+  @override
+  String get sos_dndAccess => 'SOS a Ne zavarjanak módon át';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Be: az SOS akkor is megszólal, ha be van kapcsolva a Ne zavarjanak mód, a telefon néma, vagy egy másik alkalmazás hangot játszik le';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Ki: a Ne zavarjanak mód elnémíthat egy SOS-t. Koppintson, és engedélyezze a Ne zavarjanak hozzáférést ennek az alkalmazásnak';
 }

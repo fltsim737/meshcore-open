@@ -9,6 +9,11 @@ enum MessageStatus { pending, sent, delivered, failed }
 /// the UI flags it as a wrong clock.
 const Duration futureTimestampTolerance = Duration(minutes: 5);
 
+/// How far a sender timestamp may lag the local receive time before the UI
+/// treats the sender's clock as wrong. Generous, as a radio can hold messages
+/// for a while before the phone connects.
+const Duration pastTimestampTolerance = Duration(days: 2);
+
 /// Receive time for a persisted message JSON record. Records written before
 /// `receivedAt` existed fall back to the sender timestamp, capped at now so a
 /// stored future-dated message stops sorting below everything received later.
@@ -96,6 +101,15 @@ class Message {
   /// this device received the message.
   bool get hasFutureTimestamp =>
       timestamp.difference(receivedAt) > futureTimestampTolerance;
+
+  /// True when the sender's clock is clearly wrong either way; the chat then
+  /// shows when the message arrived.
+  bool get hasWrongClock =>
+      hasFutureTimestamp ||
+      receivedAt.difference(timestamp) > pastTimestampTolerance;
+
+  /// The time to show for this message.
+  DateTime get shownTime => hasWrongClock ? receivedAt : timestamp;
 
   Message copyWith({
     MessageStatus? status,
