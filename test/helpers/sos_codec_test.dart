@@ -147,7 +147,10 @@ void main() {
     });
 
     test('round-trips ACK and cancel, and an SOS without a position', () {
-      for (final kind in SosPacketKind.values) {
+      // (a report always carries a reading: see 'coordinated search')
+      for (final kind in SosPacketKind.values.where(
+        (k) => k != SosPacketKind.report,
+      )) {
         final decoded = SosPacket.decode(
           SosPacket(
             kind: kind,
@@ -324,5 +327,122 @@ void main() {
     expect(beacon.length, 11 + 3 + 1);
     expect(beacon.last, 7);
     expect(SosPacket.decode(beacon)!.seq, 7);
+  });
+
+  group('coordinated search', () {
+    final prefix = Uint8List.fromList([1, 2, 3, 4, 5, 6]);
+
+    test('a locate request carries the power asked for, or none', () {
+      final asks = SosPacket(
+        kind: SosPacketKind.locate,
+        id: 'a1b2',
+        senderPrefix: prefix,
+        senderName: 'Mike',
+        power: -9,
+      );
+      final bytes = asks.encode();
+      expect(bytes.length, 11 + 4 + 1);
+      final back = SosPacket.decode(bytes)!;
+      expect(back.kind, SosPacketKind.locate);
+      expect(back.power, -9);
+      final full = SosPacket.decode(
+        SosPacket(
+          kind: SosPacketKind.locate,
+          id: 'a1b2',
+          senderPrefix: prefix,
+          senderName: 'Mike',
+          power: SosPacket.powerFull,
+        ).encode(),
+      )!;
+      expect(full.power, SosPacket.powerFull);
+      final plain = SosPacket.decode(
+        SosPacket(
+          kind: SosPacketKind.locate,
+          id: 'a1b2',
+          senderPrefix: prefix,
+          senderName: 'Mike',
+        ).encode(),
+      )!;
+      expect(plain.power, isNull);
+    });
+
+    test(
+      'a beacon says its power and who set it; older beacons just their seq',
+      () {
+        final b = SosPacket(
+          kind: SosPacketKind.beacon,
+          id: '0102',
+          senderPrefix: prefix,
+          senderName: 'Nan',
+          seq: 42,
+          power: 8,
+          setBy: 'Mike from the SES team',
+        );
+        final back = SosPacket.decode(b.encode())!;
+        expect(back.seq, 42);
+        expect(back.power, 8);
+        expect(back.fullPower, isFalse);
+        expect(back.setBy, 'Mike from the SE');
+        final old = SosPacket.decode(
+          SosPacket(
+            kind: SosPacketKind.beacon,
+            id: '0102',
+            senderPrefix: prefix,
+            senderName: 'Nan',
+            seq: 3,
+          ).encode(),
+        )!;
+        expect(old.seq, 3);
+        expect(old.power, isNull);
+      },
+    );
+
+    test('decodes the firmware\'s beacon bytes', () {
+      // as SosCodec::encodeBeacon writes it: [seq][power][flags][set-by]
+      final bytes = Uint8List.fromList([
+        1,
+        5,
+        0x02,
+        0x01,
+        ...prefix,
+        3,
+        ...'Nan'.codeUnits,
+        7,
+        0xF7,
+        1,
+        4,
+        ...'Mike'.codeUnits,
+      ]);
+      final p = SosPacket.decode(bytes)!;
+      expect(p.seq, 7);
+      expect(p.power, -9);
+      expect(p.fullPower, isTrue);
+      expect(p.setBy, 'Mike');
+    });
+
+    test('a report round trips', () {
+      final r = SosPacket(
+        kind: SosPacketKind.report,
+        id: 'a1b2',
+        senderPrefix: prefix,
+        senderName: 'Sam',
+        reading: const SosReading(
+          latitude: -30.981234,
+          longitude: 151.591234,
+          rssiDbm: -97,
+          snrDb: -6.25,
+          beaconPower: 2,
+          ageSeconds: 4,
+        ),
+      );
+      final back = SosPacket.decode(r.encode())!;
+      expect(back.kind, SosPacketKind.report);
+      expect(back.reading!.latitude, closeTo(-30.981234, 1e-6));
+      expect(back.reading!.longitude, closeTo(151.591234, 1e-6));
+      expect(back.reading!.rssiDbm, -97);
+      expect(back.reading!.snrDb, -6.25);
+      expect(back.reading!.beaconPower, 2);
+      expect(back.reading!.ageSeconds, 4);
+    });
   });
 }

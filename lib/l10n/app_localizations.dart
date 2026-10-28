@@ -11563,6 +11563,144 @@ abstract class AppLocalizations {
   /// **'About the same'**
   String get sosLocator_steady;
 
+  /// No description provided for @sosLocator_powerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Beacon power'**
+  String get sosLocator_powerTitle;
+
+  /// No description provided for @sosLocator_powerNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Beacons at {dbm} dBm'**
+  String sosLocator_powerNow(int dbm);
+
+  /// No description provided for @sosLocator_powerNowFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Beacons at full power'**
+  String get sosLocator_powerNowFull;
+
+  /// No description provided for @sosLocator_powerSetBy.
+  ///
+  /// In en, this message translates to:
+  /// **'set by {name}'**
+  String sosLocator_powerSetBy(String name);
+
+  /// No description provided for @sosLocator_powerUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'This radio\'s beacon power can\'t be changed (an SOS from a phone app, or older firmware).'**
+  String get sosLocator_powerUnknown;
+
+  /// No description provided for @sosLocator_powerAsking.
+  ///
+  /// In en, this message translates to:
+  /// **'Asking for {step}…'**
+  String sosLocator_powerAsking(String step);
+
+  /// No description provided for @sosLocator_powerFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Full'**
+  String get sosLocator_powerFull;
+
+  /// No description provided for @sosLocator_powerHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get sosLocator_powerHigh;
+
+  /// No description provided for @sosLocator_powerMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get sosLocator_powerMedium;
+
+  /// No description provided for @sosLocator_powerLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get sosLocator_powerLow;
+
+  /// No description provided for @sosLocator_powerVeryLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Very low'**
+  String get sosLocator_powerVeryLow;
+
+  /// No description provided for @sosLocator_powerHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Any searcher can change it: agree it with the others first. Turn it down as you close in, so only searchers near enough still hear the beacons. The SOS itself always goes at full power.'**
+  String get sosLocator_powerHelp;
+
+  /// No description provided for @sosLocator_mapButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Search map'**
+  String get sosLocator_mapButton;
+
+  /// No description provided for @sosLocator_sharing.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Your readings are shared with the other searchers} =1{Readings from 1 searcher} other{Readings from {count} searchers}}'**
+  String sosLocator_sharing(int count);
+
+  /// No description provided for @sosLocator_directionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the direction'**
+  String get sosLocator_directionTitle;
+
+  /// No description provided for @sosLocator_direction.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold your radio flat against your chest and turn slowly on the spot, a quarter turn at a time, waiting for a beacon at each. Your body blocks the signal from behind you: where it is weakest, the radio is behind your back. Then walk the other way.'**
+  String get sosLocator_direction;
+
+  /// No description provided for @sosSearchMap_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Search map'**
+  String get sosSearchMap_title;
+
+  /// No description provided for @sosSearchMap_you.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get sosSearchMap_you;
+
+  /// No description provided for @sosSearchMap_lastPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Last known position'**
+  String get sosSearchMap_lastPosition;
+
+  /// No description provided for @sosSearchMap_estimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Search area about {metres} m across, from {readings} readings at {places} places'**
+  String sosSearchMap_estimate(int metres, int readings, int places);
+
+  /// No description provided for @sosSearchMap_needMore.
+  ///
+  /// In en, this message translates to:
+  /// **'One place gives a ring, not an area: a reading from a second place, or from another searcher, is needed.'**
+  String get sosSearchMap_needMore;
+
+  /// No description provided for @sosSearchMap_noReadings.
+  ///
+  /// In en, this message translates to:
+  /// **'No readings yet. Yours are shared every 30 s once a beacon is heard and your phone knows where it is.'**
+  String get sosSearchMap_noReadings;
+
+  /// No description provided for @sosSearchMap_explain.
+  ///
+  /// In en, this message translates to:
+  /// **'Each ring is how far a searcher\'s reading puts the radio. It is rough: terrain, trees and bodies weaken the signal. Search where the rings meet, the shaded area first.'**
+  String get sosSearchMap_explain;
+
   /// No description provided for @sos_alarmSound.
   ///
   /// In en, this message translates to:

@@ -6927,6 +6927,98 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sosLocator_steady => 'À peu près pareil';
 
   @override
+  String get sosLocator_powerTitle => 'Puissance de la balise';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Balises à $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Balises à pleine puissance';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'réglée par $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'La puissance de balise de cette radio ne peut pas être modifiée (SOS envoyé depuis une appli de téléphone, ou ancien firmware).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Demande de $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Pleine';
+
+  @override
+  String get sosLocator_powerHigh => 'Haute';
+
+  @override
+  String get sosLocator_powerMedium => 'Moyenne';
+
+  @override
+  String get sosLocator_powerLow => 'Basse';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Très basse';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Tout chercheur peut la modifier : mettez-vous d\'accord d\'abord. Baissez-la en vous rapprochant, pour que seuls les chercheurs assez proches entendent encore les balises. Le SOS lui-même part toujours à pleine puissance.';
+
+  @override
+  String get sosLocator_mapButton => 'Carte de recherche';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Mesures de $count chercheurs',
+      one: 'Mesures d\'1 chercheur',
+      zero: 'Vos mesures sont partagées avec les autres chercheurs',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Trouver la direction';
+
+  @override
+  String get sosLocator_direction =>
+      'Tenez votre radio à plat contre la poitrine et tournez lentement sur place, un quart de tour à la fois, en attendant une balise à chaque fois. Votre corps bloque le signal venant de derrière : là où il est le plus faible, la radio est dans votre dos. Partez alors dans l\'autre sens.';
+
+  @override
+  String get sosSearchMap_title => 'Carte de recherche';
+
+  @override
+  String get sosSearchMap_you => 'Vous';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Dernière position connue';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Zone de recherche d\'environ $metres m de large, d\'après $readings mesures en $places endroits';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Un seul endroit donne un anneau, pas une zone : il faut une mesure depuis un deuxième endroit, ou d\'un autre chercheur.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Pas encore de mesures. Les vôtres sont partagées toutes les 30 s dès qu\'une balise est entendue et que votre téléphone connaît sa position.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Chaque anneau indique à quelle distance la mesure d\'un chercheur place la radio. C\'est approximatif : relief, arbres et corps affaiblissent le signal. Cherchez là où les anneaux se croisent, d\'abord dans la zone ombrée.';
+
+  @override
   String get sos_alarmSound => 'Son de l\'alarme';
 
   @override

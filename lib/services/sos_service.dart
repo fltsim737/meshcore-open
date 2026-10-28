@@ -7,6 +7,7 @@ import '../connector/meshcore_connector.dart';
 import '../connector/meshcore_protocol.dart';
 import '../helpers/sos_codec.dart';
 import '../helpers/sos_network_code.dart';
+import '../helpers/sos_search.dart';
 import '../helpers/sos_seal.dart';
 import '../models/channel.dart';
 import '../models/contact.dart';
@@ -260,12 +261,25 @@ class SosService extends ChangeNotifier {
   /// How often a responder searching repeats its request.
   static const Duration locateRepeat = Duration(minutes: 2);
 
+  /// How often a searcher shares what they hear, and how fresh a beacon must
+  /// be to be shared.
+  static const Duration reportEvery = Duration(seconds: 30);
+
+  /// A power change goes out at once and twice more, as one can be missed.
+  static const List<Duration> powerResends = [
+    Duration.zero,
+    Duration(seconds: 3),
+    Duration(seconds: 8),
+  ];
+
   Timer? _beaconTimer;
   DateTime? _beaconUntil;
   int _beaconSeq = 0;
 
   SosLocatorSession? _locator;
   Timer? _locateTimer;
+  Timer? _reportTimer;
+  final List<Timer> _powerTimers = [];
 
   /// The search this device is running for someone's SOS, if any.
   SosLocatorSession? get locator => _locator;
@@ -277,6 +291,11 @@ class SosService extends ChangeNotifier {
     _locator = SosLocatorSession(alertKey: alert.key, id: alert.id);
     _locateTimer?.cancel();
     _locateTimer = Timer.periodic(locateRepeat, (_) => _requestBeacons());
+    _reportTimer?.cancel();
+    _reportTimer = Timer.periodic(
+      reportEvery,
+      (_) => unawaited(shareReading()),
+    );
     unawaited(_requestBeacons());
     notifyListeners();
   }
@@ -284,6 +303,12 @@ class SosService extends ChangeNotifier {
   void stopLocating({bool notify = true}) {
     _locateTimer?.cancel();
     _locateTimer = null;
+    _reportTimer?.cancel();
+    _reportTimer = null;
+    for (final t in _powerTimers) {
+      t.cancel();
+    }
+    _powerTimers.clear();
     if (_locator == null) return;
     _locator = null;
     if (notify) notifyListeners();
@@ -300,6 +325,113 @@ class SosService extends ChangeNotifier {
       _packet(SosPacketKind.locate, session.id),
       session: alert == null ? null : _alertSession(alert),
     );
+  }
+
+  /// Any searcher may set the beacons' power ([dbm] null: the radio's own),
+  /// agreeing it with the others over the radio: lower as they close in, so
+  /// only those near still hear them. Only a MeshCore SOS radio does this
+  /// (firmware 1.6.1); its beacons then say the power they go at.
+  void setBeaconPower(int? dbm) {
+    final session = _locator;
+    if (session == null) return;
+    final power = dbm ?? SosPacket.powerFull;
+    session.askedPower = power;
+    session.askedAt = _now();
+    for (final t in _powerTimers) {
+      t.cancel();
+    }
+    _powerTimers.clear();
+    for (final delay in powerResends) {
+      _powerTimers.add(
+        Timer(delay, () => unawaited(_askForPower(session, power))),
+      );
+    }
+    notifyListeners();
+  }
+
+  Future<void> _askForPower(SosLocatorSession session, int power) async {
+    if (_locator != session || session.askedPower != power) return;
+    final alert = _incoming.where((a) => a.key == session.alertKey).firstOrNull;
+    final packet = SosPacket(
+      kind: SosPacketKind.locate,
+      id: session.id,
+      senderPrefix: _transport.selfPublicKey ?? Uint8List(0),
+      senderName: _transport.selfName ?? '',
+      power: power,
+    );
+    await _sendChannelPacket(
+      packet,
+      session: alert == null ? null : _alertSession(alert),
+    );
+  }
+
+  /// Shares where this searcher is and how strong the latest beacon was, so
+  /// every searcher's map can combine them. Needs a beacon heard in the last
+  /// [reportEvery] that says its power, and the phone's position.
+  @visibleForTesting
+  Future<void> shareReading() async {
+    final session = _locator;
+    final latest = session?.latest;
+    if (session == null ||
+        latest == null ||
+        latest.rssiDbm == null ||
+        latest.beaconPower == null) {
+      return;
+    }
+    final age = _now().difference(latest.at);
+    if (age > reportEvery) return;
+    final fix = await _phoneLocation?.currentFix(
+      timeout: const Duration(seconds: 6),
+    );
+    if (_locator != session || fix == null || !fix.hasPosition) return;
+    final reading = SosReading(
+      latitude: fix.latitude!,
+      longitude: fix.longitude!,
+      rssiDbm: latest.rssiDbm!,
+      snrDb: latest.snrDb,
+      beaconPower: latest.beaconPower!,
+      ageSeconds: age.inSeconds,
+    );
+    session.addReading(
+      _selfPrefixHex ?? 'me',
+      _transport.selfName ?? '',
+      reading,
+      latest.at,
+      mine: true,
+    );
+    notifyListeners();
+    final alert = _incoming.where((a) => a.key == session.alertKey).firstOrNull;
+    await _sendChannelPacket(
+      SosPacket(
+        kind: SosPacketKind.report,
+        id: session.id,
+        senderPrefix: _transport.selfPublicKey ?? Uint8List(0),
+        senderName: _transport.selfName ?? '',
+        reading: reading,
+      ),
+      session: alert == null ? null : _alertSession(alert),
+    );
+  }
+
+  String? get _selfPrefixHex {
+    final k = _transport.selfPublicKey;
+    return k == null || k.length < SosPacket.keyPrefixSize
+        ? null
+        : _hex(k.sublist(0, SosPacket.keyPrefixSize));
+  }
+
+  /// Another searcher's reading of the radio we're searching for.
+  void _onReport(SosPacket packet) {
+    final session = _locator;
+    final r = packet.reading;
+    if (session == null || session.id != packet.id || r == null) return;
+    session.addReading(
+      _hex(packet.senderPrefix),
+      packet.senderName,
+      r,
+      _now().subtract(Duration(seconds: r.ageSeconds)),
+    );
+    notifyListeners();
   }
 
   /// Someone searching for our SOS: (re)start our beacons.
@@ -358,8 +490,21 @@ class SosService extends ChangeNotifier {
         snrDb: signal.snrDb,
         rssiDbm: signal.rssiDbm,
         seq: packet.seq,
+        beaconPower: packet.power,
       ),
     );
+    session.beaconPower = packet.power;
+    session.beaconFull = packet.fullPower;
+    session.setBy = packet.setBy;
+    final asked = session.askedPower;
+    if (asked != null &&
+        packet.power != null &&
+        (asked == SosPacket.powerFull
+            ? packet.fullPower
+            : packet.power == asked ||
+                  packet.fullPower && asked > packet.power!)) {
+      session.askedPower = null; // it took
+    }
     notifyListeners();
   }
 
@@ -1252,6 +1397,8 @@ class SosService extends ChangeNotifier {
         _onLocateRequest(packet.id, packet.senderName);
       case SosPacketKind.beacon:
         _onBeacon(packet, signal);
+      case SosPacketKind.report:
+        _onReport(packet);
     }
   }
 
@@ -1650,16 +1797,33 @@ class SosBeaconSample {
   final int? rssiDbm;
   final int? seq;
 
+  /// The power the beacon was sent at, when its radio says (MeshCore SOS
+  /// firmware 1.6.1); null from a phone app or an older radio.
+  final int? beaconPower;
+
   const SosBeaconSample({
     required this.at,
     required this.snrDb,
     this.rssiDbm,
     this.seq,
+    this.beaconPower,
   });
 
   /// The strength the meter shows: RSSI when known (it tracks distance more
   /// smoothly), otherwise SNR.
   double get strength => rssiDbm?.toDouble() ?? snrDb;
+}
+
+/// A searcher on the shared map: their readings, newest last.
+class SosSearcher {
+  final String who;
+  String name;
+  final bool mine;
+  final List<SosSearchReading> readings = [];
+
+  SosSearcher({required this.who, required this.name, this.mine = false});
+
+  SosSearchReading? get latest => readings.isEmpty ? null : readings.last;
 }
 
 /// A responder's search for the radio that sent an SOS: the beacons heard,
@@ -1674,6 +1838,57 @@ class SosLocatorSession {
   SosLocatorSession({required this.alertKey, required this.id});
 
   static const int _keep = 120;
+
+  /// The beacons' power as the latest beacon says (null: its radio doesn't
+  /// say, so it can't be changed), whether that is the radio's own, and who
+  /// last set it.
+  int? beaconPower;
+  bool beaconFull = false;
+  String setBy = '';
+
+  /// A power this searcher asked for that no beacon has confirmed yet.
+  int? askedPower;
+  DateTime? askedAt;
+
+  /// Every searcher's readings (this one's too), by key prefix: where they
+  /// were and what they heard, for the shared map.
+  final Map<String, SosSearcher> searchers = {};
+
+  static const int _readingsKept = 12;
+
+  void addReading(
+    String who,
+    String name,
+    SosReading r,
+    DateTime at, {
+    bool mine = false,
+  }) {
+    final s = searchers.putIfAbsent(
+      who,
+      () => SosSearcher(who: who, name: name, mine: mine),
+    );
+    s.name = name.isEmpty ? s.name : name;
+    s.readings.add(
+      SosSearchReading(
+        who: who,
+        latitude: r.latitude,
+        longitude: r.longitude,
+        rssiDbm: r.rssiDbm,
+        beaconPower: r.beaconPower,
+        at: at,
+      ),
+    );
+    if (s.readings.length > _readingsKept) s.readings.removeAt(0);
+  }
+
+  /// All searchers' readings together.
+  List<SosSearchReading> get readings => [
+    for (final s in searchers.values) ...s.readings,
+  ];
+
+  /// Where the readings agree the radio is, once they come from two places.
+  SosSearchEstimate? estimate({DateTime? now}) =>
+      SosSearch.estimate(readings, now: now);
 
   void add(SosBeaconSample sample) {
     samples.add(sample);

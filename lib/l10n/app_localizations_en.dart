@@ -6816,6 +6816,98 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sosLocator_steady => 'About the same';
 
   @override
+  String get sosLocator_powerTitle => 'Beacon power';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Beacons at $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Beacons at full power';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'set by $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'This radio\'s beacon power can\'t be changed (an SOS from a phone app, or older firmware).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Asking for $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Full';
+
+  @override
+  String get sosLocator_powerHigh => 'High';
+
+  @override
+  String get sosLocator_powerMedium => 'Medium';
+
+  @override
+  String get sosLocator_powerLow => 'Low';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Very low';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Any searcher can change it: agree it with the others first. Turn it down as you close in, so only searchers near enough still hear the beacons. The SOS itself always goes at full power.';
+
+  @override
+  String get sosLocator_mapButton => 'Search map';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Readings from $count searchers',
+      one: 'Readings from 1 searcher',
+      zero: 'Your readings are shared with the other searchers',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Find the direction';
+
+  @override
+  String get sosLocator_direction =>
+      'Hold your radio flat against your chest and turn slowly on the spot, a quarter turn at a time, waiting for a beacon at each. Your body blocks the signal from behind you: where it is weakest, the radio is behind your back. Then walk the other way.';
+
+  @override
+  String get sosSearchMap_title => 'Search map';
+
+  @override
+  String get sosSearchMap_you => 'You';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Last known position';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Search area about $metres m across, from $readings readings at $places places';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'One place gives a ring, not an area: a reading from a second place, or from another searcher, is needed.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'No readings yet. Yours are shared every 30 s once a beacon is heard and your phone knows where it is.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Each ring is how far a searcher\'s reading puts the radio. It is rough: terrain, trees and bodies weaken the signal. Search where the rings meet, the shaded area first.';
+
+  @override
   String get sos_alarmSound => 'Alarm sound';
 
   @override

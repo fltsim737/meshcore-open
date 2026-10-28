@@ -6898,6 +6898,98 @@ class AppLocalizationsBg extends AppLocalizations {
   String get sosLocator_steady => 'Горе-долу същото';
 
   @override
+  String get sosLocator_powerTitle => 'Мощност на маяка';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Маяци на $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Маяци на пълна мощност';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'зададена от $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Мощността на маяка на това радио не може да се променя (SOS от приложение на телефон или по-стар фърмуер).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Заявка за $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Пълна';
+
+  @override
+  String get sosLocator_powerHigh => 'Висока';
+
+  @override
+  String get sosLocator_powerMedium => 'Средна';
+
+  @override
+  String get sosLocator_powerLow => 'Ниска';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Много ниска';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Всеки търсещ може да я промени: първо се разберете с останалите. Намалявайте я, докато приближавате, за да чуват маяците само търсещите наблизо. Самото SOS винаги се изпраща с пълна мощност.';
+
+  @override
+  String get sosLocator_mapButton => 'Карта на търсенето';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Измервания от $count търсещи',
+      one: 'Измервания от 1 търсещ',
+      zero: 'Вашите измервания се споделят с другите търсещи',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Намиране на посоката';
+
+  @override
+  String get sosLocator_direction =>
+      'Дръжте радиото плоско до гърдите си и се завъртете бавно на място, по четвърт оборот, като изчаквате маяк при всеки. Тялото ви блокира сигнала отзад: там, където е най-слаб, радиото е зад гърба ви. След това вървете в обратната посока.';
+
+  @override
+  String get sosSearchMap_title => 'Карта на търсенето';
+
+  @override
+  String get sosSearchMap_you => 'Вие';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Последно известно място';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Район за търсене около $metres м в диаметър, от $readings измервания на $places места';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Едно място дава пръстен, не район: нужно е измерване от второ място или от друг търсещ.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Още няма измервания. Вашите се споделят на всеки 30 с, щом се чуе маяк и телефонът знае къде е.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Всеки пръстен показва колко далеч поставя радиото измерването на един търсещ. Това е грубо: теренът, дърветата и телата отслабват сигнала. Търсете там, където пръстените се срещат, първо в засенчения район.';
+
+  @override
   String get sos_alarmSound => 'Звук на тревогата';
 
   @override

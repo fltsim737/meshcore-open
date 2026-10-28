@@ -6892,6 +6892,98 @@ class AppLocalizationsPt extends AppLocalizations {
   String get sosLocator_steady => 'Mais ou menos igual';
 
   @override
+  String get sosLocator_powerTitle => 'Potência do sinalizador';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Sinalizadores a $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Sinalizadores à potência máxima';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'definida por $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'A potência do sinalizador deste rádio não pode ser alterada (um SOS de uma app de telemóvel ou firmware antigo).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'A pedir $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Máxima';
+
+  @override
+  String get sosLocator_powerHigh => 'Alta';
+
+  @override
+  String get sosLocator_powerMedium => 'Média';
+
+  @override
+  String get sosLocator_powerLow => 'Baixa';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Muito baixa';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Qualquer pessoa na busca pode alterá-la: combinem primeiro entre todos. Baixem-na à medida que se aproximam, para que só quem está perto continue a ouvir os sinalizadores. O próprio SOS sai sempre à potência máxima.';
+
+  @override
+  String get sosLocator_mapButton => 'Mapa de busca';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Leituras de $count pessoas na busca',
+      one: 'Leituras de 1 pessoa na busca',
+      zero: 'As tuas leituras são partilhadas com os outros na busca',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Encontrar a direção';
+
+  @override
+  String get sosLocator_direction =>
+      'Segura o rádio encostado ao peito e roda devagar no mesmo sítio, um quarto de volta de cada vez, esperando por um sinalizador em cada um. O teu corpo bloqueia o sinal vindo de trás: onde for mais fraco, o rádio está atrás das tuas costas. Depois caminha para o lado oposto.';
+
+  @override
+  String get sosSearchMap_title => 'Mapa de busca';
+
+  @override
+  String get sosSearchMap_you => 'Tu';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Última posição conhecida';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Área de busca com cerca de $metres m de largura, a partir de $readings leituras em $places locais';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Um local dá um anel, não uma área: é preciso uma leitura de um segundo local ou de outra pessoa na busca.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Ainda sem leituras. As tuas são partilhadas a cada 30 s quando se ouve um sinalizador e o telemóvel sabe onde está.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Cada anel mostra a que distância a leitura de uma pessoa coloca o rádio. É aproximado: o terreno, as árvores e os corpos enfraquecem o sinal. Procura onde os anéis se encontram, primeiro na área sombreada.';
+
+  @override
   String get sos_alarmSound => 'Som do alarme';
 
   @override

@@ -6599,6 +6599,97 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sosLocator_steady => '비슷함';
 
   @override
+  String get sosLocator_powerTitle => '비콘 출력';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return '비콘 $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => '비콘 최대 출력';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return '$name 님이 설정';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      '이 무전기의 비콘 출력은 바꿀 수 없습니다(휴대폰 앱에서 보낸 SOS 또는 이전 펌웨어).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return '$step 요청 중…';
+  }
+
+  @override
+  String get sosLocator_powerFull => '최대';
+
+  @override
+  String get sosLocator_powerHigh => '높음';
+
+  @override
+  String get sosLocator_powerMedium => '중간';
+
+  @override
+  String get sosLocator_powerLow => '낮음';
+
+  @override
+  String get sosLocator_powerVeryLow => '매우 낮음';
+
+  @override
+  String get sosLocator_powerHelp =>
+      '수색자 누구나 바꿀 수 있습니다. 먼저 다른 수색자와 협의하세요. 가까워질수록 낮추면 가까이 있는 수색자만 비콘을 듣게 됩니다. SOS 자체는 항상 최대 출력으로 전송됩니다.';
+
+  @override
+  String get sosLocator_mapButton => '수색 지도';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '수색자 $count명의 측정값',
+      zero: '내 측정값이 다른 수색자와 공유됩니다',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => '방향 찾기';
+
+  @override
+  String get sosLocator_direction =>
+      '무전기를 가슴에 평평하게 대고 제자리에서 90도씩 천천히 돌며 방향마다 비콘을 기다리세요. 몸이 뒤쪽 신호를 가리므로 가장 약한 방향에서는 무전기가 등 뒤에 있습니다. 그 반대 방향으로 가세요.';
+
+  @override
+  String get sosSearchMap_title => '수색 지도';
+
+  @override
+  String get sosSearchMap_you => '나';
+
+  @override
+  String get sosSearchMap_lastPosition => '마지막으로 알려진 위치';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return '수색 범위 지름 약 $metres m ($places곳에서 측정값 $readings개)';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      '한 곳의 측정은 범위가 아니라 고리를 만듭니다. 두 번째 장소나 다른 수색자의 측정값이 필요합니다.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      '아직 측정값이 없습니다. 비콘이 들리고 휴대폰이 위치를 알면 30초마다 공유됩니다.';
+
+  @override
+  String get sosSearchMap_explain =>
+      '각 고리는 수색자의 측정값으로 본 무전기까지의 거리입니다. 지형, 나무, 사람 몸이 신호를 약하게 하므로 대략적인 값입니다. 고리가 만나는 곳, 먼저 음영 영역을 수색하세요.';
+
+  @override
   String get sos_alarmSound => '경보음';
 
   @override

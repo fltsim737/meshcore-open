@@ -6915,6 +6915,98 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sosLocator_steady => 'Etwa gleich';
 
   @override
+  String get sosLocator_powerTitle => 'Bakenleistung';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Baken mit $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Baken mit voller Leistung';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'eingestellt von $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Die Bakenleistung dieses Funkgeräts lässt sich nicht ändern (ein SOS aus einer Handy-App oder ältere Firmware).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Fordere $step an…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Voll';
+
+  @override
+  String get sosLocator_powerHigh => 'Hoch';
+
+  @override
+  String get sosLocator_powerMedium => 'Mittel';
+
+  @override
+  String get sosLocator_powerLow => 'Niedrig';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Sehr niedrig';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Jeder Suchende kann sie ändern: zuerst mit den anderen absprechen. Beim Näherkommen herunterdrehen, damit nur noch Suchende in der Nähe die Baken hören. Das SOS selbst geht immer mit voller Leistung.';
+
+  @override
+  String get sosLocator_mapButton => 'Suchkarte';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Messwerte von $count Suchenden',
+      one: 'Messwerte von 1 Suchenden',
+      zero: 'Deine Messwerte werden mit den anderen Suchenden geteilt',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Richtung finden';
+
+  @override
+  String get sosLocator_direction =>
+      'Halte dein Funkgerät flach an die Brust und dreh dich langsam auf der Stelle, jeweils eine Vierteldrehung, und warte bei jeder auf eine Bake. Dein Körper schirmt das Signal von hinten ab: Wo es am schwächsten ist, liegt das Funkgerät hinter deinem Rücken. Geh dann in die andere Richtung.';
+
+  @override
+  String get sosSearchMap_title => 'Suchkarte';
+
+  @override
+  String get sosSearchMap_you => 'Du';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Letzte bekannte Position';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Suchgebiet etwa $metres m breit, aus $readings Messwerten an $places Orten';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Ein Ort ergibt einen Ring, kein Gebiet: Ein Messwert von einem zweiten Ort oder von einem anderen Suchenden wird gebraucht.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Noch keine Messwerte. Deine werden alle 30 s geteilt, sobald eine Bake zu hören ist und dein Handy seinen Standort kennt.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Jeder Ring zeigt, wie weit das Funkgerät laut Messwert eines Suchenden entfernt ist. Das ist grob: Gelände, Bäume und Körper schwächen das Signal. Such dort, wo sich die Ringe treffen, zuerst im schattierten Gebiet.';
+
+  @override
   String get sos_alarmSound => 'Alarmton';
 
   @override

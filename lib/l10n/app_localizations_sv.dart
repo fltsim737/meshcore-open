@@ -6844,6 +6844,98 @@ class AppLocalizationsSv extends AppLocalizations {
   String get sosLocator_steady => 'Ungefär samma';
 
   @override
+  String get sosLocator_powerTitle => 'Fyrens effekt';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Fyrar på $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Fyrar på full effekt';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'inställd av $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Den här radions fyreffekt kan inte ändras (ett SOS från en telefonapp, eller äldre firmware).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Begär $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Full';
+
+  @override
+  String get sosLocator_powerHigh => 'Hög';
+
+  @override
+  String get sosLocator_powerMedium => 'Medel';
+
+  @override
+  String get sosLocator_powerLow => 'Låg';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Mycket låg';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Alla som söker kan ändra den: kom överens med de andra först. Sänk den när ni närmar er, så att bara de som är nära fortfarande hör fyrarna. Själva SOS:et går alltid på full effekt.';
+
+  @override
+  String get sosLocator_mapButton => 'Sökkarta';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Mätningar från $count sökare',
+      one: 'Mätningar från 1 sökare',
+      zero: 'Dina mätningar delas med de andra som söker',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Hitta riktningen';
+
+  @override
+  String get sosLocator_direction =>
+      'Håll radion platt mot bröstet och vrid dig långsamt på stället, ett kvarts varv i taget, och vänta på en fyr vid varje. Kroppen skymmer signalen bakifrån: där den är svagast finns radion bakom din rygg. Gå sedan åt andra hållet.';
+
+  @override
+  String get sosSearchMap_title => 'Sökkarta';
+
+  @override
+  String get sosSearchMap_you => 'Du';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Senast kända position';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Sökområde ungefär $metres m brett, från $readings mätningar på $places platser';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'En plats ger en ring, inte ett område: en mätning från en andra plats, eller från en annan sökare, behövs.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Inga mätningar än. Dina delas var 30:e sekund när en fyr hörs och telefonen vet var den är.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Varje ring visar hur långt bort en sökares mätning placerar radion. Det är grovt: terräng, träd och kroppar försvagar signalen. Sök där ringarna möts, först i det skuggade området.';
+
+  @override
   String get sos_alarmSound => 'Larmljud';
 
   @override

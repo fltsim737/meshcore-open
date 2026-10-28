@@ -6875,6 +6875,100 @@ class AppLocalizationsSk extends AppLocalizations {
   String get sosLocator_steady => 'Približne rovnako';
 
   @override
+  String get sosLocator_powerTitle => 'Výkon majáka';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'Majáky na $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'Majáky na plný výkon';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return 'nastavil(a) $name';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'Výkon majáka tohto rádia sa nedá zmeniť (SOS z aplikácie v telefóne alebo starší firmvér).';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return 'Žiadam $step…';
+  }
+
+  @override
+  String get sosLocator_powerFull => 'Plný';
+
+  @override
+  String get sosLocator_powerHigh => 'Vysoký';
+
+  @override
+  String get sosLocator_powerMedium => 'Stredný';
+
+  @override
+  String get sosLocator_powerLow => 'Nízky';
+
+  @override
+  String get sosLocator_powerVeryLow => 'Veľmi nízky';
+
+  @override
+  String get sosLocator_powerHelp =>
+      'Ktokoľvek z hľadajúcich ho môže zmeniť: najprv sa dohodnite s ostatnými. Pri približovaní ho znižujte, aby majáky počuli už len hľadajúci nablízku. Samotné SOS ide vždy na plný výkon.';
+
+  @override
+  String get sosLocator_mapButton => 'Mapa pátrania';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Merania od $count hľadajúcich',
+      many: 'Merania od $count hľadajúcich',
+      few: 'Merania od $count hľadajúcich',
+      one: 'Merania od 1 hľadajúceho',
+      zero: 'Vaše merania sa zdieľajú s ostatnými hľadajúcimi',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => 'Nájdenie smeru';
+
+  @override
+  String get sosLocator_direction =>
+      'Držte rádio naplocho pri hrudi a pomaly sa otáčajte na mieste, vždy o štvrť otáčky, a pri každej počkajte na maják. Vaše telo tieni signál zozadu: kde je najslabší, rádio je za vašim chrbtom. Potom choďte opačným smerom.';
+
+  @override
+  String get sosSearchMap_title => 'Mapa pátrania';
+
+  @override
+  String get sosSearchMap_you => 'Vy';
+
+  @override
+  String get sosSearchMap_lastPosition => 'Posledná známa poloha';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return 'Oblasť pátrania široká asi $metres m, z $readings meraní na $places miestach';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      'Jedno miesto dáva kruh, nie oblasť: treba meranie z druhého miesta alebo od iného hľadajúceho.';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'Zatiaľ žiadne merania. Vaše sa zdieľajú každých 30 s, keď je počuť maják a telefón pozná svoju polohu.';
+
+  @override
+  String get sosSearchMap_explain =>
+      'Každý kruh ukazuje, ako ďaleko podľa merania hľadajúceho je rádio. Je to hrubý odhad: terén, stromy a telá oslabujú signál. Hľadajte tam, kde sa kruhy stretávajú, najprv v zatienenej oblasti.';
+
+  @override
   String get sos_alarmSound => 'Zvuk alarmu';
 
   @override

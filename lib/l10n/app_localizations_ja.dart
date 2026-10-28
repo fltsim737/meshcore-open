@@ -6589,6 +6589,97 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sosLocator_steady => 'ほぼ同じ';
 
   @override
+  String get sosLocator_powerTitle => 'ビーコン出力';
+
+  @override
+  String sosLocator_powerNow(int dbm) {
+    return 'ビーコン $dbm dBm';
+  }
+
+  @override
+  String get sosLocator_powerNowFull => 'ビーコン最大出力';
+
+  @override
+  String sosLocator_powerSetBy(String name) {
+    return '$name が設定';
+  }
+
+  @override
+  String get sosLocator_powerUnknown =>
+      'この無線機のビーコン出力は変更できません（スマホアプリからのSOS、または古いファームウェア）。';
+
+  @override
+  String sosLocator_powerAsking(String step) {
+    return '$step を要求中…';
+  }
+
+  @override
+  String get sosLocator_powerFull => '最大';
+
+  @override
+  String get sosLocator_powerHigh => '高';
+
+  @override
+  String get sosLocator_powerMedium => '中';
+
+  @override
+  String get sosLocator_powerLow => '低';
+
+  @override
+  String get sosLocator_powerVeryLow => '最低';
+
+  @override
+  String get sosLocator_powerHelp =>
+      '捜索者なら誰でも変更できます。先に他の捜索者と相談してください。近づくにつれて下げると、近くの捜索者だけがビーコンを受信できます。SOS自体は常に最大出力で送信されます。';
+
+  @override
+  String get sosLocator_mapButton => '捜索マップ';
+
+  @override
+  String sosLocator_sharing(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 人の捜索者の測定値',
+      zero: 'あなたの測定値は他の捜索者と共有されます',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sosLocator_directionTitle => '方向を探す';
+
+  @override
+  String get sosLocator_direction =>
+      '無線機を胸に平らに当て、その場でゆっくり90度ずつ回り、それぞれの向きでビーコンを待ちます。体が背後からの信号を遮るため、最も弱い向きでは無線機は背中側にあります。その反対方向へ進んでください。';
+
+  @override
+  String get sosSearchMap_title => '捜索マップ';
+
+  @override
+  String get sosSearchMap_you => 'あなた';
+
+  @override
+  String get sosSearchMap_lastPosition => '最後の既知の位置';
+
+  @override
+  String sosSearchMap_estimate(int metres, int readings, int places) {
+    return '捜索範囲 直径約 $metres m（$places か所での $readings 件の測定値から）';
+  }
+
+  @override
+  String get sosSearchMap_needMore =>
+      '1か所の測定では範囲ではなく輪になります。2か所目、または別の捜索者の測定値が必要です。';
+
+  @override
+  String get sosSearchMap_noReadings =>
+      'まだ測定値がありません。ビーコンを受信し、スマホが位置を把握すると、30秒ごとに共有されます。';
+
+  @override
+  String get sosSearchMap_explain =>
+      '各輪は、捜索者の測定値から推定した無線機までの距離です。地形、木、人体で信号が弱まるため、おおよその目安です。輪が重なる場所、まず網掛けの範囲を捜索してください。';
+
+  @override
   String get sos_alarmSound => 'アラーム音';
 
   @override
