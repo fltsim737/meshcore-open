@@ -3229,7 +3229,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Inställningarna har ännu inte hämtats från den här repeatern.';
+      'För att spara sändningstid hämtas inget från den här repeatern förrän du ber om det. Tryck på ⟳ bredvid en inställning för att hämta bara den.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

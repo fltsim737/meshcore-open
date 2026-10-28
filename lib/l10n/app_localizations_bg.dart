@@ -3261,7 +3261,7 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Настройките още не са заредени от този повторител.';
+      'За да се пести ефирно време, нищо не се чете от този повторител, докато не поискате. Докоснете ⟳ до настройка, за да прочетете само нея.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

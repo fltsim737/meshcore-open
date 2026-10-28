@@ -3244,7 +3244,7 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Nastavitve še niso naložene s tega ponovitelja.';
+      'Da prihranimo čas oddajanja, s tega ponovitelja ni nič prebrano, dokler tega ne zahtevate. Tapnite ⟳ ob nastavitvi, da preberete samo njo.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

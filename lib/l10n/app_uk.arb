@@ -3042,7 +3042,7 @@
   "repeater_roleAdmin": "Адміністратор",
   "repeater_roleGuest": "Гість",
   "repeater_refreshAll": "Оновити все",
-  "repeater_settingsNotLoaded": "Налаштування ще не завантажено з цього ретранслятора.",
+  "repeater_settingsNotLoaded": "Щоб заощадити ефірний час, з цього ретранслятора нічого не зчитується, доки ви не попросите. Торкніться ⟳ біля налаштування, щоб зчитати лише його.",
   "repeater_settingsLoadIncomplete": "Деякі налаштування не вдалося завантажити. Скористайтеся кнопками оновлення, щоб повторити спробу.",
   "contacts_scanQrCode": "Сканувати QR-код",
   "contacts_scanQrInstructions": "Спрямуйте камеру на QR-код контакту MeshCore",

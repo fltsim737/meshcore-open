@@ -3101,7 +3101,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "VENDÉG",
   "repeater_refreshAll": "Összes frissítése",
-  "repeater_settingsNotLoaded": "A beállításokat még nem töltöttük le erről az átjátszóról.",
+  "repeater_settingsNotLoaded": "Az adási idő kímélése érdekében semmit sem olvasunk be erről az átjátszóról, amíg nem kéri. Koppintson a ⟳ ikonra egy beállítás mellett, hogy csak azt olvassa be.",
   "repeater_settingsLoadIncomplete": "Néhány beállítást nem sikerült betölteni. Az újrapróbálkozáshoz használja a frissítés gombokat.",
   "contacts_scanQrCode": "QR-kód beolvasása",
   "contacts_scanQrInstructions": "Irányítsa a kamerát a MeshCore névjegy QR-kódjára",

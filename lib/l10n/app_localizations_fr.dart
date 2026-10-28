@@ -3271,7 +3271,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Les paramètres n\'ont pas encore été chargés depuis ce répéteur.';
+      'Pour économiser le temps d\'antenne, rien n\'est lu depuis ce répéteur tant que vous ne le demandez pas. Touchez ⟳ à côté d\'un paramètre pour lire uniquement celui-ci.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

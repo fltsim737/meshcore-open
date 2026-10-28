@@ -3276,7 +3276,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Ustawienia nie zostały jeszcze wczytane z tego przekaźnika.';
+      'Aby oszczędzać czas nadawania, nic nie jest odczytywane z tego przekaźnika, dopóki o to nie poprosisz. Stuknij ⟳ obok ustawienia, aby odczytać tylko je.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

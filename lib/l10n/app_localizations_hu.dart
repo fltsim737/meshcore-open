@@ -3249,7 +3249,7 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'A beállításokat még nem töltöttük le erről az átjátszóról.';
+      'Az adási idő kímélése érdekében semmit sem olvasunk be erről az átjátszóról, amíg nem kéri. Koppintson a ⟳ ikonra egy beállítás mellett, hogy csak azt olvassa be.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

@@ -3241,7 +3241,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Nastavenia zatiaľ neboli načítané z tohto opakovača.';
+      'Aby sa šetril vysielací čas, z tohto opakovača sa nič nenačíta, kým o to nepožiadate. Ťuknite na ⟳ pri nastavení a načíta sa len to.';
 
   @override
   String get repeater_settingsLoadIncomplete =>

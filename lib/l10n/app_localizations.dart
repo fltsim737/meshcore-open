@@ -5735,7 +5735,7 @@ abstract class AppLocalizations {
   /// No description provided for @repeater_settingsNotLoaded.
   ///
   /// In en, this message translates to:
-  /// **'Settings haven\'t been loaded from this repeater yet.'**
+  /// **'Nothing is read from this repeater until you ask, to save air time. Tap ⟳ next to a setting to read just that one.'**
   String get repeater_settingsNotLoaded;
 
   /// No description provided for @repeater_settingsLoadIncomplete.

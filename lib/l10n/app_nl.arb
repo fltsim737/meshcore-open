@@ -1269,7 +1269,7 @@
   "repeater_refreshGuestAccess": "Gasttoegang vernieuwen",
   "repeater_refreshPrivacyMode": "Privacymodus vernieuwen",
   "repeater_refreshAll": "Alles vernieuwen",
-  "repeater_settingsNotLoaded": "De instellingen van deze repeater zijn nog niet geladen.",
+  "repeater_settingsNotLoaded": "Om zendtijd te besparen wordt niets van deze repeater gelezen totdat je erom vraagt. Tik op ⟳ naast een instelling om alleen die te lezen.",
   "repeater_settingsLoadIncomplete": "Sommige instellingen konden niet worden geladen. Gebruik de vernieuwknoppen om het opnieuw te proberen.",
   "repeater_refreshed": "{label} is vernieuwd",
   "@repeater_refreshed": {

@@ -3095,7 +3095,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "GOŚĆ",
   "repeater_refreshAll": "Odśwież wszystko",
-  "repeater_settingsNotLoaded": "Ustawienia nie zostały jeszcze wczytane z tego przekaźnika.",
+  "repeater_settingsNotLoaded": "Aby oszczędzać czas nadawania, nic nie jest odczytywane z tego przekaźnika, dopóki o to nie poprosisz. Stuknij ⟳ obok ustawienia, aby odczytać tylko je.",
   "repeater_settingsLoadIncomplete": "Nie udało się wczytać niektórych ustawień. Użyj przycisków odświeżania, aby spróbować ponownie.",
   "contacts_scanQrCode": "Skanuj kod QR",
   "contacts_scanQrInstructions": "Skieruj kamerę na kod QR kontaktu MeshCore",

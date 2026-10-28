@@ -3196,7 +3196,7 @@
   "repeater_roleAdmin": "ADMIN",
   "repeater_roleGuest": "INVITÉ",
   "repeater_refreshAll": "Tout rafraîchir",
-  "repeater_settingsNotLoaded": "Les paramètres n'ont pas encore été chargés depuis ce répéteur.",
+  "repeater_settingsNotLoaded": "Pour économiser le temps d'antenne, rien n'est lu depuis ce répéteur tant que vous ne le demandez pas. Touchez ⟳ à côté d'un paramètre pour lire uniquement celui-ci.",
   "repeater_settingsLoadIncomplete": "Certains paramètres n'ont pas pu être chargés. Utilisez les boutons de rafraîchissement pour réessayer.",
   "contacts_scanQrCode": "Scanner un QR code",
   "contacts_scanQrInstructions": "Pointez l'appareil photo sur le QR code d'un contact MeshCore",

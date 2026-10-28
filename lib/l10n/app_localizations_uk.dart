@@ -3257,7 +3257,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get repeater_settingsNotLoaded =>
-      'Налаштування ще не завантажено з цього ретранслятора.';
+      'Щоб заощадити ефірний час, з цього ретранслятора нічого не зчитується, доки ви не попросите. Торкніться ⟳ біля налаштування, щоб зчитати лише його.';
 
   @override
   String get repeater_settingsLoadIncomplete =>
