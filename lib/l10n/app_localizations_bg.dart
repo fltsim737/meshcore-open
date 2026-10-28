@@ -1758,7 +1758,7 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Часът на това съобщение е в бъдещето, така че часовникът на подателя може да е грешен. Показано е по реда на получаване.';
+      'Часовникът на подателя изглежда грешен, затова тук е показано кога е пристигнало съобщението.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7017,4 +7017,15 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Ако страницата с настройки не показва това приложение или настройка не остава включена: затворете всички приложения, рестартирайте телефона и опитайте отново.';
+
+  @override
+  String get sos_dndAccess => 'SOS през „Не безпокойте“';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Вкл.: SOS звучи дори при включено „Не безпокойте“, телефон на безшумен режим или друго приложение, което възпроизвежда звук';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Изкл.: „Не безпокойте“ може да заглуши SOS. Докоснете и разрешете достъп до „Не безпокойте“ за това приложение';
 }

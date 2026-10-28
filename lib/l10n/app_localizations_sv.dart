@@ -1732,7 +1732,7 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Det här meddelandets tid ligger i framtiden, så avsändarens klocka kan vara fel. Det visas i den ordning det kom in.';
+      'Avsändarens klocka verkar gå fel, så här visas när meddelandet kom fram.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -6964,4 +6964,15 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Om inställningssidan inte visar den här appen eller en inställning inte stannar kvar: stäng alla appar, starta om telefonen och försök igen.';
+
+  @override
+  String get sos_dndAccess => 'SOS genom Stör ej';
+
+  @override
+  String get sos_dndAccessOn =>
+      'På: ett SOS hörs även när Stör ej är på, telefonen är ljudlös eller en annan app spelar upp ljud';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Av: Stör ej kan tysta ett SOS. Tryck och tillåt åtkomst till Stör ej för den här appen';
 }

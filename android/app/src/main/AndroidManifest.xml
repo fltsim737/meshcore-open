@@ -20,6 +20,9 @@
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
     <!-- ...and, unlocked, lets the app open its alert from the background ("Display over other apps") -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- An incoming SOS sounds through Do Not Disturb (with the access the person grants), and vibrates -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- Install-time permission that lets the connected-device service start before a radio
          is connected (Android 14 requires one such permission) -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>

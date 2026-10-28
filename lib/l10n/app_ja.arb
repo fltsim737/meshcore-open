@@ -3270,7 +3270,7 @@
   "appSettings_regionOnHopsLineSubtitle": "チャンネルメッセージの地域を、ホップ数の下ではなく同じ行に表示します。",
   "channels_regionRadioDefaultSuffix": "（無線機の既定）",
   "channels_regionRadioDefaultApplies": "この無線機は、地域なしのフラッドを既定の地域で送信します：{region}。",
-  "chat_futureTimestampWarning": "このメッセージの時刻は未来です。送信者の時計がずれている可能性があります。届いた順に表示しています。",
+  "chat_futureTimestampWarning": "送信者の時計が正しくないようなので、メッセージが届いた時刻を表示しています。",
   "discoveredContacts_scan": "近くのノードをスキャン",
   "discoveredContacts_scanTitle": "近くのノード",
   "discoveredContacts_scanExplanation": "直接電波が届く範囲のノードに応答を求めます。リピータとセンサーが応答します。ルームサーバーやコンパニオンは通常応答しません。",
@@ -3723,5 +3723,8 @@
   "sos_fullScreenLockedOnly": "ロック中のみ。タップして「他のアプリの上に重ねて表示」を許可すると、使用中でもSOSで赤いアラートが開きます",
   "sos_fullScreenOff": "オフ: SOSは通知のみです。タップしてこのアプリの全画面通知を許可してください",
   "sos_fullScreenAllow": "許可",
-  "sos_fullScreenRestartTip": "設定ページにこのアプリが表示されない、または設定がオンのままにならない場合は、すべてのアプリを閉じてスマートフォンを再起動し、もう一度お試しください。"
+  "sos_fullScreenRestartTip": "設定ページにこのアプリが表示されない、または設定がオンのままにならない場合は、すべてのアプリを閉じてスマートフォンを再起動し、もう一度お試しください。",
+  "sos_dndAccess": "おやすみモード中もSOSを鳴らす",
+  "sos_dndAccessOn": "オン：おやすみモード、マナーモード中や、他のアプリが音を再生中でもSOSが鳴ります",
+  "sos_dndAccessOff": "オフ：おやすみモードでSOSが鳴らないことがあります。タップして、このアプリにおやすみモードへのアクセスを許可してください"
 }

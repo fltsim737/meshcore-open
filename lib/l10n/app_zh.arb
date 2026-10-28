@@ -3141,7 +3141,7 @@
   "appSettings_regionOnHopsLineSubtitle": "将频道消息的地区与跳数显示在同一行，而不是在其下方。",
   "channels_regionRadioDefaultSuffix": "（电台默认）",
   "channels_regionRadioDefaultApplies": "此电台会用默认地区发送未指定地区的泛洪：{region}。",
-  "chat_futureTimestampWarning": "此消息的时间在未来，发送方的时钟可能有误。已按到达顺序显示。",
+  "chat_futureTimestampWarning": "发送者的时钟似乎不正确，因此这里显示的是消息到达的时间。",
   "discoveredContacts_scan": "扫描附近节点",
   "discoveredContacts_scanTitle": "附近节点",
   "discoveredContacts_scanExplanation": "请求直接无线电范围内的节点自报身份。中继器和传感器会响应，房间服务器和伴侣设备通常不会。",
@@ -3594,5 +3594,8 @@
   "sos_fullScreenLockedOnly": "仅在手机锁定时。点按并允许“显示在其他应用上层”,手机使用中 SOS 也会打开红色警报",
   "sos_fullScreenOff": "关闭:SOS 只显示通知。点按并允许此应用使用全屏通知",
   "sos_fullScreenAllow": "允许",
-  "sos_fullScreenRestartTip": "如果设置页面不显示此应用,或某项设置无法保持开启:关闭所有应用,重启手机,然后再试一次。"
+  "sos_fullScreenRestartTip": "如果设置页面不显示此应用,或某项设置无法保持开启:关闭所有应用,重启手机,然后再试一次。",
+  "sos_dndAccess": "勿扰模式下仍发出SOS警报",
+  "sos_dndAccessOn": "开启：即使开启勿扰模式、手机静音或其他应用正在播放声音，SOS 也会响起",
+  "sos_dndAccessOff": "关闭：勿扰模式可能使 SOS 静音。点按并允许此应用访问勿扰模式"
 }

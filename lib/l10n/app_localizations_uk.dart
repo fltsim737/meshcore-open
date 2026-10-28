@@ -1747,7 +1747,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Час цього повідомлення в майбутньому, тож годинник відправника може бути неточним. Повідомлення показано в порядку отримання.';
+      'Годинник відправника, схоже, неправильний, тому показано час отримання повідомлення.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7032,4 +7032,15 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Якщо сторінка налаштувань не показує цю програму або налаштування не зберігається: закрийте всі програми, перезапустіть телефон і спробуйте ще раз.';
+
+  @override
+  String get sos_dndAccess => 'SOS у режимі «Не турбувати»';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Увімк.: SOS звучить, навіть коли ввімкнено «Не турбувати», телефон у беззвучному режимі або інша програма відтворює звук';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Вимк.: режим «Не турбувати» може заглушити SOS. Торкніться й дозвольте цій програмі доступ до режиму «Не турбувати»';
 }

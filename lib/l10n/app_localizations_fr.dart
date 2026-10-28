@@ -1757,7 +1757,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'L\'heure de ce message est dans le futur, l\'horloge de l\'expéditeur est peut-être incorrecte. Il est affiché dans l\'ordre d\'arrivée.';
+      'L\'horloge de l\'expéditeur semble fausse : l\'heure affichée est celle de l\'arrivée du message.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7048,4 +7048,15 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Si la page des réglages n\'affiche pas cette appli ou qu\'un réglage ne reste pas activé : fermez toutes les applis, redémarrez le téléphone, puis réessayez.';
+
+  @override
+  String get sos_dndAccess => 'SOS malgré Ne pas déranger';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Activé : un SOS sonne même avec Ne pas déranger, le téléphone en silencieux ou une autre application qui joue du son';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Désactivé : Ne pas déranger peut rendre un SOS silencieux. Touchez et autorisez l\'accès à Ne pas déranger pour cette application';
 }

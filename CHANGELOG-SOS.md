@@ -2,6 +2,22 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.7.2 (2026-10-28)
+
+### Changed: an SOS sounds when it matters
+
+- **An incoming SOS now sounds through Do Not Disturb, silent mode and other apps' audio** (Android). The app plays the alarm itself, as alarm audio: silent and vibrate mode don't mute it, the alarm volume is turned up for the alert, and it takes the sound from other apps (music, videos, a Discord call), which pause or go quiet until the alert is dealt with. Everything is put back afterwards. It also vibrates SOS in Morse.
+- **Do Not Disturb:** allow **SOS through Do Not Disturb** once (**Settings → App Settings → Emergency SOS**, or the warning on the Emergency tab) and an SOS breaks through it; if Do Not Disturb is set to silence alarms too, the app lets alarms through for the alert and puts your setting back afterwards.
+- **During a phone call** Android only lets other sound play quietly, so the alarm plays quietly in the earpiece, the phone vibrates and the full-screen alert shows.
+
+### Fixed
+
+- **Removing a contact no longer puts it in Discovered nearby**, so there's nothing to clear. It's listed there again only if it sends a new advert.
+- **"Last heard" is when you heard them.** It used the time inside the contact's advert, which is the other radio's clock: a repeater or radio with its clock wrong showed as heard months ago. It now uses when your radio or phone received it.
+- **Messages from a radio with a wrong clock** show when they arrived, with a clock icon, instead of a time months out or in the future; the clock icon now covers clocks that are far behind as well as ahead. A message's time is otherwise the sender's, as before.
+
+SOS alerts, acknowledgements and cancellations were already timed by your phone's clock, so a sender's wrong clock never affected them.
+
 ## 9.7.1 (2026-10-28)
 
 ### Changed: repeater settings save air time

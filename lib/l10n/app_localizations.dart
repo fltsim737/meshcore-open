@@ -3121,7 +3121,7 @@ abstract class AppLocalizations {
   /// No description provided for @chat_futureTimestampWarning.
   ///
   /// In en, this message translates to:
-  /// **'This message\'s time is in the future, so the sender\'s clock may be wrong. It is shown in the order it arrived.'**
+  /// **'The sender\'s clock looks wrong, so this shows when the message arrived.'**
   String get chat_futureTimestampWarning;
 
   /// No description provided for @chat_messageTooLong.
@@ -11754,6 +11754,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'If the settings page doesn\'t show this app, or a setting won\'t stay on: close all apps, restart the phone, then try again.'**
   String get sos_fullScreenRestartTip;
+
+  /// No description provided for @sos_dndAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS through Do Not Disturb'**
+  String get sos_dndAccess;
+
+  /// No description provided for @sos_dndAccessOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On: an SOS sounds even with Do Not Disturb on, the phone on silent, or another app playing sound'**
+  String get sos_dndAccessOn;
+
+  /// No description provided for @sos_dndAccessOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Off: Do Not Disturb can silence an SOS. Tap and allow Do Not Disturb access for this app'**
+  String get sos_dndAccessOff;
 }
 
 class _AppLocalizationsDelegate

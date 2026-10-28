@@ -1756,7 +1756,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Die Uhrzeit dieser Nachricht liegt in der Zukunft, daher könnte die Uhr des Absenders falsch gehen. Sie wird in der Reihenfolge ihres Eintreffens angezeigt.';
+      'Die Uhr des Absenders scheint falsch zu gehen, daher wird angezeigt, wann die Nachricht angekommen ist.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7036,4 +7036,15 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Wenn die Einstellungsseite diese App nicht zeigt oder eine Einstellung nicht bleibt: alle Apps schließen, das Handy neu starten und es noch einmal versuchen.';
+
+  @override
+  String get sos_dndAccess => 'SOS trotz „Bitte nicht stören“';
+
+  @override
+  String get sos_dndAccessOn =>
+      'An: Ein SOS ist auch bei „Bitte nicht stören“, lautlosem Telefon oder wenn eine andere App Ton abspielt, zu hören';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Aus: „Bitte nicht stören“ kann ein SOS stummschalten. Tippen und „Bitte nicht stören“-Zugriff für diese App erlauben';
 }

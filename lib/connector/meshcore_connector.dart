@@ -5182,10 +5182,10 @@ class MeshCoreConnector extends ChangeNotifier {
   }) async {
     if (!isConnected) return;
 
-    _handleDiscovery(
-      contact,
-      contact.rawPacket ?? Uint8List(0),
-      noNotify: true,
+    // Gone from Discovered nearby too: removing someone shouldn't leave them
+    // to clear from there. A new advert from them lists them again.
+    _discoveredContacts.removeWhere(
+      (c) => c.publicKeyHex == contact.publicKeyHex,
     );
 
     await sendFrame(buildRemoveContactFrame(contact.publicKey));
@@ -7241,7 +7241,7 @@ class MeshCoreConnector extends ChangeNotifier {
         );
       }
       if (contact != null) {
-        _updateContactLastMessageAt(contact.publicKeyHex, message.timestamp);
+        _updateContactLastMessageAt(contact.publicKeyHex, message.receivedAt);
       }
       if (!message.isOutgoing) {
         final existing = _conversations[message.senderKeyHex];
@@ -7713,7 +7713,7 @@ class MeshCoreConnector extends ChangeNotifier {
       final message = parsed.copyWith(packetHash: contentHash);
       _updateContactLastMessageAtByName(
         message.senderName,
-        message.timestamp,
+        message.receivedAt,
         pathBytes: message.pathBytes,
         pathHashWidth: message.pathHashWidth,
       );
@@ -7817,7 +7817,7 @@ class MeshCoreConnector extends ChangeNotifier {
 
           _updateContactLastMessageAtByName(
             parsed.senderName,
-            message.timestamp,
+            message.receivedAt,
             pathBytes: message.pathBytes,
             pathHashWidth: message.pathHashWidth,
           );
@@ -9164,7 +9164,6 @@ class MeshCoreConnector extends ChangeNotifier {
     String name = '';
     Uint8List publicKey = Uint8List(0);
     int type = 0;
-    int timestamp = 0;
     bool hasLocation = false;
     bool hasName = false;
     if (payloadType != payloadTypeADVERT) {
@@ -9173,7 +9172,7 @@ class MeshCoreConnector extends ChangeNotifier {
     }
     try {
       publicKey = packet.readBytes(32);
-      timestamp = packet.readInt32LE();
+      packet.skipBytes(4); // its advert time: the sender's clock, not used
       //TODO add signature verification
       packet.skipBytes(64); // Skip signature for now
       final flags = packet.readByte();
@@ -9210,7 +9209,7 @@ class MeshCoreConnector extends ChangeNotifier {
         pathHashWidth: pathHashWidth,
         latitude: latitude,
         longitude: longitude,
-        lastSeen: DateTime.fromMillisecondsSinceEpoch(timestamp * 1000),
+        lastSeen: DateTime.now(), // when we heard it: the sender's clock may be wrong
       ),
     );
   }
@@ -9241,7 +9240,6 @@ class MeshCoreConnector extends ChangeNotifier {
     String contactKeyHex = '';
     Uint8List publicKey = Uint8List(0);
     int type = 0;
-    int timestamp = 0;
     bool hasLocation = false;
     bool hasName = false;
     try {
@@ -9250,7 +9248,7 @@ class MeshCoreConnector extends ChangeNotifier {
           .map((b) => b.toRadixString(16).padLeft(2, '0'))
           .join();
 
-      timestamp = advert.readInt32LE();
+      advert.skipBytes(4); // its advert time: the sender's clock, not used
       //TODO add signature verification
       advert.skipBytes(64); // Skip signature for now
       final flags = advert.readByte();
@@ -9296,7 +9294,7 @@ class MeshCoreConnector extends ChangeNotifier {
         pathHashWidth: pathHashWidth,
         latitude: latitude,
         longitude: longitude,
-        lastSeen: DateTime.fromMillisecondsSinceEpoch(timestamp * 1000),
+        lastSeen: DateTime.now(), // when we heard it: the sender's clock may be wrong
       );
       // The firmware decides whether to store it: PUSH_CODE_ADVERT (then
       // GET_CONTACT_BY_KEY) adds it to _contacts and notifies.
@@ -9339,7 +9337,7 @@ class MeshCoreConnector extends ChangeNotifier {
         pathHashWidth: pathHashWidth,
         pathLength: path.isEmpty ? -1 : (path.length ~/ pathHashWidth),
         lastMessageAt: mergedLastMessageAt,
-        lastSeen: DateTime.fromMillisecondsSinceEpoch(timestamp * 1000),
+        lastSeen: DateTime.now(), // when we heard it: the sender's clock may be wrong
         pathOverride: existing.pathOverride, // Preserve user's path choice
         pathOverrideBytes: existing.pathOverrideBytes,
       );

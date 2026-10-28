@@ -79,7 +79,7 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 ### Receiving
 
-A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android it loops at alarm volume until the responder acknowledges or dismisses it. **Send ACK** answers on the mesh; **Message** opens a chat with the sender (sending the ACK again first, so their radio knows the responder). On Android the alert wakes the screen and shows over the lock screen. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
+A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android the app plays it as alarm audio, so silent and vibrate mode don't mute it: it turns the alarm volume up, takes the sound from other apps (music, videos, a call in Discord), vibrates SOS in Morse and loops until the responder acknowledges or dismisses it, then puts everything back. With **SOS through Do Not Disturb** allowed it also breaks through Do Not Disturb. During a phone call Android only lets it play quietly, so it vibrates and shows full screen as well. **Send ACK** answers on the mesh; **Message** opens a chat with the sender (sending the ACK again first, so their radio knows the responder). On Android the alert wakes the screen and shows over the lock screen. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
 
 **Locate** helps a responder close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and the responder's screen shows how strong each one is and whether they're getting warmer or colder.
 
@@ -120,7 +120,7 @@ Download the installer for your platform from the [Releases](https://github.com/
 1. Copy the APK to the phone and open it. Allow "install unknown apps" for your file manager if asked.
 2. On first launch, allow Bluetooth, location and notifications. SOS Voice also asks for the microphone the first time you talk.
 3. To keep alerts arriving with the screen off, allow the app to run in the background when asked (battery optimisation off). A notification shows while it is listening.
-4. So an SOS opens the red alert even when the app isn't open, check **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** and tap it to allow what it asks for: **Display over other apps**, and on Samsung and Android 14 or later, **full-screen notifications**. If the settings page doesn't show the app, or a setting won't stay on (seen on Samsung phones), close all apps, restart the phone and try again. Then also set the app's **Battery** to **Unrestricted** (long-press the app icon → App info → Battery).
+4. So an SOS opens the red alert even when the app isn't open, check **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** and tap it to allow what it asks for: **Display over other apps**, and on Samsung and Android 14 or later, **full-screen notifications**. If the settings page doesn't show the app, or a setting won't stay on (seen on Samsung phones), close all apps, restart the phone and try again. Tap **SOS through Do Not Disturb** in the same place and allow Do Not Disturb access, so Do Not Disturb can't silence an SOS. Then also set the app's **Battery** to **Unrestricted** (long-press the app icon → App info → Battery).
 5. MeshCore Open SOS and MeshCore Open SOS Voice are separate apps from the original MeshCore Open and can be installed beside it (from 9.5.8; earlier MeshCore Open SOS builds replaced it).
 
 ### Linux
@@ -192,6 +192,10 @@ See [Voice](#voice-sos-voice-only) below.
 ### Backing up your radio
 
 **Settings → Backup and restore → Export config** saves the radio's identity (its private key), name, radio settings, channels and contacts, with this app's emergency network, home location and emergency contacts, in one file. **Import config** puts it back after a firmware update or erase, or onto a new radio that takes over the old one's identity. A MeshCore SOS radio's web page reads and writes the same file; its WiFi and button settings come back only through that page. Keep the file private: anyone with it can pretend to be your radio.
+
+### Managing a repeater
+
+Log in to a repeater as admin and open **Settings**: nothing is read from the repeater until you ask, to save air time. Tap **⟳** next to the setting you want to see or change, and only that one is read; its field stays greyed out until then. The **⟳** at the top reads everything, which over several hops is slow and loads the mesh, so use it sparingly. (Since 9.7.1.)
 
 ### Practising
 

@@ -1756,7 +1756,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'L\'ora di questo messaggio è nel futuro, quindi l\'orologio del mittente potrebbe essere sbagliato. Viene mostrato nell\'ordine di arrivo.';
+      'L\'orologio del mittente sembra sbagliato, quindi viene mostrato quando è arrivato il messaggio.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7028,4 +7028,15 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Se la pagina delle impostazioni non mostra questa app o un\'impostazione non resta attiva: chiudi tutte le app, riavvia il telefono e riprova.';
+
+  @override
+  String get sos_dndAccess => 'SOS anche con Non disturbare';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Attivo: un SOS suona anche con Non disturbare attivo, il telefono in silenzioso o un\'altra app che riproduce audio';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Disattivo: Non disturbare può silenziare un SOS. Tocca e consenti l\'accesso a Non disturbare per questa app';
 }

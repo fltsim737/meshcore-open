@@ -3175,7 +3175,7 @@
   "appSettings_regionOnHopsLineSubtitle": "A csatornaüzenet tája az ugrásszámmal azonos sorban jelenik meg, nem alatta.",
   "channels_regionRadioDefaultSuffix": "(rádió alapértelmezése)",
   "channels_regionRadioDefaultApplies": "Ez a rádió a táj nélküli elárasztásokat az alapértelmezett tájában küldi: {region}.",
-  "chat_futureTimestampWarning": "Az üzenet időpontja a jövőben van, ezért a feladó órája hibás lehet. Az érkezés sorrendjében látható.",
+  "chat_futureTimestampWarning": "A küldő órája hibásnak tűnik, ezért itt az üzenet megérkezésének ideje látható.",
   "discoveredContacts_scan": "Közeli csomópontok keresése",
   "discoveredContacts_scanTitle": "Közeli csomópontok",
   "discoveredContacts_scanExplanation": "Felkéri a közvetlen rádiótávolságon belüli csomópontokat, hogy azonosítsák magukat. Az átjátszók és az érzékelők válaszolnak. A szobaszerverek és a kísérők általában nem.",
@@ -3628,5 +3628,8 @@
   "sos_fullScreenLockedOnly": "Csak zárolt telefonon. Koppints, és engedélyezd a „Megjelenítés más alkalmazások felett” beállítást, hogy az SOS használat közben is megnyissa a piros riasztást",
   "sos_fullScreenOff": "Ki: az SOS csak értesítést jelenít meg. Koppints, és engedélyezd ennek az alkalmazásnak a teljes képernyős értesítéseket",
   "sos_fullScreenAllow": "Engedélyezés",
-  "sos_fullScreenRestartTip": "Ha a beállítási oldal nem mutatja ezt az alkalmazást, vagy egy beállítás nem marad bekapcsolva: zárj be minden alkalmazást, indítsd újra a telefont, és próbáld újra."
+  "sos_fullScreenRestartTip": "Ha a beállítási oldal nem mutatja ezt az alkalmazást, vagy egy beállítás nem marad bekapcsolva: zárj be minden alkalmazást, indítsd újra a telefont, és próbáld újra.",
+  "sos_dndAccess": "SOS a Ne zavarjanak módon át",
+  "sos_dndAccessOn": "Be: az SOS akkor is megszólal, ha be van kapcsolva a Ne zavarjanak mód, a telefon néma, vagy egy másik alkalmazás hangot játszik le",
+  "sos_dndAccessOff": "Ki: a Ne zavarjanak mód elnémíthat egy SOS-t. Koppintson, és engedélyezze a Ne zavarjanak hozzáférést ennek az alkalmazásnak"
 }

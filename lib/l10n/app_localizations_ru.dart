@@ -1757,7 +1757,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chat_futureTimestampWarning =>
-      'Время этого сообщения в будущем, поэтому часы отправителя могут быть неверны. Сообщение показано в порядке получения.';
+      'Часы отправителя, похоже, идут неверно, поэтому показано время получения сообщения.';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -7033,4 +7033,15 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       'Если страница настроек не показывает это приложение или настройка не сохраняется: закройте все приложения, перезапустите телефон и попробуйте снова.';
+
+  @override
+  String get sos_dndAccess => 'SOS в режиме «Не беспокоить»';
+
+  @override
+  String get sos_dndAccessOn =>
+      'Вкл.: SOS звучит, даже если включён режим «Не беспокоить», телефон в беззвучном режиме или другое приложение воспроизводит звук';
+
+  @override
+  String get sos_dndAccessOff =>
+      'Выкл.: режим «Не беспокоить» может заглушить SOS. Нажмите и разрешите этому приложению доступ к режиму «Не беспокоить»';
 }

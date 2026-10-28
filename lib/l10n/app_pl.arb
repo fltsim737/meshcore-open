@@ -3169,7 +3169,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Pokaż region wiadomości kanału w tym samym wierszu co liczba hopów, zamiast pod nią.",
   "channels_regionRadioDefaultSuffix": "(domyślny radia)",
   "channels_regionRadioDefaultApplies": "To radio wysyła floody bez regionu w swoim regionie domyślnym: {region}.",
-  "chat_futureTimestampWarning": "Czas tej wiadomości jest w przyszłości, więc zegar nadawcy może być błędny. Wiadomość jest pokazana w kolejności odbioru.",
+  "chat_futureTimestampWarning": "Zegar nadawcy wydaje się błędny, więc pokazano, kiedy wiadomość dotarła.",
   "discoveredContacts_scan": "Skanuj pobliskie węzły",
   "discoveredContacts_scanTitle": "Pobliskie węzły",
   "discoveredContacts_scanExplanation": "Prosi węzły w bezpośrednim zasięgu radia o zgłoszenie się. Odpowiadają przekaźniki i czujniki. Serwery pokoi i companiony zwykle nie.",
@@ -3622,5 +3622,8 @@
   "sos_fullScreenLockedOnly": "Tylko przy zablokowanym telefonie. Stuknij i zezwól na „Wyświetlanie nad innymi aplikacjami”, by SOS otwierał czerwony alarm także podczas używania telefonu",
   "sos_fullScreenOff": "Wyłączone: SOS pokazuje tylko powiadomienie. Stuknij i zezwól tej aplikacji na powiadomienia pełnoekranowe",
   "sos_fullScreenAllow": "Zezwól",
-  "sos_fullScreenRestartTip": "Jeśli strona ustawień nie pokazuje tej aplikacji albo ustawienie nie zostaje włączone: zamknij wszystkie aplikacje, uruchom telefon ponownie i spróbuj jeszcze raz."
+  "sos_fullScreenRestartTip": "Jeśli strona ustawień nie pokazuje tej aplikacji albo ustawienie nie zostaje włączone: zamknij wszystkie aplikacje, uruchom telefon ponownie i spróbuj jeszcze raz.",
+  "sos_dndAccess": "SOS mimo trybu Nie przeszkadzać",
+  "sos_dndAccessOn": "Wł.: SOS zabrzmi nawet przy włączonym trybie Nie przeszkadzać, wyciszonym telefonie lub gdy inna aplikacja odtwarza dźwięk",
+  "sos_dndAccessOff": "Wył.: tryb Nie przeszkadzać może wyciszyć SOS. Stuknij i zezwól tej aplikacji na dostęp do trybu Nie przeszkadzać"
 }

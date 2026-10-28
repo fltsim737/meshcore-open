@@ -3137,7 +3137,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Regijo sporočila kanala prikaži v isti vrstici kot število skokov, ne pod njim.",
   "channels_regionRadioDefaultSuffix": "(privzeto za radio)",
   "channels_regionRadioDefaultApplies": "To radio pošilja flood sporočila brez regije v svoji privzeti regiji: {region}.",
-  "chat_futureTimestampWarning": "Čas tega sporočila je v prihodnosti, zato je ura pošiljatelja morda napačna. Prikazano je v vrstnem redu prispetja.",
+  "chat_futureTimestampWarning": "Ura pošiljatelja se zdi napačna, zato je prikazan čas, ko je sporočilo prispelo.",
   "discoveredContacts_scan": "Poišči vozlišča v bližini",
   "discoveredContacts_scanTitle": "Vozlišča v bližini",
   "discoveredContacts_scanExplanation": "Vozlišča v neposrednem dosegu radia prosi, naj se predstavijo. Odgovorijo ponovitelji in senzorji. Strežniki sob in spremljevalci običajno ne.",
@@ -3590,5 +3590,8 @@
   "sos_fullScreenLockedOnly": "Le pri zaklenjenem telefonu. Tapnite in dovolite »Prikaz čez druge aplikacije«, da SOS odpre rdeče opozorilo tudi med uporabo telefona",
   "sos_fullScreenOff": "Izklopljeno: SOS prikaže le obvestilo. Tapnite in tej aplikaciji dovolite obvestila na celem zaslonu",
   "sos_fullScreenAllow": "Dovoli",
-  "sos_fullScreenRestartTip": "Če stran z nastavitvami ne prikaže te aplikacije ali nastavitev ne ostane vklopljena: zaprite vse aplikacije, znova zaženite telefon in poskusite znova."
+  "sos_fullScreenRestartTip": "Če stran z nastavitvami ne prikaže te aplikacije ali nastavitev ne ostane vklopljena: zaprite vse aplikacije, znova zaženite telefon in poskusite znova.",
+  "sos_dndAccess": "SOS tudi pri načinu Ne moti",
+  "sos_dndAccessOn": "Vklopljeno: SOS se oglasi tudi pri vklopljenem načinu Ne moti, utišanem telefonu ali ko druga aplikacija predvaja zvok",
+  "sos_dndAccessOff": "Izklopljeno: način Ne moti lahko utiša SOS. Tapnite in tej aplikaciji dovolite dostop do načina Ne moti"
 }

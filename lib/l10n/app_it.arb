@@ -3270,7 +3270,7 @@
   "appSettings_regionOnHopsLineSubtitle": "Mostra la regione di un messaggio di canale sulla stessa riga del numero di salti invece che sotto.",
   "channels_regionRadioDefaultSuffix": "(predefinita della radio)",
   "channels_regionRadioDefaultApplies": "Questa radio invia i flood senza regione nella sua regione predefinita: {region}.",
-  "chat_futureTimestampWarning": "L'ora di questo messaggio è nel futuro, quindi l'orologio del mittente potrebbe essere sbagliato. Viene mostrato nell'ordine di arrivo.",
+  "chat_futureTimestampWarning": "L'orologio del mittente sembra sbagliato, quindi viene mostrato quando è arrivato il messaggio.",
   "discoveredContacts_scan": "Cerca nodi vicini",
   "discoveredContacts_scanTitle": "Nodi vicini",
   "discoveredContacts_scanExplanation": "Chiede ai nodi nel raggio radio diretto di identificarsi. Ripetitori e sensori rispondono. I room server e i companion di solito no.",
@@ -3723,5 +3723,8 @@
   "sos_fullScreenLockedOnly": "Solo con il telefono bloccato. Tocca e consenti \"Mostra sopra altre app\" perché un SOS apra l'avviso rosso anche con il telefono in uso",
   "sos_fullScreenOff": "Disattivati: un SOS mostra solo una notifica. Tocca e consenti le notifiche a schermo intero per questa app",
   "sos_fullScreenAllow": "Consenti",
-  "sos_fullScreenRestartTip": "Se la pagina delle impostazioni non mostra questa app o un'impostazione non resta attiva: chiudi tutte le app, riavvia il telefono e riprova."
+  "sos_fullScreenRestartTip": "Se la pagina delle impostazioni non mostra questa app o un'impostazione non resta attiva: chiudi tutte le app, riavvia il telefono e riprova.",
+  "sos_dndAccess": "SOS anche con Non disturbare",
+  "sos_dndAccessOn": "Attivo: un SOS suona anche con Non disturbare attivo, il telefono in silenzioso o un'altra app che riproduce audio",
+  "sos_dndAccessOff": "Disattivo: Non disturbare può silenziare un SOS. Tocca e consenti l'accesso a Non disturbare per questa app"
 }

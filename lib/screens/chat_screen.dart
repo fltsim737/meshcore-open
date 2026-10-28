@@ -1457,13 +1457,13 @@ class _MessageBubble extends StatelessWidget {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Text(
-                                  formatChatTime(context, message.timestamp),
+                                  formatChatTime(context, message.shownTime),
                                   style: MeshTheme.mono(
                                     fontSize: 12 * textScale,
                                     color: metaColor,
                                   ),
                                 ),
-                                if (message.hasFutureTimestamp)
+                                if (message.hasWrongClock)
                                   FutureTimestampIndicator(
                                     size: 16 * textScale,
                                   ),

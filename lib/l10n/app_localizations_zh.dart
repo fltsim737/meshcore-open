@@ -1649,7 +1649,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chat_typeMessage => '输入消息...';
 
   @override
-  String get chat_futureTimestampWarning => '此消息的时间在未来，发送方的时钟可能有误。已按到达顺序显示。';
+  String get chat_futureTimestampWarning => '发送者的时钟似乎不正确，因此这里显示的是消息到达的时间。';
 
   @override
   String chat_messageTooLong(int maxBytes) {
@@ -6558,4 +6558,13 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get sos_fullScreenRestartTip =>
       '如果设置页面不显示此应用,或某项设置无法保持开启:关闭所有应用,重启手机,然后再试一次。';
+
+  @override
+  String get sos_dndAccess => '勿扰模式下仍发出SOS警报';
+
+  @override
+  String get sos_dndAccessOn => '开启：即使开启勿扰模式、手机静音或其他应用正在播放声音，SOS 也会响起';
+
+  @override
+  String get sos_dndAccessOff => '关闭：勿扰模式可能使 SOS 静音。点按并允许此应用访问勿扰模式';
 }
