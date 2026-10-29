@@ -6723,6 +6723,19 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sos_dismiss => 'Приховати';
 
   @override
+  String get sos_showAgain => 'Показати знову';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Приховано · ви підтвердили · востаннє почуто о $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Приховано без відповіді · востаннє почуто о $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Копіювати координати';
 
   @override

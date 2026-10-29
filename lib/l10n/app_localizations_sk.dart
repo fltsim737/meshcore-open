@@ -6684,6 +6684,19 @@ class AppLocalizationsSk extends AppLocalizations {
   String get sos_dismiss => 'Zavrieť';
 
   @override
+  String get sos_showAgain => 'Zobraziť znova';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Zavreté · potvrdili ste ho · naposledy počuté $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Zavreté bez odpovede · naposledy počuté $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Kopírovať súradnice';
 
   @override

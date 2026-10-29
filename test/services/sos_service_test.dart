@@ -980,14 +980,63 @@ void main() {
       ]);
     });
 
-    test('dismiss deletes the alert and its position', () async {
+    test('dismiss puts the alert aside; Show again brings it back', () async {
       hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
-      await service.dismiss(service.incoming.single);
-      expect(service.incoming, isEmpty);
+      await service.acknowledge(service.incoming.single);
+      final alert = service.incoming.single;
+      await service.dismiss(alert);
+      expect(alert.dismissed, isTrue);
+      expect(service.openIncoming, isEmpty);
+      // kept across a restart, acknowledgement and position included
       final reloaded = newService()..load();
-      expect(reloaded.incoming, isEmpty);
+      final kept = reloaded.incoming.single;
+      expect(kept.dismissed, isTrue);
+      expect(kept.ackSent, isTrue);
+      expect(kept.fix.latitude, -41);
       reloaded.dispose();
+
+      await service.showAgain(alert);
+      expect(alert.dismissed, isFalse);
+      expect(alert.ackSent, isTrue);
+      expect(
+        service.openIncoming,
+        isEmpty,
+      ); // acknowledged: no full-screen alert
     });
+
+    test(
+      'a repeat of an acknowledged, dismissed alert stays put aside',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        await service.acknowledge(service.incoming.single);
+        await service.dismiss(service.incoming.single);
+        alerter.events.clear();
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        expect(service.incoming.single.dismissed, isTrue);
+        expect(service.incoming.single.receivedCount, 2);
+        expect(alerter.events, isEmpty);
+      },
+    );
+
+    test('a repeat of an unanswered, dismissed alert sounds again', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      await service.dismiss(service.incoming.single);
+      expect(service.openIncoming, isEmpty);
+      alerter.events.clear();
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(service.openIncoming, hasLength(1));
+      expect(alerter.events, ['alert:Ridge#a1b2']);
+    });
+
+    test(
+      'a dismissed alert is still deleted when the sender cancels',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        await service.dismiss(service.incoming.single);
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+        expect(service.incoming, isEmpty);
+      },
+    );
 
     test('an alert not heard for 60 minutes is deleted', () async {
       hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
@@ -1137,17 +1186,20 @@ void main() {
       reloaded.dispose();
     });
 
-    test('a dismissed alert heard again gets a new record', () async {
-      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
-      await service.dismiss(service.incoming.single);
-      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
-      expect(service.history.map((r) => r.outcome), [
-        SosHistoryOutcome.ongoing,
-        SosHistoryOutcome.dismissed,
-      ]);
-      await service.deleteFinishedHistory();
-      expect(service.history.single.isOngoing, isTrue);
-    });
+    test(
+      'a dismissed alert keeps its record, ended as dismissed if it expires',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        await service.dismiss(service.incoming.single);
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        expect(service.history.single.isOngoing, isTrue);
+        expect(service.history.single.count, 2);
+        await service.dismiss(service.incoming.single);
+        now = now.add(SosService.alertExpiry + const Duration(minutes: 1));
+        service.purgeExpired();
+        expect(service.history.single.outcome, SosHistoryOutcome.dismissed);
+      },
+    );
 
     test('records an expired alert', () {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));

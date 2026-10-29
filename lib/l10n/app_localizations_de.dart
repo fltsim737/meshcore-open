@@ -6723,6 +6723,19 @@ class AppLocalizationsDe extends AppLocalizations {
   String get sos_dismiss => 'Verwerfen';
 
   @override
+  String get sos_showAgain => 'Wieder anzeigen';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Verworfen · von dir bestätigt · zuletzt gehört $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Verworfen ohne Antwort · zuletzt gehört $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Koordinaten kopieren';
 
   @override

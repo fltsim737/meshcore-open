@@ -115,7 +115,9 @@ class _EmergencyScreenState extends State<EmergencyScreen>
             )
           else
             for (final alert in sos.incoming)
-              _IncomingSosCard(alert: alert, service: sos),
+              alert.dismissed
+                  ? _DismissedSosCard(alert: alert, service: sos)
+                  : _IncomingSosCard(alert: alert, service: sos),
         ],
       ),
       bottomNavigationBar: SafeArea(
@@ -419,6 +421,39 @@ class _ActiveSosCard extends StatelessWidget {
       ),
     );
     if (confirmed == true) await service.cancel();
+  }
+}
+
+/// An alert put aside with Dismiss: kept until the sender cancels it or it
+/// expires, so the responder can pick it up again at once.
+class _DismissedSosCard extends StatelessWidget {
+  final IncomingSos alert;
+  final SosService service;
+
+  const _DismissedSosCard({required this.alert, required this.service});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final name = alert.senderName.isEmpty
+        ? l10n.sos_unknownSender
+        : alert.senderName;
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+      child: ListTile(
+        leading: Icon(Icons.sos, color: Colors.red.shade700),
+        title: Text('$name  #${alert.id}'),
+        subtitle: Text(
+          alert.ackSent
+              ? l10n.sos_dismissedAcked(_time(context, alert.lastSeen))
+              : l10n.sos_dismissedOpen(_time(context, alert.lastSeen)),
+        ),
+        trailing: FilledButton(
+          onPressed: () => service.showAgain(alert),
+          child: Text(l10n.sos_showAgain),
+        ),
+      ),
+    );
   }
 }
 

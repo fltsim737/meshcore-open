@@ -11245,6 +11245,24 @@ abstract class AppLocalizations {
   /// **'Dismiss'**
   String get sos_dismiss;
 
+  /// No description provided for @sos_showAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Show again'**
+  String get sos_showAgain;
+
+  /// No description provided for @sos_dismissedAcked.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed · you acknowledged it · last heard {time}'**
+  String sos_dismissedAcked(String time);
+
+  /// No description provided for @sos_dismissedOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismissed without answering · last heard {time}'**
+  String sos_dismissedOpen(String time);
+
   /// No description provided for @sos_copyCoordinates.
   ///
   /// In en, this message translates to:

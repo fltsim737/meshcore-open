@@ -6686,6 +6686,19 @@ class AppLocalizationsSl extends AppLocalizations {
   String get sos_dismiss => 'Opusti';
 
   @override
+  String get sos_showAgain => 'Prikaži znova';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Opuščeno · potrdili ste ga · nazadnje slišano ob $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Opuščeno brez odgovora · nazadnje slišano ob $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Kopiraj koordinate';
 
   @override

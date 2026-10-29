@@ -6736,6 +6736,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sos_dismiss => 'Odrzuć';
 
   @override
+  String get sos_showAgain => 'Pokaż ponownie';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Odrzucone · potwierdzone przez ciebie · ostatnio słyszane $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Odrzucone bez odpowiedzi · ostatnio słyszane $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Kopiuj współrzędne';
 
   @override

@@ -6723,6 +6723,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sos_dismiss => 'Скрыть';
 
   @override
+  String get sos_showAgain => 'Показать снова';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Скрыто · вы подтвердили · последний приём в $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Скрыто без ответа · последний приём в $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Копировать координаты';
 
   @override

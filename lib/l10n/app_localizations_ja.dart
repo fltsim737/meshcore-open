@@ -6400,6 +6400,19 @@ class AppLocalizationsJa extends AppLocalizations {
   String get sos_dismiss => '閉じる';
 
   @override
+  String get sos_showAgain => '再表示';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return '閉じました · 確認済み · 最終受信 $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return '応答せずに閉じました · 最終受信 $time';
+  }
+
+  @override
   String get sos_copyCoordinates => '座標をコピー';
 
   @override

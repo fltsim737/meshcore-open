@@ -2,6 +2,13 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.8.1 (2026-10-29)
+
+### Fixed: Dismiss no longer loses the SOS
+
+- **Dismiss puts an alert aside instead of deleting it.** Until now, a responder who dismissed an alert (by accident, or after acknowledging it) lost it, with its position, until the sender's radio repeated the SOS, which after the first five minutes is only every 5 minutes. Now the alarm stops and the alert shrinks to a line on the Emergency tab, with **Show again** to bring it straight back as it was: position, your acknowledgement and Locate included. If you hadn't acknowledged it, the sender's next repeat still brings it back with the alarm; an acknowledged one stays put aside until you tap Show again. It's deleted when the sender cancels or after 60 minutes unheard, as before.
+- On the MeshCore SOS radio's web page, the same from firmware 1.6.2, which also shows **Being located** on the SOS card while responders search for the radio.
+
 ## 9.8.0 (2026-10-29)
 
 ### New: a coordinated search with Locate

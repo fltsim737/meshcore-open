@@ -6707,6 +6707,19 @@ class AppLocalizationsBg extends AppLocalizations {
   String get sos_dismiss => 'Отхвърли';
 
   @override
+  String get sos_showAgain => 'Покажи отново';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Отхвърлено · потвърдихте го · последно чуто в $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Отхвърлено без отговор · последно чуто в $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Копирай координатите';
 
   @override

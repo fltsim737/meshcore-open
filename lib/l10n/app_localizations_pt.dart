@@ -6701,6 +6701,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get sos_dismiss => 'Ignorar';
 
   @override
+  String get sos_showAgain => 'Mostrar de novo';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Ignorado · você confirmou · ouvido pela última vez às $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Ignorado sem responder · ouvido pela última vez às $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Copiar coordenadas';
 
   @override

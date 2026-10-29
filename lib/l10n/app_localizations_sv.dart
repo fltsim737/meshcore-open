@@ -6653,6 +6653,19 @@ class AppLocalizationsSv extends AppLocalizations {
   String get sos_dismiss => 'Avfärda';
 
   @override
+  String get sos_showAgain => 'Visa igen';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Avfärdat · du har kvitterat · senast hört $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Avfärdat utan svar · senast hört $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Kopiera koordinater';
 
   @override
