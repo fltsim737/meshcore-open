@@ -6697,6 +6697,19 @@ class AppLocalizationsHu extends AppLocalizations {
   String get sos_dismiss => 'Elvetés';
 
   @override
+  String get sos_showAgain => 'Megjelenítés újra';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Elvetve · nyugtáztad · utoljára hallva: $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Elvetve válasz nélkül · utoljára hallva: $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Koordináták másolása';
 
   @override

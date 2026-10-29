@@ -6261,6 +6261,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sos_dismiss => '忽略';
 
   @override
+  String get sos_showAgain => '重新显示';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return '已忽略 · 你已确认 · 最后收到 $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return '未回应即忽略 · 最后收到 $time';
+  }
+
+  @override
   String get sos_copyCoordinates => '复制坐标';
 
   @override

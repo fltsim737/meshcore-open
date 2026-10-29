@@ -6708,6 +6708,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get sos_dismiss => 'Descartar';
 
   @override
+  String get sos_showAgain => 'Mostrar de nuevo';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Descartada · la confirmaste · oída por última vez a las $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Descartada sin responder · oída por última vez a las $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Copiar coordenadas';
 
   @override

@@ -183,7 +183,7 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 3. Use **Map** or copy the coordinates to navigate.
 4. Press **Message** to chat with the sender directly.
 5. Near the sender but can't find them? Press **Locate** and follow the signal: walk a little, stop, and wait for the next beacon. Stronger means closer. With other searchers, open **Search map** to see everyone's readings and the area to search, and agree among yourselves when to turn the **Beacon power** down.
-6. **Dismiss** removes it from your phone without replying. A repeat brings it back.
+6. **Dismiss** puts it aside without replying: the alarm stops and it shrinks to a line on the Emergency tab, with **Show again** to pick it up at once (its position, your acknowledgement and Locate are kept). If you hadn't acknowledged it, the sender's next repeat brings it back with the alarm; an acknowledged one stays put aside until you tap Show again.
 
 ### 6. Talking (SOS Voice only)
 
@@ -231,7 +231,7 @@ An SOS carries your position, so the apps keep it out of anything that can be sc
 
 - Channel alerts are hidden data packets and never appear in a channel chat, in this app or any other MeshCore app.
 - SOS DMs go only to your chosen emergency contacts. The sending app keeps them out of its own chat history; a receiving MeshCore Open raises the alarm and also keeps the message in the chat with you, so the contact can read it.
-- A live alert leaves the Emergency tab when the sender cancels, when you dismiss it, or after 60 minutes with no repeat.
+- A live alert leaves the Emergency tab when the sender cancels, or after 60 minutes with no repeat. A dismissed one stays as a line with **Show again** until then.
 - The **SOS history** keeps a record of every alert received or sent, positions included, until you delete it, so it can be handed to paramedics or emergency services afterwards.
 - Voice clips are kept in memory for the live SOS only.
 

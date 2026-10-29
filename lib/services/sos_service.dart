@@ -1577,6 +1577,9 @@ class SosService extends ChangeNotifier {
         ..sessionRef = sessionRef ?? existing.sessionRef;
       if (fix.hasPosition || !existing.fix.hasPosition) existing.fix = fix;
       if (info != null) existing.info = info;
+      // Dismissed without answering: the sender is still calling, so it comes
+      // back. One already acknowledged stays put aside until Show again.
+      if (existing.dismissed && !existing.ackSent) existing.dismissed = false;
     } else {
       alert = IncomingSos(
         id: id,
@@ -1607,7 +1610,7 @@ class SosService extends ChangeNotifier {
     appLogger.info(
       'SOS #$id from $senderName by $via: '
       '${isNew ? 'new alert' : 'repeat ${alert.receivedCount}'}, '
-      '${sound ? 'alarm sounded' : (alert.isOpen ? 'alarm already sounding, not re-sounded' : 'already acknowledged')}'
+      '${sound ? 'alarm sounded' : (alert.isOpen ? 'alarm already sounding, not re-sounded' : 'acknowledged or dismissed')}'
       '${info != null ? ', info "$info"' : ''}',
       tag: 'SOS',
     );
@@ -1712,7 +1715,12 @@ class SosService extends ChangeNotifier {
     for (final alert in expired) {
       _incoming.remove(alert);
       _clearAlarm(alert, 'expired');
-      _receivedRecord(alert)?.end(SosHistoryOutcome.expired, _now());
+      _receivedRecord(alert)?.end(
+        alert.dismissed
+            ? SosHistoryOutcome.dismissed
+            : SosHistoryOutcome.expired,
+        _now(),
+      );
       _saveHistory();
     }
     unawaited(_store.saveIncoming(_incoming));
@@ -1810,12 +1818,26 @@ class SosService extends ChangeNotifier {
     }
   }
 
-  /// Deletes the alert and its position from this phone without replying.
+  /// Puts the alert aside without replying: the alarm stops and it leaves the
+  /// screen, but it's kept (with its position, acknowledgement and Locate) so
+  /// [showAgain] brings it straight back, rather than waiting for the sender's
+  /// next repeat, which can be 5 minutes away. It's deleted when the sender
+  /// cancels or it expires, as any alert is.
   Future<void> dismiss(IncomingSos alert) async {
-    _incoming.remove(alert);
+    alert.dismissed = true;
     _clearAlarm(alert, 'dismissed');
-    _receivedRecord(alert)?.end(SosHistoryOutcome.dismissed, _now());
-    _saveHistory();
+    notifyListeners();
+    await _store.saveIncoming(_incoming);
+  }
+
+  /// Brings a dismissed alert back, as it was.
+  Future<void> showAgain(IncomingSos alert) async {
+    if (!alert.dismissed) return;
+    alert.dismissed = false;
+    appLogger.info(
+      'SOS #${alert.id} from ${alert.senderName}: shown again',
+      tag: 'SOS',
+    );
     notifyListeners();
     await _store.saveIncoming(_incoming);
   }

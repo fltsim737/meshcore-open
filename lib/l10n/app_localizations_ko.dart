@@ -6410,6 +6410,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sos_dismiss => '닫기';
 
   @override
+  String get sos_showAgain => '다시 보기';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return '닫음 · 확인함 · 마지막 수신 $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return '응답 없이 닫음 · 마지막 수신 $time';
+  }
+
+  @override
   String get sos_copyCoordinates => '좌표 복사';
 
   @override

@@ -186,6 +186,11 @@ class IncomingSos {
   int receivedCount;
   bool ackSent;
 
+  /// Put aside on this phone with Dismiss. It's kept, so the responder can
+  /// bring it back at once with Show again, until the sender cancels it or it
+  /// expires; a repeat brings back one that wasn't acknowledged.
+  bool dismissed;
+
   /// The sender's line of text, such as a short address, if it sent one.
   String? info;
 
@@ -206,6 +211,7 @@ class IncomingSos {
     this.channelIndex,
     this.receivedCount = 1,
     this.ackSent = false,
+    this.dismissed = false,
     this.info,
     this.sessionRef,
     Set<String>? ackedBy,
@@ -215,9 +221,9 @@ class IncomingSos {
 
   static String keyFor(String senderName, String id) => '$senderName#$id';
 
-  /// Needs attention until this device acknowledges it. Dismissed, cancelled
-  /// and expired alerts are deleted outright.
-  bool get isOpen => !ackSent;
+  /// Needs attention until this device acknowledges or dismisses it.
+  /// Cancelled and expired alerts are deleted outright.
+  bool get isOpen => !ackSent && !dismissed;
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -229,6 +235,7 @@ class IncomingSos {
     'fix': _fixToJson(fix),
     'received_count': receivedCount,
     'ack_sent': ackSent,
+    'dismissed': dismissed,
     'info': info,
     'acked_by': ackedBy.toList(),
     'session_ref': sessionRef,
@@ -246,6 +253,7 @@ class IncomingSos {
       fix: _fixFromJson(json['fix']),
       receivedCount: json['received_count'] as int? ?? 1,
       ackSent: json['ack_sent'] as bool? ?? false,
+      dismissed: json['dismissed'] as bool? ?? false,
       info: json['info'] as String?,
       sessionRef: json['session_ref'] as String?,
       ackedBy: (json['acked_by'] as List<dynamic>? ?? const [])

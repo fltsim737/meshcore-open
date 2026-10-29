@@ -6619,6 +6619,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sos_dismiss => 'Dismiss';
 
   @override
+  String get sos_showAgain => 'Show again';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Dismissed · you acknowledged it · last heard $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Dismissed without answering · last heard $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Copy coordinates';
 
   @override

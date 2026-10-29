@@ -6671,6 +6671,19 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sos_dismiss => 'Negeren';
 
   @override
+  String get sos_showAgain => 'Weer tonen';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Genegeerd · je hebt het bevestigd · laatst gehoord $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Genegeerd zonder antwoord · laatst gehoord $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Coördinaten kopiëren';
 
   @override

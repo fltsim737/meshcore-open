@@ -52,6 +52,36 @@ void main() {
     service.dispose();
   });
 
+  testWidgets('Dismiss puts the alert aside; Show again brings it back', (
+    tester,
+  ) async {
+    final settings = await freshSettings();
+    final transport = FakeSosTransport();
+    final service = SosService(transport: transport, settings: settings);
+    await settings.joinSosNetwork(farmNetwork(SosNetworkRole.responder));
+    service.handleInboundData(2, sosPacketFrom('Ridge', 9, 'a1b2'));
+
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(
+        value: service,
+        child: MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const Stack(children: [SosWarningOverlay()]),
+        ),
+      ),
+    );
+    await tester.tap(find.text('Dismiss'));
+    await tester.pump();
+    expect(find.text('EMERGENCY SOS'), findsNothing);
+    expect(service.incoming.single.dismissed, isTrue);
+
+    await service.showAgain(service.incoming.single);
+    await tester.pump();
+    expect(find.text('EMERGENCY SOS'), findsOneWidget);
+    service.dispose();
+  });
+
   testWidgets('Send ACK is disabled while disconnected', (tester) async {
     final settings = await freshSettings();
     final transport = FakeSosTransport()..isConnected = false;

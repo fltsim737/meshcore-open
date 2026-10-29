@@ -6736,6 +6736,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sos_dismiss => 'Ignorer';
 
   @override
+  String get sos_showAgain => 'Réafficher';
+
+  @override
+  String sos_dismissedAcked(String time) {
+    return 'Ignorée · vous l\'avez confirmée · entendue pour la dernière fois à $time';
+  }
+
+  @override
+  String sos_dismissedOpen(String time) {
+    return 'Ignorée sans réponse · entendue pour la dernière fois à $time';
+  }
+
+  @override
   String get sos_copyCoordinates => 'Copier les coordonnées';
 
   @override
