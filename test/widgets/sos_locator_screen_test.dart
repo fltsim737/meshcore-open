@@ -77,6 +77,45 @@ void main() {
     service.dispose();
   });
 
+  testWidgets('warns when the SOS came only through repeaters', (tester) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 2.625;
+    addTearDown(tester.view.reset);
+    final settings = await freshSettings();
+    final transport = FakeSosTransport();
+    final service = SosService(transport: transport, settings: settings);
+    await settings.joinSosNetwork(farmNetwork(SosNetworkRole.responder));
+    final sos = sosPacketFrom('Ridge', 9, 'a1b2');
+    service.handleHeardRoute(2, sos, ['3a', '7c']);
+    service.handleInboundData(2, sos);
+    final alert = service.incoming.single;
+
+    Widget screen() => ChangeNotifierProvider.value(
+      value: service,
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Navigator(
+          onGenerateRoute: (_) =>
+              MaterialPageRoute(builder: (_) => SosLocatorScreen(alert: alert)),
+        ),
+      ),
+    );
+    await tester.pumpWidget(screen());
+    await tester.pump();
+    expect(find.text('Not heard straight from their radio'), findsOneWidget);
+    expect(find.text('Via 3a → 7c (1×)'), findsOneWidget);
+    expect(find.textContaining('Head for 3a,'), findsOneWidget);
+
+    // once heard straight from their radio, Locate can work: no warning
+    service.handleHeardRoute(2, sos, []);
+    await tester.pump();
+    expect(find.text('Not heard straight from their radio'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+    service.dispose();
+  });
+
   testWidgets('beacon power: shows who set it, and any searcher can change it', (
     tester,
   ) async {

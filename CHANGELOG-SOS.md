@@ -2,6 +2,29 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 9.8.3 (2026-10-29)
+
+### New: an SOS across a bridge, and retuning to reach it
+
+- **An SOS now says what radio settings it was sent on.** The alert card shows *Their radio: 915.075 MHz · BW 125 · SF9 · CR 4/5*. When that isn't what your radio is on, for instance because the SOS crossed a MeshCore bridge from another frequency, the card says so: Locate can't hear them from your frequency, and they may not hear you directly.
+- **Retune to their frequency, when you choose.** Nothing retunes by itself: you keep your own mesh while you travel or work. When you know you're within coverage on their side, press **Retune to their frequency** on the alert (or on Locate) and confirm. Your app first tells the other responders on your mesh, then moves your radio to the sender's settings.
+- **Other responders see "Joe has re-tuned to 915.075 MHz and may be unreachable"** on the alert, so nobody wonders why you've gone quiet. It clears when you come back.
+- **While retuned, the Emergency tab says so**, with **Back to 916.575 MHz** (your own settings) to return. It stays until you go back, also if the app is closed and opened again.
+- Older apps read these alerts as before and ignore the new parts. A MeshCore SOS radio sends its settings from firmware 1.7.0, which also shows them, and who re-tuned, on its web page; to make room, its message line is now up to 27 characters (it was 32).
+
+### New: how an SOS reached you
+
+- **The alert card shows the route each copy of the SOS took to your radio**: *Straight from their radio*, or *Via Scaramouche → Superstar*, with how many copies came each way. Repeaters you have as contacts are shown by name, others by their short hash.
+- **Locate warns when the SOS has only come through repeaters.** Locate hears the sender's radio itself, radio to radio, so from where you are it can't hear anything yet. It says so, names the repeater nearest the sender on the way to you, and tells you to head there and to the last known position. If the SOS crossed a bridge to another frequency, such as a MeshCore bridge between two repeaters, Locate can't hear the sender at all until your radio is on their frequency. The warning goes once their radio is heard directly.
+
+## 9.8.2 (2026-10-29, released as part of 9.8.3)
+
+### Fixed: repeater management drops out
+
+- **Logging in to a repeater or room server, and a repeater's status, neighbours, settings, owner info and CLI now wait long enough for the reply.** They used the timeout learned from chat messages, which is trained on small acknowledgements that come straight back. A repeater has to handle the request and send a full reply, so for a repeater in direct range the wait could be cut to half a second and the app reported "unreachable" or "request failed" while the reply was still on its way. Repeater requests now wait for the airtime the request and reply actually need, at least 8 seconds direct and 12 seconds by flood, with extra margin for busy channels and bridges.
+- **Every repeater request is tried three times**, and a reply to any try counts. Status, neighbours and settings refreshes were tried only once. This applies to the Android app and the desktop builds alike. Commands that mustn't be sent twice (`region load`, `reboot`, `start ota`, `poweroff`, `erase`) are still sent once.
+- **If a direct route goes unanswered, the last try floods**, and the route is reset so the reply teaches the radio the current one. A repeater that moved, changed frequency or now sits behind a bridge no longer fails every try on an old route. A route you set by hand is left alone.
+
 ## 9.8.1 (2026-10-29)
 
 ### Fixed: Dismiss no longer loses the SOS

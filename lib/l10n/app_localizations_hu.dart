@@ -7203,4 +7203,79 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Ki: a Ne zavarjanak mód elnémíthat egy SOS-t. Koppintson, és engedélyezze a Ne zavarjanak hozzáférést ennek az alkalmazásnak';
+
+  @override
+  String get sos_routeTitle => 'Hogyan jutott el hozzád';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Közvetlenül a rádiójukról ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Ezen át: $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle =>
+      'Nem hallottuk közvetlenül a rádiójukról';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Ez az SOS csak átjátszókon keresztül jutott el hozzád, soha nem közvetlenül a rádiójukról. A Helymeghatározás csak magát a rádiójukat hallja, így innen nem találja meg őket. Indulj $nearest felé – ez az átjátszó van hozzájuk a legközelebb az úton feléd –, és az utolsó ismert hely felé: amint közvetlen hatótávon belül vagy, megérkeznek a jeladások. Ha az SOS egy hídon át másik frekvenciára került, a rádiód egyáltalán nem hallja a jeladásaikat, amíg nem azon a frekvencián van.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Az ő rádiójuk: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Az ő rádiójuk másik frekvencián van, mint a tiéd, így a Helymeghatározás nem hallja őket, és ők sem feltétlenül hallanak téged közvetlenül. Ha az ő oldalukon lefedettségben vagy, hangolj át rá.';
+
+  @override
+  String get sos_retuneButton => 'Áthangolás az ő frekvenciájukra';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Áthangolsz $name frekvenciájára?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'A rádiód átáll erre: $settings. Elhagyod a jelenlegi hálózatodat: amíg vissza nem térsz, nem hallod, és az ottani segítők nem érnek el. Értesítést kapnak az áthangolásról.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Áthangolás';
+
+  @override
+  String get sos_retuneFailed => 'A rádió nem fogadta el az új beállításokat.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name áthangolt erre: $frequency, és lehet, hogy nem elérhető';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'A rádiód át van hangolva';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return '$name beállításain van ($settings), a saját hálózatodon ($frequency) kívül. Térj vissza, ha végeztél.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Vissza erre: $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'A rádió nem tért vissza. Próbáld újra, vagy állítsd be a Rádióbeállításokban.';
+
+  @override
+  String get sos_retuning => 'A többi segítő értesítése, majd áthangolás…';
 }

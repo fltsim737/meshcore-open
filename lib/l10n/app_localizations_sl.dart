@@ -7192,4 +7192,79 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Izklopljeno: način Ne moti lahko utiša SOS. Tapnite in tej aplikaciji dovolite dostop do načina Ne moti';
+
+  @override
+  String get sos_routeTitle => 'Kako je prišlo do vas';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Neposredno z njihovega radia ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Prek $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle =>
+      'Ni slišano neposredno z njihovega radia';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Ta SOS je do vas prišel le prek repetitorjev, nikoli neposredno z njihovega radia. Iskanje sliši le njihov radio sam, zato jih od tod ne najde. Pojdite proti $nearest, repetitorju, ki jim je na poti do vas najbližji, in proti zadnjemu znanemu položaju: ko boste v neposrednem dosegu, bodo signali prišli. Če je SOS prek mostu prešel na drugo frekvenco, vaš radio njihovih signalov sploh ne sliši, dokler ni na tej frekvenci.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Njihov radio: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Njihov radio je na drugi frekvenci kot vaš, zato jih Iskanje ne sliši in vas morda ne slišijo neposredno. Ko boste na njihovi strani v dosegu, se preglasite nanjo.';
+
+  @override
+  String get sos_retuneButton => 'Preglasi na njihovo frekvenco';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Preglasiti na frekvenco $name?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Vaš radio preide na $settings. Zapustite trenutno omrežje: dokler se ne vrnete, ga ne slišite in reševalci v njem vas ne dosežejo. Obveščeni bodo, da ste se preglasili.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Preglasi';
+
+  @override
+  String get sos_retuneFailed => 'Radio ni sprejel novih nastavitev.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name se je preglasil(a) na $frequency in morda ni dosegljiv(a)';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Vaš radio je preglašen';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Je na nastavitvah $name ($settings), zunaj vašega omrežja na $frequency. Vrnite se, ko končate.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Nazaj na $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'Radio se ni vrnil. Poskusite znova ali ga nastavite v Nastavitvah radia.';
+
+  @override
+  String get sos_retuning => 'Obveščam druge reševalce, nato preglašam…';
 }

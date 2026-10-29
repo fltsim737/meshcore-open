@@ -504,11 +504,7 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
     final repeater = _resolveRepeater(connector);
     for (final command in commands) {
       try {
-        final response = await _commandService!.sendCommand(
-          repeater,
-          command,
-          retries: 1,
-        );
+        final response = await _commandService!.sendCommand(repeater, command);
         if (!mounted) return;
         answered = true;
         if (_handleGetResponse(command, response)) successCount += 1;
@@ -740,7 +736,9 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
       final response = await _commandService!.sendCommand(
         repeater,
         command,
-        retries: 1,
+        retries: replyOptional
+            ? 1
+            : RepeaterCommandService.attemptsFor(command),
       );
       if (!mounted) return;
       final outcome = _classifySaveResponse(response);
@@ -1190,7 +1188,7 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
           final response = await _commandService!.sendCommand(
             repeater,
             entry.command,
-            retries: 1,
+            retries: RepeaterCommandService.attemptsFor(entry.command),
           );
           final outcome = _classifySaveResponse(response);
           if (outcome == _SaveOutcome.error) {

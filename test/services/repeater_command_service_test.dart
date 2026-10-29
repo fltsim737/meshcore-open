@@ -25,12 +25,7 @@ class _ShortTimeoutConnector extends _FakeConnector {
   final List<Uint8List> sentFrames = [];
 
   @override
-  int calculateTimeout({
-    required int pathLength,
-    int messageBytes = 100,
-    String? contactKey,
-    int? deviceTimeoutMs,
-  }) => 30;
+  int repeaterReplyTimeout(PathSelection selection) => 30;
 
   @override
   Future<void> sendFrame(
@@ -40,6 +35,36 @@ class _ShortTimeoutConnector extends _FakeConnector {
     bool waitForGenericAck = false,
   }) async {
     sentFrames.add(data);
+  }
+}
+
+/// A repeater the companion has a direct 1-hop path to.
+class _DirectPathConnector extends _ShortTimeoutConnector {
+  final List<PathSelection> selections = [];
+  int pathResets = 0;
+
+  @override
+  Future<PathSelection> preparePathForContactSend(Contact contact) async =>
+      const PathSelection(pathBytes: [0x05], hopCount: 1, useFlood: false);
+
+  @override
+  Future<void> clearContactPath(Contact contact) async => pathResets++;
+
+  @override
+  Future<PathSelection> preparePathForRepeaterAttempt(
+    Contact contact, {
+    required int attempt,
+    required int attempts,
+    PathSelection? first,
+  }) async {
+    final selection = await super.preparePathForRepeaterAttempt(
+      contact,
+      attempt: attempt,
+      attempts: attempts,
+      first: first,
+    );
+    selections.add(selection);
+    return selection;
   }
 }
 
@@ -197,6 +222,94 @@ void main() {
       service.handleResponse(repeater, '02|fresh');
       await pumpEventQueue();
       expect(result, 'fresh');
+    });
+  });
+
+  group('RepeaterCommandService routes', () {
+    test(
+      'a direct path is tried twice, then the last attempt floods',
+      () async {
+        final connector = _DirectPathConnector();
+        final service = RepeaterCommandService(connector);
+        addTearDown(service.dispose);
+        Object? error;
+        await service.sendCommand(_repeater(1), 'get radio').catchError((
+          Object e,
+        ) {
+          error = e;
+          return '';
+        });
+        expect(error, isNotNull);
+        expect(
+          connector.sentFrames,
+          hasLength(RepeaterCommandService.maxRetries),
+        );
+        expect(connector.selections.map((s) => s.useFlood), [
+          false,
+          false,
+          true,
+        ]);
+        expect(connector.pathResets, 1);
+      },
+    );
+
+    test('a pinned path is never replaced by a flood', () async {
+      final connector = _DirectPathConnector();
+      final service = RepeaterCommandService(connector);
+      addTearDown(service.dispose);
+      final pinned = _repeater(1).copyWith(pathOverride: 1);
+      await service.sendCommand(pinned, 'get radio').catchError((_) => '');
+      expect(connector.selections.every((s) => !s.useFlood), isTrue);
+      expect(connector.pathResets, 0);
+    });
+
+    test('commands a repeat would harm are sent once', () {
+      for (final c in [
+        'region load',
+        'reboot',
+        'start ota',
+        'poweroff',
+        'erase',
+        ' Reboot ',
+      ]) {
+        expect(RepeaterCommandService.attemptsFor(c), 1, reason: c);
+      }
+      for (final c in ['get radio', 'neighbors', 'clear stats', 'set tx 20']) {
+        expect(
+          RepeaterCommandService.attemptsFor(c),
+          RepeaterCommandService.maxRetries,
+          reason: c,
+        );
+      }
+    });
+  });
+
+  group('MeshCoreConnector.repeaterReplyTimeout', () {
+    final connector = MeshCoreConnector();
+
+    test('never drops below the direct and flood floors', () {
+      const direct = PathSelection(pathBytes: [], hopCount: 0, useFlood: false);
+      const flood = PathSelection(pathBytes: [], hopCount: -1, useFlood: true);
+      expect(
+        connector.repeaterReplyTimeout(direct),
+        greaterThanOrEqualTo(8000),
+      );
+      expect(
+        connector.repeaterReplyTimeout(flood),
+        greaterThanOrEqualTo(12000),
+      );
+    });
+
+    test('grows with hops and stays under the hard cap', () {
+      int forHops(int h) => connector.repeaterReplyTimeout(
+        PathSelection(
+          pathBytes: List.filled(h, 1),
+          hopCount: h,
+          useFlood: false,
+        ),
+      );
+      expect(forHops(20), greaterThan(forHops(0)));
+      expect(forHops(60), lessThanOrEqualTo(45000));
     });
   });
 }

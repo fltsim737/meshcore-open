@@ -388,6 +388,12 @@ class MeshCoreConnector extends ChangeNotifier {
   /// copy (the last hop), in hex.
   void Function(int channelIndex, Uint8List payload, String lastHopHex)?
   sosRepeatListener;
+
+  /// Every copy of an SOS packet the radio heard, with the path hashes (hex)
+  /// of the repeaters it came through, nearest the sender first; empty when it
+  /// came straight from the sender's radio.
+  void Function(int channelIndex, Uint8List payload, List<String> pathHex)?
+  sosRouteListener;
   // the latest raw packet heard (from the RX log), to give an SOS packet its
   // received signal strength: the log frame arrives just before the decoded one
   int? _lastRxRssi;
@@ -6889,6 +6895,49 @@ class MeshCoreConnector extends ChangeNotifier {
     return physicsMax.clamp(0, _hardMaxTimeoutMs);
   }
 
+  /// How long to wait for a repeater's reply to a request (login, status,
+  /// neighbours, CLI). Deliberately not [calculateTimeout]: its learned model
+  /// is trained on chat ACKs, which are small and come straight back, while a
+  /// repeater has to handle the request and send a full sized reply; for a
+  /// zero-hop repeater the model could go as low as 500 ms. This is the
+  /// firmware's send budget, plus the repeater's handling and reply airtime,
+  /// with 50% margin for busy channels and bridges.
+  int repeaterReplyTimeout(PathSelection selection) {
+    final airtime = _estimateAirtimeMs(maxFrameSize);
+    final pathLength = selection.useFlood ? -1 : selection.hopCount;
+    final budget = _physicsMaxTimeout(pathLength, airtime) + 2 * airtime + 1000;
+    final floor = selection.useFlood
+        ? _repeaterReplyFloodFloorMs
+        : _repeaterReplyDirectFloorMs;
+    return (budget * 1.5).round().clamp(floor, _hardMaxTimeoutMs);
+  }
+
+  static const int _repeaterReplyDirectFloorMs = 8000;
+  static const int _repeaterReplyFloodFloorMs = 12000;
+
+  /// Route for attempt [attempt] (0 based) of [attempts] of a repeater request.
+  /// The first attempt takes the normal route ([preparePathForContactSend]);
+  /// later ones reuse [first]. If that is a direct path the user didn't pin,
+  /// the last attempt floods instead and resets the device path, so the reply
+  /// teaches it the current route: a stale direct path (repeater moved, changed
+  /// frequency, or now sits behind a bridge) otherwise fails every attempt.
+  Future<PathSelection> preparePathForRepeaterAttempt(
+    Contact contact, {
+    required int attempt,
+    required int attempts,
+    PathSelection? first,
+  }) async {
+    if (attempt == 0 || first == null) {
+      return preparePathForContactSend(contact);
+    }
+    final isLast = attempt == attempts - 1;
+    if (isLast && !first.useFlood && contact.pathOverride == null) {
+      await clearContactPath(contact);
+      return const PathSelection(pathBytes: [], hopCount: -1, useFlood: true);
+    }
+    return first;
+  }
+
   /// PUSH_CODE_NEW_ADVERT carries a contact the firmware did NOT store
   /// (type not auto-added, beyond autoadd_max_hops, or storage full;
   /// BaseChatMesh::onAdvertRecv), so it only feeds the discovered list.
@@ -7897,7 +7946,11 @@ class MeshCoreConnector extends ChangeNotifier {
   /// its own SOS.
   void _handleSosRepeatLog(_RawPacket packet) {
     final listener = sosRepeatListener;
-    if (listener == null || !packet.isFlood || packet.hopCount == 0) return;
+    final routeListener = sosRouteListener;
+    if (listener == null && routeListener == null) return;
+    // A flood packet's path is where it has been. A direct one's is where it
+    // is still going, so only a zero-hop direct one (no path) says anything.
+    if (!packet.isFlood && packet.hopCount != 0) return;
     final width = packet.pathHashWidth;
     if (packet.pathBytes.length < packet.hopCount * width) return;
     final payload = BufferReader(packet.payload);
@@ -7914,15 +7967,18 @@ class MeshCoreConnector extends ChangeNotifier {
       final dataType = data[0] | (data[1] << 8);
       final length = data[2];
       if (dataType != dataTypeSos || length > data.length - 3) return;
-      final last = packet.pathBytes.sublist(
-        (packet.hopCount - 1) * width,
-        packet.hopCount * width,
-      );
-      listener(
-        channel.index,
-        Uint8List.fromList(data.sublist(3, 3 + length)),
-        last.map((b) => b.toRadixString(16).padLeft(2, '0')).join(),
-      );
+      final sos = Uint8List.fromList(data.sublist(3, 3 + length));
+      final path = [
+        for (var i = 0; i < packet.hopCount; i++)
+          packet.pathBytes
+              .sublist(i * width, (i + 1) * width)
+              .map((b) => b.toRadixString(16).padLeft(2, '0'))
+              .join(),
+      ];
+      routeListener?.call(channel.index, sos, path);
+      if (listener != null && packet.isFlood && path.isNotEmpty) {
+        listener(channel.index, sos, path.last);
+      }
       return;
     }
   }
@@ -9252,7 +9308,8 @@ class MeshCoreConnector extends ChangeNotifier {
         pathHashWidth: pathHashWidth,
         latitude: latitude,
         longitude: longitude,
-        lastSeen: DateTime.now(), // when we heard it: the sender's clock may be wrong
+        lastSeen:
+            DateTime.now(), // when we heard it: the sender's clock may be wrong
       ),
     );
   }
@@ -9337,7 +9394,8 @@ class MeshCoreConnector extends ChangeNotifier {
         pathHashWidth: pathHashWidth,
         latitude: latitude,
         longitude: longitude,
-        lastSeen: DateTime.now(), // when we heard it: the sender's clock may be wrong
+        lastSeen:
+            DateTime.now(), // when we heard it: the sender's clock may be wrong
       );
       // The firmware decides whether to store it: PUSH_CODE_ADVERT (then
       // GET_CONTACT_BY_KEY) adds it to _contacts and notifies.
@@ -9380,7 +9438,8 @@ class MeshCoreConnector extends ChangeNotifier {
         pathHashWidth: pathHashWidth,
         pathLength: path.isEmpty ? -1 : (path.length ~/ pathHashWidth),
         lastMessageAt: mergedLastMessageAt,
-        lastSeen: DateTime.now(), // when we heard it: the sender's clock may be wrong
+        lastSeen:
+            DateTime.now(), // when we heard it: the sender's clock may be wrong
         pathOverride: existing.pathOverride, // Preserve user's path choice
         pathOverrideBytes: existing.pathOverrideBytes,
       );

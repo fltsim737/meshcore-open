@@ -7230,4 +7230,79 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Выкл.: режим «Не беспокоить» может заглушить SOS. Нажмите и разрешите этому приложению доступ к режиму «Не беспокоить»';
+
+  @override
+  String get sos_routeTitle => 'Как оно дошло до вас';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Напрямую от их рации ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Через $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => 'Не слышно напрямую от их рации';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Этот SOS дошёл до вас только через ретрансляторы, ни разу напрямую от их рации. Поиск слышит только саму их рацию, поэтому отсюда найти их не может. Двигайтесь к $nearest, ретранслятору, ближайшему к ним на пути к вам, и к последнему известному положению: как только окажетесь в прямой досягаемости, маяки начнут приходить. Если SOS прошёл через мост на другую частоту, ваша рация вообще не услышит их маяки, пока не будет на этой частоте.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Их рация: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Их рация на другой частоте, чем ваша, поэтому Поиск их не слышит, а они могут не слышать вас напрямую. Когда окажетесь в зоне покрытия на их стороне, перестройтесь на неё.';
+
+  @override
+  String get sos_retuneButton => 'Перестроиться на их частоту';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Перестроиться на частоту $name?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Ваша рация перейдёт на $settings. Вы покидаете текущую сеть: пока не вернётесь, вы её не слышите, а спасатели в ней не смогут с вами связаться. Им сообщат, что вы перестроились.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Перестроиться';
+
+  @override
+  String get sos_retuneFailed => 'Рация не приняла новые настройки.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name перестроился(ась) на $frequency и может быть недоступен(на)';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Ваша рация перестроена';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Она на настройках $name ($settings), вне вашей сети на $frequency. Вернитесь, когда закончите.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Назад на $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'Рация не вернулась. Попробуйте ещё раз или настройте её в Настройках радио.';
+
+  @override
+  String get sos_retuning =>
+      'Сообщаем другим спасателям, затем перестраиваемся…';
 }

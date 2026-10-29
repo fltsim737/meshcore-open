@@ -36,19 +36,17 @@ class _NeighborsScreenState extends State<NeighborsScreen> {
   static const int _reqNeighborsKeyLen = 4;
   // Firmware packs results into a 130-byte buffer (simple_repeater/MyMesh.cpp).
   static const int _reqNeighborsPageSize = 130 ~/ (_reqNeighborsKeyLen + 5);
-  static const int _statusPayloadOffset = 8;
-  static const int _statusStatsSize = 52;
-  static const int _statusResponseBytes =
-      _statusPayloadOffset + _statusStatsSize;
-  Uint8List _tagData = Uint8List(4);
+  static const int _pageAttempts = 3;
+  // Tags of every request sent for the page being loaded: a late reply to an
+  // earlier attempt still counts.
+  final Set<String> _pageTags = {};
   bool _awaitingSent = false;
+  Completer<({int total, List<Map<String, dynamic>> page})>? _pageReply;
   int _neighborCount = 0;
-  int _pageOffset = 0;
 
   bool _isLoading = false;
   bool _isLoaded = false;
   bool _hasData = false;
-  Timer? _statusTimeout;
   StreamSubscription<Uint8List>? _frameSubscription;
   RepeaterCommandService? _commandService;
   PathSelection? _pendingStatusSelection;
@@ -91,14 +89,14 @@ class _NeighborsScreenState extends State<NeighborsScreen> {
 
       if (frame[0] == respCodeSent && _awaitingSent && frame.length >= 6) {
         _awaitingSent = false;
-        _tagData = frame.sublist(2, 6);
+        _pageTags.add(pubKeyToHex(frame.sublist(2, 6)));
       }
 
       // Check if it's a binary response
       if (frame[0] == pushCodeBinaryResponse &&
           frame.length >= 6 &&
-          listEquals(frame.sublist(2, 6), _tagData)) {
-        _handleNeighborsResponse(connector, frame.sublist(6));
+          _pageTags.contains(pubKeyToHex(frame.sublist(2, 6)))) {
+        _handleNeighborsResponse(frame.sublist(6));
       }
     });
   }
@@ -152,63 +150,59 @@ class _NeighborsScreenState extends State<NeighborsScreen> {
     }
   }
 
-  void _handleNeighborsResponse(MeshCoreConnector connector, Uint8List frame) {
+  void _handleNeighborsResponse(Uint8List frame) {
+    final reply = _pageReply;
+    if (reply == null || reply.isCompleted) return;
     final buffer = BufferReader(frame);
-    final contacts = connector.allContactsUnfiltered;
     try {
-      final neighborCount = buffer.readUInt16LE();
+      final total = buffer.readUInt16LE();
       final page = parseNeighborsData(buffer, buffer.readUInt16LE());
-      final parsedNeighbors = [
-        if (_pageOffset > 0) ...?_parsedNeighbors,
-        ...page,
-      ];
-      contacts.where((c) => c.type == advTypeRepeater).forEach((repeater) {
-        for (var neighborData in parsedNeighbors) {
-          final publicKey = neighborData['publicKey'];
-          if (listEquals(
-            repeater.publicKey.sublist(0, _reqNeighborsKeyLen),
-            publicKey,
-          )) {
-            neighborData['contact'] = repeater;
-          }
-        }
-      });
-
-      setState(() {
-        _parsedNeighbors = parsedNeighbors;
-        _neighborCount = neighborCount;
-      });
-
-      _tagData = Uint8List(4);
-      _statusTimeout?.cancel();
-      _recordStatusResult(true);
-      if (!mounted) return;
-      if (page.isNotEmpty && parsedNeighbors.length < neighborCount) {
-        _loadNeighbors(offset: parsedNeighbors.length);
-        return;
-      }
-      setState(() {
-        _isLoading = false;
-        _isLoaded = true;
-        _hasData = true;
-      });
+      reply.complete((total: total, page: page));
     } catch (e) {
       appLogger.error('Error handling neighbors response: $e');
     }
   }
 
-  Future<void> _loadNeighbors({int offset = 0}) async {
-    if (_commandService == null) return;
+  /// Links neighbours to known repeater contacts by key prefix.
+  void _linkContacts(
+    MeshCoreConnector connector,
+    List<Map<String, dynamic>> neighbors,
+  ) {
+    final repeaters = connector.allContactsUnfiltered.where(
+      (c) => c.type == advTypeRepeater,
+    );
+    for (final repeater in repeaters) {
+      for (final neighborData in neighbors) {
+        if (listEquals(
+          repeater.publicKey.sublist(0, _reqNeighborsKeyLen),
+          neighborData['publicKey'],
+        )) {
+          neighborData['contact'] = repeater;
+        }
+      }
+    }
+  }
 
-    _pageOffset = offset;
-    setState(() {
-      _isLoading = true;
-      _isLoaded = false;
-    });
-    try {
-      final connector = Provider.of<MeshCoreConnector>(context, listen: false);
-      final repeater = _resolveRepeater(connector);
-      final selection = await connector.preparePathForContactSend(repeater);
+  /// Requests one page, up to [_pageAttempts] times. Null if none answered.
+  Future<({int total, List<Map<String, dynamic>> page})?> _requestPage(
+    MeshCoreConnector connector,
+    Contact repeater,
+    int offset,
+    Object load,
+  ) async {
+    final reply = Completer<({int total, List<Map<String, dynamic>> page})>();
+    _pageReply = reply;
+    _pageTags.clear();
+    PathSelection? first;
+    for (var attempt = 0; attempt < _pageAttempts; attempt++) {
+      final selection = await connector.preparePathForRepeaterAttempt(
+        repeater,
+        attempt: attempt,
+        attempts: _pageAttempts,
+        first: first,
+      );
+      first ??= selection;
+      if (!mounted || !identical(_currentLoad, load)) return null;
       _pendingStatusSelection = selection;
 
       //[version][number of requested neighbors][offset_16bit][order by][len of public key]
@@ -226,28 +220,70 @@ class _NeighborsScreenState extends State<NeighborsScreen> {
       );
       _awaitingSent = true;
       await connector.sendFrame(frame);
-
-      final pathLengthValue = selection.useFlood ? -1 : selection.hopCount;
-      final messageBytes = frame.length >= _statusResponseBytes
-          ? frame.length
-          : _statusResponseBytes;
-      final timeoutMs = connector.calculateTimeout(
-        pathLength: pathLengthValue,
-        messageBytes: messageBytes,
-      );
-      _statusTimeout?.cancel();
-      _statusTimeout = Timer(Duration(milliseconds: timeoutMs), () {
-        if (!mounted) return;
-        setState(() {
-          _isLoading = false;
-          _isLoaded = false;
-        });
-        showDismissibleSnackBar(
-          context,
-          content: Text(context.l10n.neighbors_requestTimedOut),
-          backgroundColor: Theme.of(context).colorScheme.error,
+      try {
+        final result = await reply.future.timeout(
+          Duration(milliseconds: connector.repeaterReplyTimeout(selection)),
         );
+        _recordStatusResult(true);
+        return result;
+      } on TimeoutException {
+        if (!mounted || !identical(_currentLoad, load)) return null;
         _recordStatusResult(false);
+      }
+    }
+    return null;
+  }
+
+  /// Identifies the running load, so a refresh abandons the previous one.
+  Object? _currentLoad;
+
+  Future<void> _loadNeighbors() async {
+    if (_commandService == null) return;
+    final load = Object();
+    _currentLoad = load;
+
+    setState(() {
+      _isLoading = true;
+      _isLoaded = false;
+    });
+    try {
+      final connector = Provider.of<MeshCoreConnector>(context, listen: false);
+      final repeater = _resolveRepeater(connector);
+      final neighbors = <Map<String, dynamic>>[];
+      var total = 0;
+      while (true) {
+        final result = await _requestPage(
+          connector,
+          repeater,
+          neighbors.length,
+          load,
+        );
+        if (!mounted || !identical(_currentLoad, load)) return;
+        if (result == null) {
+          setState(() {
+            _isLoading = false;
+            _isLoaded = false;
+          });
+          showDismissibleSnackBar(
+            context,
+            content: Text(context.l10n.neighbors_requestTimedOut),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          );
+          return;
+        }
+        total = result.total;
+        neighbors.addAll(result.page);
+        _linkContacts(connector, neighbors);
+        setState(() {
+          _parsedNeighbors = List.of(neighbors);
+          _neighborCount = total;
+        });
+        if (result.page.isEmpty || neighbors.length >= total) break;
+      }
+      setState(() {
+        _isLoading = false;
+        _isLoaded = true;
+        _hasData = true;
       });
     } catch (e) {
       _awaitingSent = false;
@@ -279,7 +315,7 @@ class _NeighborsScreenState extends State<NeighborsScreen> {
   void dispose() {
     _frameSubscription?.cancel();
     _commandService?.dispose();
-    _statusTimeout?.cancel();
+    _currentLoad = null;
     super.dispose();
   }
 

@@ -7159,4 +7159,79 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Av: Stör ej kan tysta ett SOS. Tryck och tillåt åtkomst till Stör ej för den här appen';
+
+  @override
+  String get sos_routeTitle => 'Hur det nådde dig';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Direkt från deras radio ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Via $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => 'Inte hört direkt från deras radio';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Detta SOS har bara nått dig via repeatrar, aldrig direkt från deras radio. Lokalisera hör bara deras radio själv och kan därför inte hitta dem härifrån. Bege dig mot $nearest, repeatern närmast dem på vägen till dig, och den senast kända positionen: när du är inom direkt räckvidd kommer fyrsignalerna fram. Om SOS:et gick över en brygga till en annan frekvens kan din radio inte höra deras fyrsignaler alls förrän den är på den frekvensen.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Deras radio: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Deras radio är på en annan frekvens än din, så Lokalisera kan inte höra dem och de kanske inte hör dig direkt. När du är inom täckning på deras sida, ställ om till den.';
+
+  @override
+  String get sos_retuneButton => 'Ställ om till deras frekvens';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Ställa om till ${name}s frekvens?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Din radio går över till $settings. Du lämnar ditt nuvarande mesh: tills du går tillbaka hör du det inte och hjälpare där kan inte nå dig. De får veta att du har ställt om.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Ställ om';
+
+  @override
+  String get sos_retuneFailed => 'Radion tog inte de nya inställningarna.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name har ställt om till $frequency och kan vara onåbar';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Din radio är omställd';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Den är på ${name}s inställningar ($settings), utanför ditt eget mesh på $frequency. Gå tillbaka när du är klar.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Tillbaka till $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'Radion gick inte tillbaka. Försök igen eller ställ in den i Radioinställningar.';
+
+  @override
+  String get sos_retuning =>
+      'Meddelar de andra hjälparna och ställer sedan om…';
 }

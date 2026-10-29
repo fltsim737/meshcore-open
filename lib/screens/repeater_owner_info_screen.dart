@@ -97,11 +97,8 @@ class _RepeaterOwnerInfoScreenState extends State<RepeaterOwnerInfoScreen> {
       );
       _awaitingSent = true;
       await connector.sendFrame(frame);
-      // The reply carries up to 120 bytes of text plus version and name.
-      final timeoutMs = connector.calculateTimeout(
-        pathLength: selection.useFlood ? -1 : selection.hopCount,
-        messageBytes: 180,
-      );
+      // Not the chat-ACK timeout: see MeshCoreConnector.repeaterReplyTimeout.
+      final timeoutMs = connector.repeaterReplyTimeout(selection);
       _timeout?.cancel();
       _timeout = Timer(Duration(milliseconds: timeoutMs), () {
         if (!mounted) return;

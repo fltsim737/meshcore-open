@@ -31,10 +31,21 @@ class RepeaterCommandService {
   final Map<String, _PendingCommand> _pendingByPrefix = {};
   int _prefixCounter = 0;
 
-  static const int maxRetries = 5;
+  /// Attempts per command: the normal route twice, then (for a direct path)
+  /// a flood, see [MeshCoreConnector.preparePathForRepeaterAttempt].
+  static const int maxRetries = 3;
   static final RegExp _prefixPattern = RegExp(r'^[0-9A-Fa-f]{2}\|');
 
   RepeaterCommandService(this._connector);
+
+  /// Attempts for [command]. Once only for commands a repeat would harm or
+  /// that don't answer: a second `region load` would be taken as a region
+  /// line, and reboot / OTA / power off / erase restart the repeater.
+  static int attemptsFor(String command) {
+    final c = command.trim().toLowerCase();
+    const once = ['region load', 'reboot', 'start ota', 'poweroff', 'erase'];
+    return once.any(c.startsWith) ? 1 : maxRetries;
+  }
 
   /// Send a CLI command to a repeater with automatic retries
   /// Returns a future that completes when a response is received or after max retries.
@@ -52,10 +63,17 @@ class RepeaterCommandService {
     final pending = _PendingCommand(repeater.publicKeyHex);
     _pendingCommands.add(pending);
     try {
-      final selection = await _connector.preparePathForContactSend(repeater);
+      PathSelection? first;
 
       for (int attempt = 0; attempt < attemptCount; attempt++) {
         onAttempt?.call(attempt + 1);
+        final selection = await _connector.preparePathForRepeaterAttempt(
+          repeater,
+          attempt: attempt,
+          attempts: attemptCount,
+          first: first,
+        );
+        first ??= selection;
         try {
           final response = await _sendCommandAttempt(
             repeater,
@@ -96,7 +114,6 @@ class RepeaterCommandService {
     final int timeoutMs;
     try {
       final framedCommand = raw ? command : '$prefix$command';
-      final pathLengthValue = selection.useFlood ? -1 : selection.hopCount;
       final timestampSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
       _connector.trackRepeaterAck(
         contact: repeater,
@@ -111,13 +128,7 @@ class RepeaterCommandService {
         attempt: attempt,
         timestampSeconds: timestampSeconds,
       );
-      final responseBytes = frame.length > maxFrameSize
-          ? frame.length
-          : maxFrameSize;
-      timeoutMs = _connector.calculateTimeout(
-        pathLength: pathLengthValue,
-        messageBytes: responseBytes,
-      );
+      timeoutMs = _connector.repeaterReplyTimeout(selection);
       await _connector.sendFrame(frame);
     } catch (e) {
       throw Exception('Failed to send command: $e');

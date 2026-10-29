@@ -171,7 +171,7 @@ class _RepeaterCliScreenState extends State<RepeaterCliScreen> {
         final response = await _commandService!.sendCommand(
           repeater,
           command,
-          retries: 1,
+          retries: RepeaterCommandService.attemptsFor(command),
         );
         if (mounted) {
           setState(() {

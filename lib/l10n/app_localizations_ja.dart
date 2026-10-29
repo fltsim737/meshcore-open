@@ -6889,4 +6889,77 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'オフ：おやすみモードでSOSが鳴らないことがあります。タップして、このアプリにおやすみモードへのアクセスを許可してください';
+
+  @override
+  String get sos_routeTitle => '届いた経路';
+
+  @override
+  String sos_routeDirect(int count) {
+    return '相手の無線機から直接 ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return '$path 経由 ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => '相手の無線機から直接は受信していません';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'このSOSは中継器を経由してのみ届いており、相手の無線機から直接届いたことはありません。探索は相手の無線機そのものしか聞き取れないため、ここからは見つけられません。あなたまでの経路で相手に最も近い中継器 $nearest と、最後に分かっている位置へ向かってください。直接届く範囲に入ればビーコンが届きます。SOSがブリッジを通って別の周波数から届いた場合、あなたの無線機がその周波数になるまでビーコンはまったく聞こえません。';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return '相手の無線機: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      '相手の無線機はあなたと違う周波数のため、探索では聞き取れず、相手もあなたを直接受信できない可能性があります。相手側のカバー範囲に入ったら、その周波数に切り替えてください。';
+
+  @override
+  String get sos_retuneButton => '相手の周波数に切り替える';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return '$name の周波数に切り替えますか？';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return '無線機を $settings に切り替えます。現在のメッシュから外れるため、戻るまでそのメッシュは受信できず、そこの対応者もあなたに連絡できません。切り替えたことは対応者に通知されます。';
+  }
+
+  @override
+  String get sos_retuneAction => '切り替える';
+
+  @override
+  String get sos_retuneFailed => '無線機が新しい設定を受け付けませんでした。';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name は $frequency に切り替えたため、連絡がつかない可能性があります';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => '無線機の周波数を切り替え中です';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return '$name の設定 ($settings) になっており、$frequency の自分のメッシュから外れています。終わったら戻してください。';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return '$frequency に戻す';
+  }
+
+  @override
+  String get sos_retuneBackFailed => '無線機が戻りませんでした。もう一度試すか、無線設定で設定してください。';
+
+  @override
+  String get sos_retuning => 'ほかの対応者に知らせてから切り替えています…';
 }
