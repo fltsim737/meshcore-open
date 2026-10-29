@@ -7111,4 +7111,79 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Vyp.: režim Nerušiť môže SOS stlmiť. Ťuknite a povoľte tejto aplikácii prístup k režimu Nerušiť';
+
+  @override
+  String get sos_routeTitle => 'Ako sa k vám dostalo';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Priamo z ich rádia ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Cez $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => 'Nepočuté priamo z ich rádia';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Toto SOS sa k vám dostalo len cez opakovače, nikdy priamo z ich rádia. Lokalizácia počuje len samotné ich rádio, takže odtiaľto ich nenájde. Choďte smerom k $nearest, opakovaču najbližšiemu k nim na ceste k vám, a k poslednej známej polohe: keď budete v priamom dosahu, signály začnú prichádzať. Ak SOS prešlo cez most na inú frekvenciu, vaše rádio ich signály vôbec nepočuje, kým nebude na tej frekvencii.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Ich rádio: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Ich rádio je na inej frekvencii ako vaše, takže Lokalizácia ich nepočuje a oni vás možno nepočujú priamo. Keď budete v pokrytí na ich strane, prelaďte sa na ňu.';
+
+  @override
+  String get sos_retuneButton => 'Preladiť na ich frekvenciu';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Preladiť na frekvenciu $name?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Vaše rádio prejde na $settings. Opúšťate súčasnú sieť: kým sa nevrátite, nebudete ju počuť a záchranári v nej vás nezastihnú. Dostanú správu, že ste sa preladili.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Preladiť';
+
+  @override
+  String get sos_retuneFailed => 'Rádio neprijalo nové nastavenia.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name sa preladil(a) na $frequency a môže byť nedostupný(á)';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Vaše rádio je preladené';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Je na nastaveniach $name ($settings), mimo vašej siete na $frequency. Vráťte sa, keď skončíte.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Späť na $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'Rádio sa nevrátilo. Skúste znova alebo ho nastavte v Nastaveniach rádia.';
+
+  @override
+  String get sos_retuning =>
+      'Informujem ostatných záchranárov, potom prelaďujem…';
 }

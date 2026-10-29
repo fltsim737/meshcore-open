@@ -147,9 +147,10 @@ void main() {
     });
 
     test('round-trips ACK and cancel, and an SOS without a position', () {
-      // (a report always carries a reading: see 'coordinated search')
+      // (a report always carries a reading: see 'coordinated search'; a
+      // retune its radio settings: see 'radio settings and retune')
       for (final kind in SosPacketKind.values.where(
-        (k) => k != SosPacketKind.report,
+        (k) => k != SosPacketKind.report && k != SosPacketKind.retune,
       )) {
         final decoded = SosPacket.decode(
           SosPacket(
@@ -443,6 +444,99 @@ void main() {
       expect(back.reading!.snrDb, -6.25);
       expect(back.reading!.beaconPower, 2);
       expect(back.reading!.ageSeconds, 4);
+    });
+  });
+
+  group('radio settings and retune (9.8.3)', () {
+    const mid = SosRadio(freqKhz: 915075, bwHz: 125000, sf: 9, cr: 5);
+    final key = Uint8List.fromList(List.filled(32, 7));
+    SosPacket sos({String? info, SosRadio? radio}) => SosPacket(
+      kind: SosPacketKind.sos,
+      id: 'a1b2',
+      senderPrefix: key.sublist(0, 6),
+      senderName: 'Ridge',
+      time: DateTime.utc(2026, 10, 29),
+      senderKey: key,
+      info: info,
+      radio: radio,
+    );
+
+    test('radio settings round trip in 5 bytes', () {
+      expect(mid.encode(), hasLength(SosRadio.size));
+      expect(SosRadio.decode(mid.encode(), 0), mid);
+      const narrow = SosRadio(freqKhz: 916575, bwHz: 62500, sf: 7, cr: 8);
+      expect(SosRadio.decode(narrow.encode(), 0), narrow);
+      expect(mid.label, '915.075 MHz · BW 125 · SF9 · CR 4/5');
+      expect(narrow.label, '916.575 MHz · BW 62.5 · SF7 · CR 4/8');
+    });
+
+    test('settings an SOS cannot carry are dropped', () {
+      expect(
+        SosRadio.fromRadio(freqKhz: 915075, bwHz: 99000, sf: 9, cr: 5),
+        isNull,
+      );
+      expect(
+        SosRadio.fromRadio(freqKhz: null, bwHz: 125000, sf: 9, cr: 5),
+        isNull,
+      );
+      // MeshCore reports the coding rate either as 5..8 or as 1..4
+      expect(
+        SosRadio.fromRadio(freqKhz: 915075, bwHz: 125000, sf: 9, cr: 1),
+        mid,
+      );
+    });
+
+    test('only frequency, bandwidth and SF decide who hears whom', () {
+      const otherCr = SosRadio(freqKhz: 915075, bwHz: 125000, sf: 9, cr: 8);
+      const otherSf = SosRadio(freqKhz: 915075, bwHz: 125000, sf: 10, cr: 5);
+      expect(mid.canHear(otherCr), isTrue);
+      expect(mid.canHear(otherSf), isFalse);
+    });
+
+    test('an SOS carries its radio, with or without info', () {
+      final bare = SosPacket.decode(sos(radio: mid).encode())!;
+      expect(bare.radio, mid);
+      expect(bare.info, isNull);
+      final both = SosPacket.decode(
+        sos(info: 'Back gate', radio: mid).encode(),
+      )!;
+      expect(both.radio, mid);
+      expect(both.info, 'Back gate');
+      expect(SosPacket.decode(sos(info: 'Back gate').encode())!.radio, isNull);
+    });
+
+    test('an older build reads no info from an SOS with only radio settings', () {
+      // the info length byte is written as 0, so the radio bytes after it
+      // are never taken for text
+      final wire = sos(radio: mid).encode();
+      final infoAt = wire.length - SosRadio.size - 1;
+      expect(wire[infoAt], 0);
+    });
+
+    test('radio settings take their room from the info', () {
+      final long = sos(info: 'I' * 40).encode();
+      final withRadio = sos(info: 'I' * 40, radio: mid).encode();
+      expect(withRadio.length, long.length);
+      final back = SosPacket.decode(withRadio)!;
+      expect(back.info, 'I' * (SosPacket.maxInfoBytes - SosRadio.size));
+      expect(back.radio, mid);
+    });
+
+    test('a retune round trips, going and back', () {
+      SosPacket retune(bool back) => SosPacket(
+        kind: SosPacketKind.retune,
+        id: 'a1b2',
+        senderPrefix: Uint8List.fromList(List.filled(6, 3)),
+        senderName: 'Joe',
+        radio: mid,
+        back: back,
+      );
+      final going = SosPacket.decode(retune(false).encode())!;
+      expect(going.kind, SosPacketKind.retune);
+      expect(going.senderName, 'Joe');
+      expect(going.radio, mid);
+      expect(going.back, isFalse);
+      expect(SosPacket.decode(retune(true).encode())!.back, isTrue);
     });
   });
 }

@@ -7129,4 +7129,79 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Desativado: Não incomodar pode silenciar um SOS. Toque e permita o acesso a Não incomodar para esta app';
+
+  @override
+  String get sos_routeTitle => 'Como chegou até si';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Diretamente do rádio dele ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Via $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => 'Não ouvido diretamente do rádio dele';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Este SOS chegou até si apenas através de repetidores, nunca diretamente do rádio dele. Localizar só ouve o próprio rádio, por isso não o consegue encontrar daqui. Dirija-se a $nearest, o repetidor mais próximo dele no caminho até si, e à última posição conhecida: quando estiver em alcance direto, os sinais chegam. Se o SOS atravessou uma ponte para outra frequência, o seu rádio não consegue ouvir os sinais dele até estar nessa frequência.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'O rádio dele: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'O rádio dele está numa frequência diferente da sua, por isso Localizar não o ouve e ele pode não o ouvir diretamente. Quando estiver em cobertura do lado dele, sintonize-a.';
+
+  @override
+  String get sos_retuneButton => 'Sintonizar a frequência dele';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Sintonizar a frequência de $name?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'O seu rádio passa para $settings. Sai da sua rede atual: até voltar não a ouvirá e os socorristas nela não o conseguem contactar. São avisados de que mudou de frequência.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Sintonizar';
+
+  @override
+  String get sos_retuneFailed => 'O rádio não aceitou as novas definições.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name mudou para $frequency e pode estar incontactável';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'O seu rádio mudou de frequência';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Está nas definições de $name ($settings), fora da sua rede em $frequency. Volte quando terminar.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Voltar a $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'O rádio não voltou. Tente de novo ou ajuste-o em Definições de rádio.';
+
+  @override
+  String get sos_retuning =>
+      'A avisar os outros socorristas e a mudar de frequência…';
 }

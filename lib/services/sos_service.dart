@@ -33,6 +33,12 @@ abstract class SosTransport implements Listenable {
   double? get selfLatitude;
   double? get selfLongitude;
 
+  /// The radio's LoRa settings, when known (and ones an SOS can carry).
+  SosRadio? get selfRadio;
+
+  /// Retunes the radio; true once it has taken the settings.
+  Future<bool> setRadio(SosRadio radio);
+
   /// Every channel on the radio, the hidden network channel included.
   List<Channel> get allChannels;
   List<Contact> get contacts;
@@ -65,6 +71,14 @@ abstract class SosTransport implements Listenable {
     listener,
   );
 
+  /// Every copy of an SOS packet heard, with the repeaters it came through
+  /// (path hashes in hex, nearest the sender first; empty: straight from the
+  /// sender's radio).
+  set sosRouteListener(
+    void Function(int channelIndex, Uint8List payload, List<String> pathHex)?
+    listener,
+  );
+
   /// Flooded across the mesh, or [zeroHop]: only radios in direct range.
   Future<void> sendChannelData(
     Channel channel,
@@ -94,6 +108,25 @@ class ConnectorSosTransport implements SosTransport {
   double? get selfLatitude => connector.selfLatitude;
   @override
   double? get selfLongitude => connector.selfLongitude;
+  @override
+  SosRadio? get selfRadio => SosRadio.fromRadio(
+    freqKhz: connector.currentFreqHz, // kHz, despite the name
+    bwHz: connector.currentBwHz,
+    sf: connector.currentSf,
+    cr: connector.currentCr,
+  );
+  @override
+  Future<bool> setRadio(SosRadio radio) async {
+    final ok = await connector.setRadioParams(
+      radio.freqKhz,
+      radio.bwHz,
+      radio.sf,
+      radio.cr,
+    );
+    if (ok) await connector.refreshDeviceInfo();
+    return ok;
+  }
+
   @override
   List<Channel> get allChannels => connector.allChannels;
   @override
@@ -130,6 +163,11 @@ class ConnectorSosTransport implements SosTransport {
     void Function(int channelIndex, Uint8List payload, String lastHopHex)?
     listener,
   ) => connector.sosRepeatListener = listener;
+  @override
+  set sosRouteListener(
+    void Function(int channelIndex, Uint8List payload, List<String> pathHex)?
+    listener,
+  ) => connector.sosRouteListener = listener;
   @override
   Future<void> sendChannelData(
     Channel channel,
@@ -535,6 +573,7 @@ class SosService extends ChangeNotifier {
     SosAlerter? alerter,
     SosStore? store,
     DateTime Function()? now,
+    this.retuneSendGap = defaultRetuneSendGap,
   }) : _transport = transport,
        _settings = settings,
        _phoneLocation = phoneLocation,
@@ -546,6 +585,7 @@ class SosService extends ChangeNotifier {
     _transport.sosDataListener = handleInboundData;
     _transport.sosAckListener = handleDeliveryAck;
     _transport.sosRepeatListener = handleHeardRepeat;
+    _transport.sosRouteListener = handleHeardRoute;
     _transport.addListener(_onTransportChanged);
     _settings.addListener(_syncNetwork);
     _expiryTimer = Timer.periodic(const Duration(minutes: 1), (_) {
@@ -588,6 +628,7 @@ class SosService extends ChangeNotifier {
       ..clear()
       ..addAll(_store.loadHistory());
     _sessions.load(_store.loadSessions());
+    _retune = _store.loadRetune();
     purgeExpired();
     notifyListeners();
     _schedule();
@@ -859,6 +900,8 @@ class SosService extends ChangeNotifier {
     String id, {
     SosFix? fix,
     bool withKey = false,
+    SosRadio? radio,
+    bool back = false,
   }) => SosPacket(
     kind: kind,
     id: id,
@@ -867,6 +910,10 @@ class SosService extends ChangeNotifier {
     time: _now(),
     fix: fix ?? const SosFix.none(),
     senderKey: withKey ? _transport.selfPublicKey : null,
+    // an SOS says what its radio is on, so a responder across a bridge on
+    // another frequency knows where to retune to
+    radio: radio ?? (kind == SosPacketKind.sos ? _transport.selfRadio : null),
+    back: back,
   );
 
   Future<void> activate() async {
@@ -1312,6 +1359,57 @@ class SosService extends ChangeNotifier {
     unawaited(_store.saveOutgoing(sos));
   }
 
+  /// Routes of SOS copies heard before the alert itself was decoded (the raw
+  /// copy reaches the app just ahead of it), by alert key.
+  final Map<String, ({DateTime at, Map<String, int> routes})> _pendingRoutes =
+      {};
+
+  /// Someone else's SOS heard on the network: remember the way it came, so a
+  /// responder can see whether it reached them straight from the sender's
+  /// radio (Locate can hear its beacons) or only through repeaters, perhaps
+  /// across a bridge to another frequency (it can't).
+  void handleHeardRoute(int channelIndex, Uint8List data, List<String> path) {
+    if (!isResponder) return;
+    final networkIndex = _transport.channelsReady
+        ? sosChannel?.index
+        : _knownSosChannelIndex;
+    if (networkIndex != channelIndex) return;
+    final packet = _sealed ? _openSealed(data)?.packet : SosPacket.decode(data);
+    if (packet == null || packet.kind != SosPacketKind.sos) return;
+    final self = _transport.selfPublicKey;
+    if (self != null &&
+        self.length >= SosPacket.keyPrefixSize &&
+        listEquals(
+          self.sublist(0, SosPacket.keyPrefixSize),
+          packet.senderPrefix,
+        )) {
+      return; // our own SOS: counted by handleHeardRepeat
+    }
+    final key = IncomingSos.keyFor(packet.senderName, packet.id);
+    final route = path.join(',');
+    final alert = _incoming.where((a) => a.key == key).firstOrNull;
+    if (alert == null) {
+      final now = _now();
+      _pendingRoutes.removeWhere(
+        (_, p) => now.difference(p.at) > const Duration(minutes: 1),
+      );
+      final pending = _pendingRoutes.putIfAbsent(
+        key,
+        () => (at: now, routes: <String, int>{}),
+      );
+      pending.routes[route] = (pending.routes[route] ?? 0) + 1;
+      return;
+    }
+    alert.routes[route] = (alert.routes[route] ?? 0) + 1;
+    notifyListeners();
+    unawaited(_store.saveIncoming(_incoming));
+  }
+
+  /// [route] (see [IncomingSos.routes]) as repeater names, nearest the sender
+  /// first.
+  List<String> routeNames(String route) =>
+      IncomingSos.routeHops(route).map(repeaterName).toList();
+
   /// A repeater heard passing on our SOS: its name when it is a contact
   /// whose key starts with [hashHex], else the hash itself.
   String repeaterName(String hashHex) {
@@ -1388,6 +1486,7 @@ class SosService extends ChangeNotifier {
           info: packet.info,
           via: 'network',
           sessionRef: sessionRef,
+          radio: packet.radio,
         );
       case SosPacketKind.ack:
         _handleAck(packet.id, packet.senderName, senderKeyHex);
@@ -1399,7 +1498,126 @@ class SosService extends ChangeNotifier {
         _onBeacon(packet, signal);
       case SosPacketKind.report:
         _onReport(packet);
+      case SosPacketKind.retune:
+        _onRetune(packet);
     }
+  }
+
+  /// Another responder retuned for an SOS, or came back.
+  void _onRetune(SosPacket packet) {
+    final radio = packet.radio;
+    if (radio == null) return;
+    var changed = false;
+    for (final alert in _incoming.where((a) => a.id == packet.id)) {
+      if (packet.back) {
+        changed |= alert.retunedResponders.remove(packet.senderName) != null;
+      } else {
+        alert.retunedResponders[packet.senderName] = radio;
+        changed = true;
+      }
+    }
+    if (!changed) return;
+    appLogger.info(
+      packet.back
+          ? '${packet.senderName} is back on ${radio.label} (SOS #${packet.id})'
+          : '${packet.senderName} retuned to ${radio.label} for SOS '
+                '#${packet.id}, may be unreachable',
+      tag: 'SOS',
+    );
+    unawaited(_store.saveIncoming(_incoming));
+    notifyListeners();
+  }
+
+  // ---------------------------------------------------------------------
+  // Retune: a responder moves their own radio to an SOS sender's settings
+  // ---------------------------------------------------------------------
+
+  /// Time for the note to other responders to go out before the radio
+  /// leaves their frequency: sending only queues it on the radio.
+  static const Duration defaultRetuneSendGap = Duration(seconds: 5);
+  final Duration retuneSendGap;
+
+  SosRetune? _retune;
+
+  /// While this phone's radio is retuned to an SOS sender's settings: the
+  /// settings to go back to. Nothing goes back by itself.
+  SosRetune? get retune => _retune;
+
+  /// [alert]'s sender is on radio settings ours can't hear (another frequency,
+  /// say across a bridge): Retune would move ours there.
+  bool canRetuneTo(IncomingSos alert) {
+    final theirs = alert.senderRadio;
+    final ours = _transport.selfRadio;
+    return theirs != null && ours != null && !ours.canHear(theirs);
+  }
+
+  /// Moves our radio to [alert]'s sender's settings, when the responder knows
+  /// they're within coverage on that side. Tells this mesh's responders first,
+  /// as afterwards we can't reach them. False if the radio refused.
+  Future<bool> retuneTo(IncomingSos alert) async {
+    final target = alert.senderRadio;
+    final current = _transport.selfRadio;
+    if (target == null || current == null || !isConnected) return false;
+    // Retuned already (to another SOS): go back to the original in the end.
+    final from = _retune?.from ?? current;
+    await _sendChannelPacket(
+      _packet(SosPacketKind.retune, alert.id, radio: target),
+      session: _alertSession(alert),
+    );
+    await Future<void>.delayed(retuneSendGap);
+    if (!await _transport.setRadio(target)) {
+      appLogger.warn('Radio refused ${target.label} for retune', tag: 'SOS');
+      await _sendChannelPacket(
+        _packet(SosPacketKind.retune, alert.id, radio: current, back: true),
+        session: _alertSession(alert),
+      );
+      return false;
+    }
+    _retune = SosRetune(
+      alertKey: alert.key,
+      alertId: alert.id,
+      senderName: alert.senderName,
+      from: from,
+      to: target,
+      at: _now(),
+    );
+    appLogger.info(
+      'Retuned from ${from.label} to ${target.label} for '
+      '${alert.senderName}\'s SOS #${alert.id}',
+      tag: 'SOS',
+    );
+    unawaited(_store.saveRetune(_retune));
+    notifyListeners();
+    return true;
+  }
+
+  /// Back to the radio settings we retuned from, and tells the responders
+  /// there we're reachable again. False if the radio refused.
+  Future<bool> retuneBack() async {
+    final retune = _retune;
+    if (retune == null || !isConnected) return false;
+    if (!await _transport.setRadio(retune.from)) {
+      appLogger.warn(
+        'Radio refused ${retune.from.label} going back',
+        tag: 'SOS',
+      );
+      return false;
+    }
+    _retune = null;
+    unawaited(_store.saveRetune(null));
+    notifyListeners();
+    appLogger.info('Back on ${retune.from.label}', tag: 'SOS');
+    final alert = _incoming.where((a) => a.key == retune.alertKey).firstOrNull;
+    await _sendChannelPacket(
+      _packet(
+        SosPacketKind.retune,
+        retune.alertId,
+        radio: retune.from,
+        back: true,
+      ),
+      session: alert == null ? null : _alertSession(alert),
+    );
+    return true;
   }
 
   String? _contactKeyForPrefix(Uint8List prefix) => _transport.contacts
@@ -1515,6 +1733,7 @@ class SosService extends ChangeNotifier {
     required String via,
     String? info,
     String? sessionRef,
+    SosRadio? radio,
   }) {
     final key = IncomingSos.keyFor(senderName, id);
     final now = _now();
@@ -1527,7 +1746,8 @@ class SosService extends ChangeNotifier {
         ..receivedCount += 1
         ..senderKeyHex ??= senderKeyHex
         ..channelIndex ??= channelIndex
-        ..sessionRef = sessionRef ?? existing.sessionRef;
+        ..sessionRef = sessionRef ?? existing.sessionRef
+        ..senderRadio = radio ?? existing.senderRadio;
       if (fix.hasPosition || !existing.fix.hasPosition) existing.fix = fix;
       if (info != null) existing.info = info;
       // Dismissed without answering: the sender is still calling, so it comes
@@ -1544,9 +1764,16 @@ class SosService extends ChangeNotifier {
         fix: fix,
         info: info,
         sessionRef: sessionRef,
+        senderRadio: radio,
       );
       _incoming.insert(0, alert);
       _trimIncoming();
+    }
+    if (_pendingRoutes.remove(key) case final pending?) {
+      final routes = alert.routes;
+      pending.routes.forEach((route, count) {
+        routes[route] = (routes[route] ?? 0) + count;
+      });
     }
     _recordHeard(alert, now, fix, via, info);
 
@@ -1808,6 +2035,7 @@ class SosService extends ChangeNotifier {
     _transport.sosDataListener = null;
     _transport.sosAckListener = null;
     _transport.sosRepeatListener = null;
+    _transport.sosRouteListener = null;
     super.dispose();
   }
 }

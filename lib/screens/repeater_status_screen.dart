@@ -33,12 +33,13 @@ class RepeaterStatusScreen extends StatefulWidget {
 }
 
 class _RepeaterStatusScreenState extends State<RepeaterStatusScreen> {
-  static const int _statusResponseBytes = RemoteNodeStats.payloadOffset + 56;
-
   bool _isLoading = false;
   StreamSubscription<Uint8List>? _frameSubscription;
   RepeaterCommandService? _commandService;
-  Timer? _statusTimeout;
+
+  /// Completed by the first status reply to any attempt of the current load.
+  Completer<void>? _statusReply;
+  static const int _statusAttempts = 3;
   int? _batteryMv;
   int? _uptimeSecs;
   int? _queueLen;
@@ -78,7 +79,6 @@ class _RepeaterStatusScreenState extends State<RepeaterStatusScreen> {
   void dispose() {
     _frameSubscription?.cancel();
     _commandService?.dispose();
-    _statusTimeout?.cancel();
     super.dispose();
   }
 
@@ -121,7 +121,7 @@ class _RepeaterStatusScreenState extends State<RepeaterStatusScreen> {
     // Only a reply that actually carried status fields ends the request;
     // any other text from this repeater (e.g. a CLI reply) is ignored here.
     if (!_parseStatusResponse(parsed.text)) return;
-    _statusTimeout?.cancel();
+    _completeStatusReply();
     if (mounted) {
       setState(() {
         _isLoading = false;
@@ -138,7 +138,7 @@ class _RepeaterStatusScreenState extends State<RepeaterStatusScreen> {
     final stats = RemoteNodeStats.tryParse(frame, isRoom: _isRoom);
     if (stats == null) return;
 
-    _statusTimeout?.cancel();
+    _completeStatusReply();
     if (!mounted) return;
     final rxAirSecs = stats.rxAirSecs;
     setState(() {
@@ -278,31 +278,39 @@ class _RepeaterStatusScreenState extends State<RepeaterStatusScreen> {
       _chanUtil = null;
     });
 
+    final reply = Completer<void>();
+    _statusReply = reply;
     try {
       final connector = Provider.of<MeshCoreConnector>(context, listen: false);
       final repeater = _resolveRepeater(connector);
-      final selection = await connector.preparePathForContactSend(repeater);
-      _pendingStatusSelection = selection;
-      final frame = buildSendStatusRequestFrame(repeater.publicKey);
-      await connector.sendFrame(frame);
-
-      final pathLengthValue = selection.useFlood ? -1 : selection.hopCount;
-      var messageBytes = frame.length >= _statusResponseBytes
-          ? frame.length
-          : _statusResponseBytes;
-      if (messageBytes < maxFrameSize) messageBytes = maxFrameSize;
-      final timeoutMs = connector.calculateTimeout(
-        pathLength: pathLengthValue,
-        messageBytes: messageBytes,
-      );
-      _statusTimeout?.cancel();
-      _statusTimeout = Timer(Duration(milliseconds: timeoutMs), () {
-        if (!mounted) return;
-        setState(() {
-          _isLoading = false;
-          _loadError = context.l10n.repeater_statusRequestTimeout;
-        });
-        _recordStatusResult(false);
+      PathSelection? first;
+      for (var attempt = 0; attempt < _statusAttempts; attempt++) {
+        final selection = await connector.preparePathForRepeaterAttempt(
+          repeater,
+          attempt: attempt,
+          attempts: _statusAttempts,
+          first: first,
+        );
+        first ??= selection;
+        if (!mounted || !identical(_statusReply, reply)) return;
+        _pendingStatusSelection = selection;
+        await connector.sendFrame(
+          buildSendStatusRequestFrame(repeater.publicKey),
+        );
+        try {
+          // A late reply to an earlier attempt completes this one too.
+          await reply.future.timeout(
+            Duration(milliseconds: connector.repeaterReplyTimeout(selection)),
+          );
+          return; // the reply handlers updated the screen
+        } on TimeoutException {
+          if (!mounted || !identical(_statusReply, reply)) return;
+          _recordStatusResult(false);
+        }
+      }
+      setState(() {
+        _isLoading = false;
+        _loadError = context.l10n.repeater_statusRequestTimeout;
       });
     } catch (e) {
       if (mounted) {
@@ -313,6 +321,11 @@ class _RepeaterStatusScreenState extends State<RepeaterStatusScreen> {
       }
       _recordStatusResult(false);
     }
+  }
+
+  void _completeStatusReply() {
+    final reply = _statusReply;
+    if (reply != null && !reply.isCompleted) reply.complete();
   }
 
   void _recordStatusResult(bool success) {

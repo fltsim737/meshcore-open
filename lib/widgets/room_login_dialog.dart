@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import '../l10n/l10n.dart';
 import '../models/contact.dart';
+import '../models/path_selection.dart';
 import '../l10n/contact_localization.dart';
 import '../services/storage_service.dart';
 import '../connector/meshcore_connector.dart';
@@ -35,7 +36,8 @@ class _RoomLoginDialogState extends State<RoomLoginDialog> {
   bool _obscurePassword = true;
   late MeshCoreConnector _connector;
   int _currentAttempt = 0;
-  static const int _maxAttempts = 5;
+  // the normal route twice, then a flood (preparePathForRepeaterAttempt)
+  static const int _maxAttempts = 3;
 
   @override
   void initState() {
@@ -103,29 +105,30 @@ class _RoomLoginDialogState extends State<RoomLoginDialog> {
         'Login started for ${room.name} (${room.publicKeyHex})',
         tag: 'RoomLogin',
       );
-      final selection = await _connector.preparePathForContactSend(room);
       final loginFrame = buildSendLoginFrame(room.publicKey, password);
-      final pathLengthValue = selection.useFlood ? -1 : selection.hopCount;
-      final responseBytes = loginFrame.length > maxFrameSize
-          ? loginFrame.length
-          : maxFrameSize;
-      final timeoutMs = _connector.calculateTimeout(
-        pathLength: pathLengthValue,
-        messageBytes: responseBytes,
-      );
-      final timeoutSeconds = (timeoutMs / 1000).ceil();
-      final timeout = Duration(milliseconds: timeoutMs + 2000);
-      final selectionLabel = selection.useFlood
-          ? 'flood'
-          : '${selection.hopCount} hops';
-      appLogger.info('Login routing: $selectionLabel', tag: 'RoomLogin');
       bool? loginResult;
       bool isAdmin = false;
+      PathSelection? first;
+      late PathSelection selection;
       for (int attempt = 0; attempt < _maxAttempts; attempt++) {
         if (!mounted) return;
         setState(() {
           _currentAttempt = attempt + 1;
         });
+        selection = await _connector.preparePathForRepeaterAttempt(
+          room,
+          attempt: attempt,
+          attempts: _maxAttempts,
+          first: first,
+        );
+        first ??= selection;
+        final timeoutMs = _connector.repeaterReplyTimeout(selection);
+        final timeoutSeconds = (timeoutMs / 1000).ceil();
+        final timeout = Duration(milliseconds: timeoutMs);
+        final selectionLabel = selection.useFlood
+            ? 'flood'
+            : '${selection.hopCount} hops';
+        appLogger.info('Login routing: $selectionLabel', tag: 'RoomLogin');
 
         appLogger.info(
           'Sending login attempt ${attempt + 1}/$_maxAttempts',

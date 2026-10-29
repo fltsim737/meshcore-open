@@ -7163,4 +7163,79 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Wył.: tryb Nie przeszkadzać może wyciszyć SOS. Stuknij i zezwól tej aplikacji na dostęp do trybu Nie przeszkadzać';
+
+  @override
+  String get sos_routeTitle => 'Jak do Ciebie dotarło';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Prosto z ich radia ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Przez $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => 'Nie usłyszano prosto z ich radia';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'To SOS dotarło do Ciebie tylko przez przekaźniki, nigdy prosto z ich radia. Lokalizacja słyszy tylko samo ich radio, więc stąd go nie znajdzie. Kieruj się do $nearest, przekaźnika najbliższego im na drodze do Ciebie, i do ostatniej znanej pozycji: gdy znajdziesz się w bezpośrednim zasięgu, sygnały zaczną docierać. Jeśli SOS przeszło przez most na inną częstotliwość, Twoje radio w ogóle nie usłyszy ich sygnałów, dopóki nie będzie na tej częstotliwości.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Ich radio: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Ich radio jest na innej częstotliwości niż Twoje, więc Lokalizacja ich nie słyszy, a oni mogą nie słyszeć Cię bezpośrednio. Gdy będziesz w zasięgu po ich stronie, przestrój się na nią.';
+
+  @override
+  String get sos_retuneButton => 'Przestrój na ich częstotliwość';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Przestroić na częstotliwość $name?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Twoje radio przejdzie na $settings. Opuszczasz obecną sieć: do powrotu nie będziesz jej słyszeć, a ratownicy w niej nie skontaktują się z Tobą. Zostaną powiadomieni o przestrojeniu.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Przestrój';
+
+  @override
+  String get sos_retuneFailed => 'Radio nie przyjęło nowych ustawień.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name przestroił(a) się na $frequency i może być nieosiągalny(a)';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Twoje radio jest przestrojone';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Jest na ustawieniach $name ($settings), poza Twoją siecią na $frequency. Wróć, gdy skończysz.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Wróć na $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'Radio nie wróciło. Spróbuj ponownie lub ustaw je w Ustawieniach radia.';
+
+  @override
+  String get sos_retuning =>
+      'Powiadamianie innych ratowników, potem przestrajanie…';
 }

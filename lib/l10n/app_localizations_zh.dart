@@ -6669,4 +6669,77 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_dndAccessOff => '关闭：勿扰模式可能使 SOS 静音。点按并允许此应用访问勿扰模式';
+
+  @override
+  String get sos_routeTitle => '到达你的路径';
+
+  @override
+  String sos_routeDirect(int count) {
+    return '直接来自对方电台（$count×）';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return '经由 $path（$count×）';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => '未直接从对方电台收到';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return '此 SOS 只通过中继器到达你，从未直接来自对方电台。定位只能听到对方电台本身，所以在这里找不到对方。请前往 $nearest（到你这条路径上离对方最近的中继器）以及最后已知位置：进入直接通信范围后，信标就会传来。如果 SOS 经过网桥来自另一个频率，在你的电台切换到该频率之前完全听不到对方的信标。';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return '对方电台：$settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      '对方电台的频率与你的不同，因此定位听不到对方，对方也可能无法直接听到你。等你进入对方一侧的覆盖范围后，再切换到该频率。';
+
+  @override
+  String get sos_retuneButton => '切换到对方频率';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return '切换到 $name 的频率？';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return '你的电台将切换到 $settings。你会离开当前网络：在切回之前你收不到它，网络中的救援者也联系不到你。他们会收到你已切换频率的通知。';
+  }
+
+  @override
+  String get sos_retuneAction => '切换';
+
+  @override
+  String get sos_retuneFailed => '电台未接受新设置。';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name 已切换到 $frequency，可能无法联系';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => '你的电台已切换频率';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return '它正使用 $name 的设置（$settings），已离开你在 $frequency 上的网络。完成后请切回。';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return '切回 $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed => '电台未能切回。请重试，或在电台设置中设置。';
+
+  @override
+  String get sos_retuning => '正在通知其他救援者，然后切换频率…';
 }

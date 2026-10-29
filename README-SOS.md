@@ -83,6 +83,10 @@ A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the s
 
 **Locate** helps responders close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and each responder's screen shows how strong each one is and whether they're getting warmer or colder. Several searchers can work together: any of them can turn the beacons' power down as they close in (from a MeshCore SOS radio), so only those near still hear them, and each searcher's app shares its position and what it hears every 30 seconds. The **Search map** shows each reading as a ring, how far that signal puts the radio, and shades the area where the rings agree. It's an estimate to search, not a pin.
 
+Each alert also shows **how it reached you**: *Straight from their radio*, or *Via Scaramouche → Superstar*, with how many copies came each way. Locate needs the first: if the alert has only come through repeaters, the Locate screen says so and names the repeater nearest the sender.
+
+**Across a bridge.** Where two meshes on different frequencies are joined by a bridge, an SOS crosses it like any message, but Locate can't, because beacons go radio to radio on the sender's frequency. Each SOS carries the sender's radio settings, shown as *Their radio: …*, and the alert says when they aren't yours. Nothing retunes by itself, so responders keep their own mesh while they travel. Once you know you're within coverage on the sender's side, **Retune to their frequency** tells the other responders first (they see *Joe has re-tuned … and may be unreachable*), then moves your radio over; **Back to …** on the Emergency tab returns it and tells them you're reachable again. (Since 9.8.3.)
+
 Each SOS and ACK carries the sender's public key, so the two phones save each other as contacts automatically. A **Message** button then opens an ordinary direct chat, with no exchange of adverts beforehand.
 
 When the sender cancels, a cancellation goes out on the network and by direct message to every emergency contact and every responder who acknowledged. It is repeated, and direct copies are re-sent until delivered. A responder whose acknowledged alert goes quiet checks back with the sender, so a missed cancellation still arrives. Each responder's alarm stops and the live alert closes. A record of it, with its positions, acknowledgements and outcome, stays in the **SOS history** until the user deletes it, ready to share as a text report.
@@ -97,6 +101,7 @@ Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on e
 |---|---|---|
 | SOS, ACK, cancel | Channel data type `0x5053` on the emergency network | MeshCore Open SOS / SOS Voice holders of the network code |
 | Locate request, locator beacon, searcher's reading | Channel data type `0x5053`; beacons are sent zero hop | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
+| Retune note ("re-tuned", "back") | Channel data type `0x5053` | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
 | Voice clip | Channel data type `0x5356` (SV) on the emergency network | SOS Voice holders of the network code |
 | SOS DM to emergency contacts | Plain text, under 160 bytes | Any MeshCore app |
 | Repeater owner info | Existing `GET_OWNER_INFO` request (`0x07`) | Any guest of the repeater |
@@ -183,7 +188,8 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 3. Use **Map** or copy the coordinates to navigate.
 4. Press **Message** to chat with the sender directly.
 5. Near the sender but can't find them? Press **Locate** and follow the signal: walk a little, stop, and wait for the next beacon. Stronger means closer. With other searchers, open **Search map** to see everyone's readings and the area to search, and agree among yourselves when to turn the **Beacon power** down.
-6. **Dismiss** puts it aside without replying: the alarm stops and it shrinks to a line on the Emergency tab, with **Show again** to pick it up at once (its position, your acknowledgement and Locate are kept). If you hadn't acknowledged it, the sender's next repeat brings it back with the alarm; an acknowledged one stays put aside until you tap Show again.
+6. Alert on another frequency (it crossed a bridge)? Once you're within coverage on the sender's side, press **Retune to their frequency**; the other responders are told first. Press **Back to …** on the Emergency tab when you're done.
+7. **Dismiss** puts it aside without replying: the alarm stops and it shrinks to a line on the Emergency tab, with **Show again** to pick it up at once (its position, your acknowledgement and Locate are kept). If you hadn't acknowledged it, the sender's next repeat brings it back with the alarm; an acknowledged one stays put aside until you tap Show again.
 
 ### 6. Talking (SOS Voice only)
 
@@ -196,6 +202,8 @@ See [Voice](#voice-sos-voice-only) below.
 ### Managing a repeater
 
 Log in to a repeater as admin and open **Settings**: nothing is read from the repeater until you ask, to save air time. Tap **⟳** next to the setting you want to see or change, and only that one is read; its field stays greyed out until then. The **⟳** at the top reads everything, which over several hops is slow and loads the mesh, so use it sparingly. (Since 9.7.1.)
+
+Login, status, neighbours, settings, owner info and CLI commands wait for the reply as long as the airtime needs (at least 8 s direct, 12 s by flood), try three times, and take a late reply to an earlier try. If a direct route goes unanswered, the last try floods and resets the route, so a repeater that moved or sits behind a bridge is still reached. `reboot`, `start ota`, `poweroff`, `erase` and `region load` are sent once. (Since 9.8.2.)
 
 ### Practising
 

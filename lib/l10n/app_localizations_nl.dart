@@ -7100,4 +7100,81 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Uit: Niet storen kan een SOS dempen. Tik en sta toegang tot Niet storen toe voor deze app';
+
+  @override
+  String get sos_routeTitle => 'Hoe het u bereikte';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Rechtstreeks van hun radio ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Via $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle =>
+      'Niet rechtstreeks van hun radio gehoord';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Deze SOS heeft u alleen via repeaters bereikt, nooit rechtstreeks van hun radio. Lokaliseren hoort alleen hun radio zelf en kan hen van hieruit dus niet vinden. Ga richting $nearest, de repeater die op de weg naar u het dichtst bij hen ligt, en de laatst bekende positie: zodra u binnen direct bereik bent, komen de bakens door. Is de SOS via een brug naar een andere frequentie gegaan, dan kan uw radio hun bakens helemaal niet horen tot hij op die frequentie staat.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Hun radio: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Hun radio staat op een andere frequentie dan die van u, dus Lokaliseren kan hen niet horen en zij horen u misschien niet rechtstreeks. Zodra u aan hun kant binnen bereik bent, stemt u erop af.';
+
+  @override
+  String get sos_retuneButton => 'Afstemmen op hun frequentie';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Afstemmen op de frequentie van $name?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Uw radio gaat naar $settings. U verlaat uw huidige mesh: tot u terugschakelt hoort u die niet en kunnen hulpverleners daarop u niet bereiken. Zij krijgen bericht dat u bent overgeschakeld.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Afstemmen';
+
+  @override
+  String get sos_retuneFailed =>
+      'De radio nam de nieuwe instellingen niet over.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name is overgeschakeld naar $frequency en is mogelijk onbereikbaar';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Uw radio is omgeschakeld';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Hij staat op de instellingen van $name ($settings), buiten uw eigen mesh op $frequency. Schakel terug als u klaar bent.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Terug naar $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'De radio schakelde niet terug. Probeer opnieuw of stel hem in bij Radio-instellingen.';
+
+  @override
+  String get sos_retuning =>
+      'Andere hulpverleners inlichten, daarna omschakelen…';
 }

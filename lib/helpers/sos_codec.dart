@@ -205,7 +205,12 @@ enum SosPacketKind {
 
   /// A searcher sharing what they hear: their own position and the beacon's
   /// strength there, so every searcher's map can combine them (9.8.0).
-  report(6);
+  report(6),
+
+  /// A responder retuning their radio to an SOS sender's settings, for
+  /// instance to cross a bridge to the sender's frequency, and so maybe out of
+  /// reach on this one; or back again (9.8.3).
+  retune(7);
 
   final int code;
   const SosPacketKind(this.code);
@@ -230,6 +235,13 @@ enum SosPacketKind {
 /// bit 0 full power][set-by len][set-by]`. A [SosPacketKind.report] is the
 /// header plus `[lat i32][lon i32][rssi i8][snr i8, 1/4 dB][beacon power i8]
 /// [age secs u8]`. Older builds skip the bytes they don't know.
+///
+/// Radio settings (9.8.3, MeshCore SOS firmware 1.7.0): an SOS may end, after
+/// the full key and an info length byte (written as 0 when there is no info,
+/// so older builds read no info), with the sender's radio settings
+/// ([SosRadio], 5 bytes). A [SosPacketKind.retune] is the header plus
+/// `[flags, bit 0 back][radio settings]`: the settings the responder is
+/// moving to, or (back) returning to.
 class SosPacket {
   static const int version = 1;
   static const int keyPrefixSize = 6;
@@ -274,6 +286,13 @@ class SosPacket {
   /// A [SosPacketKind.report]'s reading.
   final SosReading? reading;
 
+  /// An SOS: the sender's radio settings, when it says. A retune: the
+  /// settings the responder is moving to, or returning to when [back].
+  final SosRadio? radio;
+
+  /// A retune: back on their own settings.
+  final bool back;
+
   const SosPacket({
     required this.kind,
     required this.id,
@@ -288,6 +307,8 @@ class SosPacket {
     this.fullPower = false,
     this.setBy = '',
     this.reading,
+    this.radio,
+    this.back = false,
   });
 
   bool get _carriesKey =>
@@ -309,6 +330,12 @@ class SosPacket {
       ..add(name);
     if (kind == SosPacketKind.locate) {
       if (power != null) out.addByte(power! & 0xFF);
+      return out.toBytes();
+    }
+    if (kind == SosPacketKind.retune) {
+      out
+        ..addByte(back ? 1 : 0)
+        ..add(radio!.encode());
       return out.toBytes();
     }
     if (kind == SosPacketKind.beacon) {
@@ -351,18 +378,22 @@ class SosPacket {
       ..add(_i32(((fix.longitude ?? 0) * 1e6).round()));
     if (_carriesKey) {
       out.add(senderKey!);
+      // The radio settings take their room from the info, so the largest
+      // SOS is no bigger than before (it must still fit one channel packet).
+      final radioBytes = radio?.encode();
+      final infoMax = radioBytes == null
+          ? maxInfoBytes
+          : maxInfoBytes - SosRadio.size;
       var infoBytes = utf8.encode(info ?? '');
-      if (infoBytes.length > maxInfoBytes) {
-        infoBytes = infoBytes.sublist(
-          0,
-          utf8BoundaryLength(infoBytes, maxInfoBytes),
-        );
+      if (infoBytes.length > infoMax) {
+        infoBytes = infoBytes.sublist(0, utf8BoundaryLength(infoBytes, infoMax));
       }
-      if (infoBytes.isNotEmpty) {
+      if (infoBytes.isNotEmpty || radioBytes != null) {
         out
           ..addByte(infoBytes.length)
           ..add(infoBytes);
       }
+      if (radioBytes != null) out.add(radioBytes);
     }
     return out.toBytes();
   }
@@ -422,6 +453,19 @@ class SosPacket {
           power: power,
           fullPower: full,
           setBy: setBy,
+        );
+      }
+      if (kind == SosPacketKind.retune) {
+        if (data.length <= offset) return null;
+        final radio = SosRadio.decode(data, offset + 1);
+        if (radio == null) return null;
+        return SosPacket(
+          kind: kind,
+          id: id,
+          senderPrefix: prefix,
+          senderName: name,
+          radio: radio,
+          back: data[offset] & 1 == 1,
         );
       }
       if (kind == SosPacketKind.report) {
@@ -484,6 +528,9 @@ class SosPacket {
         info: senderKey == null
             ? null
             : _readInfo(data, offset + 10 + publicKeySize),
+        radio: senderKey == null
+            ? null
+            : _readRadioAfterInfo(data, offset + 10 + publicKeySize),
         fix: valid
             ? SosFix(
                 latitude: lat,
@@ -509,6 +556,14 @@ class SosPacket {
       if (key[i] != prefix[i]) return null;
     }
     return key;
+  }
+
+  /// The radio settings after the `[len][text]` info at [offset], if any.
+  static SosRadio? _readRadioAfterInfo(Uint8List data, int offset) {
+    if (data.length <= offset) return null;
+    final length = data[offset];
+    if (length > maxInfoBytes) return null;
+    return SosRadio.decode(data, offset + 1 + length);
   }
 
   /// The optional `[len][text]` at [offset]; null if absent or malformed.
@@ -574,6 +629,143 @@ class SosReading {
     required this.beaconPower,
     this.ageSeconds = 0,
   });
+}
+
+/// LoRa radio settings, as an SOS or a retune carries them: 5 bytes,
+/// `[freq kHz u24][bandwidth code][sf << 4 | (cr - 4)]`. Bandwidth codes index
+/// [bandwidthsHz], the LoRa bandwidths MeshCore radios use.
+class SosRadio {
+  /// kHz, as MeshCore's SELF_INFO and SET_RADIO_PARAMS give it.
+  final int freqKhz;
+  final int bwHz;
+  final int sf;
+
+  /// Coding rate denominator, 5 to 8 (4/5 to 4/8).
+  final int cr;
+
+  const SosRadio({
+    required this.freqKhz,
+    required this.bwHz,
+    required this.sf,
+    required this.cr,
+  });
+
+  static const int size = 5;
+  static const List<int> bandwidthsHz = [
+    7800,
+    10400,
+    15600,
+    20800,
+    31250,
+    41700,
+    62500,
+    125000,
+    250000,
+    500000,
+  ];
+
+  /// Null for settings that can't be carried (unknown, an unlisted
+  /// bandwidth, or values out of range).
+  static SosRadio? fromRadio({
+    required int? freqKhz,
+    required int? bwHz,
+    required int? sf,
+    required int? cr,
+  }) {
+    if (freqKhz == null || bwHz == null || sf == null || cr == null) {
+      return null;
+    }
+    final radio = SosRadio(
+      freqKhz: freqKhz,
+      bwHz: bwHz,
+      sf: sf,
+      cr: cr <= 4 ? cr + 4 : cr,
+    );
+    return radio._valid ? radio : null;
+  }
+
+  int get _bwCode {
+    for (var i = 0; i < bandwidthsHz.length; i++) {
+      if ((bandwidthsHz[i] - bwHz).abs() <= 100) return i;
+    }
+    return -1;
+  }
+
+  bool get _valid =>
+      freqKhz > 0 &&
+      freqKhz <= 0xFFFFFF &&
+      _bwCode >= 0 &&
+      sf >= 5 &&
+      sf <= 12 &&
+      cr >= 5 &&
+      cr <= 8;
+
+  Uint8List encode() => Uint8List.fromList([
+    freqKhz & 0xFF,
+    (freqKhz >> 8) & 0xFF,
+    (freqKhz >> 16) & 0xFF,
+    _bwCode,
+    (sf << 4) | (cr - 4),
+  ]);
+
+  static SosRadio? decode(Uint8List data, int offset) {
+    if (data.length < offset + size) return null;
+    final code = data[offset + 3];
+    if (code >= bandwidthsHz.length) return null;
+    final radio = SosRadio(
+      freqKhz:
+          data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16),
+      bwHz: bandwidthsHz[code],
+      sf: data[offset + 4] >> 4,
+      cr: (data[offset + 4] & 0x0F) + 4,
+    );
+    return radio._valid ? radio : null;
+  }
+
+  /// Radios hear each other only on the same frequency, bandwidth and
+  /// spreading factor; the coding rate doesn't matter for that.
+  bool canHear(SosRadio other) =>
+      freqKhz == other.freqKhz && _bwCode == other._bwCode && sf == other.sf;
+
+  /// e.g. 915.075 MHz
+  String get frequencyLabel => '${(freqKhz / 1000).toStringAsFixed(3)} MHz';
+
+  /// e.g. 915.075 MHz · BW 125 · SF9 · CR 4/5
+  String get label {
+    final bw = bwHz / 1000;
+    final bwText = bw == bw.roundToDouble()
+        ? bw.toStringAsFixed(0)
+        : bw.toString();
+    return '$frequencyLabel · BW $bwText · SF$sf · CR 4/$cr';
+  }
+
+  Map<String, dynamic> toJson() => {
+    'freq_khz': freqKhz,
+    'bw_hz': bwHz,
+    'sf': sf,
+    'cr': cr,
+  };
+
+  static SosRadio? fromJson(Object? json) {
+    if (json is! Map) return null;
+    return SosRadio.fromRadio(
+      freqKhz: (json['freq_khz'] as num?)?.toInt(),
+      bwHz: (json['bw_hz'] as num?)?.toInt(),
+      sf: (json['sf'] as num?)?.toInt(),
+      cr: (json['cr'] as num?)?.toInt(),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is SosRadio &&
+      other.freqKhz == freqKhz &&
+      other.bwHz == bwHz &&
+      other.sf == sf &&
+      other.cr == cr;
+
+  @override
+  int get hashCode => Object.hash(freqKhz, bwHz, sf, cr);
 }
 
 /// How a packet was heard: its signal-to-noise ratio, whether it came straight

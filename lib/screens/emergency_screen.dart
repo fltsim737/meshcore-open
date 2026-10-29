@@ -20,6 +20,7 @@ import '../utils/disconnect_navigation_mixin.dart';
 import '../utils/route_transitions.dart';
 import '../widgets/mesh_ui.dart';
 import '../widgets/quick_switch_bar.dart';
+import '../widgets/sos_retune.dart';
 import 'channels_screen.dart';
 import 'chat_screen.dart';
 import 'contacts_screen.dart';
@@ -102,6 +103,7 @@ class _EmergencyScreenState extends State<EmergencyScreen>
           // Android: an SOS would be only a notification while the app is closed
           const SosScreenAccessTile(onlyWhenMissing: true),
           const SosDndAccessTile(onlyWhenMissing: true),
+          const SosRetunedBanner(),
           const SizedBox(height: 8),
           if (active == null)
             _SosHoldButton(onActivated: sos.activate)
@@ -535,6 +537,43 @@ class _IncomingSosCard extends StatelessWidget {
                   alert.receivedCount,
                 ),
               ),
+              if (alert.senderRadio case final radio?)
+                Text(l10n.sos_theirRadio(radio.label)),
+              for (final retuned in alert.retunedResponders.entries)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    l10n.sos_retunedResponder(
+                      retuned.key,
+                      retuned.value.frequencyLabel,
+                    ),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.orange.shade900,
+                    ),
+                  ),
+                ),
+              if (service.canRetuneTo(alert))
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(l10n.sos_otherFrequency),
+                ),
+              if (alert.routes.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text(
+                  l10n.sos_routeTitle,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                for (final route in alert.routesByCount)
+                  Text(
+                    route.key.isEmpty
+                        ? l10n.sos_routeDirect(route.value)
+                        : l10n.sos_routeVia(
+                            service.routeNames(route.key).join(' → '),
+                            route.value,
+                          ),
+                  ),
+              ],
               if (others.isNotEmpty) Text(l10n.sos_ackedByOthers(others)),
               if (!open)
                 Padding(
@@ -584,6 +623,15 @@ class _IncomingSosCard extends StatelessWidget {
                           builder: (_) => SosLocatorScreen(alert: alert),
                         ),
                       ),
+                    ),
+                  // Never automatic: the responder knows when they're within
+                  // coverage on the sender's side.
+                  if (service.canRetuneTo(alert) && service.isConnected)
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.swap_horiz),
+                      label: Text(l10n.sos_retuneButton),
+                      onPressed: () =>
+                          confirmAndRetune(context, service, alert),
                     ),
                   // Deletes the alert and its position from this phone.
                   OutlinedButton(

@@ -7152,4 +7152,81 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Aus: „Bitte nicht stören“ kann ein SOS stummschalten. Tippen und „Bitte nicht stören“-Zugriff für diese App erlauben';
+
+  @override
+  String get sos_routeTitle => 'Wie es Sie erreicht hat';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Direkt von ihrem Funkgerät ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Über $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle =>
+      'Nicht direkt von ihrem Funkgerät gehört';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'Dieses SOS hat Sie nur über Repeater erreicht, nie direkt von ihrem Funkgerät. Orten hört nur ihr Funkgerät selbst und kann sie von hier aus nicht finden. Gehen Sie in Richtung $nearest, dem Repeater, der ihnen auf dem Weg zu Ihnen am nächsten ist, und zur letzten bekannten Position: Sobald Sie in direkter Reichweite sind, kommen die Baken an. Hat das SOS über eine Brücke eine andere Frequenz gewechselt, kann Ihr Funkgerät ihre Baken gar nicht hören, bis es auf dieser Frequenz ist.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Ihr Funkgerät: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Ihr Funkgerät ist auf einer anderen Frequenz als Ihres, daher kann Orten sie nicht hören und sie hören Sie vielleicht nicht direkt. Sobald Sie auf ihrer Seite in Reichweite sind, stimmen Sie darauf um.';
+
+  @override
+  String get sos_retuneButton => 'Auf ihre Frequenz umstimmen';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Auf die Frequenz von $name umstimmen?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Ihr Funkgerät wechselt auf $settings. Sie verlassen Ihr aktuelles Mesh: Bis Sie zurückwechseln, hören Sie es nicht und Helfer darin können Sie nicht erreichen. Sie werden über Ihr Umstimmen informiert.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Umstimmen';
+
+  @override
+  String get sos_retuneFailed =>
+      'Das Funkgerät hat die neuen Einstellungen nicht übernommen.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name hat auf $frequency umgestimmt und ist vielleicht nicht erreichbar';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Ihr Funkgerät ist umgestimmt';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'Es ist auf den Einstellungen von $name ($settings), außerhalb Ihres eigenen Mesh auf $frequency. Wechseln Sie zurück, wenn Sie fertig sind.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Zurück auf $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'Das Funkgerät ist nicht zurückgewechselt. Versuchen Sie es erneut oder stellen Sie es in den Funkeinstellungen ein.';
+
+  @override
+  String get sos_retuning =>
+      'Die anderen Helfer werden informiert, dann wird umgestimmt…';
 }

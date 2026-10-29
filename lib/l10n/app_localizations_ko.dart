@@ -6826,4 +6826,78 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       '꺼짐: 방해 금지 모드가 SOS를 무음으로 만들 수 있습니다. 탭하여 이 앱의 방해 금지 모드 접근을 허용하세요';
+
+  @override
+  String get sos_routeTitle => '전달된 경로';
+
+  @override
+  String sos_routeDirect(int count) {
+    return '상대 무전기에서 직접 ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return '$path 경유 ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => '상대 무전기에서 직접 수신되지 않음';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return '이 SOS는 중계기를 통해서만 도착했고 상대 무전기에서 직접 온 적은 없습니다. 위치 찾기는 상대 무전기 자체만 들을 수 있으므로 여기서는 찾을 수 없습니다. 당신에게 오는 경로에서 상대와 가장 가까운 중계기인 $nearest와 마지막으로 알려진 위치로 이동하세요. 직접 범위에 들어가면 비콘이 수신됩니다. SOS가 브리지를 거쳐 다른 주파수에서 왔다면, 당신의 무전기가 그 주파수에 맞춰질 때까지 비콘을 전혀 들을 수 없습니다.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return '상대 무전기: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      '상대 무전기가 당신과 다른 주파수에 있어 위치 찾기로 들을 수 없고, 상대도 당신을 직접 듣지 못할 수 있습니다. 상대 쪽 커버리지 안에 들어가면 그 주파수로 바꾸세요.';
+
+  @override
+  String get sos_retuneButton => '상대 주파수로 변경';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return '$name의 주파수로 변경할까요?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return '무전기가 $settings(으)로 바뀝니다. 현재 메시를 떠나므로 돌아올 때까지 그 메시를 들을 수 없고 그곳의 대응자도 당신에게 연락할 수 없습니다. 주파수를 바꾼 사실은 대응자들에게 알려집니다.';
+  }
+
+  @override
+  String get sos_retuneAction => '변경';
+
+  @override
+  String get sos_retuneFailed => '무전기가 새 설정을 받아들이지 않았습니다.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name님이 $frequency(으)로 주파수를 바꿔 연락이 안 될 수 있습니다';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => '무전기 주파수가 바뀌어 있습니다';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return '$name의 설정($settings)에 있으며 $frequency의 내 메시를 벗어나 있습니다. 끝나면 되돌리세요.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return '$frequency(으)로 되돌리기';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      '무전기가 되돌아가지 않았습니다. 다시 시도하거나 무전 설정에서 설정하세요.';
+
+  @override
+  String get sos_retuning => '다른 대응자에게 알린 뒤 주파수를 바꾸는 중…';
 }

@@ -7050,4 +7050,78 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sos_dndAccessOff =>
       'Off: Do Not Disturb can silence an SOS. Tap and allow Do Not Disturb access for this app';
+
+  @override
+  String get sos_routeTitle => 'How it reached you';
+
+  @override
+  String sos_routeDirect(int count) {
+    return 'Straight from their radio ($count×)';
+  }
+
+  @override
+  String sos_routeVia(String path, int count) {
+    return 'Via $path ($count×)';
+  }
+
+  @override
+  String get sosLocator_relayedTitle => 'Not heard straight from their radio';
+
+  @override
+  String sosLocator_relayed(String nearest) {
+    return 'This SOS has reached you only through repeaters, never straight from their radio. Locate hears only their radio itself, so it can\'t find them from here. Head for $nearest, the repeater nearest them on its way to you, and the last known position: once you\'re in direct range, the beacons come through. If the SOS crossed a bridge to another frequency, your radio can\'t hear their beacons at all until it is on that frequency.';
+  }
+
+  @override
+  String sos_theirRadio(String settings) {
+    return 'Their radio: $settings';
+  }
+
+  @override
+  String get sos_otherFrequency =>
+      'Their radio is on another frequency than yours, so Locate can\'t hear them and they may not hear you directly. Once you\'re within coverage on their side, retune to it.';
+
+  @override
+  String get sos_retuneButton => 'Retune to their frequency';
+
+  @override
+  String sos_retuneConfirmTitle(String name) {
+    return 'Retune to $name\'s frequency?';
+  }
+
+  @override
+  String sos_retuneConfirmBody(String settings) {
+    return 'Your radio moves to $settings. You leave your current mesh: until you go back you won\'t hear it, and responders on it can\'t reach you. They are told you\'ve re-tuned.';
+  }
+
+  @override
+  String get sos_retuneAction => 'Retune';
+
+  @override
+  String get sos_retuneFailed => 'The radio didn\'t take the new settings.';
+
+  @override
+  String sos_retunedResponder(String name, String frequency) {
+    return '$name has re-tuned to $frequency and may be unreachable';
+  }
+
+  @override
+  String get sos_retunedBannerTitle => 'Your radio is retuned';
+
+  @override
+  String sos_retunedBanner(String name, String settings, String frequency) {
+    return 'It is on $name\'s settings ($settings), off your own mesh on $frequency. Go back when you\'re done.';
+  }
+
+  @override
+  String sos_retuneBack(String frequency) {
+    return 'Back to $frequency';
+  }
+
+  @override
+  String get sos_retuneBackFailed =>
+      'The radio didn\'t go back. Try again, or set it in Radio settings.';
+
+  @override
+  String get sos_retuning => 'Telling the other responders, then retuning…';
 }

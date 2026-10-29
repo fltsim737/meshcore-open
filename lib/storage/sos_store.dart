@@ -15,6 +15,28 @@ class SosStore {
   static const String _cancellationKey = 'sos_cancellation';
   static const String _historyKey = 'sos_history';
   static const String _sessionsKey = 'sos_sessions';
+  static const String _retuneKey = 'sos_retune';
+
+  /// The radio settings this phone retuned from, while retuned.
+  SosRetune? loadRetune() {
+    final raw = PrefsManager.instance.getString(_retuneKey);
+    if (raw == null) return null;
+    try {
+      return SosRetune.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+    } catch (e) {
+      appLogger.warn('Discarding unreadable SOS retune: $e', tag: 'SOS');
+      return null;
+    }
+  }
+
+  Future<void> saveRetune(SosRetune? retune) async {
+    final prefs = PrefsManager.instance;
+    if (retune == null) {
+      await prefs.remove(_retuneKey);
+    } else {
+      await prefs.setString(_retuneKey, jsonEncode(retune.toJson()));
+    }
+  }
 
   /// Unreadable state is discarded rather than allowed to block startup.
   OutgoingSos? loadOutgoing() {

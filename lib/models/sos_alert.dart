@@ -201,6 +201,21 @@ class IncomingSos {
   /// Locate requests to it.
   String? sessionRef;
 
+  /// The sender's radio settings, when its SOS says (9.8.3 apps, MeshCore
+  /// SOS firmware 1.7.0).
+  SosRadio? senderRadio;
+
+  /// Other responders who retuned their radio for this SOS (to the sender's
+  /// settings, say across a bridge) and so may be out of reach on ours, by
+  /// name, with the settings they moved to. Cleared when they say they're
+  /// back.
+  final Map<String, SosRadio> retunedResponders;
+
+  /// The ways copies of this SOS reached our radio, with how many came each
+  /// way: the repeaters' path hashes (hex) joined by commas, nearest the
+  /// sender first, or '' for straight from the sender's radio.
+  final Map<String, int> routes;
+
   IncomingSos({
     required this.id,
     required this.senderName,
@@ -215,7 +230,23 @@ class IncomingSos {
     this.info,
     this.sessionRef,
     Set<String>? ackedBy,
-  }) : ackedBy = ackedBy ?? {};
+    Map<String, int>? routes,
+    this.senderRadio,
+    Map<String, SosRadio>? retunedResponders,
+  }) : ackedBy = ackedBy ?? {},
+       routes = routes ?? {},
+       retunedResponders = retunedResponders ?? {};
+
+  /// Heard straight from the sender's radio at least once, so its Locate
+  /// beacons can reach this radio.
+  bool get heardDirect => routes.containsKey('');
+
+  /// [routes], most copies first.
+  List<MapEntry<String, int>> get routesByCount =>
+      routes.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+
+  static List<String> routeHops(String route) =>
+      route.isEmpty ? const [] : route.split(',');
 
   String get key => keyFor(senderName, id);
 
@@ -239,6 +270,11 @@ class IncomingSos {
     'info': info,
     'acked_by': ackedBy.toList(),
     'session_ref': sessionRef,
+    'routes': routes,
+    'sender_radio': senderRadio?.toJson(),
+    'retuned_responders': {
+      for (final e in retunedResponders.entries) e.key: e.value.toJson(),
+    },
   };
 
   factory IncomingSos.fromJson(Map<String, dynamic> json) {
@@ -259,6 +295,64 @@ class IncomingSos {
       ackedBy: (json['acked_by'] as List<dynamic>? ?? const [])
           .map((e) => e.toString())
           .toSet(),
+      routes: {
+        for (final e
+            in (json['routes'] as Map<dynamic, dynamic>? ?? const {}).entries)
+          e.key.toString(): (e.value as num).toInt(),
+      },
+      senderRadio: SosRadio.fromJson(json['sender_radio']),
+      retunedResponders: {
+        for (final e
+            in (json['retuned_responders'] as Map<dynamic, dynamic>? ??
+                    const {})
+                .entries)
+          e.key.toString(): ?SosRadio.fromJson(e.value),
+      },
+    );
+  }
+}
+
+/// This phone's radio, retuned with Retune to an SOS sender's settings, and
+/// the settings to go back to. Kept until the responder goes back, also over
+/// a restart: nothing switches back by itself.
+class SosRetune {
+  final String alertKey;
+  final String alertId;
+  final String senderName;
+  final SosRadio from;
+  final SosRadio to;
+  final DateTime at;
+
+  const SosRetune({
+    required this.alertKey,
+    required this.alertId,
+    required this.senderName,
+    required this.from,
+    required this.to,
+    required this.at,
+  });
+
+  Map<String, dynamic> toJson() => {
+    'alert_key': alertKey,
+    'alert_id': alertId,
+    'sender_name': senderName,
+    'from': from.toJson(),
+    'to': to.toJson(),
+    'at': at.millisecondsSinceEpoch,
+  };
+
+  static SosRetune? fromJson(Map<String, dynamic> json) {
+    final from = SosRadio.fromJson(json['from']);
+    final to = SosRadio.fromJson(json['to']);
+    final at = _timeFromJson(json['at']);
+    if (from == null || to == null || at == null) return null;
+    return SosRetune(
+      alertKey: json['alert_key'] as String? ?? '',
+      alertId: json['alert_id'] as String? ?? '',
+      senderName: json['sender_name'] as String? ?? '',
+      from: from,
+      to: to,
+      at: at,
     );
   }
 }

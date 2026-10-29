@@ -11,6 +11,7 @@ import '../models/sos_alert.dart';
 import '../helpers/sos_codec.dart';
 import '../services/sos_service.dart';
 import 'map_screen.dart';
+import '../widgets/sos_retune.dart';
 import 'sos_search_map_screen.dart';
 
 /// A responder closing in on the radio that sent an SOS. While this screen is
@@ -76,6 +77,10 @@ class _SosLocatorScreenState extends State<SosLocatorScreen> {
     final quiet = since == null || since > _quiet;
     final fix = widget.alert.fix;
     final scheme = Theme.of(context).colorScheme;
+    // Only ever heard through repeaters: its beacons, which go radio to radio,
+    // can't reach us from here, and across a bridge not at all.
+    final routes = widget.alert.routesByCount;
+    final relayedOnly = routes.isNotEmpty && !widget.alert.heardDirect;
 
     return Scaffold(
       appBar: AppBar(
@@ -85,6 +90,60 @@ class _SosLocatorScreenState extends State<SosLocatorScreen> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
         children: [
+          if (relayedOnly) ...[
+            Card(
+              color: scheme.errorContainer,
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.sosLocator_relayedTitle,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: scheme.onErrorContainer,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    for (final route in routes)
+                      Text(
+                        l10n.sos_routeVia(
+                          service.routeNames(route.key).join(' → '),
+                          route.value,
+                        ),
+                        style: TextStyle(color: scheme.onErrorContainer),
+                      ),
+                    const SizedBox(height: 6),
+                    Text(
+                      l10n.sosLocator_relayed(
+                        service.routeNames(routes.first.key).first,
+                      ),
+                      style: TextStyle(color: scheme.onErrorContainer),
+                    ),
+                    if (widget.alert.senderRadio case final radio?) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        l10n.sos_theirRadio(radio.label),
+                        style: TextStyle(color: scheme.onErrorContainer),
+                      ),
+                    ],
+                    if (service.canRetuneTo(widget.alert) &&
+                        service.isConnected) ...[
+                      const SizedBox(height: 8),
+                      OutlinedButton.icon(
+                        icon: const Icon(Icons.swap_horiz),
+                        label: Text(l10n.sos_retuneButton),
+                        onPressed: () =>
+                            confirmAndRetune(context, service, widget.alert),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
           _Meter(sample: quiet ? null : latest),
           const SizedBox(height: 12),
           _TrendLine(session: session, quiet: quiet),

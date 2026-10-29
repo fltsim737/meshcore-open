@@ -195,6 +195,25 @@ void main() {
       info: 'I' * 40,
     );
     expect(SosSeal.sealPacket(sos, s).length, lessThanOrEqualTo(165));
+    final withRadio = SosPacket(
+      kind: SosPacketKind.sos,
+      id: 'ffff',
+      senderPrefix: _me,
+      senderName: 'N' * 40,
+      time: DateTime.now(),
+      fix: sos.fix,
+      senderKey: _me,
+      info: 'I' * 40,
+      radio: const SosRadio(freqKhz: 915075, bwHz: 125000, sf: 9, cr: 5),
+    );
+    expect(
+      SosSeal.sealPacket(withRadio, s).length,
+      SosSeal.sealPacket(sos, s).length,
+    );
+    expect(
+      SosSeal.openPacket(SosSeal.sealPacket(withRadio, s), s)!.radio,
+      withRadio.radio,
+    );
   });
 
   test('sessions survive being saved', () {

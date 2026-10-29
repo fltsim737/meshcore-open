@@ -25,6 +25,20 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
   @override
   double? selfLongitude;
   @override
+  SosRadio? selfRadio = narrowRadio;
+
+  /// Every retune asked of the radio, with the channel packets sent before it.
+  final List<(SosRadio, int)> radioChanges = [];
+  bool refuseRadio = false;
+  @override
+  Future<bool> setRadio(SosRadio radio) async {
+    if (refuseRadio) return false;
+    radioChanges.add((radio, channelPackets.length));
+    selfRadio = radio;
+    return true;
+  }
+
+  @override
   List<Channel> allChannels = [
     Channel(index: 0, name: 'Public', psk: Uint8List(16)),
     Channel(index: 2, name: 'Farm', psk: farmKey),
@@ -85,6 +99,13 @@ class FakeSosTransport extends ChangeNotifier implements SosTransport {
     void Function(int channelIndex, Uint8List payload, String lastHopHex)?
     value,
   ) => repeatListener = value;
+  void Function(int channelIndex, Uint8List payload, List<String> pathHex)?
+  routeListener;
+  @override
+  set sosRouteListener(
+    void Function(int channelIndex, Uint8List payload, List<String> pathHex)?
+    value,
+  ) => routeListener = value;
 
   @override
   Future<void> sendChannelData(
@@ -197,6 +218,9 @@ Contact contactFor(String name, int seed, {bool favourite = false}) => Contact(
   lastSeen: DateTime(2026),
 );
 
+const narrowRadio = SosRadio(freqKhz: 916575, bwHz: 62500, sf: 7, cr: 5);
+const midRadio = SosRadio(freqKhz: 915075, bwHz: 125000, sf: 9, cr: 5);
+
 /// A channel SOS packet from [name], whose key starts with byte [seed].
 Uint8List sosPacketFrom(
   String name,
@@ -206,13 +230,19 @@ Uint8List sosPacketFrom(
   double? lat,
   double? lon,
   bool withKey = false,
+  SosRadio? radio,
+  bool back = false,
 }) => SosPacket(
   kind: kind,
   id: id,
   senderPrefix: Uint8List.fromList(List.filled(6, seed)),
   senderName: name,
   time: DateTime.utc(2026, 10, 21),
-  senderKey: withKey ? Uint8List.fromList(List.filled(32, seed)) : null,
+  senderKey: withKey || radio != null
+      ? Uint8List.fromList(List.filled(32, seed))
+      : null,
+  radio: radio,
+  back: back,
   fix: lat == null
       ? const SosFix.none()
       : SosFix(
@@ -245,6 +275,7 @@ void main() {
     phoneLocation: phone,
     alerter: alerter,
     now: () => now,
+    retuneSendGap: Duration.zero,
   );
 
   /// A packet on the network channel (slot 2) unless [channel] says not.
@@ -271,6 +302,7 @@ void main() {
     expect(transport.dataListener, isNotNull);
     expect(transport.ackListener, isNotNull);
     expect(transport.repeatListener, isNotNull);
+    expect(transport.routeListener, isNotNull);
   });
 
   test('location priority: phone, radio, stored, none', () async {
@@ -1126,10 +1158,161 @@ void main() {
       reloaded.dispose();
     });
 
+    test('records the routes an SOS reached us by, and keeps them', () {
+      transport.contacts = [
+        Contact(
+          publicKey: Uint8List.fromList([0x3a, ...List.filled(31, 1)]),
+          name: 'Scaramouche',
+          type: advTypeRepeater,
+          pathLength: -1,
+          path: Uint8List(0),
+          lastSeen: now,
+        ),
+        Contact(
+          publicKey: Uint8List.fromList([0x7c, ...List.filled(31, 2)]),
+          name: 'Superstar',
+          type: advTypeRepeater,
+          pathLength: -1,
+          path: Uint8List(0),
+          lastSeen: now,
+        ),
+      ];
+      final sos = sosPacketFrom('Ridge', 9, 'a1b2');
+      // the raw copy reaches the app just before the decoded alert
+      transport.routeListener!(2, sos, ['3a', '7c']);
+      hear(sos);
+      transport.routeListener!(2, sos, ['3a', '7c']);
+      transport.routeListener!(2, sos, ['7c']);
+      // not counted: another channel, an ACK, our own SOS
+      transport.routeListener!(5, sos, ['3a']);
+      transport.routeListener!(
+        2,
+        sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.ack),
+        ['3a'],
+      );
+      transport.routeListener!(2, sosPacketFrom('Me', 0xAA, 'a1b2'), ['3a']);
+
+      final alert = service.incoming.single;
+      expect(alert.routes, {'3a,7c': 2, '7c': 1});
+      expect(alert.heardDirect, isFalse);
+      expect(alert.routesByCount.first.key, '3a,7c');
+      expect(service.routeNames('3a,7c'), ['Scaramouche', 'Superstar']);
+      expect(service.routeNames('5e'), ['5e']); // not a contact: its hash
+
+      transport.routeListener!(2, sos, []); // straight from their radio
+      expect(alert.heardDirect, isTrue);
+
+      final reloaded = newService()..load();
+      expect(reloaded.incoming.single.routes, {'3a,7c': 2, '7c': 1, '': 1});
+      reloaded.dispose();
+    });
+
+    test('members keep no routes', () async {
+      await settings.joinSosNetwork(farmNetwork(SosNetworkRole.member));
+      transport.routeListener!(2, sosPacketFrom('Ridge', 9, 'a1b2'), ['3a']);
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(service.incoming, isEmpty);
+    });
+
     test('notes other responders', () {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));
       hear(sosPacketFrom('Valley', 5, 'a1b2', kind: SosPacketKind.ack));
       expect(service.incoming.single.ackedBy, {'Valley'});
+    });
+  });
+
+  group('retune', () {
+    test('our SOS says what our radio is on', () async {
+      await service.activate();
+      expect(transport.channelPackets.first.$2.radio, narrowRadio);
+    });
+
+    test('an SOS from another frequency offers Retune; one from ours not', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', radio: midRadio));
+      final alert = service.incoming.single;
+      expect(alert.senderRadio, midRadio);
+      expect(service.canRetuneTo(alert), isTrue);
+
+      hear(sosPacketFrom('Hut', 4, 'c3d4', radio: narrowRadio));
+      expect(service.canRetuneTo(service.incoming.first), isFalse);
+      // an SOS that doesn't say (older app or radio): nothing to retune to
+      hear(sosPacketFrom('Barn', 5, 'e5f6'));
+      expect(service.canRetuneTo(service.incoming.first), isFalse);
+    });
+
+    test(
+      'tells the other responders first, then retunes, and only on request',
+      () async {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', radio: midRadio));
+        final alert = service.incoming.single;
+        expect(transport.radioChanges, isEmpty); // never by itself
+
+        expect(await service.retuneTo(alert), isTrue);
+        final note = transport.channelPackets.last.$2;
+        expect(note.kind, SosPacketKind.retune);
+        expect(note.id, 'a1b2');
+        expect(note.radio, midRadio);
+        expect(note.back, isFalse);
+        // the note was sent before the radio moved
+        final (radio, sentBefore) = transport.radioChanges.single;
+        expect(radio, midRadio);
+        expect(sentBefore, transport.channelPackets.length);
+        expect(service.retune!.from, narrowRadio);
+        expect(service.retune!.to, midRadio);
+        expect(service.canRetuneTo(alert), isFalse); // there now
+
+        // kept over a restart, and nothing goes back by itself
+        final reloaded = newService()..load();
+        expect(reloaded.retune?.from, narrowRadio);
+        reloaded.dispose();
+
+        expect(await service.retuneBack(), isTrue);
+        expect(transport.radioChanges.last.$1, narrowRadio);
+        final back = transport.channelPackets.last.$2;
+        expect(back.kind, SosPacketKind.retune);
+        expect(back.back, isTrue);
+        expect(back.radio, narrowRadio);
+        expect(service.retune, isNull);
+      },
+    );
+
+    test('a radio that refuses: says so, and takes the note back', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', radio: midRadio));
+      transport.refuseRadio = true;
+      expect(await service.retuneTo(service.incoming.single), isFalse);
+      expect(service.retune, isNull);
+      expect(transport.channelPackets.last.$2.back, isTrue);
+    });
+
+    test('shows who re-tuned, until they say they are back', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', radio: midRadio));
+      final alert = service.incoming.single;
+      hear(
+        sosPacketFrom(
+          'Joe',
+          3,
+          'a1b2',
+          kind: SosPacketKind.retune,
+          radio: midRadio,
+        ),
+      );
+      expect(alert.retunedResponders, {'Joe': midRadio});
+      // kept over a restart: carry on with the reloaded service
+      service.dispose();
+      service = newService()..load();
+      expect(service.incoming.single.retunedResponders, {'Joe': midRadio});
+
+      hear(
+        sosPacketFrom(
+          'Joe',
+          3,
+          'a1b2',
+          kind: SosPacketKind.retune,
+          radio: narrowRadio,
+          back: true,
+        ),
+      );
+      expect(service.incoming.single.retunedResponders, isEmpty);
     });
   });
 

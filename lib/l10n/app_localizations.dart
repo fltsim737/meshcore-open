@@ -11928,6 +11928,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Off: Do Not Disturb can silence an SOS. Tap and allow Do Not Disturb access for this app'**
   String get sos_dndAccessOff;
+
+  /// No description provided for @sos_routeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How it reached you'**
+  String get sos_routeTitle;
+
+  /// No description provided for @sos_routeDirect.
+  ///
+  /// In en, this message translates to:
+  /// **'Straight from their radio ({count}×)'**
+  String sos_routeDirect(int count);
+
+  /// No description provided for @sos_routeVia.
+  ///
+  /// In en, this message translates to:
+  /// **'Via {path} ({count}×)'**
+  String sos_routeVia(String path, int count);
+
+  /// No description provided for @sosLocator_relayedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Not heard straight from their radio'**
+  String get sosLocator_relayedTitle;
+
+  /// No description provided for @sosLocator_relayed.
+  ///
+  /// In en, this message translates to:
+  /// **'This SOS has reached you only through repeaters, never straight from their radio. Locate hears only their radio itself, so it can\'t find them from here. Head for {nearest}, the repeater nearest them on its way to you, and the last known position: once you\'re in direct range, the beacons come through. If the SOS crossed a bridge to another frequency, your radio can\'t hear their beacons at all until it is on that frequency.'**
+  String sosLocator_relayed(String nearest);
+
+  /// No description provided for @sos_theirRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'Their radio: {settings}'**
+  String sos_theirRadio(String settings);
+
+  /// No description provided for @sos_otherFrequency.
+  ///
+  /// In en, this message translates to:
+  /// **'Their radio is on another frequency than yours, so Locate can\'t hear them and they may not hear you directly. Once you\'re within coverage on their side, retune to it.'**
+  String get sos_otherFrequency;
+
+  /// No description provided for @sos_retuneButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retune to their frequency'**
+  String get sos_retuneButton;
+
+  /// No description provided for @sos_retuneConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Retune to {name}\'s frequency?'**
+  String sos_retuneConfirmTitle(String name);
+
+  /// No description provided for @sos_retuneConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your radio moves to {settings}. You leave your current mesh: until you go back you won\'t hear it, and responders on it can\'t reach you. They are told you\'ve re-tuned.'**
+  String sos_retuneConfirmBody(String settings);
+
+  /// No description provided for @sos_retuneAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Retune'**
+  String get sos_retuneAction;
+
+  /// No description provided for @sos_retuneFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio didn\'t take the new settings.'**
+  String get sos_retuneFailed;
+
+  /// No description provided for @sos_retunedResponder.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has re-tuned to {frequency} and may be unreachable'**
+  String sos_retunedResponder(String name, String frequency);
+
+  /// No description provided for @sos_retunedBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your radio is retuned'**
+  String get sos_retunedBannerTitle;
+
+  /// No description provided for @sos_retunedBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'It is on {name}\'s settings ({settings}), off your own mesh on {frequency}. Go back when you\'re done.'**
+  String sos_retunedBanner(String name, String settings, String frequency);
+
+  /// No description provided for @sos_retuneBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to {frequency}'**
+  String sos_retuneBack(String frequency);
+
+  /// No description provided for @sos_retuneBackFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio didn\'t go back. Try again, or set it in Radio settings.'**
+  String get sos_retuneBackFailed;
+
+  /// No description provided for @sos_retuning.
+  ///
+  /// In en, this message translates to:
+  /// **'Telling the other responders, then retuning…'**
+  String get sos_retuning;
 }
 
 class _AppLocalizationsDelegate
