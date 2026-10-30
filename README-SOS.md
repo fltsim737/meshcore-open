@@ -4,7 +4,7 @@ Two builds of [MeshCore Open](README.md) that add emergency calling over a MeshC
 
 | | **MeshCore Open SOS** | **MeshCore Open SOS Voice** |
 |---|---|---|
-| What it adds | Emergency SOS alerts, acknowledgements, emergency networks, and messaging between the sender and responders | Everything in MeshCore Open SOS, plus short voice clips between the sender and responders during a live SOS |
+| What it adds | Emergency SOS alerts, acknowledgements, emergency networks, and messaging between the sender and responders | Everything in MeshCore Open SOS, plus short voice clips between the sender and responders during a live SOS, and push-to-talk on a public #voice channel and in direct messages |
 | Platforms | Android, Linux (AppImage), Windows | Android, Linux (AppImage), Windows |
 | Branch | `feat/emergency-sos` | `feat/sos-voice` (built on `feat/emergency-sos`) |
 | Android package | `com.meshcore.meshcore_open_sos` (from 9.5.8) | `com.meshcore.meshcore_open_voice` |
@@ -27,6 +27,7 @@ The two apps can be installed side by side, and each keeps its own settings and 
 - [Installing](#installing)
 - [User guide](#user-guide)
 - [Voice (SOS Voice only)](#voice-sos-voice-only)
+- [Push-to-talk (SOS Voice only)](#push-to-talk-sos-voice-only)
 - [Privacy and security](#privacy-and-security)
 - [Limitations](#limitations)
 - [Why it should be included, used and developed further](#why-it-should-be-included-used-and-developed-further)
@@ -93,7 +94,9 @@ When the sender cancels, a cancellation goes out on the network and by direct me
 
 ### Voice (SOS Voice)
 
-Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on each responder's alert. Speech is compressed with [Codec2](https://github.com/drowe67/codec2), an open-source codec built for HF and low-bitrate radio, at 700 or 1300 bit/s. It is sent as a short clip of up to 12 packets on the emergency network channel, the same way MeshCore Open sends images. Clips play aloud as they arrive. This is like walkie-talkie messages, not a live call: LoRa is far too slow to stream speech across a mesh. Voice works only while an SOS is live, so it can't become a general-purpose voice chat that floods the network.
+Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on each responder's alert. Speech is compressed with [Codec2](https://github.com/drowe67/codec2), an open-source codec built for HF and low-bitrate radio, at 700 or 1300 bit/s. It is sent as a short clip of up to 12 packets on the emergency network channel, the same way MeshCore Open sends images. Clips play aloud as they arrive. This is like walkie-talkie messages, not a live call: LoRa is far too slow to stream speech across a mesh.
+
+**Push-to-talk** (from 10.0.0) uses the same clips outside an emergency, on a public **#voice** channel and in direct messages, with limits that keep it from crowding out text and SOS traffic: see [Push-to-talk](#push-to-talk-sos-voice-only).
 
 ### On the wire
 
@@ -103,6 +106,8 @@ Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on e
 | Locate request, locator beacon, searcher's reading | Channel data type `0x5053`; beacons are sent zero hop | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
 | Retune note ("re-tuned", "back") | Channel data type `0x5053` | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
 | Voice clip | Channel data type `0x5356` (SV) on the emergency network | SOS Voice holders of the network code |
+| Push-to-talk clip | Channel data type `0x5356`, voice packet version 3, on the `#voice` hashtag channel | Anyone with SOS Voice 10.0.0 (public) |
+| Push-to-talk clip in a direct message | Direct messages of type CLI data, `~ptt1:` + base64, along the contact's route | That contact's SOS Voice 10.0.0 (encrypted end to end by MeshCore); other apps may show odd text |
 | SOS DM to emergency contacts | Plain text, under 160 bytes | Any MeshCore app |
 | Repeater owner info | Existing `GET_OWNER_INFO` request (`0x07`) | Any guest of the repeater |
 
@@ -112,13 +117,13 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the installer for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page. What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. Each release also has a short walkthrough video.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.0.0; earlier versions have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
-| Android (ARM64) | `meshcore-open-sos.apk` | `meshcore-open-sos-voice.apk` |
-| Linux x86-64 | `MeshCore_Open_SOS-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-Setup.exe` (installs as "MeshCore Open") | `MeshCore-Open-SOS-Voice-Setup.exe` |
+| Android (any phone) | `meshcore-open-sos-10.0.0.apk` | `meshcore-open-sos-voice-10.0.0.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.0.0-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.0.0-x86_64.AppImage` |
+| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.0.0-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.0.0-windows-source.zip` |
 
 ### Android
 
@@ -169,6 +174,8 @@ While travelling: log in to a local repeater as a guest and open **Operator info
 | Stored emergency location | Your base, used when neither phone nor radio has a position. **Use current GPS** fills it in. |
 | Emergency contacts | People who always get the SOS by direct message, even if they use another MeshCore app. |
 | Include favourite contacts | On by default: favourites get the DM too. |
+| Speakers and microphone (Linux, Windows) | **Speaker for alerts and notifications** and, in SOS Voice, **Speaker for voice** and **Microphone**: only this app's sound goes there, and the computer's default devices stay as they are. An unplugged device falls back to the system default. |
+| Setup wizard | Runs once on a new install; run it again here. |
 
 Open the **Emergency** tab once so the app can ask for location permission ahead of time.
 
@@ -193,7 +200,7 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 
 ### 6. Talking (SOS Voice only)
 
-See [Voice](#voice-sos-voice-only) below.
+See [Voice](#voice-sos-voice-only) and [Push-to-talk](#push-to-talk-sos-voice-only) below.
 
 ### Backing up your radio
 
@@ -229,7 +236,27 @@ Clips play aloud as they arrive, one after another. While a clip is playing, han
 - Keep it short: "Alex, rolled the quad at the north dam, leg's hurt, can't walk." Every clip uses airtime that the whole mesh shares.
 - Expect a delay of a few seconds per hop. Wait for a reply before talking again.
 - If a packet is lost, the clip has a gap. If the last packet is lost, the clip isn't played: say it again or send a text.
-- Voice stops working when the SOS is cancelled.
+- SOS voice stops when the SOS is cancelled.
+
+## Push-to-talk (SOS Voice only)
+
+From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
+
+- **#voice channel.** SOS Voice adds a public hashtag channel, `#voice`, to the radio once (in its last free slot; removed, it stays removed). Everyone on the mesh with SOS Voice hears it. Push-to-talk never uses MeshCore's Public channel. Hold to talk in the bar above the text box.
+- **Direct messages.** The mic button at the top of a chat. Clips go to that contact along their route and never appear in the chat.
+- **Clips heard** raise a notification and play aloud; in a chat, push-to-talk opens by itself when one arrives.
+- **Clips up to 10 s**, with no wait between them, so a conversation can flow.
+
+**Voice gives way.** One 10-second clip takes as much airtime as 12 to 15 text messages, more when flooded through repeaters, on a channel everyone shares. So push-to-talk:
+
+| Rule | Detail |
+|---|---|
+| Someone else is talking | No clip while another clip is arriving on #voice. |
+| Text comes first | No clip for 15 s after any text message is heard or sent, nor while 4 or more went in the last minute. |
+| A rest after 3 minutes | Each conversation counts its voice both ways; after 3 minutes in a session, the people who talked hear two tones and rest from push-to-talk for 5 minutes, everywhere. Listeners aren't stopped. A session ends after 5 minutes without voice. |
+| An SOS comes first | Paused while the app knows of a live SOS, and for 5 minutes after any SOS packet is heard on the emergency network, even one a member's code can't read. A clip already going out stops at its next packet. |
+
+SOS voice is never limited by these rules, and text always keeps working.
 
 ---
 
