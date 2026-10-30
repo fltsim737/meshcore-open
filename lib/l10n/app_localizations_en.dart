@@ -7124,4 +7124,177 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sos_retuning => 'Telling the other responders, then retuning…';
+
+  @override
+  String get sos_radioLink => 'SOS radio connection';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Now: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Its own hotspot';
+
+  @override
+  String get sos_radioLinkHome => 'Home WiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB cable';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Set up a home WiFi network on the radio\'s web page first';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'The radio connects one way at a time. Changing it restarts the radio, and this app disconnects from it.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Change to $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'The radio restarts. Then join its WiFi hotspot (the name and password are on its App link page: press PRG) and connect by TCP/IP to 4.3.2.1, port 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'The radio restarts and joins your WiFi. Connect this device to the same WiFi, then connect by TCP/IP to meshcore-sos.local (or the address on the radio\'s App link page), port 5000. If it can\'t join within 2 minutes, it goes back to its hotspot.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'The radio restarts with Bluetooth on and WiFi off. Then scan for it by Bluetooth; the pairing PIN is on its screen.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'The radio restarts with Bluetooth and WiFi off. Then connect it to this device with a USB cable and connect by USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Change';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'The radio is restarting to change how it connects.';
+
+  @override
+  String get sos_soundMicrophone => 'Microphone';
+
+  @override
+  String get sos_soundDefault => 'System default';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Only this app\'s sound uses it. The computer\'s own default, and every other program, stay as they are.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Not connected: the system default is used until it\'s back';
+
+  @override
+  String get sos_soundNoDevices => 'No other devices found';
+
+  @override
+  String get wizard_title => 'Setup';
+
+  @override
+  String get wizard_rerun => 'Setup wizard';
+
+  @override
+  String get wizard_rerunSubtitle => 'Go through the first-time setup again';
+
+  @override
+  String get wizard_skip => 'Skip';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Step $n of $total';
+  }
+
+  @override
+  String get wizard_next => 'Next';
+
+  @override
+  String get wizard_back => 'Back';
+
+  @override
+  String get wizard_finish => 'Connect a radio';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Welcome to $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'This app calls for help, and answers calls for help, over a MeshCore radio network, with no mobile coverage or internet. A few steps set it up; everything can be changed later in the settings.';
+
+  @override
+  String get wizard_bestEffort =>
+      'An SOS is best effort: a radio network can\'t guarantee that any message arrives. Keep every other way of calling for help.';
+
+  @override
+  String get wizard_roleQuestion => 'How are you starting?';
+
+  @override
+  String get wizard_roleCoordinator => 'I\'m setting up a group';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Create the emergency network and hand out its codes';
+
+  @override
+  String get wizard_roleJoin => 'I\'ve been given a code';
+
+  @override
+  String get wizard_roleJoinDetail => 'Join a group\'s emergency network';
+
+  @override
+  String get wizard_alertsTitle => 'Alerts on this device';
+
+  @override
+  String get wizard_alertsBody =>
+      'So an SOS reaches you even when the app is closed or the device is locked, through the speaker you choose.';
+
+  @override
+  String get wizard_networkTitle => 'Emergency network';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Create the network. Then give its member code to people who may need help, and its responder code to people who answer.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Enter or scan the code you were given. A member code sends an SOS; a responder code also receives other people\'s.';
+
+  @override
+  String get wizard_networkOpen => 'Open emergency network';
+
+  @override
+  String get wizard_networkNone => 'Not set up yet';
+
+  @override
+  String get wizard_locationTitle => 'Your emergency location';
+
+  @override
+  String get wizard_locationBody =>
+      'Sent with your SOS when there\'s no GPS fix: your front door, for example. You can leave it for now.';
+
+  @override
+  String get wizard_radioTitle => 'Connect your radio';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Next, connect to your MeshCore radio by Bluetooth, USB or WiFi. Once connected, add your emergency contacts in $path, and practise once with your group, after warning them.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Speaker for voice';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Speaker for alerts and notifications';
 }

@@ -624,6 +624,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onTap: connected ? () => _editLocation(context, connector) : null,
         ),
         const Divider(height: 1, indent: 16),
+        // A MeshCore SOS radio (firmware 1.8.3) says how it connects, one way
+        // at a time, and lets the app change it.
+        if (connected &&
+            (connector.currentCustomVars?.containsKey('sos_link') ??
+                false)) ...[
+          MeshNavTile(
+            icon: Icons.settings_input_antenna,
+            title: l10n.sos_radioLink,
+            subtitle: l10n.sos_radioLinkNow(
+              _sosLinkName(
+                context,
+                connector.currentCustomVars?['sos_link'] ?? '',
+              ),
+            ),
+            onTap: () => _editSosRadioLink(context, connector),
+          ),
+          const Divider(height: 1, indent: 16),
+        ],
         MeshNavTile(
           icon: Icons.group_add_outlined,
           title: l10n.settings_contactSettings,
@@ -1133,6 +1151,97 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  String _sosLinkName(BuildContext context, String link) {
+    final l10n = context.l10n;
+    return switch (link) {
+      'home' => l10n.sos_radioLinkHome,
+      'bluetooth' => l10n.sos_radioLinkBluetooth,
+      'usb' => l10n.sos_radioLinkUsb,
+      _ => l10n.sos_radioLinkHotspot,
+    };
+  }
+
+  /// How a MeshCore SOS radio connects: its hotspot, home WiFi, Bluetooth or
+  /// USB, one at a time. Changing it restarts the radio, so this says how to
+  /// connect again first.
+  Future<void> _editSosRadioLink(
+    BuildContext context,
+    MeshCoreConnector connector,
+  ) async {
+    final l10n = context.l10n;
+    final vars = connector.currentCustomVars ?? const <String, String>{};
+    final current = vars['sos_link'] ?? 'hotspot';
+    final homeSet = vars['sos_homewifi'] == '1';
+    final chosen = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => SimpleDialog(
+        title: Text(l10n.sos_radioLink),
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
+            child: Text(l10n.sos_radioLinkIntro),
+          ),
+          for (final link in const ['hotspot', 'home', 'bluetooth', 'usb'])
+            ListTile(
+              leading: Icon(
+                link == current
+                    ? Icons.radio_button_checked
+                    : Icons.radio_button_unchecked,
+              ),
+              title: Text(_sosLinkName(context, link)),
+              subtitle: link == 'home' && !homeSet
+                  ? Text(l10n.sos_radioLinkHomeNotSet)
+                  : null,
+              enabled: link != current && (link != 'home' || homeSet),
+              onTap: () => Navigator.pop(dialogContext, link),
+            ),
+        ],
+      ),
+    );
+    if (chosen == null || chosen == current || !context.mounted) return;
+    final after = switch (chosen) {
+      'home' => l10n.sos_radioLinkAfterHome,
+      'bluetooth' => l10n.sos_radioLinkAfterBluetooth,
+      'usb' => l10n.sos_radioLinkAfterUsb,
+      _ => l10n.sos_radioLinkAfterHotspot,
+    };
+    final go = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.sos_radioLinkConfirm(_sosLinkName(context, chosen))),
+        content: Text(after),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(
+              MaterialLocalizations.of(dialogContext).cancelButtonLabel,
+            ),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.sos_radioLinkChange),
+          ),
+        ],
+      ),
+    );
+    if (go != true || !context.mounted) return;
+    if (!_ensureConnected(context, connector)) return;
+    try {
+      await connector.setCustomVar('sos_link:$chosen');
+      if (!context.mounted) return;
+      showDismissibleSnackBar(
+        context,
+        content: Text(l10n.sos_radioLinkChanging),
+      );
+    } catch (e) {
+      if (!context.mounted) return;
+      showDismissibleSnackBar(
+        context,
+        content: Text(l10n.settings_error(e.toString())),
+      );
+    }
+  }
+
   Future<void> _editLocation(
     BuildContext context,
     MeshCoreConnector connector,
@@ -1290,6 +1399,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       applicationLegalese:
           'MeshCore Open © 2025 zjs81 and contributors. '
           'SOS additions © 2026 fltsim737. MIT licence.\n'
+          'Works with MeshCore, by Scott Powell (rippleradios.com) and '
+          'Liam Cottle, with the MeshCore contributors.\n'
           'Not affiliated with or endorsed by the MeshCore project. '
           'Provided as is, without warranty: not a certified or monitored '
           'emergency alarm. An SOS is best effort; don\'t rely on it as your '

@@ -7188,4 +7188,178 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get sos_retuning => 'Obveščam druge reševalce, nato preglašam…';
+
+  @override
+  String get sos_radioLink => 'Povezava radia SOS';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Zdaj: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Lastna dostopna točka';
+
+  @override
+  String get sos_radioLinkHome => 'Domači WiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'Kabel USB';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Najprej na spletni strani radia nastavite domače omrežje WiFi';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'Radio se hkrati poveže le na en način. Sprememba znova zažene radio in ta aplikacija se od njega odklopi.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Spremeni v $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'Radio se znova zažene. Nato se povežite z njegovo dostopno točko WiFi (ime in geslo sta na strani App link: pritisnite PRG) in se povežite prek TCP/IP z 4.3.2.1, vrata 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'Radio se znova zažene in se poveže z vašim WiFi. To napravo povežite z istim WiFi, nato se povežite prek TCP/IP z meshcore-sos.local (ali naslovom na strani App link radia), vrata 5000. Če se v 2 minutah ne more povezati, se vrne na svojo dostopno točko.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'Radio se znova zažene z vklopljenim Bluetoothom in izklopljenim WiFi. Nato ga poiščite prek Bluetootha; koda PIN za seznanjanje je na njegovem zaslonu.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'Radio se znova zažene z izklopljenima Bluetoothom in WiFi. Nato ga s kablom USB povežite s to napravo in se povežite prek USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Spremeni';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'Radio se znova zaganja, da spremeni način povezave.';
+
+  @override
+  String get sos_soundMicrophone => 'Mikrofon';
+
+  @override
+  String get sos_soundDefault => 'Sistemska privzeta naprava';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Uporablja ga samo zvok te aplikacije. Privzeta naprava računalnika in drugi programi ostanejo nespremenjeni.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Ni povezano: dokler se ne vrne, se uporablja sistemska privzeta naprava';
+
+  @override
+  String get sos_soundNoDevices => 'Ni najdenih drugih naprav';
+
+  @override
+  String get wizard_title => 'Nastavitev';
+
+  @override
+  String get wizard_rerun => 'Čarovnik za nastavitev';
+
+  @override
+  String get wizard_rerunSubtitle => 'Ponovno opravi prvo nastavitev';
+
+  @override
+  String get wizard_skip => 'Preskoči';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Korak $n od $total';
+  }
+
+  @override
+  String get wizard_next => 'Naprej';
+
+  @override
+  String get wizard_back => 'Nazaj';
+
+  @override
+  String get wizard_finish => 'Poveži radijsko postajo';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Dobrodošli v $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Ta aplikacija kliče na pomoč in odgovarja na klice na pomoč prek radijskega omrežja MeshCore, brez mobilnega signala in interneta. Nastavite jo v nekaj korakih; vse lahko pozneje spremenite v nastavitvah.';
+
+  @override
+  String get wizard_bestEffort =>
+      'SOS se pošlje po najboljših močeh: radijsko omrežje ne more zagotoviti, da sporočilo pride. Ohranite vse druge načine klica na pomoč.';
+
+  @override
+  String get wizard_roleQuestion => 'Kako začenjate?';
+
+  @override
+  String get wizard_roleCoordinator => 'Ustanavljam skupino';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Ustvarite omrežje za nujne primere in razdelite njegove kode';
+
+  @override
+  String get wizard_roleJoin => 'Dobil sem kodo';
+
+  @override
+  String get wizard_roleJoinDetail =>
+      'Pridružite se omrežju skupine za nujne primere';
+
+  @override
+  String get wizard_alertsTitle => 'Opozorila na tej napravi';
+
+  @override
+  String get wizard_alertsBody =>
+      'Da vas SOS doseže, tudi ko je aplikacija zaprta ali naprava zaklenjena, prek zvočnika, ki ga izberete.';
+
+  @override
+  String get wizard_networkTitle => 'Omrežje za nujne primere';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Ustvarite omrežje. Nato dajte kodo člana ljudem, ki bi lahko potrebovali pomoč, in kodo reševalca tistim, ki odgovarjajo.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Vnesite ali skenirajte prejeto kodo. Koda člana pošlje SOS; koda reševalca prejema tudi SOS drugih.';
+
+  @override
+  String get wizard_networkOpen => 'Odpri omrežje za nujne primere';
+
+  @override
+  String get wizard_networkNone => 'Še ni nastavljeno';
+
+  @override
+  String get wizard_locationTitle => 'Vaša lokacija za nujne primere';
+
+  @override
+  String get wizard_locationBody =>
+      'Pošlje se z vašim SOS, ko ni GPS: na primer vaša vhodna vrata. Lahko jo pustite za pozneje.';
+
+  @override
+  String get wizard_radioTitle => 'Povežite radijsko postajo';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Zdaj se povežite z radijsko postajo MeshCore prek Bluetootha, USB ali WiFi. Ko ste povezani, dodajte stike za nujne primere v $path in enkrat vadite s skupino, potem ko jo opozorite.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Zvočnik za glas';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Zvočnik za alarme in obvestila';
 }

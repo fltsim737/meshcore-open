@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 9.8.3+37
+version: 10.0.0+41
 
 environment:
   sdk: ^3.9.2
@@ -44,6 +44,7 @@ dependencies:
   flserial:
     path: third_party/flserial
   ffi: ^2.1.3            # calloc.free for flserial's native I/O buffers
+  win32: ^6.4.0          # waveOut: sound on a chosen speaker on Windows
   provider: ^6.1.5+1
   shared_preferences: ^2.2.2
   uuid: ^4.3.3

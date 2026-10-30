@@ -22,6 +22,7 @@ import '../review_mode/review_mode_entry.dart';
 import 'channels_screen.dart';
 import 'tcp_screen.dart';
 import 'usb_screen.dart';
+import 'setup_wizard_screen.dart';
 
 /// Screen for scanning and connecting to MeshCore devices
 class ScannerScreen extends StatefulWidget {
@@ -35,9 +36,9 @@ class _ScannerScreenState extends State<ScannerScreen> {
   // Connecting to the last radio by itself happens once per app start, not
   // each time this screen comes back after a disconnect.
   static bool _autoConnectTried = false;
-  String? _autoConnectName;   // shown while connecting to the last radio
+  String? _autoConnectName; // shown while connecting to the last radio
   bool _autoConnectCancelled = false;
-  bool _autoUsb = false;      // USB from here: this screen moves on, not UsbScreen
+  bool _autoUsb = false; // USB from here: this screen moves on, not UsbScreen
   bool _changedNavigation = false;
   String? _connectingDeviceId;
   late final MeshCoreConnector _connector;
@@ -49,6 +50,11 @@ class _ScannerScreenState extends State<ScannerScreen> {
   void initState() {
     super.initState();
     _connector = Provider.of<MeshCoreConnector>(context, listen: false);
+
+    // A new install: the first-time setup, once.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) SetupWizardScreen.showIfFirstRun(context);
+    });
 
     _connectionListener = () {
       // ModalRoute.of needs a live element, so bail out before touching it.

@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
+import 'sound_devices.dart';
+
 /// Plays notification sounds on Linux. Many notification daemons, Cinnamon's
 /// included, ignore a notification's sound hint, so the app plays the
 /// freedesktop theme sounds itself.
@@ -65,7 +67,10 @@ class LinuxSoundPlayer {
   }
 
   /// PulseAudio's player first (PipeWire provides it too), then PipeWire's.
-  static Future<void> _playThemeSound(String name) async {
+  static Future<void> _playThemeSound(
+    String name, {
+    SoundRole role = SoundRole.alerts,
+  }) async {
     // The AppImage bundles the sounds and points here at them.
     final bundled = Platform.environment['MESHCORE_SOUND_DIR'];
     var file = '$_systemSoundDir/$name.oga';
@@ -74,18 +79,17 @@ class LinuxSoundPlayer {
     } else if (bundled != null && File('$bundled/$name.oga').existsSync()) {
       file = '$bundled/$name.oga';
     }
-    for (final player in const ['paplay', 'pw-play']) {
-      try {
-        // Waits for the player to exit so it is reaped; a detached start
-        // left a zombie process behind for every sound.
-        await Process.run(player, [file]);
-        return;
-      } on ProcessException {
-        continue;
-      } catch (e) {
-        debugPrint('Playing $name with $player failed: $e');
-        return;
-      }
+    try {
+      // On the speaker chosen in the app's settings, else the default. It
+      // waits for the player to exit so it is reaped; a detached start left a
+      // zombie process behind for every sound.
+      await SoundDevices.playOnLinux(file, role: role);
+    } catch (e) {
+      debugPrint('Playing $name failed: $e');
     }
   }
+
+  /// Plays a short sound, to try the speaker chosen for [role].
+  static Future<void> playTest(SoundRole role) =>
+      _playThemeSound('complete', role: role);
 }

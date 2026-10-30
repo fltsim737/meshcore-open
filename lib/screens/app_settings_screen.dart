@@ -315,7 +315,7 @@ class AppSettingsScreen extends StatelessWidget {
         ],
         if (LoginAutostart.forPlatform() != null) ...[
           const Divider(height: 1, indent: 16),
-          const _StartOnLoginTile(),
+          const StartOnLoginTile(),
         ],
         const Divider(height: 1, indent: 16),
         SwitchListTile(
@@ -1648,14 +1648,14 @@ class _ScrollIntoViewOnceState extends State<_ScrollIntoViewOnce> {
 }
 
 /// Desktop: start hidden in the tray at login.
-class _StartOnLoginTile extends StatefulWidget {
-  const _StartOnLoginTile();
+class StartOnLoginTile extends StatefulWidget {
+  const StartOnLoginTile({super.key});
 
   @override
-  State<_StartOnLoginTile> createState() => _StartOnLoginTileState();
+  State<StartOnLoginTile> createState() => _StartOnLoginTileState();
 }
 
-class _StartOnLoginTileState extends State<_StartOnLoginTile> {
+class _StartOnLoginTileState extends State<StartOnLoginTile> {
   final _autostart = LoginAutostart.forPlatform()!;
   bool _enabled = false;
 

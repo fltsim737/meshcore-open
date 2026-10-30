@@ -7204,4 +7204,178 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get sos_retuning =>
       'A avisar os outros socorristas e a mudar de frequência…';
+
+  @override
+  String get sos_radioLink => 'Ligação do rádio SOS';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Agora: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'O seu próprio hotspot';
+
+  @override
+  String get sos_radioLinkHome => 'WiFi de casa';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'Cabo USB';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Configure primeiro uma rede WiFi de casa na página web do rádio';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'O rádio liga-se de uma só forma de cada vez. Mudar reinicia o rádio, e esta aplicação desliga-se dele.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Mudar para $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'O rádio reinicia. Depois ligue-se ao seu hotspot WiFi (o nome e a palavra-passe estão na página App link: prima PRG) e ligue por TCP/IP a 4.3.2.1, porta 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'O rádio reinicia e liga-se ao seu WiFi. Ligue este dispositivo ao mesmo WiFi e depois ligue por TCP/IP a meshcore-sos.local (ou ao endereço na página App link do rádio), porta 5000. Se não conseguir ligar-se em 2 minutos, volta ao seu hotspot.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'O rádio reinicia com o Bluetooth ligado e o WiFi desligado. Depois procure-o por Bluetooth; o PIN de emparelhamento está no ecrã.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'O rádio reinicia com o Bluetooth e o WiFi desligados. Depois ligue-o a este dispositivo com um cabo USB e ligue por USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Mudar';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'O rádio está a reiniciar para mudar a forma de ligação.';
+
+  @override
+  String get sos_soundMicrophone => 'Microfone';
+
+  @override
+  String get sos_soundDefault => 'Predefinição do sistema';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Só o som desta app o utiliza. A predefinição do computador e os outros programas ficam como estão.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Não ligado: é usada a predefinição do sistema até voltar';
+
+  @override
+  String get sos_soundNoDevices => 'Não foram encontrados outros dispositivos';
+
+  @override
+  String get wizard_title => 'Configuração';
+
+  @override
+  String get wizard_rerun => 'Assistente de configuração';
+
+  @override
+  String get wizard_rerunSubtitle => 'Repetir a configuração inicial';
+
+  @override
+  String get wizard_skip => 'Saltar';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Passo $n de $total';
+  }
+
+  @override
+  String get wizard_next => 'Seguinte';
+
+  @override
+  String get wizard_back => 'Voltar';
+
+  @override
+  String get wizard_finish => 'Ligar um rádio';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Bem-vindo ao $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Esta app pede ajuda, e responde a pedidos de ajuda, através de uma rede de rádio MeshCore, sem rede móvel nem internet. Poucos passos configuram-na; tudo pode ser alterado depois nas definições.';
+
+  @override
+  String get wizard_bestEffort =>
+      'Um SOS é enviado da melhor forma possível: uma rede de rádio não garante que uma mensagem chegue. Mantenha todas as outras formas de pedir ajuda.';
+
+  @override
+  String get wizard_roleQuestion => 'Como vai começar?';
+
+  @override
+  String get wizard_roleCoordinator => 'Estou a criar um grupo';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Crie a rede de emergência e distribua os seus códigos';
+
+  @override
+  String get wizard_roleJoin => 'Recebi um código';
+
+  @override
+  String get wizard_roleJoinDetail =>
+      'Junte-se à rede de emergência de um grupo';
+
+  @override
+  String get wizard_alertsTitle => 'Alertas neste dispositivo';
+
+  @override
+  String get wizard_alertsBody =>
+      'Para que um SOS lhe chegue mesmo com a app fechada ou o dispositivo bloqueado, pelo altifalante que escolher.';
+
+  @override
+  String get wizard_networkTitle => 'Rede de emergência';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Crie a rede. Depois dê o código de membro a quem possa precisar de ajuda e o código de socorrista a quem responde.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Introduza ou digitalize o código que recebeu. Um código de membro envia um SOS; um de socorrista também recebe os dos outros.';
+
+  @override
+  String get wizard_networkOpen => 'Abrir rede de emergência';
+
+  @override
+  String get wizard_networkNone => 'Ainda não configurada';
+
+  @override
+  String get wizard_locationTitle => 'A sua localização de emergência';
+
+  @override
+  String get wizard_locationBody =>
+      'Enviada com o seu SOS quando não há GPS: a sua porta de casa, por exemplo. Pode deixá-la para depois.';
+
+  @override
+  String get wizard_radioTitle => 'Ligue o seu rádio';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'A seguir, ligue-se ao seu rádio MeshCore por Bluetooth, USB ou WiFi. Depois de ligado, adicione os contactos de emergência em $path e pratique uma vez com o seu grupo, avisando-o antes.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Altifalante para voz';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Altifalante para alertas e notificações';
 }

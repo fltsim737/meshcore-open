@@ -210,7 +210,12 @@ enum SosPacketKind {
   /// A responder retuning their radio to an SOS sender's settings, for
   /// instance to cross a bridge to the sender's frequency, and so maybe out of
   /// reach on this one; or back again (9.8.3).
-  retune(7);
+  retune(7),
+
+  /// A searcher left the Locate screen (9.8.4, radio firmware 1.8.2): just the
+  /// header. When the last one has stopped, the SOS sender's beacons stop and
+  /// go back to full power, so a later search starts at full power.
+  stopLocate(8);
 
   final int code;
   const SosPacketKind(this.code);
@@ -332,6 +337,7 @@ class SosPacket {
       if (power != null) out.addByte(power! & 0xFF);
       return out.toBytes();
     }
+    if (kind == SosPacketKind.stopLocate) return out.toBytes();
     if (kind == SosPacketKind.retune) {
       out
         ..addByte(back ? 1 : 0)
@@ -453,6 +459,14 @@ class SosPacket {
           power: power,
           fullPower: full,
           setBy: setBy,
+        );
+      }
+      if (kind == SosPacketKind.stopLocate) {
+        return SosPacket(
+          kind: kind,
+          id: id,
+          senderPrefix: prefix,
+          senderName: name,
         );
       }
       if (kind == SosPacketKind.retune) {

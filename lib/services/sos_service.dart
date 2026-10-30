@@ -292,12 +292,23 @@ class SosService extends ChangeNotifier {
 
   // ---- the radio locator ----
   /// While our SOS is live and a responder is searching: a zero-hop beacon
-  /// every [beaconInterval], until [beaconWindow] after the last request.
+  /// every [beaconInterval], while any searcher is: until each has stopped
+  /// (a [SosPacketKind.stopLocate]) or gone quiet for [searcherTimeout].
   static const Duration beaconInterval = Duration(seconds: 5);
-  static const Duration beaconWindow = Duration(minutes: 10);
+
+  /// A searcher not heard from for this long has stopped (2.5 requests, so one
+  /// lost request doesn't end a search), as the SOS radio's firmware 1.8.2.
+  static const Duration searcherTimeout = Duration(seconds: 150);
 
   /// How often a responder searching repeats its request.
-  static const Duration locateRepeat = Duration(minutes: 2);
+  static const Duration locateRepeat = Duration(minutes: 1);
+
+  /// Leaving the Locate screen says so now and again a little later, as one
+  /// can be missed.
+  static const List<Duration> stopResends = [
+    Duration.zero,
+    Duration(seconds: 5),
+  ];
 
   /// How often a searcher shares what they hear, and how fresh a beacon must
   /// be to be shared.
@@ -311,13 +322,17 @@ class SosService extends ChangeNotifier {
   ];
 
   Timer? _beaconTimer;
-  DateTime? _beaconUntil;
   int _beaconSeq = 0;
+
+  /// The responders searching for our SOS, by key prefix, and when each last
+  /// asked.
+  final Map<String, DateTime> _searchers = {};
 
   SosLocatorSession? _locator;
   Timer? _locateTimer;
   Timer? _reportTimer;
   final List<Timer> _powerTimers = [];
+  final List<Timer> _stopTimers = []; // "stopped searching", sent after the screen closes
 
   /// The search this device is running for someone's SOS, if any.
   SosLocatorSession? get locator => _locator;
@@ -347,9 +362,25 @@ class SosService extends ChangeNotifier {
       t.cancel();
     }
     _powerTimers.clear();
-    if (_locator == null) return;
+    final session = _locator;
+    if (session == null) return;
     _locator = null;
+    // tell the SOS sender: when the last searcher has stopped, its beacons stop
+    // and go back to full power
+    _stopTimers.removeWhere((t) => !t.isActive);
+    for (final delay in stopResends) {
+      _stopTimers.add(Timer(delay, () => unawaited(_sayStopped(session))));
+    }
     if (notify) notifyListeners();
+  }
+
+  Future<void> _sayStopped(SosLocatorSession session) async {
+    if (_locator?.alertKey == session.alertKey) return; // searching again
+    final alert = _incoming.where((a) => a.key == session.alertKey).firstOrNull;
+    await _sendChannelPacket(
+      _packet(SosPacketKind.stopLocate, session.id),
+      session: alert == null ? null : _alertSession(alert),
+    );
   }
 
   Future<void> _requestBeacons() async {
@@ -473,7 +504,7 @@ class SosService extends ChangeNotifier {
   }
 
   /// Someone searching for our SOS: (re)start our beacons.
-  void _onLocateRequest(String id, String from) {
+  void _onLocateRequest(String id, String from, Uint8List prefix) {
     if (_active?.id != id) return;
     if (_beaconTimer == null) {
       appLogger.info(
@@ -481,15 +512,37 @@ class SosService extends ChangeNotifier {
         tag: 'SOS',
       );
     }
-    _beaconUntil = _now().add(beaconWindow);
+    _searchers[_hex(prefix)] = _now();
     _beaconTimer ??= Timer.periodic(beaconInterval, (_) => _sendBeacon());
     unawaited(_sendBeacon());
   }
 
+  /// A searcher left the Locate screen: the last one stops our beacons.
+  void _onStopLocate(String id, String from, Uint8List prefix) {
+    if (_active?.id != id || _beaconTimer == null) return;
+    _searchers.remove(_hex(prefix));
+    if (_activeSearchers() == 0) {
+      appLogger.info('$from stopped searching: beacons off', tag: 'SOS');
+      _stopBeacons();
+    }
+  }
+
+  /// Whether our SOS is sending locator beacons, and for how many searchers.
+  @visibleForTesting
+  bool get beaconing => _beaconTimer != null;
+  @visibleForTesting
+  int get searching => _activeSearchers();
+
+  /// How many are searching now; those quiet too long are dropped.
+  int _activeSearchers() {
+    final now = _now();
+    _searchers.removeWhere((_, at) => now.difference(at) >= searcherTimeout);
+    return _searchers.length;
+  }
+
   Future<void> _sendBeacon() async {
     final sos = _active;
-    final until = _beaconUntil;
-    if (sos == null || until == null || _now().isAfter(until)) {
+    if (sos == null || _activeSearchers() == 0) {
       _stopBeacons();
       return;
     }
@@ -514,7 +567,7 @@ class SosService extends ChangeNotifier {
   void _stopBeacons() {
     _beaconTimer?.cancel();
     _beaconTimer = null;
-    _beaconUntil = null;
+    _searchers.clear();
     _beaconSeq = 0;
   }
 
@@ -1444,10 +1497,12 @@ class SosService extends ChangeNotifier {
       packet = SosPacket.decode(data);
     }
     if (packet == null) return;
-    // Members only hear ACKs for their own SOS, and requests to locate it.
+    // Members only hear ACKs for their own SOS, and requests to locate it (and
+    // to stop).
     if (!isResponder &&
         packet.kind != SosPacketKind.ack &&
-        packet.kind != SosPacketKind.locate) {
+        packet.kind != SosPacketKind.locate &&
+        packet.kind != SosPacketKind.stopLocate) {
       return;
     }
     final self = _transport.selfPublicKey;
@@ -1493,7 +1548,9 @@ class SosService extends ChangeNotifier {
       case SosPacketKind.cancel:
         _handleCancel(packet.id, packet.senderName, senderKeyHex);
       case SosPacketKind.locate:
-        _onLocateRequest(packet.id, packet.senderName);
+        _onLocateRequest(packet.id, packet.senderName, packet.senderPrefix);
+      case SosPacketKind.stopLocate:
+        _onStopLocate(packet.id, packet.senderName, packet.senderPrefix);
       case SosPacketKind.beacon:
         _onBeacon(packet, signal);
       case SosPacketKind.report:
@@ -2029,6 +2086,9 @@ class SosService extends ChangeNotifier {
     _expiryTimer?.cancel();
     _beaconTimer?.cancel();
     _locateTimer?.cancel();
+    for (final t in _stopTimers) {
+      t.cancel();
+    }
     _transport.removeListener(_onTransportChanged);
     _settings.removeListener(_syncNetwork);
     _transport.sosTextListener = null;

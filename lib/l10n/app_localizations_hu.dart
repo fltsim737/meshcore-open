@@ -7199,4 +7199,179 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get sos_retuning => 'A többi segítő értesítése, majd áthangolás…';
+
+  @override
+  String get sos_radioLink => 'Az SOS rádió kapcsolata';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Most: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Saját hotspot';
+
+  @override
+  String get sos_radioLinkHome => 'Otthoni WiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB-kábel';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Előbb állíts be egy otthoni WiFi-hálózatot a rádió weboldalán';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'A rádió egyszerre csak egyféleképpen kapcsolódik. A váltás újraindítja a rádiót, és ez az alkalmazás leválik róla.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Váltás erre: $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'A rádió újraindul. Ezután csatlakozz a WiFi-hotspotjához (a név és a jelszó az App link oldalán látható: nyomd meg a PRG gombot), és kapcsolódj TCP/IP-n a 4.3.2.1 címre, 5000-es portra.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'A rádió újraindul, és csatlakozik a WiFi-hálózatodhoz. Csatlakoztasd ezt az eszközt ugyanahhoz a WiFi-hez, majd kapcsolódj TCP/IP-n a meshcore-sos.local címre (vagy a rádió App link oldalán látható címre), 5000-es portra. Ha 2 percen belül nem sikerül csatlakoznia, visszavált a saját hotspotjára.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'A rádió bekapcsolt Bluetooth-szal és kikapcsolt WiFi-vel indul újra. Ezután keresd meg Bluetooth-on; a párosító PIN a kijelzőjén látható.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'A rádió kikapcsolt Bluetooth-szal és WiFi-vel indul újra. Ezután csatlakoztasd ehhez az eszközhöz USB-kábellel, és kapcsolódj USB-n.';
+
+  @override
+  String get sos_radioLinkChange => 'Váltás';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'A rádió újraindul, hogy megváltoztassa a kapcsolódás módját.';
+
+  @override
+  String get sos_soundMicrophone => 'Mikrofon';
+
+  @override
+  String get sos_soundDefault => 'Rendszer alapértelmezett';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Csak ennek az alkalmazásnak a hangja használja. A számítógép alapértelmezett eszköze és a többi program változatlan marad.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Nincs csatlakoztatva: amíg vissza nem kerül, a rendszer alapértelmezettje szól';
+
+  @override
+  String get sos_soundNoDevices => 'Nem található más eszköz';
+
+  @override
+  String get wizard_title => 'Beállítás';
+
+  @override
+  String get wizard_rerun => 'Beállítási varázsló';
+
+  @override
+  String get wizard_rerunSubtitle => 'Az első beállítás újbóli végigjárása';
+
+  @override
+  String get wizard_skip => 'Kihagyás';
+
+  @override
+  String wizard_step(int n, int total) {
+    return '$n. lépés / $total';
+  }
+
+  @override
+  String get wizard_next => 'Tovább';
+
+  @override
+  String get wizard_back => 'Vissza';
+
+  @override
+  String get wizard_finish => 'Rádió csatlakoztatása';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Üdvözöl a(z) $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Ez az alkalmazás segítséget hív, és válaszol a segélyhívásokra egy MeshCore rádióhálózaton, mobiltérerő és internet nélkül. Néhány lépésben beállítható; később minden módosítható a beállításokban.';
+
+  @override
+  String get wizard_bestEffort =>
+      'Az SOS a lehetőségekhez mérten jut el: egy rádióhálózat nem garantálja, hogy egy üzenet megérkezik. Tartsd meg a segélyhívás minden más módját.';
+
+  @override
+  String get wizard_roleQuestion => 'Hogyan kezded?';
+
+  @override
+  String get wizard_roleCoordinator => 'Csoportot hozok létre';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Hozd létre a vészhelyzeti hálózatot, és oszd ki a kódjait';
+
+  @override
+  String get wizard_roleJoin => 'Kaptam egy kódot';
+
+  @override
+  String get wizard_roleJoinDetail =>
+      'Csatlakozz egy csoport vészhelyzeti hálózatához';
+
+  @override
+  String get wizard_alertsTitle => 'Riasztások ezen az eszközön';
+
+  @override
+  String get wizard_alertsBody =>
+      'Hogy az SOS akkor is elérjen, ha az alkalmazás zárva vagy az eszköz zárolva van, a választott hangszórón.';
+
+  @override
+  String get wizard_networkTitle => 'Vészhelyzeti hálózat';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Hozd létre a hálózatot. Aztán add a tagkódot azoknak, akiknek segítség kellhet, a mentőkódot pedig azoknak, akik válaszolnak.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Írd be vagy olvasd be a kapott kódot. A tagkód SOS-t küld; a mentőkód mások SOS-át is fogadja.';
+
+  @override
+  String get wizard_networkOpen => 'Vészhelyzeti hálózat megnyitása';
+
+  @override
+  String get wizard_networkNone => 'Még nincs beállítva';
+
+  @override
+  String get wizard_locationTitle => 'A vészhelyzeti helyed';
+
+  @override
+  String get wizard_locationBody =>
+      'Az SOS-sel együtt küldjük, ha nincs GPS: például a bejárati ajtód. Most kihagyhatod.';
+
+  @override
+  String get wizard_radioTitle => 'Csatlakoztasd a rádiódat';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Most csatlakozz a MeshCore rádiódhoz Bluetooth-on, USB-n vagy WiFi-n. Csatlakozás után add hozzá a vészhelyzeti kontaktjaidat itt: $path, és gyakorolj egyszer a csoportoddal, miután előre szóltál nekik.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Hangszóró a beszédhez';
+
+  @override
+  String get sos_soundAlertSpeaker =>
+      'Hangszóró a riasztásokhoz és értesítésekhez';
 }

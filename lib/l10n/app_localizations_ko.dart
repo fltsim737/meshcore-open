@@ -6900,4 +6900,173 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_retuning => '다른 대응자에게 알린 뒤 주파수를 바꾸는 중…';
+
+  @override
+  String get sos_radioLink => 'SOS 무전기 연결';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return '현재: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => '자체 핫스팟';
+
+  @override
+  String get sos_radioLinkHome => '집 WiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB 케이블';
+
+  @override
+  String get sos_radioLinkHomeNotSet => '먼저 무전기의 웹 페이지에서 집 WiFi 네트워크를 설정하세요';
+
+  @override
+  String get sos_radioLinkIntro =>
+      '무전기는 한 번에 한 가지 방식으로만 연결됩니다. 변경하면 무전기가 다시 시작되고 이 앱과의 연결이 끊어집니다.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return '$how(으)로 변경할까요?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      '무전기가 다시 시작됩니다. 그런 다음 무전기의 WiFi 핫스팟에 연결하고(이름과 비밀번호는 App link 페이지에 있습니다: PRG를 누르세요) TCP/IP로 4.3.2.1, 포트 5000에 연결하세요.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      '무전기가 다시 시작되어 집 WiFi에 연결됩니다. 이 기기를 같은 WiFi에 연결한 다음 TCP/IP로 meshcore-sos.local(또는 무전기 App link 페이지의 주소), 포트 5000에 연결하세요. 2분 안에 연결하지 못하면 핫스팟으로 돌아갑니다.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      '무전기가 Bluetooth는 켜고 WiFi는 끈 상태로 다시 시작됩니다. 그런 다음 Bluetooth로 검색하세요. 페어링 PIN은 화면에 표시됩니다.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      '무전기가 Bluetooth와 WiFi를 끈 상태로 다시 시작됩니다. 그런 다음 USB 케이블로 이 기기에 연결하고 USB로 연결하세요.';
+
+  @override
+  String get sos_radioLinkChange => '변경';
+
+  @override
+  String get sos_radioLinkChanging => '연결 방식을 바꾸기 위해 무전기가 다시 시작하는 중입니다.';
+
+  @override
+  String get sos_soundMicrophone => '마이크';
+
+  @override
+  String get sos_soundDefault => '시스템 기본값';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      '이 앱의 소리만 사용합니다. 컴퓨터의 기본 장치와 다른 프로그램은 그대로입니다.';
+
+  @override
+  String get sos_soundNotConnected => '연결되지 않음: 다시 연결될 때까지 시스템 기본값을 사용합니다';
+
+  @override
+  String get sos_soundNoDevices => '다른 장치를 찾을 수 없습니다';
+
+  @override
+  String get wizard_title => '설정';
+
+  @override
+  String get wizard_rerun => '설정 마법사';
+
+  @override
+  String get wizard_rerunSubtitle => '처음 설정을 다시 진행';
+
+  @override
+  String get wizard_skip => '건너뛰기';
+
+  @override
+  String wizard_step(int n, int total) {
+    return '$total단계 중 $n단계';
+  }
+
+  @override
+  String get wizard_next => '다음';
+
+  @override
+  String get wizard_back => '뒤로';
+
+  @override
+  String get wizard_finish => '무전기 연결';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return '$app에 오신 것을 환영합니다';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      '이 앱은 휴대전화 신호나 인터넷 없이 MeshCore 무선 네트워크로 도움을 요청하고, 도움 요청에 응답합니다. 몇 단계면 설정되며, 나중에 설정에서 모두 바꿀 수 있습니다.';
+
+  @override
+  String get wizard_bestEffort =>
+      'SOS는 최선을 다해 전달될 뿐입니다. 무선 네트워크는 메시지 도착을 보장할 수 없습니다. 도움을 요청하는 다른 모든 수단을 유지하세요.';
+
+  @override
+  String get wizard_roleQuestion => '어떻게 시작하시나요?';
+
+  @override
+  String get wizard_roleCoordinator => '그룹을 만드는 중입니다';
+
+  @override
+  String get wizard_roleCoordinatorDetail => '긴급 네트워크를 만들고 코드를 나눠 줍니다';
+
+  @override
+  String get wizard_roleJoin => '코드를 받았습니다';
+
+  @override
+  String get wizard_roleJoinDetail => '그룹의 긴급 네트워크에 참여합니다';
+
+  @override
+  String get wizard_alertsTitle => '이 기기의 알림';
+
+  @override
+  String get wizard_alertsBody =>
+      '앱이 닫혀 있거나 기기가 잠겨 있어도 선택한 스피커로 SOS가 전달되도록 합니다.';
+
+  @override
+  String get wizard_networkTitle => '긴급 네트워크';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      '네트워크를 만드세요. 그런 다음 도움이 필요할 수 있는 사람에게는 구성원 코드를, 응답하는 사람에게는 응답자 코드를 주세요.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      '받은 코드를 입력하거나 스캔하세요. 구성원 코드는 SOS를 보내고, 응답자 코드는 다른 사람의 SOS도 받습니다.';
+
+  @override
+  String get wizard_networkOpen => '긴급 네트워크 열기';
+
+  @override
+  String get wizard_networkNone => '아직 설정되지 않음';
+
+  @override
+  String get wizard_locationTitle => '긴급 위치';
+
+  @override
+  String get wizard_locationBody =>
+      'GPS가 없을 때 SOS와 함께 전송됩니다(예: 집 현관). 나중에 설정해도 됩니다.';
+
+  @override
+  String get wizard_radioTitle => '무전기 연결';
+
+  @override
+  String wizard_radioBody(String path) {
+    return '이제 블루투스, USB 또는 WiFi로 MeshCore 무전기에 연결하세요. 연결되면 $path에서 긴급 연락처를 추가하고, 미리 알린 뒤 그룹과 한 번 연습하세요.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => '음성용 스피커';
+
+  @override
+  String get sos_soundAlertSpeaker => '경보 및 알림용 스피커';
 }

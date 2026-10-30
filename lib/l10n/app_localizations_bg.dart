@@ -7208,4 +7208,179 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get sos_retuning =>
       'Уведомяване на другите спасители, след това пренастройване…';
+
+  @override
+  String get sos_radioLink => 'Връзка на SOS радиото';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Сега: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Собствена точка за достъп';
+
+  @override
+  String get sos_radioLinkHome => 'Домашна WiFi мрежа';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB кабел';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Първо настройте домашна WiFi мрежа от уеб страницата на радиото';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'Радиото се свързва само по един начин наведнъж. Промяната рестартира радиото и това приложение се изключва от него.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Смяна на „$how“?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'Радиото ще се рестартира. След това се свържете с неговата WiFi точка за достъп (името и паролата са на страницата App link: натиснете PRG) и се свържете по TCP/IP с 4.3.2.1, порт 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'Радиото ще се рестартира и ще се свърже с вашата WiFi мрежа. Свържете това устройство със същата WiFi мрежа, след това се свържете по TCP/IP с meshcore-sos.local (или адреса от страницата App link на радиото), порт 5000. Ако не успее да се свърже до 2 минути, се връща към своята точка за достъп.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'Радиото ще се рестартира с включен Bluetooth и изключен WiFi. След това го потърсете чрез Bluetooth; ПИН кодът за сдвояване е на екрана му.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'Радиото ще се рестартира с изключени Bluetooth и WiFi. След това го свържете с това устройство с USB кабел и се свържете чрез USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Смяна';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'Радиото се рестартира, за да смени начина на свързване.';
+
+  @override
+  String get sos_soundMicrophone => 'Микрофон';
+
+  @override
+  String get sos_soundDefault => 'Системно по подразбиране';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Използва се само от звука на това приложение. Устройството по подразбиране на компютъра и другите програми остават непроменени.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Не е свързано: докато се върне, се използва системното по подразбиране';
+
+  @override
+  String get sos_soundNoDevices => 'Не са намерени други устройства';
+
+  @override
+  String get wizard_title => 'Настройка';
+
+  @override
+  String get wizard_rerun => 'Съветник за настройка';
+
+  @override
+  String get wizard_rerunSubtitle =>
+      'Повторно преминаване през първоначалната настройка';
+
+  @override
+  String get wizard_skip => 'Пропусни';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Стъпка $n от $total';
+  }
+
+  @override
+  String get wizard_next => 'Напред';
+
+  @override
+  String get wizard_back => 'Назад';
+
+  @override
+  String get wizard_finish => 'Свържи радио';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Добре дошли в $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Това приложение зове за помощ и отговаря на повиквания за помощ чрез радиомрежа MeshCore, без мобилно покритие и интернет. Няколко стъпки го настройват; всичко може да се промени по-късно в настройките.';
+
+  @override
+  String get wizard_bestEffort =>
+      'SOS се изпраща според възможностите: радиомрежата не може да гарантира, че съобщение ще пристигне. Запазете всички други начини да повикате помощ.';
+
+  @override
+  String get wizard_roleQuestion => 'Как започвате?';
+
+  @override
+  String get wizard_roleCoordinator => 'Създавам група';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Създайте аварийната мрежа и раздайте кодовете ѝ';
+
+  @override
+  String get wizard_roleJoin => 'Дадоха ми код';
+
+  @override
+  String get wizard_roleJoinDetail =>
+      'Присъединете се към аварийната мрежа на група';
+
+  @override
+  String get wizard_alertsTitle => 'Сигнали на това устройство';
+
+  @override
+  String get wizard_alertsBody =>
+      'За да ви достига SOS, дори когато приложението е затворено или устройството заключено, през избрания високоговорител.';
+
+  @override
+  String get wizard_networkTitle => 'Аварийна мрежа';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Създайте мрежата. След това дайте кода за член на хората, които може да имат нужда от помощ, и кода за спасител на тези, които отговарят.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Въведете или сканирайте получения код. Кодът за член изпраща SOS; кодът за спасител получава и чуждите.';
+
+  @override
+  String get wizard_networkOpen => 'Отвори аварийната мрежа';
+
+  @override
+  String get wizard_networkNone => 'Още не е настроена';
+
+  @override
+  String get wizard_locationTitle => 'Вашето аварийно местоположение';
+
+  @override
+  String get wizard_locationBody =>
+      'Изпраща се с вашия SOS, когато няма GPS: например входната ви врата. Можете да го оставите за по-късно.';
+
+  @override
+  String get wizard_radioTitle => 'Свържете радиото си';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Сега се свържете с радиото си MeshCore чрез Bluetooth, USB или WiFi. След свързване добавете аварийните си контакти в $path и се упражнете веднъж с групата си, след като я предупредите.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Високоговорител за глас';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Високоговорител за сигнали и известия';
 }

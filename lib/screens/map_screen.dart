@@ -48,6 +48,7 @@ import '../widgets/room_login_dialog.dart';
 import '../helpers/guessed_location_estimator.dart';
 import '../helpers/snack_bar_builder.dart';
 import '../helpers/utf8_length_limiter.dart';
+import '../widgets/desktop_phone_frame.dart';
 import 'repeater_hub_screen.dart';
 import 'settings_screen.dart';
 import 'line_of_sight_map_screen.dart';
@@ -159,6 +160,7 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
 
   @override
   void dispose() {
+    DesktopPhoneFrame.wideScreenClosed();
     _ageTimer?.cancel();
     _online.removeListener(_onOnlineChanged);
     _online.dispose();
@@ -260,6 +262,7 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
   @override
   void initState() {
     super.initState();
+    DesktopPhoneFrame.wideScreenOpened(); // the map: the whole window on a computer
     _loadRemovedMarkers();
     _online.addListener(_onOnlineChanged);
     _ageTimer = Timer.periodic(const Duration(seconds: 60), (_) {

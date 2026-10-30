@@ -2,6 +2,53 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.0.0 (in testing, not yet released)
+
+A major release: everything since 9.8.3. The 9.8.4, 9.8.5 and 9.8.6 test builds are replaced by it.
+
+### New: choose the speaker and microphone (Linux and Windows)
+
+- **Settings → App Settings → Emergency SOS** chooses the sound devices this app uses, each on its own: **Speaker for alerts and notifications** (the SOS alarm, message chimes and warnings) and, in SOS Voice, **Speaker for voice** (SOS voice and push-to-talk clips) and **Microphone**. So a headset can carry the talking while the alarm still sounds out loud. Only the app's own sound goes there: the computer's default devices, and every other program, are left as they are. Before, the app used whatever the system default was, and on Linux its short-lived sounds couldn't be moved to another device from the desktop's sound settings.
+- A speaker chosen in an earlier 9.8.6 test build (one speaker for everything) becomes the voice speaker; alerts go back to the system default.
+- Choosing a speaker plays a short sound on it to try it. A chosen device that's unplugged is shown as *not connected*, and the system default is used until it's back, so the SOS alarm is never silenced by a missing headset.
+- Linux plays on the chosen PulseAudio/PipeWire device (`paplay --device`, `pw-play --target`) and records from the chosen source. Windows plays through waveOut on the chosen speakers (voice clips on the voice speaker; the SOS alarm, Morse or classic, on the alerts speaker), and records from the chosen microphone; Windows' own toast sounds for ordinary messages still use the default speaker.
+
+### New: push-to-talk on a Voice channel and in direct messages (SOS Voice only)
+
+- **A public Voice channel, #voice.** SOS Voice adds this hashtag channel to the radio once (in its last free slot; removed, it stays removed). Everyone on the mesh with SOS Voice hears it. It is a channel of its own: push-to-talk never uses MeshCore's Public channel.
+- **Hold to talk** in the #voice chat. Clips up to 10 seconds, with no wait between them, so a conversation can flow.
+- **Push-to-talk in direct messages:** the mic button at the top of a chat. Clips go to that contact as encrypted direct messages along their route (lighter than flooding), and never appear in the chat. Other MeshCore apps can't play them, and may show them as odd text.
+- **A clip heard raises a notification**, as a text message does (*🎙 Voice clip, 3.2 s* from the sender, or on #voice), and plays aloud on the voice speaker. In a chat, push-to-talk opens by itself when a clip arrives, and the microphone button shows a dot for clips not yet seen.
+- Clips use the SOS voice format (Codec2, Low or Clear) with a version byte of their own, so older SOS Voice apps ignore them.
+
+### Voice gives way: text and SOS come first
+
+- **Not while someone else is talking** on #voice (*Someone is talking…*).
+- **Text comes first.** Push-to-talk stands aside while the mesh carries text: for 15 seconds after any text message is heard or sent, and while 4 or more text messages went in the last minute (*The mesh is carrying text messages… Voice in 12 s*).
+- **A rest after 3 minutes of talk.** Each conversation (#voice, or a direct message) counts its voice both ways. After 3 minutes in one session, the people who talked in it hear **two tones** and their push-to-talk stops everywhere for **5 minutes**, with a countdown, giving the airtime back to everyone else. People who only listened aren't stopped. A session ends after 5 minutes without voice, and a clip near the limit is cut short.
+- **Any SOS on the emergency network pauses push-to-talk**: at once for anyone whose app can read the alert (the sender, responders, emergency contacts), and for 5 minutes after any SOS packet is heard on the network for everyone else, members included, though their code can't read the alert (nothing is learnt about who sent it or where). The SOS repeats, so voice stays paused while it lasts. A clip already going out stops at its next packet, recording is cancelled, queued clips are dropped, and clips heard wait to be played by hand. Text keeps working for everyone.
+- **SOS voice is never limited** by any of this.
+- The user guide has a new section, *What voice costs the mesh*: one 10-second clip takes as much airtime as 12 to 15 text messages, more when flooded through repeaters, and what continued voice does to everyone else's messages.
+
+### New: first-time setup
+
+- **A setup wizard** opens once on a new install: what the app is (and that an SOS is best effort), how you're starting (setting up a group, or joining with a code), alerts on this device (full-screen alerts, Do Not Disturb and battery on Android; start at login, alarm sound, speaker and microphone on Linux and Windows), the emergency network, the emergency location, then connecting a radio. An app already set up skips it. Run it again from **Settings → App Settings → Emergency SOS → Setup wizard**.
+
+### Credits
+
+- The licences and credits (the app's About box, README-SOS, the user guide, the firmware's third-party notices) now name **Liam Cottle**, a core developer of MeshCore beside its creator Scott Powell, and maker of the official MeshCore apps and meshcore.js.
+- **New CREDITS.md** names every contributor to MeshCore (231) and to MeshCore Open (50), as recorded in their histories, and the software and data the apps include.
+
+## 9.8.5 (test builds only: part of 10.0.0)
+
+- **SOS radio connection.** A MeshCore SOS radio (firmware 1.8.3 or later) shows how it connects in **Settings** (Location group), and the app can change it: hotspot, home WiFi, Bluetooth or USB cable. The app says how to connect again after the radio restarts. Refused during an SOS.
+- **Fixed: a MeshCore SOS radio on USB pressing its own button (Linux, Windows).** Opening the port toggled DTR/RTS, which the Heltec V3 reads as PRG presses: the radio stepped through its pages and could change its connection, send an SOS or power off. The apps now leave DTR and RTS off on USB-to-serial adapters (CP210x, CH340, FTDI, PL2303).
+- **The desktop apps look like the phone app:** one phone-width column in the middle of the window, which opens phone-shaped; the map still uses the whole window.
+
+## 9.8.4 (test builds only: part of 10.0.0)
+
+- **Locate ends when the searchers stop.** Leaving the Locate screen tells the sender's radio or app (twice, a few seconds apart). When the last searcher has gone, or none has been heard from for 2.5 minutes, the beacons stop and go back to full power. Locate repeats its request every minute (it was every 2 minutes). Needs MeshCore SOS firmware 1.8.2 or later for an SOS from the radio.
+
 ## 9.8.3 (2026-10-29)
 
 ### New: an SOS across a bridge, and retuning to reach it

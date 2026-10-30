@@ -331,6 +331,10 @@ SOS Voice builds Codec2 from source as part of the app (`packages/codec2_ffi`), 
 
 **MeshCore Open** is © 2025 zjs81 and contributors, under the MIT licence: see [LICENSE](LICENSE). MeshCore Open SOS and MeshCore Open SOS Voice build on it.
 
+**MeshCore**, the mesh firmware and companion radio protocol these apps talk to, is © 2025 Scott Powell / rippleradios.com under the MIT licence, and is developed with **Liam Cottle** and the other MeshCore contributors. Liam Cottle also makes the official MeshCore apps, the MeshCore web client and [meshcore.js](https://github.com/liamcottle/meshcore.js). Thank you to them and to everyone who runs MeshCore repeaters.
+
+**Every contributor** to MeshCore and to MeshCore Open is named in [CREDITS.md](CREDITS.md), with the software and data the apps include.
+
 **The SOS and SOS Voice additions** are © 2026 fltsim737 and released under the same MIT licence.
 
 **Codec2** (SOS Voice only): SOS Voice includes the speech subset of Codec2 1.2.0, © David Rowe and contributors, under the **GNU Lesser General Public License 2.1**. It's built as a separate library that the app loads, and its full source, licence text (`src/codec2/COPYING`) and the changes made to it (variable-length arrays replaced so it builds with MSVC) are in [packages/codec2_ffi](packages/codec2_ffi), and in each release's Windows source zip. You may replace it with your own modified build of Codec2.
@@ -339,7 +343,7 @@ SOS Voice builds Codec2 from source as part of the app (`packages/codec2_ffi`), 
 
 **Other Flutter and Dart packages** used by the apps keep their own licences (mostly BSD, MIT and Apache 2.0). The app lists them all under **Settings → About → View licenses**.
 
-**Not affiliated.** MeshCore Open SOS and SOS Voice are independent community builds. They aren't made, endorsed or supported by the MeshCore project, rippleradios.com or the MeshCore Open maintainers; "MeshCore" is used only to say what they work with. The separate MeshCore SOS radio firmware is proprietary and isn't covered by this repository's licence.
+**Not affiliated.** MeshCore Open SOS and SOS Voice are independent community builds. They aren't made, endorsed or supported by the MeshCore project, Scott Powell, rippleradios.com, Liam Cottle or the MeshCore Open maintainers; "MeshCore" is used only to say what they work with. The separate MeshCore SOS radio firmware is proprietary and isn't covered by this repository's licence.
 
 **Disclaimer.** The apps are provided "as is", without warranty of any kind, as the MIT licence says; that licence's disclaimer and limitation of liability cover all their authors and copyright holders, zjs81 and contributors and fltsim737 alike. In plain words:
 - they **aren't a certified emergency, medical or personal alarm**, and nobody monitors them;

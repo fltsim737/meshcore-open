@@ -43,6 +43,7 @@ import 'storage/prefs_manager.dart';
 import 'theme/mesh_theme.dart';
 import 'utils/app_logger.dart';
 import 'widgets/image_send_codec_binding.dart';
+import 'widgets/desktop_phone_frame.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -529,7 +530,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
                 value: _systemUiOverlayStyle(context),
                 child: Stack(
                   children: [
-                    child ?? const SizedBox.shrink(),
+                    DesktopPhoneFrame(child: child ?? const SizedBox.shrink()),
                     const SosWarningOverlay(),
                   ],
                 ),

@@ -6742,4 +6742,168 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_retuning => '正在通知其他救援者，然后切换频率…';
+
+  @override
+  String get sos_radioLink => 'SOS 电台连接方式';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return '当前:$how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => '自带热点';
+
+  @override
+  String get sos_radioLinkHome => '家庭 WiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => '蓝牙';
+
+  @override
+  String get sos_radioLinkUsb => 'USB 数据线';
+
+  @override
+  String get sos_radioLinkHomeNotSet => '请先在电台的网页上设置家庭 WiFi 网络';
+
+  @override
+  String get sos_radioLinkIntro => '电台一次只能用一种方式连接。更改后电台会重启,本应用会与其断开连接。';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return '更改为$how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      '电台将重启。然后连接到它的 WiFi 热点(名称和密码显示在 App link 页面:按 PRG),并通过 TCP/IP 连接到 4.3.2.1,端口 5000。';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      '电台将重启并加入你的 WiFi。将本设备连接到同一个 WiFi,然后通过 TCP/IP 连接到 meshcore-sos.local(或电台 App link 页面上显示的地址),端口 5000。如果 2 分钟内无法加入,它会回到自己的热点。';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      '电台将以蓝牙开启、WiFi 关闭的方式重启。然后通过蓝牙搜索它;配对 PIN 码显示在它的屏幕上。';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      '电台将以蓝牙和 WiFi 均关闭的方式重启。然后用 USB 数据线把它连接到本设备,并通过 USB 连接。';
+
+  @override
+  String get sos_radioLinkChange => '更改';
+
+  @override
+  String get sos_radioLinkChanging => '电台正在重启以更改连接方式。';
+
+  @override
+  String get sos_soundMicrophone => '麦克风';
+
+  @override
+  String get sos_soundDefault => '系统默认';
+
+  @override
+  String get sos_soundThisAppOnly => '只有本应用的声音会使用它。电脑本身的默认设备和其他程序都保持不变。';
+
+  @override
+  String get sos_soundNotConnected => '未连接:在它重新连接之前使用系统默认设备';
+
+  @override
+  String get sos_soundNoDevices => '未找到其他设备';
+
+  @override
+  String get wizard_title => '设置';
+
+  @override
+  String get wizard_rerun => '设置向导';
+
+  @override
+  String get wizard_rerunSubtitle => '重新进行首次设置';
+
+  @override
+  String get wizard_skip => '跳过';
+
+  @override
+  String wizard_step(int n, int total) {
+    return '第 $n 步,共 $total 步';
+  }
+
+  @override
+  String get wizard_next => '下一步';
+
+  @override
+  String get wizard_back => '返回';
+
+  @override
+  String get wizard_finish => '连接电台';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return '欢迎使用 $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      '本应用通过 MeshCore 无线电网络求救和响应求救,无需手机信号或互联网。只需几步即可设置;以后都可以在设置中更改。';
+
+  @override
+  String get wizard_bestEffort => 'SOS 尽力送达:无线电网络无法保证任何消息一定送到。请保留所有其他求救方式。';
+
+  @override
+  String get wizard_roleQuestion => '你要如何开始?';
+
+  @override
+  String get wizard_roleCoordinator => '我要建立一个群组';
+
+  @override
+  String get wizard_roleCoordinatorDetail => '创建紧急网络并分发其代码';
+
+  @override
+  String get wizard_roleJoin => '我收到了一个代码';
+
+  @override
+  String get wizard_roleJoinDetail => '加入某个群组的紧急网络';
+
+  @override
+  String get wizard_alertsTitle => '此设备上的警报';
+
+  @override
+  String get wizard_alertsBody => '让 SOS 在应用关闭或设备锁定时也能通过你选择的扬声器提醒你。';
+
+  @override
+  String get wizard_networkTitle => '紧急网络';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      '创建网络。然后把成员代码交给可能需要帮助的人,把救援者代码交给负责响应的人。';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      '输入或扫描你收到的代码。成员代码可发送 SOS;救援者代码还能接收他人的 SOS。';
+
+  @override
+  String get wizard_networkOpen => '打开紧急网络';
+
+  @override
+  String get wizard_networkNone => '尚未设置';
+
+  @override
+  String get wizard_locationTitle => '你的紧急位置';
+
+  @override
+  String get wizard_locationBody => '没有 GPS 定位时随 SOS 一起发送:例如你家前门。可以稍后再设。';
+
+  @override
+  String get wizard_radioTitle => '连接你的电台';
+
+  @override
+  String wizard_radioBody(String path) {
+    return '接下来通过蓝牙、USB 或 WiFi 连接你的 MeshCore 电台。连接后,在 $path 中添加紧急联系人,并在事先告知群组后与他们演练一次。';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => '语音扬声器';
+
+  @override
+  String get sos_soundAlertSpeaker => '警报和通知扬声器';
 }

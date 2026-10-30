@@ -6887,4 +6887,173 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get sos_retuning => 'ほかの対応者に知らせてから切り替えています…';
+
+  @override
+  String get sos_radioLink => 'SOS無線機の接続';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return '現在: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => '本体のホットスポット';
+
+  @override
+  String get sos_radioLinkHome => '自宅のWiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USBケーブル';
+
+  @override
+  String get sos_radioLinkHomeNotSet => '先に無線機のWebページで自宅のWiFiネットワークを設定してください';
+
+  @override
+  String get sos_radioLinkIntro =>
+      '無線機は一度に1つの方法でのみ接続します。変更すると無線機が再起動し、このアプリとの接続が切れます。';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return '$howに変更しますか?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      '無線機が再起動します。その後、無線機のWiFiホットスポットに接続し(名前とパスワードはApp linkページに表示されます: PRGを押す)、TCP/IPで4.3.2.1のポート5000に接続してください。';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      '無線機が再起動し、自宅のWiFiに接続します。この端末を同じWiFiにつなぎ、TCP/IPでmeshcore-sos.local(または無線機のApp linkページに表示されるアドレス)のポート5000に接続してください。2分以内に接続できない場合は、ホットスポットに戻ります。';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      '無線機はBluetoothオン、WiFiオフで再起動します。その後、Bluetoothで検索してください。ペアリングPINは画面に表示されます。';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      '無線機はBluetoothとWiFiをオフにして再起動します。その後、USBケーブルでこの端末につなぎ、USBで接続してください。';
+
+  @override
+  String get sos_radioLinkChange => '変更';
+
+  @override
+  String get sos_radioLinkChanging => '接続方法を変更するため、無線機が再起動しています。';
+
+  @override
+  String get sos_soundMicrophone => 'マイク';
+
+  @override
+  String get sos_soundDefault => 'システムの既定';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'このアプリの音だけが使います。コンピューターの既定のデバイスやほかのプログラムはそのままです。';
+
+  @override
+  String get sos_soundNotConnected => '未接続:戻るまでシステムの既定を使います';
+
+  @override
+  String get sos_soundNoDevices => 'ほかのデバイスが見つかりません';
+
+  @override
+  String get wizard_title => 'セットアップ';
+
+  @override
+  String get wizard_rerun => 'セットアップウィザード';
+
+  @override
+  String get wizard_rerunSubtitle => '初回セットアップをもう一度行う';
+
+  @override
+  String get wizard_skip => 'スキップ';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'ステップ $n/$total';
+  }
+
+  @override
+  String get wizard_next => '次へ';
+
+  @override
+  String get wizard_back => '戻る';
+
+  @override
+  String get wizard_finish => '無線機を接続';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return '$app へようこそ';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'このアプリは、携帯の電波やインターネットがなくても、MeshCore 無線ネットワークで助けを呼び、助けの求めに応えます。数ステップで設定でき、あとから設定でいつでも変更できます。';
+
+  @override
+  String get wizard_bestEffort =>
+      'SOS はベストエフォートです。無線ネットワークではメッセージが必ず届くとは限りません。ほかの助けを呼ぶ手段もすべて残しておいてください。';
+
+  @override
+  String get wizard_roleQuestion => 'どのように始めますか?';
+
+  @override
+  String get wizard_roleCoordinator => 'グループを作る';
+
+  @override
+  String get wizard_roleCoordinatorDetail => '緊急ネットワークを作成し、コードを配ります';
+
+  @override
+  String get wizard_roleJoin => 'コードを受け取った';
+
+  @override
+  String get wizard_roleJoinDetail => 'グループの緊急ネットワークに参加します';
+
+  @override
+  String get wizard_alertsTitle => 'このデバイスでの通知';
+
+  @override
+  String get wizard_alertsBody =>
+      'アプリを閉じていても、デバイスがロックされていても、選んだスピーカーで SOS が届くようにします。';
+
+  @override
+  String get wizard_networkTitle => '緊急ネットワーク';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'ネットワークを作成し、助けが必要になりそうな人にはメンバーコードを、応答する人にはレスポンダーコードを渡します。';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      '受け取ったコードを入力するかスキャンします。メンバーコードは SOS を送信し、レスポンダーコードはほかの人の SOS も受信します。';
+
+  @override
+  String get wizard_networkOpen => '緊急ネットワークを開く';
+
+  @override
+  String get wizard_networkNone => 'まだ設定されていません';
+
+  @override
+  String get wizard_locationTitle => '緊急時の位置';
+
+  @override
+  String get wizard_locationBody =>
+      'GPS がないときに SOS と一緒に送られます(たとえば自宅の玄関)。あとで設定してもかまいません。';
+
+  @override
+  String get wizard_radioTitle => '無線機を接続';
+
+  @override
+  String wizard_radioBody(String path) {
+    return '次に、Bluetooth、USB、WiFi で MeshCore 無線機に接続します。接続したら $path で緊急連絡先を追加し、事前に知らせたうえでグループと一度練習してください。';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => '音声用スピーカー';
+
+  @override
+  String get sos_soundAlertSpeaker => '警報と通知用スピーカー';
 }
