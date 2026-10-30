@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
-import 'package:flutter/foundation.dart' show mergeSort;
+import 'package:flutter/foundation.dart' show listEquals, mergeSort;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -63,6 +63,8 @@ import 'map_screen.dart';
 import 'region_management_screen.dart';
 import '../storage/region_store.dart';
 import '../utils/share_origin.dart';
+import '../services/sos_voice_service.dart';
+import '../widgets/ptt_panel.dart';
 
 class ChannelChatScreen extends StatefulWidget {
   final Channel channel;
@@ -587,6 +589,9 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
                 },
               ),
             ),
+            // the public Voice channel: push-to-talk above the text box
+            if (listEquals(widget.channel.psk, SosVoiceService.pttChannelPsk))
+              const PttPanel(conversation: SosVoiceService.pttChannelKey),
             _buildInputBar(),
           ],
         ),

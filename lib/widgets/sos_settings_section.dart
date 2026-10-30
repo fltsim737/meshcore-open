@@ -8,15 +8,17 @@ import '../services/app_settings_service.dart';
 import '../services/sos_location_service.dart';
 import '../services/sos_service.dart';
 import '../screens/sos_history_screen.dart';
+import '../screens/setup_wizard_screen.dart';
 import '../screens/sos_network_screen.dart';
 import 'mesh_nav_tile.dart';
+import 'sound_devices_tiles.dart';
 import 'sos_screen_access_tile.dart';
 import 'sos_dnd_access_tile.dart';
 
 /// Stored emergency location, emergency network and emergency contacts.
 /// Morse (the default: it can't be mistaken for other emergency apps' alerts)
 /// or the classic two-tone alert of earlier versions.
-Future<void> _chooseAlarmSound(
+Future<void> chooseSosAlarmSound(
   BuildContext context,
   AppSettingsService settingsService,
 ) async {
@@ -70,6 +72,19 @@ class SosSettingsSection extends StatelessWidget {
     return Column(
       children: [
         MeshNavTile(
+          icon: Icons.assistant_outlined,
+          title: l10n.wizard_rerun,
+          subtitle: l10n.wizard_rerunSubtitle,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              fullscreenDialog: true,
+              builder: (_) => const SetupWizardScreen(),
+            ),
+          ),
+        ),
+        const Divider(height: 1, indent: 16),
+        MeshNavTile(
           icon: Icons.home_work_outlined,
           title: l10n.sos_storedLocation,
           subtitle: lat != null && lon != null
@@ -116,8 +131,9 @@ class SosSettingsSection extends StatelessWidget {
                 ? l10n.sos_alarmSoundClassic
                 : l10n.sos_alarmSoundMorse,
           ),
-          onTap: () => _chooseAlarmSound(context, settingsService),
+          onTap: () => chooseSosAlarmSound(context, settingsService),
         ),
+        const SoundDevicesTiles(),
         const Divider(height: 1, indent: 16),
         const SosScreenAccessTile(),
         const SosDndAccessTile(),

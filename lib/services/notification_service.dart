@@ -19,6 +19,7 @@ import '../utils/platform_info.dart';
 import 'app_settings_service.dart';
 import 'linux_sound_player.dart';
 import 'sos_morse_sound.dart';
+import 'sound_devices.dart';
 import 'notification_reply.dart';
 
 class NotificationService {
@@ -92,8 +93,16 @@ class NotificationService {
       ? LinuxSoundPlayer()
       : null;
 
-  /// Windows loops the Morse SOS itself; see [WindowsMorseAlarm].
-  WindowsMorseAlarm? _windowsAlarm;
+  /// Windows loops the Morse SOS itself; see [WindowsLoopingAlarm].
+  WindowsLoopingAlarm? _windowsAlarm;
+
+  /// The classic alarm, looped by the app only on a speaker chosen in the
+  /// settings; on the default speaker it's Windows' own alarm sound.
+  WindowsLoopingAlarm? _windowsClassicAlarm;
+
+  /// Windows: the classic alarm plays from the app (on the chosen speaker).
+  bool get _windowsClassicFromApp =>
+      _windowsClassicAlarm != null && SoundDevices.alertOutputId != null;
   static const _batchWindow = Duration(seconds: 5);
 
   DateTime? _lastNotificationTime;
@@ -685,7 +694,14 @@ class NotificationService {
     final file = await extractSosMorseSound();
     if (file == null) return;
     _morseFile = file;
-    if (PlatformInfo.isWindows) _windowsAlarm = WindowsMorseAlarm(file);
+    if (PlatformInfo.isWindows) {
+      _windowsAlarm = WindowsLoopingAlarm(file);
+      final classic = await extractSoundAsset(
+        sosClassicAsset,
+        'meshcore_sos_classic.wav',
+      );
+      if (classic != null) _windowsClassicAlarm = WindowsLoopingAlarm(classic);
+    }
   }
 
   /// Android: alarm audio, repeats until cancelled, cannot be swiped away.
@@ -765,9 +781,12 @@ class NotificationService {
           // only treats it as one when it has a button.
           windows: WindowsNotificationDetails(
             scenario: WindowsNotificationScenario.alarm,
-            // the Morse alarm plays from the app instead (WindowsMorseAlarm);
-            // Windows' own alarm if it couldn't be set up
-            audio: _windowsAlarm != null && !classic
+            // the Morse alarm plays from the app instead (WindowsLoopingAlarm),
+            // and the classic one too on a chosen speaker; Windows' own alarm
+            // otherwise, or if it couldn't be set up
+            audio:
+                (_windowsAlarm != null && !classic) ||
+                    (classic && _windowsClassicFromApp)
                 ? WindowsNotificationAudio.silent()
                 : WindowsNotificationAudio.preset(
                     sound: WindowsNotificationSound.alarm1,
@@ -791,7 +810,11 @@ class NotificationService {
             ? const Duration(seconds: 4)
             : const Duration(milliseconds: 3600)
         ..startAlarm(_sosAlertId(alert.key));
-      if (!classic) _windowsAlarm?.start(_sosAlertId(alert.key));
+      if (!classic) {
+        _windowsAlarm?.start(_sosAlertId(alert.key));
+      } else if (_windowsClassicFromApp) {
+        _windowsClassicAlarm?.start(_sosAlertId(alert.key));
+      }
     } catch (e) {
       debugPrint('Failed to show SOS notification: $e');
     }
@@ -842,6 +865,7 @@ class NotificationService {
     unawaited(SosAlarmService.stop(_sosAlertId(alert.key)));
     _linuxSound?.stopAlarm(_sosAlertId(alert.key));
     _windowsAlarm?.stop(_sosAlertId(alert.key));
+    _windowsClassicAlarm?.stop(_sosAlertId(alert.key));
     if (!_isInitialized) return;
     try {
       await _notifications.cancel(id: _sosAlertId(alert.key));
@@ -891,6 +915,7 @@ class NotificationService {
   Future<void> showSosCancelled(IncomingSos alert) async {
     _linuxSound?.stopAlarm(_sosAlertId(alert.key));
     _windowsAlarm?.stop(_sosAlertId(alert.key));
+    _windowsClassicAlarm?.stop(_sosAlertId(alert.key));
     if (!await _ensureCanNotify()) return;
     final l10n = _l10n;
     final sender = alert.senderName.isEmpty
@@ -974,6 +999,7 @@ class NotificationService {
   Future<void> cancelAll() async {
     _linuxSound?.stopAll();
     _windowsAlarm?.stopAll();
+    _windowsClassicAlarm?.stopAll();
     _conversations.clear();
     await _notifications.cancelAll();
     await _updateBadge(0);
@@ -1057,6 +1083,36 @@ class NotificationService {
         badgeCount: badgeCount,
       ),
     );
+  }
+
+  /// A push-to-talk clip heard: in a direct message from [contactName]
+  /// ([contactId] its key), or on the Voice channel ([channelIndex]) from
+  /// [contactName]. Opens that chat when tapped.
+  Future<void> showPttClip({
+    required String contactName,
+    required Duration duration,
+    String? contactId,
+    int? channelIndex,
+    String? channelName,
+  }) async {
+    final seconds = (duration.inMilliseconds / 1000).toStringAsFixed(1);
+    final text = _l10n.ptt_clipNotification(seconds);
+    if (channelIndex != null) {
+      await showChannelMessageNotification(
+        channelName: channelName ?? '#voice',
+        senderName: contactName,
+        message: text,
+        urlImagesEnabled: false,
+        channelIndex: channelIndex,
+      );
+    } else {
+      await showMessageNotification(
+        contactName: contactName,
+        message: text,
+        urlImagesEnabled: false,
+        contactId: contactId,
+      );
+    }
   }
 
   Future<void> showAdvertNotification({

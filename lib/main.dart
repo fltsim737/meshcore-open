@@ -46,6 +46,7 @@ import 'storage/prefs_manager.dart';
 import 'theme/mesh_theme.dart';
 import 'utils/app_logger.dart';
 import 'widgets/image_send_codec_binding.dart';
+import 'widgets/desktop_phone_frame.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -207,7 +208,41 @@ void main(List<String> args) async {
         PrefsManager.instance.getString(SosVoiceService.qualityPrefsKey),
     saveQuality: (value) async =>
         PrefsManager.instance.setString(SosVoiceService.qualityPrefsKey, value),
+    // the Voice channel goes on each radio once; removed, it stays removed
+    pttChannelAddedBefore: (radio) =>
+        PrefsManager.instance.getBool('ptt_channel_added_$radio') ?? false,
+    rememberPttChannelAdded: (radio) => unawaited(
+      PrefsManager.instance.setBool('ptt_channel_added_$radio', true),
+    ),
   );
+  // A push-to-talk clip heard: a notification, as for a message, so it's
+  // known about without the push-to-talk panel open.
+  sosVoiceService.onPttClipHeard = (conversation, clip) {
+    final settings = appSettingsService.settings;
+    if (!settings.notificationsEnabled) return;
+    final name = clip.senderName ?? '?';
+    if (conversation == SosVoiceService.pttChannelKey) {
+      if (!settings.notifyOnNewChannelMessage) return;
+      final channel = sosVoiceService.pttChannel;
+      unawaited(
+        notificationService.showPttClip(
+          contactName: name,
+          duration: clip.duration,
+          channelIndex: channel?.index,
+          channelName: channel?.name,
+        ),
+      );
+    } else {
+      if (!settings.notifyOnNewMessage) return;
+      unawaited(
+        notificationService.showPttClip(
+          contactName: name,
+          duration: clip.duration,
+          contactId: conversation.substring('ptt:dm:'.length),
+        ),
+      );
+    }
+  };
 
   await connector.loadContactCache();
   await connector.loadCachedChannels();
@@ -570,7 +605,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
                 value: _systemUiOverlayStyle(context),
                 child: Stack(
                   children: [
-                    child ?? const SizedBox.shrink(),
+                    DesktopPhoneFrame(child: child ?? const SizedBox.shrink()),
                     const SosWarningOverlay(),
                   ],
                 ),

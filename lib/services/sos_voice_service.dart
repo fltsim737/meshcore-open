@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 
 import '../connector/meshcore_connector.dart';
 import '../helpers/sos_voice_packet.dart';
+import '../models/channel.dart';
 import '../models/contact.dart';
 import '../utils/lora_airtime.dart';
 import 'sos_service.dart';
@@ -25,12 +26,41 @@ abstract class SosVoiceTransport {
   /// The pause to leave between two chunks of [bytes] each.
   Duration chunkGap(int bytes);
 
+  /// Sends a clip's chunks; [stop] is asked before each one, and true stops
+  /// the rest (an SOS needs the air).
   Future<bool> sendChunks(
     int channelIndex,
     List<Uint8List> blobs, {
     required Duration gap,
     void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
   });
+
+  // Push-to-talk (10.0.0)
+
+  bool get isConnected;
+  List<Channel> get channels;
+  int get maxChannels;
+
+  /// The radio's channel list has loaded.
+  bool get channelsReady;
+  Future<void> setChannel(int index, String name, Uint8List psk);
+
+  /// Called whenever the radio's state may have changed.
+  set changeListener(VoidCallback? listener);
+
+  set directListener(void Function(String senderKeyHex, String text)? value);
+
+  Future<bool> sendDirect(
+    Contact contact,
+    List<String> texts, {
+    required Duration gap,
+    void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
+  });
+
+  /// When text messages were heard or sent in the last minute.
+  List<DateTime> get recentTextTraffic;
 }
 
 class ConnectorSosVoiceTransport implements SosVoiceTransport {
@@ -77,17 +107,63 @@ class ConnectorSosVoiceTransport implements SosVoiceTransport {
     List<Uint8List> blobs, {
     required Duration gap,
     void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
   }) => connector.sendSosVoiceChunks(
     channelIndex,
     blobs,
     gap: gap,
     onProgress: onProgress,
+    stop: stop,
+  );
+
+  @override
+  bool get isConnected => connector.isConnected;
+  @override
+  List<Channel> get channels => connector.allChannels;
+  @override
+  int get maxChannels => connector.maxChannels;
+  @override
+  bool get channelsReady =>
+      connector.hasLoadedChannels && !connector.isLoadingChannels;
+  @override
+  Future<void> setChannel(int index, String name, Uint8List psk) =>
+      connector.setChannel(index, name, psk);
+
+  VoidCallback? _changeListener;
+  @override
+  set changeListener(VoidCallback? listener) {
+    final old = _changeListener;
+    if (old != null) connector.removeListener(old);
+    _changeListener = listener;
+    if (listener != null) connector.addListener(listener);
+  }
+
+  @override
+  set directListener(void Function(String, String)? value) =>
+      connector.pttDirectListener = value;
+
+  @override
+  List<DateTime> get recentTextTraffic => connector.recentTextTraffic;
+
+  @override
+  Future<bool> sendDirect(
+    Contact contact,
+    List<String> texts, {
+    required Duration gap,
+    void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
+  }) => connector.sendPttDirectTexts(
+    contact,
+    texts,
+    gap: gap,
+    onProgress: onProgress,
+    stop: stop,
   );
 }
 
 enum VoiceClipStatus { queued, sending, sent, failed, received, partial }
 
-/// A voice clip sent or heard during an SOS.
+/// A voice clip sent or heard during an SOS, or by push-to-talk.
 class VoiceClip {
   final int localId;
   final String sosId;
@@ -130,10 +206,37 @@ enum SosVoiceBlock {
 
   /// Codec2 is not available on this platform.
   unsupported,
+
+  /// Push-to-talk: an SOS is live, which comes first.
+  sosLive,
+
+  /// Push-to-talk: the Voice channel isn't on the radio.
+  noChannel,
+
+  /// Push-to-talk: someone else's clip is arriving on the Voice channel.
+  busy,
+
+  /// Push-to-talk: the mesh is carrying text messages, which come first.
+  meshBusy,
+
+  /// Push-to-talk: a voice session reached [SosVoiceService.pttSessionLimit],
+  /// and the mesh rests from voice for [SosVoiceService.pttRest].
+  talkLimit,
 }
 
 /// Voice clips between the person who raised an SOS and the responders,
 /// over the emergency network channel, only while that SOS is live.
+///
+/// Push-to-talk (10.0.0) works the same way outside an SOS, in conversations
+/// of its own: [pttChannelKey] on the public Voice channel ([pttChannelName],
+/// which the app puts on the radio once), and [pttDirectKey] with one
+/// contact, by direct message. To spare the mesh's airtime its clips are at
+/// most [pttMaxClip], not while another clip is arriving on the channel, not
+/// while the mesh is carrying text ([pttQuietAfterText], [pttBusyText]), at
+/// most [pttSessionLimit] of voice in a session before everyone rests from it
+/// for [pttRest] (two tones say so), and never while an
+/// SOS is live. There's no wait between clips, so a conversation can flow;
+/// the guide explains what each clip costs the mesh.
 ///
 /// Push-to-talk records while held. Hands-free listens continuously and
 /// sends each stretch of speech when the speaker pauses. Clips heard play
@@ -143,6 +246,44 @@ class SosVoiceService extends ChangeNotifier {
   /// Preference holding the chosen [SosVoiceQuality] name.
   static const String qualityPrefsKey = 'sos_voice_quality';
   static const int _maxClipsPerSos = 30;
+
+  /// The public push-to-talk channel: a hashtag channel, so its key comes
+  /// from its name and every SOS Voice app shares it.
+  static const String pttChannelName = '#voice';
+  static final Uint8List pttChannelPsk = Channel.derivePskFromHashtag(
+    pttChannelName,
+  );
+  static const String pttChannelKey = 'ptt:channel';
+  static String pttDirectKey(String contactKeyHex) => 'ptt:dm:$contactKeyHex';
+  static bool isPtt(String key) => key.startsWith('ptt:');
+
+  static const Duration pttMaxClip = Duration(seconds: 10);
+
+  /// A voice session: the voice in one conversation (#voice, or a direct
+  /// message), both ways, until [pttSessionGap] goes by with none. Once it
+  /// reaches [pttSessionLimit], the people who talked in it rest from
+  /// push-to-talk for [pttRest], everywhere (two tones say so), giving the
+  /// airtime back to everyone else. Someone who only listened isn't stopped:
+  /// for them the session simply starts again.
+  static const Duration pttSessionLimit = Duration(minutes: 3);
+  static const Duration pttRest = Duration(minutes: 5);
+  static const Duration pttSessionGap = Duration(minutes: 5);
+
+  /// Push-to-talk waits this long after any text message heard or sent...
+  static const Duration pttQuietAfterText = Duration(seconds: 15);
+
+  /// ...and while this many text messages were heard or sent in the last
+  /// minute.
+  static const int pttBusyText = 4;
+
+  /// Push-to-talk pauses this long after any SOS packet heard on the
+  /// emergency network, even one this phone can't read: an SOS repeats
+  /// every few minutes, so it stays paused while the SOS lasts.
+  static const Duration pttSosHold = Duration(minutes: 5);
+
+  /// The Voice channel counts as busy this long after a chunk of someone
+  /// else's clip, unless the clip has finished.
+  static const Duration pttBusyHold = Duration(seconds: 4);
 
   /// Microphone audio after a clip finishes playing that is still ignored,
   /// so the end of the clip is not picked up and sent.
@@ -157,6 +298,8 @@ class SosVoiceService extends ChangeNotifier {
   final Future<void> Function(String value)? _saveQuality;
   final DateTime Function() _now;
   final SosVoiceAssembler _assembler;
+  final bool Function(String radioKeyHex)? _pttChannelAddedBefore;
+  final void Function(String radioKeyHex)? _rememberPttChannelAdded;
 
   SosVoiceQuality _quality = SosVoiceQuality.low;
   String? _handsFreeSosId;
@@ -178,6 +321,23 @@ class SosVoiceService extends ChangeNotifier {
   int _nextLocalId = 1;
   int _nextClipId = Random().nextInt(0x10000);
 
+  /// Each conversation's voice session, and the end of this person's rest
+  /// from push-to-talk, if one is on.
+  final Map<String, _VoiceSession> _sessions = {};
+  DateTime? _restUntil;
+  Timer? _waitTimer;
+
+  /// Push-to-talk conversations with a clip heard that the user hasn't
+  /// looked at yet.
+  final Set<String> _unheard = {};
+
+  /// Called for each push-to-talk clip heard, for its notification.
+  void Function(String conversation, VoiceClip clip)? onPttClipHeard;
+  DateTime? _channelChunkAt;
+  final Set<String> _pttOfferedThisRun = {};
+  bool _addingPttChannel = false;
+  int? _pttChannelIndex;
+
   SosVoiceService({
     required SosService sos,
     required SosVoiceTransport transport,
@@ -187,6 +347,8 @@ class SosVoiceService extends ChangeNotifier {
     Future<String?> Function()? loadQuality,
     Future<void> Function(String value)? saveQuality,
     DateTime Function()? now,
+    bool Function(String radioKeyHex)? pttChannelAddedBefore,
+    void Function(String radioKeyHex)? rememberPttChannelAdded,
   }) : _sos = sos,
        _transport = transport,
        _audio = audio,
@@ -195,9 +357,13 @@ class SosVoiceService extends ChangeNotifier {
        _loadQuality = loadQuality,
        _saveQuality = saveQuality,
        _now = now ?? DateTime.now,
-       _assembler = SosVoiceAssembler(now: now) {
+       _assembler = SosVoiceAssembler(now: now),
+       _pttChannelAddedBefore = pttChannelAddedBefore,
+       _rememberPttChannelAdded = rememberPttChannelAdded {
     _vox = _makeVox();
     _transport.voiceListener = handleInbound;
+    _transport.directListener = handleDirect;
+    _transport.changeListener = _onRadioChanged;
     _sos.addListener(_onSosChanged);
     unawaited(_restoreQuality());
   }
@@ -240,9 +406,18 @@ class SosVoiceService extends ChangeNotifier {
   List<VoiceClip> clipsFor(String sosId) =>
       List.unmodifiable(_clips[sosId] ?? const []);
 
-  /// Null when voice can be used for [sosId], otherwise why not.
+  /// Null when voice can be used for [sosId] (an SOS, or a push-to-talk
+  /// conversation), otherwise why not.
   SosVoiceBlock? blockFor(String sosId) {
     if (_codec == null) return SosVoiceBlock.unsupported;
+    if (isPtt(sosId)) {
+      final block = _pttSendBlock(sosId);
+      if (block != null) return block;
+      if (sosId == pttChannelKey && channelBusy) return SosVoiceBlock.busy;
+      if (meshBusyWait > Duration.zero) return SosVoiceBlock.meshBusy;
+      if (talkLimitWait > Duration.zero) return SosVoiceBlock.talkLimit;
+      return null;
+    }
     if (!_isLive(sosId)) return SosVoiceBlock.noSos;
     if (_sos.network == null) return SosVoiceBlock.noNetwork;
     if (!_sos.isConnected ||
@@ -254,9 +429,234 @@ class SosVoiceService extends ChangeNotifier {
   }
 
   /// Our own active SOS, or a live alert we can answer as a responder.
+  /// Push-to-talk conversations are always there.
   bool _isLive(String sosId) =>
+      isPtt(sosId) ||
       _sos.active?.id == sosId ||
       (_sos.isResponder && _sos.incoming.any((a) => a.id == sosId));
+
+  // ---------------------------------------------------------------------
+  // Push-to-talk
+  // ---------------------------------------------------------------------
+
+  /// Any SOS is live: ours, or an alert heard, or an SOS packet heard on
+  /// the network in the last [pttSosHold] (one a member can't read, or an
+  /// acknowledgement or cancellation: they all mean the network is busy with
+  /// an emergency).
+  bool get sosLive =>
+      _sos.active != null ||
+      _sos.incoming.isNotEmpty ||
+      sosHeardWait > Duration.zero;
+
+  /// How long push-to-talk stays paused after the last SOS packet heard.
+  Duration get sosHeardWait {
+    final at = _sos.sosTrafficAt;
+    if (at == null) return Duration.zero;
+    return _waitUntil(at.add(pttSosHold), _now());
+  }
+
+  /// The public Voice channel on the connected radio, if it's there.
+  Channel? get pttChannel => _transport.channels
+      .where((c) => listEquals(c.psk, pttChannelPsk))
+      .firstOrNull;
+
+  /// Someone else's clip is arriving on the Voice channel.
+  bool get channelBusy {
+    final at = _channelChunkAt;
+    return at != null && _now().difference(at) < pttBusyHold;
+  }
+
+  /// How long push-to-talk stands aside for text: until [pttQuietAfterText]
+  /// after the last text message, and until fewer than [pttBusyText] were
+  /// heard or sent in the last minute.
+  Duration get meshBusyWait {
+    final traffic = _transport.recentTextTraffic;
+    if (traffic.isEmpty) return Duration.zero;
+    final now = _now();
+    var until = traffic.last.add(pttQuietAfterText);
+    if (traffic.length >= pttBusyText) {
+      // the oldest that must age out to bring it under the limit
+      final drop = traffic[traffic.length - pttBusyText];
+      final under = drop.add(const Duration(minutes: 1));
+      if (under.isAfter(until)) until = under;
+    }
+    return _waitUntil(until, now);
+  }
+
+  /// [key]'s voice session, unless [pttSessionGap] has gone by without any.
+  _VoiceSession? _session(String key) {
+    final session = _sessions[key];
+    if (session == null) return null;
+    if (_now().difference(session.lastAt) >= pttSessionGap) {
+      _sessions.remove(key);
+      return null;
+    }
+    return session;
+  }
+
+  /// Voice in [key]'s current session, both ways.
+  Duration sessionTalk(String key) => _session(key)?.talk ?? Duration.zero;
+
+  /// How long this person's rest from voice has to go.
+  Duration get talkLimitWait {
+    final until = _restUntil;
+    if (until == null) return Duration.zero;
+    return _waitUntil(until, _now());
+  }
+
+  /// Counts a push-to-talk clip in [key], heard or [sent]. At the limit, a
+  /// person who talked in the session rests, with two tones; one who only
+  /// listened starts a new session.
+  void _countVoice(String key, Duration length, {required bool sent}) {
+    final now = _now();
+    final session = _session(key) ?? (_sessions[key] = _VoiceSession(now));
+    session
+      ..talk += length
+      ..lastAt = now
+      ..talked |= sent;
+    if (session.talk < pttSessionLimit - const Duration(seconds: 1)) return;
+    _sessions.remove(key);
+    if (!session.talked || talkLimitWait > Duration.zero) return;
+    _restUntil = now.add(pttRest);
+    _playQueue.add(
+      VoiceClip(
+        localId: _nextLocalId++,
+        sosId: 'ptt:rest',
+        outgoing: false,
+        senderName: null,
+        time: now,
+        duration: const Duration(milliseconds: 800),
+        quality: _quality,
+        pcm: restTones(),
+        status: VoiceClipStatus.received,
+      ),
+    );
+    unawaited(_pumpPlay());
+    notifyListeners();
+  }
+
+  /// Two falling tones: the mesh rests from voice.
+  @visibleForTesting
+  static Int16List restTones() {
+    const rate = SosVoicePacket.sampleRate;
+    final out = Int16List(rate * 800 ~/ 1000);
+    void tone(int startMs, int lengthMs, double hz) {
+      final start = rate * startMs ~/ 1000;
+      final n = rate * lengthMs ~/ 1000;
+      for (var i = 0; i < n; i++) {
+        final fade = min(1.0, min(i, n - i) / (rate * 0.01)); // no clicks
+        out[start + i] = (9000 * fade * sin(2 * pi * hz * i / rate)).round();
+      }
+    }
+
+    tone(0, 300, 880);
+    tone(420, 300, 660);
+    return out;
+  }
+
+  Duration _waitUntil(DateTime until, DateTime now) {
+    final left = until.difference(now);
+    if (left <= Duration.zero) return Duration.zero;
+    // a countdown on screen, once a second, until every wait is over
+    _waitTimer ??= Timer.periodic(const Duration(seconds: 1), (timer) {
+      final waiting =
+          until.isAfter(_now()) ||
+          meshBusyWait > Duration.zero ||
+          talkLimitWait > Duration.zero ||
+          sosHeardWait > Duration.zero;
+      if (!waiting) {
+        timer.cancel();
+        if (identical(_waitTimer, timer)) _waitTimer = null;
+      }
+      notifyListeners();
+    });
+    return left;
+  }
+
+  /// A push-to-talk clip arrived in [key] that the user hasn't seen.
+  bool hasUnheard(String key) => _unheard.contains(key);
+
+  /// The user is looking at [key]'s clips.
+  void markHeard(String key) {
+    if (_unheard.remove(key)) notifyListeners();
+  }
+
+  /// What stops a push-to-talk clip going at all (not the waits).
+  SosVoiceBlock? _pttSendBlock(String key) {
+    if (_codec == null) return SosVoiceBlock.unsupported;
+    if (sosLive) return SosVoiceBlock.sosLive;
+    if (!_transport.isConnected) return SosVoiceBlock.radio;
+    if (key == pttChannelKey) {
+      if (!_sos.supportsChannelAlerts) return SosVoiceBlock.radio;
+      if (pttChannel == null) return SosVoiceBlock.noChannel;
+    } else if (_contactFor(key) == null) {
+      return SosVoiceBlock.radio;
+    }
+    return null;
+  }
+
+  Contact? _contactFor(String key) {
+    if (!key.startsWith('ptt:dm:')) return null;
+    final hex = key.substring('ptt:dm:'.length);
+    return _transport.contacts.where((c) => c.publicKeyHex == hex).firstOrNull;
+  }
+
+  /// A push-to-talk clip stops at [pttMaxClip], or sooner if the talk limit
+  /// would be passed.
+  int _maxFramesFor(String key) {
+    if (!isPtt(key)) return _quality.maxFrames;
+    final left = pttSessionLimit - sessionTalk(key);
+    final most = left < pttMaxClip ? left : pttMaxClip;
+    return max(
+      0,
+      min(_quality.maxFrames, most.inMilliseconds ~/ SosVoicePacket.frameMs),
+    );
+  }
+
+  /// Puts the Voice channel on the radio, once per radio: if it's removed
+  /// afterwards, it stays removed.
+  void _onRadioChanged() {
+    final index = pttChannel?.index;
+    if (index != _pttChannelIndex) {
+      _pttChannelIndex = index;
+      notifyListeners();
+    }
+    if (_codec == null ||
+        index != null ||
+        _addingPttChannel ||
+        !_transport.isConnected ||
+        !_transport.channelsReady ||
+        !_sos.supportsChannelAlerts) {
+      return;
+    }
+    final self = _transport.selfPublicKey;
+    if (self == null) return;
+    final radio = self.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    if (_pttOfferedThisRun.contains(radio) ||
+        (_pttChannelAddedBefore?.call(radio) ?? false)) {
+      return;
+    }
+    final used = _transport.channels.map((c) => c.index).toSet();
+    final free = [
+      for (var i = 0; i < _transport.maxChannels; i++)
+        if (!used.contains(i)) i,
+    ];
+    _pttOfferedThisRun.add(radio);
+    if (free.isEmpty) return; // no room: the user can add it themselves
+    _addingPttChannel = true;
+    unawaited(() async {
+      try {
+        // the last free slot, leaving the first ones for the user's own
+        await _transport.setChannel(free.last, pttChannelName, pttChannelPsk);
+        _rememberPttChannelAdded?.call(radio);
+      } catch (e) {
+        debugPrint('Adding the Voice channel failed: $e');
+      } finally {
+        _addingPttChannel = false;
+        notifyListeners();
+      }
+    }());
+  }
 
   // ---------------------------------------------------------------------
   // Talking
@@ -272,6 +672,7 @@ class SosVoiceService extends ChangeNotifier {
       notifyListeners();
       return true;
     }
+    if (isPtt(sosId)) return false; // push-to-talk is held, never hands-free
     if (blockFor(sosId) != null) return false;
     if (!await _ensurePermission()) return false;
     _vox.reset();
@@ -330,8 +731,9 @@ class SosVoiceService extends ChangeNotifier {
   }
 
   void _onMicFrame(Int16List frame) {
-    if (_pttSosId != null) {
-      if (_pttFrames.length < _quality.maxFrames) _pttFrames.add(frame);
+    final talking = _pttSosId;
+    if (talking != null) {
+      if (_pttFrames.length < _maxFramesFor(talking)) _pttFrames.add(frame);
       return;
     }
     if (_handsFreeSosId == null) return;
@@ -346,6 +748,13 @@ class SosVoiceService extends ChangeNotifier {
   }
 
   void _queueOutgoing(String sosId, List<Int16List> frames) {
+    if (isPtt(sosId)) {
+      _countVoice(
+        sosId,
+        Duration(milliseconds: frames.length * SosVoicePacket.frameMs),
+        sent: true,
+      );
+    }
     final clip = VoiceClip(
       localId: _nextLocalId++,
       sosId: sosId,
@@ -376,6 +785,7 @@ class SosVoiceService extends ChangeNotifier {
   }
 
   Future<void> _send(VoiceClip clip) async {
+    if (isPtt(clip.sosId)) return _sendPtt(clip);
     final codec = _codec;
     final channel = _sos.sosChannel;
     final self = _transport.selfPublicKey;
@@ -428,19 +838,112 @@ class SosVoiceService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> _sendPtt(VoiceClip clip) async {
+    final codec = _codec;
+    final self = _transport.selfPublicKey;
+    if (codec == null || self == null || _pttSendBlock(clip.sosId) != null) {
+      clip.status = VoiceClipStatus.failed;
+      notifyListeners();
+      return;
+    }
+    final direct = clip.sosId != pttChannelKey;
+    final packets = SosVoicePacket.split(
+      frames: codec.encode(_split(clip.pcm), clip.quality),
+      quality: clip.quality,
+      sosId: '0000',
+      senderPrefix: self.sublist(0, SosVoicePacket.keyPrefixSize),
+      clipId: _nextClipId++ & 0xFFFF,
+      ptt: true,
+      framesPerChunk: direct
+          ? SosVoicePacket.directFramesPerChunk(clip.quality)
+          : null,
+    );
+    clip
+      ..status = VoiceClipStatus.sending
+      ..totalChunks = packets.length;
+    notifyListeners();
+    void progress(int sent, int total) {
+      clip.sentChunks = sent;
+      notifyListeners();
+    }
+
+    var ok = false;
+    try {
+      if (direct) {
+        ok = await _transport.sendDirect(
+          _contactFor(clip.sosId)!,
+          [for (final p in packets) p.toDirectText()],
+          gap: _transport.chunkGap(SosVoicePacket.maxDirectText),
+          onProgress: progress,
+          stop: () => sosLive,
+        );
+      } else {
+        ok = await _transport.sendChunks(
+          pttChannel!.index,
+          [for (final p in packets) p.encode()],
+          gap: _transport.chunkGap(SosVoicePacket.maxBlobBytes),
+          onProgress: progress,
+          stop: () => sosLive,
+        );
+      }
+    } catch (_) {
+      ok = false;
+    }
+    clip.status = ok ? VoiceClipStatus.sent : VoiceClipStatus.failed;
+    notifyListeners();
+  }
+
   // ---------------------------------------------------------------------
   // Listening
   // ---------------------------------------------------------------------
+
+  /// A push-to-talk chunk heard, filed under [key].
+  void _hearPtt(SosVoicePacket packet, String key) {
+    final self = _transport.selfPublicKey;
+    if (self != null &&
+        listEquals(
+          self.sublist(0, SosVoicePacket.keyPrefixSize),
+          packet.senderPrefix,
+        )) {
+      return; // Our own clip, repeated back to us.
+    }
+    if (key == pttChannelKey) _channelChunkAt = _now();
+    final done = _assembler.add(packet.withSosId(key));
+    if (done != null) {
+      if (key == pttChannelKey) _channelChunkAt = null;
+      _deliver(done);
+    }
+    notifyListeners();
+    _staleTimer ??= Timer.periodic(const Duration(seconds: 1), (_) {
+      checkStale();
+    });
+  }
+
+  /// A direct message holding a push-to-talk chunk.
+  @visibleForTesting
+  void handleDirect(String senderKeyHex, String text) {
+    if (_codec == null) return;
+    final packet = SosVoicePacket.fromDirectText(text);
+    if (packet == null) return;
+    _hearPtt(packet, pttDirectKey(senderKeyHex));
+  }
 
   /// A channel data packet of type [dataTypeSosVoice].
   @visibleForTesting
   void handleInbound(int channelIndex, Uint8List data) {
     final codec = _codec;
-    if (codec == null || _sos.sosChannel?.index != channelIndex) return;
+    if (codec == null) return;
+    final ptt = pttChannel;
+    if (ptt != null && ptt.index == channelIndex) {
+      final packet = SosVoicePacket.decode(data);
+      if (packet != null && packet.ptt) _hearPtt(packet, pttChannelKey);
+      return;
+    }
+    if (_sos.sosChannel?.index != channelIndex) return;
     final plain = _sos.openVoice(data);
     if (plain == null) return;
     final packet = SosVoicePacket.decode(plain);
-    if (packet == null || !_isLive(packet.sosId)) return;
+    if (packet == null || packet.ptt || !_isLive(packet.sosId)) return;
     final self = _transport.selfPublicKey;
     if (self != null &&
         listEquals(
@@ -459,10 +962,15 @@ class SosVoiceService extends ChangeNotifier {
   /// Plays clips whose remaining chunks were lost.
   @visibleForTesting
   void checkStale() {
+    final wasBusy = _channelChunkAt != null;
     for (final clip in _assembler.takeStale()) {
       _deliver(clip);
     }
-    if (!_assembler.hasPending) {
+    if (wasBusy && !channelBusy) {
+      _channelChunkAt = null;
+      notifyListeners(); // the channel is free again
+    }
+    if (!_assembler.hasPending && _channelChunkAt == null) {
       _staleTimer?.cancel();
       _staleTimer = null;
     }
@@ -484,7 +992,15 @@ class SosVoiceService extends ChangeNotifier {
           : VoiceClipStatus.partial,
       totalChunks: frames.chunks.length,
     )..sentChunks = frames.received;
+    if (isPtt(frames.sosId)) {
+      _countVoice(frames.sosId, frames.duration, sent: false);
+      _unheard.add(frames.sosId);
+      onPttClipHeard?.call(frames.sosId, clip);
+    }
     _addClip(clip);
+    // During an SOS, push-to-talk clips wait to be played by hand, so they
+    // never talk over it.
+    if (isPtt(frames.sosId) && sosLive) return;
     _playQueue.add(clip);
     unawaited(_pumpPlay());
   }
@@ -549,7 +1065,10 @@ class SosVoiceService extends ChangeNotifier {
     final hf = _handsFreeSosId;
     if (hf != null && !_isLive(hf)) unawaited(setHandsFree(hf, false));
     final ptt = _pttSosId;
-    if (ptt != null && !_isLive(ptt)) unawaited(stopTalking(cancel: true));
+    if (ptt != null && (!_isLive(ptt) || (isPtt(ptt) && sosLive))) {
+      unawaited(stopTalking(cancel: true));
+    }
+    if (sosLive) _sendQueue.removeWhere((c) => isPtt(c.sosId));
     final before = _clips.length;
     _clips.removeWhere((sosId, _) => !_isLive(sosId));
     if (_clips.length != before) notifyListeners();
@@ -575,9 +1094,22 @@ class SosVoiceService extends ChangeNotifier {
   void dispose() {
     _sos.removeListener(_onSosChanged);
     _transport.voiceListener = null;
+    _transport.directListener = null;
+    _transport.changeListener = null;
     _staleTimer?.cancel();
+    _waitTimer?.cancel();
     unawaited(_micSub?.cancel());
     unawaited(_audio.dispose());
     super.dispose();
   }
+}
+
+/// One conversation's push-to-talk session: its voice so far, both ways,
+/// when it last had any, and whether this person talked in it.
+class _VoiceSession {
+  Duration talk = Duration.zero;
+  DateTime lastAt;
+  bool talked = false;
+
+  _VoiceSession(this.lastAt);
 }

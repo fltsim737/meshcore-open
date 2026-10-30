@@ -27,6 +27,7 @@ import '../models/message.dart';
 import '../services/app_settings_service.dart';
 import '../services/chat_text_scale_service.dart';
 import '../services/path_history_service.dart';
+import '../services/sos_voice_service.dart';
 import '../services/translation_service.dart';
 import '../widgets/chat_composer.dart';
 import '../widgets/chat_send_pipeline.dart';
@@ -41,6 +42,7 @@ import '../widgets/gif_message.dart';
 import '../widgets/jump_to_bottom_button.dart';
 import '../widgets/routing_sheet.dart';
 import '../widgets/radio_stats_entry.dart';
+import '../widgets/ptt_panel.dart';
 import '../widgets/sync_progress_overlay.dart';
 import '../widgets/translated_message_content.dart';
 import '../l10n/l10n.dart';
@@ -74,6 +76,23 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  /// Push-to-talk shown above the text box (SOS Voice).
+  bool _showPtt = false;
+
+  /// A clip arrived from this contact: push-to-talk opens by itself, and
+  /// stays open.
+  bool _pttHeard(BuildContext context) {
+    final heard = context.watch<SosVoiceService>().hasUnheard(
+      SosVoiceService.pttDirectKey(widget.contact.publicKeyHex),
+    );
+    if (heard && !_showPtt) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) setState(() => _showPtt = true);
+      });
+    }
+    return heard;
+  }
+
   final _textController = TextEditingController();
   final _scrollController = ChatScrollController();
   final _textFieldFocusNode = FocusNode();
@@ -254,6 +273,24 @@ class _ChatScreenState extends State<ChatScreen> {
         centerTitle: false,
         bottom: const SyncProgressAppBarBottom(),
         actions: [
+          if (widget.contact.type == advTypeChat)
+            Consumer<SosVoiceService>(
+              builder: (context, voice, _) {
+                final unheard = voice.hasUnheard(
+                  SosVoiceService.pttDirectKey(widget.contact.publicKeyHex),
+                );
+                return IconButton(
+                  tooltip: context.l10n.ptt_title,
+                  isSelected: _showPtt,
+                  icon: Badge(
+                    isLabelVisible: unheard,
+                    child: const Icon(Icons.mic_none),
+                  ),
+                  selectedIcon: const Icon(Icons.mic),
+                  onPressed: () => setState(() => _showPtt = !_showPtt),
+                );
+              },
+            ),
           const RadioStatsIconButton(),
           Consumer<MeshCoreConnector>(
             builder: (context, connector, _) {
@@ -362,6 +399,13 @@ class _ChatScreenState extends State<ChatScreen> {
                   ],
                 ),
               ),
+              if (_showPtt || _pttHeard(context))
+                PttPanel(
+                  conversation: SosVoiceService.pttDirectKey(
+                    widget.contact.publicKeyHex,
+                  ),
+                  contactName: widget.contact.name,
+                ),
               _buildInputBar(connector),
             ],
           );

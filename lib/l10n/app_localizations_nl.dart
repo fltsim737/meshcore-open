@@ -7256,4 +7256,215 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get sos_retuning =>
       'Andere hulpverleners inlichten, daarna omschakelen…';
+
+  @override
+  String get sos_radioLink => 'Verbinding van de SOS-radio';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Nu: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Eigen hotspot';
+
+  @override
+  String get sos_radioLinkHome => 'Wifi thuis';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB-kabel';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Stel eerst een wifinetwerk thuis in op de webpagina van de radio';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'De radio verbindt op één manier tegelijk. Wijzigen herstart de radio, en deze app verliest de verbinding.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Wijzigen naar $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'De radio herstart. Maak daarna verbinding met zijn wifi-hotspot (naam en wachtwoord staan op de pagina App link: druk op PRG) en verbind via TCP/IP met 4.3.2.1, poort 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'De radio herstart en maakt verbinding met je wifi. Verbind dit apparaat met dezelfde wifi en verbind daarna via TCP/IP met meshcore-sos.local (of het adres op de pagina App link van de radio), poort 5000. Lukt het niet binnen 2 minuten, dan gaat hij terug naar zijn hotspot.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'De radio herstart met bluetooth aan en wifi uit. Zoek hem daarna via bluetooth; de koppelcode staat op zijn scherm.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'De radio herstart met bluetooth en wifi uit. Sluit hem daarna met een USB-kabel aan op dit apparaat en verbind via USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Wijzigen';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'De radio herstart om de manier van verbinden te wijzigen.';
+
+  @override
+  String get sos_soundMicrophone => 'Microfoon';
+
+  @override
+  String get sos_soundDefault => 'Systeemstandaard';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Alleen het geluid van deze app gebruikt het. De standaard van de computer en alle andere programma\'s blijven zoals ze zijn.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Niet verbonden: de systeemstandaard wordt gebruikt tot het terug is';
+
+  @override
+  String get sos_soundNoDevices => 'Geen andere apparaten gevonden';
+
+  @override
+  String get ptt_title => 'Push-to-talk';
+
+  @override
+  String get ptt_channelHelp =>
+      'Iedereen op het mesh met SOS Voice hoort dit kanaal. Clips tot 10 s. Elke clip gebruikt zendtijd die het hele mesh deelt: houd het kort.';
+
+  @override
+  String ptt_directHelp(String name) {
+    return 'Clips tot 10 s, rechtstreeks naar $name. Alleen SOS Voice kan ze afspelen.';
+  }
+
+  @override
+  String get ptt_sosLive => 'Gepauzeerd: er loopt een SOS, en die gaat voor.';
+
+  @override
+  String get ptt_noChannel =>
+      'Het spraakkanaal #voice staat niet op deze radio. Voeg het toe onder Kanalen (een hashtagkanaal met de naam #voice).';
+
+  @override
+  String get ptt_busy => 'Iemand praat…';
+
+  @override
+  String get wizard_title => 'Instellen';
+
+  @override
+  String get wizard_rerun => 'Installatiewizard';
+
+  @override
+  String get wizard_rerunSubtitle => 'De eerste installatie opnieuw doorlopen';
+
+  @override
+  String get wizard_skip => 'Overslaan';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Stap $n van $total';
+  }
+
+  @override
+  String get wizard_next => 'Volgende';
+
+  @override
+  String get wizard_back => 'Terug';
+
+  @override
+  String get wizard_finish => 'Radio verbinden';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Welkom bij $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Deze app roept om hulp, en beantwoordt hulpoproepen, via een MeshCore-radionetwerk, zonder mobiel bereik of internet. Een paar stappen stellen hem in; alles is later in de instellingen te wijzigen.';
+
+  @override
+  String get wizard_bestEffort =>
+      'Een SOS is naar beste vermogen: een radionetwerk kan niet garanderen dat een bericht aankomt. Houd alle andere manieren om hulp te roepen.';
+
+  @override
+  String get wizard_roleQuestion => 'Hoe begin je?';
+
+  @override
+  String get wizard_roleCoordinator => 'Ik zet een groep op';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Maak het noodnetwerk en deel de codes uit';
+
+  @override
+  String get wizard_roleJoin => 'Ik heb een code gekregen';
+
+  @override
+  String get wizard_roleJoinDetail =>
+      'Word lid van het noodnetwerk van een groep';
+
+  @override
+  String get wizard_alertsTitle => 'Meldingen op dit apparaat';
+
+  @override
+  String get wizard_alertsBody =>
+      'Zodat een SOS je bereikt, ook als de app dicht is of het apparaat vergrendeld, via de luidspreker die je kiest.';
+
+  @override
+  String get wizard_networkTitle => 'Noodnetwerk';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Maak het netwerk. Geef daarna de ledencode aan mensen die hulp nodig kunnen hebben, en de hulpverlenerscode aan wie antwoordt.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Voer de code in die je kreeg, of scan hem. Een ledencode verstuurt een SOS; een hulpverlenerscode ontvangt ook die van anderen.';
+
+  @override
+  String get wizard_networkOpen => 'Noodnetwerk openen';
+
+  @override
+  String get wizard_networkNone => 'Nog niet ingesteld';
+
+  @override
+  String get wizard_locationTitle => 'Je noodlocatie';
+
+  @override
+  String get wizard_locationBody =>
+      'Wordt met je SOS meegestuurd als er geen GPS is: je voordeur, bijvoorbeeld. Je kunt het voorlopig leeg laten.';
+
+  @override
+  String get wizard_radioTitle => 'Verbind je radio';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Verbind nu met je MeshCore-radio via Bluetooth, USB of WiFi. Voeg daarna je noodcontacten toe in $path, en oefen een keer met je groep, nadat je ze gewaarschuwd hebt.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Luidspreker voor spraak';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Luidspreker voor alarmen en meldingen';
+
+  @override
+  String ptt_clipNotification(String seconds) {
+    return '🎙 Spraakclip, $seconds s';
+  }
+
+  @override
+  String ptt_meshBusy(int seconds) {
+    return 'Het mesh vervoert tekstberichten, die voorgaan. Spraak over $seconds s.';
+  }
+
+  @override
+  String ptt_talkLimit(String time) {
+    return 'Je gesprek had 3 minuten spraak, dus je pauzeert 5 minuten met spraak en anderen krijgen de zendtijd. Tekst werkt nog. Weer spraak over $time.';
+  }
 }

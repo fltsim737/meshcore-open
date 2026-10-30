@@ -12174,6 +12174,354 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Telling the other responders, then retuning…'**
   String get sos_retuning;
+
+  /// No description provided for @sos_radioLink.
+  ///
+  /// In en, this message translates to:
+  /// **'SOS radio connection'**
+  String get sos_radioLink;
+
+  /// No description provided for @sos_radioLinkNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Now: {how}'**
+  String sos_radioLinkNow(String how);
+
+  /// No description provided for @sos_radioLinkHotspot.
+  ///
+  /// In en, this message translates to:
+  /// **'Its own hotspot'**
+  String get sos_radioLinkHotspot;
+
+  /// No description provided for @sos_radioLinkHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home WiFi'**
+  String get sos_radioLinkHome;
+
+  /// No description provided for @sos_radioLinkBluetooth.
+  ///
+  /// In en, this message translates to:
+  /// **'Bluetooth'**
+  String get sos_radioLinkBluetooth;
+
+  /// No description provided for @sos_radioLinkUsb.
+  ///
+  /// In en, this message translates to:
+  /// **'USB cable'**
+  String get sos_radioLinkUsb;
+
+  /// No description provided for @sos_radioLinkHomeNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up a home WiFi network on the radio\'s web page first'**
+  String get sos_radioLinkHomeNotSet;
+
+  /// No description provided for @sos_radioLinkIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio connects one way at a time. Changing it restarts the radio, and this app disconnects from it.'**
+  String get sos_radioLinkIntro;
+
+  /// No description provided for @sos_radioLinkConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Change to {how}?'**
+  String sos_radioLinkConfirm(String how);
+
+  /// No description provided for @sos_radioLinkAfterHotspot.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio restarts. Then join its WiFi hotspot (the name and password are on its App link page: press PRG) and connect by TCP/IP to 4.3.2.1, port 5000.'**
+  String get sos_radioLinkAfterHotspot;
+
+  /// No description provided for @sos_radioLinkAfterHome.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio restarts and joins your WiFi. Connect this device to the same WiFi, then connect by TCP/IP to meshcore-sos.local (or the address on the radio\'s App link page), port 5000. If it can\'t join within 2 minutes, it goes back to its hotspot.'**
+  String get sos_radioLinkAfterHome;
+
+  /// No description provided for @sos_radioLinkAfterBluetooth.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio restarts with Bluetooth on and WiFi off. Then scan for it by Bluetooth; the pairing PIN is on its screen.'**
+  String get sos_radioLinkAfterBluetooth;
+
+  /// No description provided for @sos_radioLinkAfterUsb.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio restarts with Bluetooth and WiFi off. Then connect it to this device with a USB cable and connect by USB.'**
+  String get sos_radioLinkAfterUsb;
+
+  /// No description provided for @sos_radioLinkChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get sos_radioLinkChange;
+
+  /// No description provided for @sos_radioLinkChanging.
+  ///
+  /// In en, this message translates to:
+  /// **'The radio is restarting to change how it connects.'**
+  String get sos_radioLinkChanging;
+
+  /// No description provided for @sos_soundMicrophone.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone'**
+  String get sos_soundMicrophone;
+
+  /// No description provided for @sos_soundDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get sos_soundDefault;
+
+  /// No description provided for @sos_soundThisAppOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Only this app\'s sound uses it. The computer\'s own default, and every other program, stay as they are.'**
+  String get sos_soundThisAppOnly;
+
+  /// No description provided for @sos_soundNotConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected: the system default is used until it\'s back'**
+  String get sos_soundNotConnected;
+
+  /// No description provided for @sos_soundNoDevices.
+  ///
+  /// In en, this message translates to:
+  /// **'No other devices found'**
+  String get sos_soundNoDevices;
+
+  /// No description provided for @ptt_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Push to talk'**
+  String get ptt_title;
+
+  /// No description provided for @ptt_channelHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone on the mesh with SOS Voice hears this channel. Clips up to 10 s. Every clip uses airtime the whole mesh shares: keep them short.'**
+  String get ptt_channelHelp;
+
+  /// No description provided for @ptt_directHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Clips up to 10 s, sent straight to {name}. Only SOS Voice can play them.'**
+  String ptt_directHelp(String name);
+
+  /// No description provided for @ptt_sosLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: an SOS is live, and it comes first.'**
+  String get ptt_sosLive;
+
+  /// No description provided for @ptt_noChannel.
+  ///
+  /// In en, this message translates to:
+  /// **'The Voice channel isn\'t on this radio. Add it under Channels as a hashtag channel named #voice.'**
+  String get ptt_noChannel;
+
+  /// No description provided for @ptt_busy.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone is talking…'**
+  String get ptt_busy;
+
+  /// No description provided for @wizard_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup'**
+  String get wizard_title;
+
+  /// No description provided for @wizard_rerun.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup wizard'**
+  String get wizard_rerun;
+
+  /// No description provided for @wizard_rerunSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Go through the first-time setup again'**
+  String get wizard_rerunSubtitle;
+
+  /// No description provided for @wizard_skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get wizard_skip;
+
+  /// No description provided for @wizard_step.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {n} of {total}'**
+  String wizard_step(int n, int total);
+
+  /// No description provided for @wizard_next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get wizard_next;
+
+  /// No description provided for @wizard_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get wizard_back;
+
+  /// No description provided for @wizard_finish.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect a radio'**
+  String get wizard_finish;
+
+  /// No description provided for @wizard_welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to {app}'**
+  String wizard_welcomeTitle(String app);
+
+  /// No description provided for @wizard_welcomeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This app calls for help, and answers calls for help, over a MeshCore radio network, with no mobile coverage or internet. A few steps set it up; everything can be changed later in the settings.'**
+  String get wizard_welcomeBody;
+
+  /// No description provided for @wizard_bestEffort.
+  ///
+  /// In en, this message translates to:
+  /// **'An SOS is best effort: a radio network can\'t guarantee that any message arrives. Keep every other way of calling for help.'**
+  String get wizard_bestEffort;
+
+  /// No description provided for @wizard_roleQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'How are you starting?'**
+  String get wizard_roleQuestion;
+
+  /// No description provided for @wizard_roleCoordinator.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m setting up a group'**
+  String get wizard_roleCoordinator;
+
+  /// No description provided for @wizard_roleCoordinatorDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Create the emergency network and hand out its codes'**
+  String get wizard_roleCoordinatorDetail;
+
+  /// No description provided for @wizard_roleJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ve been given a code'**
+  String get wizard_roleJoin;
+
+  /// No description provided for @wizard_roleJoinDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Join a group\'s emergency network'**
+  String get wizard_roleJoinDetail;
+
+  /// No description provided for @wizard_alertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts on this device'**
+  String get wizard_alertsTitle;
+
+  /// No description provided for @wizard_alertsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'So an SOS reaches you even when the app is closed or the device is locked, through the speaker you choose.'**
+  String get wizard_alertsBody;
+
+  /// No description provided for @wizard_networkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency network'**
+  String get wizard_networkTitle;
+
+  /// No description provided for @wizard_networkBodyCoordinator.
+  ///
+  /// In en, this message translates to:
+  /// **'Create the network. Then give its member code to people who may need help, and its responder code to people who answer.'**
+  String get wizard_networkBodyCoordinator;
+
+  /// No description provided for @wizard_networkBodyJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter or scan the code you were given. A member code sends an SOS; a responder code also receives other people\'s.'**
+  String get wizard_networkBodyJoin;
+
+  /// No description provided for @wizard_networkOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open emergency network'**
+  String get wizard_networkOpen;
+
+  /// No description provided for @wizard_networkNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set up yet'**
+  String get wizard_networkNone;
+
+  /// No description provided for @wizard_locationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your emergency location'**
+  String get wizard_locationTitle;
+
+  /// No description provided for @wizard_locationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent with your SOS when there\'s no GPS fix: your front door, for example. You can leave it for now.'**
+  String get wizard_locationBody;
+
+  /// No description provided for @wizard_radioTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your radio'**
+  String get wizard_radioTitle;
+
+  /// No description provided for @wizard_radioBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Next, connect to your MeshCore radio by Bluetooth, USB or WiFi. Once connected, add your emergency contacts in {path}, and practise once with your group, after warning them.'**
+  String wizard_radioBody(String path);
+
+  /// No description provided for @sos_soundVoiceSpeaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Speaker for voice'**
+  String get sos_soundVoiceSpeaker;
+
+  /// No description provided for @sos_soundAlertSpeaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Speaker for alerts and notifications'**
+  String get sos_soundAlertSpeaker;
+
+  /// No description provided for @ptt_clipNotification.
+  ///
+  /// In en, this message translates to:
+  /// **'🎙 Voice clip, {seconds} s'**
+  String ptt_clipNotification(String seconds);
+
+  /// No description provided for @ptt_meshBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'The mesh is carrying text messages, which come first. Voice in {seconds} s.'**
+  String ptt_meshBusy(int seconds);
+
+  /// No description provided for @ptt_talkLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Your conversation has had 3 minutes of voice, so you rest from voice for 5 minutes and others get the airtime. Text still works. Voice again in {time}.'**
+  String ptt_talkLimit(String time);
 }
 
 class _AppLocalizationsDelegate

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/helpers/sos_codec.dart';
 import 'package:meshcore_open/helpers/sos_network_code.dart';
@@ -40,16 +41,76 @@ class FakeVoiceTransport implements SosVoiceTransport {
   @override
   Duration chunkGap(int bytes) => Duration.zero;
 
+  /// Called before each chunk goes, to let a test act mid-clip.
+  void Function(int index)? beforeChunk;
+
+  /// Chunks actually sent of the last clip, when it was stopped part way.
+  int? stoppedAfter;
+
   @override
   Future<bool> sendChunks(
     int channelIndex,
     List<Uint8List> blobs, {
     required Duration gap,
     void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
   }) async {
     sent.add((channelIndex, blobs));
     for (var i = 0; i < blobs.length; i++) {
+      beforeChunk?.call(i);
+      if (stop?.call() ?? false) {
+        stoppedAfter = i;
+        return false;
+      }
       onProgress?.call(i + 1, blobs.length);
+    }
+    return true;
+  }
+
+  @override
+  bool isConnected = true;
+  @override
+  List<Channel> channels = [];
+  @override
+  int maxChannels = 8;
+  @override
+  bool channelsReady = true;
+  VoidCallback? change;
+  void Function(String, String)? direct;
+
+  @override
+  List<DateTime> recentTextTraffic = [];
+
+  /// (contact, texts) for every direct clip sent.
+  final List<(Contact, List<String>)> sentDirect = [];
+
+  @override
+  Future<void> setChannel(int index, String name, Uint8List psk) async {
+    channels = [...channels, Channel(index: index, name: name, psk: psk)];
+    change?.call();
+  }
+
+  @override
+  set changeListener(VoidCallback? listener) => change = listener;
+  @override
+  set directListener(void Function(String, String)? value) => direct = value;
+
+  @override
+  Future<bool> sendDirect(
+    Contact contact,
+    List<String> texts, {
+    required Duration gap,
+    void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
+  }) async {
+    sentDirect.add((contact, texts));
+    for (var i = 0; i < texts.length; i++) {
+      beforeChunk?.call(i);
+      if (stop?.call() ?? false) {
+        stoppedAfter = i;
+        return false;
+      }
+      onProgress?.call(i + 1, texts.length);
     }
     return true;
   }

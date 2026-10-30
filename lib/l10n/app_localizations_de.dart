@@ -7308,4 +7308,216 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_retuning =>
       'Die anderen Helfer werden informiert, dann wird umgestimmt…';
+
+  @override
+  String get sos_radioLink => 'Verbindung des SOS-Funkgeräts';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Jetzt: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Eigener Hotspot';
+
+  @override
+  String get sos_radioLinkHome => 'WLAN zu Hause';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB-Kabel';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Richte zuerst auf der Webseite des Funkgeräts ein WLAN zu Hause ein';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'Das Funkgerät verbindet sich immer nur auf eine Art. Eine Änderung startet es neu, und diese App wird getrennt.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Zu $how wechseln?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'Das Funkgerät startet neu. Verbinde dich dann mit seinem WLAN-Hotspot (Name und Passwort stehen auf der Seite „App link“: PRG drücken) und verbinde per TCP/IP mit 4.3.2.1, Port 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'Das Funkgerät startet neu und verbindet sich mit deinem WLAN. Verbinde dieses Gerät mit demselben WLAN und dann per TCP/IP mit meshcore-sos.local (oder der Adresse auf der Seite „App link“ des Funkgeräts), Port 5000. Gelingt die Verbindung nicht innerhalb von 2 Minuten, schaltet es zurück auf seinen Hotspot.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'Das Funkgerät startet mit Bluetooth an und WLAN aus neu. Suche es dann per Bluetooth; die Kopplungs-PIN steht auf seinem Display.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'Das Funkgerät startet mit Bluetooth und WLAN aus neu. Verbinde es dann mit einem USB-Kabel mit diesem Gerät und verbinde per USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Wechseln';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'Das Funkgerät startet neu, um die Verbindung zu ändern.';
+
+  @override
+  String get sos_soundMicrophone => 'Mikrofon';
+
+  @override
+  String get sos_soundDefault => 'Systemstandard';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Nur der Ton dieser App nutzt ihn. Der Standard des Computers und alle anderen Programme bleiben unverändert.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Nicht verbunden: Bis es zurück ist, wird der Systemstandard verwendet';
+
+  @override
+  String get sos_soundNoDevices => 'Keine weiteren Geräte gefunden';
+
+  @override
+  String get ptt_title => 'Push-to-Talk';
+
+  @override
+  String get ptt_channelHelp =>
+      'Alle im Mesh mit SOS Voice hören diesen Kanal. Clips bis 10 s. Jeder Clip belegt Sendezeit, die sich das ganze Mesh teilt: fasse dich kurz.';
+
+  @override
+  String ptt_directHelp(String name) {
+    return 'Clips bis 10 s, direkt an $name. Nur SOS Voice kann sie abspielen.';
+  }
+
+  @override
+  String get ptt_sosLive => 'Pausiert: Ein SOS läuft und hat Vorrang.';
+
+  @override
+  String get ptt_noChannel =>
+      'Der Sprachkanal #voice ist nicht auf diesem Funkgerät. Füge ihn unter Kanäle hinzu (ein Hashtag-Kanal namens #voice).';
+
+  @override
+  String get ptt_busy => 'Jemand spricht…';
+
+  @override
+  String get wizard_title => 'Einrichtung';
+
+  @override
+  String get wizard_rerun => 'Einrichtungsassistent';
+
+  @override
+  String get wizard_rerunSubtitle =>
+      'Die Ersteinrichtung noch einmal durchgehen';
+
+  @override
+  String get wizard_skip => 'Überspringen';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Schritt $n von $total';
+  }
+
+  @override
+  String get wizard_next => 'Weiter';
+
+  @override
+  String get wizard_back => 'Zurück';
+
+  @override
+  String get wizard_finish => 'Funkgerät verbinden';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Willkommen bei $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Diese App ruft über ein MeshCore-Funknetz um Hilfe und beantwortet Hilferufe, ohne Mobilfunk oder Internet. Ein paar Schritte richten sie ein; alles lässt sich später in den Einstellungen ändern.';
+
+  @override
+  String get wizard_bestEffort =>
+      'Ein SOS geschieht nach bestem Bemühen: Ein Funknetz kann nicht garantieren, dass eine Nachricht ankommt. Behalte alle anderen Wege, Hilfe zu rufen.';
+
+  @override
+  String get wizard_roleQuestion => 'Wie fängst du an?';
+
+  @override
+  String get wizard_roleCoordinator => 'Ich richte eine Gruppe ein';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Das Notfallnetz erstellen und seine Codes verteilen';
+
+  @override
+  String get wizard_roleJoin => 'Ich habe einen Code bekommen';
+
+  @override
+  String get wizard_roleJoinDetail => 'Dem Notfallnetz einer Gruppe beitreten';
+
+  @override
+  String get wizard_alertsTitle => 'Alarme auf diesem Gerät';
+
+  @override
+  String get wizard_alertsBody =>
+      'Damit dich ein SOS erreicht, auch wenn die App geschlossen oder das Gerät gesperrt ist, über den Lautsprecher deiner Wahl.';
+
+  @override
+  String get wizard_networkTitle => 'Notfallnetz';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Erstelle das Netz. Gib dann seinen Mitgliedscode an Menschen, die Hilfe brauchen könnten, und seinen Helfercode an die, die antworten.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Gib den erhaltenen Code ein oder scanne ihn. Ein Mitgliedscode sendet ein SOS; ein Helfercode empfängt auch die anderer.';
+
+  @override
+  String get wizard_networkOpen => 'Notfallnetz öffnen';
+
+  @override
+  String get wizard_networkNone => 'Noch nicht eingerichtet';
+
+  @override
+  String get wizard_locationTitle => 'Dein Notfallstandort';
+
+  @override
+  String get wizard_locationBody =>
+      'Wird mit deinem SOS gesendet, wenn es kein GPS gibt: zum Beispiel deine Haustür. Du kannst ihn vorerst leer lassen.';
+
+  @override
+  String get wizard_radioTitle => 'Funkgerät verbinden';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Verbinde dich als Nächstes per Bluetooth, USB oder WLAN mit deinem MeshCore-Funkgerät. Füge danach unter $path deine Notfallkontakte hinzu und übe einmal mit deiner Gruppe, nachdem du sie gewarnt hast.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Lautsprecher für Sprache';
+
+  @override
+  String get sos_soundAlertSpeaker =>
+      'Lautsprecher für Alarme und Benachrichtigungen';
+
+  @override
+  String ptt_clipNotification(String seconds) {
+    return '🎙 Sprachclip, $seconds s';
+  }
+
+  @override
+  String ptt_meshBusy(int seconds) {
+    return 'Das Mesh überträgt gerade Textnachrichten, die Vorrang haben. Sprache in $seconds s.';
+  }
+
+  @override
+  String ptt_talkLimit(String time) {
+    return 'Dein Gespräch hatte 3 Minuten Sprache, daher pausierst du 5 Minuten mit Sprache und andere bekommen die Sendezeit. Text funktioniert weiter. Sprache wieder in $time.';
+  }
 }

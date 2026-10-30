@@ -7234,4 +7234,215 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get sos_retuning =>
       'Meddelar de andra hjälparna och ställer sedan om…';
+
+  @override
+  String get sos_radioLink => 'SOS-radions anslutning';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Nu: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Egen surfzon';
+
+  @override
+  String get sos_radioLinkHome => 'WiFi hemma';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB-kabel';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Ställ först in ett WiFi-nätverk hemma på radions webbsida';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'Radion ansluter på ett sätt i taget. En ändring startar om radion, och den här appen kopplas från.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Byta till $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'Radion startar om. Anslut sedan till dess WiFi-surfzon (namn och lösenord finns på sidan App link: tryck på PRG) och anslut via TCP/IP till 4.3.2.1, port 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'Radion startar om och ansluter till ditt WiFi. Anslut den här enheten till samma WiFi och anslut sedan via TCP/IP till meshcore-sos.local (eller adressen på radions sida App link), port 5000. Om den inte kan ansluta inom 2 minuter går den tillbaka till sin surfzon.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'Radion startar om med Bluetooth på och WiFi av. Sök sedan efter den via Bluetooth; parkopplingskoden visas på dess skärm.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'Radion startar om med Bluetooth och WiFi av. Anslut den sedan till den här enheten med en USB-kabel och anslut via USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Byt';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'Radion startar om för att ändra hur den ansluter.';
+
+  @override
+  String get sos_soundMicrophone => 'Mikrofon';
+
+  @override
+  String get sos_soundDefault => 'Systemets standard';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Bara den här appens ljud använder den. Datorns standard och alla andra program förblir som de är.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Inte ansluten: systemets standard används tills den är tillbaka';
+
+  @override
+  String get sos_soundNoDevices => 'Inga andra enheter hittades';
+
+  @override
+  String get ptt_title => 'Tryck för att prata';
+
+  @override
+  String get ptt_channelHelp =>
+      'Alla i meshen med SOS Voice hör den här kanalen. Klipp upp till 10 s. Varje klipp tar sändningstid som hela meshen delar: fatta dig kort.';
+
+  @override
+  String ptt_directHelp(String name) {
+    return 'Klipp upp till 10 s, skickade direkt till $name. Bara SOS Voice kan spela upp dem.';
+  }
+
+  @override
+  String get ptt_sosLive => 'Pausad: ett SOS pågår, och det går först.';
+
+  @override
+  String get ptt_noChannel =>
+      'Röstkanalen #voice finns inte på den här radion. Lägg till den under Kanaler (en hashtagkanal som heter #voice).';
+
+  @override
+  String get ptt_busy => 'Någon pratar…';
+
+  @override
+  String get wizard_title => 'Konfiguration';
+
+  @override
+  String get wizard_rerun => 'Konfigurationsguide';
+
+  @override
+  String get wizard_rerunSubtitle =>
+      'Gå igenom den första konfigurationen igen';
+
+  @override
+  String get wizard_skip => 'Hoppa över';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Steg $n av $total';
+  }
+
+  @override
+  String get wizard_next => 'Nästa';
+
+  @override
+  String get wizard_back => 'Tillbaka';
+
+  @override
+  String get wizard_finish => 'Anslut en radio';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Välkommen till $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Den här appen kallar på hjälp, och svarar på hjälprop, över ett MeshCore-radionät, utan mobiltäckning eller internet. Några steg ställer in den; allt kan ändras senare i inställningarna.';
+
+  @override
+  String get wizard_bestEffort =>
+      'Ett SOS skickas efter bästa förmåga: ett radionät kan inte garantera att ett meddelande kommer fram. Behåll alla andra sätt att kalla på hjälp.';
+
+  @override
+  String get wizard_roleQuestion => 'Hur börjar du?';
+
+  @override
+  String get wizard_roleCoordinator => 'Jag startar en grupp';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Skapa nödnätet och dela ut dess koder';
+
+  @override
+  String get wizard_roleJoin => 'Jag har fått en kod';
+
+  @override
+  String get wizard_roleJoinDetail => 'Gå med i en grupps nödnät';
+
+  @override
+  String get wizard_alertsTitle => 'Larm på den här enheten';
+
+  @override
+  String get wizard_alertsBody =>
+      'Så att ett SOS når dig även när appen är stängd eller enheten låst, genom den högtalare du väljer.';
+
+  @override
+  String get wizard_networkTitle => 'Nödnät';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Skapa nätet. Ge sedan medlemskoden till dem som kan behöva hjälp, och hjälparkoden till dem som svarar.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Ange eller skanna koden du fick. En medlemskod skickar ett SOS; en hjälparkod tar också emot andras.';
+
+  @override
+  String get wizard_networkOpen => 'Öppna nödnätet';
+
+  @override
+  String get wizard_networkNone => 'Inte inställt än';
+
+  @override
+  String get wizard_locationTitle => 'Din nödplats';
+
+  @override
+  String get wizard_locationBody =>
+      'Skickas med ditt SOS när GPS saknas: din ytterdörr, till exempel. Du kan vänta med den.';
+
+  @override
+  String get wizard_radioTitle => 'Anslut din radio';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Anslut nu till din MeshCore-radio via Bluetooth, USB eller WiFi. När den är ansluten, lägg till dina nödkontakter under $path, och öva en gång med din grupp, efter att ha varnat dem.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Högtalare för röst';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Högtalare för larm och aviseringar';
+
+  @override
+  String ptt_clipNotification(String seconds) {
+    return '🎙 Röstklipp, $seconds s';
+  }
+
+  @override
+  String ptt_meshBusy(int seconds) {
+    return 'Meshen bär textmeddelanden, som går först. Röst om $seconds s.';
+  }
+
+  @override
+  String ptt_talkLimit(String time) {
+    return 'Ditt samtal har haft 3 minuter röst, så du vilar från röst i 5 minuter och andra får sändningstiden. Text fungerar fortfarande. Röst igen om $time.';
+  }
 }

@@ -235,17 +235,31 @@ class UsbSerialService {
           serial.setBitParityNone();
           serial.setStopBits1();
           serial.setFlowControlNone();
-          serial.setRTS(false);
-          // Toggle DTR low→high so the device sees a fresh connection even
-          // if the previous disconnect didn't cleanly signal DTR drop.
-          serial.setDTR(false);
-          await Future<void>.delayed(const Duration(milliseconds: 50));
-          serial.setDTR(true);
+          final uartBridge = isUartBridgePort(candidate, FlSerial.listPorts());
+          if (uartBridge) {
+            // A USB-to-UART bridge (CP210x, CH340, FTDI, PL2303) drives the
+            // ESP32's reset (RTS) and boot (DTR) pins, and on boards like the
+            // Heltec V3 the boot pin is also the PRG button: DTR on holds PRG
+            // down, and each DTR toggle is a press, which stepped the radio's
+            // pages and held PRG on whatever page it reached (changing its app
+            // link, even sending an SOS). Both lines off, together: a reset
+            // made by opening the port then starts the firmware normally.
+            serial.setDTR(false);
+            serial.setRTS(false);
+          } else {
+            serial.setRTS(false);
+            // Toggle DTR low→high so the device sees a fresh connection even
+            // if the previous disconnect didn't cleanly signal DTR drop.
+            serial.setDTR(false);
+            await Future<void>.delayed(const Duration(milliseconds: 50));
+            serial.setDTR(true);
+          }
           _serial = serial;
           // Update the normalized port name to whichever candidate succeeded.
           normalizedPortName = candidate;
           _debugLogService?.info(
-            'USB serial opened port=$candidate cts=${serial.getCTS()} dsr=${serial.getDSR()} dtr=true rts=false',
+            'USB serial opened port=$candidate cts=${serial.getCTS()} dsr=${serial.getDSR()} '
+            '${uartBridge ? 'uart bridge: dtr=false rts=false' : 'dtr=true rts=false'}',
             tag: 'USB Serial',
           );
           opened = true;
@@ -690,3 +704,27 @@ class UsbSerialService {
 }
 
 enum UsbSerialStatus { disconnected, connecting, connected, disconnecting }
+
+/// USB-to-UART bridge chips, by USB vendor ID: their DTR and RTS lines drive a
+/// microcontroller's boot and reset pins (see the web backend's list).
+const Set<int> uartBridgeVendorIds = <int>{
+  0x10C4, // Silicon Labs CP210x
+  0x1A86, // QinHeng CH340 / CH9102
+  0x0403, // FTDI
+  0x067B, // Prolific PL2303
+};
+
+/// Whether [port] is a USB-to-UART bridge, from flserial's port list
+/// ("port - description - hardware id"; the hardware id holds the USB vendor
+/// ID as "VID:PID=10C4:EA60" on Linux and macOS, "VID_10C4&PID_EA60" on Windows).
+@visibleForTesting
+bool isUartBridgePort(String port, List<String> listed) {
+  for (final entry in listed) {
+    final parts = entry.split(' - ');
+    if (parts.isEmpty || parts.first.trim() != port) continue;
+    final match = RegExp(r'VID[_:](?:PID=)?([0-9A-Fa-f]{4})').firstMatch(entry);
+    if (match == null) return false;
+    return uartBridgeVendorIds.contains(int.parse(match.group(1)!, radix: 16));
+  }
+  return false;
+}

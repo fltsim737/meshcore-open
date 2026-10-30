@@ -1,8 +1,11 @@
 # Builds MeshCore Open for Windows and packages it as an installer,
-# build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe.
+# build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe, and as a portable zip that runs
+# without installing, build\windows\installer\MeshCore-Open-SOS-Voice-<version>-Windows-portable.zip.
 #
-# Needs Flutter, Visual Studio 2022 with "Desktop development with C++",
-# Inno Setup 6 and Windows Developer Mode. From the project folder:
+# Needs Flutter, Visual Studio 2022 with "Desktop development with C++"
+# and Windows Developer Mode; Inno Setup 6 for the installer (without it,
+# only the portable zip is made). Double-click build-windows.bat in the
+# project folder, or from the project folder:
 #
 #   powershell -ExecutionPolicy Bypass -File windows\installer\build-windows.ps1
 
@@ -41,7 +44,9 @@ if (-not $iscc) {
     if (Test-Path $candidate) { $iscc = $candidate; break }
   }
 }
-if (-not $iscc) { Fail 'Inno Setup 6 was not found.' }
+if (-not $iscc) {
+  Write-Host 'Inno Setup 6 was not found: making the portable zip only.' -ForegroundColor Yellow
+}
 
 # pubspec.yaml "version: 9.5.0+19" -> 9.5.0
 $version = (Select-String -Path pubspec.yaml -Pattern '^version:\s*([0-9.]+)').Matches[0].Groups[1].Value
@@ -63,9 +68,20 @@ $crt = Get-ChildItem "$vs\VC\Redist\MSVC\*\x64\Microsoft.VC14*.CRT" -Directory -
 if (-not $crt) { Fail 'The Visual C++ runtime files were not found in Visual Studio.' }
 Copy-Item "$($crt.FullName)\*.dll" $release -Force
 
-Step 'Packaging the installer'
-& $iscc "/DAppVersion=$version" 'windows\installer\meshcore-open.iss'
-if ($LASTEXITCODE) { Fail 'Inno Setup failed (see above).' }
+Step 'Packaging the portable zip'
+# The app folder as it is: unzip anywhere and run meshcore_open_sos_voice.exe, no install.
+$outDir = 'build\windows\installer'
+New-Item -ItemType Directory -Force $outDir | Out-Null
+$portable = "$outDir\MeshCore-Open-SOS-Voice-$version-Windows-portable.zip"
+if (Test-Path $portable) { Remove-Item $portable }
+Compress-Archive -Path "$release\*" -DestinationPath $portable
+Write-Host "Portable: $(Resolve-Path $portable)" -ForegroundColor Green
 
-$setup = Resolve-Path 'build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe'
-Write-Host "`nDone: $setup" -ForegroundColor Green
+if ($iscc) {
+  Step 'Packaging the installer'
+  & $iscc "/DAppVersion=$version" 'windows\installer\meshcore-open.iss'
+  if ($LASTEXITCODE) { Fail 'Inno Setup failed (see above).' }
+  $setup = Resolve-Path 'build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe'
+  Write-Host "Installer: $setup" -ForegroundColor Green
+}
+Write-Host "`nDone." -ForegroundColor Green

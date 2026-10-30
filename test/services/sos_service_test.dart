@@ -729,6 +729,75 @@ void main() {
       await service.cancel(); // stops the beacons with the SOS
     });
 
+    test(
+      'beacons go on while anyone searches, and stop with the last',
+      () async {
+        await service.activate();
+        final id = service.active!.id;
+        hear(sosPacketFrom('Pat', 5, id, kind: SosPacketKind.locate));
+        hear(sosPacketFrom('Kim', 6, id, kind: SosPacketKind.locate));
+        hear(
+          sosPacketFrom('Kim', 6, id, kind: SosPacketKind.locate),
+        ); // counted once
+        await settle();
+        expect(service.beaconing, isTrue);
+        expect(service.searching, 2);
+        hear(sosPacketFrom('Pat', 5, id, kind: SosPacketKind.stopLocate));
+        await settle();
+        expect(service.beaconing, isTrue); // Kim is still searching
+        expect(service.searching, 1);
+        hear(sosPacketFrom('Kim', 6, id, kind: SosPacketKind.stopLocate));
+        await settle();
+        expect(service.beaconing, isFalse); // the last one: beacons off
+        hear(
+          sosPacketFrom('Kim', 6, id, kind: SosPacketKind.stopLocate),
+        ); // a repeat
+        await settle();
+        expect(service.beaconing, isFalse);
+        await service.cancel();
+      },
+    );
+
+    test('a searcher quiet for 2.5 minutes counts as stopped', () async {
+      expect(SosService.searcherTimeout, const Duration(seconds: 150));
+      expect(SosService.locateRepeat, const Duration(minutes: 1));
+      await service.activate();
+      final id = service.active!.id;
+      hear(sosPacketFrom('Pat', 5, id, kind: SosPacketKind.locate));
+      await settle();
+      now = now.add(
+        const Duration(seconds: 149),
+      ); // one request lost: still searching
+      expect(service.searching, 1);
+      now = now.add(const Duration(seconds: 1));
+      expect(service.searching, 0);
+      await service.cancel();
+    });
+
+    test('leaving Locate tells the SOS sender, twice', () async {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', lat: -41, lon: 174));
+      service.startLocating(service.incoming.single);
+      await settle();
+      transport.channelPackets.clear();
+      service.stopLocating();
+      await settle();
+      expect(
+        transport.channelPackets.where(
+          (p) => p.$2.kind == SosPacketKind.stopLocate,
+        ),
+        hasLength(1),
+      );
+      await Future<void>.delayed(
+        SosService.stopResends.last + const Duration(milliseconds: 100),
+      );
+      await settle();
+      final stops = transport.channelPackets
+          .where((p) => p.$2.kind == SosPacketKind.stopLocate)
+          .toList();
+      expect(stops, hasLength(2));
+      expect(stops.first.$2.id, 'a1b2');
+    }, timeout: const Timeout(Duration(seconds: 20)));
+
     test('a member still answers a locate request for its own SOS', () async {
       await service.joinNetwork(farmNetwork(SosNetworkRole.member));
       await service.activate();

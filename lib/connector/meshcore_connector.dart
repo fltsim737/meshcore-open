@@ -401,6 +401,29 @@ class MeshCoreConnector extends ChangeNotifier {
   DateTime? _lastRxAt;
   void Function(int ackHash)? sosAckListener;
   void Function(int channelIndex, Uint8List payload)? sosVoiceListener;
+
+  /// Push-to-talk chunks in direct messages (SOS Voice 10.0.0), taken out of
+  /// the conversation before it sees them.
+  void Function(String senderKeyHex, String text)? pttDirectListener;
+
+  /// When text messages (direct or channel, in or out) were heard or sent in
+  /// the last minute: push-to-talk stands aside while the mesh carries text.
+  final List<DateTime> _textTraffic = [];
+  static const Duration _textTrafficWindow = Duration(minutes: 1);
+
+  List<DateTime> get recentTextTraffic {
+    final cutoff = DateTime.now().subtract(_textTrafficWindow);
+    _textTraffic.removeWhere((t) => t.isBefore(cutoff));
+    return List.unmodifiable(_textTraffic);
+  }
+
+  /// A text message just now (not one reloaded from storage).
+  void _noteTextTraffic(DateTime receivedAt) {
+    final now = DateTime.now();
+    if (now.difference(receivedAt).abs() > _textTrafficWindow) return;
+    _textTraffic.add(now);
+  }
+
   void Function(int senderPrefix)? _onImageSenderPrefix;
   // Intentionally global (not per-contact): tracks overall network activity.
   // Frequent RX from any source indicates a busy network with more collisions.
@@ -5073,16 +5096,18 @@ class MeshCoreConnector extends ChangeNotifier {
     List<Uint8List> blobs, {
     required Duration gap,
     void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
   }) async {
     if (blobs.isEmpty || !supportsChannelData) return false;
     var sentAll = true;
     await _runScopedChannelSend(() async {
       for (var i = 0; i < blobs.length; i++) {
-        if (!isConnected) {
+        if (i > 0) await Future<void>.delayed(gap);
+        // disconnected, or told to stop (an SOS needs the air)
+        if (!isConnected || (stop?.call() ?? false)) {
           sentAll = false;
           return;
         }
-        if (i > 0) await Future<void>.delayed(gap);
         await _waitForRadioQuiet(lastInboundRxTime: _lastChannelMsgRxTime);
         await _sendFrameAndWaitForCommandAck(
           buildSendChannelDataFrame(
@@ -5095,6 +5120,33 @@ class MeshCoreConnector extends ChangeNotifier {
       }
     }, region: _channelSendScope(channelIndex));
     return sentAll;
+  }
+
+  /// Sends a push-to-talk clip's chunks to [contact] as direct messages of the
+  /// CLI data type (no acknowledgement, kept out of every chat), paced by
+  /// [gap]. They go along the contact's route, or by flood if it has none.
+  /// Returns false if the radio disconnected before every chunk went out.
+  Future<bool> sendPttDirectTexts(
+    Contact contact,
+    List<String> texts, {
+    required Duration gap,
+    void Function(int sent, int total)? onProgress,
+    bool Function()? stop,
+  }) async {
+    for (var i = 0; i < texts.length; i++) {
+      if (i > 0) await Future<void>.delayed(gap);
+      if (!isConnected || (stop?.call() ?? false)) return false;
+      await _waitForRadioQuiet(lastInboundRxTime: _lastContactMsgRxTime);
+      await sendFrame(
+        buildSendTextMsgFrame(
+          contact.publicKey,
+          texts[i],
+          txtType: txtTypeCliData,
+        ),
+      );
+      onProgress?.call(i + 1, texts.length);
+    }
+    return texts.isNotEmpty;
   }
 
   /// Sends an SOS text straight to the radio, bypassing the retry service so
@@ -7313,6 +7365,16 @@ class MeshCoreConnector extends ChangeNotifier {
         return;
       }
 
+      // A push-to-talk chunk: audio, not a message for the chat.
+      final ptt = pttDirectListener;
+      if (ptt != null &&
+          !message.isOutgoing &&
+          message.isCli &&
+          message.text.startsWith(SosVoicePacket.directPrefix)) {
+        ptt(message.senderKeyHex, message.text);
+        return;
+      }
+
       final contact = _contacts.cast<Contact?>().firstWhere(
         (c) => c?.publicKeyHex == message!.senderKeyHex,
         orElse: () => null,
@@ -8371,6 +8433,7 @@ class MeshCoreConnector extends ChangeNotifier {
   }
 
   void _addMessage(String pubKeyHex, Message message) {
+    if (!message.isCli) _noteTextTraffic(message.receivedAt);
     _conversations.putIfAbsent(pubKeyHex, () => []);
     final messages = _conversations[pubKeyHex]!;
 
@@ -8674,6 +8737,7 @@ class MeshCoreConnector extends ChangeNotifier {
   }
 
   bool _addChannelMessage(int slot, ChannelMessage message) {
+    _noteTextTraffic(message.receivedAt);
     if (_isHiddenSlot(slot)) return false;
     final channelIndex = _canonicalSlot(slot);
     _channelMessages.putIfAbsent(channelIndex, () => []);

@@ -7265,4 +7265,214 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get sos_retuning =>
       'Informujem ostatných záchranárov, potom prelaďujem…';
+
+  @override
+  String get sos_radioLink => 'Pripojenie SOS rádia';
+
+  @override
+  String sos_radioLinkNow(String how) {
+    return 'Teraz: $how';
+  }
+
+  @override
+  String get sos_radioLinkHotspot => 'Vlastný hotspot';
+
+  @override
+  String get sos_radioLinkHome => 'Domáca WiFi';
+
+  @override
+  String get sos_radioLinkBluetooth => 'Bluetooth';
+
+  @override
+  String get sos_radioLinkUsb => 'USB kábel';
+
+  @override
+  String get sos_radioLinkHomeNotSet =>
+      'Najprv nastavte domácu sieť WiFi na webovej stránke rádia';
+
+  @override
+  String get sos_radioLinkIntro =>
+      'Rádio sa pripája vždy len jedným spôsobom. Zmena rádio reštartuje a táto aplikácia sa od neho odpojí.';
+
+  @override
+  String sos_radioLinkConfirm(String how) {
+    return 'Zmeniť na $how?';
+  }
+
+  @override
+  String get sos_radioLinkAfterHotspot =>
+      'Rádio sa reštartuje. Potom sa pripojte k jeho WiFi hotspotu (názov a heslo sú na stránke App link: stlačte PRG) a pripojte sa cez TCP/IP k 4.3.2.1, port 5000.';
+
+  @override
+  String get sos_radioLinkAfterHome =>
+      'Rádio sa reštartuje a pripojí sa k vašej WiFi. Pripojte toto zariadenie k tej istej WiFi a potom sa pripojte cez TCP/IP k meshcore-sos.local (alebo k adrese na stránke App link rádia), port 5000. Ak sa nepripojí do 2 minút, vráti sa k svojmu hotspotu.';
+
+  @override
+  String get sos_radioLinkAfterBluetooth =>
+      'Rádio sa reštartuje so zapnutým Bluetooth a vypnutou WiFi. Potom ho vyhľadajte cez Bluetooth; párovací PIN je na jeho displeji.';
+
+  @override
+  String get sos_radioLinkAfterUsb =>
+      'Rádio sa reštartuje s vypnutým Bluetooth aj WiFi. Potom ho pripojte k tomuto zariadeniu USB káblom a pripojte sa cez USB.';
+
+  @override
+  String get sos_radioLinkChange => 'Zmeniť';
+
+  @override
+  String get sos_radioLinkChanging =>
+      'Rádio sa reštartuje, aby zmenilo spôsob pripojenia.';
+
+  @override
+  String get sos_soundMicrophone => 'Mikrofón';
+
+  @override
+  String get sos_soundDefault => 'Predvolené systémom';
+
+  @override
+  String get sos_soundThisAppOnly =>
+      'Používa ho iba zvuk tejto aplikácie. Predvolené zariadenie počítača a ostatné programy zostávajú bez zmeny.';
+
+  @override
+  String get sos_soundNotConnected =>
+      'Nepripojené: kým sa nevráti, používa sa predvolené systémom';
+
+  @override
+  String get sos_soundNoDevices => 'Nenašli sa žiadne ďalšie zariadenia';
+
+  @override
+  String get ptt_title => 'Stlač a hovor';
+
+  @override
+  String get ptt_channelHelp =>
+      'Tento kanál počujú všetci v sieti so SOS Voice. Klipy do 10 s. Každý klip zaberá vysielací čas, ktorý zdieľa celá sieť: hovorte stručne.';
+
+  @override
+  String ptt_directHelp(String name) {
+    return 'Klipy do 10 s, poslané priamo $name. Prehrať ich vie iba SOS Voice.';
+  }
+
+  @override
+  String get ptt_sosLive => 'Pozastavené: prebieha SOS a má prednosť.';
+
+  @override
+  String get ptt_noChannel =>
+      'Hlasový kanál #voice nie je v tejto rádiostanici. Pridajte ho v Kanáloch (hashtagový kanál s názvom #voice).';
+
+  @override
+  String get ptt_busy => 'Niekto hovorí…';
+
+  @override
+  String get wizard_title => 'Nastavenie';
+
+  @override
+  String get wizard_rerun => 'Sprievodca nastavením';
+
+  @override
+  String get wizard_rerunSubtitle => 'Prejsť prvým nastavením znova';
+
+  @override
+  String get wizard_skip => 'Preskočiť';
+
+  @override
+  String wizard_step(int n, int total) {
+    return 'Krok $n z $total';
+  }
+
+  @override
+  String get wizard_next => 'Ďalej';
+
+  @override
+  String get wizard_back => 'Späť';
+
+  @override
+  String get wizard_finish => 'Pripojiť rádiostanicu';
+
+  @override
+  String wizard_welcomeTitle(String app) {
+    return 'Vitajte v $app';
+  }
+
+  @override
+  String get wizard_welcomeBody =>
+      'Táto aplikácia privoláva pomoc a odpovedá na volania o pomoc cez rádiovú sieť MeshCore, bez mobilného signálu a internetu. Nastavíte ju v pár krokoch; všetko sa dá neskôr zmeniť v nastaveniach.';
+
+  @override
+  String get wizard_bestEffort =>
+      'SOS sa odosiela podľa možností: rádiová sieť nezaručí, že správa dorazí. Ponechajte si všetky ostatné spôsoby privolania pomoci.';
+
+  @override
+  String get wizard_roleQuestion => 'Ako začínate?';
+
+  @override
+  String get wizard_roleCoordinator => 'Zakladám skupinu';
+
+  @override
+  String get wizard_roleCoordinatorDetail =>
+      'Vytvorte núdzovú sieť a rozdajte jej kódy';
+
+  @override
+  String get wizard_roleJoin => 'Dostal som kód';
+
+  @override
+  String get wizard_roleJoinDetail => 'Pripojte sa k núdzovej sieti skupiny';
+
+  @override
+  String get wizard_alertsTitle => 'Upozornenia na tomto zariadení';
+
+  @override
+  String get wizard_alertsBody =>
+      'Aby vás SOS zastihlo, aj keď je aplikácia zatvorená alebo zariadenie zamknuté, cez vybraný reproduktor.';
+
+  @override
+  String get wizard_networkTitle => 'Núdzová sieť';
+
+  @override
+  String get wizard_networkBodyCoordinator =>
+      'Vytvorte sieť. Potom dajte jej kód člena ľuďom, ktorí môžu potrebovať pomoc, a kód záchrancu tým, ktorí odpovedajú.';
+
+  @override
+  String get wizard_networkBodyJoin =>
+      'Zadajte alebo naskenujte kód, ktorý ste dostali. Kód člena posiela SOS; kód záchrancu prijíma aj SOS ostatných.';
+
+  @override
+  String get wizard_networkOpen => 'Otvoriť núdzovú sieť';
+
+  @override
+  String get wizard_networkNone => 'Zatiaľ nenastavená';
+
+  @override
+  String get wizard_locationTitle => 'Vaša núdzová poloha';
+
+  @override
+  String get wizard_locationBody =>
+      'Posiela sa s vaším SOS, keď nie je GPS: napríklad vaše vchodové dvere. Môžete ju zatiaľ vynechať.';
+
+  @override
+  String get wizard_radioTitle => 'Pripojte rádiostanicu';
+
+  @override
+  String wizard_radioBody(String path) {
+    return 'Teraz sa pripojte k rádiostanici MeshCore cez Bluetooth, USB alebo WiFi. Po pripojení pridajte núdzové kontakty v $path a raz si to so skupinou nacvičte, keď ju vopred upozorníte.';
+  }
+
+  @override
+  String get sos_soundVoiceSpeaker => 'Reproduktor pre hlas';
+
+  @override
+  String get sos_soundAlertSpeaker => 'Reproduktor pre poplachy a upozornenia';
+
+  @override
+  String ptt_clipNotification(String seconds) {
+    return '🎙 Hlasový klip, $seconds s';
+  }
+
+  @override
+  String ptt_meshBusy(int seconds) {
+    return 'Sieť prenáša textové správy, ktoré majú prednosť. Hlas o $seconds s.';
+  }
+
+  @override
+  String ptt_talkLimit(String time) {
+    return 'Váš rozhovor mal 3 minúty hlasu, preto máte 5 minút pauzu od hlasu a vysielací čas dostanú ostatní. Text naďalej funguje. Hlas znova o $time.';
+  }
 }

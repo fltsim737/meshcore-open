@@ -539,4 +539,15 @@ void main() {
       expect(SosPacket.decode(retune(true).encode())!.back, isTrue);
     });
   });
+  test('a stop is just the header, as the SOS radio (firmware 1.8.2) reads it', () {
+    final bytes = SosPacket(
+      kind: SosPacketKind.stopLocate,
+      id: 'a1b2',
+      senderPrefix: Uint8List.fromList([1, 2, 3, 4, 5, 6]),
+      senderName: 'Joe',
+    ).encode();
+    // [version 1][kind 8][id LE][prefix][name length][name]
+    expect(bytes, [1, 8, 0xb2, 0xa1, 1, 2, 3, 4, 5, 6, 3, ...'Joe'.codeUnits]);
+    expect(SosPacketKind.stopLocate.code, 8);
+  });
 }

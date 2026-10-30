@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -53,8 +54,28 @@ enum SosVoiceQuality {
 /// `SosSeal`): `[2][quality][sos id u16][ref x4][nonce x6]`, then the rest
 /// of the chunk after its first 4 bytes, encrypted, and an 8-byte tag. Only
 /// the sender and the network's responders can play it.
+///
+/// Push-to-talk clips (10.0.0), outside an SOS, use the same layout with
+/// version [pttVersion] and the SOS id 0: on the public Voice channel as
+/// channel data, or in a direct message as text ([toDirectText]).
 class SosVoicePacket {
   static const int version = 1;
+
+  /// A push-to-talk chunk.
+  static const int pttVersion = 3;
+
+  /// A push-to-talk clip in a direct message takes more, smaller chunks.
+  static const int maxPttChunks = 24;
+
+  /// What starts a direct message holding a push-to-talk chunk.
+  static const String directPrefix = '~ptt1:';
+
+  /// Direct message text the companion firmware takes, with room to spare.
+  static const int maxDirectText = 150;
+
+  /// Audio bytes in a direct-message chunk, after base64 and the header.
+  static const int directBodyBytes =
+      (maxDirectText - directPrefix.length) * 3 ~/ 4 - headerBytes;
   static const int keyPrefixSize = 6;
   static const int headerBytes = 15;
 
@@ -76,6 +97,7 @@ class SosVoicePacket {
 
   final SosVoiceQuality quality;
   final String sosId;
+  final bool ptt;
   final Uint8List senderPrefix;
   final int clipId;
   final int index;
@@ -92,12 +114,44 @@ class SosVoicePacket {
     required this.index,
     required this.total,
     required this.frames,
+    this.ptt = false,
   });
 
+  /// The same chunk filed under another conversation (a push-to-talk chunk
+  /// carries no SOS id).
+  SosVoicePacket withSosId(String id) => SosVoicePacket(
+    quality: quality,
+    sosId: id,
+    senderPrefix: senderPrefix,
+    clipId: clipId,
+    index: index,
+    total: total,
+    frames: frames,
+    ptt: ptt,
+  );
+
+  /// Frames in one direct-message chunk at [quality].
+  static int directFramesPerChunk(SosVoiceQuality quality) =>
+      directBodyBytes * 8 ~/ quality.bitsPerFrame;
+
+  /// This chunk as the text of a direct message.
+  String toDirectText() => '$directPrefix${base64Encode(encode())}';
+
+  /// A push-to-talk chunk from a direct message's text; null if it isn't one.
+  static SosVoicePacket? fromDirectText(String text) {
+    if (!text.startsWith(directPrefix)) return null;
+    try {
+      final packet = decode(base64Decode(text.substring(directPrefix.length)));
+      return packet != null && packet.ptt ? packet : null;
+    } on FormatException {
+      return null;
+    }
+  }
+
   Uint8List encode() {
-    final id = int.parse(sosId, radix: 16);
+    final id = ptt ? 0 : int.parse(sosId, radix: 16);
     final out = BytesBuilder()
-      ..addByte(version)
+      ..addByte(ptt ? pttVersion : version)
       ..addByte(quality.code)
       ..addByte(id & 0xFF)
       ..addByte((id >> 8) & 0xFF)
@@ -112,13 +166,16 @@ class SosVoicePacket {
   }
 
   static SosVoicePacket? decode(Uint8List data) {
-    if (data.length < headerBytes || data[0] != version) return null;
+    if (data.length < headerBytes) return null;
+    final ptt = data[0] == pttVersion;
+    if (data[0] != version && !ptt) return null;
     final quality = SosVoiceQuality.fromCode(data[1]);
     if (quality == null) return null;
     final index = data[12];
     final total = data[13];
     final count = data[14];
-    if (total == 0 || total > maxChunks || index >= total) return null;
+    final most = ptt ? maxPttChunks : maxChunks;
+    if (total == 0 || total > most || index >= total) return null;
     if (count == 0 || count > quality.framesPerChunk) return null;
     final bodyBytes = (count * quality.bitsPerFrame + 7) ~/ 8;
     if (data.length < headerBytes + bodyBytes) return null;
@@ -135,6 +192,7 @@ class SosVoicePacket {
         count,
         quality.bitsPerFrame,
       ),
+      ptt: ptt,
     );
   }
 
@@ -147,10 +205,14 @@ class SosVoicePacket {
     required Uint8List senderPrefix,
     required int clipId,
     bool sealed = false,
+    bool ptt = false,
+    int? framesPerChunk,
   }) {
     final kept = frames.take(quality.maxFrames).toList();
     if (kept.isEmpty) return const [];
-    final per = sealed ? quality.sealedFramesPerChunk : quality.framesPerChunk;
+    final per =
+        framesPerChunk ??
+        (sealed ? quality.sealedFramesPerChunk : quality.framesPerChunk);
     final total = (kept.length + per - 1) ~/ per;
     return [
       for (var i = 0; i < total; i++)
@@ -162,6 +224,7 @@ class SosVoicePacket {
           index: i,
           total: total,
           frames: kept.sublist(i * per, min((i + 1) * per, kept.length)),
+          ptt: ptt,
         ),
     ];
   }
@@ -225,14 +288,19 @@ class SosVoiceClipFrames {
   int get received => chunks.whereType<List<Uint8List>>().length;
   bool get isComplete => received == chunks.length;
 
-  /// The frames in order, with null for each frame of a missing chunk.
-  List<Uint8List?> get frames => [
-    for (final chunk in chunks)
-      if (chunk == null)
-        ...List<Uint8List?>.filled(quality.framesPerChunk, null)
-      else
-        ...chunk,
-  ];
+  /// The frames in order, with null for each frame of a missing chunk (as
+  /// many as the largest chunk that arrived holds).
+  List<Uint8List?> get frames {
+    final per = chunks.whereType<List<Uint8List>>().fold<int>(
+      0,
+      (most, c) => max(most, c.length),
+    );
+    final gap = per == 0 ? quality.framesPerChunk : per;
+    return [
+      for (final chunk in chunks)
+        if (chunk == null) ...List<Uint8List?>.filled(gap, null) else ...chunk,
+    ];
+  }
 
   Duration get duration =>
       Duration(milliseconds: frames.length * SosVoicePacket.frameMs);
