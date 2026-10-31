@@ -7415,4 +7415,30 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get sos_soundAlertSpeaker =>
       'Haut-parleur pour les alertes et notifications';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Absent de cette radio : ajoutez-le seulement si cette radio fait partie du réseau';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Ajouter « $network » à cette radio ?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Cette radio n\'a pas le canal de votre réseau d\'urgence. Ajoutez-le seulement si elle doit envoyer et recevoir les alertes du réseau, pas pour une radio que vous testez, prêtez ou configurez pour quelqu\'un d\'autre.';
+
+  @override
+  String get sos_radioAdd => 'Ajouter à cette radio';
+
+  @override
+  String get sos_radioNotThis => 'Pas cette radio';
+
+  @override
+  String get sos_radioRemove => 'Retirer de cette radio';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Retirer le canal du réseau d\'urgence de cette radio ? L\'application reste dans le réseau, pour vos autres radios. Vous pourrez le rajouter depuis cet écran.';
 }

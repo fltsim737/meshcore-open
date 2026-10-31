@@ -7399,4 +7399,30 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Динамик для тревог и уведомлений';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Её нет на этой рации: добавляйте, только если рация входит в сеть';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Добавить «$network» на эту рацию?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'На этой рации нет канала вашей экстренной сети. Добавляйте его, только если рация должна отправлять и принимать тревоги сети, а не на рацию, которую вы проверяете, одалживаете или настраиваете для кого-то другого.';
+
+  @override
+  String get sos_radioAdd => 'Добавить на эту рацию';
+
+  @override
+  String get sos_radioNotThis => 'Не эта рация';
+
+  @override
+  String get sos_radioRemove => 'Убрать с этой рации';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Убрать канал экстренной сети с этой рации? Приложение останется в сети для других ваших раций. Добавить его снова можно на этом экране.';
 }

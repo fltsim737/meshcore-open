@@ -167,6 +167,8 @@ Download the files for your platform from the [Releases](https://github.com/flts
 
 While travelling: log in to a local repeater as a guest and open **Operator info**. If the operator has posted an area code, tap **Join**.
 
+The network's channel goes on the radio connected when you join. Any other radio is **asked about first** (since 10.1.0): the Emergency tab offers **Add to this radio** or **Not this radio**, so a radio you're testing, lending or setting up for someone else doesn't pick up the network. **Remove from this radio** on the network screen takes it off again.
+
 ### 3. Fill in your emergency settings
 
 | Setting | What to put |
@@ -257,6 +259,8 @@ From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
 | An SOS comes first | Paused while the app knows of a live SOS, and for 5 minutes after any SOS packet is heard on the emergency network, even one a member's code can't read. A clip already going out stops at its next packet. |
 
 SOS voice is never limited by these rules, and text always keeps working.
+
+**Clips** are kept in the app's memory only, never saved on the device. Each has a **Delete** button, **Clear** deletes a conversation's clips, and push-to-talk clips older than 24 hours go by themselves, with at most 100 kept altogether (since 10.1.0).
 
 ---
 

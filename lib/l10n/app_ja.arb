@@ -3819,5 +3819,12 @@
   "wizard_radioTitle": "無線機を接続",
   "wizard_radioBody": "次に、Bluetooth、USB、WiFi で MeshCore 無線機に接続します。接続したら {path} で緊急連絡先を追加し、事前に知らせたうえでグループと一度練習してください。",
   "sos_soundVoiceSpeaker": "音声用スピーカー",
-  "sos_soundAlertSpeaker": "警報と通知用スピーカー"
+  "sos_soundAlertSpeaker": "警報と通知用スピーカー",
+  "sos_networkStatusNeedsApproval": "この無線機にはありません:この無線機がネットワークに属する場合だけ追加してください",
+  "sos_radioApprovalTitle": "「{network}」をこの無線機に追加しますか?",
+  "sos_radioApprovalBody": "この無線機には緊急ネットワークのチャンネルがありません。この無線機でネットワークの警報を送受信する場合だけ追加してください。テスト中、貸し出し中、ほかの人のために設定中の無線機には追加しないでください。",
+  "sos_radioAdd": "この無線機に追加",
+  "sos_radioNotThis": "この無線機ではない",
+  "sos_radioRemove": "この無線機から削除",
+  "sos_radioRemoveConfirm": "この無線機から緊急ネットワークのチャンネルを削除しますか?アプリはほかの無線機のためにネットワークに残ります。この画面からまた追加できます。"
 }

@@ -7362,4 +7362,30 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Zvočnik za alarme in obvestila';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Ni na tej radijski postaji: dodajte ga le, če postaja spada v omrežje';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Dodam »$network« na to radijsko postajo?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Ta radijska postaja nima kanala vašega omrežja za nujne primere. Dodajte ga le, če naj pošilja in sprejema opozorila omrežja, ne za postajo, ki jo preizkušate, posojate ali nastavljate za nekoga drugega.';
+
+  @override
+  String get sos_radioAdd => 'Dodaj na to postajo';
+
+  @override
+  String get sos_radioNotThis => 'Ne ta postaja';
+
+  @override
+  String get sos_radioRemove => 'Odstrani s te postaje';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu.';
 }

@@ -7329,4 +7329,30 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Högtalare för larm och aviseringar';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Inte på den här radion: lägg bara till den om radion hör till nätet';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Lägga till ”$network” på den här radion?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Den här radion har inte ditt nödnäts kanal. Lägg bara till den om radion ska skicka och höra nätets larm, inte på en radio du testar, lånar ut eller ställer in åt någon annan.';
+
+  @override
+  String get sos_radioAdd => 'Lägg till på den här radion';
+
+  @override
+  String get sos_radioNotThis => 'Inte den här radion';
+
+  @override
+  String get sos_radioRemove => 'Ta bort från den här radion';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här.';
 }

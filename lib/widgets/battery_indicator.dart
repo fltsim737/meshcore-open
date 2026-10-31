@@ -18,7 +18,10 @@ BatteryUi batteryUiForPercent(int? percent) {
 
   return switch (p) {
     <= 5 => const BatteryUi(Icons.battery_alert, MeshPalette.alert),
-    <= 20 => const BatteryUi(Icons.battery_alert, MeshPalette.alert),   // the low battery warning
+    <= 20 => const BatteryUi(
+      Icons.battery_alert,
+      MeshPalette.alert,
+    ), // the low battery warning
     <= 30 => const BatteryUi(Icons.battery_1_bar, MeshPalette.warn),
     <= 45 => const BatteryUi(Icons.battery_2_bar, MeshPalette.warn),
     <= 60 => const BatteryUi(Icons.battery_3_bar, null),

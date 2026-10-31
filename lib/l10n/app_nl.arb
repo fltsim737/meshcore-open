@@ -3586,5 +3586,12 @@
   "wizard_radioTitle": "Verbind je radio",
   "wizard_radioBody": "Verbind nu met je MeshCore-radio via Bluetooth, USB of WiFi. Voeg daarna je noodcontacten toe in {path}, en oefen een keer met je groep, nadat je ze gewaarschuwd hebt.",
   "sos_soundVoiceSpeaker": "Luidspreker voor spraak",
-  "sos_soundAlertSpeaker": "Luidspreker voor alarmen en meldingen"
+  "sos_soundAlertSpeaker": "Luidspreker voor alarmen en meldingen",
+  "sos_networkStatusNeedsApproval": "Niet op deze radio: voeg het alleen toe als deze radio bij het netwerk hoort",
+  "sos_radioApprovalTitle": "“{network}” aan deze radio toevoegen?",
+  "sos_radioApprovalBody": "Deze radio heeft het kanaal van je noodnetwerk niet. Voeg het alleen toe als deze radio de meldingen van het netwerk moet versturen en horen, niet voor een radio die je test, uitleent of voor iemand anders instelt.",
+  "sos_radioAdd": "Aan deze radio toevoegen",
+  "sos_radioNotThis": "Niet deze radio",
+  "sos_radioRemove": "Van deze radio verwijderen",
+  "sos_radioRemoveConfirm": "Het kanaal van het noodnetwerk van deze radio verwijderen? De app blijft in het netwerk, voor je andere radio's. Je kunt het hier weer toevoegen."
 }

@@ -7404,4 +7404,30 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_soundAlertSpeaker =>
       'Lautsprecher für Alarme und Benachrichtigungen';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Nicht auf diesem Funkgerät: nur hinzufügen, wenn es zum Netz gehört';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return '„$network“ zu diesem Funkgerät hinzufügen?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Diesem Funkgerät fehlt der Kanal deines Notfallnetzes. Füge ihn nur hinzu, wenn es die Alarme des Netzes senden und hören soll, nicht bei einem Gerät, das du testest, verleihst oder für jemand anderen einrichtest.';
+
+  @override
+  String get sos_radioAdd => 'Zu diesem Funkgerät hinzufügen';
+
+  @override
+  String get sos_radioNotThis => 'Nicht dieses Funkgerät';
+
+  @override
+  String get sos_radioRemove => 'Von diesem Funkgerät entfernen';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Den Kanal des Notfallnetzes von diesem Funkgerät entfernen? Die App bleibt im Netz, für deine anderen Funkgeräte. Du kannst ihn hier wieder hinzufügen.';
 }

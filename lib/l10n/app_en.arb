@@ -4450,5 +4450,13 @@
   "@wizard_welcomeTitle": {"placeholders": {"app": {"type": "String"}}},
   "@wizard_radioBody": {"placeholders": {"path": {"type": "String"}}},
   "sos_soundVoiceSpeaker": "Speaker for voice",
-  "sos_soundAlertSpeaker": "Speaker for alerts and notifications"
+  "sos_soundAlertSpeaker": "Speaker for alerts and notifications",
+  "sos_networkStatusNeedsApproval": "Not on this radio: add it only if this radio belongs in the network",
+  "sos_radioApprovalTitle": "Add “{network}” to this radio?",
+  "sos_radioApprovalBody": "This radio doesn't have your emergency network's channel. Add it only if this radio should send and hear the network's alerts, not for a radio you're testing, lending or setting up for someone else.",
+  "sos_radioAdd": "Add to this radio",
+  "sos_radioNotThis": "Not this radio",
+  "sos_radioRemove": "Remove from this radio",
+  "sos_radioRemoveConfirm": "Take the emergency network's channel off this radio? The app stays in the network, for your other radios. You can add it back from this screen.",
+  "@sos_radioApprovalTitle": {"placeholders": {"network": {"type": "String"}}}
 }

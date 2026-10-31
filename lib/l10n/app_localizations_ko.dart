@@ -7069,4 +7069,30 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => '경보 및 알림용 스피커';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      '이 무전기에는 없음: 이 무전기가 네트워크에 속할 때만 추가하세요';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return '“$network”을(를) 이 무전기에 추가할까요?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      '이 무전기에는 긴급 네트워크 채널이 없습니다. 이 무전기가 네트워크의 경보를 보내고 들어야 할 때만 추가하세요. 시험 중이거나, 빌려주거나, 다른 사람을 위해 설정하는 무전기에는 추가하지 마세요.';
+
+  @override
+  String get sos_radioAdd => '이 무전기에 추가';
+
+  @override
+  String get sos_radioNotThis => '이 무전기 아님';
+
+  @override
+  String get sos_radioRemove => '이 무전기에서 제거';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      '이 무전기에서 긴급 네트워크 채널을 제거할까요? 앱은 다른 무전기를 위해 네트워크에 남습니다. 이 화면에서 다시 추가할 수 있습니다.';
 }

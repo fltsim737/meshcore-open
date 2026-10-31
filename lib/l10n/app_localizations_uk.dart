@@ -7398,4 +7398,30 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Динамік для тривог і сповіщень';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Її немає на цій рації: додавайте, лише якщо рація входить до мережі';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Додати «$network» на цю рацію?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'На цій рації немає каналу вашої екстреної мережі. Додавайте його, лише якщо рація має надсилати й чути тривоги мережі, а не на рацію, яку ви перевіряєте, позичаєте чи налаштовуєте для когось іншого.';
+
+  @override
+  String get sos_radioAdd => 'Додати на цю рацію';
+
+  @override
+  String get sos_radioNotThis => 'Не ця рація';
+
+  @override
+  String get sos_radioRemove => 'Прибрати з цієї рації';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Прибрати канал екстреної мережі з цієї рації? Застосунок залишиться в мережі для інших ваших рацій. Додати його знову можна на цьому екрані.';
 }

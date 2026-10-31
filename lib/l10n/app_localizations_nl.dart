@@ -7351,4 +7351,30 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Luidspreker voor alarmen en meldingen';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Niet op deze radio: voeg het alleen toe als deze radio bij het netwerk hoort';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return '“$network” aan deze radio toevoegen?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Deze radio heeft het kanaal van je noodnetwerk niet. Voeg het alleen toe als deze radio de meldingen van het netwerk moet versturen en horen, niet voor een radio die je test, uitleent of voor iemand anders instelt.';
+
+  @override
+  String get sos_radioAdd => 'Aan deze radio toevoegen';
+
+  @override
+  String get sos_radioNotThis => 'Niet deze radio';
+
+  @override
+  String get sos_radioRemove => 'Van deze radio verwijderen';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Het kanaal van het noodnetwerk van deze radio verwijderen? De app blijft in het netwerk, voor je andere radio\'s. Je kunt het hier weer toevoegen.';
 }

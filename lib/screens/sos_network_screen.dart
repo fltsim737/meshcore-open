@@ -25,6 +25,7 @@ String sosNetworkStatusLabel(AppLocalizations l10n, SosNetworkStatus status) =>
       SosNetworkStatus.needsFirmware => l10n.sos_channelNeedsFirmware,
       SosNetworkStatus.installing => l10n.sos_networkStatusInstalling,
       SosNetworkStatus.noFreeSlot => l10n.sos_networkStatusNoFreeSlot,
+      SosNetworkStatus.needsApproval => l10n.sos_networkStatusNeedsApproval,
       SosNetworkStatus.ready => l10n.sos_networkStatusReady,
     };
 
@@ -161,6 +162,29 @@ class _NotJoined extends StatelessWidget {
   }
 }
 
+/// Takes the network off the connected radio, after asking.
+Future<void> _confirmRemove(BuildContext context, SosService sos) async {
+  final l10n = context.l10n;
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: Text(l10n.sos_radioRemove),
+      content: Text(l10n.sos_radioRemoveConfirm),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(dialogContext, false),
+          child: Text(l10n.common_cancel),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.pop(dialogContext, true),
+          child: Text(l10n.sos_radioRemove),
+        ),
+      ],
+    ),
+  );
+  if (ok ?? false) await sos.removeNetworkFromRadio();
+}
+
 class _Joined extends StatelessWidget {
   final SosService sos;
   final SosNetworkCode network;
@@ -183,6 +207,22 @@ class _Joined extends StatelessWidget {
               Text(l10n.sos_networkRoleLabel(sosRoleLabel(l10n, network.role))),
               const SizedBox(height: 4),
               Text(sosNetworkStatusLabel(l10n, sos.networkStatus)),
+              // which radios carry the network is the user's choice
+              if (sos.networkStatus == SosNetworkStatus.needsApproval) ...[
+                const SizedBox(height: 8),
+                FilledButton.icon(
+                  icon: const Icon(Icons.add_link),
+                  label: Text(l10n.sos_radioAdd),
+                  onPressed: sos.addNetworkToRadio,
+                ),
+              ] else if (sos.networkStatus == SosNetworkStatus.ready) ...[
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  icon: const Icon(Icons.link_off),
+                  label: Text(l10n.sos_radioRemove),
+                  onPressed: () => _confirmRemove(context, sos),
+                ),
+              ],
             ],
           ),
         ),

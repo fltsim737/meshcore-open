@@ -3690,5 +3690,12 @@
   "wizard_radioTitle": "连接你的电台",
   "wizard_radioBody": "接下来通过蓝牙、USB 或 WiFi 连接你的 MeshCore 电台。连接后,在 {path} 中添加紧急联系人,并在事先告知群组后与他们演练一次。",
   "sos_soundVoiceSpeaker": "语音扬声器",
-  "sos_soundAlertSpeaker": "警报和通知扬声器"
+  "sos_soundAlertSpeaker": "警报和通知扬声器",
+  "sos_networkStatusNeedsApproval": "不在此电台上:只有此电台属于该网络时才添加",
+  "sos_radioApprovalTitle": "将“{network}”添加到此电台?",
+  "sos_radioApprovalBody": "此电台没有你的紧急网络频道。只有当此电台应发送和接收该网络的警报时才添加;正在测试、借出或替他人设置的电台不要添加。",
+  "sos_radioAdd": "添加到此电台",
+  "sos_radioNotThis": "不是此电台",
+  "sos_radioRemove": "从此电台移除",
+  "sos_radioRemoveConfirm": "从此电台移除紧急网络频道?应用仍留在网络中,供你的其他电台使用。你可以在此页面重新添加。"
 }

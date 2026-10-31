@@ -7412,4 +7412,30 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Głośnik dla alarmów i powiadomień';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Nie ma go w tym radiu: dodaj tylko, jeśli to radio należy do sieci';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Dodać „$network” do tego radia?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'To radio nie ma kanału twojej sieci alarmowej. Dodaj go tylko, jeśli ma wysyłać i odbierać alarmy sieci, a nie do radia, które testujesz, pożyczasz lub konfigurujesz dla kogoś innego.';
+
+  @override
+  String get sos_radioAdd => 'Dodaj do tego radia';
+
+  @override
+  String get sos_radioNotThis => 'Nie to radio';
+
+  @override
+  String get sos_radioRemove => 'Usuń z tego radia';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie.';
 }

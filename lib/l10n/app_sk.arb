@@ -3686,5 +3686,12 @@
   "wizard_radioTitle": "Pripojte rádiostanicu",
   "wizard_radioBody": "Teraz sa pripojte k rádiostanici MeshCore cez Bluetooth, USB alebo WiFi. Po pripojení pridajte núdzové kontakty v {path} a raz si to so skupinou nacvičte, keď ju vopred upozorníte.",
   "sos_soundVoiceSpeaker": "Reproduktor pre hlas",
-  "sos_soundAlertSpeaker": "Reproduktor pre poplachy a upozornenia"
+  "sos_soundAlertSpeaker": "Reproduktor pre poplachy a upozornenia",
+  "sos_networkStatusNeedsApproval": "Nie je na tejto rádiostanici: pridajte ju, len ak patrí do siete",
+  "sos_radioApprovalTitle": "Pridať „{network}“ do tejto rádiostanice?",
+  "sos_radioApprovalBody": "Táto rádiostanica nemá kanál vašej núdzovej siete. Pridajte ho, len ak má posielať a počúvať poplachy siete, nie do rádiostanice, ktorú testujete, požičiavate alebo nastavujete pre niekoho iného.",
+  "sos_radioAdd": "Pridať do tejto rádiostanice",
+  "sos_radioNotThis": "Nie táto rádiostanica",
+  "sos_radioRemove": "Odstrániť z tejto rádiostanice",
+  "sos_radioRemoveConfirm": "Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke."
 }

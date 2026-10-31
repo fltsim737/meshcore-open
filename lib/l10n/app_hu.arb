@@ -3724,5 +3724,12 @@
   "wizard_radioTitle": "Csatlakoztasd a rádiódat",
   "wizard_radioBody": "Most csatlakozz a MeshCore rádiódhoz Bluetooth-on, USB-n vagy WiFi-n. Csatlakozás után add hozzá a vészhelyzeti kontaktjaidat itt: {path}, és gyakorolj egyszer a csoportoddal, miután előre szóltál nekik.",
   "sos_soundVoiceSpeaker": "Hangszóró a beszédhez",
-  "sos_soundAlertSpeaker": "Hangszóró a riasztásokhoz és értesítésekhez"
+  "sos_soundAlertSpeaker": "Hangszóró a riasztásokhoz és értesítésekhez",
+  "sos_networkStatusNeedsApproval": "Nincs ezen a rádión: csak akkor add hozzá, ha a rádió a hálózat része",
+  "sos_radioApprovalTitle": "Hozzáadod a(z) „{network}” hálózatot ehhez a rádióhoz?",
+  "sos_radioApprovalBody": "Ezen a rádión nincs meg a vészhelyzeti hálózatod csatornája. Csak akkor add hozzá, ha a rádiónak küldenie és fogadnia kell a hálózat riasztásait, ne egy tesztelt, kölcsönadott vagy másnak beállított rádióhoz.",
+  "sos_radioAdd": "Hozzáadás ehhez a rádióhoz",
+  "sos_radioNotThis": "Nem ez a rádió",
+  "sos_radioRemove": "Eltávolítás erről a rádióról",
+  "sos_radioRemoveConfirm": "Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod."
 }

@@ -3686,5 +3686,12 @@
   "wizard_radioTitle": "Povežite radijsko postajo",
   "wizard_radioBody": "Zdaj se povežite z radijsko postajo MeshCore prek Bluetootha, USB ali WiFi. Ko ste povezani, dodajte stike za nujne primere v {path} in enkrat vadite s skupino, potem ko jo opozorite.",
   "sos_soundVoiceSpeaker": "Zvočnik za glas",
-  "sos_soundAlertSpeaker": "Zvočnik za alarme in obvestila"
+  "sos_soundAlertSpeaker": "Zvočnik za alarme in obvestila",
+  "sos_networkStatusNeedsApproval": "Ni na tej radijski postaji: dodajte ga le, če postaja spada v omrežje",
+  "sos_radioApprovalTitle": "Dodam »{network}« na to radijsko postajo?",
+  "sos_radioApprovalBody": "Ta radijska postaja nima kanala vašega omrežja za nujne primere. Dodajte ga le, če naj pošilja in sprejema opozorila omrežja, ne za postajo, ki jo preizkušate, posojate ali nastavljate za nekoga drugega.",
+  "sos_radioAdd": "Dodaj na to postajo",
+  "sos_radioNotThis": "Ne ta postaja",
+  "sos_radioRemove": "Odstrani s te postaje",
+  "sos_radioRemoveConfirm": "Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu."
 }

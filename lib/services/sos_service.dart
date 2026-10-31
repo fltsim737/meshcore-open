@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import '../storage/prefs_manager.dart';
+
 import '../connector/meshcore_connector.dart';
 import '../connector/meshcore_protocol.dart';
 import '../helpers/sos_codec.dart';
@@ -194,6 +196,10 @@ enum SosNetworkStatus {
   needsFirmware,
   installing,
   noFreeSlot,
+
+  /// The connected radio doesn't have the network's channel, and hasn't been
+  /// agreed to: the app asks before putting it on ([addNetworkToRadio]).
+  needsApproval,
   ready,
 }
 
@@ -332,7 +338,8 @@ class SosService extends ChangeNotifier {
   Timer? _locateTimer;
   Timer? _reportTimer;
   final List<Timer> _powerTimers = [];
-  final List<Timer> _stopTimers = []; // "stopped searching", sent after the screen closes
+  final List<Timer> _stopTimers =
+      []; // "stopped searching", sent after the screen closes
 
   /// The search this device is running for someone's SOS, if any.
   SosLocatorSession? get locator => _locator;
@@ -774,6 +781,10 @@ class SosService extends ChangeNotifier {
   bool _installing = false;
   bool _noFreeSlot = false;
 
+  /// The connected radio needs agreeing to before the network's channel goes
+  /// on it (see [networkStatus]).
+  bool _needsApproval = false;
+
   /// The network channel's slot as last read, used while the radio's
   /// channel list reloads (on every connect and after a channel change).
   int? _knownSosChannelIndex;
@@ -793,6 +804,7 @@ class SosService extends ChangeNotifier {
     if (!_transport.isConnected) return SosNetworkStatus.disconnected;
     if (!_transport.supportsChannelData) return SosNetworkStatus.needsFirmware;
     if (sosChannel != null) return SosNetworkStatus.ready;
+    if (_needsApproval) return SosNetworkStatus.needsApproval;
     if (_noFreeSlot) return SosNetworkStatus.noFreeSlot;
     return SosNetworkStatus.installing;
   }
@@ -815,10 +827,28 @@ class SosService extends ChangeNotifier {
     if (net == null ||
         _installing ||
         !_transport.isConnected ||
-        !_transport.channelsReady ||
-        sosChannel != null) {
+        !_transport.channelsReady) {
       return;
     }
+    final radio = _radioHex;
+    if (sosChannel != null) {
+      // already on this radio: agreed to, whoever put it there
+      if (radio != null) _setRadioChoice(net, radio, approved: true);
+      if (_needsApproval) {
+        _needsApproval = false;
+        notifyListeners();
+      }
+      return;
+    }
+    // Never on a radio by itself: only one the user has agreed to (a radio
+    // for testing, someone else's, or one meant for another network must not
+    // pick up this network's channel just by being connected).
+    final approved = radio != null && _radioApproved(net, radio);
+    if (_needsApproval != !approved) {
+      _needsApproval = !approved;
+      notifyListeners();
+    }
+    if (!approved) return;
     final used = _transport.allChannels.map((c) => c.index).toSet();
     final free = [
       for (var i = 0; i < _transport.maxChannels; i++)
@@ -849,6 +879,100 @@ class SosService extends ChangeNotifier {
     }());
   }
 
+  /// The connected radio's public key, as hex.
+  String? get _radioHex {
+    final key = _transport.selfPublicKey;
+    if (key == null || key.isEmpty) return null;
+    return key.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+  }
+
+  static String _choiceKey(SosNetworkCode net, {required bool approved}) =>
+      'sos_net_${Channel.storageIdForPsk(net.key)}_'
+      '${approved ? 'radios' : 'declined'}';
+
+  List<String> _radioList(SosNetworkCode net, {required bool approved}) {
+    try {
+      return PrefsManager.instance.getStringList(
+            _choiceKey(net, approved: approved),
+          ) ??
+          const [];
+    } catch (_) {
+      return const []; // no settings store (as in tests)
+    }
+  }
+
+  bool _radioApproved(SosNetworkCode net, String radio) =>
+      _radioList(net, approved: true).contains(radio);
+
+  /// The user declined to put the network on the connected radio.
+  bool get radioDeclined {
+    final net = network;
+    final radio = _radioHex;
+    return net != null &&
+        radio != null &&
+        _radioList(net, approved: false).contains(radio);
+  }
+
+  void _setRadioChoice(
+    SosNetworkCode net,
+    String radio, {
+    required bool approved,
+  }) {
+    final yes = {..._radioList(net, approved: true)};
+    final no = {..._radioList(net, approved: false)};
+    final changed = approved
+        ? yes.add(radio) | no.remove(radio)
+        : no.add(radio) | yes.remove(radio);
+    if (!changed) return;
+    try {
+      final prefs = PrefsManager.instance;
+      unawaited(
+        prefs.setStringList(_choiceKey(net, approved: true), yes.toList()),
+      );
+      unawaited(
+        prefs.setStringList(_choiceKey(net, approved: false), no.toList()),
+      );
+    } catch (_) {
+      // no settings store (as in tests)
+    }
+  }
+
+  /// Puts the network's channel on the connected radio, and remembers that
+  /// this radio is agreed to.
+  Future<void> addNetworkToRadio() async {
+    final net = network;
+    final radio = _radioHex;
+    if (net == null || radio == null) return;
+    _setRadioChoice(net, radio, approved: true);
+    _syncNetwork();
+    notifyListeners();
+  }
+
+  /// Keeps the network's channel off the connected radio (it's still asked
+  /// about from the network's screen).
+  void declineRadio() {
+    final net = network;
+    final radio = _radioHex;
+    if (net == null || radio == null) return;
+    _setRadioChoice(net, radio, approved: false);
+    notifyListeners();
+  }
+
+  /// Takes the network's channel off the connected radio, and keeps it off.
+  /// The network stays joined in the app, for other radios.
+  Future<void> removeNetworkFromRadio() async {
+    final net = network;
+    final radio = _radioHex;
+    final channel = sosChannel;
+    if (net == null || radio == null) return;
+    _setRadioChoice(net, radio, approved: false);
+    if (channel != null && _transport.isConnected) {
+      await _transport.deleteChannel(channel.index);
+    }
+    _needsApproval = true;
+    notifyListeners();
+  }
+
   /// Radio channel names hold at most 31 bytes.
   static String _radioChannelName(SosNetworkCode net) {
     var name = net.name;
@@ -874,6 +998,9 @@ class SosService extends ChangeNotifier {
     // already see the new network or it would put the old one back.
     final old = sosChannel;
     await _settings.joinSosNetwork(net, coordinator: coordinator);
+    // joining while connected is setting up this radio: it's agreed to
+    final radio = _transport.isConnected ? _radioHex : null;
+    if (radio != null) _setRadioChoice(net, radio, approved: true);
     if (old != null && !listEquals(old.psk, net.key)) {
       await _transport.deleteChannel(old.index);
     }

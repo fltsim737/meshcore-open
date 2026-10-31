@@ -392,7 +392,10 @@ class SosPacket {
           : maxInfoBytes - SosRadio.size;
       var infoBytes = utf8.encode(info ?? '');
       if (infoBytes.length > infoMax) {
-        infoBytes = infoBytes.sublist(0, utf8BoundaryLength(infoBytes, infoMax));
+        infoBytes = infoBytes.sublist(
+          0,
+          utf8BoundaryLength(infoBytes, infoMax),
+        );
       }
       if (infoBytes.isNotEmpty || radioBytes != null) {
         out

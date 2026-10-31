@@ -3819,5 +3819,12 @@
   "wizard_radioTitle": "Conecta tu radio",
   "wizard_radioBody": "Ahora conéctate a tu radio MeshCore por Bluetooth, USB o WiFi. Una vez conectada, añade tus contactos de emergencia en {path} y practica una vez con tu grupo, avisándoles antes.",
   "sos_soundVoiceSpeaker": "Altavoz para la voz",
-  "sos_soundAlertSpeaker": "Altavoz para alertas y notificaciones"
+  "sos_soundAlertSpeaker": "Altavoz para alertas y notificaciones",
+  "sos_networkStatusNeedsApproval": "No está en esta radio: añádela solo si esta radio forma parte de la red",
+  "sos_radioApprovalTitle": "¿Añadir «{network}» a esta radio?",
+  "sos_radioApprovalBody": "Esta radio no tiene el canal de tu red de emergencia. Añádelo solo si esta radio debe enviar y oír las alertas de la red, no en una radio que estés probando, prestando o configurando para otra persona.",
+  "sos_radioAdd": "Añadir a esta radio",
+  "sos_radioNotThis": "Esta radio no",
+  "sos_radioRemove": "Quitar de esta radio",
+  "sos_radioRemoveConfirm": "¿Quitar el canal de la red de emergencia de esta radio? La app sigue en la red, para tus otras radios. Puedes volver a añadirlo desde esta pantalla."
 }

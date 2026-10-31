@@ -3680,5 +3680,12 @@
   "wizard_radioTitle": "Anslut din radio",
   "wizard_radioBody": "Anslut nu till din MeshCore-radio via Bluetooth, USB eller WiFi. När den är ansluten, lägg till dina nödkontakter under {path}, och öva en gång med din grupp, efter att ha varnat dem.",
   "sos_soundVoiceSpeaker": "Högtalare för röst",
-  "sos_soundAlertSpeaker": "Högtalare för larm och aviseringar"
+  "sos_soundAlertSpeaker": "Högtalare för larm och aviseringar",
+  "sos_networkStatusNeedsApproval": "Inte på den här radion: lägg bara till den om radion hör till nätet",
+  "sos_radioApprovalTitle": "Lägga till ”{network}” på den här radion?",
+  "sos_radioApprovalBody": "Den här radion har inte ditt nödnäts kanal. Lägg bara till den om radion ska skicka och höra nätets larm, inte på en radio du testar, lånar ut eller ställer in åt någon annan.",
+  "sos_radioAdd": "Lägg till på den här radion",
+  "sos_radioNotThis": "Inte den här radion",
+  "sos_radioRemove": "Ta bort från den här radion",
+  "sos_radioRemoveConfirm": "Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här."
 }

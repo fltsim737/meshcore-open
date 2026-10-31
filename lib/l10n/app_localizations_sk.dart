@@ -7359,4 +7359,30 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Reproduktor pre poplachy a upozornenia';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Nie je na tejto rádiostanici: pridajte ju, len ak patrí do siete';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Pridať „$network“ do tejto rádiostanice?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Táto rádiostanica nemá kanál vašej núdzovej siete. Pridajte ho, len ak má posielať a počúvať poplachy siete, nie do rádiostanice, ktorú testujete, požičiavate alebo nastavujete pre niekoho iného.';
+
+  @override
+  String get sos_radioAdd => 'Pridať do tejto rádiostanice';
+
+  @override
+  String get sos_radioNotThis => 'Nie táto rádiostanica';
+
+  @override
+  String get sos_radioRemove => 'Odstrániť z tejto rádiostanice';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke.';
 }

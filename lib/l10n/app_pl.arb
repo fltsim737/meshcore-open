@@ -3718,5 +3718,12 @@
   "wizard_radioTitle": "Połącz swoje radio",
   "wizard_radioBody": "Teraz połącz się z radiem MeshCore przez Bluetooth, USB lub WiFi. Po połączeniu dodaj kontakty alarmowe w {path} i przećwicz raz z grupą, uprzedzając ją wcześniej.",
   "sos_soundVoiceSpeaker": "Głośnik dla głosu",
-  "sos_soundAlertSpeaker": "Głośnik dla alarmów i powiadomień"
+  "sos_soundAlertSpeaker": "Głośnik dla alarmów i powiadomień",
+  "sos_networkStatusNeedsApproval": "Nie ma go w tym radiu: dodaj tylko, jeśli to radio należy do sieci",
+  "sos_radioApprovalTitle": "Dodać „{network}” do tego radia?",
+  "sos_radioApprovalBody": "To radio nie ma kanału twojej sieci alarmowej. Dodaj go tylko, jeśli ma wysyłać i odbierać alarmy sieci, a nie do radia, które testujesz, pożyczasz lub konfigurujesz dla kogoś innego.",
+  "sos_radioAdd": "Dodaj do tego radia",
+  "sos_radioNotThis": "Nie to radio",
+  "sos_radioRemove": "Usuń z tego radia",
+  "sos_radioRemoveConfirm": "Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie."
 }

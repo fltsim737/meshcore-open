@@ -3820,5 +3820,12 @@
   "wizard_radioTitle": "Funkgerät verbinden",
   "wizard_radioBody": "Verbinde dich als Nächstes per Bluetooth, USB oder WLAN mit deinem MeshCore-Funkgerät. Füge danach unter {path} deine Notfallkontakte hinzu und übe einmal mit deiner Gruppe, nachdem du sie gewarnt hast.",
   "sos_soundVoiceSpeaker": "Lautsprecher für Sprache",
-  "sos_soundAlertSpeaker": "Lautsprecher für Alarme und Benachrichtigungen"
+  "sos_soundAlertSpeaker": "Lautsprecher für Alarme und Benachrichtigungen",
+  "sos_networkStatusNeedsApproval": "Nicht auf diesem Funkgerät: nur hinzufügen, wenn es zum Netz gehört",
+  "sos_radioApprovalTitle": "„{network}“ zu diesem Funkgerät hinzufügen?",
+  "sos_radioApprovalBody": "Diesem Funkgerät fehlt der Kanal deines Notfallnetzes. Füge ihn nur hinzu, wenn es die Alarme des Netzes senden und hören soll, nicht bei einem Gerät, das du testest, verleihst oder für jemand anderen einrichtest.",
+  "sos_radioAdd": "Zu diesem Funkgerät hinzufügen",
+  "sos_radioNotThis": "Nicht dieses Funkgerät",
+  "sos_radioRemove": "Von diesem Funkgerät entfernen",
+  "sos_radioRemoveConfirm": "Den Kanal des Notfallnetzes von diesem Funkgerät entfernen? Die App bleibt im Netz, für deine anderen Funkgeräte. Du kannst ihn hier wieder hinzufügen."
 }

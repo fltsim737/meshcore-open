@@ -7378,4 +7378,30 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get sos_soundAlertSpeaker => 'Altifalante para alertas e notificações';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Não está neste rádio: adicione-o só se este rádio pertencer à rede';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Adicionar «$network» a este rádio?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Este rádio não tem o canal da sua rede de emergência. Adicione-o só se este rádio dever enviar e ouvir os alertas da rede, não num rádio que esteja a testar, a emprestar ou a configurar para outra pessoa.';
+
+  @override
+  String get sos_radioAdd => 'Adicionar a este rádio';
+
+  @override
+  String get sos_radioNotThis => 'Este rádio não';
+
+  @override
+  String get sos_radioRemove => 'Remover deste rádio';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Remover o canal da rede de emergência deste rádio? A app continua na rede, para os seus outros rádios. Pode voltar a adicioná-lo neste ecrã.';
 }
