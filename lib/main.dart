@@ -21,6 +21,7 @@ import 'services/image_codec_settings_store.dart';
 import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
+import 'services/coverage_survey_service.dart';
 import 'services/sos_service.dart';
 import 'services/sos_voice_service.dart';
 import 'services/voice_audio.dart';
@@ -194,6 +195,12 @@ void main(List<String> args) async {
     alerter: NotificationSosAlerter(),
   )..load();
 
+  final coverageSurveyService = CoverageSurveyService.forApp(
+    connector,
+    sosService,
+    phoneGps: !PlatformInfo.isWindows,
+  );
+
   // Voice clips need the Codec2 library, which is built for Android, Linux
   // and Windows.
   final voiceSupported =
@@ -267,6 +274,7 @@ void main(List<String> args) async {
       imageReassembler: imageReassembler,
       networkMapUploadService: networkMapUploadService,
       sosService: sosService,
+      coverageSurveyService: coverageSurveyService,
       sosVoiceService: sosVoiceService,
     ),
   );
@@ -468,6 +476,7 @@ class MeshCoreApp extends StatefulWidget {
   final ImageStreamReassembler imageReassembler;
   final NetworkMapUploadService networkMapUploadService;
   final SosService sosService;
+  final CoverageSurveyService coverageSurveyService;
   final SosVoiceService sosVoiceService;
 
   const MeshCoreApp({
@@ -489,6 +498,7 @@ class MeshCoreApp extends StatefulWidget {
     required this.imageReassembler,
     required this.networkMapUploadService,
     required this.sosService,
+    required this.coverageSurveyService,
     required this.sosVoiceService,
   });
 
@@ -575,6 +585,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
         ChangeNotifierProvider.value(value: widget.receivedImageStore),
         ChangeNotifierProvider.value(value: widget.networkMapUploadService),
         ChangeNotifierProvider.value(value: widget.sosService),
+        ChangeNotifierProvider.value(value: widget.coverageSurveyService),
         ChangeNotifierProvider.value(value: widget.sosVoiceService),
       ],
       child: Consumer<AppSettingsService>(

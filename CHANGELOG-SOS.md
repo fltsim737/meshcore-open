@@ -2,6 +2,34 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.0 (2026-11-01)
+
+Both apps.
+
+### Coverage survey: map where the repeaters can hear you
+
+- **Map → ⋮ → Coverage survey** maps repeater coverage as you travel. Tap **Start survey** and go. Each time you've moved about 150 m, the app pings for repeaters in direct radio range (no hops). Every repeater that hears the ping answers with two readings: how well you heard it, and how well it heard you.
+- **The map paints itself in.** It's divided into hexagons about 100 m across. Each one you pass through is coloured by the best link heard there, using the weaker of the two directions, judged against what LoRa can still decode at the radio's spreading factor: green strong, light green good, amber weak, red unreliable. Grey means you pinged there and no repeater answered.
+- **Radar lines:** a line sweeps out from where you pinged to each repeater that answered (when it advertises a location), coloured by signal, and fades out before the next ping.
+- **One repeater at a time:** tap a repeater, or choose it in the list, to see only its footprint.
+- **For deciding when to switch frequency:**
+  - each radio setting (frequency, bandwidth, spreading factor, coding rate) is its own layer, so coverage on two settings can be compared side by side;
+  - after 3 pings in a row with no answer, the phone vibrates and says you may be out of coverage on this frequency.
+- **Gentle on the air:**
+  - pings go at most every 30 s, and every 2 minutes when you stand still;
+  - a stock repeater answers at most 4 pings in 2 minutes from everyone together, which is why the 30 s floor exists, and why, with several searchers pinging, a missing answer can mean busy rather than out of range;
+  - **Ping now** sends one straight away when the 30 s allow it;
+  - the survey pauses while an SOS is active (yours or anyone's), so SOS traffic has the channel.
+- **Share and combine surveys:**
+  - **Export survey** saves a file that another phone can **Import survey**; the pings merge into one map, and a ping imported twice is kept once;
+  - **Export GeoJSON** and **Export KML** open in Google Earth, QGIS and other mapping tools: hexagons, repeaters and every ping with its readings.
+- **Where it runs:**
+  - the survey keeps going while you use other screens;
+  - on Android the screen stays on during a survey, so GPS keeps coming;
+  - pings use the phone's GPS, ignoring any fix less accurate than 100 m (a computer's rough WiFi- or IP-based position would paint the wrong hexagons). Without an accurate fix (Windows, or a phone with location off), the radio's own position is used if it has one, and the screen says so.
+- Surveys are kept on the device, for every radio you connect, until you **Clear survey**.
+- Needs companion firmware 1.12 or newer, the same as the nearby-node scan. Works with stock repeaters; nothing changes on the radio.
+
 ## 10.1.3 (2026-10-31)
 
 Both apps. MeshCore Open SOS goes from 10.1.1 to 10.1.3 (10.1.2 was SOS Voice only).

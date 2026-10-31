@@ -7594,4 +7594,168 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Użyj jego własnej nazwy';
+
+  @override
+  String get coverage_title => 'Pomiar zasięgu';
+
+  @override
+  String get coverage_aboutTitle => 'O pomiarze zasięgu';
+
+  @override
+  String get coverage_aboutBody =>
+      'Pomiar zasięgu pokazuje na mapie, gdzie przekaźniki cię słyszą.\n\nPodczas pomiaru aplikacja wysyła ping do przekaźników w bezpośrednim zasięgu radiowym co około 150 m, nie częściej niż co 30 s, a co 2 minuty, gdy stoisz. Każdy przekaźnik, który usłyszy ping, odpowiada dwoma odczytami: jak dobrze ty go słyszysz i jak dobrze on słyszy ciebie. Słabszy z nich koloruje mapę.\n\nZielony to mocne łącze, jasnozielony dobre, bursztynowy słabe, czerwony zawodne, a szary oznacza, że żaden przekaźnik nie odpowiedział. Linie biegną do każdego przekaźnika, który odpowiedział na ostatni ping.\n\nKażde ustawienie częstotliwości ma osobną mapę, więc możesz porównać zasięg przed zmianą. Podczas aktywnego SOS pingi są wstrzymane. Przekaźnik odpowiada na najwyżej 4 pingi w ciągu 2 minut od wszystkich razem, więc gdy pinguje kilku poszukujących, brak odpowiedzi może oznaczać zajęty, a nie poza zasięgiem.\n\nUdostępniaj pomiary przez Eksport i łącz je przez Import. Pliki GeoJSON i KML otworzysz w Google Earth i programach mapowych.';
+
+  @override
+  String get coverage_start => 'Rozpocznij pomiar';
+
+  @override
+  String get coverage_stop => 'Zatrzymaj pomiar';
+
+  @override
+  String get coverage_pingNow => 'Pinguj teraz';
+
+  @override
+  String get coverage_statusIdle =>
+      'Rozpocznij pomiar i ruszaj. Mapa wypełnia się, gdy przekaźniki odpowiadają.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Pomiar zatrzymany. Zapisane pingi: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Pingowanie przekaźników…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Następny ping możliwy za $time';
+  }
+
+  @override
+  String get coverage_statusMove => 'Następny ping po 150 m lub za 2 minuty';
+
+  @override
+  String get coverage_pausedDisconnected =>
+      'Wstrzymano: brak połączonego radia';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Wstrzymano: oprogramowanie radia jest za stare, by pingować przekaźniki';
+
+  @override
+  String get coverage_pausedSos =>
+      'Wstrzymano na czas aktywnego SOS, by kanał był wolny';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Wstrzymano: czekam na lokalizację. Włącz lokalizację dla tej aplikacji.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Brak GPS w telefonie: używana jest pozycja radia.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Przekaźniki, które odpowiedziały na ostatni ping ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Żaden przekaźnik nie odpowiedział na ostatni ping, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Żaden przekaźnik nie odpowiedział na ostatnie pingi ($count). Możesz być poza zasięgiem na tej częstotliwości albo przekaźniki są zajęte.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds s temu';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes min temu';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (bieżące)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Wszystkie przekaźniki';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Pokaż tylko ten przekaźnik';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Najlepsze łącze $snr ($grade). Słyszany w komórkach mapy: $cells.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Mocne';
+
+  @override
+  String get coverage_gradeGood => 'Dobre';
+
+  @override
+  String get coverage_gradeWeak => 'Słabe';
+
+  @override
+  String get coverage_gradeMarginal => 'Zawodne';
+
+  @override
+  String get coverage_gradeNone => 'Brak odpowiedzi';
+
+  @override
+  String get coverage_followMe => 'Śledź moją pozycję';
+
+  @override
+  String get coverage_exportSurvey => 'Eksportuj pomiar';
+
+  @override
+  String get coverage_exportGeoJson => 'Eksportuj GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Eksportuj KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Importuj pomiar';
+
+  @override
+  String get coverage_clear => 'Wyczyść pomiar';
+
+  @override
+  String get coverage_clearTitle => 'Wyczyścić pomiar?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Spowoduje to usunięcie wszystkich pingów na tym urządzeniu ($count). Najpierw je wyeksportuj, aby je zachować.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Zapisano $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Eksport nie powiódł się: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Dodane nowe pingi: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Ten plik nie jest pomiarem zasięgu';
 }

@@ -7233,4 +7233,165 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => '本来の名前を使う';
+
+  @override
+  String get coverage_title => 'カバレッジ調査';
+
+  @override
+  String get coverage_aboutTitle => 'カバレッジ調査について';
+
+  @override
+  String get coverage_aboutBody =>
+      'カバレッジ調査は、リピーターがあなたを受信できる場所を地図に示します。\n\n調査中、約 150 m 移動するごとに、直接電波が届くリピーターへ ping を送ります(間隔は 30 秒以上、停止中は 2 分ごと)。ping を受信した各リピーターは、あなたがそのリピーターを受信した強さと、リピーターがあなたを受信した強さの 2 つの値を返します。弱いほうの値で地図が色分けされます。\n\n緑は強いリンク、黄緑は良好、琥珀色は弱い、赤は不安定、灰色はどのリピーターも応答しなかったことを表します。直前の ping に応答した各リピーターへ線が伸びます。\n\n周波数設定ごとに別の地図になるので、切り替える前にカバレッジを比べられます。SOS が有効な間は ping を停止します。リピーターが応答するのは全員合わせて 2 分間に最大 4 回の ping までです。複数の捜索者が ping している場合、応答がないのは圏外ではなく混雑のこともあります。\n\n「エクスポート」で調査を共有し、「インポート」で統合できます。GeoJSON と KML ファイルは Google Earth や地図ソフトで開けます。';
+
+  @override
+  String get coverage_start => '調査を開始';
+
+  @override
+  String get coverage_stop => '調査を停止';
+
+  @override
+  String get coverage_pingNow => '今すぐ ping';
+
+  @override
+  String get coverage_statusIdle => '調査を開始して移動してください。リピーターが応答するにつれて地図が埋まります。';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return '調査を停止しました。保存した ping: $count';
+  }
+
+  @override
+  String get coverage_statusPinging => 'リピーターに ping 中…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return '次の ping は $time 後に可能';
+  }
+
+  @override
+  String get coverage_statusMove => '150 m 移動後または 2 分後に次の ping';
+
+  @override
+  String get coverage_pausedDisconnected => '一時停止中: 無線機が接続されていません';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      '一時停止中: 無線機のファームウェアが古く、リピーターに ping できません';
+
+  @override
+  String get coverage_pausedSos => 'SOS が有効な間はチャンネルを空けるため一時停止中';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      '一時停止中: 位置情報を待っています。このアプリの位置情報をオンにしてください。';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'スマートフォンに GPS がないため、無線機の位置を使用しています。';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return '直前の ping に応答したリピーター($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return '直前の ping に応答したリピーターはありません($ago)';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return '直近 $count 回の ping にどのリピーターも応答していません。この周波数の圏外か、リピーターが混雑している可能性があります。';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds 秒前';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes 分前';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label(現在)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'すべてのリピーター';
+
+  @override
+  String get coverage_onlyThisRepeater => 'このリピーターだけ表示';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return '最良リンク $snr($grade)。$cells 個の地図セルで受信。';
+  }
+
+  @override
+  String get coverage_gradeStrong => '強い';
+
+  @override
+  String get coverage_gradeGood => '良好';
+
+  @override
+  String get coverage_gradeWeak => '弱い';
+
+  @override
+  String get coverage_gradeMarginal => '不安定';
+
+  @override
+  String get coverage_gradeNone => '応答なし';
+
+  @override
+  String get coverage_followMe => '現在地を追従';
+
+  @override
+  String get coverage_exportSurvey => '調査をエクスポート';
+
+  @override
+  String get coverage_exportGeoJson => 'GeoJSON をエクスポート';
+
+  @override
+  String get coverage_exportKml => 'KML をエクスポート(Google Earth)';
+
+  @override
+  String get coverage_import => '調査をインポート';
+
+  @override
+  String get coverage_clear => '調査を消去';
+
+  @override
+  String get coverage_clearTitle => '調査を消去しますか?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'この端末の ping $count 件をすべて削除します。残したい場合は先にエクスポートしてください。';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return '保存しました: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'エクスポートに失敗しました: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return '追加された新しい ping: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'このファイルはカバレッジ調査ではありません';
 }

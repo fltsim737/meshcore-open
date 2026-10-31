@@ -7598,4 +7598,169 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Utiliser son propre nom';
+
+  @override
+  String get coverage_title => 'Relevé de couverture';
+
+  @override
+  String get coverage_aboutTitle => 'À propos du relevé de couverture';
+
+  @override
+  String get coverage_aboutBody =>
+      'Le relevé de couverture montre sur la carte où les répéteurs vous entendent.\n\nPendant le relevé, l\'application envoie un ping aux répéteurs à portée radio directe chaque fois que vous avancez d\'environ 150 m, au plus une fois toutes les 30 s, et toutes les 2 minutes à l\'arrêt. Chaque répéteur qui entend le ping répond avec deux mesures : la qualité à laquelle vous l\'entendez et celle à laquelle il vous entend. La plus faible des deux colore la carte.\n\nVert indique une liaison forte, vert clair bonne, orange faible, rouge peu fiable, et gris signifie qu\'aucun répéteur n\'a répondu. Des lignes partent vers chaque répéteur qui a répondu au dernier ping.\n\nChaque réglage de fréquence a sa propre carte, pour comparer la couverture avant de changer. Les pings s\'arrêtent pendant un SOS actif. Un répéteur répond au plus à 4 pings en 2 minutes, tous émetteurs confondus : avec plusieurs chercheurs, une réponse manquante peut signifier occupé, et non hors de portée.\n\nPartagez les relevés avec Exporter et fusionnez-les avec Importer. Les fichiers GeoJSON et KML s\'ouvrent dans Google Earth et les logiciels de cartographie.';
+
+  @override
+  String get coverage_start => 'Démarrer le relevé';
+
+  @override
+  String get coverage_stop => 'Arrêter le relevé';
+
+  @override
+  String get coverage_pingNow => 'Pinger maintenant';
+
+  @override
+  String get coverage_statusIdle =>
+      'Démarrez un relevé, puis déplacez-vous. La carte se remplit à mesure que les répéteurs répondent.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Relevé arrêté. Pings enregistrés : $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Ping des répéteurs…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Prochain ping possible dans $time';
+  }
+
+  @override
+  String get coverage_statusMove =>
+      'Prochain ping après 150 m ou dans 2 minutes';
+
+  @override
+  String get coverage_pausedDisconnected => 'En pause : aucune radio connectée';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'En pause : le firmware de la radio est trop ancien pour pinger les répéteurs';
+
+  @override
+  String get coverage_pausedSos =>
+      'En pause pendant un SOS actif, pour laisser le canal libre';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'En pause : en attente d\'une position. Activez la localisation pour cette application.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Pas de GPS sur le téléphone : la position de la radio est utilisée.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Répéteurs ayant répondu au dernier ping ($ago) : $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Aucun répéteur n\'a répondu au dernier ping, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Aucun répéteur n\'a répondu aux $count derniers pings. Vous êtes peut-être hors couverture sur cette fréquence, ou les répéteurs sont occupés.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return 'il y a $seconds s';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return 'il y a $minutes min';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (actuelle)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Tous les répéteurs';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Afficher seulement ce répéteur';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Meilleure liaison $snr ($grade). Entendu dans $cells cellules de la carte.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Forte';
+
+  @override
+  String get coverage_gradeGood => 'Bonne';
+
+  @override
+  String get coverage_gradeWeak => 'Faible';
+
+  @override
+  String get coverage_gradeMarginal => 'Peu fiable';
+
+  @override
+  String get coverage_gradeNone => 'Pas de réponse';
+
+  @override
+  String get coverage_followMe => 'Suivre ma position';
+
+  @override
+  String get coverage_exportSurvey => 'Exporter le relevé';
+
+  @override
+  String get coverage_exportGeoJson => 'Exporter en GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Exporter en KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Importer un relevé';
+
+  @override
+  String get coverage_clear => 'Effacer le relevé';
+
+  @override
+  String get coverage_clearTitle => 'Effacer le relevé ?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Les $count pings de cet appareil seront supprimés. Exportez-les d\'abord pour les garder.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Enregistré : $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Échec de l\'export : $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Nouveaux pings ajoutés : $count';
+  }
+
+  @override
+  String get coverage_importFailed =>
+      'Ce fichier n\'est pas un relevé de couverture';
 }

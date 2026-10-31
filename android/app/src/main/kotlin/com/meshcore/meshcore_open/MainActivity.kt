@@ -9,6 +9,7 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.FlutterEngineCache
 import io.flutter.embedding.engine.dart.DartExecutor
+import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
     /**
@@ -29,6 +30,24 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun shouldDestroyEngineWithHost(): Boolean = false
+
+    /** Per activity: keeps the screen on while a coverage survey runs, so GPS keeps coming. */
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SCREEN_CHANNEL)
+            .setMethodCallHandler { call, result ->
+                if (call.method == "keepOn") {
+                    if (call.argument<Boolean>("on") == true) {
+                        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                    } else {
+                        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                    }
+                    result.success(true)
+                } else {
+                    result.notImplemented()
+                }
+            }
+    }
 
     // An incoming SOS's full-screen alert opens the app over the lock screen with the screen
     // turned on. Only then: once the app leaves the screen it no longer shows over the lock.
@@ -82,6 +101,7 @@ class MainActivity : FlutterActivity() {
 
     companion object {
         private const val ENGINE_ID = "meshcore_main"
+        private const val SCREEN_CHANNEL = "meshcore_open/screen"
         const val ACTION_SOS_ALERT = "com.meshcore.meshcore_open.SOS_ALERT"
     }
 }

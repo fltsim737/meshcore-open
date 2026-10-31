@@ -7556,4 +7556,169 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'A saját nevét használja';
+
+  @override
+  String get coverage_title => 'Lefedettségmérés';
+
+  @override
+  String get coverage_aboutTitle => 'A lefedettségmérésről';
+
+  @override
+  String get coverage_aboutBody =>
+      'A lefedettségmérés megmutatja a térképen, hol hallanak téged a jelismétlők.\n\nMérés közben az alkalmazás nagyjából 150 méterenként pinget küld a közvetlen rádiós hatótávon belüli jelismétlőknek, legfeljebb 30 másodpercenként, álló helyzetben pedig 2 percenként. Minden jelismétlő, amely hallja a pinget, két értékkel válaszol: te mennyire jól hallod őt, és ő mennyire jól hall téged. A kettő közül a gyengébb színezi a térképet.\n\nA zöld erős kapcsolat, a világoszöld jó, a borostyán gyenge, a piros megbízhatatlan, a szürke pedig azt jelenti, hogy egy jelismétlő sem válaszolt. Vonalak futnak minden jelismétlőhöz, amely válaszolt az utolsó pingre.\n\nMinden frekvenciabeállításnak saját térképe van, így váltás előtt összevetheted a lefedettséget. Aktív SOS alatt a pingelés szünetel. Egy jelismétlő 2 percenként legfeljebb 4 pingre válaszol, mindenkitől együttvéve, így ha többen pingelnek, a hiányzó válasz jelenthet foglaltságot is, nem csak hatótávon kívüliséget.\n\nA méréseket az Exportálással oszthatod meg, és az Importálással egyesítheted. A GeoJSON- és KML-fájlok megnyílnak a Google Earthben és térképes programokban.';
+
+  @override
+  String get coverage_start => 'Mérés indítása';
+
+  @override
+  String get coverage_stop => 'Mérés leállítása';
+
+  @override
+  String get coverage_pingNow => 'Pingelés most';
+
+  @override
+  String get coverage_statusIdle =>
+      'Indíts egy mérést, és indulj el. A térkép a jelismétlők válaszaival telik meg.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Mérés leállítva. Mentett pingek: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Jelismétlők pingelése…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'A következő ping $time múlva lehetséges';
+  }
+
+  @override
+  String get coverage_statusMove =>
+      'Következő ping 150 m után vagy 2 perc múlva';
+
+  @override
+  String get coverage_pausedDisconnected =>
+      'Szünetel: nincs rádió csatlakoztatva';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Szünetel: a rádió firmware-e túl régi a jelismétlők pingeléséhez';
+
+  @override
+  String get coverage_pausedSos =>
+      'Aktív SOS alatt szünetel, hogy a csatorna szabad maradjon';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Szünetel: helyadatra vár. Kapcsold be a helymeghatározást ehhez az alkalmazáshoz.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'A telefonban nincs GPS: a rádió helyzete szerepel.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Az utolsó pingre válaszoló jelismétlők ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Egy jelismétlő sem válaszolt az utolsó pingre, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Az utolsó pingekre ($count) egy jelismétlő sem válaszolt. Lehet, hogy ezen a frekvencián lefedettségen kívül vagy, vagy a jelismétlők foglaltak.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds mp-e';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes perce';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (jelenlegi)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Minden jelismétlő';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Csak ez a jelismétlő';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Legjobb kapcsolat $snr ($grade). Hallható térképcellák: $cells.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Erős';
+
+  @override
+  String get coverage_gradeGood => 'Jó';
+
+  @override
+  String get coverage_gradeWeak => 'Gyenge';
+
+  @override
+  String get coverage_gradeMarginal => 'Megbízhatatlan';
+
+  @override
+  String get coverage_gradeNone => 'Nincs válasz';
+
+  @override
+  String get coverage_followMe => 'Kövesse a helyzetemet';
+
+  @override
+  String get coverage_exportSurvey => 'Mérés exportálása';
+
+  @override
+  String get coverage_exportGeoJson => 'GeoJSON exportálása';
+
+  @override
+  String get coverage_exportKml => 'KML exportálása (Google Earth)';
+
+  @override
+  String get coverage_import => 'Mérés importálása';
+
+  @override
+  String get coverage_clear => 'Mérés törlése';
+
+  @override
+  String get coverage_clearTitle => 'Törlöd a mérést?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Ez törli az eszközön lévő összes pinget ($count). Ha meg akarod tartani őket, előbb exportáld.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Mentve: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Sikertelen exportálás: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Új pingek hozzáadva: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Ez a fájl nem lefedettségmérés';
 }

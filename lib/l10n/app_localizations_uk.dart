@@ -7580,4 +7580,168 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Використати його власне ім\'я';
+
+  @override
+  String get coverage_title => 'Обстеження покриття';
+
+  @override
+  String get coverage_aboutTitle => 'Про обстеження покриття';
+
+  @override
+  String get coverage_aboutBody =>
+      'Обстеження покриття показує на мапі, де ретранслятори вас чують.\n\nПоки воно триває, застосунок надсилає пінг ретрансляторам у прямій радіодосяжності щоразу, як ви проходите приблизно 150 м, не частіше ніж раз на 30 с, а на місці — кожні 2 хвилини. Кожен ретранслятор, що почув пінг, відповідає двома показниками: наскільки добре ви чуєте його і наскільки добре він чує вас. Слабший із них розфарбовує мапу.\n\nЗелений — сильний зв\'язок, світло-зелений — добрий, бурштиновий — слабкий, червоний — ненадійний, сірий — жоден ретранслятор не відповів. До кожного ретранслятора, що відповів на останній пінг, тягнеться лінія.\n\nДля кожного налаштування частоти своя мапа, тож покриття можна порівняти перед перемиканням. Під час активного SOS пінги призупиняються. Ретранслятор відповідає щонайбільше на 4 пінги за 2 хвилини від усіх разом, тому коли пінгують кілька пошуковців, відсутня відповідь може означати зайнятість, а не поза зоною.\n\nДіліться обстеженнями через Експорт і об\'єднуйте їх через Імпорт. Файли GeoJSON і KML відкриваються в Google Earth і картографічних програмах.';
+
+  @override
+  String get coverage_start => 'Почати обстеження';
+
+  @override
+  String get coverage_stop => 'Зупинити обстеження';
+
+  @override
+  String get coverage_pingNow => 'Пінг зараз';
+
+  @override
+  String get coverage_statusIdle =>
+      'Почніть обстеження й рушайте. Мапа заповнюється, коли ретранслятори відповідають.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Обстеження зупинено. Збережено пінгів: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Пінг ретрансляторів…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Наступний пінг можливий через $time';
+  }
+
+  @override
+  String get coverage_statusMove =>
+      'Наступний пінг через 150 м або через 2 хвилини';
+
+  @override
+  String get coverage_pausedDisconnected => 'Пауза: радіо не під\'єднано';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Пауза: прошивка радіо застара для пінгу ретрансляторів';
+
+  @override
+  String get coverage_pausedSos =>
+      'Пауза на час активного SOS, щоб канал був вільний';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Пауза: очікування місцезнаходження. Увімкніть геолокацію для цього застосунку.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'У телефоні немає GPS: використовується позиція радіо.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Ретрансляторів відповіло на останній пінг ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Жоден ретранслятор не відповів на останній пінг, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Жоден ретранслятор не відповів на останні пінги ($count). Можливо, ви поза покриттям на цій частоті, або ретранслятори зайняті.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds с тому';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes хв тому';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (поточна)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Усі ретранслятори';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Показати лише цей ретранслятор';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Найкращий зв\'язок $snr ($grade). Чути в комірках мапи: $cells.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Сильний';
+
+  @override
+  String get coverage_gradeGood => 'Добрий';
+
+  @override
+  String get coverage_gradeWeak => 'Слабкий';
+
+  @override
+  String get coverage_gradeMarginal => 'Ненадійний';
+
+  @override
+  String get coverage_gradeNone => 'Немає відповіді';
+
+  @override
+  String get coverage_followMe => 'Стежити за моєю позицією';
+
+  @override
+  String get coverage_exportSurvey => 'Експорт обстеження';
+
+  @override
+  String get coverage_exportGeoJson => 'Експорт GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Експорт KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Імпорт обстеження';
+
+  @override
+  String get coverage_clear => 'Очистити обстеження';
+
+  @override
+  String get coverage_clearTitle => 'Очистити обстеження?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Буде видалено всі пінги на цьому пристрої ($count). Спершу експортуйте їх, щоб зберегти.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Збережено: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Помилка експорту: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Додано нових пінгів: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Цей файл не є обстеженням покриття';
 }

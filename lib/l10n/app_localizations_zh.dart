@@ -7081,4 +7081,162 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => '使用其自己的名称';
+
+  @override
+  String get coverage_title => '覆盖勘测';
+
+  @override
+  String get coverage_aboutTitle => '关于覆盖勘测';
+
+  @override
+  String get coverage_aboutBody =>
+      '覆盖勘测会在地图上标出中继器能听到你的地方。\n\n勘测进行时,你每移动约 150 米,应用就向直接无线电范围内的中继器发送一次 ping,两次之间至少间隔 30 秒;静止时每 2 分钟一次。每个听到 ping 的中继器都会回复两个读数:你听它有多清楚,以及它听你有多清楚。两者中较弱的一个决定地图颜色。\n\n绿色表示强链路,浅绿色良好,琥珀色较弱,红色不可靠,灰色表示没有中继器回复。会有线条扫向每个回复了上一次 ping 的中继器。\n\n每种频率设置各有一张地图,便于在切换前比较覆盖。SOS 激活期间暂停 ping。每个中继器每 2 分钟最多回复所有人合计 4 次 ping,因此多名搜索者同时 ping 时,没有回复可能只是繁忙,而不是超出范围。\n\n用“导出”分享勘测,用“导入”合并勘测。GeoJSON 和 KML 文件可在 Google Earth 和地图软件中打开。';
+
+  @override
+  String get coverage_start => '开始勘测';
+
+  @override
+  String get coverage_stop => '停止勘测';
+
+  @override
+  String get coverage_pingNow => '立即 ping';
+
+  @override
+  String get coverage_statusIdle => '开始勘测后出发。中继器回复时地图会逐步填充。';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return '勘测已停止。已保存 ping:$count。';
+  }
+
+  @override
+  String get coverage_statusPinging => '正在 ping 中继器…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return '$time 后可再次 ping';
+  }
+
+  @override
+  String get coverage_statusMove => '移动 150 米后或 2 分钟后进行下一次 ping';
+
+  @override
+  String get coverage_pausedDisconnected => '已暂停:未连接无线电';
+
+  @override
+  String get coverage_pausedUnsupported => '已暂停:无线电固件太旧,无法 ping 中继器';
+
+  @override
+  String get coverage_pausedSos => 'SOS 激活期间暂停,以保持信道空闲';
+
+  @override
+  String get coverage_pausedNoLocation => '已暂停:正在等待位置。请为本应用开启定位。';
+
+  @override
+  String get coverage_usingRadioPosition => '手机没有 GPS:使用无线电的位置。';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return '回复上一次 ping 的中继器($ago):$count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return '没有中继器回复上一次 ping,$ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return '最近 $count 次 ping 都没有中继器回复。你可能在此频率的覆盖范围之外,或中继器正忙。';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds 秒前';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes 分钟前';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label(当前)';
+  }
+
+  @override
+  String get coverage_allRepeaters => '所有中继器';
+
+  @override
+  String get coverage_onlyThisRepeater => '只显示此中继器';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return '最佳链路 $snr($grade)。在 $cells 个地图格中听到。';
+  }
+
+  @override
+  String get coverage_gradeStrong => '强';
+
+  @override
+  String get coverage_gradeGood => '良好';
+
+  @override
+  String get coverage_gradeWeak => '弱';
+
+  @override
+  String get coverage_gradeMarginal => '不可靠';
+
+  @override
+  String get coverage_gradeNone => '无回复';
+
+  @override
+  String get coverage_followMe => '跟随我的位置';
+
+  @override
+  String get coverage_exportSurvey => '导出勘测';
+
+  @override
+  String get coverage_exportGeoJson => '导出 GeoJSON';
+
+  @override
+  String get coverage_exportKml => '导出 KML(Google Earth)';
+
+  @override
+  String get coverage_import => '导入勘测';
+
+  @override
+  String get coverage_clear => '清除勘测';
+
+  @override
+  String get coverage_clearTitle => '清除勘测?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return '这将删除此设备上的全部 $count 次 ping。如需保留,请先导出。';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return '已保存 $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return '导出失败:$error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return '新增 ping:$count';
+  }
+
+  @override
+  String get coverage_importFailed => '该文件不是覆盖勘测';
 }

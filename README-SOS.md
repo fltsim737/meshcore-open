@@ -117,13 +117,13 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.1.3; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.2.0; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
-| Android (any phone) | `meshcore-open-sos-10.1.3.apk` | `meshcore-open-sos-voice-10.1.3.apk` |
-| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.3-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.3-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.3-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.3-windows-source.zip` |
+| Android (any phone) | `meshcore-open-sos-10.2.0.apk` | `meshcore-open-sos-voice-10.2.0.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.2.0-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.2.0-x86_64.AppImage` |
+| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.2.0-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.2.0-windows-source.zip` |
 
 ### Android
 
@@ -208,6 +208,10 @@ See [Voice](#voice-sos-voice-only) and [Push-to-talk](#push-to-talk-sos-voice-on
 ### Naming your contacts
 
 Long-press a contact and choose **Set custom name** to call it what you like, such as *Dad* for "VK2-Rob-Mobile". The app uses that name wherever it shows the contact, on every radio you connect, and Export config carries it to a new phone. It's never sent to the radio or to anyone else: the contact keeps advertising its own name, which the contact's options still show (*Advertises as …*). **Use its own name** takes it off. (Since 10.1.3.)
+
+### Mapping repeater coverage
+
+**Map → ⋮ → Coverage survey**, then **Start survey**, and travel. Every 150 m or so (at most every 30 s, and every 2 minutes standing still) the app pings for repeaters in direct range, and each one that hears it answers with how well you heard it and how well it heard you. The map fills in with hexagons about 100 m across, coloured by the weaker direction: green strong, light green good, amber weak, red unreliable, grey no answer. A line sweeps out to each repeater that answered. Pick one repeater to see its footprint alone. Each frequency setting is its own layer, and after 3 silent pings in a row the phone warns that you may be out of coverage on this frequency. That helps a search decide when to switch, and helps a group find where the existing repeaters reach. Pinging pauses during an SOS. **Export survey** and **Import survey** combine several people's surveys into one map; **Export GeoJSON** or **KML** opens them in Google Earth or GIS tools. A repeater answers at most 4 pings in 2 minutes from everyone together, so with several people pinging, a missing answer can mean busy, not out of range. (Since 10.2.0.)
 
 ### Backing up your radio
 
@@ -296,6 +300,7 @@ What it can't protect against:
 - **Windows** has no phone GPS. Use a radio with GPS or set a stored location.
 - **Voice** has been tested between two radios on Android and Linux. It still needs testing across several repeater hops and with more people on one network. The Windows voice build is new, and its microphone and playback still need confirming on more PCs.
 - The repeat intervals are fixed in this version.
+- **Coverage survey** only measures repeaters in direct range of your radio, on the settings it's on now. A repeater with no advertised location gets no line on the map. Stock repeaters rate-limit their answers, so a grey hexagon is "no answer", not proof of no coverage.
 
 ---
 

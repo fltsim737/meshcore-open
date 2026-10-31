@@ -7581,4 +7581,169 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Использовать его собственное имя';
+
+  @override
+  String get coverage_title => 'Обследование покрытия';
+
+  @override
+  String get coverage_aboutTitle => 'Об обследовании покрытия';
+
+  @override
+  String get coverage_aboutBody =>
+      'Обследование покрытия показывает на карте, где ретрансляторы вас слышат.\n\nПока оно идёт, приложение отправляет пинг ретрансляторам в прямой радиодоступности каждые примерно 150 м, не чаще раза в 30 с, а на месте — каждые 2 минуты. Каждый ретранслятор, услышавший пинг, отвечает двумя показаниями: насколько хорошо вы слышите его и насколько хорошо он слышит вас. Более слабое из них окрашивает карту.\n\nЗелёный — сильная связь, светло-зелёный — хорошая, жёлтый — слабая, красный — ненадёжная, серый — ни один ретранслятор не ответил. К каждому ретранслятору, ответившему на последний пинг, проводится линия.\n\nДля каждой настройки частоты своя карта, так что покрытие можно сравнить перед переключением. Во время активного SOS пинги приостанавливаются. Ретранслятор отвечает не более чем на 4 пинга за 2 минуты от всех вместе, поэтому при нескольких поисковиках отсутствие ответа может означать занятость, а не выход из зоны.\n\nДелитесь обследованиями через Экспорт и объединяйте их через Импорт. Файлы GeoJSON и KML открываются в Google Earth и картографических программах.';
+
+  @override
+  String get coverage_start => 'Начать обследование';
+
+  @override
+  String get coverage_stop => 'Остановить обследование';
+
+  @override
+  String get coverage_pingNow => 'Пинг сейчас';
+
+  @override
+  String get coverage_statusIdle =>
+      'Начните обследование и двигайтесь. Карта заполняется по мере ответов ретрансляторов.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Обследование остановлено. Сохранено пингов: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Пинг ретрансляторов…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Следующий пинг возможен через $time';
+  }
+
+  @override
+  String get coverage_statusMove =>
+      'Следующий пинг через 150 м или через 2 минуты';
+
+  @override
+  String get coverage_pausedDisconnected => 'Пауза: радио не подключено';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Пауза: прошивка радио слишком старая для пинга ретрансляторов';
+
+  @override
+  String get coverage_pausedSos =>
+      'Пауза на время активного SOS, чтобы канал был свободен';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Пауза: ожидание местоположения. Включите геолокацию для этого приложения.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'В телефоне нет GPS: используется позиция радио.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Ретрансляторов ответило на последний пинг ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Ни один ретранслятор не ответил на последний пинг, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Ни один ретранслятор не ответил на последние пинги ($count). Возможно, вы вне зоны покрытия на этой частоте, или ретрансляторы заняты.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds с назад';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes мин назад';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (текущая)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Все ретрансляторы';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Показать только этот ретранслятор';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Лучшая связь $snr ($grade). Слышен в ячейках карты: $cells.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Сильная';
+
+  @override
+  String get coverage_gradeGood => 'Хорошая';
+
+  @override
+  String get coverage_gradeWeak => 'Слабая';
+
+  @override
+  String get coverage_gradeMarginal => 'Ненадёжная';
+
+  @override
+  String get coverage_gradeNone => 'Нет ответа';
+
+  @override
+  String get coverage_followMe => 'Следовать за моей позицией';
+
+  @override
+  String get coverage_exportSurvey => 'Экспорт обследования';
+
+  @override
+  String get coverage_exportGeoJson => 'Экспорт GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Экспорт KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Импорт обследования';
+
+  @override
+  String get coverage_clear => 'Очистить обследование';
+
+  @override
+  String get coverage_clearTitle => 'Очистить обследование?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Будут удалены все пинги на этом устройстве ($count). Сначала экспортируйте их, чтобы сохранить.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Сохранено: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Ошибка экспорта: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Добавлено новых пингов: $count';
+  }
+
+  @override
+  String get coverage_importFailed =>
+      'Этот файл не является обследованием покрытия';
 }

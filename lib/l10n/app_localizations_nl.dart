@@ -7533,4 +7533,167 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Eigen naam van het contact gebruiken';
+
+  @override
+  String get coverage_title => 'Dekkingsmeting';
+
+  @override
+  String get coverage_aboutTitle => 'Over de dekkingsmeting';
+
+  @override
+  String get coverage_aboutBody =>
+      'De dekkingsmeting toont op de kaart waar de repeaters je horen.\n\nZolang hij loopt, pingt de app repeaters binnen direct radiobereik telkens als je ongeveer 150 m verder bent, minstens 30 s na elkaar, en elke 2 minuten als je stilstaat. Elke repeater die de ping hoort, antwoordt met twee metingen: hoe goed jij hem hoort en hoe goed hij jou hoort. De zwakste van de twee kleurt de kaart.\n\nGroen is een sterke verbinding, lichtgroen goed, oranje zwak, rood onbetrouwbaar, en grijs betekent dat geen repeater antwoordde. Lijnen lopen naar elke repeater die op de laatste ping antwoordde.\n\nElke frequentie-instelling heeft een eigen kaart, zodat je de dekking kunt vergelijken voordat je wisselt. Tijdens een actieve SOS wordt niet gepingd. Een repeater beantwoordt hooguit 4 pings per 2 minuten van iedereen samen, dus met meerdere zoekers kan een ontbrekend antwoord bezet betekenen in plaats van buiten bereik.\n\nDeel metingen met Exporteren en voeg ze samen met Importeren. GeoJSON- en KML-bestanden openen in Google Earth en kaartprogramma\'s.';
+
+  @override
+  String get coverage_start => 'Meting starten';
+
+  @override
+  String get coverage_stop => 'Meting stoppen';
+
+  @override
+  String get coverage_pingNow => 'Nu pingen';
+
+  @override
+  String get coverage_statusIdle =>
+      'Start een meting en ga op pad. De kaart vult zich naarmate repeaters antwoorden.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Meting gestopt. Opgeslagen pings: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Repeaters pingen…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Volgende ping mogelijk over $time';
+  }
+
+  @override
+  String get coverage_statusMove => 'Volgende ping na 150 m of over 2 minuten';
+
+  @override
+  String get coverage_pausedDisconnected => 'Gepauzeerd: geen radio verbonden';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Gepauzeerd: de firmware van de radio is te oud om repeaters te pingen';
+
+  @override
+  String get coverage_pausedSos =>
+      'Gepauzeerd zolang er een SOS actief is, om het kanaal vrij te houden';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Gepauzeerd: wacht op een locatie. Zet locatie aan voor deze app.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Geen gps in de telefoon: de positie van de radio wordt gebruikt.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Repeaters die op de laatste ping antwoordden ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Geen repeater antwoordde op de laatste ping, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Geen repeater heeft op de laatste $count pings geantwoord. Misschien ben je buiten dekking op deze frequentie, of zijn de repeaters bezet.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds s geleden';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes min geleden';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (huidig)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Alle repeaters';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Alleen deze repeater tonen';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Beste verbinding $snr ($grade). Gehoord in $cells kaartcellen.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Sterk';
+
+  @override
+  String get coverage_gradeGood => 'Goed';
+
+  @override
+  String get coverage_gradeWeak => 'Zwak';
+
+  @override
+  String get coverage_gradeMarginal => 'Onbetrouwbaar';
+
+  @override
+  String get coverage_gradeNone => 'Geen antwoord';
+
+  @override
+  String get coverage_followMe => 'Mijn positie volgen';
+
+  @override
+  String get coverage_exportSurvey => 'Meting exporteren';
+
+  @override
+  String get coverage_exportGeoJson => 'GeoJSON exporteren';
+
+  @override
+  String get coverage_exportKml => 'KML exporteren (Google Earth)';
+
+  @override
+  String get coverage_import => 'Meting importeren';
+
+  @override
+  String get coverage_clear => 'Meting wissen';
+
+  @override
+  String get coverage_clearTitle => 'Meting wissen?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Hiermee worden alle $count pings op dit apparaat verwijderd. Exporteer ze eerst om ze te bewaren.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Opgeslagen: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Exporteren mislukt: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Nieuwe pings toegevoegd: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Dat bestand is geen dekkingsmeting';
 }

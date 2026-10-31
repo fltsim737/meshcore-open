@@ -7246,4 +7246,163 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => '원래 이름 사용';
+
+  @override
+  String get coverage_title => '커버리지 조사';
+
+  @override
+  String get coverage_aboutTitle => '커버리지 조사 정보';
+
+  @override
+  String get coverage_aboutBody =>
+      '커버리지 조사는 리피터가 내 신호를 받을 수 있는 곳을 지도에 표시합니다.\n\n조사 중에는 약 150m 이동할 때마다 직접 무선 범위 안의 리피터에 핑을 보냅니다. 간격은 최소 30초이며, 멈춰 있을 때는 2분마다 보냅니다. 핑을 받은 각 리피터는 두 가지 값으로 응답합니다. 내가 리피터를 얼마나 잘 받는지, 리피터가 나를 얼마나 잘 받는지입니다. 둘 중 약한 값으로 지도를 칠합니다.\n\n초록은 강한 링크, 연두는 양호, 호박색은 약함, 빨강은 불안정, 회색은 응답한 리피터가 없다는 뜻입니다. 마지막 핑에 응답한 리피터마다 선이 뻗어 나갑니다.\n\n주파수 설정마다 별도의 지도가 있어 전환하기 전에 커버리지를 비교할 수 있습니다. SOS가 활성인 동안에는 핑을 멈춥니다. 리피터는 모든 사람을 합쳐 2분에 최대 4번의 핑에만 응답하므로, 여러 수색자가 핑을 보내면 응답이 없는 것은 범위 밖이 아니라 바쁘다는 뜻일 수 있습니다.\n\n내보내기로 조사를 공유하고 가져오기로 합칠 수 있습니다. GeoJSON과 KML 파일은 Google Earth와 지도 프로그램에서 열립니다.';
+
+  @override
+  String get coverage_start => '조사 시작';
+
+  @override
+  String get coverage_stop => '조사 중지';
+
+  @override
+  String get coverage_pingNow => '지금 핑';
+
+  @override
+  String get coverage_statusIdle => '조사를 시작하고 이동하세요. 리피터가 응답할수록 지도가 채워집니다.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return '조사를 중지했습니다. 저장된 핑: $count';
+  }
+
+  @override
+  String get coverage_statusPinging => '리피터에 핑 보내는 중…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return '$time 후 다음 핑 가능';
+  }
+
+  @override
+  String get coverage_statusMove => '150m 이동 후 또는 2분 후 다음 핑';
+
+  @override
+  String get coverage_pausedDisconnected => '일시 중지: 연결된 무선기가 없습니다';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      '일시 중지: 무선기 펌웨어가 너무 오래되어 리피터에 핑을 보낼 수 없습니다';
+
+  @override
+  String get coverage_pausedSos => 'SOS가 활성인 동안 채널을 비워 두기 위해 일시 중지';
+
+  @override
+  String get coverage_pausedNoLocation => '일시 중지: 위치를 기다리는 중입니다. 이 앱의 위치를 켜세요.';
+
+  @override
+  String get coverage_usingRadioPosition => '휴대폰에 GPS가 없어 무선기의 위치를 사용합니다.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return '마지막 핑에 응답한 리피터($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return '마지막 핑에 응답한 리피터가 없습니다, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return '최근 $count번의 핑에 응답한 리피터가 없습니다. 이 주파수의 커버리지 밖이거나 리피터가 바쁠 수 있습니다.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return '$seconds초 전';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return '$minutes분 전';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (현재)';
+  }
+
+  @override
+  String get coverage_allRepeaters => '모든 리피터';
+
+  @override
+  String get coverage_onlyThisRepeater => '이 리피터만 표시';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return '최고 링크 $snr ($grade). 지도 칸 $cells개에서 수신.';
+  }
+
+  @override
+  String get coverage_gradeStrong => '강함';
+
+  @override
+  String get coverage_gradeGood => '양호';
+
+  @override
+  String get coverage_gradeWeak => '약함';
+
+  @override
+  String get coverage_gradeMarginal => '불안정';
+
+  @override
+  String get coverage_gradeNone => '응답 없음';
+
+  @override
+  String get coverage_followMe => '내 위치 따라가기';
+
+  @override
+  String get coverage_exportSurvey => '조사 내보내기';
+
+  @override
+  String get coverage_exportGeoJson => 'GeoJSON 내보내기';
+
+  @override
+  String get coverage_exportKml => 'KML 내보내기(Google Earth)';
+
+  @override
+  String get coverage_import => '조사 가져오기';
+
+  @override
+  String get coverage_clear => '조사 지우기';
+
+  @override
+  String get coverage_clearTitle => '조사를 지울까요?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return '이 기기의 핑 $count개가 모두 삭제됩니다. 보관하려면 먼저 내보내세요.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return '저장됨: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return '내보내기 실패: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return '추가된 새 핑: $count';
+  }
+
+  @override
+  String get coverage_importFailed => '이 파일은 커버리지 조사가 아닙니다';
 }

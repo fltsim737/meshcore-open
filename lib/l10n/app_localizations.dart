@@ -12624,6 +12624,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use its own name'**
   String get contacts_useOwnName;
+
+  /// No description provided for @coverage_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage survey'**
+  String get coverage_title;
+
+  /// No description provided for @coverage_aboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About coverage survey'**
+  String get coverage_aboutTitle;
+
+  /// No description provided for @coverage_aboutBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage survey maps where the repeaters can hear you.\n\nWhile it runs, the app pings for repeaters in direct radio range each time you move about 150 m, at least 30 s apart, and every 2 minutes when you stand still. Every repeater that hears a ping answers with two readings: how well you heard it, and how well it heard you. The weaker of the two colours the map.\n\nGreen is a strong link, light green good, amber weak, red unreliable, and grey means no repeater answered. Lines sweep out to each repeater that answered the last ping.\n\nEach frequency setting gets its own map, so you can compare coverage before switching. Pinging pauses while an SOS is active. A repeater answers at most 4 pings in 2 minutes from everyone together, so with several searchers pinging, a missing answer can mean busy, not out of range.\n\nShare surveys with Export and merge them with Import. GeoJSON and KML files open in Google Earth and mapping tools.'**
+  String get coverage_aboutBody;
+
+  /// No description provided for @coverage_start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start survey'**
+  String get coverage_start;
+
+  /// No description provided for @coverage_stop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop survey'**
+  String get coverage_stop;
+
+  /// No description provided for @coverage_pingNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Ping now'**
+  String get coverage_pingNow;
+
+  /// No description provided for @coverage_statusIdle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a survey, then travel. The map fills in as repeaters answer.'**
+  String get coverage_statusIdle;
+
+  /// No description provided for @coverage_statusStopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Survey stopped. {count, plural, =1{1 ping} other{{count} pings}} saved.'**
+  String coverage_statusStopped(int count);
+
+  /// No description provided for @coverage_statusPinging.
+  ///
+  /// In en, this message translates to:
+  /// **'Pinging for repeaters…'**
+  String get coverage_statusPinging;
+
+  /// No description provided for @coverage_statusWait.
+  ///
+  /// In en, this message translates to:
+  /// **'Next ping allowed in {time}'**
+  String coverage_statusWait(String time);
+
+  /// No description provided for @coverage_statusMove.
+  ///
+  /// In en, this message translates to:
+  /// **'Next ping when you move 150 m, or in 2 minutes'**
+  String get coverage_statusMove;
+
+  /// No description provided for @coverage_pausedDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: no radio connected'**
+  String get coverage_pausedDisconnected;
+
+  /// No description provided for @coverage_pausedUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: the radio\'s firmware is too old to ping for repeaters'**
+  String get coverage_pausedUnsupported;
+
+  /// No description provided for @coverage_pausedSos.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused while an SOS is active, to keep the channel clear'**
+  String get coverage_pausedSos;
+
+  /// No description provided for @coverage_pausedNoLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: waiting for a location. Turn on location for this app.'**
+  String get coverage_pausedNoLocation;
+
+  /// No description provided for @coverage_usingRadioPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'No phone GPS: using the radio\'s position.'**
+  String get coverage_usingRadioPosition;
+
+  /// No description provided for @coverage_lastPing.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 repeater} other{{count} repeaters}} answered the last ping, {ago}'**
+  String coverage_lastPing(int count, String ago);
+
+  /// No description provided for @coverage_lastPingNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No repeater answered the last ping, {ago}'**
+  String coverage_lastPingNone(String ago);
+
+  /// No description provided for @coverage_outOfCoverage.
+  ///
+  /// In en, this message translates to:
+  /// **'No repeater has answered the last {count} pings. You may be out of coverage on this frequency, or the repeaters may be busy.'**
+  String coverage_outOfCoverage(int count);
+
+  /// No description provided for @coverage_agoSeconds.
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds} s ago'**
+  String coverage_agoSeconds(int seconds);
+
+  /// No description provided for @coverage_agoMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min ago'**
+  String coverage_agoMinutes(int minutes);
+
+  /// No description provided for @coverage_replySignal.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}  ↓{heard}  ↑{heardBy}'**
+  String coverage_replySignal(String name, String heard, String heardBy);
+
+  /// No description provided for @coverage_radioCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} (current)'**
+  String coverage_radioCurrent(String label);
+
+  /// No description provided for @coverage_allRepeaters.
+  ///
+  /// In en, this message translates to:
+  /// **'All repeaters'**
+  String get coverage_allRepeaters;
+
+  /// No description provided for @coverage_onlyThisRepeater.
+  ///
+  /// In en, this message translates to:
+  /// **'Show only this repeater'**
+  String get coverage_onlyThisRepeater;
+
+  /// No description provided for @coverage_repeaterSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Best link {snr} ({grade}). Heard in {cells} map cells.'**
+  String coverage_repeaterSummary(String snr, String grade, int cells);
+
+  /// No description provided for @coverage_gradeStrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong'**
+  String get coverage_gradeStrong;
+
+  /// No description provided for @coverage_gradeGood.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get coverage_gradeGood;
+
+  /// No description provided for @coverage_gradeWeak.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak'**
+  String get coverage_gradeWeak;
+
+  /// No description provided for @coverage_gradeMarginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Unreliable'**
+  String get coverage_gradeMarginal;
+
+  /// No description provided for @coverage_gradeNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No reply'**
+  String get coverage_gradeNone;
+
+  /// No description provided for @coverage_followMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow my position'**
+  String get coverage_followMe;
+
+  /// No description provided for @coverage_exportSurvey.
+  ///
+  /// In en, this message translates to:
+  /// **'Export survey'**
+  String get coverage_exportSurvey;
+
+  /// No description provided for @coverage_exportGeoJson.
+  ///
+  /// In en, this message translates to:
+  /// **'Export GeoJSON'**
+  String get coverage_exportGeoJson;
+
+  /// No description provided for @coverage_exportKml.
+  ///
+  /// In en, this message translates to:
+  /// **'Export KML (Google Earth)'**
+  String get coverage_exportKml;
+
+  /// No description provided for @coverage_import.
+  ///
+  /// In en, this message translates to:
+  /// **'Import survey'**
+  String get coverage_import;
+
+  /// No description provided for @coverage_clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear survey'**
+  String get coverage_clear;
+
+  /// No description provided for @coverage_clearTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear the survey?'**
+  String get coverage_clearTitle;
+
+  /// No description provided for @coverage_clearBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This deletes all {count} pings on this device. Export first to keep them.'**
+  String coverage_clearBody(int count);
+
+  /// No description provided for @coverage_exported.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {path}'**
+  String coverage_exported(String path);
+
+  /// No description provided for @coverage_exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Export failed: {error}'**
+  String coverage_exportFailed(String error);
+
+  /// No description provided for @coverage_imported.
+  ///
+  /// In en, this message translates to:
+  /// **'New pings added: {count}'**
+  String coverage_imported(int count);
+
+  /// No description provided for @coverage_importFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'That file isn\'t a coverage survey'**
+  String get coverage_importFailed;
 }
 
 class _AppLocalizationsDelegate

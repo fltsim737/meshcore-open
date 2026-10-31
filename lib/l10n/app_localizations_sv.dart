@@ -7511,4 +7511,167 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Använd kontaktens eget namn';
+
+  @override
+  String get coverage_title => 'Täckningsmätning';
+
+  @override
+  String get coverage_aboutTitle => 'Om täckningsmätning';
+
+  @override
+  String get coverage_aboutBody =>
+      'Täckningsmätningen visar på kartan var repeatrarna hör dig.\n\nMedan den pågår pingar appen repeatrar inom direkt radioräckvidd varje gång du har rört dig ungefär 150 m, minst 30 s mellan pingarna, och varannan minut när du står still. Varje repeater som hör pingen svarar med två värden: hur bra du hör den och hur bra den hör dig. Det svagaste av dem färgar kartan.\n\nGrönt är en stark länk, ljusgrönt bra, orange svag, rött opålitlig och grått betyder att ingen repeater svarade. Linjer dras ut till varje repeater som svarade på den senaste pingen.\n\nVarje frekvensinställning får en egen karta, så du kan jämföra täckningen innan du byter. Pingandet pausas medan ett SOS är aktivt. En repeater svarar på högst 4 pingar per 2 minuter från alla tillsammans, så när flera sökare pingar kan ett uteblivet svar betyda upptagen, inte utom räckhåll.\n\nDela mätningar med Exportera och slå ihop dem med Importera. GeoJSON- och KML-filer öppnas i Google Earth och kartprogram.';
+
+  @override
+  String get coverage_start => 'Starta mätning';
+
+  @override
+  String get coverage_stop => 'Stoppa mätning';
+
+  @override
+  String get coverage_pingNow => 'Pinga nu';
+
+  @override
+  String get coverage_statusIdle =>
+      'Starta en mätning och ge dig av. Kartan fylls i när repeatrar svarar.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Mätningen stoppad. Sparade pingar: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Pingar repeatrar…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Nästa ping tillåts om $time';
+  }
+
+  @override
+  String get coverage_statusMove => 'Nästa ping efter 150 m eller om 2 minuter';
+
+  @override
+  String get coverage_pausedDisconnected => 'Pausad: ingen radio ansluten';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Pausad: radions firmware är för gammal för att pinga repeatrar';
+
+  @override
+  String get coverage_pausedSos =>
+      'Pausad medan ett SOS är aktivt, så att kanalen hålls fri';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Pausad: väntar på en position. Slå på plats för den här appen.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Ingen GPS i telefonen: radions position används.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Repeatrar som svarade på den senaste pingen ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Ingen repeater svarade på den senaste pingen, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Ingen repeater har svarat på de senaste $count pingarna. Du kan vara utanför täckning på den här frekvensen, eller så är repeatrarna upptagna.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return 'för $seconds s sedan';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return 'för $minutes min sedan';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (nuvarande)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Alla repeatrar';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Visa bara den här repeatern';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Bästa länk $snr ($grade). Hörd i $cells kartrutor.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Stark';
+
+  @override
+  String get coverage_gradeGood => 'Bra';
+
+  @override
+  String get coverage_gradeWeak => 'Svag';
+
+  @override
+  String get coverage_gradeMarginal => 'Opålitlig';
+
+  @override
+  String get coverage_gradeNone => 'Inget svar';
+
+  @override
+  String get coverage_followMe => 'Följ min position';
+
+  @override
+  String get coverage_exportSurvey => 'Exportera mätning';
+
+  @override
+  String get coverage_exportGeoJson => 'Exportera GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Exportera KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Importera mätning';
+
+  @override
+  String get coverage_clear => 'Rensa mätning';
+
+  @override
+  String get coverage_clearTitle => 'Rensa mätningen?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Det här raderar alla $count pingar på enheten. Exportera dem först om du vill behålla dem.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Sparad: $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Exporten misslyckades: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Nya pingar tillagda: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Filen är ingen täckningsmätning';
 }
