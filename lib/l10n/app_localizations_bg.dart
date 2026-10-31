@@ -7598,4 +7598,53 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Този файл не е измерване на покритието';
+
+  @override
+  String get contacts_manageSensor => 'Управление на сензора';
+
+  @override
+  String get login_sensorLogin => 'Вход в сензора';
+
+  @override
+  String get login_sensorDescription =>
+      'Паролата на администратора отключва настройките и командния ред. Оставете я празна, за да видите показанията, ако сензорът допуска гости.';
+
+  @override
+  String get sensor_management => 'Управление на сензора';
+
+  @override
+  String get sensor_guest => 'Информация за сензора';
+
+  @override
+  String get telemetry_weatherAir => 'Въздух';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Точка на оросяване';
+
+  @override
+  String get telemetry_weatherWind => 'Вятър';
+
+  @override
+  String get telemetry_weatherRain => 'Дъжд';
+
+  @override
+  String get telemetry_weatherSun => 'Слънце';
+
+  @override
+  String get telemetry_windSpeed => 'Скорост на вятъра';
+
+  @override
+  String get telemetry_windGust => 'Порив';
+
+  @override
+  String get telemetry_rainRate => 'Интензитет на дъжда';
+
+  @override
+  String get telemetry_rainToday => 'Дъжд днес';
+
+  @override
+  String get telemetry_uvIndex => 'UV индекс';
+
+  @override
+  String get telemetry_solarRadiation => 'Слънчева радиация';
 }

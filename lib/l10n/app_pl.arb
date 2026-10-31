@@ -3775,5 +3775,21 @@
   "coverage_exported": "Zapisano {path}",
   "coverage_exportFailed": "Eksport nie powiódł się: {error}",
   "coverage_imported": "Dodane nowe pingi: {count}",
-  "coverage_importFailed": "Ten plik nie jest pomiarem zasięgu"
+  "coverage_importFailed": "Ten plik nie jest pomiarem zasięgu",
+  "contacts_manageSensor": "Zarządzaj czujnikiem",
+  "login_sensorLogin": "Logowanie do czujnika",
+  "login_sensorDescription": "Hasło administratora odblokowuje ustawienia i wiersz poleceń. Zostaw puste, aby zobaczyć odczyty, jeśli czujnik wpuszcza gości.",
+  "sensor_management": "Zarządzanie czujnikiem",
+  "sensor_guest": "Informacje o czujniku",
+  "telemetry_weatherAir": "Powietrze",
+  "telemetry_weatherDewPoint": "Punkt rosy",
+  "telemetry_weatherWind": "Wiatr",
+  "telemetry_weatherRain": "Deszcz",
+  "telemetry_weatherSun": "Słońce",
+  "telemetry_windSpeed": "Prędkość wiatru",
+  "telemetry_windGust": "Poryw",
+  "telemetry_rainRate": "Natężenie deszczu",
+  "telemetry_rainToday": "Deszcz dzisiaj",
+  "telemetry_uvIndex": "Indeks UV",
+  "telemetry_solarRadiation": "Promieniowanie słoneczne"
 }

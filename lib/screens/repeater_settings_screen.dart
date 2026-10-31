@@ -88,6 +88,7 @@ String _shortCommandLabel(String command) {
 }
 
 class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
+  bool get _isSensor => widget.repeater.type == advTypeSensor;
   final StorageService _storage = StorageService();
 
   bool _isLoading = false;
@@ -1421,8 +1422,8 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
                     _buildBasicSettingsCard(),
                     _buildRadioSettingsCard(),
                     _buildLocationSettingsCard(),
-                    _buildFeatureTogglesCard(),
-                    _buildNetworkHealthCard(),
+                    if (!_isSensor) _buildFeatureTogglesCard(),
+                    if (!_isSensor) _buildNetworkHealthCard(),
                     _buildAdvertisementSettingsCard(),
                     _buildOwnerInfoCard(),
                     _buildActionsCard(),
@@ -1530,19 +1531,20 @@ class _RepeaterSettingsScreenState extends State<RepeaterSettingsScreen> {
                 ],
                 onChanged: (_) => _flagHasChanges(),
               ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _guestPasswordController,
-                decoration: InputDecoration(
-                  labelText: l10n.repeater_guestPassword,
-                  helperText: l10n.repeater_guestPasswordHelper,
+              if (!_isSensor) const SizedBox(height: 12),
+              if (!_isSensor)
+                TextField(
+                  controller: _guestPasswordController,
+                  decoration: InputDecoration(
+                    labelText: l10n.repeater_guestPassword,
+                    helperText: l10n.repeater_guestPasswordHelper,
+                  ),
+                  obscureText: true,
+                  inputFormatters: const [
+                    Utf8LengthLimitingTextInputFormatter(_maxPasswordBytes),
+                  ],
+                  onChanged: (_) => _flagHasChanges(),
                 ),
-                obscureText: true,
-                inputFormatters: const [
-                  Utf8LengthLimitingTextInputFormatter(_maxPasswordBytes),
-                ],
-                onChanged: (_) => _flagHasChanges(),
-              ),
             ],
           ),
         ),

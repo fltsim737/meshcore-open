@@ -3747,5 +3747,21 @@
   "coverage_exported": "已保存 {path}",
   "coverage_exportFailed": "导出失败:{error}",
   "coverage_imported": "新增 ping:{count}",
-  "coverage_importFailed": "该文件不是覆盖勘测"
+  "coverage_importFailed": "该文件不是覆盖勘测",
+  "contacts_manageSensor": "管理传感器",
+  "login_sensorLogin": "传感器登录",
+  "login_sensorDescription": "管理员密码可解锁设置和命令行。若传感器允许访客，留空即可查看读数。",
+  "sensor_management": "传感器管理",
+  "sensor_guest": "传感器信息",
+  "telemetry_weatherAir": "空气",
+  "telemetry_weatherDewPoint": "露点",
+  "telemetry_weatherWind": "风",
+  "telemetry_weatherRain": "雨",
+  "telemetry_weatherSun": "日照",
+  "telemetry_windSpeed": "风速",
+  "telemetry_windGust": "阵风",
+  "telemetry_rainRate": "降雨强度",
+  "telemetry_rainToday": "今日降雨",
+  "telemetry_uvIndex": "紫外线指数",
+  "telemetry_solarRadiation": "太阳辐射"
 }

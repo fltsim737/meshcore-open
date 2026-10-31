@@ -7614,4 +7614,53 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Цей файл не є обстеженням покриття';
+
+  @override
+  String get contacts_manageSensor => 'Керувати датчиком';
+
+  @override
+  String get login_sensorLogin => 'Вхід у датчик';
+
+  @override
+  String get login_sensorDescription =>
+      'Пароль адміністратора відкриває налаштування й командний рядок. Залиште його порожнім, щоб бачити показники, якщо датчик пускає гостей.';
+
+  @override
+  String get sensor_management => 'Керування датчиком';
+
+  @override
+  String get sensor_guest => 'Відомості про датчик';
+
+  @override
+  String get telemetry_weatherAir => 'Повітря';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Точка роси';
+
+  @override
+  String get telemetry_weatherWind => 'Вітер';
+
+  @override
+  String get telemetry_weatherRain => 'Дощ';
+
+  @override
+  String get telemetry_weatherSun => 'Сонце';
+
+  @override
+  String get telemetry_windSpeed => 'Швидкість вітру';
+
+  @override
+  String get telemetry_windGust => 'Порив';
+
+  @override
+  String get telemetry_rainRate => 'Інтенсивність дощу';
+
+  @override
+  String get telemetry_rainToday => 'Дощ сьогодні';
+
+  @override
+  String get telemetry_uvIndex => 'УФ-індекс';
+
+  @override
+  String get telemetry_solarRadiation => 'Сонячна радіація';
 }

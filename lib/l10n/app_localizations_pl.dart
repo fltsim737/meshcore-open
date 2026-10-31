@@ -7628,4 +7628,53 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Ten plik nie jest pomiarem zasięgu';
+
+  @override
+  String get contacts_manageSensor => 'Zarządzaj czujnikiem';
+
+  @override
+  String get login_sensorLogin => 'Logowanie do czujnika';
+
+  @override
+  String get login_sensorDescription =>
+      'Hasło administratora odblokowuje ustawienia i wiersz poleceń. Zostaw puste, aby zobaczyć odczyty, jeśli czujnik wpuszcza gości.';
+
+  @override
+  String get sensor_management => 'Zarządzanie czujnikiem';
+
+  @override
+  String get sensor_guest => 'Informacje o czujniku';
+
+  @override
+  String get telemetry_weatherAir => 'Powietrze';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Punkt rosy';
+
+  @override
+  String get telemetry_weatherWind => 'Wiatr';
+
+  @override
+  String get telemetry_weatherRain => 'Deszcz';
+
+  @override
+  String get telemetry_weatherSun => 'Słońce';
+
+  @override
+  String get telemetry_windSpeed => 'Prędkość wiatru';
+
+  @override
+  String get telemetry_windGust => 'Poryw';
+
+  @override
+  String get telemetry_rainRate => 'Natężenie deszczu';
+
+  @override
+  String get telemetry_rainToday => 'Deszcz dzisiaj';
+
+  @override
+  String get telemetry_uvIndex => 'Indeks UV';
+
+  @override
+  String get telemetry_solarRadiation => 'Promieniowanie słoneczne';
 }

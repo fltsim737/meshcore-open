@@ -7544,4 +7544,53 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Filen är ingen täckningsmätning';
+
+  @override
+  String get contacts_manageSensor => 'Hantera sensor';
+
+  @override
+  String get login_sensorLogin => 'Sensorinloggning';
+
+  @override
+  String get login_sensorDescription =>
+      'Adminlösenordet låser upp inställningarna och kommandoraden. Lämna det tomt för att se mätvärdena, om sensorn släpper in gäster.';
+
+  @override
+  String get sensor_management => 'Sensorhantering';
+
+  @override
+  String get sensor_guest => 'Sensorinformation';
+
+  @override
+  String get telemetry_weatherAir => 'Luft';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Daggpunkt';
+
+  @override
+  String get telemetry_weatherWind => 'Vind';
+
+  @override
+  String get telemetry_weatherRain => 'Regn';
+
+  @override
+  String get telemetry_weatherSun => 'Sol';
+
+  @override
+  String get telemetry_windSpeed => 'Vindhastighet';
+
+  @override
+  String get telemetry_windGust => 'Byvind';
+
+  @override
+  String get telemetry_rainRate => 'Regnintensitet';
+
+  @override
+  String get telemetry_rainToday => 'Regn i dag';
+
+  @override
+  String get telemetry_uvIndex => 'UV-index';
+
+  @override
+  String get telemetry_solarRadiation => 'Solinstrålning';
 }

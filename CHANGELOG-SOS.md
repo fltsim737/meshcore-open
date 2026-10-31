@@ -2,6 +2,21 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.1 (2026-11-01)
+
+Both apps.
+
+### Managing sensors
+
+- **Sensors can now be managed like repeaters.** Long-press a sensor in Contacts and choose **Manage Sensor**, then log in with its admin password. Before, only repeaters and room servers had a management screen; a sensor only opened a chat.
+- Sensor management has **Telemetry**, **Command line** and **Settings**: name, admin password, radio, location, adverts, clock sync, send advert and reboot. Repeater-only tools (status, neighbours, owner info, packet forwarding, network health, guest password) are hidden for sensors, because sensors don't support them.
+- **Telemetry** is also on the sensor's menu directly, so you can read a sensor without logging in when it lets guests in.
+
+### Weather readings, labelled
+
+- When a sensor marks its telemetry as weather readings (channel 99 = 1), the telemetry screen names the channels **Air**, **Dew point**, **Wind**, **Rain** and **Sun**, and shows wind speed and gust in km/h, rain rate and today's rain in mm, UV index and solar radiation. With imperial units chosen, wind shows in mph and rain in inches. Before, these showed as "Channel 4, Analog Input" and similar.
+- Other sensors look exactly as before.
+
 ## 10.2.0 (2026-10-31)
 
 Both apps.

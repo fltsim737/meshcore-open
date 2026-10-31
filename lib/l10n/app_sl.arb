@@ -3743,5 +3743,21 @@
   "coverage_exported": "Shranjeno {path}",
   "coverage_exportFailed": "Izvoz ni uspel: {error}",
   "coverage_imported": "Dodani novi pingi: {count}",
-  "coverage_importFailed": "Ta datoteka ni meritev pokritosti"
+  "coverage_importFailed": "Ta datoteka ni meritev pokritosti",
+  "contacts_manageSensor": "Upravljaj senzor",
+  "login_sensorLogin": "Prijava v senzor",
+  "login_sensorDescription": "Skrbniško geslo odklene nastavitve in ukazno vrstico. Pusti ga prazno, da vidiš meritve, če senzor sprejema goste.",
+  "sensor_management": "Upravljanje senzorja",
+  "sensor_guest": "Podatki senzorja",
+  "telemetry_weatherAir": "Zrak",
+  "telemetry_weatherDewPoint": "Rosišče",
+  "telemetry_weatherWind": "Veter",
+  "telemetry_weatherRain": "Dež",
+  "telemetry_weatherSun": "Sonce",
+  "telemetry_windSpeed": "Hitrost vetra",
+  "telemetry_windGust": "Sunek",
+  "telemetry_rainRate": "Jakost dežja",
+  "telemetry_rainToday": "Dež danes",
+  "telemetry_uvIndex": "UV-indeks",
+  "telemetry_solarRadiation": "Sončno sevanje"
 }

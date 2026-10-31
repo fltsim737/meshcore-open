@@ -7578,4 +7578,53 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Ta datoteka ni meritev pokritosti';
+
+  @override
+  String get contacts_manageSensor => 'Upravljaj senzor';
+
+  @override
+  String get login_sensorLogin => 'Prijava v senzor';
+
+  @override
+  String get login_sensorDescription =>
+      'Skrbniško geslo odklene nastavitve in ukazno vrstico. Pusti ga prazno, da vidiš meritve, če senzor sprejema goste.';
+
+  @override
+  String get sensor_management => 'Upravljanje senzorja';
+
+  @override
+  String get sensor_guest => 'Podatki senzorja';
+
+  @override
+  String get telemetry_weatherAir => 'Zrak';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Rosišče';
+
+  @override
+  String get telemetry_weatherWind => 'Veter';
+
+  @override
+  String get telemetry_weatherRain => 'Dež';
+
+  @override
+  String get telemetry_weatherSun => 'Sonce';
+
+  @override
+  String get telemetry_windSpeed => 'Hitrost vetra';
+
+  @override
+  String get telemetry_windGust => 'Sunek';
+
+  @override
+  String get telemetry_rainRate => 'Jakost dežja';
+
+  @override
+  String get telemetry_rainToday => 'Dež danes';
+
+  @override
+  String get telemetry_uvIndex => 'UV-indeks';
+
+  @override
+  String get telemetry_solarRadiation => 'Sončno sevanje';
 }

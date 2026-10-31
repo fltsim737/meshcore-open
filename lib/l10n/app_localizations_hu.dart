@@ -7591,4 +7591,53 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Ez a fájl nem lefedettségmérés';
+
+  @override
+  String get contacts_manageSensor => 'Érzékelő kezelése';
+
+  @override
+  String get login_sensorLogin => 'Bejelentkezés az érzékelőre';
+
+  @override
+  String get login_sensorDescription =>
+      'Az admin jelszó feloldja a beállításokat és a parancssort. Hagyd üresen a mért értékek megtekintéséhez, ha az érzékelő enged vendégeket.';
+
+  @override
+  String get sensor_management => 'Érzékelő kezelése';
+
+  @override
+  String get sensor_guest => 'Érzékelő adatai';
+
+  @override
+  String get telemetry_weatherAir => 'Levegő';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Harmatpont';
+
+  @override
+  String get telemetry_weatherWind => 'Szél';
+
+  @override
+  String get telemetry_weatherRain => 'Eső';
+
+  @override
+  String get telemetry_weatherSun => 'Nap';
+
+  @override
+  String get telemetry_windSpeed => 'Szélsebesség';
+
+  @override
+  String get telemetry_windGust => 'Széllökés';
+
+  @override
+  String get telemetry_rainRate => 'Csapadékintenzitás';
+
+  @override
+  String get telemetry_rainToday => 'Mai csapadék';
+
+  @override
+  String get telemetry_uvIndex => 'UV-index';
+
+  @override
+  String get telemetry_solarRadiation => 'Napsugárzás';
 }

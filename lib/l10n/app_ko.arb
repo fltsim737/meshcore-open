@@ -3876,5 +3876,21 @@
   "coverage_exported": "저장됨: {path}",
   "coverage_exportFailed": "내보내기 실패: {error}",
   "coverage_imported": "추가된 새 핑: {count}",
-  "coverage_importFailed": "이 파일은 커버리지 조사가 아닙니다"
+  "coverage_importFailed": "이 파일은 커버리지 조사가 아닙니다",
+  "contacts_manageSensor": "센서 관리",
+  "login_sensorLogin": "센서 로그인",
+  "login_sensorDescription": "관리자 비밀번호로 설정과 명령줄을 사용할 수 있습니다. 센서가 게스트를 허용하면 비워 두고 측정값을 볼 수 있습니다.",
+  "sensor_management": "센서 관리",
+  "sensor_guest": "센서 정보",
+  "telemetry_weatherAir": "공기",
+  "telemetry_weatherDewPoint": "이슬점",
+  "telemetry_weatherWind": "바람",
+  "telemetry_weatherRain": "비",
+  "telemetry_weatherSun": "햇빛",
+  "telemetry_windSpeed": "풍속",
+  "telemetry_windGust": "돌풍",
+  "telemetry_rainRate": "강우 강도",
+  "telemetry_rainToday": "오늘 강우량",
+  "telemetry_uvIndex": "자외선 지수",
+  "telemetry_solarRadiation": "일사량"
 }

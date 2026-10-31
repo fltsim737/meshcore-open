@@ -3722,5 +3722,21 @@
   "coverage_exported": "Збережено: {path}",
   "coverage_exportFailed": "Помилка експорту: {error}",
   "coverage_imported": "Додано нових пінгів: {count}",
-  "coverage_importFailed": "Цей файл не є обстеженням покриття"
+  "coverage_importFailed": "Цей файл не є обстеженням покриття",
+  "contacts_manageSensor": "Керувати датчиком",
+  "login_sensorLogin": "Вхід у датчик",
+  "login_sensorDescription": "Пароль адміністратора відкриває налаштування й командний рядок. Залиште його порожнім, щоб бачити показники, якщо датчик пускає гостей.",
+  "sensor_management": "Керування датчиком",
+  "sensor_guest": "Відомості про датчик",
+  "telemetry_weatherAir": "Повітря",
+  "telemetry_weatherDewPoint": "Точка роси",
+  "telemetry_weatherWind": "Вітер",
+  "telemetry_weatherRain": "Дощ",
+  "telemetry_weatherSun": "Сонце",
+  "telemetry_windSpeed": "Швидкість вітру",
+  "telemetry_windGust": "Порив",
+  "telemetry_rainRate": "Інтенсивність дощу",
+  "telemetry_rainToday": "Дощ сьогодні",
+  "telemetry_uvIndex": "УФ-індекс",
+  "telemetry_solarRadiation": "Сонячна радіація"
 }

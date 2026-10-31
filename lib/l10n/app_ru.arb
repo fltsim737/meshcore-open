@@ -3039,5 +3039,21 @@
   "coverage_exported": "Сохранено: {path}",
   "coverage_exportFailed": "Ошибка экспорта: {error}",
   "coverage_imported": "Добавлено новых пингов: {count}",
-  "coverage_importFailed": "Этот файл не является обследованием покрытия"
+  "coverage_importFailed": "Этот файл не является обследованием покрытия",
+  "contacts_manageSensor": "Управление датчиком",
+  "login_sensorLogin": "Вход в датчик",
+  "login_sensorDescription": "Пароль администратора открывает настройки и командную строку. Оставьте его пустым, чтобы видеть показания, если датчик пускает гостей.",
+  "sensor_management": "Управление датчиком",
+  "sensor_guest": "Сведения о датчике",
+  "telemetry_weatherAir": "Воздух",
+  "telemetry_weatherDewPoint": "Точка росы",
+  "telemetry_weatherWind": "Ветер",
+  "telemetry_weatherRain": "Дождь",
+  "telemetry_weatherSun": "Солнце",
+  "telemetry_windSpeed": "Скорость ветра",
+  "telemetry_windGust": "Порыв",
+  "telemetry_rainRate": "Интенсивность дождя",
+  "telemetry_rainToday": "Дождь сегодня",
+  "telemetry_uvIndex": "УФ-индекс",
+  "telemetry_solarRadiation": "Солнечная радиация"
 }

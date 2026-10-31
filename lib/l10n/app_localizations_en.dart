@@ -7525,4 +7525,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'That file isn\'t a coverage survey';
+
+  @override
+  String get contacts_manageSensor => 'Manage Sensor';
+
+  @override
+  String get login_sensorLogin => 'Sensor Login';
+
+  @override
+  String get login_sensorDescription =>
+      'The admin password unlocks settings and the command line. Leave it blank to see readings, if the sensor lets guests in.';
+
+  @override
+  String get sensor_management => 'Sensor Management';
+
+  @override
+  String get sensor_guest => 'Sensor Information';
+
+  @override
+  String get telemetry_weatherAir => 'Air';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Dew point';
+
+  @override
+  String get telemetry_weatherWind => 'Wind';
+
+  @override
+  String get telemetry_weatherRain => 'Rain';
+
+  @override
+  String get telemetry_weatherSun => 'Sun';
+
+  @override
+  String get telemetry_windSpeed => 'Wind speed';
+
+  @override
+  String get telemetry_windGust => 'Gust';
+
+  @override
+  String get telemetry_rainRate => 'Rain rate';
+
+  @override
+  String get telemetry_rainToday => 'Rain today';
+
+  @override
+  String get telemetry_uvIndex => 'UV index';
+
+  @override
+  String get telemetry_solarRadiation => 'Solar radiation';
 }

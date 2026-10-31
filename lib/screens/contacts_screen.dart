@@ -40,6 +40,7 @@ import 'discovery_screen.dart';
 import 'map_screen.dart';
 import '../review_mode/review_mode_banner.dart';
 import 'repeater_hub_screen.dart';
+import 'telemetry_screen.dart';
 import 'settings_screen.dart';
 import 'emergency_screen.dart';
 
@@ -1243,7 +1244,7 @@ class _ContactsScreenState extends State<ContactsScreen>
   }
 
   VoidCallback? _manageAction(BuildContext context, Contact contact) {
-    if (contact.type == advTypeRepeater) {
+    if (contact.type == advTypeRepeater || contact.type == advTypeSensor) {
       return () => _showRepeaterLogin(context, contact);
     }
     if (contact.type == advTypeRoom) {
@@ -1624,6 +1625,7 @@ class _ContactsScreenState extends State<ContactsScreen>
   ) {
     final isRepeater = contact.type == advTypeRepeater;
     final isRoom = contact.type == advTypeRoom;
+    final isSensor = contact.type == advTypeSensor;
     final isFavorite = contact.isFavorite;
 
     showMeshSheet(
@@ -1666,6 +1668,31 @@ class _ContactsScreenState extends State<ContactsScreen>
               ListTile(
                 leading: Icon(Icons.cell_tower, color: MeshPalette.warn),
                 title: Text(context.l10n.contacts_manageRepeater),
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  _showRepeaterLogin(context, contact);
+                },
+              ),
+            ] else if (isSensor) ...[
+              ListTile(
+                leading: Icon(
+                  Icons.bar_chart_sharp,
+                  color: MeshPalette.magenta,
+                ),
+                title: Text(context.l10n.repeater_telemetry),
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelemetryScreen(contact: contact),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.sensors, color: MeshPalette.warn),
+                title: Text(context.l10n.contacts_manageSensor),
                 onTap: () {
                   Navigator.pop(sheetContext);
                   _showRepeaterLogin(context, contact);

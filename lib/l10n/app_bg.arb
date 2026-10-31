@@ -3742,5 +3742,21 @@
   "coverage_exported": "Запазено: {path}",
   "coverage_exportFailed": "Неуспешен експорт: {error}",
   "coverage_imported": "Добавени нови пингове: {count}",
-  "coverage_importFailed": "Този файл не е измерване на покритието"
+  "coverage_importFailed": "Този файл не е измерване на покритието",
+  "contacts_manageSensor": "Управление на сензора",
+  "login_sensorLogin": "Вход в сензора",
+  "login_sensorDescription": "Паролата на администратора отключва настройките и командния ред. Оставете я празна, за да видите показанията, ако сензорът допуска гости.",
+  "sensor_management": "Управление на сензора",
+  "sensor_guest": "Информация за сензора",
+  "telemetry_weatherAir": "Въздух",
+  "telemetry_weatherDewPoint": "Точка на оросяване",
+  "telemetry_weatherWind": "Вятър",
+  "telemetry_weatherRain": "Дъжд",
+  "telemetry_weatherSun": "Слънце",
+  "telemetry_windSpeed": "Скорост на вятъра",
+  "telemetry_windGust": "Порив",
+  "telemetry_rainRate": "Интензитет на дъжда",
+  "telemetry_rainToday": "Дъжд днес",
+  "telemetry_uvIndex": "UV индекс",
+  "telemetry_solarRadiation": "Слънчева радиация"
 }
