@@ -117,13 +117,13 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.1.0; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.1.1; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
-| Android (any phone) | `meshcore-open-sos-10.1.0.apk` | `meshcore-open-sos-voice-10.1.0.apk` |
-| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.0-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.0-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.0-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.0-windows-source.zip` |
+| Android (any phone) | `meshcore-open-sos-10.1.1.apk` | `meshcore-open-sos-voice-10.1.1.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.1-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.1-x86_64.AppImage` |
+| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.1-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.1-windows-source.zip` |
 
 ### Android
 
