@@ -2,7 +2,7 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
-## 10.1.0 (in testing, not yet released)
+## 10.1.0 (2026-10-31)
 
 ### The emergency network goes only on radios you agree to
 
