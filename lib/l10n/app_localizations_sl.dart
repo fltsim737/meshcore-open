@@ -7414,4 +7414,168 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Uporabi njegovo lastno ime';
+
+  @override
+  String get coverage_title => 'Meritev pokritosti';
+
+  @override
+  String get coverage_aboutTitle => 'O meritvi pokritosti';
+
+  @override
+  String get coverage_aboutBody =>
+      'Meritev pokritosti na zemljevidu pokaže, kje vas repetitorji slišijo.\n\nMed meritvijo aplikacija pošlje ping repetitorjem v neposrednem radijskem dosegu vsakič, ko se premaknete za približno 150 m, največ enkrat na 30 s, in vsaki 2 minuti, ko stojite. Vsak repetitor, ki sliši ping, odgovori z dvema meritvama: kako dobro ga slišite vi in kako dobro on sliši vas. Šibkejša od obeh obarva zemljevid.\n\nZelena je močna povezava, svetlo zelena dobra, oranžna šibka, rdeča nezanesljiva, siva pa pomeni, da ni odgovoril noben repetitor. Črte vodijo do vsakega repetitorja, ki je odgovoril na zadnji ping.\n\nVsaka nastavitev frekvence ima svoj zemljevid, zato lahko pokritost primerjate pred preklopom. Med aktivnim SOS se pingi ustavijo. Repetitor odgovori na največ 4 pinge v 2 minutah od vseh skupaj, zato lahko pri več iskalcih manjkajoč odgovor pomeni zaseden in ne zunaj dosega.\n\nMeritve delite z Izvozom in jih združite z Uvozom. Datoteke GeoJSON in KML se odprejo v Google Earth in programih za zemljevide.';
+
+  @override
+  String get coverage_start => 'Začni meritev';
+
+  @override
+  String get coverage_stop => 'Ustavi meritev';
+
+  @override
+  String get coverage_pingNow => 'Pošlji ping zdaj';
+
+  @override
+  String get coverage_statusIdle =>
+      'Začnite meritev in se odpravite. Zemljevid se polni, ko repetitorji odgovarjajo.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Meritev ustavljena. Shranjeni pingi: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Pošiljam ping repetitorjem…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Naslednji ping mogoč čez $time';
+  }
+
+  @override
+  String get coverage_statusMove => 'Naslednji ping po 150 m ali čez 2 minuti';
+
+  @override
+  String get coverage_pausedDisconnected =>
+      'Zaustavljeno: noben radio ni povezan';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Zaustavljeno: vdelana programska oprema radia je prestara za ping repetitorjev';
+
+  @override
+  String get coverage_pausedSos =>
+      'Zaustavljeno med aktivnim SOS, da ostane kanal prost';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Zaustavljeno: čakam na lokacijo. Vklopite lokacijo za to aplikacijo.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Telefon nima GPS: uporablja se položaj radia.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Repetitorji, ki so odgovorili na zadnji ping ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Na zadnji ping ni odgovoril noben repetitor, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Na zadnje pinge ($count) ni odgovoril noben repetitor. Morda ste na tej frekvenci zunaj pokritosti ali pa so repetitorji zasedeni.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return 'pred $seconds s';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return 'pred $minutes min';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (trenutna)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Vsi repetitorji';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Prikaži samo ta repetitor';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Najboljša povezava $snr ($grade). Slišan v celicah zemljevida: $cells.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Močna';
+
+  @override
+  String get coverage_gradeGood => 'Dobra';
+
+  @override
+  String get coverage_gradeWeak => 'Šibka';
+
+  @override
+  String get coverage_gradeMarginal => 'Nezanesljiva';
+
+  @override
+  String get coverage_gradeNone => 'Brez odgovora';
+
+  @override
+  String get coverage_followMe => 'Sledi mojemu položaju';
+
+  @override
+  String get coverage_exportSurvey => 'Izvozi meritev';
+
+  @override
+  String get coverage_exportGeoJson => 'Izvozi GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Izvozi KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Uvozi meritev';
+
+  @override
+  String get coverage_clear => 'Počisti meritev';
+
+  @override
+  String get coverage_clearTitle => 'Počistim meritev?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'S tem izbrišete vse pinge v tej napravi ($count). Če jih želite obdržati, jih najprej izvozite.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Shranjeno $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Izvoz ni uspel: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Dodani novi pingi: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Ta datoteka ni meritev pokritosti';
 }

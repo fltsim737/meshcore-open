@@ -7411,4 +7411,168 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Použiť jeho vlastný názov';
+
+  @override
+  String get coverage_title => 'Meranie pokrytia';
+
+  @override
+  String get coverage_aboutTitle => 'O meraní pokrytia';
+
+  @override
+  String get coverage_aboutBody =>
+      'Meranie pokrytia ukazuje na mape, kde vás opakovače počujú.\n\nPočas merania aplikácia pinguje opakovače v priamom rádiovom dosahu vždy, keď sa posuniete asi o 150 m, najviac raz za 30 s, a každé 2 minúty, keď stojíte. Každý opakovač, ktorý ping počuje, odpovie dvoma hodnotami: ako dobre ho počujete vy a ako dobre počuje on vás. Slabšia z nich zafarbí mapu.\n\nZelená je silné spojenie, svetlozelená dobré, oranžová slabé, červená nespoľahlivé a sivá znamená, že neodpovedal žiadny opakovač. Čiary vedú ku každému opakovaču, ktorý odpovedal na posledný ping.\n\nKaždé nastavenie frekvencie má vlastnú mapu, takže pokrytie porovnáte pred prepnutím. Počas aktívneho SOS sa nepinguje. Opakovač odpovie najviac na 4 pingy za 2 minúty od všetkých spolu, takže keď pinguje viac hľadajúcich, chýbajúca odpoveď môže znamenať obsadený, nie mimo dosahu.\n\nMerania zdieľajte cez Export a spájajte cez Import. Súbory GeoJSON a KML sa otvoria v Google Earth a mapových programoch.';
+
+  @override
+  String get coverage_start => 'Spustiť meranie';
+
+  @override
+  String get coverage_stop => 'Zastaviť meranie';
+
+  @override
+  String get coverage_pingNow => 'Pingnúť teraz';
+
+  @override
+  String get coverage_statusIdle =>
+      'Spustite meranie a vyrazte. Mapa sa plní, ako opakovače odpovedajú.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Meranie zastavené. Uložené pingy: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'Pingujem opakovače…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Ďalší ping možný o $time';
+  }
+
+  @override
+  String get coverage_statusMove => 'Ďalší ping po 150 m alebo o 2 minúty';
+
+  @override
+  String get coverage_pausedDisconnected =>
+      'Pozastavené: nie je pripojené rádio';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Pozastavené: firmvér rádia je príliš starý na pingovanie opakovačov';
+
+  @override
+  String get coverage_pausedSos =>
+      'Pozastavené počas aktívneho SOS, aby kanál zostal voľný';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Pozastavené: čakám na polohu. Zapnite polohu pre túto aplikáciu.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Telefón nemá GPS: používa sa poloha rádia.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Opakovače, ktoré odpovedali na posledný ping ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Na posledný ping neodpovedal žiadny opakovač, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Na posledné pingy ($count) neodpovedal žiadny opakovač. Možno ste na tejto frekvencii mimo pokrytia, alebo sú opakovače obsadené.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return 'pred $seconds s';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return 'pred $minutes min';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (aktuálne)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Všetky opakovače';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Zobraziť len tento opakovač';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Najlepšie spojenie $snr ($grade). Počuť v bunkách mapy: $cells.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Silné';
+
+  @override
+  String get coverage_gradeGood => 'Dobré';
+
+  @override
+  String get coverage_gradeWeak => 'Slabé';
+
+  @override
+  String get coverage_gradeMarginal => 'Nespoľahlivé';
+
+  @override
+  String get coverage_gradeNone => 'Bez odpovede';
+
+  @override
+  String get coverage_followMe => 'Sledovať moju polohu';
+
+  @override
+  String get coverage_exportSurvey => 'Exportovať meranie';
+
+  @override
+  String get coverage_exportGeoJson => 'Exportovať GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Exportovať KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Importovať meranie';
+
+  @override
+  String get coverage_clear => 'Vymazať meranie';
+
+  @override
+  String get coverage_clearTitle => 'Vymazať meranie?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Týmto sa vymažú všetky pingy v tomto zariadení ($count). Ak ich chcete zachovať, najprv ich exportujte.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Uložené $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Export zlyhal: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Pridané nové pingy: $count';
+  }
+
+  @override
+  String get coverage_importFailed => 'Tento súbor nie je meranie pokrytia';
 }

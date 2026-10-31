@@ -40,6 +40,7 @@ import '../widgets/sync_progress_overlay.dart';
 import '../icons/los_icon.dart';
 import 'channels_screen.dart';
 import 'chat_screen.dart';
+import 'coverage_survey_screen.dart';
 import 'contacts_screen.dart';
 import '../theme/mesh_theme.dart';
 import '../widgets/mesh_ui.dart';
@@ -805,6 +806,21 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
                           );
                         },
                       ),
+                    PopupMenuItem(
+                      child: Row(
+                        children: [
+                          const Icon(Icons.wifi_tethering),
+                          const SizedBox(width: 8),
+                          Text(context.l10n.coverage_title),
+                        ],
+                      ),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CoverageSurveyScreen(),
+                        ),
+                      ),
+                    ),
                     PopupMenuItem(
                       child: Row(
                         children: [

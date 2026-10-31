@@ -30,6 +30,7 @@ MeshCore Open is an open-source Flutter client for MeshCore LoRa mesh networking
 17. [Review Mode](review-mode.md) - Simulated radio and reviewer instructions for Google Play and App Store review
 18. [Network Map](network-map.md) - Online repeater map, adding and managing repeaters from it, opt-in uploads, and hiding a repeater
 19. [Emergency SOS](emergency-sos.md) - Repeating distress alert over the mesh, location sources, acknowledgements, and incoming alert alarm
+20. [Coverage Survey](coverage-survey.md) - Pinging for repeaters while travelling, hexagon coverage map, radar lines, frequency layers, and survey export/import (GeoJSON, KML)
 
 ## App Overview
 

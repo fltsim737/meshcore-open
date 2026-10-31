@@ -21,6 +21,7 @@ import 'services/image_codec_settings_store.dart';
 import 'services/received_image_blob_store_factory.dart';
 import 'services/received_image_store.dart';
 import 'services/sos_location_service.dart';
+import 'services/coverage_survey_service.dart';
 import 'services/sos_service.dart';
 import 'services/desktop_tray_service.dart';
 import 'services/login_autostart.dart';
@@ -191,6 +192,12 @@ void main(List<String> args) async {
     alerter: NotificationSosAlerter(),
   )..load();
 
+  final coverageSurveyService = CoverageSurveyService.forApp(
+    connector,
+    sosService,
+    phoneGps: !PlatformInfo.isWindows,
+  );
+
   await connector.loadContactCache();
   await connector.loadCachedChannels();
   await connector.loadUnreadState();
@@ -214,6 +221,7 @@ void main(List<String> args) async {
       imageReassembler: imageReassembler,
       networkMapUploadService: networkMapUploadService,
       sosService: sosService,
+      coverageSurveyService: coverageSurveyService,
     ),
   );
 
@@ -396,6 +404,7 @@ class MeshCoreApp extends StatefulWidget {
   final ImageStreamReassembler imageReassembler;
   final NetworkMapUploadService networkMapUploadService;
   final SosService sosService;
+  final CoverageSurveyService coverageSurveyService;
 
   const MeshCoreApp({
     super.key,
@@ -416,6 +425,7 @@ class MeshCoreApp extends StatefulWidget {
     required this.imageReassembler,
     required this.networkMapUploadService,
     required this.sosService,
+    required this.coverageSurveyService,
   });
 
   @override
@@ -501,6 +511,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
         ChangeNotifierProvider.value(value: widget.receivedImageStore),
         ChangeNotifierProvider.value(value: widget.networkMapUploadService),
         ChangeNotifierProvider.value(value: widget.sosService),
+        ChangeNotifierProvider.value(value: widget.coverageSurveyService),
       ],
       child: Consumer<AppSettingsService>(
         builder: (context, settingsService, child) {

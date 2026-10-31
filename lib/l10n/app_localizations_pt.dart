@@ -7430,4 +7430,169 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get contacts_useOwnName => 'Usar o nome próprio';
+
+  @override
+  String get coverage_title => 'Levantamento de cobertura';
+
+  @override
+  String get coverage_aboutTitle => 'Sobre o levantamento de cobertura';
+
+  @override
+  String get coverage_aboutBody =>
+      'O levantamento de cobertura mostra no mapa onde os repetidores o ouvem.\n\nEnquanto decorre, a app faz ping aos repetidores ao alcance direto do rádio sempre que avança cerca de 150 m, com pelo menos 30 s entre pings, e a cada 2 minutos quando está parado. Cada repetidor que ouve o ping responde com duas leituras: quão bem o ouve e quão bem ele o ouve a si. A mais fraca das duas pinta o mapa.\n\nVerde é uma ligação forte, verde-claro boa, âmbar fraca, vermelho pouco fiável, e cinzento significa que nenhum repetidor respondeu. Linhas saem para cada repetidor que respondeu ao último ping.\n\nCada configuração de frequência tem o seu mapa, para comparar a cobertura antes de mudar. Os pings param enquanto houver um SOS ativo. Um repetidor responde no máximo a 4 pings em 2 minutos de todos em conjunto, por isso, com vários a procurar, uma resposta em falta pode significar ocupado e não fora de alcance.\n\nPartilhe levantamentos com Exportar e junte-os com Importar. Os ficheiros GeoJSON e KML abrem no Google Earth e em programas de mapas.';
+
+  @override
+  String get coverage_start => 'Iniciar levantamento';
+
+  @override
+  String get coverage_stop => 'Parar levantamento';
+
+  @override
+  String get coverage_pingNow => 'Fazer ping agora';
+
+  @override
+  String get coverage_statusIdle =>
+      'Inicie um levantamento e ponha-se a caminho. O mapa preenche-se à medida que os repetidores respondem.';
+
+  @override
+  String coverage_statusStopped(int count) {
+    return 'Levantamento parado. Pings guardados: $count.';
+  }
+
+  @override
+  String get coverage_statusPinging => 'A fazer ping aos repetidores…';
+
+  @override
+  String coverage_statusWait(String time) {
+    return 'Próximo ping possível dentro de $time';
+  }
+
+  @override
+  String get coverage_statusMove =>
+      'Próximo ping após 150 m ou dentro de 2 minutos';
+
+  @override
+  String get coverage_pausedDisconnected => 'Em pausa: nenhum rádio ligado';
+
+  @override
+  String get coverage_pausedUnsupported =>
+      'Em pausa: o firmware do rádio é demasiado antigo para fazer ping aos repetidores';
+
+  @override
+  String get coverage_pausedSos =>
+      'Em pausa enquanto houver um SOS ativo, para manter o canal livre';
+
+  @override
+  String get coverage_pausedNoLocation =>
+      'Em pausa: à espera de uma localização. Ative a localização para esta app.';
+
+  @override
+  String get coverage_usingRadioPosition =>
+      'Sem GPS no telefone: é usada a posição do rádio.';
+
+  @override
+  String coverage_lastPing(int count, String ago) {
+    return 'Repetidores que responderam ao último ping ($ago): $count';
+  }
+
+  @override
+  String coverage_lastPingNone(String ago) {
+    return 'Nenhum repetidor respondeu ao último ping, $ago';
+  }
+
+  @override
+  String coverage_outOfCoverage(int count) {
+    return 'Nenhum repetidor respondeu aos últimos $count pings. Pode estar fora de cobertura nesta frequência, ou os repetidores podem estar ocupados.';
+  }
+
+  @override
+  String coverage_agoSeconds(int seconds) {
+    return 'há $seconds s';
+  }
+
+  @override
+  String coverage_agoMinutes(int minutes) {
+    return 'há $minutes min';
+  }
+
+  @override
+  String coverage_replySignal(String name, String heard, String heardBy) {
+    return '$name  ↓$heard  ↑$heardBy';
+  }
+
+  @override
+  String coverage_radioCurrent(String label) {
+    return '$label (atual)';
+  }
+
+  @override
+  String get coverage_allRepeaters => 'Todos os repetidores';
+
+  @override
+  String get coverage_onlyThisRepeater => 'Mostrar só este repetidor';
+
+  @override
+  String coverage_repeaterSummary(String snr, String grade, int cells) {
+    return 'Melhor ligação $snr ($grade). Ouvido em $cells células do mapa.';
+  }
+
+  @override
+  String get coverage_gradeStrong => 'Forte';
+
+  @override
+  String get coverage_gradeGood => 'Boa';
+
+  @override
+  String get coverage_gradeWeak => 'Fraca';
+
+  @override
+  String get coverage_gradeMarginal => 'Pouco fiável';
+
+  @override
+  String get coverage_gradeNone => 'Sem resposta';
+
+  @override
+  String get coverage_followMe => 'Seguir a minha posição';
+
+  @override
+  String get coverage_exportSurvey => 'Exportar levantamento';
+
+  @override
+  String get coverage_exportGeoJson => 'Exportar GeoJSON';
+
+  @override
+  String get coverage_exportKml => 'Exportar KML (Google Earth)';
+
+  @override
+  String get coverage_import => 'Importar levantamento';
+
+  @override
+  String get coverage_clear => 'Limpar levantamento';
+
+  @override
+  String get coverage_clearTitle => 'Limpar o levantamento?';
+
+  @override
+  String coverage_clearBody(int count) {
+    return 'Isto apaga os $count pings deste dispositivo. Exporte-os antes para os manter.';
+  }
+
+  @override
+  String coverage_exported(String path) {
+    return 'Guardado $path';
+  }
+
+  @override
+  String coverage_exportFailed(String error) {
+    return 'Falha ao exportar: $error';
+  }
+
+  @override
+  String coverage_imported(int count) {
+    return 'Novos pings adicionados: $count';
+  }
+
+  @override
+  String get coverage_importFailed =>
+      'Esse ficheiro não é um levantamento de cobertura';
 }
