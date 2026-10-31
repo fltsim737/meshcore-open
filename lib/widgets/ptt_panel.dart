@@ -46,6 +46,22 @@ class PttPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (clips.isNotEmpty)
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      l10n.ptt_clips(clips.length),
+                      style: textTheme.labelMedium,
+                    ),
+                  ),
+                  TextButton.icon(
+                    icon: const Icon(Icons.delete_sweep_outlined, size: 18),
+                    label: Text(l10n.common_clear),
+                    onPressed: () => _confirmClear(context, voice),
+                  ),
+                ],
+              ),
             for (final clip in clips.reversed.take(3).toList().reversed)
               _ClipRow(clip: clip, playing: identical(voice.playing, clip)),
             Row(
@@ -99,6 +115,30 @@ class PttPanel extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _confirmClear(
+    BuildContext context,
+    SosVoiceService voice,
+  ) async {
+    final l10n = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        content: Text(l10n.ptt_clearConfirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.common_cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.common_delete),
+          ),
+        ],
+      ),
+    );
+    if (ok ?? false) await voice.clearClips(conversation);
   }
 
   String? _blockText(
@@ -213,6 +253,17 @@ class _ClipRow extends StatelessWidget {
           tooltip: playing ? l10n.sosVoice_stop : l10n.sosVoice_play,
           icon: Icon(playing ? Icons.stop : Icons.play_arrow),
           onPressed: playing ? voice.stopPlayback : () => voice.replay(clip),
+        ),
+        IconButton(
+          visualDensity: VisualDensity.compact,
+          tooltip: l10n.common_delete,
+          icon: const Icon(Icons.delete_outline),
+          // a clip still going out can't be deleted
+          onPressed:
+              clip.status == VoiceClipStatus.queued ||
+                  clip.status == VoiceClipStatus.sending
+              ? null
+              : () => voice.deleteClip(clip),
         ),
       ],
     );

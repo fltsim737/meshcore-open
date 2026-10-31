@@ -7490,4 +7490,39 @@ class AppLocalizationsHu extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'A beszélgetésedben 3 perc hang volt, ezért 5 percig szünetel a hang, és mások kapják az adásidőt. A szöveg továbbra is működik. Hang újra $time múlva.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Klipek: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Törlöd a beszélgetés összes klipjét? Többé nem játszhatók le.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Nincs ezen a rádión: csak akkor add hozzá, ha a rádió a hálózat része';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Hozzáadod a(z) „$network” hálózatot ehhez a rádióhoz?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Ezen a rádión nincs meg a vészhelyzeti hálózatod csatornája. Csak akkor add hozzá, ha a rádiónak küldenie és fogadnia kell a hálózat riasztásait, ne egy tesztelt, kölcsönadott vagy másnak beállított rádióhoz.';
+
+  @override
+  String get sos_radioAdd => 'Hozzáadás ehhez a rádióhoz';
+
+  @override
+  String get sos_radioNotThis => 'Nem ez a rádió';
+
+  @override
+  String get sos_radioRemove => 'Eltávolítás erről a rádióról';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod.';
 }

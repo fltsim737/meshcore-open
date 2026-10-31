@@ -12522,6 +12522,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your conversation has had 3 minutes of voice, so you rest from voice for 5 minutes and others get the airtime. Text still works. Voice again in {time}.'**
   String ptt_talkLimit(String time);
+
+  /// No description provided for @ptt_clips.
+  ///
+  /// In en, this message translates to:
+  /// **'Clips: {count}'**
+  String ptt_clips(int count);
+
+  /// No description provided for @ptt_clearConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete all the clips in this conversation? They can\'t be played again.'**
+  String get ptt_clearConfirm;
+
+  /// No description provided for @sos_networkStatusNeedsApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Not on this radio: add it only if this radio belongs in the network'**
+  String get sos_networkStatusNeedsApproval;
+
+  /// No description provided for @sos_radioApprovalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add “{network}” to this radio?'**
+  String sos_radioApprovalTitle(String network);
+
+  /// No description provided for @sos_radioApprovalBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This radio doesn\'t have your emergency network\'s channel. Add it only if this radio should send and hear the network\'s alerts, not for a radio you\'re testing, lending or setting up for someone else.'**
+  String get sos_radioApprovalBody;
+
+  /// No description provided for @sos_radioAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to this radio'**
+  String get sos_radioAdd;
+
+  /// No description provided for @sos_radioNotThis.
+  ///
+  /// In en, this message translates to:
+  /// **'Not this radio'**
+  String get sos_radioNotThis;
+
+  /// No description provided for @sos_radioRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from this radio'**
+  String get sos_radioRemove;
+
+  /// No description provided for @sos_radioRemoveConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Take the emergency network\'s channel off this radio? The app stays in the network, for your other radios. You can add it back from this screen.'**
+  String get sos_radioRemoveConfirm;
 }
 
 class _AppLocalizationsDelegate

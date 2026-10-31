@@ -7445,4 +7445,39 @@ class AppLocalizationsSv extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'Ditt samtal har haft 3 minuter röst, så du vilar från röst i 5 minuter och andra får sändningstiden. Text fungerar fortfarande. Röst igen om $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Klipp: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Radera alla klipp i det här samtalet? De kan inte spelas upp igen.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Inte på den här radion: lägg bara till den om radion hör till nätet';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Lägga till ”$network” på den här radion?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Den här radion har inte ditt nödnäts kanal. Lägg bara till den om radion ska skicka och höra nätets larm, inte på en radio du testar, lånar ut eller ställer in åt någon annan.';
+
+  @override
+  String get sos_radioAdd => 'Lägg till på den här radion';
+
+  @override
+  String get sos_radioNotThis => 'Inte den här radion';
+
+  @override
+  String get sos_radioRemove => 'Ta bort från den här radion';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här.';
 }

@@ -3718,5 +3718,14 @@
   "sos_soundAlertSpeaker": "Zvočnik za alarme in obvestila",
   "ptt_clipNotification": "🎙 Glasovni posnetek, {seconds} s",
   "ptt_meshBusy": "Omrežje prenaša besedilna sporočila, ki imajo prednost. Glas čez {seconds} s.",
-  "ptt_talkLimit": "Vaš pogovor je imel 3 minute glasu, zato imate 5 minut premora od glasu in oddajni čas dobijo drugi. Besedilo še deluje. Glas znova čez {time}."
+  "ptt_talkLimit": "Vaš pogovor je imel 3 minute glasu, zato imate 5 minut premora od glasu in oddajni čas dobijo drugi. Besedilo še deluje. Glas znova čez {time}.",
+  "ptt_clips": "Posnetki: {count}",
+  "ptt_clearConfirm": "Izbrišem vse posnetke v tem pogovoru? Ne bo jih več mogoče predvajati.",
+  "sos_networkStatusNeedsApproval": "Ni na tej radijski postaji: dodajte ga le, če postaja spada v omrežje",
+  "sos_radioApprovalTitle": "Dodam »{network}« na to radijsko postajo?",
+  "sos_radioApprovalBody": "Ta radijska postaja nima kanala vašega omrežja za nujne primere. Dodajte ga le, če naj pošilja in sprejema opozorila omrežja, ne za postajo, ki jo preizkušate, posojate ali nastavljate za nekoga drugega.",
+  "sos_radioAdd": "Dodaj na to postajo",
+  "sos_radioNotThis": "Ne ta postaja",
+  "sos_radioRemove": "Odstrani s te postaje",
+  "sos_radioRemoveConfirm": "Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu."
 }

@@ -7494,4 +7494,39 @@ class AppLocalizationsPt extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'A sua conversa teve 3 minutos de voz, por isso faz uma pausa de voz de 5 minutos e os outros ficam com o tempo de emissão. O texto continua a funcionar. Voz de novo dentro de $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Clips: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Eliminar todos os clips desta conversa? Não poderão voltar a ser reproduzidos.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Não está neste rádio: adicione-o só se este rádio pertencer à rede';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Adicionar «$network» a este rádio?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Este rádio não tem o canal da sua rede de emergência. Adicione-o só se este rádio dever enviar e ouvir os alertas da rede, não num rádio que esteja a testar, a emprestar ou a configurar para outra pessoa.';
+
+  @override
+  String get sos_radioAdd => 'Adicionar a este rádio';
+
+  @override
+  String get sos_radioNotThis => 'Este rádio não';
+
+  @override
+  String get sos_radioRemove => 'Remover deste rádio';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Remover o canal da rede de emergência deste rádio? A app continua na rede, para os seus outros rádios. Pode voltar a adicioná-lo neste ecrã.';
 }

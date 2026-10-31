@@ -7018,4 +7018,37 @@ class AppLocalizationsZh extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return '你的对话已用了 3 分钟语音,因此语音暂停 5 分钟,把通话时间让给其他人。文字仍可使用。$time 后可再用语音。';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return '语音片段:$count';
+  }
+
+  @override
+  String get ptt_clearConfirm => '删除此对话中的所有语音片段?删除后将无法再播放。';
+
+  @override
+  String get sos_networkStatusNeedsApproval => '不在此电台上:只有此电台属于该网络时才添加';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return '将“$network”添加到此电台?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      '此电台没有你的紧急网络频道。只有当此电台应发送和接收该网络的警报时才添加;正在测试、借出或替他人设置的电台不要添加。';
+
+  @override
+  String get sos_radioAdd => '添加到此电台';
+
+  @override
+  String get sos_radioNotThis => '不是此电台';
+
+  @override
+  String get sos_radioRemove => '从此电台移除';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      '从此电台移除紧急网络频道?应用仍留在网络中,供你的其他电台使用。你可以在此页面重新添加。';
 }

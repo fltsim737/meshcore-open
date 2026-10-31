@@ -513,6 +513,79 @@ void main() {
     });
   });
 
+  group('clips can be deleted, and tidy themselves away', () {
+    setUp(addVoiceChannel);
+
+    Future<void> hearClip(int seed) async {
+      for (final p in pttClip(seed, frames: 30)) {
+        transport.listener!(voice.pttChannel!.index, p.encode());
+      }
+      await settle();
+    }
+
+    test('one clip is deleted', () async {
+      await hearClip(0x41);
+      await hearClip(0x42);
+      final clips = voice.clipsFor(SosVoiceService.pttChannelKey);
+      expect(await voice.deleteClip(clips.first), isTrue);
+      final left = voice.clipsFor(SosVoiceService.pttChannelKey);
+      expect(left, hasLength(1));
+      expect(left.single, same(clips.last));
+    });
+
+    test('a conversation\'s clips are cleared; others stay', () async {
+      final joe = contactFor('Joe', 0x42);
+      transport.contacts = [joe];
+      final dm = SosVoiceService.pttDirectKey(joe.publicKeyHex);
+      await hearClip(0x41);
+      await talk(dm, 50);
+      await voice.clearClips(SosVoiceService.pttChannelKey);
+      expect(voice.clipsFor(SosVoiceService.pttChannelKey), isEmpty);
+      expect(voice.clipsFor(dm), hasLength(1));
+    });
+
+    test('a clip still being sent is not deleted', () async {
+      expect(await voice.startTalking(SosVoiceService.pttChannelKey), isTrue);
+      for (var i = 0; i < 50; i++) {
+        audio.mic!.add(loud(i));
+      }
+      await settle();
+      await voice.stopTalking();
+      final clip = voice.clipsFor(SosVoiceService.pttChannelKey).single;
+      clip.status = VoiceClipStatus.sending; // as while it goes out
+      expect(await voice.deleteClip(clip), isFalse);
+    });
+
+    test('clips older than 24 hours go by themselves', () async {
+      await hearClip(0x41);
+      now = now.add(const Duration(hours: 25));
+      await hearClip(0x42); // a new clip tidies the old away
+      final left = voice.clipsFor(SosVoiceService.pttChannelKey);
+      expect(left, hasLength(1));
+      expect(left.single.time, now);
+    });
+
+    test(
+      'at most 100 push-to-talk clips are kept, oldest going first',
+      () async {
+        final contacts = [
+          for (var i = 0; i < 5; i++) contactFor('C$i', 0x50 + i),
+        ];
+        transport.contacts = contacts;
+        for (var round = 0; round < 25; round++) {
+          for (final c in contacts) {
+            for (final p in pttClip(c.publicKey[0], frames: 30, direct: true)) {
+              transport.direct!(c.publicKeyHex, p.toDirectText());
+            }
+            await settle();
+            now = now.add(const Duration(seconds: 1));
+          }
+        }
+        expect(voice.pttClipCount, SosVoiceService.pttMaxClips);
+      },
+    );
+  });
+
   group('SosVoicePacket for push-to-talk', () {
     test('a direct message chunk round-trips', () {
       final p = pttClip(0x42, direct: true).first;

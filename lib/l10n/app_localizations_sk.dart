@@ -7475,4 +7475,39 @@ class AppLocalizationsSk extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'Váš rozhovor mal 3 minúty hlasu, preto máte 5 minút pauzu od hlasu a vysielací čas dostanú ostatní. Text naďalej funguje. Hlas znova o $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Klipy: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Odstrániť všetky klipy v tomto rozhovore? Nebude ich možné znova prehrať.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Nie je na tejto rádiostanici: pridajte ju, len ak patrí do siete';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Pridať „$network“ do tejto rádiostanice?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Táto rádiostanica nemá kanál vašej núdzovej siete. Pridajte ho, len ak má posielať a počúvať poplachy siete, nie do rádiostanice, ktorú testujete, požičiavate alebo nastavujete pre niekoho iného.';
+
+  @override
+  String get sos_radioAdd => 'Pridať do tejto rádiostanice';
+
+  @override
+  String get sos_radioNotThis => 'Nie táto rádiostanica';
+
+  @override
+  String get sos_radioRemove => 'Odstrániť z tejto rádiostanice';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke.';
 }

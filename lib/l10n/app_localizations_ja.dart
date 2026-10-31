@@ -7168,4 +7168,38 @@ class AppLocalizationsJa extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'この会話で音声を 3 分使ったため、5 分間音声を休み、通信時間をほかの人に譲ります。テキストは使えます。音声はあと $time で使えます。';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'クリップ:$count';
+  }
+
+  @override
+  String get ptt_clearConfirm => 'この会話のクリップをすべて削除しますか?もう再生できなくなります。';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'この無線機にはありません:この無線機がネットワークに属する場合だけ追加してください';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return '「$network」をこの無線機に追加しますか?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'この無線機には緊急ネットワークのチャンネルがありません。この無線機でネットワークの警報を送受信する場合だけ追加してください。テスト中、貸し出し中、ほかの人のために設定中の無線機には追加しないでください。';
+
+  @override
+  String get sos_radioAdd => 'この無線機に追加';
+
+  @override
+  String get sos_radioNotThis => 'この無線機ではない';
+
+  @override
+  String get sos_radioRemove => 'この無線機から削除';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'この無線機から緊急ネットワークのチャンネルを削除しますか?アプリはほかの無線機のためにネットワークに残ります。この画面からまた追加できます。';
 }

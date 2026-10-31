@@ -3718,5 +3718,14 @@
   "sos_soundAlertSpeaker": "Reproduktor pre poplachy a upozornenia",
   "ptt_clipNotification": "🎙 Hlasový klip, {seconds} s",
   "ptt_meshBusy": "Sieť prenáša textové správy, ktoré majú prednosť. Hlas o {seconds} s.",
-  "ptt_talkLimit": "Váš rozhovor mal 3 minúty hlasu, preto máte 5 minút pauzu od hlasu a vysielací čas dostanú ostatní. Text naďalej funguje. Hlas znova o {time}."
+  "ptt_talkLimit": "Váš rozhovor mal 3 minúty hlasu, preto máte 5 minút pauzu od hlasu a vysielací čas dostanú ostatní. Text naďalej funguje. Hlas znova o {time}.",
+  "ptt_clips": "Klipy: {count}",
+  "ptt_clearConfirm": "Odstrániť všetky klipy v tomto rozhovore? Nebude ich možné znova prehrať.",
+  "sos_networkStatusNeedsApproval": "Nie je na tejto rádiostanici: pridajte ju, len ak patrí do siete",
+  "sos_radioApprovalTitle": "Pridať „{network}“ do tejto rádiostanice?",
+  "sos_radioApprovalBody": "Táto rádiostanica nemá kanál vašej núdzovej siete. Pridajte ho, len ak má posielať a počúvať poplachy siete, nie do rádiostanice, ktorú testujete, požičiavate alebo nastavujete pre niekoho iného.",
+  "sos_radioAdd": "Pridať do tejto rádiostanice",
+  "sos_radioNotThis": "Nie táto rádiostanica",
+  "sos_radioRemove": "Odstrániť z tejto rádiostanice",
+  "sos_radioRemoveConfirm": "Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke."
 }

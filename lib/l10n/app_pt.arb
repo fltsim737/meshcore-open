@@ -3717,5 +3717,14 @@
   "sos_soundAlertSpeaker": "Altifalante para alertas e notificações",
   "ptt_clipNotification": "🎙 Clip de voz, {seconds} s",
   "ptt_meshBusy": "A malha está a transmitir mensagens de texto, que têm prioridade. Voz dentro de {seconds} s.",
-  "ptt_talkLimit": "A sua conversa teve 3 minutos de voz, por isso faz uma pausa de voz de 5 minutos e os outros ficam com o tempo de emissão. O texto continua a funcionar. Voz de novo dentro de {time}."
+  "ptt_talkLimit": "A sua conversa teve 3 minutos de voz, por isso faz uma pausa de voz de 5 minutos e os outros ficam com o tempo de emissão. O texto continua a funcionar. Voz de novo dentro de {time}.",
+  "ptt_clips": "Clips: {count}",
+  "ptt_clearConfirm": "Eliminar todos os clips desta conversa? Não poderão voltar a ser reproduzidos.",
+  "sos_networkStatusNeedsApproval": "Não está neste rádio: adicione-o só se este rádio pertencer à rede",
+  "sos_radioApprovalTitle": "Adicionar «{network}» a este rádio?",
+  "sos_radioApprovalBody": "Este rádio não tem o canal da sua rede de emergência. Adicione-o só se este rádio dever enviar e ouvir os alertas da rede, não num rádio que esteja a testar, a emprestar ou a configurar para outra pessoa.",
+  "sos_radioAdd": "Adicionar a este rádio",
+  "sos_radioNotThis": "Este rádio não",
+  "sos_radioRemove": "Remover deste rádio",
+  "sos_radioRemoveConfirm": "Remover o canal da rede de emergência deste rádio? A app continua na rede, para os seus outros rádios. Pode voltar a adicioná-lo neste ecrã."
 }

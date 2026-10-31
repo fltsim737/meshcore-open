@@ -7512,4 +7512,39 @@ class AppLocalizationsIt extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'La tua conversazione ha avuto 3 minuti di voce, quindi la voce si ferma per 5 minuti e gli altri hanno il tempo di trasmissione. Il testo funziona ancora. Voce di nuovo tra $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Clip: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Eliminare tutte le clip di questa conversazione? Non si potranno più riprodurre.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Non è su questa radio: aggiungila solo se questa radio fa parte della rete';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Aggiungere «$network» a questa radio?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Questa radio non ha il canale della tua rete di emergenza. Aggiungilo solo se deve inviare e ricevere gli allarmi della rete, non per una radio che stai provando, prestando o configurando per qualcun altro.';
+
+  @override
+  String get sos_radioAdd => 'Aggiungi a questa radio';
+
+  @override
+  String get sos_radioNotThis => 'Non questa radio';
+
+  @override
+  String get sos_radioRemove => 'Rimuovi da questa radio';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Togliere il canale della rete di emergenza da questa radio? L\'app resta nella rete, per le tue altre radio. Puoi riaggiungerlo da questa schermata.';
 }

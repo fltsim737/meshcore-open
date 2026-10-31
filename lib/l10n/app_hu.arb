@@ -3756,5 +3756,14 @@
   "sos_soundAlertSpeaker": "Hangszóró a riasztásokhoz és értesítésekhez",
   "ptt_clipNotification": "🎙 Hangklip, {seconds} s",
   "ptt_meshBusy": "A hálózat szöveges üzeneteket továbbít, ezek az elsők. Hang {seconds} s múlva.",
-  "ptt_talkLimit": "A beszélgetésedben 3 perc hang volt, ezért 5 percig szünetel a hang, és mások kapják az adásidőt. A szöveg továbbra is működik. Hang újra {time} múlva."
+  "ptt_talkLimit": "A beszélgetésedben 3 perc hang volt, ezért 5 percig szünetel a hang, és mások kapják az adásidőt. A szöveg továbbra is működik. Hang újra {time} múlva.",
+  "ptt_clips": "Klipek: {count}",
+  "ptt_clearConfirm": "Törlöd a beszélgetés összes klipjét? Többé nem játszhatók le.",
+  "sos_networkStatusNeedsApproval": "Nincs ezen a rádión: csak akkor add hozzá, ha a rádió a hálózat része",
+  "sos_radioApprovalTitle": "Hozzáadod a(z) „{network}” hálózatot ehhez a rádióhoz?",
+  "sos_radioApprovalBody": "Ezen a rádión nincs meg a vészhelyzeti hálózatod csatornája. Csak akkor add hozzá, ha a rádiónak küldenie és fogadnia kell a hálózat riasztásait, ne egy tesztelt, kölcsönadott vagy másnak beállított rádióhoz.",
+  "sos_radioAdd": "Hozzáadás ehhez a rádióhoz",
+  "sos_radioNotThis": "Nem ez a rádió",
+  "sos_radioRemove": "Eltávolítás erről a rádióról",
+  "sos_radioRemoveConfirm": "Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod."
 }

@@ -3712,5 +3712,14 @@
   "sos_soundAlertSpeaker": "Högtalare för larm och aviseringar",
   "ptt_clipNotification": "🎙 Röstklipp, {seconds} s",
   "ptt_meshBusy": "Meshen bär textmeddelanden, som går först. Röst om {seconds} s.",
-  "ptt_talkLimit": "Ditt samtal har haft 3 minuter röst, så du vilar från röst i 5 minuter och andra får sändningstiden. Text fungerar fortfarande. Röst igen om {time}."
+  "ptt_talkLimit": "Ditt samtal har haft 3 minuter röst, så du vilar från röst i 5 minuter och andra får sändningstiden. Text fungerar fortfarande. Röst igen om {time}.",
+  "ptt_clips": "Klipp: {count}",
+  "ptt_clearConfirm": "Radera alla klipp i det här samtalet? De kan inte spelas upp igen.",
+  "sos_networkStatusNeedsApproval": "Inte på den här radion: lägg bara till den om radion hör till nätet",
+  "sos_radioApprovalTitle": "Lägga till ”{network}” på den här radion?",
+  "sos_radioApprovalBody": "Den här radion har inte ditt nödnäts kanal. Lägg bara till den om radion ska skicka och höra nätets larm, inte på en radio du testar, lånar ut eller ställer in åt någon annan.",
+  "sos_radioAdd": "Lägg till på den här radion",
+  "sos_radioNotThis": "Inte den här radion",
+  "sos_radioRemove": "Ta bort från den här radion",
+  "sos_radioRemoveConfirm": "Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här."
 }

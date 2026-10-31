@@ -3722,5 +3722,14 @@
   "sos_soundAlertSpeaker": "警报和通知扬声器",
   "ptt_clipNotification": "🎙 语音片段,{seconds} 秒",
   "ptt_meshBusy": "网络正在传送文字消息,文字优先。{seconds} 秒后可用语音。",
-  "ptt_talkLimit": "你的对话已用了 3 分钟语音,因此语音暂停 5 分钟,把通话时间让给其他人。文字仍可使用。{time} 后可再用语音。"
+  "ptt_talkLimit": "你的对话已用了 3 分钟语音,因此语音暂停 5 分钟,把通话时间让给其他人。文字仍可使用。{time} 后可再用语音。",
+  "ptt_clips": "语音片段:{count}",
+  "ptt_clearConfirm": "删除此对话中的所有语音片段?删除后将无法再播放。",
+  "sos_networkStatusNeedsApproval": "不在此电台上:只有此电台属于该网络时才添加",
+  "sos_radioApprovalTitle": "将“{network}”添加到此电台?",
+  "sos_radioApprovalBody": "此电台没有你的紧急网络频道。只有当此电台应发送和接收该网络的警报时才添加;正在测试、借出或替他人设置的电台不要添加。",
+  "sos_radioAdd": "添加到此电台",
+  "sos_radioNotThis": "不是此电台",
+  "sos_radioRemove": "从此电台移除",
+  "sos_radioRemoveConfirm": "从此电台移除紧急网络频道?应用仍留在网络中,供你的其他电台使用。你可以在此页面重新添加。"
 }

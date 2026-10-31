@@ -2,7 +2,20 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
-## 10.0.0 (in testing, not yet released)
+## 10.1.0 (in testing, not yet released)
+
+### The emergency network goes only on radios you agree to
+
+- **No more channels on the wrong radio.** Before, an app with an emergency network put the network's channel on any radio it connected to: a radio being tested on a computer, lent out, or meant for another network picked it up just by being plugged in. Now, connecting to a radio without the channel **asks first**: *Add “Farm” to this radio?* on the Emergency tab, with **Add to this radio** or **Not this radio**. The answer is remembered for that radio.
+- Joining or setting up a network while connected counts as agreeing for that radio, and a radio that already has the channel is left as it is. With no network set, nothing is ever added. This applies to members and responders alike.
+- **Remove from this radio** on the emergency network screen takes the channel off the connected radio and keeps it off; the app stays in the network for your other radios, and **Add to this radio** there puts it back.
+
+### Push-to-talk clips can be deleted, and tidy themselves away (SOS Voice)
+
+- Each clip has a **Delete** button, and **Clear** deletes all of a conversation's clips (after asking). A clip still being sent can't be deleted.
+- Clips are only ever kept in memory, never saved on the device, but the app runs in the background for days, so they now go by themselves too: push-to-talk clips older than **24 hours** are dropped (checked every 10 minutes), and at most **100** are kept over every conversation together, the oldest going first. SOS clips still go when their SOS ends.
+
+## 10.0.0 (2026-10-31)
 
 A major release: everything since 9.8.3. The 9.8.4, 9.8.5 and 9.8.6 test builds are replaced by it.
 

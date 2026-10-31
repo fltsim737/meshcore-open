@@ -7412,4 +7412,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'Your conversation has had 3 minutes of voice, so you rest from voice for 5 minutes and others get the airtime. Text still works. Voice again in $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Clips: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Delete all the clips in this conversation? They can\'t be played again.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Not on this radio: add it only if this radio belongs in the network';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Add “$network” to this radio?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'This radio doesn\'t have your emergency network\'s channel. Add it only if this radio should send and hear the network\'s alerts, not for a radio you\'re testing, lending or setting up for someone else.';
+
+  @override
+  String get sos_radioAdd => 'Add to this radio';
+
+  @override
+  String get sos_radioNotThis => 'Not this radio';
+
+  @override
+  String get sos_radioRemove => 'Remove from this radio';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Take the emergency network\'s channel off this radio? The app stays in the network, for your other radios. You can add it back from this screen.';
 }

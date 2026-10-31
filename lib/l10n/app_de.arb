@@ -3852,5 +3852,14 @@
   "sos_soundAlertSpeaker": "Lautsprecher für Alarme und Benachrichtigungen",
   "ptt_clipNotification": "🎙 Sprachclip, {seconds} s",
   "ptt_meshBusy": "Das Mesh überträgt gerade Textnachrichten, die Vorrang haben. Sprache in {seconds} s.",
-  "ptt_talkLimit": "Dein Gespräch hatte 3 Minuten Sprache, daher pausierst du 5 Minuten mit Sprache und andere bekommen die Sendezeit. Text funktioniert weiter. Sprache wieder in {time}."
+  "ptt_talkLimit": "Dein Gespräch hatte 3 Minuten Sprache, daher pausierst du 5 Minuten mit Sprache und andere bekommen die Sendezeit. Text funktioniert weiter. Sprache wieder in {time}.",
+  "ptt_clips": "Clips: {count}",
+  "ptt_clearConfirm": "Alle Clips in diesem Gespräch löschen? Sie können nicht mehr abgespielt werden.",
+  "sos_networkStatusNeedsApproval": "Nicht auf diesem Funkgerät: nur hinzufügen, wenn es zum Netz gehört",
+  "sos_radioApprovalTitle": "„{network}“ zu diesem Funkgerät hinzufügen?",
+  "sos_radioApprovalBody": "Diesem Funkgerät fehlt der Kanal deines Notfallnetzes. Füge ihn nur hinzu, wenn es die Alarme des Netzes senden und hören soll, nicht bei einem Gerät, das du testest, verleihst oder für jemand anderen einrichtest.",
+  "sos_radioAdd": "Zu diesem Funkgerät hinzufügen",
+  "sos_radioNotThis": "Nicht dieses Funkgerät",
+  "sos_radioRemove": "Von diesem Funkgerät entfernen",
+  "sos_radioRemoveConfirm": "Den Kanal des Notfallnetzes von diesem Funkgerät entfernen? Die App bleibt im Netz, für deine anderen Funkgeräte. Du kannst ihn hier wieder hinzufügen."
 }

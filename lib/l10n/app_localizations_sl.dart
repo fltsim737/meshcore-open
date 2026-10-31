@@ -7478,4 +7478,39 @@ class AppLocalizationsSl extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'Vaš pogovor je imel 3 minute glasu, zato imate 5 minut premora od glasu in oddajni čas dobijo drugi. Besedilo še deluje. Glas znova čez $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Posnetki: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Izbrišem vse posnetke v tem pogovoru? Ne bo jih več mogoče predvajati.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Ni na tej radijski postaji: dodajte ga le, če postaja spada v omrežje';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Dodam »$network« na to radijsko postajo?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Ta radijska postaja nima kanala vašega omrežja za nujne primere. Dodajte ga le, če naj pošilja in sprejema opozorila omrežja, ne za postajo, ki jo preizkušate, posojate ali nastavljate za nekoga drugega.';
+
+  @override
+  String get sos_radioAdd => 'Dodaj na to postajo';
+
+  @override
+  String get sos_radioNotThis => 'Ne ta postaja';
+
+  @override
+  String get sos_radioRemove => 'Odstrani s te postaje';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu.';
 }

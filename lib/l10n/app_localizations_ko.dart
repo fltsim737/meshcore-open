@@ -7181,4 +7181,38 @@ class AppLocalizationsKo extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return '대화에서 음성을 3분 사용해 5분 동안 음성을 쉬고 송신 시간을 다른 사람에게 넘깁니다. 텍스트는 계속 쓸 수 있습니다. $time 후 다시 음성 가능.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return '클립: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm => '이 대화의 클립을 모두 삭제할까요? 다시 재생할 수 없습니다.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      '이 무전기에는 없음: 이 무전기가 네트워크에 속할 때만 추가하세요';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return '“$network”을(를) 이 무전기에 추가할까요?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      '이 무전기에는 긴급 네트워크 채널이 없습니다. 이 무전기가 네트워크의 경보를 보내고 들어야 할 때만 추가하세요. 시험 중이거나, 빌려주거나, 다른 사람을 위해 설정하는 무전기에는 추가하지 마세요.';
+
+  @override
+  String get sos_radioAdd => '이 무전기에 추가';
+
+  @override
+  String get sos_radioNotThis => '이 무전기 아님';
+
+  @override
+  String get sos_radioRemove => '이 무전기에서 제거';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      '이 무전기에서 긴급 네트워크 채널을 제거할까요? 앱은 다른 무전기를 위해 네트워크에 남습니다. 이 화면에서 다시 추가할 수 있습니다.';
 }

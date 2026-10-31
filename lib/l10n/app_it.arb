@@ -3851,5 +3851,14 @@
   "sos_soundAlertSpeaker": "Altoparlante per avvisi e notifiche",
   "ptt_clipNotification": "🎙 Clip vocale, {seconds} s",
   "ptt_meshBusy": "La mesh sta trasmettendo messaggi di testo, che hanno la precedenza. Voce tra {seconds} s.",
-  "ptt_talkLimit": "La tua conversazione ha avuto 3 minuti di voce, quindi la voce si ferma per 5 minuti e gli altri hanno il tempo di trasmissione. Il testo funziona ancora. Voce di nuovo tra {time}."
+  "ptt_talkLimit": "La tua conversazione ha avuto 3 minuti di voce, quindi la voce si ferma per 5 minuti e gli altri hanno il tempo di trasmissione. Il testo funziona ancora. Voce di nuovo tra {time}.",
+  "ptt_clips": "Clip: {count}",
+  "ptt_clearConfirm": "Eliminare tutte le clip di questa conversazione? Non si potranno più riprodurre.",
+  "sos_networkStatusNeedsApproval": "Non è su questa radio: aggiungila solo se questa radio fa parte della rete",
+  "sos_radioApprovalTitle": "Aggiungere «{network}» a questa radio?",
+  "sos_radioApprovalBody": "Questa radio non ha il canale della tua rete di emergenza. Aggiungilo solo se deve inviare e ricevere gli allarmi della rete, non per una radio che stai provando, prestando o configurando per qualcun altro.",
+  "sos_radioAdd": "Aggiungi a questa radio",
+  "sos_radioNotThis": "Non questa radio",
+  "sos_radioRemove": "Rimuovi da questa radio",
+  "sos_radioRemoveConfirm": "Togliere il canale della rete di emergenza da questa radio? L'app resta nella rete, per le tue altre radio. Puoi riaggiungerlo da questa schermata."
 }

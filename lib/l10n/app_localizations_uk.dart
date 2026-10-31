@@ -7514,4 +7514,39 @@ class AppLocalizationsUk extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'У вашій розмові було 3 хвилини голосу, тож голос відпочиває 5 хвилин, а ефір дістається іншим. Текст і далі працює. Голос знову через $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Кліпи: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Видалити всі кліпи в цій розмові? Їх більше не можна буде відтворити.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Її немає на цій рації: додавайте, лише якщо рація входить до мережі';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Додати «$network» на цю рацію?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'На цій рації немає каналу вашої екстреної мережі. Додавайте його, лише якщо рація має надсилати й чути тривоги мережі, а не на рацію, яку ви перевіряєте, позичаєте чи налаштовуєте для когось іншого.';
+
+  @override
+  String get sos_radioAdd => 'Додати на цю рацію';
+
+  @override
+  String get sos_radioNotThis => 'Не ця рація';
+
+  @override
+  String get sos_radioRemove => 'Прибрати з цієї рації';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Прибрати канал екстреної мережі з цієї рації? Застосунок залишиться в мережі для інших ваших рацій. Додати його знову можна на цьому екрані.';
 }

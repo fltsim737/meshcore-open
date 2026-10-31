@@ -3750,5 +3750,14 @@
   "sos_soundAlertSpeaker": "Głośnik dla alarmów i powiadomień",
   "ptt_clipNotification": "🎙 Nagranie głosowe, {seconds} s",
   "ptt_meshBusy": "Sieć przesyła wiadomości tekstowe, które mają pierwszeństwo. Głos za {seconds} s.",
-  "ptt_talkLimit": "Twoja rozmowa miała 3 minuty głosu, więc robisz 5 minut przerwy od głosu, a inni dostają czas antenowy. Tekst nadal działa. Głos ponownie za {time}."
+  "ptt_talkLimit": "Twoja rozmowa miała 3 minuty głosu, więc robisz 5 minut przerwy od głosu, a inni dostają czas antenowy. Tekst nadal działa. Głos ponownie za {time}.",
+  "ptt_clips": "Nagrania: {count}",
+  "ptt_clearConfirm": "Usunąć wszystkie nagrania z tej rozmowy? Nie będzie można ich odtworzyć.",
+  "sos_networkStatusNeedsApproval": "Nie ma go w tym radiu: dodaj tylko, jeśli to radio należy do sieci",
+  "sos_radioApprovalTitle": "Dodać „{network}” do tego radia?",
+  "sos_radioApprovalBody": "To radio nie ma kanału twojej sieci alarmowej. Dodaj go tylko, jeśli ma wysyłać i odbierać alarmy sieci, a nie do radia, które testujesz, pożyczasz lub konfigurujesz dla kogoś innego.",
+  "sos_radioAdd": "Dodaj do tego radia",
+  "sos_radioNotThis": "Nie to radio",
+  "sos_radioRemove": "Usuń z tego radia",
+  "sos_radioRemoveConfirm": "Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie."
 }

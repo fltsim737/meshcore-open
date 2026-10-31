@@ -7499,4 +7499,39 @@ class AppLocalizationsBg extends AppLocalizations {
   String ptt_talkLimit(String time) {
     return 'Разговорът ви имаше 3 минути глас, затова гласът почива 5 минути и другите получават ефирното време. Текстът продължава да работи. Глас отново след $time.';
   }
+
+  @override
+  String ptt_clips(int count) {
+    return 'Клипове: $count';
+  }
+
+  @override
+  String get ptt_clearConfirm =>
+      'Да се изтрият ли всички клипове в този разговор? Няма да могат да се пуснат отново.';
+
+  @override
+  String get sos_networkStatusNeedsApproval =>
+      'Не е на това радио: добавете го само ако радиото е част от мрежата';
+
+  @override
+  String sos_radioApprovalTitle(String network) {
+    return 'Да се добави ли „$network“ към това радио?';
+  }
+
+  @override
+  String get sos_radioApprovalBody =>
+      'Това радио няма канала на аварийната ви мрежа. Добавете го само ако радиото трябва да изпраща и чува сигналите на мрежата, а не за радио, което тествате, давате назаем или настройвате за някой друг.';
+
+  @override
+  String get sos_radioAdd => 'Добави към това радио';
+
+  @override
+  String get sos_radioNotThis => 'Не това радио';
+
+  @override
+  String get sos_radioRemove => 'Премахни от това радио';
+
+  @override
+  String get sos_radioRemoveConfirm =>
+      'Да се премахне ли каналът на аварийната мрежа от това радио? Приложението остава в мрежата за другите ви радиа. Можете да го добавите отново от този екран.';
 }

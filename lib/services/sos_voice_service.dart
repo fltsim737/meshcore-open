@@ -247,6 +247,13 @@ class SosVoiceService extends ChangeNotifier {
   static const String qualityPrefsKey = 'sos_voice_quality';
   static const int _maxClipsPerSos = 30;
 
+  /// Push-to-talk clips are kept in memory only (never saved), and tidied
+  /// away by themselves: those older than [pttClipKeep] go, and at most
+  /// [pttMaxClips] are kept over every push-to-talk conversation together,
+  /// the oldest going first. SOS clips go when their SOS ends.
+  static const Duration pttClipKeep = Duration(hours: 24);
+  static const int pttMaxClips = 100;
+
   /// The public push-to-talk channel: a hashtag channel, so its key comes
   /// from its name and every SOS Voice app shares it.
   static const String pttChannelName = '#voice';
@@ -327,6 +334,10 @@ class SosVoiceService extends ChangeNotifier {
   DateTime? _restUntil;
   Timer? _waitTimer;
 
+  /// Tidies push-to-talk clips away now and then, so old ones go even when
+  /// no new clip arrives ([pttClipKeep]).
+  Timer? _tidyTimer;
+
   /// Push-to-talk conversations with a clip heard that the user hasn't
   /// looked at yet.
   final Set<String> _unheard = {};
@@ -365,6 +376,9 @@ class SosVoiceService extends ChangeNotifier {
     _transport.directListener = handleDirect;
     _transport.changeListener = _onRadioChanged;
     _sos.addListener(_onSosChanged);
+    _tidyTimer = Timer.periodic(const Duration(minutes: 10), (_) {
+      if (_tidyPttClips()) notifyListeners();
+    });
     unawaited(_restoreQuality());
   }
 
@@ -1057,8 +1071,73 @@ class SosVoiceService extends ChangeNotifier {
     final list = _clips.putIfAbsent(clip.sosId, () => []);
     list.add(clip);
     if (list.length > _maxClipsPerSos) list.removeAt(0);
+    if (isPtt(clip.sosId)) _tidyPttClips();
     notifyListeners();
   }
+
+  /// Drops push-to-talk clips past [pttClipKeep], then the oldest past
+  /// [pttMaxClips]; true if any went.
+  bool _tidyPttClips() {
+    final cutoff = _now().subtract(pttClipKeep);
+    var removed = false;
+    for (final key in _clips.keys.where(isPtt).toList()) {
+      final list = _clips[key]!;
+      final before = list.length;
+      list.removeWhere((c) => c.time.isBefore(cutoff) && !_inUse(c));
+      if (list.length != before) removed = true;
+      if (list.isEmpty) _clips.remove(key);
+    }
+    final all = [
+      for (final e in _clips.entries)
+        if (isPtt(e.key)) ...e.value,
+    ]..sort((a, b) => a.time.compareTo(b.time));
+    for (final clip in all.take(max(0, all.length - pttMaxClips))) {
+      if (_inUse(clip)) continue;
+      _clips[clip.sosId]?.remove(clip);
+      if (_clips[clip.sosId]?.isEmpty ?? false) _clips.remove(clip.sosId);
+      removed = true;
+    }
+    return removed;
+  }
+
+  /// A clip still being sent, or playing, isn't removed from under itself.
+  bool _inUse(VoiceClip clip) =>
+      identical(_playing, clip) ||
+      clip.status == VoiceClipStatus.queued ||
+      clip.status == VoiceClipStatus.sending;
+
+  /// Deletes one clip, stopping it first if it's playing. A clip still being
+  /// sent can't be deleted (false).
+  Future<bool> deleteClip(VoiceClip clip) async {
+    if (clip.status == VoiceClipStatus.queued ||
+        clip.status == VoiceClipStatus.sending) {
+      return false;
+    }
+    if (identical(_playing, clip)) await stopPlayback();
+    _playQueue.remove(clip);
+    final list = _clips[clip.sosId];
+    if (list == null || !list.remove(clip)) return false;
+    if (list.isEmpty) _clips.remove(clip.sosId);
+    notifyListeners();
+    return true;
+  }
+
+  /// Deletes every clip in [conversation] except any still being sent.
+  Future<void> clearClips(String conversation) async {
+    final list = _clips[conversation];
+    if (list == null) return;
+    if (_playing?.sosId == conversation) await stopPlayback();
+    _playQueue.removeWhere((c) => c.sosId == conversation);
+    list.removeWhere((c) => !_inUse(c));
+    if (list.isEmpty) _clips.remove(conversation);
+    notifyListeners();
+  }
+
+  /// Push-to-talk clips kept, over every conversation.
+  int get pttClipCount => [
+    for (final e in _clips.entries)
+      if (isPtt(e.key)) ...e.value,
+  ].length;
 
   /// Ends voice for any SOS that is over.
   void _onSosChanged() {
@@ -1098,6 +1177,7 @@ class SosVoiceService extends ChangeNotifier {
     _transport.changeListener = null;
     _staleTimer?.cancel();
     _waitTimer?.cancel();
+    _tidyTimer?.cancel();
     unawaited(_micSub?.cancel());
     unawaited(_audio.dispose());
     super.dispose();
