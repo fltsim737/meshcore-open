@@ -3828,5 +3828,10 @@
   "sos_radioRemove": "Retirer de cette radio",
   "sos_radioRemoveConfirm": "Retirer le canal du réseau d'urgence de cette radio ? L'application reste dans le réseau, pour vos autres radios. Vous pourrez le rajouter depuis cet écran.",
   "sos_voiceVolume": "Volume de la voix",
-  "sos_voiceVolumeHelp": "Chaque clip est mis à niveau pour que les plus faibles s'entendent bien ; montez-le pour des haut-parleurs faibles."
+  "sos_voiceVolumeHelp": "Chaque clip est mis à niveau pour que les plus faibles s'entendent bien ; montez-le pour des haut-parleurs faibles.",
+  "contacts_setCustomName": "Définir un nom personnalisé",
+  "contacts_customNameTitle": "Nom personnalisé",
+  "contacts_customNameHelp": "Seule cette application l'affiche. Les autres voient toujours le nom que {name} annonce.",
+  "contacts_advertisesAs": "S'annonce comme {name}",
+  "contacts_useOwnName": "Utiliser son propre nom"
 }

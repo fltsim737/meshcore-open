@@ -7102,4 +7102,23 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       '작은 클립도 잘 들리도록 클립마다 음량을 맞춥니다. 스피커 소리가 작으면 올리세요.';
+
+  @override
+  String get contacts_setCustomName => '사용자 지정 이름 설정';
+
+  @override
+  String get contacts_customNameTitle => '사용자 지정 이름';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return '이 앱에서만 표시됩니다. 다른 사람에게는 $name이(가) 알리는 이름이 그대로 보입니다.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return '알림 이름: $name';
+  }
+
+  @override
+  String get contacts_useOwnName => '원래 이름 사용';
 }

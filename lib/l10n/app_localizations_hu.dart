@@ -7407,4 +7407,23 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb.';
+
+  @override
+  String get contacts_setCustomName => 'Egyéni név megadása';
+
+  @override
+  String get contacts_customNameTitle => 'Egyéni név';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Csak ez az alkalmazás mutatja. Mások továbbra is a(z) $name által hirdetett nevet látják.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Így hirdeti magát: $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'A saját nevét használja';
 }

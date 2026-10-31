@@ -7432,4 +7432,23 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Каждый клип выравнивается, чтобы тихие было хорошо слышно; прибавьте для тихих динамиков.';
+
+  @override
+  String get contacts_setCustomName => 'Задать своё имя';
+
+  @override
+  String get contacts_customNameTitle => 'Своё имя';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Его показывает только это приложение. Остальные по-прежнему видят имя, которое объявляет $name.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Объявляется как $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Использовать его собственное имя';
 }

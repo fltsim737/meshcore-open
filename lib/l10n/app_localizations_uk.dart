@@ -7431,4 +7431,23 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Кожен кліп вирівнюється, щоб тихі було добре чути; збільште для тихих динаміків.';
+
+  @override
+  String get contacts_setCustomName => 'Задати власне ім\'я';
+
+  @override
+  String get contacts_customNameTitle => 'Власне ім\'я';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Його показує лише цей застосунок. Інші й далі бачать ім\'я, яке оголошує $name.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Оголошується як $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Використати його власне ім\'я';
 }

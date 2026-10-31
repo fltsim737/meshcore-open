@@ -7445,4 +7445,23 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Każde nagranie jest wyrównywane, by ciche były dobrze słyszalne; zwiększ dla cichych głośników.';
+
+  @override
+  String get contacts_setCustomName => 'Ustaw własną nazwę';
+
+  @override
+  String get contacts_customNameTitle => 'Własna nazwa';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Pokazuje ją tylko ta aplikacja. Inni nadal widzą nazwę, którą ogłasza $name.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Ogłasza się jako $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Użyj jego własnej nazwy';
 }

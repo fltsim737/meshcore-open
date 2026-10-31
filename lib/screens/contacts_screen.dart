@@ -1556,6 +1556,67 @@ class _ContactsScreenState extends State<ContactsScreen>
     );
   }
 
+  /// A name only this app shows for [contact] (10.1.3); the contact keeps
+  /// advertising its own, and the radio keeps that one too.
+  Future<void> _showCustomNameDialog(
+    BuildContext context,
+    MeshCoreConnector connector,
+    Contact contact,
+  ) async {
+    final l10n = context.l10n;
+    final advertised = connector.advertisedNameFor(contact);
+    final custom = connector.customNameFor(contact.publicKeyHex);
+    final controller = TextEditingController(text: custom ?? advertised);
+    controller.selection = TextSelection(
+      baseOffset: 0,
+      extentOffset: controller.text.length,
+    );
+    final result = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.contacts_customNameTitle),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: controller,
+              autofocus: true,
+              maxLength: 40,
+              textCapitalization: TextCapitalization.words,
+              decoration: InputDecoration(hintText: advertised),
+              onSubmitted: (v) => Navigator.pop(dialogContext, v),
+            ),
+            Text(
+              l10n.contacts_customNameHelp(advertised),
+              style: Theme.of(dialogContext).textTheme.bodySmall,
+            ),
+          ],
+        ),
+        actions: [
+          if (custom != null)
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, ''),
+              child: Text(l10n.contacts_useOwnName),
+            ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.common_cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, controller.text),
+            child: Text(l10n.common_save),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (result == null) return;
+    // the contact's own name typed back in means no custom name
+    final name = result.trim() == advertised ? '' : result;
+    await connector.setCustomName(contact.publicKeyHex, name);
+  }
+
   void _showContactOptions(
     BuildContext context,
     MeshCoreConnector connector,
@@ -1573,7 +1634,9 @@ class _ContactsScreenState extends State<ContactsScreen>
           children: [
             BottomSheetHeader(
               title: contact.name,
-              subtitle: contact.typeLabel(context.l10n),
+              subtitle: connector.customNameFor(contact.publicKeyHex) == null
+                  ? contact.typeLabel(context.l10n)
+                  : '${contact.typeLabel(context.l10n)} · ${context.l10n.contacts_advertisesAs(connector.advertisedNameFor(contact))}',
             ),
             if (isRepeater) ...[
               ListTile(
@@ -1698,6 +1761,14 @@ class _ContactsScreenState extends State<ContactsScreen>
                   contact,
                   isFavorite: !isFavorite,
                 );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.drive_file_rename_outline),
+              title: Text(context.l10n.contacts_setCustomName),
+              onTap: () {
+                Navigator.pop(sheetContext);
+                _showCustomNameDialog(context, connector, contact);
               },
             ),
             ListTile(

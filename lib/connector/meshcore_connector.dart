@@ -636,35 +636,107 @@ class MeshCoreConnector extends ChangeNotifier {
   }
 
   List<ScanResult> get scanResults => List.unmodifiable(_scanResults);
+  // ---------------------------------------------------------------------
+  // Custom names (10.1.3)
+  // ---------------------------------------------------------------------
+
+  /// Names the user gave contacts, by full public key (hex). Kept in the app
+  /// for every radio, never sent to one: a radio's contact name is replaced by
+  /// whatever that contact advertises, so it wouldn't stick there. The getters
+  /// below hand out contacts with these names; [_contacts] keeps the radio's.
+  Map<String, String>? _customNames;
+  static const String _customNamesKey = 'contact_custom_names';
+
+  Map<String, String> get _names {
+    if (_customNames != null) return _customNames!;
+    final names = <String, String>{};
+    try {
+      final raw = PrefsManager.instance.getString(_customNamesKey);
+      if (raw != null) {
+        (jsonDecode(raw) as Map<String, dynamic>).forEach((k, v) {
+          if (v is String && v.trim().isNotEmpty) names[k] = v;
+        });
+      }
+    } catch (e) {
+      appLogger.warn('Custom contact names unreadable: $e', tag: 'Connector');
+    }
+    return _customNames = names;
+  }
+
+  /// The name the user gave this contact, or null.
+  String? customNameFor(String publicKeyHex) => _names[publicKeyHex];
+
+  /// The name the contact itself advertises, whatever it's called here.
+  String advertisedNameFor(Contact contact) => _radioName(contact);
+
+  /// Sets (or, with an empty name, clears) a contact's custom name.
+  Future<void> setCustomName(String publicKeyHex, String? name) async {
+    final names = _names;
+    final trimmed = name?.trim() ?? '';
+    if (trimmed.isEmpty) {
+      names.remove(publicKeyHex);
+    } else {
+      names[publicKeyHex] = trimmed;
+    }
+    await PrefsManager.instance.setString(_customNamesKey, jsonEncode(names));
+    notifyListeners();
+  }
+
+  Contact _named(Contact c) {
+    final custom = _names[c.publicKeyHex];
+    return custom == null ? c : c.copyWith(name: custom);
+  }
+
+  List<Contact> _namedAll(Iterable<Contact> contacts) =>
+      _names.isEmpty ? contacts.toList() : contacts.map(_named).toList();
+
+  /// The name to write to the radio: always the contact's own, never a custom
+  /// one, even when [contact] came from the getters.
+  String _radioName(Contact contact) {
+    final key = contact.publicKeyHex;
+    for (final c in _contacts) {
+      if (c.publicKeyHex == key) return c.name;
+    }
+    for (final c in _discoveredContacts) {
+      if (c.publicKeyHex == key) return c.name;
+    }
+    return _names[key] == contact.name ? '' : contact.name;
+  }
+
   List<Contact> get contacts {
     final selfKey = _selfPublicKey;
     if (selfKey == null) {
-      return List.unmodifiable(_contacts);
+      return List.unmodifiable(_namedAll(_contacts));
     }
     return List.unmodifiable(
-      _contacts.where((contact) => !listEquals(contact.publicKey, selfKey)),
+      _namedAll(
+        _contacts.where((contact) => !listEquals(contact.publicKey, selfKey)),
+      ),
     );
   }
 
   Contact? getContactByPubKeyHex(String contactPubKeyHex) {
-    return _contacts.cast<Contact?>().firstWhere(
+    final found = _contacts.cast<Contact?>().firstWhere(
       (c) => c?.publicKeyHex == contactPubKeyHex,
       orElse: () => null,
     );
+    return found == null ? null : _named(found);
   }
 
-  List<Contact> get allContacts => List.unmodifiable([
-    ..._contacts,
-    ..._discoveredContacts.where(
-      (c) => !c.isActive && c.publicKeyHex != selfPublicKeyHex,
-    ),
-  ]);
+  List<Contact> get allContacts => List.unmodifiable(
+    _namedAll([
+      ..._contacts,
+      ..._discoveredContacts.where(
+        (c) => !c.isActive && c.publicKeyHex != selfPublicKeyHex,
+      ),
+    ]),
+  );
 
   List<Contact> get allContactsUnfiltered =>
-      List.unmodifiable([..._contacts, ..._discoveredContacts]);
+      List.unmodifiable(_namedAll([..._contacts, ..._discoveredContacts]));
 
   List<Contact> get discoveredContacts {
-    return List.unmodifiable(_discoveredContacts);
+    return List.unmodifiable(_namedAll(_discoveredContacts));
   }
 
   String exportDiscoveredContactsJson() {
@@ -4484,7 +4556,7 @@ class MeshCoreConnector extends ChangeNotifier {
           encodedPathLen,
           type: contact.type,
           flags: contact.flags,
-          name: contact.name,
+          name: _radioName(contact),
           lastAdvert: _deviceLastAdvert(contact),
         ),
       );
@@ -4562,7 +4634,7 @@ class MeshCoreConnector extends ChangeNotifier {
         encodedPathLen,
         type: latestContact.type,
         flags: updatedFlags,
-        name: latestContact.name,
+        name: _radioName(latestContact),
         lastAdvert: latestContact.lastSeen,
       ),
     );
@@ -5325,7 +5397,7 @@ class MeshCoreConnector extends ChangeNotifier {
         encodedPathLen,
         type: contact.type,
         flags: contact.flags,
-        name: contact.name,
+        name: _radioName(contact),
         lat: contact.latitude,
         lon: contact.longitude,
         lastAdvert: contact.lastSeen,

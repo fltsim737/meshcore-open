@@ -7392,4 +7392,23 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Každý klip sa vyrovná, aby boli tiché dobre počuť; pri tichých reproduktoroch zvýšte.';
+
+  @override
+  String get contacts_setCustomName => 'Nastaviť vlastný názov';
+
+  @override
+  String get contacts_customNameTitle => 'Vlastný názov';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Zobrazuje ho len táto aplikácia. Ostatní stále vidia názov, ktorý ohlasuje $name.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Ohlasuje sa ako $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Použiť jeho vlastný názov';
 }

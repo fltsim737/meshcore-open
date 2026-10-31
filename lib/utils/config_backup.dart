@@ -131,13 +131,22 @@ class ConfigBackup {
         for (final key in app.sosContactKeys)
           {
             'key': key,
-            'name': connector.getContactByPubKeyHex(key)?.name ?? '',
+            // the contact's own name: a restore writes these to the radio
+            'name': switch (connector.getContactByPubKeyHex(key)) {
+              final c? => connector.advertisedNameFor(c),
+              null => '',
+            },
           },
       ],
       'app': {
         'network_name': net?.name,
         'coordinator': app.sosNetworkCoordinator,
         'include_favourites': app.sosIncludeFavourites,
+        // names given to contacts in this app (10.1.3), by public key
+        'custom_names': {
+          for (final c in connector.allContactsUnfiltered)
+            c.publicKeyHex: ?connector.customNameFor(c.publicKeyHex),
+        },
         if (connector.selfLatitude != null && connector.selfLongitude != null)
           'advert_location': {
             'lat': connector.selfLatitude,
@@ -166,7 +175,7 @@ class ConfigBackup {
               'key': c.publicKeyHex,
               'type': c.type,
               'flags': c.flags,
-              'name': c.name,
+              'name': connector.advertisedNameFor(c),
             },
         ],
       },
@@ -379,6 +388,16 @@ class ConfigBackup {
               (c['key'] as String).toLowerCase(),
               true,
             );
+          }
+        }
+      });
+    }
+    final customNames = app is Map ? app['custom_names'] : null;
+    if (customNames is Map && customNames.isNotEmpty) {
+      await step('Contact names', () async {
+        for (final e in customNames.entries) {
+          if (e.key is String && e.value is String) {
+            await connector.setCustomName(e.key as String, e.value as String);
           }
         }
       });

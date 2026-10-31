@@ -7362,4 +7362,23 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Varje klipp jämnas ut så att svaga hörs bra; höj för svaga högtalare.';
+
+  @override
+  String get contacts_setCustomName => 'Ange eget namn';
+
+  @override
+  String get contacts_customNameTitle => 'Eget namn';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Bara den här appen visar det. Alla andra ser fortfarande namnet som $name annonserar.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Annonserar som $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Använd kontaktens eget namn';
 }

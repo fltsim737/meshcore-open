@@ -7416,4 +7416,23 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Всеки клип се изравнява, за да се чуват добре тихите; увеличете за тихи високоговорители.';
+
+  @override
+  String get contacts_setCustomName => 'Задаване на собствено име';
+
+  @override
+  String get contacts_customNameTitle => 'Собствено име';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Показва го само това приложение. Другите продължават да виждат името, което $name обявява.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Обявява се като $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Използване на собственото му име';
 }

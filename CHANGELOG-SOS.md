@@ -2,6 +2,21 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.1.3 (2026-10-31)
+
+Both apps. MeshCore Open SOS goes from 10.1.1 to 10.1.3 (10.1.2 was SOS Voice only).
+
+### Your own names for contacts
+
+- **Set custom name** in a contact's options (long-press it on the Contacts tab) gives it a name of your choosing, such as *Dad* for "VK2-Rob-Mobile". The app shows it everywhere it names that contact: the contacts list, chats, the map, notifications, emergency contacts, discovered radios.
+- It's kept in the app, for every radio you connect, and is never sent to the radio or to anyone else. The contact keeps advertising its own name, and that's what everyone else sees. A radio's contact list can't hold your name anyway: it takes whatever name the contact advertises.
+- The contact's options say *Advertises as …* while a custom name is set, and **Use its own name** in the same box takes it off.
+- An SOS alert still shows the name the sender's radio sends.
+
+### Push-to-talk's Clear is now Delete All (SOS Voice)
+
+- The button that deletes all the clips in a conversation says **Delete All**, and so does the button that confirms it, which said *Delete*. It works as before.
+
 ## 10.1.2 (2026-10-31)
 
 SOS Voice only: MeshCore Open SOS has no push-to-talk and stays at 10.1.1.

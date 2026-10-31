@@ -3828,5 +3828,10 @@
   "sos_radioRemove": "Rimuovi da questa radio",
   "sos_radioRemoveConfirm": "Togliere il canale della rete di emergenza da questa radio? L'app resta nella rete, per le tue altre radio. Puoi riaggiungerlo da questa schermata.",
   "sos_voiceVolume": "Volume della voce",
-  "sos_voiceVolumeHelp": "Ogni clip viene livellata perché quelle deboli si sentano bene; alzalo per altoparlanti deboli."
+  "sos_voiceVolumeHelp": "Ogni clip viene livellata perché quelle deboli si sentano bene; alzalo per altoparlanti deboli.",
+  "contacts_setCustomName": "Imposta un nome personalizzato",
+  "contacts_customNameTitle": "Nome personalizzato",
+  "contacts_customNameHelp": "Lo mostra solo questa app. Gli altri vedono ancora il nome che {name} annuncia.",
+  "contacts_advertisesAs": "Si annuncia come {name}",
+  "contacts_useOwnName": "Usa il suo nome"
 }

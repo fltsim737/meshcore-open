@@ -7428,4 +7428,23 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Ogni clip viene livellata perché quelle deboli si sentano bene; alzalo per altoparlanti deboli.';
+
+  @override
+  String get contacts_setCustomName => 'Imposta un nome personalizzato';
+
+  @override
+  String get contacts_customNameTitle => 'Nome personalizzato';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Lo mostra solo questa app. Gli altri vedono ancora il nome che $name annuncia.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Si annuncia come $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Usa il suo nome';
 }
