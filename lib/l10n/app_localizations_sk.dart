@@ -7510,4 +7510,11 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke.';
+
+  @override
+  String get sos_voiceVolume => 'Hlasitosť hlasu';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Každý klip sa vyrovná, aby boli tiché dobre počuť; pri tichých reproduktoroch zvýšte.';
 }

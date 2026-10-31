@@ -3765,5 +3765,7 @@
   "sos_radioAdd": "Hozzáadás ehhez a rádióhoz",
   "sos_radioNotThis": "Nem ez a rádió",
   "sos_radioRemove": "Eltávolítás erről a rádióról",
-  "sos_radioRemoveConfirm": "Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod."
+  "sos_radioRemoveConfirm": "Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod.",
+  "sos_voiceVolume": "Hangerő a beszédhez",
+  "sos_voiceVolumeHelp": "Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb."
 }

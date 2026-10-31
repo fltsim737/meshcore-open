@@ -7051,4 +7051,10 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       '从此电台移除紧急网络频道?应用仍留在网络中,供你的其他电台使用。你可以在此页面重新添加。';
+
+  @override
+  String get sos_voiceVolume => '语音音量';
+
+  @override
+  String get sos_voiceVolumeHelp => '每段语音都会自动调平,声音小的也能听清;扬声器较小时可调高。';
 }

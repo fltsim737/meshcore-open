@@ -7480,4 +7480,11 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här.';
+
+  @override
+  String get sos_voiceVolume => 'Röstvolym';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Varje klipp jämnas ut så att svaga hörs bra; höj för svaga högtalare.';
 }

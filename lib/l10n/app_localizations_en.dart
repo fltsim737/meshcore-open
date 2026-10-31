@@ -7447,4 +7447,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Take the emergency network\'s channel off this radio? The app stays in the network, for your other radios. You can add it back from this screen.';
+
+  @override
+  String get sos_voiceVolume => 'Voice volume';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Each clip is levelled so quiet ones are easy to hear; turn this up for quiet speakers.';
 }

@@ -3727,5 +3727,7 @@
   "sos_radioAdd": "Pridať do tejto rádiostanice",
   "sos_radioNotThis": "Nie táto rádiostanica",
   "sos_radioRemove": "Odstrániť z tejto rádiostanice",
-  "sos_radioRemoveConfirm": "Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke."
+  "sos_radioRemoveConfirm": "Odstrániť kanál núdzovej siete z tejto rádiostanice? Aplikácia zostáva v sieti pre vaše ostatné rádiostanice. Späť ho môžete pridať na tejto obrazovke.",
+  "sos_voiceVolume": "Hlasitosť hlasu",
+  "sos_voiceVolumeHelp": "Každý klip sa vyrovná, aby boli tiché dobre počuť; pri tichých reproduktoroch zvýšte."
 }

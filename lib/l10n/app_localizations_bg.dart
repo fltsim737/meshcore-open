@@ -7534,4 +7534,11 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Да се премахне ли каналът на аварийната мрежа от това радио? Приложението остава в мрежата за другите ви радиа. Можете да го добавите отново от този екран.';
+
+  @override
+  String get sos_voiceVolume => 'Сила на гласа';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Всеки клип се изравнява, за да се чуват добре тихите; увеличете за тихи високоговорители.';
 }

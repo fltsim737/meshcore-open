@@ -61,6 +61,7 @@ class DeviceVoiceAudio implements VoiceAudio {
   WindowsWaveOut? _windowsOut;
 
   DeviceVoiceAudio() {
+    SoundDevices.playsVoice = true;
     if (Platform.isLinux) {
       SoundDevices.inputLister = SoundDevices.linuxInputs;
     } else if (Platform.isWindows) {

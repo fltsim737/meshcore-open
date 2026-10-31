@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -9,6 +10,55 @@ import 'package:meshcore_open/services/voice_audio.dart';
 import 'package:meshcore_open/services/windows_wave_out.dart';
 
 void main() {
+  group('levelVoice', () {
+    Int16List tone(int amplitude) => Int16List.fromList([
+      for (var i = 0; i < 800; i++)
+        (amplitude * sin(2 * pi * 440 * i / 8000)).round(),
+    ]);
+    int peak(Int16List pcm) => pcm.fold(0, (m, s) => max(m, s.abs()));
+
+    test('a quiet clip is brought up to 90% of full scale', () {
+      final out = SoundDevices.levelVoice(tone(4000), 1.0);
+      expect(peak(out) / 32767, closeTo(0.7 + 0.3 * 0.53, 0.05));
+      expect(peak(out), greaterThan(peak(tone(4000)) * 5));
+    });
+
+    test('hiss is raised by at most 8 times', () {
+      final out = SoundDevices.levelVoice(tone(100), 1.0);
+      expect(peak(out), lessThanOrEqualTo(810));
+    });
+
+    test('turned up, it gets louder but never clips', () {
+      final out = SoundDevices.levelVoice(tone(20000), 3.0);
+      expect(peak(out), lessThanOrEqualTo(32767));
+      expect(
+        peak(out),
+        greaterThan(peak(SoundDevices.levelVoice(tone(20000), 1.0))),
+      );
+    });
+
+    test('turned down, it gets quieter', () {
+      final out = SoundDevices.levelVoice(tone(20000), 0.25);
+      expect(peak(out) / 32767, closeTo(0.225, 0.01));
+    });
+
+    test('silence stays silent', () {
+      final silence = Int16List(800);
+      expect(SoundDevices.levelVoice(silence, 2.0), same(silence));
+    });
+  });
+
+  test('voice volume is kept between 25% and 300%', () async {
+    SharedPreferences.setMockInitialValues({});
+    PrefsManager.reset();
+    await PrefsManager.initialize();
+    expect(SoundDevices.voiceVolume, 1.0);
+    await SoundDevices.setVoiceVolume(5);
+    expect(SoundDevices.voiceVolume, 3.0);
+    await SoundDevices.setVoiceVolume(0.1);
+    expect(SoundDevices.voiceVolume, 0.25);
+  });
+
   group('speakers for voice and for alerts', () {
     Future<void> prefs(Map<String, Object> values) async {
       SharedPreferences.setMockInitialValues(values);

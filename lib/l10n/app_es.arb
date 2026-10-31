@@ -3860,5 +3860,7 @@
   "sos_radioAdd": "Añadir a esta radio",
   "sos_radioNotThis": "Esta radio no",
   "sos_radioRemove": "Quitar de esta radio",
-  "sos_radioRemoveConfirm": "¿Quitar el canal de la red de emergencia de esta radio? La app sigue en la red, para tus otras radios. Puedes volver a añadirlo desde esta pantalla."
+  "sos_radioRemoveConfirm": "¿Quitar el canal de la red de emergencia de esta radio? La app sigue en la red, para tus otras radios. Puedes volver a añadirlo desde esta pantalla.",
+  "sos_voiceVolume": "Volumen de voz",
+  "sos_voiceVolumeHelp": "Cada clip se nivela para que los bajos se oigan bien; súbelo para altavoces flojos."
 }

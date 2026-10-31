@@ -3759,5 +3759,7 @@
   "sos_radioAdd": "Dodaj do tego radia",
   "sos_radioNotThis": "Nie to radio",
   "sos_radioRemove": "Usuń z tego radia",
-  "sos_radioRemoveConfirm": "Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie."
+  "sos_radioRemoveConfirm": "Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie.",
+  "sos_voiceVolume": "Głośność głosu",
+  "sos_voiceVolumeHelp": "Każde nagranie jest wyrównywane, by ciche były dobrze słyszalne; zwiększ dla cichych głośników."
 }

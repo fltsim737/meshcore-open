@@ -7550,4 +7550,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Убрать канал экстренной сети с этой рации? Приложение останется в сети для других ваших раций. Добавить его снова можно на этом экране.';
+
+  @override
+  String get sos_voiceVolume => 'Громкость голоса';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Каждый клип выравнивается, чтобы тихие было хорошо слышно; прибавьте для тихих динамиков.';
 }

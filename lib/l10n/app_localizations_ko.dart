@@ -7215,4 +7215,11 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       '이 무전기에서 긴급 네트워크 채널을 제거할까요? 앱은 다른 무전기를 위해 네트워크에 남습니다. 이 화면에서 다시 추가할 수 있습니다.';
+
+  @override
+  String get sos_voiceVolume => '음성 볼륨';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      '작은 클립도 잘 들리도록 클립마다 음량을 맞춥니다. 스피커 소리가 작으면 올리세요.';
 }

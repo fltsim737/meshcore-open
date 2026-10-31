@@ -10,6 +10,7 @@ import '../models/channel.dart';
 import '../models/contact.dart';
 import '../utils/lora_airtime.dart';
 import 'sos_service.dart';
+import 'sound_devices.dart';
 import 'voice_activity_detector.dart';
 import 'voice_audio.dart';
 import 'voice_codec.dart';
@@ -1055,7 +1056,12 @@ class SosVoiceService extends ChangeNotifier {
       _vox.reset();
       notifyListeners();
       try {
-        await _audio.play(clip.pcm);
+        // levelled and at the chosen volume (rest tones as they are)
+        await _audio.play(
+          clip.sosId == 'ptt:rest'
+              ? clip.pcm
+              : SoundDevices.levelVoice(clip.pcm, SoundDevices.voiceVolume),
+        );
       } catch (_) {
         // A failed playback must not stop the queue.
       }
