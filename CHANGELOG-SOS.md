@@ -2,7 +2,7 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
-## 10.2.0 (2026-11-01)
+## 10.2.0 (2026-10-31)
 
 Both apps.
 
