@@ -117,13 +117,13 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.1.1; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current versions are MeshCore Open SOS 10.1.1 and SOS Voice 10.1.2; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
-| Android (any phone) | `meshcore-open-sos-10.1.1.apk` | `meshcore-open-sos-voice-10.1.1.apk` |
-| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.1-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.1-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.1-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.1-windows-source.zip` |
+| Android (any phone) | `meshcore-open-sos-10.1.1.apk` | `meshcore-open-sos-voice-10.1.2.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.1-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.2-x86_64.AppImage` |
+| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.1-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.2-windows-source.zip` |
 
 ### Android
 
@@ -257,7 +257,7 @@ From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
 | Someone else is talking | No clip while another clip is arriving on #voice. |
 | Text comes first | No clip for 15 s after any text message is heard or sent, nor while 4 or more went in the last minute. |
 | A rest after 3 minutes | Each conversation counts its voice both ways; after 3 minutes in a session, the people who talked hear two tones and rest from push-to-talk for 5 minutes, everywhere. Listeners aren't stopped. A session ends after 5 minutes without voice. |
-| An SOS comes first | Paused while the app knows of a live SOS, and for 5 minutes after any SOS packet is heard on the emergency network, even one a member's code can't read. A clip already going out stops at its next packet. |
+| An SOS comes first | Paused while the app knows of a live SOS, and for 5 minutes after any SOS packet is heard on the emergency network, even one a member's code can't read (as long as an SOS's slowest repeats). A cancel doesn't pause it: when the SOS the app knew about is cancelled, push-to-talk comes straight back (since 10.1.2). A clip already going out stops at its next packet. |
 
 SOS voice is never limited by these rules, and text always keeps working.
 
