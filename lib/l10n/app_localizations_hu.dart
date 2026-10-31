@@ -7537,4 +7537,23 @@ class AppLocalizationsHu extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'Szünetel: SOS-forgalom hallatszott a hálózaton, és az az első. Hang újra $time múlva.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Egyéni név megadása';
+
+  @override
+  String get contacts_customNameTitle => 'Egyéni név';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Csak ez az alkalmazás mutatja. Mások továbbra is a(z) $name által hirdetett nevet látják.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Így hirdeti magát: $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'A saját nevét használja';
 }

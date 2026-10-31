@@ -7546,4 +7546,23 @@ class AppLocalizationsBg extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'На пауза: в мрежата се чу SOS трафик, който е с предимство. Глас отново след $time.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Задаване на собствено име';
+
+  @override
+  String get contacts_customNameTitle => 'Собствено име';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Показва го само това приложение. Другите продължават да виждат името, което $name обявява.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Обявява се като $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Използване на собственото му име';
 }

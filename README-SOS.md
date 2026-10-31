@@ -117,13 +117,13 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current versions are MeshCore Open SOS 10.1.1 and SOS Voice 10.1.2; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.1.3; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
-| Android (any phone) | `meshcore-open-sos-10.1.1.apk` | `meshcore-open-sos-voice-10.1.2.apk` |
-| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.1-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.2-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.1-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.2-windows-source.zip` |
+| Android (any phone) | `meshcore-open-sos-10.1.3.apk` | `meshcore-open-sos-voice-10.1.3.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.1.3-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.1.3-x86_64.AppImage` |
+| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.1.3-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.1.3-windows-source.zip` |
 
 ### Android
 
@@ -205,6 +205,10 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 
 See [Voice](#voice-sos-voice-only) and [Push-to-talk](#push-to-talk-sos-voice-only) below.
 
+### Naming your contacts
+
+Long-press a contact and choose **Set custom name** to call it what you like, such as *Dad* for "VK2-Rob-Mobile". The app uses that name wherever it shows the contact, on every radio you connect, and Export config carries it to a new phone. It's never sent to the radio or to anyone else: the contact keeps advertising its own name, which the contact's options still show (*Advertises as …*). **Use its own name** takes it off. (Since 10.1.3.)
+
 ### Backing up your radio
 
 **Settings → Backup and restore → Export config** saves the radio's identity (its private key), name, radio settings, channels and contacts, with this app's emergency network, home location and emergency contacts, in one file. **Import config** puts it back after a firmware update or erase, or onto a new radio that takes over the old one's identity. A MeshCore SOS radio's web page reads and writes the same file; its WiFi and button settings come back only through that page. Keep the file private: anyone with it can pretend to be your radio.
@@ -261,7 +265,7 @@ From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
 
 SOS voice is never limited by these rules, and text always keeps working.
 
-**Clips** are kept in the app's memory only, never saved on the device. Each has a **Delete** button, **Clear** deletes a conversation's clips, and push-to-talk clips older than 24 hours go by themselves, with at most 100 kept altogether (since 10.1.0).
+**Clips** are kept in the app's memory only, never saved on the device. Each has a **Delete** button, **Delete All** deletes a conversation's clips (called **Clear** before 10.1.3), and push-to-talk clips older than 24 hours go by themselves, with at most 100 kept altogether (since 10.1.0).
 
 ---
 

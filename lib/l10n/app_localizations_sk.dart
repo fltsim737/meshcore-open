@@ -7522,4 +7522,23 @@ class AppLocalizationsSk extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'Pozastavené: v sieti bolo počuť prevádzku SOS, ktorá má prednosť. Hlas znova o $time.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Nastaviť vlastný názov';
+
+  @override
+  String get contacts_customNameTitle => 'Vlastný názov';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Zobrazuje ho len táto aplikácia. Ostatní stále vidia názov, ktorý ohlasuje $name.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Ohlasuje sa ako $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Použiť jeho vlastný názov';
 }

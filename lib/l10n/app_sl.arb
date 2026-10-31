@@ -3730,5 +3730,10 @@
   "sos_radioRemoveConfirm": "Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu.",
   "sos_voiceVolume": "Glasnost glasu",
   "sos_voiceVolumeHelp": "Vsak posnetek se izravna, da se tihi dobro slišijo; za tihe zvočnike povečajte.",
-  "ptt_sosHeard": "Začasno ustavljeno: v omrežju je bil slišan promet SOS, ki ima prednost. Glas znova čez {time}."
+  "ptt_sosHeard": "Začasno ustavljeno: v omrežju je bil slišan promet SOS, ki ima prednost. Glas znova čez {time}.",
+  "contacts_setCustomName": "Nastavi lastno ime",
+  "contacts_customNameTitle": "Lastno ime",
+  "contacts_customNameHelp": "Prikazuje ga le ta aplikacija. Drugi še vedno vidijo ime, ki ga oglašuje {name}.",
+  "contacts_advertisesAs": "Se oglašuje kot {name}",
+  "contacts_useOwnName": "Uporabi njegovo lastno ime"
 }

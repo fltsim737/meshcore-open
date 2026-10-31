@@ -3724,5 +3724,10 @@
   "sos_radioRemoveConfirm": "Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här.",
   "sos_voiceVolume": "Röstvolym",
   "sos_voiceVolumeHelp": "Varje klipp jämnas ut så att svaga hörs bra; höj för svaga högtalare.",
-  "ptt_sosHeard": "Pausad: SOS-trafik hördes i nätet, och den går först. Röst igen om {time}."
+  "ptt_sosHeard": "Pausad: SOS-trafik hördes i nätet, och den går först. Röst igen om {time}.",
+  "contacts_setCustomName": "Ange eget namn",
+  "contacts_customNameTitle": "Eget namn",
+  "contacts_customNameHelp": "Bara den här appen visar det. Alla andra ser fortfarande namnet som {name} annonserar.",
+  "contacts_advertisesAs": "Annonserar som {name}",
+  "contacts_useOwnName": "Använd kontaktens eget namn"
 }

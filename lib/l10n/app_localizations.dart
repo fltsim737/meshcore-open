@@ -12594,6 +12594,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Paused: SOS traffic was heard on the network, and it comes first. Voice again in {time}.'**
   String ptt_sosHeard(String time);
+
+  /// No description provided for @contacts_setCustomName.
+  ///
+  /// In en, this message translates to:
+  /// **'Set custom name'**
+  String get contacts_setCustomName;
+
+  /// No description provided for @contacts_customNameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom name'**
+  String get contacts_customNameTitle;
+
+  /// No description provided for @contacts_customNameHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Only this app shows it. Everyone else still sees the name {name} advertises.'**
+  String contacts_customNameHelp(String name);
+
+  /// No description provided for @contacts_advertisesAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Advertises as {name}'**
+  String contacts_advertisesAs(String name);
+
+  /// No description provided for @contacts_useOwnName.
+  ///
+  /// In en, this message translates to:
+  /// **'Use its own name'**
+  String get contacts_useOwnName;
 }
 
 class _AppLocalizationsDelegate

@@ -3768,5 +3768,10 @@
   "sos_radioRemoveConfirm": "Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod.",
   "sos_voiceVolume": "Hangerő a beszédhez",
   "sos_voiceVolumeHelp": "Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb.",
-  "ptt_sosHeard": "Szünetel: SOS-forgalom hallatszott a hálózaton, és az az első. Hang újra {time} múlva."
+  "ptt_sosHeard": "Szünetel: SOS-forgalom hallatszott a hálózaton, és az az első. Hang újra {time} múlva.",
+  "contacts_setCustomName": "Egyéni név megadása",
+  "contacts_customNameTitle": "Egyéni név",
+  "contacts_customNameHelp": "Csak ez az alkalmazás mutatja. Mások továbbra is a(z) {name} által hirdetett nevet látják.",
+  "contacts_advertisesAs": "Így hirdeti magát: {name}",
+  "contacts_useOwnName": "A saját nevét használja"
 }

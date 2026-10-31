@@ -7514,4 +7514,23 @@ class AppLocalizationsNl extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'Gepauzeerd: er was SOS-verkeer op het netwerk, en dat gaat voor. Weer spraak over $time.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Eigen naam instellen';
+
+  @override
+  String get contacts_customNameTitle => 'Eigen naam';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Alleen deze app toont hem. Anderen zien nog steeds de naam die $name uitzendt.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Zendt uit als $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Eigen naam van het contact gebruiken';
 }

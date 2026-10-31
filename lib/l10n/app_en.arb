@@ -4528,5 +4528,12 @@
   "sos_voiceVolume": "Voice volume",
   "sos_voiceVolumeHelp": "Each clip is levelled so quiet ones are easy to hear; turn this up for quiet speakers.",
   "ptt_sosHeard": "Paused: SOS traffic was heard on the network, and it comes first. Voice again in {time}.",
-  "@ptt_sosHeard": {"placeholders": {"time": {"type": "String"}}}
+  "@ptt_sosHeard": {"placeholders": {"time": {"type": "String"}}},
+  "contacts_setCustomName": "Set custom name",
+  "contacts_customNameTitle": "Custom name",
+  "contacts_customNameHelp": "Only this app shows it. Everyone else still sees the name {name} advertises.",
+  "contacts_advertisesAs": "Advertises as {name}",
+  "contacts_useOwnName": "Use its own name",
+  "@contacts_customNameHelp": {"placeholders": {"name": {"type": "String"}}},
+  "@contacts_advertisesAs": {"placeholders": {"name": {"type": "String"}}}
 }

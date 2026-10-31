@@ -7525,4 +7525,23 @@ class AppLocalizationsSl extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'Začasno ustavljeno: v omrežju je bil slišan promet SOS, ki ima prednost. Glas znova čez $time.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Nastavi lastno ime';
+
+  @override
+  String get contacts_customNameTitle => 'Lastno ime';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Prikazuje ga le ta aplikacija. Drugi še vedno vidijo ime, ki ga oglašuje $name.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Se oglašuje kot $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Uporabi njegovo lastno ime';
 }

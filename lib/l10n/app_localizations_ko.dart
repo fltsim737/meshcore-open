@@ -7227,4 +7227,23 @@ class AppLocalizationsKo extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return '일시 중지: 네트워크에서 SOS 통신이 들렸으며 SOS가 우선입니다. $time 후 다시 음성 가능.';
   }
+
+  @override
+  String get contacts_setCustomName => '사용자 지정 이름 설정';
+
+  @override
+  String get contacts_customNameTitle => '사용자 지정 이름';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return '이 앱에서만 표시됩니다. 다른 사람에게는 $name이(가) 알리는 이름이 그대로 보입니다.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return '알림 이름: $name';
+  }
+
+  @override
+  String get contacts_useOwnName => '원래 이름 사용';
 }

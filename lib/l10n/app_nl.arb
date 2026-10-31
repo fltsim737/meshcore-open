@@ -3630,5 +3630,10 @@
   "sos_radioRemoveConfirm": "Het kanaal van het noodnetwerk van deze radio verwijderen? De app blijft in het netwerk, voor je andere radio's. Je kunt het hier weer toevoegen.",
   "sos_voiceVolume": "Spraakvolume",
   "sos_voiceVolumeHelp": "Elke clip wordt geëgaliseerd zodat zachte goed te horen zijn; zet dit hoger voor zachte luidsprekers.",
-  "ptt_sosHeard": "Gepauzeerd: er was SOS-verkeer op het netwerk, en dat gaat voor. Weer spraak over {time}."
+  "ptt_sosHeard": "Gepauzeerd: er was SOS-verkeer op het netwerk, en dat gaat voor. Weer spraak over {time}.",
+  "contacts_setCustomName": "Eigen naam instellen",
+  "contacts_customNameTitle": "Eigen naam",
+  "contacts_customNameHelp": "Alleen deze app toont hem. Anderen zien nog steeds de naam die {name} uitzendt.",
+  "contacts_advertisesAs": "Zendt uit als {name}",
+  "contacts_useOwnName": "Eigen naam van het contact gebruiken"
 }

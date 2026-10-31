@@ -3863,5 +3863,10 @@
   "sos_radioRemoveConfirm": "この無線機から緊急ネットワークのチャンネルを削除しますか?アプリはほかの無線機のためにネットワークに残ります。この画面からまた追加できます。",
   "sos_voiceVolume": "音声の音量",
   "sos_voiceVolumeHelp": "小さいクリップも聞き取りやすいよう各クリップの音量をそろえます。スピーカーが小さいときは上げてください。",
-  "ptt_sosHeard": "一時停止中:ネットワークで SOS の通信がありました。SOS が優先です。音声はあと {time} で使えます。"
+  "ptt_sosHeard": "一時停止中:ネットワークで SOS の通信がありました。SOS が優先です。音声はあと {time} で使えます。",
+  "contacts_setCustomName": "カスタム名を設定",
+  "contacts_customNameTitle": "カスタム名",
+  "contacts_customNameHelp": "このアプリでのみ表示されます。ほかの人には {name} が広告する名前のままです。",
+  "contacts_advertisesAs": "広告名: {name}",
+  "contacts_useOwnName": "本来の名前を使う"
 }

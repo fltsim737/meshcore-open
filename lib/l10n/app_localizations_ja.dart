@@ -7214,4 +7214,23 @@ class AppLocalizationsJa extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return '一時停止中:ネットワークで SOS の通信がありました。SOS が優先です。音声はあと $time で使えます。';
   }
+
+  @override
+  String get contacts_setCustomName => 'カスタム名を設定';
+
+  @override
+  String get contacts_customNameTitle => 'カスタム名';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'このアプリでのみ表示されます。ほかの人には $name が広告する名前のままです。';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return '広告名: $name';
+  }
+
+  @override
+  String get contacts_useOwnName => '本来の名前を使う';
 }

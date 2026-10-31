@@ -7492,4 +7492,23 @@ class AppLocalizationsSv extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'Pausad: SOS-trafik hördes i nätet, och den går först. Röst igen om $time.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Ange eget namn';
+
+  @override
+  String get contacts_customNameTitle => 'Eget namn';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Bara den här appen visar det. Alla andra ser fortfarande namnet som $name annonserar.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Annonserar som $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Använd kontaktens eget namn';
 }

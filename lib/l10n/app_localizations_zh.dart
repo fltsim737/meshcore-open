@@ -7062,4 +7062,23 @@ class AppLocalizationsZh extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return '已暂停:网络上刚收到 SOS 通信,SOS 优先。$time 后可再用语音。';
   }
+
+  @override
+  String get contacts_setCustomName => '设置自定义名称';
+
+  @override
+  String get contacts_customNameTitle => '自定义名称';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return '只有本应用显示它。其他人看到的仍是 $name 广播的名称。';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return '广播名称:$name';
+  }
+
+  @override
+  String get contacts_useOwnName => '使用其自己的名称';
 }

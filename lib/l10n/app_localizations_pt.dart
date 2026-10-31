@@ -7541,4 +7541,23 @@ class AppLocalizationsPt extends AppLocalizations {
   String ptt_sosHeard(String time) {
     return 'Em pausa: ouviu-se tráfego de SOS na rede, que tem prioridade. Voz de novo dentro de $time.';
   }
+
+  @override
+  String get contacts_setCustomName => 'Definir um nome personalizado';
+
+  @override
+  String get contacts_customNameTitle => 'Nome personalizado';
+
+  @override
+  String contacts_customNameHelp(String name) {
+    return 'Só esta app o mostra. Os outros continuam a ver o nome que $name anuncia.';
+  }
+
+  @override
+  String contacts_advertisesAs(String name) {
+    return 'Anuncia-se como $name';
+  }
+
+  @override
+  String get contacts_useOwnName => 'Usar o nome próprio';
 }

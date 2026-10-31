@@ -57,7 +57,7 @@ class PttPanel extends StatelessWidget {
                   ),
                   TextButton.icon(
                     icon: const Icon(Icons.delete_sweep_outlined, size: 18),
-                    label: Text(l10n.common_clear),
+                    label: Text(l10n.common_deleteAll),
                     onPressed: () => _confirmClear(context, voice),
                   ),
                 ],
@@ -133,7 +133,7 @@ class PttPanel extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: Text(l10n.common_delete),
+            child: Text(l10n.common_deleteAll),
           ),
         ],
       ),
