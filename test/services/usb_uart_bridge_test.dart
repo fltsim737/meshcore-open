@@ -14,7 +14,7 @@ void main() {
     r'COM9 - USB Serial Device (COM9) - USB\VID_239A&PID_8029&MI_00',
   ];
 
-  test('a CP210x or CH340 bridge is one: DTR and RTS stay off (the Heltec PRG button)', () {
+  test('a CP210x or CH340 bridge is one', () {
     expect(isUartBridgePort('/dev/ttyUSB0', linux), isTrue);
     expect(isUartBridgePort('COM5', windows), isTrue);
     expect(isUartBridgePort('COM7', windows), isTrue);
@@ -28,5 +28,19 @@ void main() {
   test('an unknown or unlisted port is not', () {
     expect(isUartBridgePort('/dev/ttyS0', linux), isFalse);
     expect(isUartBridgePort('COM3', windows), isFalse);
+  });
+
+  test('Linux and macOS leave a bridge\'s lines alone: one at a time resets '
+      'the radio', () {
+    expect(leaveBridgeLinesAlone(uartBridge: true, windows: false), isTrue);
+  });
+
+  test('Windows turns DTR off on a bridge (it opens with PRG held)', () {
+    expect(leaveBridgeLinesAlone(uartBridge: true, windows: true), isFalse);
+  });
+
+  test('a native USB board keeps its own DTR handshake everywhere', () {
+    expect(leaveBridgeLinesAlone(uartBridge: false, windows: false), isFalse);
+    expect(leaveBridgeLinesAlone(uartBridge: false, windows: true), isFalse);
   });
 }

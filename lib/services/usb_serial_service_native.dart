@@ -36,6 +36,10 @@ class UsbSerialService {
   String? _connectedPortLabel;
   FlSerial? _serial;
 
+  /// The open port is a USB-to-UART bridge on Linux or macOS, whose DTR and
+  /// RTS lines are left exactly as the system set them ([leaveBridgeLinesAlone]).
+  bool _bridgeLinesAlone = false;
+
   /// Non-null while a disconnect teardown (native close in a helper isolate,
   /// then subscription cancel) is running.
   Future<void>? _activeDisconnect;
@@ -236,16 +240,20 @@ class UsbSerialService {
           serial.setStopBits1();
           serial.setFlowControlNone();
           final uartBridge = isUartBridgePort(candidate, FlSerial.listPorts());
-          if (uartBridge) {
-            // A USB-to-UART bridge (CP210x, CH340, FTDI, PL2303) drives the
-            // ESP32's reset (RTS) and boot (DTR) pins, and on boards like the
-            // Heltec V3 the boot pin is also the PRG button: DTR on holds PRG
-            // down, and each DTR toggle is a press, which stepped the radio's
-            // pages and held PRG on whatever page it reached (changing its app
-            // link, even sending an SOS). Both lines off, together: a reset
-            // made by opening the port then starts the firmware normally.
-            serial.setDTR(false);
+          _bridgeLinesAlone = leaveBridgeLinesAlone(
+            uartBridge: uartBridge,
+            windows: Platform.isWindows,
+          );
+          if (_bridgeLinesAlone) {
+            // Linux and macOS raise DTR and RTS together as the port opens:
+            // see leaveBridgeLinesAlone. Touching either one alone would
+            // reset the radio, or hold its PRG button down.
+          } else if (uartBridge) {
+            // Windows opens it with DTR on and RTS off, which holds the PRG
+            // button down: RTS stays off, then DTR goes off, so it never
+            // passes through RTS alone (a reset).
             serial.setRTS(false);
+            serial.setDTR(false);
           } else {
             serial.setRTS(false);
             // Toggle DTR low→high so the device sees a fresh connection even
@@ -393,7 +401,9 @@ class UsbSerialService {
       final serial = _serial;
       _serial = null;
       try {
-        if (serial?.isOpen() == FlOpenStatus.open) {
+        // DTR alone off would reset a radio behind a UART bridge on Linux
+        // or macOS; closing lowers both lines together there.
+        if (serial?.isOpen() == FlOpenStatus.open && !_bridgeLinesAlone) {
           serial?.setDTR(false);
         }
       } catch (_) {
@@ -565,7 +575,7 @@ class UsbSerialService {
         final flh = serial.flh;
         if (flh >= 0) {
           try {
-            serial.setDTR(false);
+            if (!_bridgeLinesAlone) serial.setDTR(false);
           } catch (_) {
             // Line-control failure must not skip the close below.
           }
@@ -713,6 +723,21 @@ const Set<int> uartBridgeVendorIds = <int>{
   0x0403, // FTDI
   0x067B, // Prolific PL2303
 };
+
+/// Whether to leave a port's DTR and RTS lines exactly as the system set them.
+///
+/// On boards like the Heltec V3 a USB-to-UART bridge drives the ESP32 through
+/// the usual two-transistor auto-reset circuit: RTS on with DTR off resets the
+/// chip (EN), and DTR on with RTS off holds GPIO0 low, which is also the PRG
+/// button. Both on, or both off, leave it alone. Linux and macOS raise both
+/// lines together as a port opens and lower both together as it closes, so on
+/// a bridge there they are never touched: changing them one at a time (as
+/// 9.8.5 to 10.0.0 did, DTR off then RTS off) passed through RTS alone and
+/// reset the radio, dropping the connection, every time the port opened.
+/// Windows opens a port with DTR on and RTS off, so there DTR is turned off.
+@visibleForTesting
+bool leaveBridgeLinesAlone({required bool uartBridge, required bool windows}) =>
+    uartBridge && !windows;
 
 /// Whether [port] is a USB-to-UART bridge, from flserial's port list
 /// ("port - description - hardware id"; the hardware id holds the USB vendor

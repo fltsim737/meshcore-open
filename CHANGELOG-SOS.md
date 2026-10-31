@@ -42,7 +42,7 @@ A major release: everything since 9.8.3. The 9.8.4, 9.8.5 and 9.8.6 test builds 
 ## 9.8.5 (test builds only: part of 10.0.0)
 
 - **SOS radio connection.** A MeshCore SOS radio (firmware 1.8.3 or later) shows how it connects in **Settings** (Location group), and the app can change it: hotspot, home WiFi, Bluetooth or USB cable. The app says how to connect again after the radio restarts. Refused during an SOS.
-- **Fixed: a MeshCore SOS radio on USB pressing its own button (Linux, Windows).** Opening the port toggled DTR/RTS, which the Heltec V3 reads as PRG presses: the radio stepped through its pages and could change its connection, send an SOS or power off. The apps now leave DTR and RTS off on USB-to-serial adapters (CP210x, CH340, FTDI, PL2303).
+- **Fixed: a MeshCore SOS radio on USB pressing its own button, or restarting (Linux, Windows).** On a Heltec V3 the USB chip's DTR and RTS lines drive the ESP32's PRG button and reset: one line on without the other presses PRG or resets the radio. The apps used to toggle DTR on opening the port, so the radio stepped through its pages and could change its connection, send an SOS or power off. Now, on USB-to-serial adapters (CP210x, CH340, FTDI, PL2303), Linux and macOS leave both lines exactly as the system sets them (together, as the port opens and closes), and Windows turns DTR off with RTS already off, so the radio is neither pressed nor restarted.
 - **The desktop apps look like the phone app:** one phone-width column in the middle of the window, which opens phone-shaped; the map still uses the whole window.
 
 ## 9.8.4 (test builds only: part of 10.0.0)
