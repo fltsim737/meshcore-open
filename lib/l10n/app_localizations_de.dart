@@ -7751,4 +7751,53 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Diese Datei ist keine Abdeckungsmessung';
+
+  @override
+  String get contacts_manageSensor => 'Sensor verwalten';
+
+  @override
+  String get login_sensorLogin => 'Sensor-Anmeldung';
+
+  @override
+  String get login_sensorDescription =>
+      'Das Admin-Passwort öffnet die Einstellungen und die Befehlszeile. Lass es leer, um die Messwerte zu sehen, wenn der Sensor Gäste zulässt.';
+
+  @override
+  String get sensor_management => 'Sensorverwaltung';
+
+  @override
+  String get sensor_guest => 'Sensorinformationen';
+
+  @override
+  String get telemetry_weatherAir => 'Luft';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Taupunkt';
+
+  @override
+  String get telemetry_weatherWind => 'Wind';
+
+  @override
+  String get telemetry_weatherRain => 'Regen';
+
+  @override
+  String get telemetry_weatherSun => 'Sonne';
+
+  @override
+  String get telemetry_windSpeed => 'Windgeschwindigkeit';
+
+  @override
+  String get telemetry_windGust => 'Böe';
+
+  @override
+  String get telemetry_rainRate => 'Regenrate';
+
+  @override
+  String get telemetry_rainToday => 'Regen heute';
+
+  @override
+  String get telemetry_uvIndex => 'UV-Index';
+
+  @override
+  String get telemetry_solarRadiation => 'Sonneneinstrahlung';
 }

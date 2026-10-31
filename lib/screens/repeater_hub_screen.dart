@@ -38,11 +38,14 @@ class RepeaterHubScreen extends StatelessWidget {
     final chemistry = settingsService.batteryChemistryForRepeater(
       repeater.publicKeyHex,
     );
+    final isSensor = repeater.type == advTypeSensor;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          repeater.type == advTypeRepeater
+          isSensor
+              ? (isAdmin ? l10n.sensor_management : l10n.sensor_guest)
+              : repeater.type == advTypeRepeater
               ? (isAdmin ? l10n.repeater_management : l10n.repeater_guest)
               : (isAdmin ? l10n.room_management : l10n.room_guest),
         ),
@@ -66,7 +69,7 @@ class RepeaterHubScreen extends StatelessWidget {
                       name: repeater.name,
                       size: 52,
                       color: MeshPalette.warn,
-                      icon: Icons.cell_tower,
+                      icon: isSensor ? Icons.sensors : Icons.cell_tower,
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -186,25 +189,26 @@ class RepeaterHubScreen extends StatelessWidget {
                   : l10n.repeater_guestTools,
             ),
 
-            _HubActionTile(
-              index: 0,
-              icon: Icons.analytics,
-              title: l10n.repeater_status,
-              subtitle: l10n.repeater_statusSubtitle,
-              accentColor: MeshPalette.blue,
-              onTap: () {
-                HapticFeedback.selectionClick();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RepeaterStatusScreen(
-                      repeater: repeater,
-                      password: password,
+            if (!isSensor)
+              _HubActionTile(
+                index: 0,
+                icon: Icons.analytics,
+                title: l10n.repeater_status,
+                subtitle: l10n.repeater_statusSubtitle,
+                accentColor: MeshPalette.blue,
+                onTap: () {
+                  HapticFeedback.selectionClick();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RepeaterStatusScreen(
+                        repeater: repeater,
+                        password: password,
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
 
             _HubActionTile(
               index: 1,
@@ -223,7 +227,7 @@ class RepeaterHubScreen extends StatelessWidget {
               },
             ),
 
-            if (repeater.type != advTypeRoom)
+            if (repeater.type != advTypeRoom && !isSensor)
               _HubActionTile(
                 index: 2,
                 icon: Icons.group,
@@ -244,7 +248,7 @@ class RepeaterHubScreen extends StatelessWidget {
                 },
               ),
 
-            if (repeater.type != advTypeRoom)
+            if (repeater.type != advTypeRoom && !isSensor)
               _HubActionTile(
                 index: 3,
                 icon: Icons.badge_outlined,

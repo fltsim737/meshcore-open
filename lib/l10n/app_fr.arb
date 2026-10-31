@@ -3911,5 +3911,21 @@
   "coverage_exported": "Enregistré : {path}",
   "coverage_exportFailed": "Échec de l'export : {error}",
   "coverage_imported": "Nouveaux pings ajoutés : {count}",
-  "coverage_importFailed": "Ce fichier n'est pas un relevé de couverture"
+  "coverage_importFailed": "Ce fichier n'est pas un relevé de couverture",
+  "contacts_manageSensor": "Gérer le capteur",
+  "login_sensorLogin": "Connexion au capteur",
+  "login_sensorDescription": "Le mot de passe administrateur ouvre les réglages et la ligne de commande. Laissez-le vide pour voir les mesures, si le capteur accepte les invités.",
+  "sensor_management": "Gestion du capteur",
+  "sensor_guest": "Informations du capteur",
+  "telemetry_weatherAir": "Air",
+  "telemetry_weatherDewPoint": "Point de rosée",
+  "telemetry_weatherWind": "Vent",
+  "telemetry_weatherRain": "Pluie",
+  "telemetry_weatherSun": "Soleil",
+  "telemetry_windSpeed": "Vitesse du vent",
+  "telemetry_windGust": "Rafale",
+  "telemetry_rainRate": "Intensité de pluie",
+  "telemetry_rainToday": "Pluie aujourd'hui",
+  "telemetry_uvIndex": "Indice UV",
+  "telemetry_solarRadiation": "Rayonnement solaire"
 }

@@ -23,6 +23,18 @@ import '../theme/mesh_theme.dart';
 import '../widgets/mesh_ui.dart';
 
 /// Opens the telemetry screen for the locally connected node.
+/// True when parsed telemetry (from [CayenneLpp.parseByChannel]) comes from a
+/// MeshCore weather sensor: channel 99 holds digital input 1.
+bool isWeatherSensorTelemetry(List<Map<String, dynamic>>? channels) {
+  if (channels == null) return false;
+  for (final c in channels) {
+    if (c['channel'] != 99) continue;
+    final values = c['values'];
+    if (values is Map && values['digitalInput'] == 1) return true;
+  }
+  return false;
+}
+
 void pushSelfTelemetryScreen(BuildContext context) {
   final connector = Provider.of<MeshCoreConnector>(context, listen: false);
   final selfKey = connector.selfPublicKey;
@@ -477,18 +489,92 @@ class _TelemetryScreenState extends State<TelemetryScreen> {
                   _parsedTelemetry != null &&
                   _parsedTelemetry!.isNotEmpty)
                 for (final entry in _parsedTelemetry ?? [])
-                  _buildChannelInfoCard(
-                    entry['values'],
-                    l10n.telemetry_channelTitle(entry['channel']),
-                    entry['channel'],
-                    isImperialUnits,
-                  ),
+                  if (!(_weatherLayout &&
+                      entry['channel'] == weatherMarkerChannel))
+                    _buildChannelInfoCard(
+                      entry['values'],
+                      (_weatherLayout
+                              ? _weatherChannelTitle(entry['channel'])
+                              : null) ??
+                          l10n.telemetry_channelTitle(entry['channel']),
+                      entry['channel'],
+                      isImperialUnits,
+                    ),
               _buildAutoRefreshCard(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  /// Telemetry from a MeshCore weather sensor carries this marker: channel 99,
+  /// digital input 1. The channels then have fixed meanings (layout 1).
+  static const int weatherMarkerChannel = 99;
+
+  bool get _weatherLayout => isWeatherSensorTelemetry(_parsedTelemetry);
+
+  String? _weatherChannelTitle(int channel) {
+    final l10n = context.l10n;
+    return switch (channel) {
+      2 => l10n.telemetry_weatherAir,
+      3 => l10n.telemetry_weatherDewPoint,
+      4 => l10n.telemetry_weatherWind,
+      5 => l10n.telemetry_weatherRain,
+      6 => l10n.telemetry_weatherSun,
+      _ => null,
+    };
+  }
+
+  _TelemetryFieldDisplay? _weatherField(
+    String key,
+    dynamic value,
+    int channel,
+    bool isImperialUnits,
+  ) {
+    final l10n = context.l10n;
+    if (value is! num) return null;
+    final v = value.toDouble();
+    String speed(double kmh) => isImperialUnits
+        ? '${(kmh / 1.609344).toStringAsFixed(1)} mph'
+        : '${kmh.toStringAsFixed(1)} km/h';
+    String rain(double mm, {bool perHour = false}) {
+      final unit = isImperialUnits ? 'in' : 'mm';
+      final n = isImperialUnits
+          ? (mm / 25.4).toStringAsFixed(2)
+          : mm.toStringAsFixed(1);
+      return perHour ? '$n $unit/h' : '$n $unit';
+    }
+
+    switch ((channel, key)) {
+      case (3, 'temperature'):
+        return _TelemetryFieldDisplay(
+          l10n.telemetry_weatherDewPoint,
+          _temperatureText(v, isImperialUnits),
+        );
+      case (4, 'analogInput'):
+        return _TelemetryFieldDisplay(l10n.telemetry_windSpeed, speed(v));
+      case (4, 'analogOutput'):
+        return _TelemetryFieldDisplay(l10n.telemetry_windGust, speed(v));
+      case (5, 'analogInput'):
+        return _TelemetryFieldDisplay(
+          l10n.telemetry_rainRate,
+          rain(v, perHour: true),
+        );
+      case (5, 'analogOutput'):
+        return _TelemetryFieldDisplay(l10n.telemetry_rainToday, rain(v));
+      case (6, 'analogInput'):
+        return _TelemetryFieldDisplay(
+          l10n.telemetry_uvIndex,
+          v.toStringAsFixed(0),
+        );
+      case (6, 'generic'):
+        return _TelemetryFieldDisplay(
+          l10n.telemetry_solarRadiation,
+          '${v.toStringAsFixed(0)} W/m²',
+        );
+    }
+    return null;
   }
 
   Widget _buildChannelInfoCard(
@@ -541,6 +627,11 @@ class _TelemetryScreenState extends State<TelemetryScreen> {
   ) {
     final l10n = context.l10n;
     final text = _telemetryValueText(value);
+
+    if (_weatherLayout) {
+      final weather = _weatherField(key, value, channel, isImperialUnits);
+      if (weather != null) return weather;
+    }
 
     switch (key) {
       case 'digitalInput':

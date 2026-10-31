@@ -7405,4 +7405,53 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get coverage_importFailed => '이 파일은 커버리지 조사가 아닙니다';
+
+  @override
+  String get contacts_manageSensor => '센서 관리';
+
+  @override
+  String get login_sensorLogin => '센서 로그인';
+
+  @override
+  String get login_sensorDescription =>
+      '관리자 비밀번호로 설정과 명령줄을 사용할 수 있습니다. 센서가 게스트를 허용하면 비워 두고 측정값을 볼 수 있습니다.';
+
+  @override
+  String get sensor_management => '센서 관리';
+
+  @override
+  String get sensor_guest => '센서 정보';
+
+  @override
+  String get telemetry_weatherAir => '공기';
+
+  @override
+  String get telemetry_weatherDewPoint => '이슬점';
+
+  @override
+  String get telemetry_weatherWind => '바람';
+
+  @override
+  String get telemetry_weatherRain => '비';
+
+  @override
+  String get telemetry_weatherSun => '햇빛';
+
+  @override
+  String get telemetry_windSpeed => '풍속';
+
+  @override
+  String get telemetry_windGust => '돌풍';
+
+  @override
+  String get telemetry_rainRate => '강우 강도';
+
+  @override
+  String get telemetry_rainToday => '오늘 강우량';
+
+  @override
+  String get telemetry_uvIndex => '자외선 지수';
+
+  @override
+  String get telemetry_solarRadiation => '일사량';
 }

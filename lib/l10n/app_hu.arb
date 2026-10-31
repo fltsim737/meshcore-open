@@ -3816,5 +3816,21 @@
   "coverage_exported": "Mentve: {path}",
   "coverage_exportFailed": "Sikertelen exportálás: {error}",
   "coverage_imported": "Új pingek hozzáadva: {count}",
-  "coverage_importFailed": "Ez a fájl nem lefedettségmérés"
+  "coverage_importFailed": "Ez a fájl nem lefedettségmérés",
+  "contacts_manageSensor": "Érzékelő kezelése",
+  "login_sensorLogin": "Bejelentkezés az érzékelőre",
+  "login_sensorDescription": "Az admin jelszó feloldja a beállításokat és a parancssort. Hagyd üresen a mért értékek megtekintéséhez, ha az érzékelő enged vendégeket.",
+  "sensor_management": "Érzékelő kezelése",
+  "sensor_guest": "Érzékelő adatai",
+  "telemetry_weatherAir": "Levegő",
+  "telemetry_weatherDewPoint": "Harmatpont",
+  "telemetry_weatherWind": "Szél",
+  "telemetry_weatherRain": "Eső",
+  "telemetry_weatherSun": "Nap",
+  "telemetry_windSpeed": "Szélsebesség",
+  "telemetry_windGust": "Széllökés",
+  "telemetry_rainRate": "Csapadékintenzitás",
+  "telemetry_rainToday": "Mai csapadék",
+  "telemetry_uvIndex": "UV-index",
+  "telemetry_solarRadiation": "Napsugárzás"
 }

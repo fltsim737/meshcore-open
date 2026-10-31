@@ -3911,5 +3911,21 @@
   "coverage_exported": "Guardado {path}",
   "coverage_exportFailed": "Error al exportar: {error}",
   "coverage_imported": "Pings nuevos añadidos: {count}",
-  "coverage_importFailed": "Ese archivo no es un estudio de cobertura"
+  "coverage_importFailed": "Ese archivo no es un estudio de cobertura",
+  "contacts_manageSensor": "Gestionar sensor",
+  "login_sensorLogin": "Acceso al sensor",
+  "login_sensorDescription": "La contraseña de administrador abre los ajustes y la línea de comandos. Déjala en blanco para ver las lecturas, si el sensor admite invitados.",
+  "sensor_management": "Gestión del sensor",
+  "sensor_guest": "Información del sensor",
+  "telemetry_weatherAir": "Aire",
+  "telemetry_weatherDewPoint": "Punto de rocío",
+  "telemetry_weatherWind": "Viento",
+  "telemetry_weatherRain": "Lluvia",
+  "telemetry_weatherSun": "Sol",
+  "telemetry_windSpeed": "Velocidad del viento",
+  "telemetry_windGust": "Ráfaga",
+  "telemetry_rainRate": "Intensidad de lluvia",
+  "telemetry_rainToday": "Lluvia hoy",
+  "telemetry_uvIndex": "Índice UV",
+  "telemetry_solarRadiation": "Radiación solar"
 }

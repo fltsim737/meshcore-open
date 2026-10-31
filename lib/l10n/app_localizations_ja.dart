@@ -7394,4 +7394,53 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'このファイルはカバレッジ調査ではありません';
+
+  @override
+  String get contacts_manageSensor => 'センサーを管理';
+
+  @override
+  String get login_sensorLogin => 'センサーにログイン';
+
+  @override
+  String get login_sensorDescription =>
+      '管理者パスワードで設定とコマンドラインが使えます。センサーがゲストを許可していれば、空欄のままで測定値を見られます。';
+
+  @override
+  String get sensor_management => 'センサー管理';
+
+  @override
+  String get sensor_guest => 'センサー情報';
+
+  @override
+  String get telemetry_weatherAir => '気温・湿度';
+
+  @override
+  String get telemetry_weatherDewPoint => '露点';
+
+  @override
+  String get telemetry_weatherWind => '風';
+
+  @override
+  String get telemetry_weatherRain => '雨';
+
+  @override
+  String get telemetry_weatherSun => '日射';
+
+  @override
+  String get telemetry_windSpeed => '風速';
+
+  @override
+  String get telemetry_windGust => '最大瞬間風速';
+
+  @override
+  String get telemetry_rainRate => '降雨強度';
+
+  @override
+  String get telemetry_rainToday => '今日の雨量';
+
+  @override
+  String get telemetry_uvIndex => 'UV指数';
+
+  @override
+  String get telemetry_solarRadiation => '日射量';
 }

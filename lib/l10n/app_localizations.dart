@@ -12882,6 +12882,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That file isn\'t a coverage survey'**
   String get coverage_importFailed;
+
+  /// No description provided for @contacts_manageSensor.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Sensor'**
+  String get contacts_manageSensor;
+
+  /// No description provided for @login_sensorLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensor Login'**
+  String get login_sensorLogin;
+
+  /// No description provided for @login_sensorDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'The admin password unlocks settings and the command line. Leave it blank to see readings, if the sensor lets guests in.'**
+  String get login_sensorDescription;
+
+  /// No description provided for @sensor_management.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensor Management'**
+  String get sensor_management;
+
+  /// No description provided for @sensor_guest.
+  ///
+  /// In en, this message translates to:
+  /// **'Sensor Information'**
+  String get sensor_guest;
+
+  /// No description provided for @telemetry_weatherAir.
+  ///
+  /// In en, this message translates to:
+  /// **'Air'**
+  String get telemetry_weatherAir;
+
+  /// No description provided for @telemetry_weatherDewPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Dew point'**
+  String get telemetry_weatherDewPoint;
+
+  /// No description provided for @telemetry_weatherWind.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind'**
+  String get telemetry_weatherWind;
+
+  /// No description provided for @telemetry_weatherRain.
+  ///
+  /// In en, this message translates to:
+  /// **'Rain'**
+  String get telemetry_weatherRain;
+
+  /// No description provided for @telemetry_weatherSun.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get telemetry_weatherSun;
+
+  /// No description provided for @telemetry_windSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind speed'**
+  String get telemetry_windSpeed;
+
+  /// No description provided for @telemetry_windGust.
+  ///
+  /// In en, this message translates to:
+  /// **'Gust'**
+  String get telemetry_windGust;
+
+  /// No description provided for @telemetry_rainRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rain rate'**
+  String get telemetry_rainRate;
+
+  /// No description provided for @telemetry_rainToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Rain today'**
+  String get telemetry_rainToday;
+
+  /// No description provided for @telemetry_uvIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'UV index'**
+  String get telemetry_uvIndex;
+
+  /// No description provided for @telemetry_solarRadiation.
+  ///
+  /// In en, this message translates to:
+  /// **'Solar radiation'**
+  String get telemetry_solarRadiation;
 }
 
 class _AppLocalizationsDelegate

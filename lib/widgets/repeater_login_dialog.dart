@@ -284,6 +284,7 @@ class _RepeaterLoginDialogState extends State<RepeaterLoginDialog> {
     final connector = context.watch<MeshCoreConnector>();
     final repeater = _resolveRepeater(connector);
     final isFloodMode = repeater.pathOverride == -1;
+    final isSensor = repeater.type == advTypeSensor;
     return AlertDialog(
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       titlePadding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
@@ -294,7 +295,7 @@ class _RepeaterLoginDialogState extends State<RepeaterLoginDialog> {
             name: repeater.name,
             size: 40,
             color: MeshPalette.warn,
-            icon: Icons.cell_tower,
+            icon: isSensor ? Icons.sensors : Icons.cell_tower,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -302,7 +303,7 @@ class _RepeaterLoginDialogState extends State<RepeaterLoginDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  l10n.login_repeaterLogin,
+                  isSensor ? l10n.login_sensorLogin : l10n.login_repeaterLogin,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -336,7 +337,9 @@ class _RepeaterLoginDialogState extends State<RepeaterLoginDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.login_repeaterDescription,
+                    isSensor
+                        ? l10n.login_sensorDescription
+                        : l10n.login_repeaterDescription,
                     style: const TextStyle(fontSize: 14),
                   ),
                   const SizedBox(height: 16),

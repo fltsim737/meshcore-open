@@ -7696,4 +7696,53 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Dat bestand is geen dekkingsmeting';
+
+  @override
+  String get contacts_manageSensor => 'Sensor beheren';
+
+  @override
+  String get login_sensorLogin => 'Sensor aanmelden';
+
+  @override
+  String get login_sensorDescription =>
+      'Het beheerderswachtwoord ontgrendelt de instellingen en de opdrachtregel. Laat het leeg om de metingen te zien, als de sensor gasten toelaat.';
+
+  @override
+  String get sensor_management => 'Sensorbeheer';
+
+  @override
+  String get sensor_guest => 'Sensorinformatie';
+
+  @override
+  String get telemetry_weatherAir => 'Lucht';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Dauwpunt';
+
+  @override
+  String get telemetry_weatherWind => 'Wind';
+
+  @override
+  String get telemetry_weatherRain => 'Regen';
+
+  @override
+  String get telemetry_weatherSun => 'Zon';
+
+  @override
+  String get telemetry_windSpeed => 'Windsnelheid';
+
+  @override
+  String get telemetry_windGust => 'Windstoot';
+
+  @override
+  String get telemetry_rainRate => 'Regenintensiteit';
+
+  @override
+  String get telemetry_rainToday => 'Regen vandaag';
+
+  @override
+  String get telemetry_uvIndex => 'UV-index';
+
+  @override
+  String get telemetry_solarRadiation => 'Zonnestraling';
 }

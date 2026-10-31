@@ -4592,5 +4592,21 @@
   "@coverage_clearBody": {"placeholders": {"count": {"type": "int"}}},
   "@coverage_exported": {"placeholders": {"path": {"type": "String"}}},
   "@coverage_exportFailed": {"placeholders": {"error": {"type": "String"}}},
-  "@coverage_imported": {"placeholders": {"count": {"type": "int"}}}
+  "@coverage_imported": {"placeholders": {"count": {"type": "int"}}},
+  "contacts_manageSensor": "Manage Sensor",
+  "login_sensorLogin": "Sensor Login",
+  "login_sensorDescription": "The admin password unlocks settings and the command line. Leave it blank to see readings, if the sensor lets guests in.",
+  "sensor_management": "Sensor Management",
+  "sensor_guest": "Sensor Information",
+  "telemetry_weatherAir": "Air",
+  "telemetry_weatherDewPoint": "Dew point",
+  "telemetry_weatherWind": "Wind",
+  "telemetry_weatherRain": "Rain",
+  "telemetry_weatherSun": "Sun",
+  "telemetry_windSpeed": "Wind speed",
+  "telemetry_windGust": "Gust",
+  "telemetry_rainRate": "Rain rate",
+  "telemetry_rainToday": "Rain today",
+  "telemetry_uvIndex": "UV index",
+  "telemetry_solarRadiation": "Solar radiation"
 }

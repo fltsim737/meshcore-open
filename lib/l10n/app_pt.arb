@@ -3777,5 +3777,21 @@
   "coverage_exported": "Guardado {path}",
   "coverage_exportFailed": "Falha ao exportar: {error}",
   "coverage_imported": "Novos pings adicionados: {count}",
-  "coverage_importFailed": "Esse ficheiro não é um levantamento de cobertura"
+  "coverage_importFailed": "Esse ficheiro não é um levantamento de cobertura",
+  "contacts_manageSensor": "Gerir sensor",
+  "login_sensorLogin": "Acesso ao sensor",
+  "login_sensorDescription": "A palavra-passe de administrador desbloqueia as definições e a linha de comandos. Deixe em branco para ver as leituras, se o sensor aceitar convidados.",
+  "sensor_management": "Gestão do sensor",
+  "sensor_guest": "Informações do sensor",
+  "telemetry_weatherAir": "Ar",
+  "telemetry_weatherDewPoint": "Ponto de orvalho",
+  "telemetry_weatherWind": "Vento",
+  "telemetry_weatherRain": "Chuva",
+  "telemetry_weatherSun": "Sol",
+  "telemetry_windSpeed": "Velocidade do vento",
+  "telemetry_windGust": "Rajada",
+  "telemetry_rainRate": "Intensidade da chuva",
+  "telemetry_rainToday": "Chuva hoje",
+  "telemetry_uvIndex": "Índice UV",
+  "telemetry_solarRadiation": "Radiação solar"
 }

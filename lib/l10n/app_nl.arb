@@ -3678,5 +3678,21 @@
   "coverage_exported": "Opgeslagen: {path}",
   "coverage_exportFailed": "Exporteren mislukt: {error}",
   "coverage_imported": "Nieuwe pings toegevoegd: {count}",
-  "coverage_importFailed": "Dat bestand is geen dekkingsmeting"
+  "coverage_importFailed": "Dat bestand is geen dekkingsmeting",
+  "contacts_manageSensor": "Sensor beheren",
+  "login_sensorLogin": "Sensor aanmelden",
+  "login_sensorDescription": "Het beheerderswachtwoord ontgrendelt de instellingen en de opdrachtregel. Laat het leeg om de metingen te zien, als de sensor gasten toelaat.",
+  "sensor_management": "Sensorbeheer",
+  "sensor_guest": "Sensorinformatie",
+  "telemetry_weatherAir": "Lucht",
+  "telemetry_weatherDewPoint": "Dauwpunt",
+  "telemetry_weatherWind": "Wind",
+  "telemetry_weatherRain": "Regen",
+  "telemetry_weatherSun": "Zon",
+  "telemetry_windSpeed": "Windsnelheid",
+  "telemetry_windGust": "Windstoot",
+  "telemetry_rainRate": "Regenintensiteit",
+  "telemetry_rainToday": "Regen vandaag",
+  "telemetry_uvIndex": "UV-index",
+  "telemetry_solarRadiation": "Zonnestraling"
 }

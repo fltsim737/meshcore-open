@@ -3911,5 +3911,21 @@
   "coverage_exported": "Salvato {path}",
   "coverage_exportFailed": "Esportazione non riuscita: {error}",
   "coverage_imported": "Nuovi ping aggiunti: {count}",
-  "coverage_importFailed": "Questo file non è un rilievo copertura"
+  "coverage_importFailed": "Questo file non è un rilievo copertura",
+  "contacts_manageSensor": "Gestisci sensore",
+  "login_sensorLogin": "Accesso al sensore",
+  "login_sensorDescription": "La password di amministratore sblocca le impostazioni e la riga di comando. Lasciala vuota per vedere le letture, se il sensore accetta ospiti.",
+  "sensor_management": "Gestione sensore",
+  "sensor_guest": "Informazioni sensore",
+  "telemetry_weatherAir": "Aria",
+  "telemetry_weatherDewPoint": "Punto di rugiada",
+  "telemetry_weatherWind": "Vento",
+  "telemetry_weatherRain": "Pioggia",
+  "telemetry_weatherSun": "Sole",
+  "telemetry_windSpeed": "Velocità del vento",
+  "telemetry_windGust": "Raffica",
+  "telemetry_rainRate": "Intensità di pioggia",
+  "telemetry_rainToday": "Pioggia oggi",
+  "telemetry_uvIndex": "Indice UV",
+  "telemetry_solarRadiation": "Radiazione solare"
 }

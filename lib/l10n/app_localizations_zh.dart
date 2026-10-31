@@ -7239,4 +7239,52 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get coverage_importFailed => '该文件不是覆盖勘测';
+
+  @override
+  String get contacts_manageSensor => '管理传感器';
+
+  @override
+  String get login_sensorLogin => '传感器登录';
+
+  @override
+  String get login_sensorDescription => '管理员密码可解锁设置和命令行。若传感器允许访客，留空即可查看读数。';
+
+  @override
+  String get sensor_management => '传感器管理';
+
+  @override
+  String get sensor_guest => '传感器信息';
+
+  @override
+  String get telemetry_weatherAir => '空气';
+
+  @override
+  String get telemetry_weatherDewPoint => '露点';
+
+  @override
+  String get telemetry_weatherWind => '风';
+
+  @override
+  String get telemetry_weatherRain => '雨';
+
+  @override
+  String get telemetry_weatherSun => '日照';
+
+  @override
+  String get telemetry_windSpeed => '风速';
+
+  @override
+  String get telemetry_windGust => '阵风';
+
+  @override
+  String get telemetry_rainRate => '降雨强度';
+
+  @override
+  String get telemetry_rainToday => '今日降雨';
+
+  @override
+  String get telemetry_uvIndex => '紫外线指数';
+
+  @override
+  String get telemetry_solarRadiation => '太阳辐射';
 }

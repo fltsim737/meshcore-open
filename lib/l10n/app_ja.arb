@@ -3911,5 +3911,21 @@
   "coverage_exported": "保存しました: {path}",
   "coverage_exportFailed": "エクスポートに失敗しました: {error}",
   "coverage_imported": "追加された新しい ping: {count}",
-  "coverage_importFailed": "このファイルはカバレッジ調査ではありません"
+  "coverage_importFailed": "このファイルはカバレッジ調査ではありません",
+  "contacts_manageSensor": "センサーを管理",
+  "login_sensorLogin": "センサーにログイン",
+  "login_sensorDescription": "管理者パスワードで設定とコマンドラインが使えます。センサーがゲストを許可していれば、空欄のままで測定値を見られます。",
+  "sensor_management": "センサー管理",
+  "sensor_guest": "センサー情報",
+  "telemetry_weatherAir": "気温・湿度",
+  "telemetry_weatherDewPoint": "露点",
+  "telemetry_weatherWind": "風",
+  "telemetry_weatherRain": "雨",
+  "telemetry_weatherSun": "日射",
+  "telemetry_windSpeed": "風速",
+  "telemetry_windGust": "最大瞬間風速",
+  "telemetry_rainRate": "降雨強度",
+  "telemetry_rainToday": "今日の雨量",
+  "telemetry_uvIndex": "UV指数",
+  "telemetry_solarRadiation": "日射量"
 }

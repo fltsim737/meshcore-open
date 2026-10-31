@@ -3772,5 +3772,21 @@
   "coverage_exported": "Sparad: {path}",
   "coverage_exportFailed": "Exporten misslyckades: {error}",
   "coverage_imported": "Nya pingar tillagda: {count}",
-  "coverage_importFailed": "Filen är ingen täckningsmätning"
+  "coverage_importFailed": "Filen är ingen täckningsmätning",
+  "contacts_manageSensor": "Hantera sensor",
+  "login_sensorLogin": "Sensorinloggning",
+  "login_sensorDescription": "Adminlösenordet låser upp inställningarna och kommandoraden. Lämna det tomt för att se mätvärdena, om sensorn släpper in gäster.",
+  "sensor_management": "Sensorhantering",
+  "sensor_guest": "Sensorinformation",
+  "telemetry_weatherAir": "Luft",
+  "telemetry_weatherDewPoint": "Daggpunkt",
+  "telemetry_weatherWind": "Vind",
+  "telemetry_weatherRain": "Regn",
+  "telemetry_weatherSun": "Sol",
+  "telemetry_windSpeed": "Vindhastighet",
+  "telemetry_windGust": "Byvind",
+  "telemetry_rainRate": "Regnintensitet",
+  "telemetry_rainToday": "Regn i dag",
+  "telemetry_uvIndex": "UV-index",
+  "telemetry_solarRadiation": "Solinstrålning"
 }

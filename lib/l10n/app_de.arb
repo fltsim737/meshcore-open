@@ -3912,5 +3912,21 @@
   "coverage_exported": "Gespeichert: {path}",
   "coverage_exportFailed": "Export fehlgeschlagen: {error}",
   "coverage_imported": "Neue Pings hinzugefügt: {count}",
-  "coverage_importFailed": "Diese Datei ist keine Abdeckungsmessung"
+  "coverage_importFailed": "Diese Datei ist keine Abdeckungsmessung",
+  "contacts_manageSensor": "Sensor verwalten",
+  "login_sensorLogin": "Sensor-Anmeldung",
+  "login_sensorDescription": "Das Admin-Passwort öffnet die Einstellungen und die Befehlszeile. Lass es leer, um die Messwerte zu sehen, wenn der Sensor Gäste zulässt.",
+  "sensor_management": "Sensorverwaltung",
+  "sensor_guest": "Sensorinformationen",
+  "telemetry_weatherAir": "Luft",
+  "telemetry_weatherDewPoint": "Taupunkt",
+  "telemetry_weatherWind": "Wind",
+  "telemetry_weatherRain": "Regen",
+  "telemetry_weatherSun": "Sonne",
+  "telemetry_windSpeed": "Windgeschwindigkeit",
+  "telemetry_windGust": "Böe",
+  "telemetry_rainRate": "Regenrate",
+  "telemetry_rainToday": "Regen heute",
+  "telemetry_uvIndex": "UV-Index",
+  "telemetry_solarRadiation": "Sonneneinstrahlung"
 }

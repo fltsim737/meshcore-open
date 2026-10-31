@@ -7705,4 +7705,53 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get coverage_importFailed => 'Tento súbor nie je meranie pokrytia';
+
+  @override
+  String get contacts_manageSensor => 'Spravovať senzor';
+
+  @override
+  String get login_sensorLogin => 'Prihlásenie do senzora';
+
+  @override
+  String get login_sensorDescription =>
+      'Heslo správcu odomkne nastavenia a príkazový riadok. Nechaj ho prázdne, ak chceš vidieť namerané hodnoty a senzor púšťa hostí.';
+
+  @override
+  String get sensor_management => 'Správa senzora';
+
+  @override
+  String get sensor_guest => 'Informácie o senzore';
+
+  @override
+  String get telemetry_weatherAir => 'Vzduch';
+
+  @override
+  String get telemetry_weatherDewPoint => 'Rosný bod';
+
+  @override
+  String get telemetry_weatherWind => 'Vietor';
+
+  @override
+  String get telemetry_weatherRain => 'Dážď';
+
+  @override
+  String get telemetry_weatherSun => 'Slnko';
+
+  @override
+  String get telemetry_windSpeed => 'Rýchlosť vetra';
+
+  @override
+  String get telemetry_windGust => 'Nárazy';
+
+  @override
+  String get telemetry_rainRate => 'Intenzita dažďa';
+
+  @override
+  String get telemetry_rainToday => 'Dážď dnes';
+
+  @override
+  String get telemetry_uvIndex => 'UV index';
+
+  @override
+  String get telemetry_solarRadiation => 'Slnečné žiarenie';
 }

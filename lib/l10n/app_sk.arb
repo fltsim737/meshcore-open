@@ -3778,5 +3778,21 @@
   "coverage_exported": "Uložené {path}",
   "coverage_exportFailed": "Export zlyhal: {error}",
   "coverage_imported": "Pridané nové pingy: {count}",
-  "coverage_importFailed": "Tento súbor nie je meranie pokrytia"
+  "coverage_importFailed": "Tento súbor nie je meranie pokrytia",
+  "contacts_manageSensor": "Spravovať senzor",
+  "login_sensorLogin": "Prihlásenie do senzora",
+  "login_sensorDescription": "Heslo správcu odomkne nastavenia a príkazový riadok. Nechaj ho prázdne, ak chceš vidieť namerané hodnoty a senzor púšťa hostí.",
+  "sensor_management": "Správa senzora",
+  "sensor_guest": "Informácie o senzore",
+  "telemetry_weatherAir": "Vzduch",
+  "telemetry_weatherDewPoint": "Rosný bod",
+  "telemetry_weatherWind": "Vietor",
+  "telemetry_weatherRain": "Dážď",
+  "telemetry_weatherSun": "Slnko",
+  "telemetry_windSpeed": "Rýchlosť vetra",
+  "telemetry_windGust": "Nárazy",
+  "telemetry_rainRate": "Intenzita dažďa",
+  "telemetry_rainToday": "Dážď dnes",
+  "telemetry_uvIndex": "UV index",
+  "telemetry_solarRadiation": "Slnečné žiarenie"
 }
