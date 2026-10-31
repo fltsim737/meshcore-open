@@ -12,6 +12,7 @@ import '../screens/setup_wizard_screen.dart';
 import '../screens/sos_network_screen.dart';
 import 'mesh_nav_tile.dart';
 import 'sound_devices_tiles.dart';
+import 'voice_volume_tile.dart';
 import 'sos_screen_access_tile.dart';
 import 'sos_dnd_access_tile.dart';
 
@@ -134,6 +135,7 @@ class SosSettingsSection extends StatelessWidget {
           onTap: () => chooseSosAlarmSound(context, settingsService),
         ),
         const SoundDevicesTiles(),
+        const VoiceVolumeTile(),
         const Divider(height: 1, indent: 16),
         const SosScreenAccessTile(),
         const SosDndAccessTile(),

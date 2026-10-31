@@ -12372,6 +12372,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Take the emergency network\'s channel off this radio? The app stays in the network, for your other radios. You can add it back from this screen.'**
   String get sos_radioRemoveConfirm;
+
+  /// No description provided for @sos_voiceVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice volume'**
+  String get sos_voiceVolume;
+
+  /// No description provided for @sos_voiceVolumeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Each clip is levelled so quiet ones are easy to hear; turn this up for quiet speakers.'**
+  String get sos_voiceVolumeHelp;
 }
 
 class _AppLocalizationsDelegate

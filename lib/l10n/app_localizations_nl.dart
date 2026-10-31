@@ -7377,4 +7377,11 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Het kanaal van het noodnetwerk van deze radio verwijderen? De app blijft in het netwerk, voor je andere radio\'s. Je kunt het hier weer toevoegen.';
+
+  @override
+  String get sos_voiceVolume => 'Spraakvolume';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Elke clip wordt geëgaliseerd zodat zachte goed te horen zijn; zet dit hoger voor zachte luidsprekers.';
 }

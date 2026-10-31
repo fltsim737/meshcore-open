@@ -177,6 +177,7 @@ The network's channel goes on the radio connected when you join. Any other radio
 | Emergency contacts | People who always get the SOS by direct message, even if they use another MeshCore app. |
 | Include favourite contacts | On by default: favourites get the DM too. |
 | Speakers and microphone (Linux, Windows) | **Speaker for alerts and notifications** and, in SOS Voice, **Speaker for voice** and **Microphone**: only this app's sound goes there, and the computer's default devices stay as they are. An unplugged device falls back to the system default. |
+| Voice volume (SOS Voice) | Clips are levelled so quiet ones are easy to hear; 25% to 300% on top of that, for quiet speakers (since 10.1.1). |
 | Setup wizard | Runs once on a new install; run it again here. |
 
 Open the **Emergency** tab once so the app can ask for location permission ahead of time.

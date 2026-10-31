@@ -2,6 +2,13 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.1.1 (in testing, not yet released)
+
+### Voice you can hear (SOS Voice)
+
+- **Each voice clip is levelled before it plays.** Codec2 clips often come out quiet (a quiet microphone stays quiet), and turning the computer's or phone's volume up barely helped, so on PC speakers voice was hard to hear. Now each clip's peak is raised to 90% of full scale, by up to 8 times (so hiss and silence aren't blown up), on every platform.
+- **Voice volume** in **Settings → App Settings → Emergency SOS**: 25% to 300%. Above 100% voice gets louder still, rounded off smoothly near full scale instead of clipping, for quiet speakers. Rest tones play as they are.
+
 ## 10.1.0 (2026-10-31)
 
 ### The emergency network goes only on radios you agree to

@@ -7404,4 +7404,11 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Remover o canal da rede de emergência deste rádio? A app continua na rede, para os seus outros rádios. Pode voltar a adicioná-lo neste ecrã.';
+
+  @override
+  String get sos_voiceVolume => 'Volume da voz';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Cada clip é nivelado para que os baixos se ouçam bem; aumente para altifalantes fracos.';
 }

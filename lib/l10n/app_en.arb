@@ -4458,5 +4458,7 @@
   "sos_radioNotThis": "Not this radio",
   "sos_radioRemove": "Remove from this radio",
   "sos_radioRemoveConfirm": "Take the emergency network's channel off this radio? The app stays in the network, for your other radios. You can add it back from this screen.",
-  "@sos_radioApprovalTitle": {"placeholders": {"network": {"type": "String"}}}
+  "@sos_radioApprovalTitle": {"placeholders": {"network": {"type": "String"}}},
+  "sos_voiceVolume": "Voice volume",
+  "sos_voiceVolumeHelp": "Each clip is levelled so quiet ones are easy to hear; turn this up for quiet speakers."
 }

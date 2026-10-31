@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 
@@ -61,6 +63,60 @@ class SoundDevices {
 
   /// Lists the microphones, where the app records (SOS Voice sets this).
   static Future<List<SoundDevice>> Function()? inputLister;
+
+  /// The app plays voice clips (SOS Voice sets this, on every platform).
+  static bool playsVoice = false;
+
+  static const _voiceVolumeKey = 'voice_volume';
+  static const double minVoiceVolume = 0.25;
+  static const double maxVoiceVolume = 3.0;
+
+  /// How loud voice clips play, after each is levelled ([levelVoice]): 1.0
+  /// as levelled, more for louder (softly limited, so it doesn't distort).
+  static double get voiceVolume {
+    try {
+      final v = PrefsManager.instance.getDouble(_voiceVolumeKey);
+      return (v ?? 1.0).clamp(minVoiceVolume, maxVoiceVolume).toDouble();
+    } catch (_) {
+      return 1.0;
+    }
+  }
+
+  static Future<void> setVoiceVolume(double value) =>
+      PrefsManager.instance.setDouble(
+        _voiceVolumeKey,
+        value.clamp(minVoiceVolume, maxVoiceVolume).toDouble(),
+      );
+
+  /// A voice clip brought to a steady loudness, then [volume] applied.
+  ///
+  /// Codec2 clips often come out quiet (a quiet microphone stays quiet), and
+  /// turning the computer's volume up barely helps. So each clip's peak is
+  /// raised to 90% of full scale (by up to 8 times: silence and hiss aren't
+  /// blown up), then multiplied by [volume]; anything above 70% of full
+  /// scale is rounded off smoothly towards full scale instead of clipping.
+  static Int16List levelVoice(Int16List pcm, double volume) {
+    var peak = 0;
+    for (final s in pcm) {
+      final a = s.abs();
+      if (a > peak) peak = a;
+    }
+    if (peak == 0) return pcm;
+    final gain = min(0.9 * 32767 / peak, 8.0) * volume;
+    final out = Int16List(pcm.length);
+    for (var i = 0; i < pcm.length; i++) {
+      final v = pcm[i] * gain / 32767;
+      final a = v.abs();
+      final shaped = a <= 0.7 ? a : 0.7 + 0.3 * _tanh((a - 0.7) / 0.3);
+      out[i] = (shaped * v.sign * 32767).round().clamp(-32768, 32767);
+    }
+    return out;
+  }
+
+  static double _tanh(double x) {
+    final e = exp(2 * x);
+    return (e - 1) / (e + 1);
+  }
 
   /// The app has voice (SOS Voice): a voice speaker and a microphone to
   /// choose, besides the alerts speaker.

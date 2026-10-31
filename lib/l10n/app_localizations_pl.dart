@@ -7438,4 +7438,11 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie.';
+
+  @override
+  String get sos_voiceVolume => 'Głośność głosu';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Każde nagranie jest wyrównywane, by ciche były dobrze słyszalne; zwiększ dla cichych głośników.';
 }

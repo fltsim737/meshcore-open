@@ -7082,4 +7082,11 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'この無線機から緊急ネットワークのチャンネルを削除しますか?アプリはほかの無線機のためにネットワークに残ります。この画面からまた追加できます。';
+
+  @override
+  String get sos_voiceVolume => '音声の音量';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      '小さいクリップも聞き取りやすいよう各クリップの音量をそろえます。スピーカーが小さいときは上げてください。';
 }

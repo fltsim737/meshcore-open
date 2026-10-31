@@ -7400,4 +7400,11 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod.';
+
+  @override
+  String get sos_voiceVolume => 'Hangerő a beszédhez';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb.';
 }

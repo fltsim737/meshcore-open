@@ -7424,4 +7424,11 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Прибрати канал екстреної мережі з цієї рації? Застосунок залишиться в мережі для інших ваших рацій. Додати його знову можна на цьому екрані.';
+
+  @override
+  String get sos_voiceVolume => 'Гучність голосу';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Кожен кліп вирівнюється, щоб тихі було добре чути; збільште для тихих динаміків.';
 }

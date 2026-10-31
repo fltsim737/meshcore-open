@@ -7388,4 +7388,11 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu.';
+
+  @override
+  String get sos_voiceVolume => 'Glasnost glasu';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Vsak posnetek se izravna, da se tihi dobro slišijo; za tihe zvočnike povečajte.';
 }

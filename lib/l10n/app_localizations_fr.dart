@@ -7441,4 +7441,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Retirer le canal du réseau d\'urgence de cette radio ? L\'application reste dans le réseau, pour vos autres radios. Vous pourrez le rajouter depuis cet écran.';
+
+  @override
+  String get sos_voiceVolume => 'Volume de la voix';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Chaque clip est mis à niveau pour que les plus faibles s\'entendent bien ; montez-le pour des haut-parleurs faibles.';
 }

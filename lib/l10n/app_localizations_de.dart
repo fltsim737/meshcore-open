@@ -7430,4 +7430,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_radioRemoveConfirm =>
       'Den Kanal des Notfallnetzes von diesem Funkgerät entfernen? Die App bleibt im Netz, für deine anderen Funkgeräte. Du kannst ihn hier wieder hinzufügen.';
+
+  @override
+  String get sos_voiceVolume => 'Sprachlautstärke';
+
+  @override
+  String get sos_voiceVolumeHelp =>
+      'Jeder Clip wird angeglichen, damit leise gut hörbar sind; für leise Lautsprecher höher stellen.';
 }
