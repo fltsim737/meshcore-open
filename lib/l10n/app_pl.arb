@@ -3761,5 +3761,6 @@
   "sos_radioRemove": "Usuń z tego radia",
   "sos_radioRemoveConfirm": "Usunąć kanał sieci alarmowej z tego radia? Aplikacja pozostaje w sieci, dla twoich innych radiów. Możesz go dodać ponownie na tym ekranie.",
   "sos_voiceVolume": "Głośność głosu",
-  "sos_voiceVolumeHelp": "Każde nagranie jest wyrównywane, by ciche były dobrze słyszalne; zwiększ dla cichych głośników."
+  "sos_voiceVolumeHelp": "Każde nagranie jest wyrównywane, by ciche były dobrze słyszalne; zwiększ dla cichych głośników.",
+  "ptt_sosHeard": "Wstrzymane: w sieci słychać było ruch SOS, który ma pierwszeństwo. Głos ponownie za {time}."
 }

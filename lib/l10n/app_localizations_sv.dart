@@ -7487,4 +7487,9 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Varje klipp jämnas ut så att svaga hörs bra; höj för svaga högtalare.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Pausad: SOS-trafik hördes i nätet, och den går först. Röst igen om $time.';
+  }
 }

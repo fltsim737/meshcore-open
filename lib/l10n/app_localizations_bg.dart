@@ -7541,4 +7541,9 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Всеки клип се изравнява, за да се чуват добре тихите; увеличете за тихи високоговорители.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'На пауза: в мрежата се чу SOS трафик, който е с предимство. Глас отново след $time.';
+  }
 }

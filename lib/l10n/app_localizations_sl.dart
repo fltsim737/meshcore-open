@@ -7520,4 +7520,9 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Vsak posnetek se izravna, da se tihi dobro slišijo; za tihe zvočnike povečajte.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Začasno ustavljeno: v omrežju je bil slišan promet SOS, ki ima prednost. Glas znova čez $time.';
+  }
 }

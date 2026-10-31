@@ -2,6 +2,20 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.1.2 (2026-10-31)
+
+SOS Voice only: MeshCore Open SOS has no push-to-talk and stays at 10.1.1.
+
+### Push-to-talk comes back when an SOS is cancelled (SOS Voice)
+
+- **Fixed: push-to-talk stayed paused long after an SOS was cancelled**, still saying *an SOS is live*. Push-to-talk pauses for 5 minutes after any SOS packet heard on the network, so members who can't read an alert still give it the air. But the cancel itself counted as SOS traffic. A cancel goes out three times, a minute apart, and acknowledgements still arriving count too, so each one started the 5 minutes again.
+- Now a cancel, and anything more about an SOS already cancelled (its repeats, late acknowledgements, locate requests, reports), no longer pauses push-to-talk. When the cancel ends the last live SOS this phone knows of, push-to-talk comes back at once.
+- **Unchanged:**
+  - an SOS this phone can't read (another member's, sealed) still pauses it for 5 minutes after its last packet, as long as the SOS's slowest repeats, so voice never slips in between them;
+  - a new SOS reusing a cancelled one's id still counts;
+  - a live SOS still pauses it until it's cancelled.
+- **The pause says which it is:** *Paused: an SOS is live* while one is, or *Paused: SOS traffic was heard on the network… Voice again in 4:12*, with the time left, while only the 5 minutes are running.
+
 ## 10.1.1 (2026-10-31)
 
 ### Voice you can hear (SOS Voice)

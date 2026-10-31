@@ -211,6 +211,10 @@ enum SosVoiceBlock {
   /// Push-to-talk: an SOS is live, which comes first.
   sosLive,
 
+  /// Push-to-talk: SOS traffic was heard a moment ago (perhaps one this phone
+  /// can't read); waits [SosVoiceService.sosHeardWait] (10.1.2).
+  sosHeard,
+
   /// Push-to-talk: the Voice channel isn't on the radio.
   noChannel,
 
@@ -287,6 +291,8 @@ class SosVoiceService extends ChangeNotifier {
   /// Push-to-talk pauses this long after any SOS packet heard on the
   /// emergency network, even one this phone can't read: an SOS repeats
   /// every few minutes, so it stays paused while the SOS lasts.
+  /// As long as an SOS's slowest repeats (every 5 minutes), so a member who
+  /// can't read a live SOS never gets a gap to talk over it.
   static const Duration pttSosHold = Duration(minutes: 5);
 
   /// The Voice channel counts as busy this long after a chunk of someone
@@ -599,7 +605,10 @@ class SosVoiceService extends ChangeNotifier {
   /// What stops a push-to-talk clip going at all (not the waits).
   SosVoiceBlock? _pttSendBlock(String key) {
     if (_codec == null) return SosVoiceBlock.unsupported;
-    if (sosLive) return SosVoiceBlock.sosLive;
+    if (_sos.active != null || _sos.incoming.isNotEmpty) {
+      return SosVoiceBlock.sosLive;
+    }
+    if (sosHeardWait > Duration.zero) return SosVoiceBlock.sosHeard;
     if (!_transport.isConnected) return SosVoiceBlock.radio;
     if (key == pttChannelKey) {
       if (!_sos.supportsChannelAlerts) return SosVoiceBlock.radio;

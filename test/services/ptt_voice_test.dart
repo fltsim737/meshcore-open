@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meshcore_open/helpers/sos_voice_packet.dart';
+import 'package:meshcore_open/helpers/sos_codec.dart';
 import 'package:meshcore_open/models/channel.dart';
 import 'package:meshcore_open/services/app_settings_service.dart';
 import 'package:meshcore_open/services/sos_service.dart';
@@ -15,7 +16,8 @@ import 'sos_service_test.dart'
         FakeSosTransport,
         contactFor,
         farmNetwork,
-        freshSettings;
+        freshSettings,
+        sosPacketFrom;
 import 'sos_voice_service_test.dart'
     show FakeCodec, FakeVoiceAudio, FakeVoiceTransport, loud;
 
@@ -386,6 +388,57 @@ void main() {
     });
   });
 
+  group('a cancel ends the pause (10.1.2)', () {
+    setUp(() async {
+      await addVoiceChannel();
+      await settings.joinSosNetwork(farmNetwork(SosNetworkRole.responder));
+      await settle();
+    });
+
+    void hear(Uint8List packet) =>
+        sos.handleInboundData(sos.sosChannel!.index, packet);
+
+    test('push-to-talk comes back as soon as the SOS is cancelled', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      expect(
+        voice.blockFor(SosVoiceService.pttChannelKey),
+        SosVoiceBlock.sosLive,
+      );
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+      expect(sos.incoming, isEmpty);
+      expect(voice.blockFor(SosVoiceService.pttChannelKey), isNull);
+    });
+
+    test('the cancel\'s repeats and late acknowledgements don\'t pause it again', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+      now = now.add(const Duration(minutes: 1));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+      hear(sosPacketFrom('Hill', 5, 'a1b2', kind: SosPacketKind.ack));
+      expect(voice.blockFor(SosVoiceService.pttChannelKey), isNull);
+    });
+
+    test('a new SOS after a cancelled one still pauses it', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+      hear(sosPacketFrom('Gully', 4, 'a1b2')); // same id, someone else
+      expect(
+        voice.blockFor(SosVoiceService.pttChannelKey),
+        SosVoiceBlock.sosLive,
+      );
+    });
+
+    test('another SOS still live keeps it paused after one is cancelled', () {
+      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+      hear(sosPacketFrom('Gully', 4, 'c3d4'));
+      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+      expect(
+        voice.blockFor(SosVoiceService.pttChannelKey),
+        SosVoiceBlock.sosLive,
+      );
+    });
+  });
+
   group('an SOS the member can\'t read still pauses push-to-talk', () {
     setUp(() async {
       await addVoiceChannel();
@@ -402,14 +455,14 @@ void main() {
       expect(sos.incoming, isEmpty); // nothing was read
       expect(
         voice.blockFor(SosVoiceService.pttChannelKey),
-        SosVoiceBlock.sosLive,
+        SosVoiceBlock.sosHeard,
       );
       now = now.add(const Duration(minutes: 4));
       hearSosPacket(); // the SOS repeats: still paused
       now = now.add(const Duration(minutes: 4));
       expect(
         voice.blockFor(SosVoiceService.pttChannelKey),
-        SosVoiceBlock.sosLive,
+        SosVoiceBlock.sosHeard,
       );
       now = now.add(const Duration(minutes: 1, seconds: 1));
       expect(voice.blockFor(SosVoiceService.pttChannelKey), isNull);

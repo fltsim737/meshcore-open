@@ -7570,4 +7570,9 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Każde nagranie jest wyrównywane, by ciche były dobrze słyszalne; zwiększ dla cichych głośników.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Wstrzymane: w sieci słychać było ruch SOS, który ma pierwszeństwo. Głos ponownie za $time.';
+  }
 }

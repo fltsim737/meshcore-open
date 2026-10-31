@@ -7532,4 +7532,9 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Szünetel: SOS-forgalom hallatszott a hálózaton, és az az első. Hang újra $time múlva.';
+  }
 }

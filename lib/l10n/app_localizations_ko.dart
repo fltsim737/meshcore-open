@@ -7222,4 +7222,9 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       '작은 클립도 잘 들리도록 클립마다 음량을 맞춥니다. 스피커 소리가 작으면 올리세요.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return '일시 중지: 네트워크에서 SOS 통신이 들렸으며 SOS가 우선입니다. $time 후 다시 음성 가능.';
+  }
 }

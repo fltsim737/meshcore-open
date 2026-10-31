@@ -7517,4 +7517,9 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Každý klip sa vyrovná, aby boli tiché dobre počuť; pri tichých reproduktoroch zvýšte.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Pozastavené: v sieti bolo počuť prevádzku SOS, ktorá má prednosť. Hlas znova o $time.';
+  }
 }

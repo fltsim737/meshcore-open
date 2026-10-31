@@ -7562,4 +7562,9 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Jeder Clip wird angeglichen, damit leise gut hörbar sind; für leise Lautsprecher höher stellen.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Pausiert: Im Netz war SOS-Verkehr zu hören, und der hat Vorrang. Sprache wieder in $time.';
+  }
 }

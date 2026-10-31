@@ -7509,4 +7509,9 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Elke clip wordt geëgaliseerd zodat zachte goed te horen zijn; zet dit hoger voor zachte luidsprekers.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'Gepauzeerd: er was SOS-verkeer op het netwerk, en dat gaat voor. Weer spraak over $time.';
+  }
 }

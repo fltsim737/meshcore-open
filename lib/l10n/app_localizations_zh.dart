@@ -7057,4 +7057,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sos_voiceVolumeHelp => '每段语音都会自动调平,声音小的也能听清;扬声器较小时可调高。';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return '已暂停:网络上刚收到 SOS 通信,SOS 优先。$time 后可再用语音。';
+  }
 }

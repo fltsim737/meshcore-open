@@ -295,6 +295,23 @@ class SosService extends ChangeNotifier {
   DateTime? _sosTrafficAt;
   DateTime? get sosTrafficAt => _sosTrafficAt;
 
+  /// SOS heard cancelled, as "sender prefix:id" (10.1.2), so their late
+  /// packets (the cancel's own repeats, acknowledgements still arriving) don't
+  /// pause push-to-talk again.
+  final Set<String> _endedSosIds = <String>{};
+
+  /// A packet about an SOS already cancelled. The SOS and its beacons come
+  /// from its sender, so they match on sender and id: someone else's new SOS
+  /// can reuse an id. Acknowledgements, locate requests and reports come from
+  /// other people and carry only the SOS's id.
+  bool _isAboutEndedSos(SosPacket packet) {
+    if (packet.kind == SosPacketKind.sos ||
+        packet.kind == SosPacketKind.beacon) {
+      return _endedSosIds.contains('${_hex(packet.senderPrefix)}:${packet.id}');
+    }
+    return _endedSosIds.any((k) => k.endsWith(':${packet.id}'));
+  }
+
   OutgoingSos? _active;
   SosCancellation? _cancellation;
   final List<IncomingSos> _incoming = [];
@@ -1665,10 +1682,6 @@ class SosService extends ChangeNotifier {
         ? sosChannel?.index
         : _knownSosChannelIndex;
     if (networkIndex != channelIndex) return;
-    // Something is happening on the network, even if this phone can't read it
-    // (a member can't read other people's alerts): push-to-talk gives way.
-    _sosTrafficAt = _now();
-    notifyListeners();
     // An SOS2 network takes only sealed packets, so nobody can slip in an
     // unsealed one; an SOS1 network takes only SOS1 packets.
     String? sessionRef;
@@ -1679,6 +1692,19 @@ class SosService extends ChangeNotifier {
       sessionRef = opened?.ref;
     } else {
       packet = SosPacket.decode(data);
+    }
+    // Something is happening on the network: push-to-talk gives way, even to
+    // a packet this phone can't read (a member can't read other people's
+    // alerts). Not to a cancel, or anything more about an SOS already
+    // cancelled: those mean the emergency is over (10.1.2).
+    if (packet != null && packet.kind == SosPacketKind.cancel) {
+      _endedSosIds.add('${_hex(packet.senderPrefix)}:${packet.id}');
+      if (_endedSosIds.length > 64) _endedSosIds.remove(_endedSosIds.first);
+    }
+    if (packet == null ||
+        (packet.kind != SosPacketKind.cancel && !_isAboutEndedSos(packet))) {
+      _sosTrafficAt = _now();
+      notifyListeners();
     }
     if (packet == null) return;
     // Members only hear ACKs for their own SOS, and requests to locate it (and
@@ -1962,6 +1988,9 @@ class SosService extends ChangeNotifier {
     _saveHistory();
     _alerter?.cancelled(alert);
     unawaited(_store.saveIncoming(_incoming));
+    // the last live SOS this phone knows of is over: push-to-talk needn't wait
+    // out the pause after it (10.1.2)
+    if (_incoming.isEmpty && _active == null) _sosTrafficAt = null;
     notifyListeners();
   }
 

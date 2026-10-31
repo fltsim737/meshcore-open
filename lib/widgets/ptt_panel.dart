@@ -148,6 +148,9 @@ class PttPanel extends StatelessWidget {
   ) => switch (block) {
     null => null,
     SosVoiceBlock.sosLive => l10n.ptt_sosLive,
+    SosVoiceBlock.sosHeard => l10n.ptt_sosHeard(
+      _minutesSeconds(voice.sosHeardWait),
+    ),
     SosVoiceBlock.noChannel => l10n.ptt_noChannel,
     SosVoiceBlock.busy => l10n.ptt_busy,
     SosVoiceBlock.meshBusy => l10n.ptt_meshBusy(

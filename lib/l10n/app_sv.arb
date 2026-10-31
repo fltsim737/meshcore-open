@@ -3723,5 +3723,6 @@
   "sos_radioRemove": "Ta bort från den här radion",
   "sos_radioRemoveConfirm": "Ta bort nödnätets kanal från den här radion? Appen stannar i nätet, för dina andra radioapparater. Du kan lägga till den igen här.",
   "sos_voiceVolume": "Röstvolym",
-  "sos_voiceVolumeHelp": "Varje klipp jämnas ut så att svaga hörs bra; höj för svaga högtalare."
+  "sos_voiceVolumeHelp": "Varje klipp jämnas ut så att svaga hörs bra; höj för svaga högtalare.",
+  "ptt_sosHeard": "Pausad: SOS-trafik hördes i nätet, och den går först. Röst igen om {time}."
 }

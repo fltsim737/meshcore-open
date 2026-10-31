@@ -3729,5 +3729,6 @@
   "sos_radioRemove": "Odstrani s te postaje",
   "sos_radioRemoveConfirm": "Odstranim kanal omrežja za nujne primere s te postaje? Aplikacija ostane v omrežju za vaše druge postaje. Znova ga lahko dodate na tem zaslonu.",
   "sos_voiceVolume": "Glasnost glasu",
-  "sos_voiceVolumeHelp": "Vsak posnetek se izravna, da se tihi dobro slišijo; za tihe zvočnike povečajte."
+  "sos_voiceVolumeHelp": "Vsak posnetek se izravna, da se tihi dobro slišijo; za tihe zvočnike povečajte.",
+  "ptt_sosHeard": "Začasno ustavljeno: v omrežju je bil slišan promet SOS, ki ima prednost. Glas znova čez {time}."
 }

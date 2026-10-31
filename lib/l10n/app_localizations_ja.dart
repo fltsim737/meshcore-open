@@ -7209,4 +7209,9 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       '小さいクリップも聞き取りやすいよう各クリップの音量をそろえます。スピーカーが小さいときは上げてください。';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return '一時停止中:ネットワークで SOS の通信がありました。SOS が優先です。音声はあと $time で使えます。';
+  }
 }

@@ -7543,4 +7543,9 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get sos_voiceVolumeHelp =>
       'Cada clip se nivela para que los bajos se oigan bien; súbelo para altavoces flojos.';
+
+  @override
+  String ptt_sosHeard(String time) {
+    return 'En pausa: se ha oído tráfico de SOS en la red, y tiene prioridad. Voz de nuevo en $time.';
+  }
 }

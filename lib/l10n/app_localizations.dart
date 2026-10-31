@@ -12588,6 +12588,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Each clip is levelled so quiet ones are easy to hear; turn this up for quiet speakers.'**
   String get sos_voiceVolumeHelp;
+
+  /// No description provided for @ptt_sosHeard.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused: SOS traffic was heard on the network, and it comes first. Voice again in {time}.'**
+  String ptt_sosHeard(String time);
 }
 
 class _AppLocalizationsDelegate

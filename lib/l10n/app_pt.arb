@@ -3728,5 +3728,6 @@
   "sos_radioRemove": "Remover deste rádio",
   "sos_radioRemoveConfirm": "Remover o canal da rede de emergência deste rádio? A app continua na rede, para os seus outros rádios. Pode voltar a adicioná-lo neste ecrã.",
   "sos_voiceVolume": "Volume da voz",
-  "sos_voiceVolumeHelp": "Cada clip é nivelado para que os baixos se ouçam bem; aumente para altifalantes fracos."
+  "sos_voiceVolumeHelp": "Cada clip é nivelado para que os baixos se ouçam bem; aumente para altifalantes fracos.",
+  "ptt_sosHeard": "Em pausa: ouviu-se tráfego de SOS na rede, que tem prioridade. Voz de novo dentro de {time}."
 }

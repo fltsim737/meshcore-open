@@ -3767,5 +3767,6 @@
   "sos_radioRemove": "Eltávolítás erről a rádióról",
   "sos_radioRemoveConfirm": "Eltávolítod a vészhelyzeti hálózat csatornáját erről a rádióról? Az alkalmazás a hálózatban marad a többi rádiód számára. Erről a képernyőről visszaadhatod.",
   "sos_voiceVolume": "Hangerő a beszédhez",
-  "sos_voiceVolumeHelp": "Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb."
+  "sos_voiceVolumeHelp": "Minden klip kiegyenlítődik, hogy a halkak is jól hallhatók legyenek; halk hangszóróhoz vedd feljebb.",
+  "ptt_sosHeard": "Szünetel: SOS-forgalom hallatszott a hálózaton, és az az első. Hang újra {time} múlva."
 }
