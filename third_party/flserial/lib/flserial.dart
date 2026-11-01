@@ -12,6 +12,10 @@ import 'flserial_bindings_generated.dart';
 const String _libName = 'flserial';
 const int _serialIOBuffLen = 1024 * 8;
 
+/// Callback length meaning the port failed and the native reader stopped
+/// (FL_PORT_FAILED in flserial.h).
+const int flPortFailed = 0xFFFFFFFF;
+
 /// The dynamic library in which the symbols for [FlserialBindings] can be found.
 final DynamicLibrary dylib = () {
   if (Platform.isMacOS || Platform.isIOS) {
@@ -179,7 +183,20 @@ class FlSerial {
     setCallback(
       flh,
       callback: (cflh, len) async {
-        if (len > 0) {
+        if (len == flPortFailed) {
+          // The native reader hit a fatal port error (usually the device was
+          // unplugged) and has stopped. Report it and end the stream so
+          // listeners run their disconnect path.
+          if (!onSerialData.isClosed) {
+            onSerialData.addError(
+              FlSerialException(FlError.FL_ERROR_IO,
+                  msg: 'Serial port failed: $portname'),
+            );
+            onSerialData.close();
+          }
+          return;
+        }
+        if (len > 0 && !onSerialData.isClosed) {
           onSerialData.add(FlSerialEventArgs(this, len, prevCTS, prevDSR));
         }
       },

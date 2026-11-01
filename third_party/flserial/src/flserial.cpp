@@ -71,10 +71,20 @@ int SerialThread(void *aArg)
 
            
         }
-        catch (const serial::IOException &ioe)
+        catch (const std::exception &e)
         {
+            // The port failed, usually because the device was unplugged:
+            // read() throws SerialException once the fd reports readiness but
+            // returns nothing. Record the error, tell Dart (which closes its
+            // data stream and runs its disconnect path) and stop. Carrying on
+            // would spin on the dead fd, and an uncaught exception here
+            // terminates the whole app.
             serial->lasterror = FL_ERROR_IO;
-            strncpy(serial->lasterrormsg , ioe.what(), sizeof(serial->lasterrormsg) - 1);
+            strncpy(serial->lasterrormsg, e.what(), sizeof(serial->lasterrormsg) - 1);
+            serial->lasterrormsg[sizeof(serial->lasterrormsg) - 1] = '\0';
+            if (!serial->breakThread && serial->callback != nullptr)
+                serial->callback(0, FL_PORT_FAILED);
+            break;
         }
     }
 
@@ -167,6 +177,12 @@ FFI_PLUGIN_EXPORT int fl_open(int flh, char *portname, int baudrate)
     port->serialport = new serial::Serial();
 #if !defined(__linux__) && !defined(__APPLE__)
     port->serialport->setTimeout(serial::Timeout(0, 2, 0, 0, 0));
+#else
+    // Without a read timeout every read() returns at once and SerialThread
+    // spins a whole CPU core while the port is open. Wait up to 5 ms for data
+    // (the same loop also sends queued writes, so they wait at most 5 ms).
+    serial::Timeout readTimeout(5, 5, 0, 0, 0);
+    port->serialport->setTimeout(readTimeout);
 #endif // #if defined(__linux__)
     port->serialport->setPort(portname);
     port->serialport->setBaudrate(baudrate);
