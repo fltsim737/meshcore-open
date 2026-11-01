@@ -63,6 +63,10 @@ extern "C" {
 
 typedef void (*flcallback)(unsigned int, unsigned int);
 
+/// Passed as the callback's length when the port has failed (for example the
+/// device was unplugged). The reader thread has stopped; close the port.
+#define FL_PORT_FAILED 0xFFFFFFFFu
+
 FFI_PLUGIN_EXPORT int fl_init (int portCount);
 FFI_PLUGIN_EXPORT int fl_set_callback(int flh, flcallback cb);
 FFI_PLUGIN_EXPORT int fl_ports (int index, int buffsize, char *buff);

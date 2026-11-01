@@ -2,6 +2,15 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.3 (2026-11-01)
+
+Both apps. Fixes for radios connected by USB cable on Linux and macOS; Android and Windows behave as before.
+
+### USB radios: no more busy CPU, no crash when unplugged
+
+- **The app no longer keeps a whole CPU core busy while a radio is connected by USB.** The part that reads from the radio checked for data non-stop (about 24,000 times a second) instead of waiting for it, which made a Raspberry Pi sluggish and drained laptop batteries. It now waits up to 5 ms for data: CPU use with a radio connected falls from 100% of a core to well under 1%, and messages are no slower.
+- **Unplugging a USB radio no longer closes the app.** The app now shows that the radio has disconnected, as it does when Bluetooth drops, and you can plug it back in and connect again.
+
 ## 10.2.2 (2026-11-01)
 
 Both apps.
