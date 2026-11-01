@@ -7162,4 +7162,49 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => '太阳辐射';
+
+  @override
+  String get coverage_pingSettings => 'Ping 设置';
+
+  @override
+  String get coverage_modeDistance => '按距离';
+
+  @override
+  String get coverage_modeTime => '按时间';
+
+  @override
+  String get coverage_modeEither => '距离或时间';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return '每移动 $distance 发送一次 ping';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return '每 $time 发送一次 ping';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      '最快每 30 秒一次：每个中继器在 2 分钟内总共最多回应所有人的 4 次 ping。减少 ping 能为其他人留出更多通话时间。';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return '移动 $distance 后发送下一次 ping';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return '$time 后发送下一次 ping';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return '移动 $distance 后或 $time 后发送下一次 ping';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      '要更改 ping 的频率（按距离、按时间或先到者为准），请使用 ⋮ → Ping 设置。';
 }

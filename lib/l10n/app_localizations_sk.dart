@@ -7624,4 +7624,49 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Slnečné žiarenie';
+
+  @override
+  String get coverage_pingSettings => 'Nastavenia pingov';
+
+  @override
+  String get coverage_modeDistance => 'Podľa vzdialenosti';
+
+  @override
+  String get coverage_modeTime => 'Podľa času';
+
+  @override
+  String get coverage_modeEither => 'Vzdialenosť alebo čas';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Ping po každých $distance';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Ping každých $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Nikdy častejšie ako každých 30 sekúnd: každý opakovač odpovie najviac na 4 pingy za 2 minúty od všetkých spolu. Menej pingov necháva viac vysielacieho času ostatným.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Ďalší ping po $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Ďalší ping o $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Ďalší ping po $distance alebo o $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov.';
 }

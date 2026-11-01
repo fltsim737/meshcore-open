@@ -7329,4 +7329,49 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => '일사량';
+
+  @override
+  String get coverage_pingSettings => '핑 설정';
+
+  @override
+  String get coverage_modeDistance => '거리 기준';
+
+  @override
+  String get coverage_modeTime => '시간 기준';
+
+  @override
+  String get coverage_modeEither => '거리 또는 시간';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return '$distance 이동할 때마다 핑';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return '$time마다 핑';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      '30초보다 자주 보내지 않습니다. 각 리피터는 모두 합쳐 2분에 최대 4번의 핑에만 응답합니다. 핑을 줄이면 다른 사람에게 더 많은 통신 시간이 남습니다.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return '$distance 이동하면 다음 핑';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return '$time 후 다음 핑';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return '$distance 이동하거나 $time 후 다음 핑';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      '핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다.';
 }

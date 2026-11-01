@@ -11,6 +11,7 @@ import '../helpers/coverage_export.dart';
 import '../helpers/coverage_grid.dart';
 import '../models/coverage_survey.dart';
 import '../utils/app_logger.dart';
+import '../storage/prefs_manager.dart';
 import '../utils/platform_info.dart';
 import 'coverage_file_store.dart';
 import 'coverage_survey_store.dart';
@@ -136,6 +137,95 @@ class NoCoverageLocation implements CoverageLocationSource {
 /// When the next ping goes out. Each ping makes every repeater in range
 /// answer, and a stock repeater answers at most 4 pings in 2 minutes from
 /// everyone together, so pings follow distance travelled, not a clock.
+/// How the survey decides when to ping.
+enum CoveragePingMode {
+  /// Each time you've moved the set distance (nothing while standing still).
+  distance,
+
+  /// Every set interval, moving or not.
+  time,
+
+  /// Whichever comes first (the default: 150 m, or 2 minutes).
+  either,
+}
+
+/// The user's choice of how often the survey pings. Never closer together
+/// than [CoveragePingPlanner.minInterval], whatever is chosen.
+class CoveragePingSettings {
+  final CoveragePingMode mode;
+  final double distanceMetres;
+  final Duration interval;
+
+  const CoveragePingSettings({
+    this.mode = CoveragePingMode.either,
+    this.distanceMetres = 150,
+    this.interval = const Duration(minutes: 2),
+  });
+
+  /// The distances offered, in metres.
+  static const List<double> distanceChoices = [
+    50,
+    100,
+    150,
+    250,
+    500,
+    1000,
+    2000,
+  ];
+
+  /// The intervals offered, in seconds (30 s is the repeaters' limit).
+  static const List<int> intervalChoices = [30, 60, 120, 300, 600, 900];
+
+  bool get usesDistance => mode != CoveragePingMode.time;
+  bool get usesTime => mode != CoveragePingMode.distance;
+
+  CoveragePingSettings copyWith({
+    CoveragePingMode? mode,
+    double? distanceMetres,
+    Duration? interval,
+  }) => CoveragePingSettings(
+    mode: mode ?? this.mode,
+    distanceMetres: distanceMetres ?? this.distanceMetres,
+    interval: interval ?? this.interval,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'mode': mode.name,
+    'distance_m': distanceMetres,
+    'interval_s': interval.inSeconds,
+  };
+
+  /// Anything unreadable or out of range falls back to the default.
+  static CoveragePingSettings fromJson(Object? json) {
+    if (json is! Map) return const CoveragePingSettings();
+    final mode = CoveragePingMode.values.firstWhere(
+      (m) => m.name == json['mode'],
+      orElse: () => CoveragePingMode.either,
+    );
+    final d = json['distance_m'];
+    final i = json['interval_s'];
+    return CoveragePingSettings(
+      mode: mode,
+      distanceMetres: d is num ? d.toDouble().clamp(50, 2000).toDouble() : 150,
+      interval: Duration(
+        seconds: i is num
+            ? i.toInt().clamp(CoveragePingPlanner.minInterval.inSeconds, 900)
+            : 120,
+      ),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is CoveragePingSettings &&
+      other.mode == mode &&
+      other.distanceMetres == distanceMetres &&
+      other.interval == interval;
+
+  @override
+  int get hashCode => Object.hash(mode, distanceMetres, interval);
+}
+
 class CoveragePingPlanner {
   CoveragePingPlanner._();
 
@@ -153,18 +243,21 @@ class CoveragePingPlanner {
     required CoveragePosition here,
     DateTime? lastAt,
     CoveragePosition? lastPos,
+    CoveragePingSettings settings = const CoveragePingSettings(),
   }) {
     if (lastAt == null || lastPos == null) return true;
     final elapsed = now.difference(lastAt);
     if (elapsed < minInterval) return false;
-    if (elapsed >= idleInterval) return true;
+    final timeUp = elapsed >= settings.interval;
+    if (settings.mode == CoveragePingMode.time) return timeUp;
+    if (settings.mode == CoveragePingMode.either && timeUp) return true;
     return coverageDistanceMetres(
           here.latitude,
           here.longitude,
           lastPos.latitude,
           lastPos.longitude,
         ) >=
-        distanceMetres;
+        settings.distanceMetres;
   }
 }
 
@@ -203,7 +296,11 @@ class CoverageSurveyService extends ChangeNotifier {
     Listenable? sosChanges,
     DateTime Function()? now,
     Duration tickEvery = const Duration(seconds: 5),
-  }) : _link = link,
+    CoveragePingSettings settings = const CoveragePingSettings(),
+    void Function(CoveragePingSettings)? saveSettings,
+  }) : _settings = settings,
+       _saveSettings = saveSettings,
+       _link = link,
        _store = store ?? CoverageFileStore(),
        _location = location ?? GeolocatorCoverageLocation(),
        _sosBusy = sosBusy ?? (() => false),
@@ -222,7 +319,37 @@ class CoverageSurveyService extends ChangeNotifier {
     location: phoneGps ? null : NoCoverageLocation(),
     sosBusy: () => sos.isActive || sos.openIncoming.isNotEmpty,
     sosChanges: sos,
+    settings: _readSettings(),
+    saveSettings: (s) =>
+        PrefsManager.instance.setString(settingsKey, jsonEncode(s.toJson())),
   );
+
+  /// Where the ping settings are kept (on this phone, for every radio).
+  static const String settingsKey = 'coverage_ping_settings';
+
+  static CoveragePingSettings _readSettings() {
+    try {
+      final raw = PrefsManager.instance.getString(settingsKey);
+      return raw == null
+          ? const CoveragePingSettings()
+          : CoveragePingSettings.fromJson(jsonDecode(raw));
+    } catch (_) {
+      return const CoveragePingSettings();
+    }
+  }
+
+  CoveragePingSettings _settings;
+  final void Function(CoveragePingSettings)? _saveSettings;
+
+  /// How often the survey pings.
+  CoveragePingSettings get settings => _settings;
+
+  void setSettings(CoveragePingSettings value) {
+    if (value == _settings) return;
+    _settings = value;
+    _saveSettings?.call(value);
+    notifyListeners();
+  }
 
   final List<CoveragePing> _pings = [];
   final Set<String> _ids = {};
@@ -261,6 +388,11 @@ class CoverageSurveyService extends ChangeNotifier {
   /// Pings in a row that no repeater answered.
   int get silentStreak => _silentStreak;
   bool get outOfCoverage => _silentStreak >= silentAlertAfter;
+
+  /// When a timed ping is next due ([CoveragePingMode.time] and
+  /// [CoveragePingMode.either]); null before the first ping.
+  DateTime? get nextTimedAt =>
+      _settings.usesTime ? _lastPingAt?.add(_settings.interval) : null;
 
   /// The earliest the next ping may go (the repeaters' rate limit).
   DateTime? get nextAllowedAt =>
@@ -366,6 +498,7 @@ class CoverageSurveyService extends ChangeNotifier {
       here: here,
       lastAt: _lastPingAt,
       lastPos: _lastPingPos,
+      settings: _settings,
     )) {
       return;
     }

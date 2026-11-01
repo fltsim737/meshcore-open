@@ -7615,4 +7615,49 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Zonnestraling';
+
+  @override
+  String get coverage_pingSettings => 'Ping-instellingen';
+
+  @override
+  String get coverage_modeDistance => 'Op afstand';
+
+  @override
+  String get coverage_modeTime => 'Op tijd';
+
+  @override
+  String get coverage_modeEither => 'Afstand of tijd';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Ping na elke $distance';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Ping elke $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Nooit vaker dan elke 30 seconden: elke repeater beantwoordt hoogstens 4 pings per 2 minuten van iedereen samen. Minder pings laten meer zendtijd over voor de rest.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Volgende ping na $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Volgende ping over $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Volgende ping na $distance of over $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen.';
 }

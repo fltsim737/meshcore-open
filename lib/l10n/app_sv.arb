@@ -3753,5 +3753,16 @@
   "telemetry_rainRate": "Regnintensitet",
   "telemetry_rainToday": "Regn i dag",
   "telemetry_uvIndex": "UV-index",
-  "telemetry_solarRadiation": "Solinstrålning"
+  "telemetry_solarRadiation": "Solinstrålning",
+  "coverage_pingSettings": "Ping-inställningar",
+  "coverage_modeDistance": "Efter sträcka",
+  "coverage_modeTime": "Efter tid",
+  "coverage_modeEither": "Sträcka eller tid",
+  "coverage_pingDistance": "Pinga efter varje {distance}",
+  "coverage_pingInterval": "Pinga var {time}",
+  "coverage_pingNote": "Aldrig oftare än var 30:e sekund: varje repeater svarar på högst 4 pingar på 2 minuter från alla tillsammans. Färre pingar lämnar mer sändningstid åt andra.",
+  "coverage_nextDistance": "Nästa ping efter {distance}",
+  "coverage_nextTime": "Nästa ping om {time}",
+  "coverage_nextEither": "Nästa ping efter {distance} eller om {time}",
+  "coverage_aboutSettings": "Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar."
 }

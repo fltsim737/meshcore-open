@@ -7640,4 +7640,49 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Napsugárzás';
+
+  @override
+  String get coverage_pingSettings => 'Ping-beállítások';
+
+  @override
+  String get coverage_modeDistance => 'Távolság szerint';
+
+  @override
+  String get coverage_modeTime => 'Idő szerint';
+
+  @override
+  String get coverage_modeEither => 'Távolság vagy idő';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Ping minden $distance megtett út után';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Ping $time időnként';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Soha nem gyakrabban, mint 30 másodpercenként: minden átjátszó legfeljebb 4 pingre válaszol 2 perc alatt, mindenkitől együtt. Kevesebb ping több adásidőt hagy másoknak.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Következő ping $distance után';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Következő ping $time múlva';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Következő ping $distance után vagy $time múlva';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod.';
 }

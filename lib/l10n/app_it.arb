@@ -3892,5 +3892,16 @@
   "telemetry_rainRate": "Intensità di pioggia",
   "telemetry_rainToday": "Pioggia oggi",
   "telemetry_uvIndex": "Indice UV",
-  "telemetry_solarRadiation": "Radiazione solare"
+  "telemetry_solarRadiation": "Radiazione solare",
+  "coverage_pingSettings": "Impostazioni ping",
+  "coverage_modeDistance": "Per distanza",
+  "coverage_modeTime": "Per tempo",
+  "coverage_modeEither": "Distanza o tempo",
+  "coverage_pingDistance": "Ping ogni {distance} percorsi",
+  "coverage_pingInterval": "Ping ogni {time}",
+  "coverage_pingNote": "Mai più spesso di ogni 30 secondi: ogni ripetitore risponde al massimo a 4 ping in 2 minuti da tutti insieme. Meno ping lasciano più tempo di trasmissione agli altri.",
+  "coverage_nextDistance": "Prossimo ping dopo {distance}",
+  "coverage_nextTime": "Prossimo ping tra {time}",
+  "coverage_nextEither": "Prossimo ping dopo {distance} o tra {time}",
+  "coverage_aboutSettings": "Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping."
 }

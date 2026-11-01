@@ -3892,5 +3892,16 @@
   "telemetry_rainRate": "강우 강도",
   "telemetry_rainToday": "오늘 강우량",
   "telemetry_uvIndex": "자외선 지수",
-  "telemetry_solarRadiation": "일사량"
+  "telemetry_solarRadiation": "일사량",
+  "coverage_pingSettings": "핑 설정",
+  "coverage_modeDistance": "거리 기준",
+  "coverage_modeTime": "시간 기준",
+  "coverage_modeEither": "거리 또는 시간",
+  "coverage_pingDistance": "{distance} 이동할 때마다 핑",
+  "coverage_pingInterval": "{time}마다 핑",
+  "coverage_pingNote": "30초보다 자주 보내지 않습니다. 각 리피터는 모두 합쳐 2분에 최대 4번의 핑에만 응답합니다. 핑을 줄이면 다른 사람에게 더 많은 통신 시간이 남습니다.",
+  "coverage_nextDistance": "{distance} 이동하면 다음 핑",
+  "coverage_nextTime": "{time} 후 다음 핑",
+  "coverage_nextEither": "{distance} 이동하거나 {time} 후 다음 핑",
+  "coverage_aboutSettings": "핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다."
 }

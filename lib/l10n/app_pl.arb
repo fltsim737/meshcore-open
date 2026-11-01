@@ -3791,5 +3791,16 @@
   "telemetry_rainRate": "Natężenie deszczu",
   "telemetry_rainToday": "Deszcz dzisiaj",
   "telemetry_uvIndex": "Indeks UV",
-  "telemetry_solarRadiation": "Promieniowanie słoneczne"
+  "telemetry_solarRadiation": "Promieniowanie słoneczne",
+  "coverage_pingSettings": "Ustawienia pingów",
+  "coverage_modeDistance": "Według odległości",
+  "coverage_modeTime": "Według czasu",
+  "coverage_modeEither": "Odległość lub czas",
+  "coverage_pingDistance": "Ping co {distance}",
+  "coverage_pingInterval": "Ping co {time}",
+  "coverage_pingNote": "Nigdy częściej niż co 30 sekund: każdy przemiennik odpowiada najwyżej na 4 pingi w ciągu 2 minut od wszystkich razem. Mniej pingów zostawia innym więcej czasu nadawania.",
+  "coverage_nextDistance": "Następny ping po przejechaniu {distance}",
+  "coverage_nextTime": "Następny ping za {time}",
+  "coverage_nextEither": "Następny ping po przejechaniu {distance} lub za {time}",
+  "coverage_aboutSettings": "Aby zmienić, jak często wysyłać pingi (według odległości, czasu lub tego, co nastąpi pierwsze), użyj ⋮ → Ustawienia pingów."
 }

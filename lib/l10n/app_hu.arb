@@ -3797,5 +3797,16 @@
   "telemetry_rainRate": "Csapadékintenzitás",
   "telemetry_rainToday": "Mai csapadék",
   "telemetry_uvIndex": "UV-index",
-  "telemetry_solarRadiation": "Napsugárzás"
+  "telemetry_solarRadiation": "Napsugárzás",
+  "coverage_pingSettings": "Ping-beállítások",
+  "coverage_modeDistance": "Távolság szerint",
+  "coverage_modeTime": "Idő szerint",
+  "coverage_modeEither": "Távolság vagy idő",
+  "coverage_pingDistance": "Ping minden {distance} megtett út után",
+  "coverage_pingInterval": "Ping {time} időnként",
+  "coverage_pingNote": "Soha nem gyakrabban, mint 30 másodpercenként: minden átjátszó legfeljebb 4 pingre válaszol 2 perc alatt, mindenkitől együtt. Kevesebb ping több adásidőt hagy másoknak.",
+  "coverage_nextDistance": "Következő ping {distance} után",
+  "coverage_nextTime": "Következő ping {time} múlva",
+  "coverage_nextEither": "Következő ping {distance} után vagy {time} múlva",
+  "coverage_aboutSettings": "A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod."
 }

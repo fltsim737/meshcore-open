@@ -3738,5 +3738,16 @@
   "telemetry_rainRate": "Інтенсивність дощу",
   "telemetry_rainToday": "Дощ сьогодні",
   "telemetry_uvIndex": "УФ-індекс",
-  "telemetry_solarRadiation": "Сонячна радіація"
+  "telemetry_solarRadiation": "Сонячна радіація",
+  "coverage_pingSettings": "Налаштування пінгів",
+  "coverage_modeDistance": "За відстанню",
+  "coverage_modeTime": "За часом",
+  "coverage_modeEither": "Відстань або час",
+  "coverage_pingDistance": "Пінг кожні {distance}",
+  "coverage_pingInterval": "Пінг кожні {time}",
+  "coverage_pingNote": "Не частіше ніж раз на 30 секунд: кожен ретранслятор відповідає щонайбільше на 4 пінги за 2 хвилини від усіх разом. Менше пінгів — більше ефірного часу для інших.",
+  "coverage_nextDistance": "Наступний пінг через {distance}",
+  "coverage_nextTime": "Наступний пінг через {time}",
+  "coverage_nextEither": "Наступний пінг через {distance} або через {time}",
+  "coverage_aboutSettings": "Щоб змінити частоту пінгів (за відстанню, за часом або що настане раніше), відкрийте ⋮ → Налаштування пінгів."
 }

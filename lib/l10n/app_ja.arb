@@ -3892,5 +3892,16 @@
   "telemetry_rainRate": "降雨強度",
   "telemetry_rainToday": "今日の雨量",
   "telemetry_uvIndex": "UV指数",
-  "telemetry_solarRadiation": "日射量"
+  "telemetry_solarRadiation": "日射量",
+  "coverage_pingSettings": "ping の設定",
+  "coverage_modeDistance": "距離で",
+  "coverage_modeTime": "時間で",
+  "coverage_modeEither": "距離または時間",
+  "coverage_pingDistance": "{distance} 移動するごとに ping",
+  "coverage_pingInterval": "{time} ごとに ping",
+  "coverage_pingNote": "30 秒より短い間隔にはなりません。各リピーターは全員合わせて 2 分間に最大 4 回の ping にしか応答しません。ping を減らすと他の人の通信時間が増えます。",
+  "coverage_nextDistance": "{distance} 移動したら次の ping",
+  "coverage_nextTime": "{time} 後に次の ping",
+  "coverage_nextEither": "{distance} 移動するか {time} 後に次の ping",
+  "coverage_aboutSettings": "ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。"
 }

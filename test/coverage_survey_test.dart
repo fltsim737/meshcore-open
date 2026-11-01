@@ -163,6 +163,97 @@ void main() {
       );
     });
 
+    const far = CoveragePosition(-33.862, 151.21); // about 220 m away
+    const near = CoveragePosition(-33.8605, 151.21); // about 55 m away
+
+    test('by distance: moving pings, standing still never does', () {
+      const s = CoveragePingSettings(
+        mode: CoveragePingMode.distance,
+        distanceMetres: 100,
+      );
+      bool at(Duration d, CoveragePosition p) => CoveragePingPlanner.shouldPing(
+        now: t0.add(d),
+        here: p,
+        lastAt: t0,
+        lastPos: here,
+        settings: s,
+      );
+      expect(at(const Duration(hours: 1), here), isFalse);
+      expect(at(const Duration(seconds: 40), near), isFalse);
+      expect(at(const Duration(seconds: 40), far), isTrue);
+    });
+
+    test('by time: every interval, moving or not', () {
+      const s = CoveragePingSettings(
+        mode: CoveragePingMode.time,
+        interval: Duration(minutes: 5),
+      );
+      bool at(Duration d, CoveragePosition p) => CoveragePingPlanner.shouldPing(
+        now: t0.add(d),
+        here: p,
+        lastAt: t0,
+        lastPos: here,
+        settings: s,
+      );
+      expect(at(const Duration(minutes: 4), far), isFalse);
+      expect(at(const Duration(minutes: 5), here), isTrue);
+    });
+
+    test('distance or time: whichever comes first', () {
+      const s = CoveragePingSettings(
+        mode: CoveragePingMode.either,
+        distanceMetres: 500,
+        interval: Duration(minutes: 1),
+      );
+      bool at(Duration d, CoveragePosition p) => CoveragePingPlanner.shouldPing(
+        now: t0.add(d),
+        here: p,
+        lastAt: t0,
+        lastPos: here,
+        settings: s,
+      );
+      expect(at(const Duration(seconds: 45), far), isFalse); // 220 m < 500 m
+      expect(at(const Duration(minutes: 1), here), isTrue);
+    });
+
+    test('the 30 s floor holds for every setting', () {
+      for (final mode in CoveragePingMode.values) {
+        expect(
+          CoveragePingPlanner.shouldPing(
+            now: t0.add(const Duration(seconds: 29)),
+            here: const CoveragePosition(-33.9, 151.21),
+            lastAt: t0,
+            lastPos: here,
+            settings: CoveragePingSettings(
+              mode: mode,
+              distanceMetres: 50,
+              interval: const Duration(seconds: 30),
+            ),
+          ),
+          isFalse,
+          reason: mode.name,
+        );
+      }
+    });
+
+    test('settings survive a round trip and reject nonsense', () {
+      const s = CoveragePingSettings(
+        mode: CoveragePingMode.time,
+        distanceMetres: 1000,
+        interval: Duration(minutes: 10),
+      );
+      expect(CoveragePingSettings.fromJson(s.toJson()), s);
+      expect(CoveragePingSettings.fromJson(null), const CoveragePingSettings());
+      final odd = CoveragePingSettings.fromJson({
+        'mode': 'warp',
+        'distance_m': 5,
+        'interval_s': 1,
+      });
+      expect(odd.mode, CoveragePingMode.either);
+      expect(odd.distanceMetres, 50);
+      expect(odd.interval, const Duration(seconds: 30));
+    });
+
     test('standing still pings every 2 minutes', () {
       expect(
         CoveragePingPlanner.shouldPing(

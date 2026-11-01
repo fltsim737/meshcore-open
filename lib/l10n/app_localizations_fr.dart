@@ -7681,4 +7681,49 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Rayonnement solaire';
+
+  @override
+  String get coverage_pingSettings => 'Réglages des pings';
+
+  @override
+  String get coverage_modeDistance => 'Par distance';
+
+  @override
+  String get coverage_modeTime => 'Par durée';
+
+  @override
+  String get coverage_modeEither => 'Distance ou durée';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Ping tous les $distance parcourus';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Ping toutes les $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Jamais plus d\'un toutes les 30 secondes : chaque répéteur répond au plus à 4 pings en 2 minutes, tous utilisateurs confondus. Moins de pings laissent plus de temps d\'antenne aux autres.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Prochain ping après $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Prochain ping dans $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Prochain ping après $distance ou dans $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Pour changer la fréquence des pings (par distance, par durée ou au premier des deux), utilisez ⋮ → Réglages des pings.';
 }

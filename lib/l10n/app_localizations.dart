@@ -12768,6 +12768,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Solar radiation'**
   String get telemetry_solarRadiation;
+
+  /// No description provided for @coverage_pingSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Ping settings'**
+  String get coverage_pingSettings;
+
+  /// No description provided for @coverage_modeDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'By distance'**
+  String get coverage_modeDistance;
+
+  /// No description provided for @coverage_modeTime.
+  ///
+  /// In en, this message translates to:
+  /// **'By time'**
+  String get coverage_modeTime;
+
+  /// No description provided for @coverage_modeEither.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance or time'**
+  String get coverage_modeEither;
+
+  /// No description provided for @coverage_pingDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Ping each time you move {distance}'**
+  String coverage_pingDistance(String distance);
+
+  /// No description provided for @coverage_pingInterval.
+  ///
+  /// In en, this message translates to:
+  /// **'Ping every {time}'**
+  String coverage_pingInterval(String time);
+
+  /// No description provided for @coverage_pingNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Never more often than every 30 seconds: each repeater answers at most 4 pings in 2 minutes from everyone together. Fewer pings leave more airtime for everyone else.'**
+  String get coverage_pingNote;
+
+  /// No description provided for @coverage_nextDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'Next ping when you move {distance}'**
+  String coverage_nextDistance(String distance);
+
+  /// No description provided for @coverage_nextTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Next ping in {time}'**
+  String coverage_nextTime(String time);
+
+  /// No description provided for @coverage_nextEither.
+  ///
+  /// In en, this message translates to:
+  /// **'Next ping when you move {distance}, or in {time}'**
+  String coverage_nextEither(String distance, String time);
+
+  /// No description provided for @coverage_aboutSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'To change how often it pings (by distance, by time, or whichever comes first), use ⋮ → Ping settings.'**
+  String get coverage_aboutSettings;
 }
 
 class _AppLocalizationsDelegate

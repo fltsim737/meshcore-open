@@ -7318,4 +7318,49 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => '日射量';
+
+  @override
+  String get coverage_pingSettings => 'ping の設定';
+
+  @override
+  String get coverage_modeDistance => '距離で';
+
+  @override
+  String get coverage_modeTime => '時間で';
+
+  @override
+  String get coverage_modeEither => '距離または時間';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return '$distance 移動するごとに ping';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return '$time ごとに ping';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      '30 秒より短い間隔にはなりません。各リピーターは全員合わせて 2 分間に最大 4 回の ping にしか応答しません。ping を減らすと他の人の通信時間が増えます。';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return '$distance 移動したら次の ping';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return '$time 後に次の ping';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return '$distance 移動するか $time 後に次の ping';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。';
 }

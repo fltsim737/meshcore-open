@@ -2,6 +2,19 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.2 (2026-11-01)
+
+Both apps.
+
+### Coverage survey: choose how often it pings
+
+- **Coverage survey → ⋮ → Ping settings** chooses when a ping goes:
+  - **By distance:** each time you've moved a set distance, from 50 m to 2 km; nothing while you stand still;
+  - **By time:** every set interval, from 30 seconds to 15 minutes, moving or not;
+  - **Distance or time:** whichever comes first. This is the default, and is the same as before: 150 m, or 2 minutes.
+- Pings are still never closer than 30 seconds apart, whatever is chosen: a stock repeater answers at most 4 pings in 2 minutes from everyone together, so faster pings would only be ignored and use airtime.
+- The status line follows the choice, with a countdown for timed pings: *Next ping when you move 500 m, or in 4:12*. The setting is kept on the phone, for every radio.
+
 ## 10.2.1 (2026-11-01)
 
 Both apps.
