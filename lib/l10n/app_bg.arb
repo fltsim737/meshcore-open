@@ -3793,5 +3793,16 @@
   "telemetry_rainRate": "Интензитет на дъжда",
   "telemetry_rainToday": "Дъжд днес",
   "telemetry_uvIndex": "UV индекс",
-  "telemetry_solarRadiation": "Слънчева радиация"
+  "telemetry_solarRadiation": "Слънчева радиация",
+  "coverage_pingSettings": "Настройки на пинга",
+  "coverage_modeDistance": "По разстояние",
+  "coverage_modeTime": "По време",
+  "coverage_modeEither": "Разстояние или време",
+  "coverage_pingDistance": "Пинг на всеки {distance}",
+  "coverage_pingInterval": "Пинг на всеки {time}",
+  "coverage_pingNote": "Никога по-често от веднъж на 30 секунди: всеки ретранслатор отговаря на най-много 4 пинга за 2 минути от всички заедно. По-малко пингове оставят повече ефирно време за другите.",
+  "coverage_nextDistance": "Следващ пинг след {distance}",
+  "coverage_nextTime": "Следващ пинг след {time}",
+  "coverage_nextEither": "Следващ пинг след {distance} или след {time}",
+  "coverage_aboutSettings": "За да промените колко често се пингва (по разстояние, по време или което настъпи първо), използвайте ⋮ → Настройки на пинга."
 }

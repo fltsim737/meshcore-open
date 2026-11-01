@@ -7793,4 +7793,49 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Сонячна радіація';
+
+  @override
+  String get coverage_pingSettings => 'Налаштування пінгів';
+
+  @override
+  String get coverage_modeDistance => 'За відстанню';
+
+  @override
+  String get coverage_modeTime => 'За часом';
+
+  @override
+  String get coverage_modeEither => 'Відстань або час';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Пінг кожні $distance';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Пінг кожні $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Не частіше ніж раз на 30 секунд: кожен ретранслятор відповідає щонайбільше на 4 пінги за 2 хвилини від усіх разом. Менше пінгів — більше ефірного часу для інших.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Наступний пінг через $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Наступний пінг через $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Наступний пінг через $distance або через $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Щоб змінити частоту пінгів (за відстанню, за часом або що настане раніше), відкрийте ⋮ → Налаштування пінгів.';
 }

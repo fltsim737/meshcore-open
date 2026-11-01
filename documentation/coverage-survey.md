@@ -14,9 +14,10 @@ A ping is MeshCore's zero-hop discover request (`CMD_SEND_CONTROL_DATA`, `DISCOV
 
 | Rule | Value |
 |---|---|
-| Minimum interval | 30 s |
-| Distance between pings | 150 m |
-| Standing still | every 2 min |
+| Minimum interval | 30 s, always |
+| Mode (**⋮ → Ping settings**, 10.2.2) | by distance, by time, or distance or time (default) |
+| Distance between pings | 150 m by default; 50 m to 2 km |
+| Time between pings | every 2 min by default; 30 s to 15 min (by time, or standing still in distance-or-time mode) |
 | Reply window | 12 s |
 | Paused | while any SOS is active or open, without a radio, without a position |
 

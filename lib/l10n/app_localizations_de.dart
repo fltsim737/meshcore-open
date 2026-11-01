@@ -7800,4 +7800,49 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Sonneneinstrahlung';
+
+  @override
+  String get coverage_pingSettings => 'Ping-Einstellungen';
+
+  @override
+  String get coverage_modeDistance => 'Nach Strecke';
+
+  @override
+  String get coverage_modeTime => 'Nach Zeit';
+
+  @override
+  String get coverage_modeEither => 'Strecke oder Zeit';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Pingen nach je $distance';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Pingen alle $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Nie öfter als alle 30 Sekunden: Jeder Repeater beantwortet höchstens 4 Pings in 2 Minuten von allen zusammen. Weniger Pings lassen allen anderen mehr Sendezeit.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Nächster Ping nach $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Nächster Ping in $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Nächster Ping nach $distance oder in $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Wie oft gepingt wird (nach Strecke, nach Zeit oder was zuerst eintritt), stellst du unter ⋮ → Ping-Einstellungen ein.';
 }

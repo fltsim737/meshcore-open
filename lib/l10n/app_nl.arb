@@ -3694,5 +3694,16 @@
   "telemetry_rainRate": "Regenintensiteit",
   "telemetry_rainToday": "Regen vandaag",
   "telemetry_uvIndex": "UV-index",
-  "telemetry_solarRadiation": "Zonnestraling"
+  "telemetry_solarRadiation": "Zonnestraling",
+  "coverage_pingSettings": "Ping-instellingen",
+  "coverage_modeDistance": "Op afstand",
+  "coverage_modeTime": "Op tijd",
+  "coverage_modeEither": "Afstand of tijd",
+  "coverage_pingDistance": "Ping na elke {distance}",
+  "coverage_pingInterval": "Ping elke {time}",
+  "coverage_pingNote": "Nooit vaker dan elke 30 seconden: elke repeater beantwoordt hoogstens 4 pings per 2 minuten van iedereen samen. Minder pings laten meer zendtijd over voor de rest.",
+  "coverage_nextDistance": "Volgende ping na {distance}",
+  "coverage_nextTime": "Volgende ping over {time}",
+  "coverage_nextEither": "Volgende ping na {distance} of over {time}",
+  "coverage_aboutSettings": "Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen."
 }

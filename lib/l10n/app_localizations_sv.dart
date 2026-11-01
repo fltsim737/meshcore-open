@@ -7723,4 +7723,49 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Solinstrålning';
+
+  @override
+  String get coverage_pingSettings => 'Ping-inställningar';
+
+  @override
+  String get coverage_modeDistance => 'Efter sträcka';
+
+  @override
+  String get coverage_modeTime => 'Efter tid';
+
+  @override
+  String get coverage_modeEither => 'Sträcka eller tid';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Pinga efter varje $distance';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Pinga var $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Aldrig oftare än var 30:e sekund: varje repeater svarar på högst 4 pingar på 2 minuter från alla tillsammans. Färre pingar lämnar mer sändningstid åt andra.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Nästa ping efter $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Nästa ping om $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Nästa ping efter $distance eller om $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar.';
 }

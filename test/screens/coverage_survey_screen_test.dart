@@ -120,6 +120,28 @@ void main() {
     await tester.tap(find.text('Stop survey'));
     await tester.pump();
     expect(find.text('Start survey'), findsOneWidget);
+
+    // ping settings: choose By time, and the status and saved setting follow
+    final saved = <CoveragePingSettings>[];
+    await tester.tap(find.byType(PopupMenuButton<String>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Ping settings'));
+    await tester.pumpAndSettle();
+    expect(find.text('Distance or time'), findsOneWidget);
+    expect(find.byKey(const Key('coverage-ping-distance')), findsOneWidget);
+    expect(find.byKey(const Key('coverage-ping-interval')), findsOneWidget);
+    service.addListener(() => saved.add(service.settings));
+    await tester.tap(find.text('By time'));
+    await tester.pumpAndSettle();
+    expect(service.settings.mode, CoveragePingMode.time);
+    expect(find.byKey(const Key('coverage-ping-distance')), findsNothing);
+    expect(
+      find.textContaining('Never more often than every 30 seconds'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Done'));
+    await tester.pumpAndSettle();
+    expect(saved.last.mode, CoveragePingMode.time);
     expect(tester.takeException(), isNull);
 
     await tester.pumpWidget(const SizedBox());

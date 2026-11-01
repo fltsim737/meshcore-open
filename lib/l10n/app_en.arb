@@ -4608,5 +4608,21 @@
   "telemetry_rainRate": "Rain rate",
   "telemetry_rainToday": "Rain today",
   "telemetry_uvIndex": "UV index",
-  "telemetry_solarRadiation": "Solar radiation"
+  "telemetry_solarRadiation": "Solar radiation",
+  "coverage_pingSettings": "Ping settings",
+  "coverage_modeDistance": "By distance",
+  "coverage_modeTime": "By time",
+  "coverage_modeEither": "Distance or time",
+  "coverage_pingDistance": "Ping each time you move {distance}",
+  "coverage_pingInterval": "Ping every {time}",
+  "coverage_pingNote": "Never more often than every 30 seconds: each repeater answers at most 4 pings in 2 minutes from everyone together. Fewer pings leave more airtime for everyone else.",
+  "coverage_nextDistance": "Next ping when you move {distance}",
+  "coverage_nextTime": "Next ping in {time}",
+  "coverage_nextEither": "Next ping when you move {distance}, or in {time}",
+  "coverage_aboutSettings": "To change how often it pings (by distance, by time, or whichever comes first), use ⋮ → Ping settings.",
+  "@coverage_pingDistance": {"placeholders": {"distance": {"type": "String"}}},
+  "@coverage_pingInterval": {"placeholders": {"time": {"type": "String"}}},
+  "@coverage_nextDistance": {"placeholders": {"distance": {"type": "String"}}},
+  "@coverage_nextTime": {"placeholders": {"time": {"type": "String"}}},
+  "@coverage_nextEither": {"placeholders": {"distance": {"type": "String"}, "time": {"type": "String"}}}
 }

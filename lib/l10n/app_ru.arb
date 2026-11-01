@@ -3090,5 +3090,16 @@
   "telemetry_rainRate": "Интенсивность дождя",
   "telemetry_rainToday": "Дождь сегодня",
   "telemetry_uvIndex": "УФ-индекс",
-  "telemetry_solarRadiation": "Солнечная радиация"
+  "telemetry_solarRadiation": "Солнечная радиация",
+  "coverage_pingSettings": "Настройки пингов",
+  "coverage_modeDistance": "По расстоянию",
+  "coverage_modeTime": "По времени",
+  "coverage_modeEither": "Расстояние или время",
+  "coverage_pingDistance": "Пинг каждые {distance}",
+  "coverage_pingInterval": "Пинг каждые {time}",
+  "coverage_pingNote": "Не чаще раза в 30 секунд: каждый ретранслятор отвечает максимум на 4 пинга за 2 минуты от всех вместе. Меньше пингов — больше эфирного времени для остальных.",
+  "coverage_nextDistance": "Следующий пинг через {distance}",
+  "coverage_nextTime": "Следующий пинг через {time}",
+  "coverage_nextEither": "Следующий пинг через {distance} или через {time}",
+  "coverage_aboutSettings": "Чтобы изменить частоту пингов (по расстоянию, по времени или что наступит раньше), откройте ⋮ → Настройки пингов."
 }

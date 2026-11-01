@@ -7795,4 +7795,49 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get telemetry_solarRadiation => 'Солнечная радиация';
+
+  @override
+  String get coverage_pingSettings => 'Настройки пингов';
+
+  @override
+  String get coverage_modeDistance => 'По расстоянию';
+
+  @override
+  String get coverage_modeTime => 'По времени';
+
+  @override
+  String get coverage_modeEither => 'Расстояние или время';
+
+  @override
+  String coverage_pingDistance(String distance) {
+    return 'Пинг каждые $distance';
+  }
+
+  @override
+  String coverage_pingInterval(String time) {
+    return 'Пинг каждые $time';
+  }
+
+  @override
+  String get coverage_pingNote =>
+      'Не чаще раза в 30 секунд: каждый ретранслятор отвечает максимум на 4 пинга за 2 минуты от всех вместе. Меньше пингов — больше эфирного времени для остальных.';
+
+  @override
+  String coverage_nextDistance(String distance) {
+    return 'Следующий пинг через $distance';
+  }
+
+  @override
+  String coverage_nextTime(String time) {
+    return 'Следующий пинг через $time';
+  }
+
+  @override
+  String coverage_nextEither(String distance, String time) {
+    return 'Следующий пинг через $distance или через $time';
+  }
+
+  @override
+  String get coverage_aboutSettings =>
+      'Чтобы изменить частоту пингов (по расстоянию, по времени или что наступит раньше), откройте ⋮ → Настройки пингов.';
 }

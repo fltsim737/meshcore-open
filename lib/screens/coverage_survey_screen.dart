@@ -198,6 +198,10 @@ class _CoverageSurveyScreenState extends State<CoverageSurveyScreen>
               onSelected: (v) => _menu(v, service, menuContext),
               itemBuilder: (_) => [
                 PopupMenuItem(
+                  value: 'pings',
+                  child: _menuRow(Icons.tune, l10n.coverage_pingSettings),
+                ),
+                PopupMenuItem(
                   value: 'export',
                   enabled: pings.isNotEmpty,
                   child: _menuRow(Icons.ios_share, l10n.coverage_exportSurvey),
@@ -411,7 +415,7 @@ class _CoverageSurveyScreenState extends State<CoverageSurveyScreen>
               ? l10n.coverage_statusPinging
               : waitSecs > 0
               ? l10n.coverage_statusWait(_mmss(waitSecs))
-              : l10n.coverage_statusMove,
+              : _nextPingText(l10n, service, now),
       };
     }
 
@@ -698,13 +702,169 @@ class _CoverageSurveyScreenState extends State<CoverageSurveyScreen>
     );
   }
 
+  static String distanceText(double metres) => metres >= 1000
+      ? '${(metres / 1000).toStringAsFixed(metres % 1000 == 0 ? 0 : 1)} km'
+      : '${metres.round()} m';
+
+  static String intervalText(Duration d) =>
+      d.inSeconds < 60 ? '${d.inSeconds} s' : '${d.inMinutes} min';
+
+  /// "Next ping when you move 150 m, or in 1:42", from the ping settings.
+  String _nextPingText(
+    AppLocalizations l10n,
+    CoverageSurveyService service,
+    DateTime now,
+  ) {
+    final s = service.settings;
+    final due = service.nextTimedAt;
+    final left = due == null
+        ? intervalText(s.interval)
+        : _mmss(due.difference(now).inSeconds.clamp(0, 99999));
+    return switch (s.mode) {
+      CoveragePingMode.distance => l10n.coverage_nextDistance(
+        distanceText(s.distanceMetres),
+      ),
+      CoveragePingMode.time => l10n.coverage_nextTime(left),
+      CoveragePingMode.either => l10n.coverage_nextEither(
+        distanceText(s.distanceMetres),
+        left,
+      ),
+    };
+  }
+
+  void _showPingSettings(CoverageSurveyService service) {
+    final l10n = context.l10n;
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (sheet) => StatefulBuilder(
+        builder: (sheet, setSheet) {
+          final s = service.settings;
+          final dIdx = CoveragePingSettings.distanceChoices
+              .indexWhere((v) => v >= s.distanceMetres)
+              .clamp(0, CoveragePingSettings.distanceChoices.length - 1);
+          final tIdx = CoveragePingSettings.intervalChoices
+              .indexWhere((v) => v >= s.interval.inSeconds)
+              .clamp(0, CoveragePingSettings.intervalChoices.length - 1);
+          void set(CoveragePingSettings v) {
+            service.setSettings(v);
+            setSheet(() {});
+          }
+
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.coverage_pingSettings,
+                    style: Theme.of(sheet).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: SegmentedButton<CoveragePingMode>(
+                      key: const Key('coverage-ping-mode'),
+                      segments: [
+                        ButtonSegment(
+                          value: CoveragePingMode.distance,
+                          label: Text(l10n.coverage_modeDistance),
+                        ),
+                        ButtonSegment(
+                          value: CoveragePingMode.time,
+                          label: Text(l10n.coverage_modeTime),
+                        ),
+                        ButtonSegment(
+                          value: CoveragePingMode.either,
+                          label: Text(l10n.coverage_modeEither),
+                        ),
+                      ],
+                      selected: {s.mode},
+                      showSelectedIcon: false,
+                      onSelectionChanged: (v) => set(s.copyWith(mode: v.first)),
+                    ),
+                  ),
+                  if (s.usesDistance) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      l10n.coverage_pingDistance(
+                        distanceText(s.distanceMetres),
+                      ),
+                    ),
+                    Slider(
+                      key: const Key('coverage-ping-distance'),
+                      value: dIdx.toDouble(),
+                      min: 0,
+                      max: (CoveragePingSettings.distanceChoices.length - 1)
+                          .toDouble(),
+                      divisions:
+                          CoveragePingSettings.distanceChoices.length - 1,
+                      label: distanceText(s.distanceMetres),
+                      onChanged: (v) => set(
+                        s.copyWith(
+                          distanceMetres:
+                              CoveragePingSettings.distanceChoices[v.round()],
+                        ),
+                      ),
+                    ),
+                  ],
+                  if (s.usesTime) ...[
+                    const SizedBox(height: 8),
+                    Text(l10n.coverage_pingInterval(intervalText(s.interval))),
+                    Slider(
+                      key: const Key('coverage-ping-interval'),
+                      value: tIdx.toDouble(),
+                      min: 0,
+                      max: (CoveragePingSettings.intervalChoices.length - 1)
+                          .toDouble(),
+                      divisions:
+                          CoveragePingSettings.intervalChoices.length - 1,
+                      label: intervalText(s.interval),
+                      onChanged: (v) => set(
+                        s.copyWith(
+                          interval: Duration(
+                            seconds:
+                                CoveragePingSettings.intervalChoices[v.round()],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 8),
+                  Text(
+                    l10n.coverage_pingNote,
+                    style: Theme.of(sheet).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () => Navigator.pop(sheet),
+                      child: Text(l10n.common_done),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   void _showAbout() {
     final l10n = context.l10n;
     showDialog<void>(
       context: context,
       builder: (dialog) => AlertDialog(
         title: Text(l10n.coverage_aboutTitle),
-        content: SingleChildScrollView(child: Text(l10n.coverage_aboutBody)),
+        content: SingleChildScrollView(
+          child: Text(
+            '${l10n.coverage_aboutBody}\n\n${l10n.coverage_aboutSettings}',
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialog),
@@ -730,6 +890,8 @@ class _CoverageSurveyScreenState extends State<CoverageSurveyScreen>
         .replaceAll(':', '-');
     final origin = shareOriginOf(anchor);
     switch (action) {
+      case 'pings':
+        _showPingSettings(service);
       case 'export':
         await _exportText(
           'coverage-survey-$stamp.json',

@@ -3794,5 +3794,16 @@
   "telemetry_rainRate": "Intenzita dažďa",
   "telemetry_rainToday": "Dážď dnes",
   "telemetry_uvIndex": "UV index",
-  "telemetry_solarRadiation": "Slnečné žiarenie"
+  "telemetry_solarRadiation": "Slnečné žiarenie",
+  "coverage_pingSettings": "Nastavenia pingov",
+  "coverage_modeDistance": "Podľa vzdialenosti",
+  "coverage_modeTime": "Podľa času",
+  "coverage_modeEither": "Vzdialenosť alebo čas",
+  "coverage_pingDistance": "Ping po každých {distance}",
+  "coverage_pingInterval": "Ping každých {time}",
+  "coverage_pingNote": "Nikdy častejšie ako každých 30 sekúnd: každý opakovač odpovie najviac na 4 pingy za 2 minúty od všetkých spolu. Menej pingov necháva viac vysielacieho času ostatným.",
+  "coverage_nextDistance": "Ďalší ping po {distance}",
+  "coverage_nextTime": "Ďalší ping o {time}",
+  "coverage_nextEither": "Ďalší ping po {distance} alebo o {time}",
+  "coverage_aboutSettings": "Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov."
 }
