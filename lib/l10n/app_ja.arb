@@ -3110,7 +3110,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "オフグリッド中継用に周波数を {freq} MHz に設定",
+  "settings_clientRepeatFrequencyNote": "オフグリッド中継は {freq} MHz を使用します",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3903,5 +3903,7 @@
   "coverage_nextDistance": "{distance} 移動したら次の ping",
   "coverage_nextTime": "{time} 後に次の ping",
   "coverage_nextEither": "{distance} 移動するか {time} 後に次の ping",
-  "coverage_aboutSettings": "ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。"
+  "coverage_aboutSettings": "ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。",
+  "settings_clientRepeatRefused": "この無線機のファームウェアは {freq} MHz では中継しません。オフグリッド中継は {freqs} MHz でのみ可能です。これらのいずれかを使うか、他の周波数を許可するファームウェアを書き込んでください。",
+  "settings_clientRepeatUseFreq": "{freq} MHz を使用"
 }

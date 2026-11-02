@@ -342,8 +342,27 @@
   },
   "settings_txPowerInvalid": "Invalid TX power",
   "settings_clientRepeat": "Off-Grid Repeat",
-  "settings_clientRepeatFrequencyNote": "Frequency set to {freq} MHz for off-grid repeat",
+  "settings_clientRepeatFrequencyNote": "Off-grid repeat will use {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
+    "placeholders": {
+      "freq": {
+        "type": "String"
+      }
+    }
+  },
+  "settings_clientRepeatRefused": "This radio's firmware won't repeat on {freq} MHz. It only allows Off-Grid Repeat on {freqs} MHz. Use one of those, or put firmware on the radio that allows other frequencies.",
+  "@settings_clientRepeatRefused": {
+    "placeholders": {
+      "freq": {
+        "type": "String"
+      },
+      "freqs": {
+        "type": "String"
+      }
+    }
+  },
+  "settings_clientRepeatUseFreq": "Use {freq} MHz",
+  "@settings_clientRepeatUseFreq": {
     "placeholders": {
       "freq": {
         "type": "String"

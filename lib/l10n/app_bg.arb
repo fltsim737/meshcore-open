@@ -2976,7 +2976,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Честота {freq} MHz за повторение извън мрежата",
+  "settings_clientRepeatFrequencyNote": "Препредаването извън мрежата ще използва {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3769,5 +3769,7 @@
   "coverage_nextDistance": "Следващ пинг след {distance}",
   "coverage_nextTime": "Следващ пинг след {time}",
   "coverage_nextEither": "Следващ пинг след {distance} или след {time}",
-  "coverage_aboutSettings": "За да промените колко често се пингва (по разстояние, по време или което настъпи първо), използвайте ⋮ → Настройки на пинга."
+  "coverage_aboutSettings": "За да промените колко често се пингва (по разстояние, по време или което настъпи първо), използвайте ⋮ → Настройки на пинга.",
+  "settings_clientRepeatRefused": "Фърмуерът на това радио не препредава на {freq} MHz. Позволява препредаване извън мрежата само на {freqs} MHz. Използвайте една от тях или сложете на радиото фърмуер, който позволява други честоти.",
+  "settings_clientRepeatUseFreq": "Използвай {freq} MHz"
 }

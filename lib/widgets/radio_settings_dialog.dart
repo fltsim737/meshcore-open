@@ -15,16 +15,49 @@ int _toUiCodingRate(int deviceCr) {
   return deviceCr <= 4 ? deviceCr + 4 : deviceCr;
 }
 
-const Set<int> _defaultRepeatFreqsKHz = {433000, 869495, 918000};
+/// Frequencies stock companion firmware accepts for off-grid client repeat
+/// when it doesn't report its own list (CMD_GET_ALLOWED_REPEAT_FREQ).
+const List<RepeatFreqRange> _defaultRepeatFreqRanges = [
+  (lowKHz: 433000, highKHz: 433000),
+  (lowKHz: 869495, highKHz: 869495),
+  (lowKHz: 918000, highKHz: 918000),
+];
 
-/// Whether the firmware accepts [freqKHz] for off-grid client repeat, using
-/// the ranges from CMD_GET_ALLOWED_REPEAT_FREQ when known.
-bool _isAllowedRepeatFreqKHz(MeshCoreConnector connector, int freqKHz) {
+List<RepeatFreqRange> _repeatFreqRanges(MeshCoreConnector connector) {
   final ranges = connector.allowedRepeatFreqRanges;
-  if (ranges == null || ranges.isEmpty) {
-    return _defaultRepeatFreqsKHz.contains(freqKHz);
-  }
-  return ranges.any((r) => freqKHz >= r.lowKHz && freqKHz <= r.highKHz);
+  return ranges == null || ranges.isEmpty ? _defaultRepeatFreqRanges : ranges;
+}
+
+/// Whether the radio's firmware says it accepts [freqKHz] for off-grid
+/// client repeat.
+bool _isAllowedRepeatFreqKHz(MeshCoreConnector connector, int freqKHz) {
+  return _repeatFreqRanges(
+    connector,
+  ).any((r) => freqKHz >= r.lowKHz && freqKHz <= r.highKHz);
+}
+
+/// The frequency the firmware allows for off-grid repeat nearest [freqKHz].
+int _nearestAllowedRepeatFreqKHz(MeshCoreConnector connector, int freqKHz) {
+  final candidates = [
+    for (final r in _repeatFreqRanges(connector))
+      freqKHz.clamp(r.lowKHz, r.highKHz),
+  ];
+  return candidates.reduce(
+    (a, b) => (a - freqKHz).abs() <= (b - freqKHz).abs() ? a : b,
+  );
+}
+
+String _mhz(int kHz) => (kHz / 1000.0).toStringAsFixed(3);
+
+/// "433.000, 869.495 or 918.000" style list of the allowed repeat frequencies.
+String _allowedRepeatFreqList(MeshCoreConnector connector) {
+  return _repeatFreqRanges(connector)
+      .map(
+        (r) => r.lowKHz == r.highKHz
+            ? _mhz(r.lowKHz)
+            : '${_mhz(r.lowKHz)}–${_mhz(r.highKHz)}',
+      )
+      .join(', ');
 }
 
 /// Lowest TX power companion firmware accepts (CMD_SET_RADIO_TX_POWER).
@@ -33,6 +66,10 @@ const int _minTxPowerDbm = -9;
 /// Radio parameter editor (preset, frequency, bandwidth, SF, CR, TX power and
 /// off-grid client repeat). Stays open when the radio rejects or fails to
 /// apply the settings so the user's edits are not lost.
+///
+/// Off-grid repeat uses whatever frequency is chosen: the app no longer moves
+/// it to 433/869.495/918 MHz. Firmware that only allows repeat on certain
+/// frequencies refuses others, and the dialog then offers the nearest one.
 class RadioSettingsDialog extends StatefulWidget {
   final MeshCoreConnector connector;
 
@@ -47,10 +84,9 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
   LoRaBandwidth _bandwidth = LoRaBandwidth.bw125;
   LoRaSpreadingFactor _spreadingFactor = LoRaSpreadingFactor.sf7;
   LoRaCodingRate _codingRate = LoRaCodingRate.cr4_5;
-  final _txPowerController = TextEditingController(text: '20');
+  final _txPowerController = TextEditingController(text: '22');
   bool _clientRepeat = false;
   int? _selectedPresetIndex;
-  _RadioSettingsSnapshot? _lastNonRepeatSnapshot;
   String? _frequencyError;
   String? _txPowerError;
 
@@ -61,7 +97,6 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
   void initState() {
     super.initState();
 
-    // Populate with current settings if available
     if (widget.connector.currentFreqHz != null) {
       _frequencyController.text = (widget.connector.currentFreqHz! / 1000.0)
           .toStringAsFixed(3);
@@ -69,37 +104,29 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
       _frequencyController.text = '915.0';
     }
 
-    if (widget.connector.currentBwHz != null) {
-      // Find matching bandwidth enum
-      final bwValue = widget.connector.currentBwHz!;
-      for (var bw in LoRaBandwidth.values) {
-        if (bw.hz == bwValue) {
-          _bandwidth = bw;
-          break;
-        }
-      }
+    final bwValue = widget.connector.currentBwHz;
+    if (bwValue != null) {
+      _bandwidth =
+          LoRaBandwidth.values.where((bw) => bw.hz == bwValue).firstOrNull ??
+          _bandwidth;
     }
 
-    if (widget.connector.currentSf != null) {
-      // Find matching spreading factor enum
-      final sfValue = widget.connector.currentSf!;
-      for (var sf in LoRaSpreadingFactor.values) {
-        if (sf.value == sfValue) {
-          _spreadingFactor = sf;
-          break;
-        }
-      }
+    final sfValue = widget.connector.currentSf;
+    if (sfValue != null) {
+      _spreadingFactor =
+          LoRaSpreadingFactor.values
+              .where((sf) => sf.value == sfValue)
+              .firstOrNull ??
+          _spreadingFactor;
     }
 
     if (widget.connector.currentCr != null) {
-      // Find matching coding rate enum
       final crValue = _toUiCodingRate(widget.connector.currentCr!);
-      for (var cr in LoRaCodingRate.values) {
-        if (cr.value == crValue) {
-          _codingRate = cr;
-          break;
-        }
-      }
+      _codingRate =
+          LoRaCodingRate.values
+              .where((cr) => cr.value == crValue)
+              .firstOrNull ??
+          _codingRate;
     }
 
     if (widget.connector.currentTxPower != null) {
@@ -108,16 +135,6 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
 
     _clientRepeat = widget.connector.clientRepeat ?? false;
     _selectedPresetIndex = _findMatchingPresetIndex();
-    if (_clientRepeat) {
-      _lastNonRepeatSnapshot =
-          _sessionRememberedNonRepeatSnapshot() ??
-          _inferNonRepeatSnapshotForRepeatEnabled();
-      _selectedPresetIndex = _findMatchingPresetIndexForSnapshot(
-        _lastNonRepeatSnapshot!,
-      );
-    } else {
-      _lastNonRepeatSnapshot = _nonRepeatSnapshotForCurrentSelection();
-    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _logRadioSettingsState('Dialog initialized');
@@ -140,11 +157,9 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
     );
   }
 
+  /// Presets match on frequency, bandwidth, SF and CR (not TX power).
   int? _findMatchingPresetIndex() {
-    return _findMatchingPresetIndexForSnapshot(_currentSnapshot());
-  }
-
-  int? _findMatchingPresetIndexForSnapshot(_RadioSettingsSnapshot snapshot) {
+    final snapshot = _currentSnapshot();
     for (final i in _visiblePresetIndexes()) {
       final preset = RadioSettings.presets[i].$2;
       if (preset.frequencyHz == snapshot.frequencyHz &&
@@ -157,18 +172,12 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
     return null;
   }
 
-  Iterable<int> _visiblePresetIndexes() sync* {
-    for (var i = 0; i < RadioSettings.presets.length; i++) {
-      if (_isOffGridPresetIndex(i)) {
-        continue;
-      }
-      yield i;
-    }
-  }
+  Iterable<int> _visiblePresetIndexes() =>
+      Iterable<int>.generate(RadioSettings.presets.length);
 
   _RadioSettingsSnapshot _currentSnapshot() {
     final frequencyMHz = double.tryParse(_frequencyController.text) ?? 915.0;
-    final txPowerDbm = int.tryParse(_txPowerController.text) ?? 20;
+    final txPowerDbm = int.tryParse(_txPowerController.text) ?? 22;
     return _RadioSettingsSnapshot(
       frequencyMHz: frequencyMHz,
       bandwidth: _bandwidth,
@@ -178,148 +187,31 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
     );
   }
 
-  bool _isOffGridPresetIndex(int? index) {
-    if (index == null) return false;
-    return RadioSettings.presets[index].$1.startsWith('Off-Grid ');
-  }
-
-  double _offGridFrequencyForBaseFrequency(double baseFrequencyMHz) {
-    final baseKHz = (baseFrequencyMHz * 1000).round();
-    final ranges = widget.connector.allowedRepeatFreqRanges;
-    final candidates = ranges == null || ranges.isEmpty
-        ? _defaultRepeatFreqsKHz
-        : {for (final r in ranges) baseKHz.clamp(r.lowKHz, r.highKHz)};
-    final closestKHz = candidates.reduce(
-      (a, b) => (a - baseKHz).abs() <= (b - baseKHz).abs() ? a : b,
-    );
-    return closestKHz / 1000.0;
-  }
-
-  double _normalFrequencyForBand(double frequencyMHz) {
-    if (frequencyMHz < 500) return 433.650;
-    if (frequencyMHz < 900) return 869.432;
-    return 915.8;
-  }
-
-  _RadioSettingsSnapshot _fallbackNonRepeatSnapshot(
-    double currentFrequencyMHz,
-  ) {
-    return _RadioSettingsSnapshot(
-      frequencyMHz: _normalFrequencyForBand(currentFrequencyMHz),
-      bandwidth: _bandwidth,
-      spreadingFactor: _spreadingFactor,
-      codingRate: _codingRate,
-      txPowerDbm: int.tryParse(_txPowerController.text) ?? 20,
-    );
-  }
-
-  _RadioSettingsSnapshot _nonRepeatSnapshotForCurrentSelection() {
-    final current = _currentSnapshot();
-    if (!_isOffGridPresetIndex(_selectedPresetIndex)) {
-      return current;
-    }
-    return _fallbackNonRepeatSnapshot(current.frequencyMHz);
-  }
-
-  _RadioSettingsSnapshot? _sessionRememberedNonRepeatSnapshot() {
-    final snapshot = widget.connector.rememberedNonRepeatRadioState;
-    if (snapshot == null) return null;
-    return _RadioSettingsSnapshot.fromMeshCoreSnapshot(snapshot);
-  }
-
-  _RadioSettingsSnapshot _inferNonRepeatSnapshotForRepeatEnabled() {
-    final current = _currentSnapshot();
-    for (final i in _visiblePresetIndexes()) {
-      final preset = RadioSettings.presets[i].$2;
-      final offGridFreqHz =
-          (_offGridFrequencyForBaseFrequency(preset.frequencyMHz) * 1000)
-              .round();
-      if (offGridFreqHz == current.frequencyHz &&
-          preset.bandwidth == current.bandwidth &&
-          preset.spreadingFactor == current.spreadingFactor &&
-          preset.codingRate == current.codingRate) {
-        return _RadioSettingsSnapshot(
-          frequencyMHz: preset.frequencyMHz,
-          bandwidth: preset.bandwidth,
-          spreadingFactor: preset.spreadingFactor,
-          codingRate: preset.codingRate,
-          txPowerDbm: current.txPowerDbm,
-        );
-      }
-    }
-    return _fallbackNonRepeatSnapshot(current.frequencyMHz);
-  }
-
-  void _applySnapshot(_RadioSettingsSnapshot snapshot) {
-    _frequencyController.text = snapshot.frequencyMHz.toStringAsFixed(3);
-    _bandwidth = snapshot.bandwidth;
-    _spreadingFactor = snapshot.spreadingFactor;
-    _codingRate = snapshot.codingRate;
-    _txPowerController.text = snapshot.txPowerDbm.toString();
-  }
-
   void _applyPresetState(int index) {
     final preset = RadioSettings.presets[index].$2;
-    final baseSnapshot = _RadioSettingsSnapshot(
-      frequencyMHz: preset.frequencyMHz,
-      bandwidth: preset.bandwidth,
-      spreadingFactor: preset.spreadingFactor,
-      codingRate: preset.codingRate,
-      txPowerDbm: preset.txPowerDbm,
-    );
-    final frequencyMHz = _clientRepeat
-        ? _offGridFrequencyForBaseFrequency(baseSnapshot.frequencyMHz)
-        : baseSnapshot.frequencyMHz;
-    _frequencyController.text = frequencyMHz.toString();
+    _frequencyController.text = preset.frequencyMHz.toStringAsFixed(3);
     _bandwidth = preset.bandwidth;
     _spreadingFactor = preset.spreadingFactor;
     _codingRate = preset.codingRate;
-    _txPowerController.text = preset.txPowerDbm.toString();
+    // A preset's power may be above what this radio can do (some boards top
+    // out below 22 dBm): use the radio's maximum instead.
+    final maxTxPower = widget.connector.maxTxPower;
+    final txPower = maxTxPower != null && preset.txPowerDbm > maxTxPower
+        ? maxTxPower
+        : preset.txPowerDbm;
+    _txPowerController.text = txPower.toString();
     _selectedPresetIndex = index;
-    _lastNonRepeatSnapshot = baseSnapshot;
     // Programmatic writes skip TextField.onChanged, so clear any stale
     // frequency/TX errors here or Save stays disabled.
     _validateFields();
   }
 
   void _syncPresetSelection() {
-    final previousPresetIndex = _selectedPresetIndex;
-    final previousLastNonRepeat = _lastNonRepeatSnapshot;
-    if (_clientRepeat) {
-      final baseSnapshot =
-          previousLastNonRepeat ?? _inferNonRepeatSnapshotForRepeatEnabled();
-      if (_bandwidth != baseSnapshot.bandwidth ||
-          _spreadingFactor != baseSnapshot.spreadingFactor ||
-          _codingRate != baseSnapshot.codingRate ||
-          (int.tryParse(_txPowerController.text) ?? 20) !=
-              baseSnapshot.txPowerDbm) {
-        _lastNonRepeatSnapshot = _RadioSettingsSnapshot(
-          frequencyMHz: baseSnapshot.frequencyMHz,
-          bandwidth: _bandwidth,
-          spreadingFactor: _spreadingFactor,
-          codingRate: _codingRate,
-          txPowerDbm: int.tryParse(_txPowerController.text) ?? 20,
-        );
-      }
-      _selectedPresetIndex = _findMatchingPresetIndexForSnapshot(
-        _lastNonRepeatSnapshot ?? baseSnapshot,
-      );
-      if (previousPresetIndex != _selectedPresetIndex ||
-          previousLastNonRepeat != _lastNonRepeatSnapshot) {
-        _logRadioSettingsState(
-          'Preset match updated while repeat enabled: ${_presetLabel(previousPresetIndex)} -> ${_presetLabel(_selectedPresetIndex)}',
-        );
-      }
-      return;
-    }
-    _lastNonRepeatSnapshot = _nonRepeatSnapshotForCurrentSelection();
-    _selectedPresetIndex = _findMatchingPresetIndexForSnapshot(
-      _lastNonRepeatSnapshot!,
-    );
-    if (previousPresetIndex != _selectedPresetIndex ||
-        previousLastNonRepeat != _lastNonRepeatSnapshot) {
+    final previous = _selectedPresetIndex;
+    _selectedPresetIndex = _findMatchingPresetIndex();
+    if (previous != _selectedPresetIndex) {
       _logRadioSettingsState(
-        'Preset sync updated state from ${_presetLabel(previousPresetIndex)} to ${_presetLabel(_selectedPresetIndex)}',
+        'Preset match ${_presetLabel(previous)} -> ${_presetLabel(_selectedPresetIndex)}',
       );
     }
   }
@@ -347,34 +239,45 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
         : null;
   }
 
+  /// Turning off-grid repeat on or off leaves the frequency alone.
   void _handleClientRepeatChanged(bool enabled) {
-    _logRadioSettingsState(
-      'Off-grid repeat toggle requested: $_clientRepeat -> $enabled',
-    );
-    setState(() {
-      final currentSnapshot = _currentSnapshot();
-      if (enabled) {
-        if (!_clientRepeat) {
-          _syncPresetSelection();
-        }
-        final baseSnapshot = _lastNonRepeatSnapshot ?? currentSnapshot;
-        _clientRepeat = true;
-        _frequencyController.text = _offGridFrequencyForBaseFrequency(
-          baseSnapshot.frequencyMHz,
-        ).toStringAsFixed(3);
-        _validateFields();
-        return;
-      }
+    setState(() => _clientRepeat = enabled);
+    _logRadioSettingsState('Off-grid repeat toggled');
+  }
 
-      _clientRepeat = false;
-      _applySnapshot(
-        _lastNonRepeatSnapshot ??
-            _fallbackNonRepeatSnapshot(currentSnapshot.frequencyMHz),
-      );
+  /// The radio refused off-grid repeat on [freqKHz]: say which frequencies
+  /// its firmware allows and offer the nearest one.
+  Future<void> _offerAllowedRepeatFrequency(int freqKHz) async {
+    final l10n = context.l10n;
+    final nearestKHz = _nearestAllowedRepeatFreqKHz(widget.connector, freqKHz);
+    final use = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.settings_clientRepeat),
+        content: Text(
+          l10n.settings_clientRepeatRefused(
+            _mhz(freqKHz),
+            _allowedRepeatFreqList(widget.connector),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.common_cancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.settings_clientRepeatUseFreq(_mhz(nearestKHz))),
+          ),
+        ],
+      ),
+    );
+    if (use != true || !mounted) return;
+    setState(() {
+      _frequencyController.text = _mhz(nearestKHz);
       _validateFields();
       _syncPresetSelection();
     });
-    _logRadioSettingsState('Off-grid repeat toggle applied');
   }
 
   Future<void> _saveSettings() async {
@@ -410,16 +313,6 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
     //otherwise we leave it out of the frame to avoid accidentally enabling
     final knownRepeat = widget.connector.clientRepeat != null;
 
-    if (knownRepeat) {
-      if (_clientRepeat && !_isAllowedRepeatFreqKHz(widget.connector, freqHz)) {
-        showDismissibleSnackBar(
-          context,
-          content: Text(l10n.settings_clientRepeatFreqWarning),
-        );
-        return;
-      }
-    }
-
     try {
       _logRadioSettingsState('Saving radio settings');
       final accepted = await widget.connector.setRadioParams(
@@ -432,6 +325,14 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
       if (!accepted) {
         _logRadioSettingsState('Radio rejected requested settings');
         if (!mounted) return;
+        // Repeat is sent on any frequency; firmware that only allows it on
+        // some refuses the rest. Explain and offer an allowed one.
+        if (knownRepeat &&
+            _clientRepeat &&
+            !_isAllowedRepeatFreqKHz(widget.connector, freqHz)) {
+          await _offerAllowedRepeatFrequency(freqHz);
+          return;
+        }
         showDismissibleSnackBar(
           context,
           content: Text(l10n.settings_radioSettingsNotApplied),
@@ -462,14 +363,6 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
           content: Text(l10n.settings_radioSettingsNotApplied),
         );
         return;
-      }
-      final rememberedSnapshot = _clientRepeat
-          ? _lastNonRepeatSnapshot
-          : _currentSnapshot();
-      if (rememberedSnapshot != null) {
-        widget.connector.rememberNonRepeatRadioState(
-          rememberedSnapshot.toMeshCoreSnapshot(),
-        );
       }
 
       if (!mounted) return;
@@ -519,17 +412,6 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
     return '${RadioSettings.presets[index].$1} (#$index)';
   }
 
-  String _formatSnapshot(_RadioSettingsSnapshot? snapshot) {
-    if (snapshot == null) {
-      return 'null';
-    }
-    return '${snapshot.frequencyMHz.toStringAsFixed(3)}MHz/'
-        '${snapshot.bandwidth.label}/'
-        '${snapshot.spreadingFactor.label}/'
-        '${snapshot.codingRate.label}/'
-        '${snapshot.txPowerDbm}dBm';
-  }
-
   void _logRadioSettingsState(String message) {
     if (!kDebugMode) return;
     _appLog.info(
@@ -540,8 +422,7 @@ class _RadioSettingsDialogState extends State<RadioSettingsDialog> {
       'cr=${_codingRate.label} '
       'tx=${_txPowerController.text}dBm '
       'repeat=$_clientRepeat '
-      'preset=${_presetLabel(_selectedPresetIndex)} '
-      'lastNonRepeat=${_formatSnapshot(_lastNonRepeatSnapshot)}',
+      'preset=${_presetLabel(_selectedPresetIndex)}',
       tag: 'RadioSettings',
     );
   }
@@ -736,59 +617,6 @@ class _RadioSettingsSnapshot {
     required this.txPowerDbm,
   });
 
-  /// Frequency in integer Hz — avoids floating-point comparison issues.
+  /// Frequency in integer kHz — avoids floating-point comparison issues.
   int get frequencyHz => (frequencyMHz * 1000).round();
-
-  /// Convert from the connector's raw-int snapshot to UI-enum snapshot.
-  static _RadioSettingsSnapshot? fromMeshCoreSnapshot(
-    MeshCoreRadioStateSnapshot snapshot,
-  ) {
-    final bw = LoRaBandwidth.values
-        .where((b) => b.hz == snapshot.bwHz)
-        .firstOrNull;
-    final sf = LoRaSpreadingFactor.values
-        .where((s) => s.value == snapshot.sf)
-        .firstOrNull;
-    final cr = LoRaCodingRate.values
-        .where((c) => c.value == _toUiCodingRate(snapshot.cr))
-        .firstOrNull;
-    if (bw == null || sf == null || cr == null) return null;
-    return _RadioSettingsSnapshot(
-      frequencyMHz: snapshot.freqHz / 1000.0,
-      bandwidth: bw,
-      spreadingFactor: sf,
-      codingRate: cr,
-      txPowerDbm: snapshot.txPowerDbm,
-    );
-  }
-
-  /// Convert back to the connector's raw-int snapshot.
-  MeshCoreRadioStateSnapshot toMeshCoreSnapshot() {
-    return MeshCoreRadioStateSnapshot(
-      freqHz: frequencyHz,
-      bwHz: bandwidth.hz,
-      sf: spreadingFactor.value,
-      cr: codingRate.value,
-      txPowerDbm: txPowerDbm,
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is _RadioSettingsSnapshot &&
-        frequencyHz == other.frequencyHz &&
-        bandwidth == other.bandwidth &&
-        spreadingFactor == other.spreadingFactor &&
-        codingRate == other.codingRate &&
-        txPowerDbm == other.txPowerDbm;
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    frequencyHz,
-    bandwidth,
-    spreadingFactor,
-    codingRate,
-    txPowerDbm,
-  );
 }

@@ -812,7 +812,17 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frecuencia fijada en $freq MHz para la repetición sin conexión';
+    return 'La repetición sin red usará $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'El firmware de esta radio no repite en $freq MHz. Solo permite la repetición sin red en $freqs MHz. Usa una de esas o instala en la radio un firmware que permita otras frecuencias.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Usar $freq MHz';
   }
 
   @override

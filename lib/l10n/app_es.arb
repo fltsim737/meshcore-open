@@ -3110,7 +3110,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Frecuencia fijada en {freq} MHz para la repetición sin conexión",
+  "settings_clientRepeatFrequencyNote": "La repetición sin red usará {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3903,5 +3903,7 @@
   "coverage_nextDistance": "Próximo ping al recorrer {distance}",
   "coverage_nextTime": "Próximo ping en {time}",
   "coverage_nextEither": "Próximo ping al recorrer {distance} o en {time}",
-  "coverage_aboutSettings": "Para cambiar la frecuencia de los pings (por distancia, por tiempo o lo que ocurra primero), usa ⋮ → Ajustes de ping."
+  "coverage_aboutSettings": "Para cambiar la frecuencia de los pings (por distancia, por tiempo o lo que ocurra primero), usa ⋮ → Ajustes de ping.",
+  "settings_clientRepeatRefused": "El firmware de esta radio no repite en {freq} MHz. Solo permite la repetición sin red en {freqs} MHz. Usa una de esas o instala en la radio un firmware que permita otras frecuencias.",
+  "settings_clientRepeatUseFreq": "Usar {freq} MHz"
 }

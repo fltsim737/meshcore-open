@@ -2977,7 +2977,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Frekvenca nastavljena na {freq} MHz za ponavljanje brez omrežja",
+  "settings_clientRepeatFrequencyNote": "Ponavljanje zunaj omrežja bo uporabilo {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3770,5 +3770,7 @@
   "coverage_nextDistance": "Naslednji ping po {distance}",
   "coverage_nextTime": "Naslednji ping čez {time}",
   "coverage_nextEither": "Naslednji ping po {distance} ali čez {time}",
-  "coverage_aboutSettings": "Kako pogosto pošilja pinge (po razdalji, času ali kar je prej), spremeniš v ⋮ → Nastavitve pingov."
+  "coverage_aboutSettings": "Kako pogosto pošilja pinge (po razdalji, času ali kar je prej), spremeniš v ⋮ → Nastavitve pingov.",
+  "settings_clientRepeatRefused": "Strojna programska oprema tega radia ne ponavlja na {freq} MHz. Ponavljanje zunaj omrežja dovoli le na {freqs} MHz. Uporabite eno od teh ali naložite programsko opremo, ki dovoli druge frekvence.",
+  "settings_clientRepeatUseFreq": "Uporabi {freq} MHz"
 }

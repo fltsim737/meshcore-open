@@ -764,7 +764,17 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return '为离网重复设置的频率：$freq MHz';
+    return '离网中继将使用 $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return '此电台的固件不会在 $freq MHz 上中继。离网中继只允许在 $freqs MHz 上使用。请选择其中之一，或为电台安装允许其他频率的固件。';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return '使用 $freq MHz';
   }
 
   @override

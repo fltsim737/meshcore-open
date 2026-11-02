@@ -808,7 +808,17 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frekvencia nastavená na $freq MHz pre opakovanie mimo siete';
+    return 'Opakovanie mimo siete použije $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Firmvér tohto rádia neopakuje na $freq MHz. Opakovanie mimo siete povoľuje len na $freqs MHz. Použite jednu z nich alebo nahrajte firmvér, ktorý povoľuje iné frekvencie.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Použiť $freq MHz';
   }
 
   @override

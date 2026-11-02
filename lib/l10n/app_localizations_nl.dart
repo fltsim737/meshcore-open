@@ -809,7 +809,17 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frequentie ingesteld op $freq MHz voor off-grid herhalen';
+    return 'Off-grid doorgeven gebruikt $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'De firmware van deze radio geeft niet door op $freq MHz. Off-grid doorgeven mag alleen op $freqs MHz. Kies er een daarvan of zet firmware op de radio die andere frequenties toestaat.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return '$freq MHz gebruiken';
   }
 
   @override

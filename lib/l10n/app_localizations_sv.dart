@@ -802,7 +802,17 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frekvensen är satt till $freq MHz för upprepning utan elnät';
+    return 'Vidarebefordran utan nät använder $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Radions firmware vidarebefordrar inte på $freq MHz. Den tillåter vidarebefordran utan nät bara på $freqs MHz. Välj någon av dem eller installera firmware som tillåter andra frekvenser.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Använd $freq MHz';
   }
 
   @override

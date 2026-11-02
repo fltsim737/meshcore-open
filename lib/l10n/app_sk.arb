@@ -2977,7 +2977,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Frekvencia nastavená na {freq} MHz pre opakovanie mimo siete",
+  "settings_clientRepeatFrequencyNote": "Opakovanie mimo siete použije {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3770,5 +3770,7 @@
   "coverage_nextDistance": "Ďalší ping po {distance}",
   "coverage_nextTime": "Ďalší ping o {time}",
   "coverage_nextEither": "Ďalší ping po {distance} alebo o {time}",
-  "coverage_aboutSettings": "Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov."
+  "coverage_aboutSettings": "Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov.",
+  "settings_clientRepeatRefused": "Firmvér tohto rádia neopakuje na {freq} MHz. Opakovanie mimo siete povoľuje len na {freqs} MHz. Použite jednu z nich alebo nahrajte firmvér, ktorý povoľuje iné frekvencie.",
+  "settings_clientRepeatUseFreq": "Použiť {freq} MHz"
 }

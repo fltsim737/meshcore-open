@@ -820,7 +820,17 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Częstotliwość ustawiona na $freq MHz dla powtórzeń poza siecią';
+    return 'Przekazywanie poza siecią użyje $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Oprogramowanie tego radia nie przekazuje na $freq MHz. Pozwala na przekazywanie poza siecią tylko na $freqs MHz. Wybierz jedną z nich albo wgraj oprogramowanie, które pozwala na inne częstotliwości.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Użyj $freq MHz';
   }
 
   @override

@@ -811,7 +811,17 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return '$freq MHz frekvencia beállítva a hálózaton kívüli ismétléshez';
+    return 'A hálózaton kívüli továbbítás $freq MHz-et használ';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'A rádió firmware-e nem továbbít $freq MHz-en. A hálózaton kívüli továbbítást csak ezeken engedi: $freqs MHz. Válasszon ezek közül, vagy telepítsen olyan firmware-t, amely más frekvenciákat is enged.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return '$freq MHz használata';
   }
 
   @override

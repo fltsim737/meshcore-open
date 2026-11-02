@@ -3110,7 +3110,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Fréquence réglée sur {freq} MHz pour la répétition hors réseau",
+  "settings_clientRepeatFrequencyNote": "Le relais hors réseau utilisera {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3903,5 +3903,7 @@
   "coverage_nextDistance": "Prochain ping après {distance}",
   "coverage_nextTime": "Prochain ping dans {time}",
   "coverage_nextEither": "Prochain ping après {distance} ou dans {time}",
-  "coverage_aboutSettings": "Pour changer la fréquence des pings (par distance, par durée ou au premier des deux), utilisez ⋮ → Réglages des pings."
+  "coverage_aboutSettings": "Pour changer la fréquence des pings (par distance, par durée ou au premier des deux), utilisez ⋮ → Réglages des pings.",
+  "settings_clientRepeatRefused": "Le firmware de cette radio ne relaie pas sur {freq} MHz. Il n'autorise le relais hors réseau que sur {freqs} MHz. Utilisez l'une de ces fréquences ou installez sur la radio un firmware qui en autorise d'autres.",
+  "settings_clientRepeatUseFreq": "Utiliser {freq} MHz"
 }

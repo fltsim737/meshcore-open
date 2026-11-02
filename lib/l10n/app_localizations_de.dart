@@ -813,7 +813,17 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frequenz für die Weiterleitung ohne Netzstrom auf $freq MHz gesetzt';
+    return 'Weiterleitung ohne Netzstrom nutzt $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Die Firmware dieses Funkgeräts leitet auf $freq MHz nicht weiter. Sie erlaubt die Weiterleitung ohne Netzstrom nur auf $freqs MHz. Wähle eine davon oder spiele eine Firmware auf, die andere Frequenzen erlaubt.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return '$freq MHz verwenden';
   }
 
   @override
