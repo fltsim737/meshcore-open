@@ -7809,4 +7809,21 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov.';
+
+  @override
+  String get channels_allowVoice => 'Povoliť hlas v tomto kanáli';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Stlač a hovor v čete tohto kanála. Klipy počujú len tí, ktorí v ňom tiež povolili hlas.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Len text. Hlasové klipy v tomto kanáli sa ignorujú.';
+
+  @override
+  String get channels_allowVoiceAction => 'Povoliť hlas';
+
+  @override
+  String get channels_denyVoice => 'Nepovoliť hlas';
 }

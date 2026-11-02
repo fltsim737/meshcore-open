@@ -3801,5 +3801,10 @@
   "coverage_nextEither": "Nästa ping efter {distance} eller om {time}",
   "coverage_aboutSettings": "Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar.",
   "settings_clientRepeatRefused": "Radions firmware vidarebefordrar inte på {freq} MHz. Den tillåter vidarebefordran utan nät bara på {freqs} MHz. Välj någon av dem eller installera firmware som tillåter andra frekvenser.",
-  "settings_clientRepeatUseFreq": "Använd {freq} MHz"
+  "settings_clientRepeatUseFreq": "Använd {freq} MHz",
+  "channels_allowVoice": "Tillåt röst i den här kanalen",
+  "channels_allowVoiceOn": "Tryck och tala i kanalens chatt. Bara de som också har tillåtit röst där hör klippen.",
+  "channels_allowVoiceOff": "Bara text. Röstklipp i den här kanalen ignoreras.",
+  "channels_allowVoiceAction": "Tillåt röst",
+  "channels_denyVoice": "Tillåt inte röst"
 }

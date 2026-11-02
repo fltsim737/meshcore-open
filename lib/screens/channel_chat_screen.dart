@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
-import 'package:flutter/foundation.dart' show listEquals, mergeSort;
+import 'package:flutter/foundation.dart' show mergeSort;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -589,9 +589,17 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
                 },
               ),
             ),
-            // the public Voice channel: push-to-talk above the text box
-            if (listEquals(widget.channel.psk, SosVoiceService.pttChannelPsk))
-              const PttPanel(conversation: SosVoiceService.pttChannelKey),
+            // #voice, or a channel voice is allowed on: push-to-talk above
+            // the text box
+            Builder(
+              builder: (context) {
+                final voice = context.watch<SosVoiceService>();
+                if (!voice.voiceAllowedOn(widget.channel)) {
+                  return const SizedBox.shrink();
+                }
+                return PttPanel(conversation: voice.pttKeyFor(widget.channel));
+              },
+            ),
             _buildInputBar(),
           ],
         ),

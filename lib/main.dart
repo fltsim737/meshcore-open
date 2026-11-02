@@ -221,6 +221,16 @@ void main(List<String> args) async {
     rememberPttChannelAdded: (radio) => unawaited(
       PrefsManager.instance.setBool('ptt_channel_added_$radio', true),
     ),
+    // channels (other than #voice) the user allowed voice on, by PSK
+    voiceChannels:
+        PrefsManager.instance.getStringList('ptt_voice_channels')?.toSet() ??
+        const {},
+    saveVoiceChannels: (pskHexes) => unawaited(
+      PrefsManager.instance.setStringList(
+        'ptt_voice_channels',
+        pskHexes.toList(),
+      ),
+    ),
   );
   // A push-to-talk clip heard: a notification, as for a message, so it's
   // known about without the push-to-talk panel open.
@@ -228,9 +238,9 @@ void main(List<String> args) async {
     final settings = appSettingsService.settings;
     if (!settings.notificationsEnabled) return;
     final name = clip.senderName ?? '?';
-    if (conversation == SosVoiceService.pttChannelKey) {
+    if (SosVoiceService.isPttChannelKey(conversation)) {
       if (!settings.notifyOnNewChannelMessage) return;
-      final channel = sosVoiceService.pttChannel;
+      final channel = sosVoiceService.channelForKey(conversation);
       unawaited(
         notificationService.showPttClip(
           contactName: name,

@@ -3940,5 +3940,10 @@
   "coverage_nextEither": "{distance} 이동하거나 {time} 후 다음 핑",
   "coverage_aboutSettings": "핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다.",
   "settings_clientRepeatRefused": "이 무전기의 펌웨어는 {freq} MHz에서 중계하지 않습니다. 오프그리드 중계는 {freqs} MHz에서만 허용됩니다. 이 중 하나를 사용하거나 다른 주파수를 허용하는 펌웨어를 설치하세요.",
-  "settings_clientRepeatUseFreq": "{freq} MHz 사용"
+  "settings_clientRepeatUseFreq": "{freq} MHz 사용",
+  "channels_allowVoice": "이 채널에서 음성 허용",
+  "channels_allowVoiceOn": "이 채널 채팅에서 눌러서 말하기. 음성을 허용한 사람만 클립을 듣습니다.",
+  "channels_allowVoiceOff": "텍스트만. 이 채널의 음성 클립은 무시됩니다.",
+  "channels_allowVoiceAction": "음성 허용",
+  "channels_denyVoice": "음성 허용 안 함"
 }

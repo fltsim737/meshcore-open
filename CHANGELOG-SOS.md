@@ -24,7 +24,7 @@ Both apps, plus a channel option in SOS Voice.
 - **When you add a channel in SOS Voice, you choose whether to allow voice on it.** Voice is off unless you turn it on. With it on, the channel's chat has the push-to-talk panel, as #voice does.
 - **You can change it later:** long-press the channel and choose **Allow voice** or **Don't allow voice**.
 - The choice is kept on your phone, not the radio. Only people who've also allowed voice on that channel hear the clips; others never see or hear them.
-- #voice always allows voice, and the emergency network channel always carries SOS voice during an SOS, whatever is chosen. Push-to-talk keeps its limits on every channel: clips up to 10 seconds, a rest after 3 minutes of talk, and nothing while an SOS is live or the mesh is busy with text.
+- #voice always allows voice. MeshCore's Public channel never does, because it's shared by everyone on the mesh. The emergency network channel carries SOS voice during an SOS, as before, and isn't affected by this choice. Push-to-talk keeps its limits on every channel: clips up to 10 seconds, a rest after 3 minutes of talk, and nothing while an SOS is live or the mesh is busy with text.
 
 ## 10.2.3 (2026-11-01)
 

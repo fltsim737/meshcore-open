@@ -258,6 +258,7 @@ Clips play aloud as they arrive, one after another. While a clip is playing, han
 From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
 
 - **#voice channel.** SOS Voice adds a public hashtag channel, `#voice`, to the radio once (in its last free slot; removed, it stays removed). Everyone on the mesh with SOS Voice hears it. Push-to-talk never uses MeshCore's Public channel. Hold to talk in the bar above the text box.
+- **Voice on your own channels** (from 10.2.4). When you add or create a channel, **Allow voice on this channel** chooses whether it carries push-to-talk too (off unless you turn it on). Long-press a channel to change it later. The choice is kept on the phone; only people who have also allowed voice on that channel hear the clips. The same limits apply as on #voice.
 - **Direct messages.** The mic button at the top of a chat. Clips go to that contact along their route and never appear in the chat.
 - **Clips heard** raise a notification and play aloud; in a chat, push-to-talk opens by itself when one arrives.
 - **Clips up to 10 s**, with no wait between them, so a conversation can flow.
@@ -266,7 +267,7 @@ From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
 
 | Rule | Detail |
 |---|---|
-| Someone else is talking | No clip while another clip is arriving on #voice. |
+| Someone else is talking | No clip while another clip is arriving on that channel. |
 | Text comes first | No clip for 15 s after any text message is heard or sent, nor while 4 or more went in the last minute. |
 | A rest after 3 minutes | Each conversation counts its voice both ways; after 3 minutes in a session, the people who talked hear two tones and rest from push-to-talk for 5 minutes, everywhere. Listeners aren't stopped. A session ends after 5 minutes without voice. |
 | An SOS comes first | Paused while the app knows of a live SOS, and for 5 minutes after any SOS packet is heard on the emergency network, even one a member's code can't read (as long as an SOS's slowest repeats). A cancel doesn't pause it: when the SOS the app knew about is cancelled, push-to-talk comes straight back (since 10.1.2). A clip already going out stops at its next packet. |

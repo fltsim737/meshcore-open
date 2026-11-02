@@ -7850,4 +7850,21 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Чтобы изменить частоту пингов (по расстоянию, по времени или что наступит раньше), откройте ⋮ → Настройки пингов.';
+
+  @override
+  String get channels_allowVoice => 'Разрешить голос в этом канале';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Рация в чате этого канала. Клипы слышат только те, кто тоже разрешил в нём голос.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Только текст. Голосовые клипы в этом канале игнорируются.';
+
+  @override
+  String get channels_allowVoiceAction => 'Разрешить голос';
+
+  @override
+  String get channels_denyVoice => 'Не разрешать голос';
 }

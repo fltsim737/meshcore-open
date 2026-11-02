@@ -7862,4 +7862,21 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Aby zmienić, jak często wysyłać pingi (według odległości, czasu lub tego, co nastąpi pierwsze), użyj ⋮ → Ustawienia pingów.';
+
+  @override
+  String get channels_allowVoice => 'Zezwól na głos na tym kanale';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Naciśnij i mów w czacie tego kanału. Klipy słyszą tylko osoby, które też zezwoliły na nim na głos.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Tylko tekst. Klipy głosowe na tym kanale są pomijane.';
+
+  @override
+  String get channels_allowVoiceAction => 'Zezwól na głos';
+
+  @override
+  String get channels_denyVoice => 'Nie zezwalaj na głos';
 }

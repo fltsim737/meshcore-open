@@ -3940,5 +3940,10 @@
   "coverage_nextEither": "Prossimo ping dopo {distance} o tra {time}",
   "coverage_aboutSettings": "Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping.",
   "settings_clientRepeatRefused": "Il firmware di questa radio non ripete su {freq} MHz. Consente la ripetizione fuori rete solo su {freqs} MHz. Usa una di queste o installa sulla radio un firmware che consenta altre frequenze.",
-  "settings_clientRepeatUseFreq": "Usa {freq} MHz"
+  "settings_clientRepeatUseFreq": "Usa {freq} MHz",
+  "channels_allowVoice": "Consenti la voce su questo canale",
+  "channels_allowVoiceOn": "Premi per parlare nella chat di questo canale. Solo chi ha consentito la voce anche lì sente i clip.",
+  "channels_allowVoiceOff": "Solo testo. I clip vocali inviati su questo canale vengono ignorati.",
+  "channels_allowVoiceAction": "Consenti la voce",
+  "channels_denyVoice": "Non consentire la voce"
 }

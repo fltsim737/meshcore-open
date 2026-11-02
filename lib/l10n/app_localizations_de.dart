@@ -7855,4 +7855,21 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Wie oft gepingt wird (nach Strecke, nach Zeit oder was zuerst eintritt), stellst du unter ⋮ → Ping-Einstellungen ein.';
+
+  @override
+  String get channels_allowVoice => 'Sprache in diesem Kanal erlauben';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Push-to-Talk im Chat dieses Kanals. Nur wer Sprache dort ebenfalls erlaubt hat, hört die Clips.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Nur Text. Sprachclips in diesem Kanal werden ignoriert.';
+
+  @override
+  String get channels_allowVoiceAction => 'Sprache erlauben';
+
+  @override
+  String get channels_denyVoice => 'Sprache nicht erlauben';
 }

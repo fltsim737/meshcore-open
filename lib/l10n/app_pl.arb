@@ -3839,5 +3839,10 @@
   "coverage_nextEither": "Następny ping po przejechaniu {distance} lub za {time}",
   "coverage_aboutSettings": "Aby zmienić, jak często wysyłać pingi (według odległości, czasu lub tego, co nastąpi pierwsze), użyj ⋮ → Ustawienia pingów.",
   "settings_clientRepeatRefused": "Oprogramowanie tego radia nie przekazuje na {freq} MHz. Pozwala na przekazywanie poza siecią tylko na {freqs} MHz. Wybierz jedną z nich albo wgraj oprogramowanie, które pozwala na inne częstotliwości.",
-  "settings_clientRepeatUseFreq": "Użyj {freq} MHz"
+  "settings_clientRepeatUseFreq": "Użyj {freq} MHz",
+  "channels_allowVoice": "Zezwól na głos na tym kanale",
+  "channels_allowVoiceOn": "Naciśnij i mów w czacie tego kanału. Klipy słyszą tylko osoby, które też zezwoliły na nim na głos.",
+  "channels_allowVoiceOff": "Tylko tekst. Klipy głosowe na tym kanale są pomijane.",
+  "channels_allowVoiceAction": "Zezwól na głos",
+  "channels_denyVoice": "Nie zezwalaj na głos"
 }

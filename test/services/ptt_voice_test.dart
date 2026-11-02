@@ -250,6 +250,114 @@ void main() {
     });
   });
 
+  group('voice on a channel the user chooses (10.2.4)', () {
+    final team = Channel(
+      index: 1,
+      name: 'Team',
+      psk: Uint8List.fromList(List.generate(16, (i) => 0x30 + i)),
+    );
+    late Set<String> saved;
+
+    setUp(() async {
+      transport.channels = [public, team];
+      saved = {};
+      voice.dispose();
+      voice = SosVoiceService(
+        sos: sos,
+        transport: transport,
+        audio: audio,
+        codec: FakeCodec(),
+        now: () => now,
+        pttChannelAddedBefore: remembered.contains,
+        rememberPttChannelAdded: remembered.add,
+        saveVoiceChannels: (hexes) => saved = {...hexes},
+      );
+      await addVoiceChannel();
+    });
+
+    String teamKey() => voice.pttKeyFor(team);
+
+    test('voice is denied unless allowed', () async {
+      expect(voice.voiceAllowedOn(team), isFalse);
+      expect(voice.canChooseVoice(team), isTrue);
+      expect(voice.blockFor(teamKey()), SosVoiceBlock.noChannel);
+      for (final p in pttClip(0x42)) {
+        transport.listener!(team.index, p.encode());
+      }
+      await settle();
+      expect(voice.clipsFor(teamKey()), isEmpty);
+      expect(audio.played, isEmpty);
+    });
+
+    test('MeshCore\'s Public channel never carries voice', () {
+      final realPublic = Channel(
+        index: 2,
+        name: 'Public',
+        psk: Channel.parsePskHex(Channel.publicChannelPsk),
+      );
+      expect(voice.canChooseVoice(realPublic), isFalse);
+      voice.setVoiceAllowed(realPublic.psk, true);
+      expect(voice.voiceAllowedOn(realPublic), isFalse);
+      expect(saved, isEmpty);
+    });
+
+    test('#voice always allows voice and can\'t be changed', () {
+      final ch = voice.pttChannel!;
+      expect(voice.voiceAllowedOn(ch), isTrue);
+      expect(voice.canChooseVoice(ch), isFalse);
+      expect(voice.pttKeyFor(ch), SosVoiceService.pttChannelKey);
+    });
+
+    test('allowed: sends on that channel and plays what is heard', () async {
+      voice.setVoiceAllowed(team.psk, true);
+      expect(saved, {team.pskHex.toLowerCase()});
+      expect(voice.voiceAllowedOn(team), isTrue);
+      await talk(teamKey(), 50);
+      final (channel, blobs) = transport.sent.single;
+      expect(channel, team.index);
+      expect(blobs.map(SosVoicePacket.decode).every((p) => p!.ptt), isTrue);
+
+      for (final p in pttClip(0x42)) {
+        transport.listener!(team.index, p.encode());
+      }
+      await settle();
+      expect(voice.clipsFor(teamKey()).where((c) => !c.outgoing), hasLength(1));
+      expect(voice.clipsFor(SosVoiceService.pttChannelKey), isEmpty);
+      expect(audio.played, hasLength(1));
+    });
+
+    test('busy is per channel', () {
+      voice.setVoiceAllowed(team.psk, true);
+      final blobs = [for (final p in pttClip(0x42)) p.encode()];
+      transport.listener!(team.index, blobs.first);
+      expect(voice.blockFor(teamKey()), SosVoiceBlock.busy);
+      expect(voice.channelBusy, isFalse); // #voice is free
+      now = now.add(const Duration(seconds: 5));
+      expect(voice.channelBusyOn(teamKey()), isFalse);
+    });
+
+    test('denying it again stops voice there', () async {
+      voice.setVoiceAllowed(team.psk, true);
+      voice.setVoiceAllowed(team.psk, false);
+      expect(saved, isEmpty);
+      expect(voice.blockFor(teamKey()), SosVoiceBlock.noChannel);
+    });
+
+    test('the choice is restored when the app starts', () {
+      final again = SosVoiceService(
+        sos: sos,
+        transport: transport,
+        audio: audio,
+        codec: FakeCodec(),
+        now: () => now,
+        voiceChannels: {team.pskHex.toUpperCase()},
+      );
+      addTearDown(again.dispose);
+      expect(again.voiceAllowedOn(team), isTrue);
+      expect(again.voiceAllowedOn(public), isFalse);
+    });
+  });
+
   group('standing aside for text, and the talk limit', () {
     setUp(addVoiceChannel);
 
@@ -409,14 +517,17 @@ void main() {
       expect(voice.blockFor(SosVoiceService.pttChannelKey), isNull);
     });
 
-    test('the cancel\'s repeats and late acknowledgements don\'t pause it again', () {
-      hear(sosPacketFrom('Ridge', 9, 'a1b2'));
-      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
-      now = now.add(const Duration(minutes: 1));
-      hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
-      hear(sosPacketFrom('Hill', 5, 'a1b2', kind: SosPacketKind.ack));
-      expect(voice.blockFor(SosVoiceService.pttChannelKey), isNull);
-    });
+    test(
+      'the cancel\'s repeats and late acknowledgements don\'t pause it again',
+      () {
+        hear(sosPacketFrom('Ridge', 9, 'a1b2'));
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+        now = now.add(const Duration(minutes: 1));
+        hear(sosPacketFrom('Ridge', 9, 'a1b2', kind: SosPacketKind.cancel));
+        hear(sosPacketFrom('Hill', 5, 'a1b2', kind: SosPacketKind.ack));
+        expect(voice.blockFor(SosVoiceService.pttChannelKey), isNull);
+      },
+    );
 
     test('a new SOS after a cancelled one still pauses it', () {
       hear(sosPacketFrom('Ridge', 9, 'a1b2'));

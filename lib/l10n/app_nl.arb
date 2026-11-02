@@ -3707,5 +3707,10 @@
   "coverage_nextEither": "Volgende ping na {distance} of over {time}",
   "coverage_aboutSettings": "Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen.",
   "settings_clientRepeatRefused": "De firmware van deze radio geeft niet door op {freq} MHz. Off-grid doorgeven mag alleen op {freqs} MHz. Kies er een daarvan of zet firmware op de radio die andere frequenties toestaat.",
-  "settings_clientRepeatUseFreq": "{freq} MHz gebruiken"
+  "settings_clientRepeatUseFreq": "{freq} MHz gebruiken",
+  "channels_allowVoice": "Spraak toestaan op dit kanaal",
+  "channels_allowVoiceOn": "Push-to-talk in de chat van dit kanaal. Alleen wie spraak er ook heeft toegestaan, hoort de clips.",
+  "channels_allowVoiceOff": "Alleen tekst. Spraakclips op dit kanaal worden genegeerd.",
+  "channels_allowVoiceAction": "Spraak toestaan",
+  "channels_denyVoice": "Spraak niet toestaan"
 }

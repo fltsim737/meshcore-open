@@ -7812,4 +7812,21 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Kako pogosto pošilja pinge (po razdalji, času ali kar je prej), spremeniš v ⋮ → Nastavitve pingov.';
+
+  @override
+  String get channels_allowVoice => 'Dovoli glas na tem kanalu';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Pritisni in govori v klepetu tega kanala. Posnetke slišijo le tisti, ki so na njem prav tako dovolili glas.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Samo besedilo. Glasovni posnetki na tem kanalu so prezrti.';
+
+  @override
+  String get channels_allowVoiceAction => 'Dovoli glas';
+
+  @override
+  String get channels_denyVoice => 'Ne dovoli glasu';
 }

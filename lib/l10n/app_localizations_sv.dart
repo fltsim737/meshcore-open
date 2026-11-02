@@ -7778,4 +7778,21 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar.';
+
+  @override
+  String get channels_allowVoice => 'Tillåt röst i den här kanalen';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Tryck och tala i kanalens chatt. Bara de som också har tillåtit röst där hör klippen.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Bara text. Röstklipp i den här kanalen ignoreras.';
+
+  @override
+  String get channels_allowVoiceAction => 'Tillåt röst';
+
+  @override
+  String get channels_denyVoice => 'Tillåt inte röst';
 }

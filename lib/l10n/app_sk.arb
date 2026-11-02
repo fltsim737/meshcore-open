@@ -3807,5 +3807,10 @@
   "coverage_nextEither": "Ďalší ping po {distance} alebo o {time}",
   "coverage_aboutSettings": "Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov.",
   "settings_clientRepeatRefused": "Firmvér tohto rádia neopakuje na {freq} MHz. Opakovanie mimo siete povoľuje len na {freqs} MHz. Použite jednu z nich alebo nahrajte firmvér, ktorý povoľuje iné frekvencie.",
-  "settings_clientRepeatUseFreq": "Použiť {freq} MHz"
+  "settings_clientRepeatUseFreq": "Použiť {freq} MHz",
+  "channels_allowVoice": "Povoliť hlas v tomto kanáli",
+  "channels_allowVoiceOn": "Stlač a hovor v čete tohto kanála. Klipy počujú len tí, ktorí v ňom tiež povolili hlas.",
+  "channels_allowVoiceOff": "Len text. Hlasové klipy v tomto kanáli sa ignorujú.",
+  "channels_allowVoiceAction": "Povoliť hlas",
+  "channels_denyVoice": "Nepovoliť hlas"
 }

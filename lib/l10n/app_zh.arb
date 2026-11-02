@@ -3811,5 +3811,10 @@
   "coverage_nextEither": "移动 {distance} 后或 {time} 后发送下一次 ping",
   "coverage_aboutSettings": "要更改 ping 的频率（按距离、按时间或先到者为准），请使用 ⋮ → Ping 设置。",
   "settings_clientRepeatRefused": "此电台的固件不会在 {freq} MHz 上中继。离网中继只允许在 {freqs} MHz 上使用。请选择其中之一，或为电台安装允许其他频率的固件。",
-  "settings_clientRepeatUseFreq": "使用 {freq} MHz"
+  "settings_clientRepeatUseFreq": "使用 {freq} MHz",
+  "channels_allowVoice": "允许在此频道使用语音",
+  "channels_allowVoiceOn": "在此频道聊天中按住说话。只有同样允许了语音的人才能听到片段。",
+  "channels_allowVoiceOff": "仅文字。此频道上的语音片段会被忽略。",
+  "channels_allowVoiceAction": "允许语音",
+  "channels_denyVoice": "不允许语音"
 }

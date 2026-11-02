@@ -7509,4 +7509,20 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       '핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다.';
+
+  @override
+  String get channels_allowVoice => '이 채널에서 음성 허용';
+
+  @override
+  String get channels_allowVoiceOn =>
+      '이 채널 채팅에서 눌러서 말하기. 음성을 허용한 사람만 클립을 듣습니다.';
+
+  @override
+  String get channels_allowVoiceOff => '텍스트만. 이 채널의 음성 클립은 무시됩니다.';
+
+  @override
+  String get channels_allowVoiceAction => '음성 허용';
+
+  @override
+  String get channels_denyVoice => '음성 허용 안 함';
 }

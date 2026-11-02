@@ -3806,5 +3806,10 @@
   "coverage_nextEither": "Следващ пинг след {distance} или след {time}",
   "coverage_aboutSettings": "За да промените колко често се пингва (по разстояние, по време или което настъпи първо), използвайте ⋮ → Настройки на пинга.",
   "settings_clientRepeatRefused": "Фърмуерът на това радио не препредава на {freq} MHz. Позволява препредаване извън мрежата само на {freqs} MHz. Използвайте една от тях или сложете на радиото фърмуер, който позволява други честоти.",
-  "settings_clientRepeatUseFreq": "Използвай {freq} MHz"
+  "settings_clientRepeatUseFreq": "Използвай {freq} MHz",
+  "channels_allowVoice": "Разреши глас в този канал",
+  "channels_allowVoiceOn": "Натисни и говори в чата на канала. Клиповете чуват само хората, които също са разрешили глас в него.",
+  "channels_allowVoiceOff": "Само текст. Гласовите клипове в този канал се пренебрегват.",
+  "channels_allowVoiceAction": "Разреши глас",
+  "channels_denyVoice": "Не разрешавай глас"
 }

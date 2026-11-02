@@ -7342,4 +7342,19 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       '要更改 ping 的频率（按距离、按时间或先到者为准），请使用 ⋮ → Ping 设置。';
+
+  @override
+  String get channels_allowVoice => '允许在此频道使用语音';
+
+  @override
+  String get channels_allowVoiceOn => '在此频道聊天中按住说话。只有同样允许了语音的人才能听到片段。';
+
+  @override
+  String get channels_allowVoiceOff => '仅文字。此频道上的语音片段会被忽略。';
+
+  @override
+  String get channels_allowVoiceAction => '允许语音';
+
+  @override
+  String get channels_denyVoice => '不允许语音';
 }

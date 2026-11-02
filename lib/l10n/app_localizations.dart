@@ -13056,6 +13056,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To change how often it pings (by distance, by time, or whichever comes first), use ⋮ → Ping settings.'**
   String get coverage_aboutSettings;
+
+  /// No description provided for @channels_allowVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow voice on this channel'**
+  String get channels_allowVoice;
+
+  /// No description provided for @channels_allowVoiceOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Push-to-talk in this channel\'s chat. Only people who have also allowed voice on it hear the clips.'**
+  String get channels_allowVoiceOn;
+
+  /// No description provided for @channels_allowVoiceOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Text only. Voice clips sent on this channel are ignored.'**
+  String get channels_allowVoiceOff;
+
+  /// No description provided for @channels_allowVoiceAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow voice'**
+  String get channels_allowVoiceAction;
+
+  /// No description provided for @channels_denyVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t allow voice'**
+  String get channels_denyVoice;
 }
 
 class _AppLocalizationsDelegate

@@ -3941,5 +3941,10 @@
   "coverage_nextEither": "Nächster Ping nach {distance} oder in {time}",
   "coverage_aboutSettings": "Wie oft gepingt wird (nach Strecke, nach Zeit oder was zuerst eintritt), stellst du unter ⋮ → Ping-Einstellungen ein.",
   "settings_clientRepeatRefused": "Die Firmware dieses Funkgeräts leitet auf {freq} MHz nicht weiter. Sie erlaubt die Weiterleitung ohne Netzstrom nur auf {freqs} MHz. Wähle eine davon oder spiele eine Firmware auf, die andere Frequenzen erlaubt.",
-  "settings_clientRepeatUseFreq": "{freq} MHz verwenden"
+  "settings_clientRepeatUseFreq": "{freq} MHz verwenden",
+  "channels_allowVoice": "Sprache in diesem Kanal erlauben",
+  "channels_allowVoiceOn": "Push-to-Talk im Chat dieses Kanals. Nur wer Sprache dort ebenfalls erlaubt hat, hört die Clips.",
+  "channels_allowVoiceOff": "Nur Text. Sprachclips in diesem Kanal werden ignoriert.",
+  "channels_allowVoiceAction": "Sprache erlauben",
+  "channels_denyVoice": "Sprache nicht erlauben"
 }

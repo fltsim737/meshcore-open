@@ -7848,4 +7848,21 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Щоб змінити частоту пінгів (за відстанню, за часом або що настане раніше), відкрийте ⋮ → Налаштування пінгів.';
+
+  @override
+  String get channels_allowVoice => 'Дозволити голос у цьому каналі';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Рація в чаті цього каналу. Кліпи чують лише ті, хто теж дозволив у ньому голос.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Лише текст. Голосові кліпи в цьому каналі ігноруються.';
+
+  @override
+  String get channels_allowVoiceAction => 'Дозволити голос';
+
+  @override
+  String get channels_denyVoice => 'Не дозволяти голос';
 }

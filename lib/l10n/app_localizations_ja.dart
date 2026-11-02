@@ -7498,4 +7498,20 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。';
+
+  @override
+  String get channels_allowVoice => 'このチャンネルで音声を許可';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'このチャンネルのチャットでプッシュトゥトーク。音声を許可した人だけがクリップを聞けます。';
+
+  @override
+  String get channels_allowVoiceOff => 'テキストのみ。このチャンネルの音声クリップは無視されます。';
+
+  @override
+  String get channels_allowVoiceAction => '音声を許可';
+
+  @override
+  String get channels_denyVoice => '音声を許可しない';
 }

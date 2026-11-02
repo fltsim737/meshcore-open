@@ -11,6 +11,7 @@ import 'package:uuid/uuid.dart';
 import '../connector/meshcore_connector.dart';
 import '../l10n/l10n.dart';
 import '../services/app_settings_service.dart';
+import '../services/sos_voice_service.dart';
 import '../services/ui_view_state_service.dart';
 import '../models/channel.dart';
 import '../models/community.dart';
@@ -628,6 +629,8 @@ class _ChannelsScreenState extends State<ChannelsScreen>
     final parentContext = context;
     final settingsService = context.read<AppSettingsService>();
     final isMuted = settingsService.isChannelMuted(channel.muteKey);
+    final voice = context.read<SosVoiceService>();
+    final voiceAllowed = voice.voiceAllowedOn(channel);
 
     showMeshSheet(
       parentContext,
@@ -646,6 +649,21 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                 }
               },
             ),
+            if (voice.canChooseVoice(channel))
+              ListTile(
+                leading: Icon(
+                  voiceAllowed ? Icons.mic_off_outlined : Icons.mic_none,
+                ),
+                title: Text(
+                  voiceAllowed
+                      ? sheetContext.l10n.channels_denyVoice
+                      : sheetContext.l10n.channels_allowVoiceAction,
+                ),
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  voice.setVoiceAllowed(channel.psk, !voiceAllowed);
+                },
+              ),
             ListTile(
               leading: Icon(
                 isMuted
@@ -832,6 +850,14 @@ class _ChannelsScreenState extends State<ChannelsScreen>
     bool addPublicChannel = true;
     bool isRegularHashtag = true;
     Community? selectedCommunity;
+    final voice = context.read<SosVoiceService>();
+    // Voice is denied unless the user allows it. Saved before the channel
+    // goes on the radio, so its chat opens with push-to-talk.
+    bool allowVoice = false;
+    Future<void> addChannel(int index, String name, Uint8List psk) {
+      if (allowVoice) voice.setVoiceAllowed(psk, true);
+      return connector.setChannel(index, name, psk);
+    }
 
     _communityStore.setPublicKeyHex = connector.selfPublicKeyHex;
 
@@ -933,6 +959,24 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                 );
               }
 
+              Widget buildVoiceSwitch() => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  secondary: Icon(
+                    allowVoice ? Icons.mic_none : Icons.mic_off_outlined,
+                  ),
+                  title: Text(sheetContext.l10n.channels_allowVoice),
+                  subtitle: Text(
+                    allowVoice
+                        ? sheetContext.l10n.channels_allowVoiceOn
+                        : sheetContext.l10n.channels_allowVoiceOff,
+                  ),
+                  value: allowVoice,
+                  onChanged: (value) => setSheetState(() => allowVoice = value),
+                ),
+              );
+
               Widget? buildExpandedContent() {
                 switch (selectedOption) {
                   case 0: // Create Private Channel
@@ -982,11 +1026,7 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                     if (nextIndex == null) return;
                                     final psk = randomBytes(16);
                                     Navigator.pop(sheetContext);
-                                    await connector.setChannel(
-                                      nextIndex,
-                                      name,
-                                      psk,
-                                    );
+                                    await addChannel(nextIndex, name, psk);
                                     if (context.mounted) {
                                       showDismissibleSnackBar(
                                         context,
@@ -1082,7 +1122,7 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                     );
                                     if (nextIndex == null) return;
                                     Navigator.pop(sheetContext);
-                                    connector.setChannel(nextIndex, name, psk);
+                                    addChannel(nextIndex, name, psk);
                                     if (context.mounted) {
                                       showDismissibleSnackBar(
                                         context,
@@ -1124,7 +1164,7 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                   Channel.publicChannelPsk,
                                 );
                                 Navigator.pop(sheetContext);
-                                connector.setChannel(
+                                addChannel(
                                   nextIndex,
                                   context.l10n.channels_public,
                                   psk,
@@ -1354,11 +1394,7 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                     if (sheetContext.mounted) {
                                       Navigator.pop(sheetContext);
                                     }
-                                    connector.setChannel(
-                                      nextIndex,
-                                      channelName,
-                                      psk,
-                                    );
+                                    addChannel(nextIndex, channelName, psk);
                                     if (context.mounted) {
                                       showDismissibleSnackBar(
                                         context,
@@ -1507,11 +1543,7 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                         community.name,
                                         publicLabel,
                                       );
-                                      connector.setChannel(
-                                        nextIndex,
-                                        channelName,
-                                        psk,
-                                      );
+                                      addChannel(nextIndex, channelName, psk);
                                     }
 
                                     if (sheetContext.mounted) {
@@ -1587,7 +1619,10 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                   .l10n
                                   .channels_joinPublicChannelDesc,
                             ),
-                            if (selectedOption == 2) buildExpandedContent()!,
+                            if (selectedOption == 2) ...[
+                              buildVoiceSwitch(),
+                              buildExpandedContent()!,
+                            ],
                           ],
                           buildOptionCard(
                             optionIndex: 3,
@@ -1598,7 +1633,10 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                 .l10n
                                 .channels_joinHashtagChannelDesc,
                           ),
-                          if (selectedOption == 3) buildExpandedContent()!,
+                          if (selectedOption == 3) ...[
+                            buildVoiceSwitch(),
+                            buildExpandedContent()!,
+                          ],
                           buildOptionCard(
                             optionIndex: 1,
                             icon: Icons.lock,
@@ -1608,7 +1646,10 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                 .l10n
                                 .channels_joinPrivateChannelDesc,
                           ),
-                          if (selectedOption == 1) buildExpandedContent()!,
+                          if (selectedOption == 1) ...[
+                            buildVoiceSwitch(),
+                            buildExpandedContent()!,
+                          ],
                           buildOptionCard(
                             optionIndex: 4,
                             icon: Icons.qr_code_scanner,
@@ -1628,14 +1669,20 @@ class _ChannelsScreenState extends State<ChannelsScreen>
                                 .l10n
                                 .channels_createPrivateChannelDesc,
                           ),
-                          if (selectedOption == 0) buildExpandedContent()!,
+                          if (selectedOption == 0) ...[
+                            buildVoiceSwitch(),
+                            buildExpandedContent()!,
+                          ],
                           buildOptionCard(
                             optionIndex: 5,
                             icon: Icons.groups,
                             title: sheetContext.l10n.community_create,
                             subtitle: sheetContext.l10n.community_createDesc,
                           ),
-                          if (selectedOption == 5) buildExpandedContent()!,
+                          if (selectedOption == 5) ...[
+                            buildVoiceSwitch(),
+                            buildExpandedContent()!,
+                          ],
                         ],
                       ),
                     ),

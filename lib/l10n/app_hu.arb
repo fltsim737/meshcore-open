@@ -3845,5 +3845,10 @@
   "coverage_nextEither": "Következő ping {distance} után vagy {time} múlva",
   "coverage_aboutSettings": "A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod.",
   "settings_clientRepeatRefused": "A rádió firmware-e nem továbbít {freq} MHz-en. A hálózaton kívüli továbbítást csak ezeken engedi: {freqs} MHz. Válasszon ezek közül, vagy telepítsen olyan firmware-t, amely más frekvenciákat is enged.",
-  "settings_clientRepeatUseFreq": "{freq} MHz használata"
+  "settings_clientRepeatUseFreq": "{freq} MHz használata",
+  "channels_allowVoice": "Hang engedélyezése ezen a csatornán",
+  "channels_allowVoiceOn": "Adóvevős beszéd a csatorna csevegésében. A klipeket csak azok hallják, akik szintén engedélyezték rajta a hangot.",
+  "channels_allowVoiceOff": "Csak szöveg. A csatornán küldött hangklipeket figyelmen kívül hagyja.",
+  "channels_allowVoiceAction": "Hang engedélyezése",
+  "channels_denyVoice": "Hang tiltása"
 }

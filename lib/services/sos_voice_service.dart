@@ -269,6 +269,16 @@ class SosVoiceService extends ChangeNotifier {
   static String pttDirectKey(String contactKeyHex) => 'ptt:dm:$contactKeyHex';
   static bool isPtt(String key) => key.startsWith('ptt:');
 
+  /// Push-to-talk on another channel the user allowed voice on (10.2.4),
+  /// keyed by the channel's PSK so it follows the channel across slots.
+  static String pttChannelKeyForPsk(String pskHex) =>
+      'ptt:ch:${pskHex.toLowerCase()}';
+
+  /// A push-to-talk conversation on a channel (#voice or one allowed),
+  /// rather than a direct message.
+  static bool isPttChannelKey(String key) =>
+      key == pttChannelKey || key.startsWith('ptt:ch:');
+
   static const Duration pttMaxClip = Duration(seconds: 10);
 
   /// A voice session: the voice in one conversation (#voice, or a direct
@@ -314,6 +324,11 @@ class SosVoiceService extends ChangeNotifier {
   final SosVoiceAssembler _assembler;
   final bool Function(String radioKeyHex)? _pttChannelAddedBefore;
   final void Function(String radioKeyHex)? _rememberPttChannelAdded;
+  final void Function(Set<String> pskHexes)? _saveVoiceChannels;
+
+  /// PSKs (lower-case hex) of the channels, other than #voice, the user
+  /// allowed voice on. Kept on the phone, for every radio.
+  final Set<String> _voiceChannels = {};
 
   SosVoiceQuality _quality = SosVoiceQuality.low;
   String? _handsFreeSosId;
@@ -351,7 +366,10 @@ class SosVoiceService extends ChangeNotifier {
 
   /// Called for each push-to-talk clip heard, for its notification.
   void Function(String conversation, VoiceClip clip)? onPttClipHeard;
-  DateTime? _channelChunkAt;
+
+  /// When a chunk of someone else's clip last arrived, per channel
+  /// conversation.
+  final Map<String, DateTime> _channelChunkAt = {};
   final Set<String> _pttOfferedThisRun = {};
   bool _addingPttChannel = false;
   int? _pttChannelIndex;
@@ -367,6 +385,8 @@ class SosVoiceService extends ChangeNotifier {
     DateTime Function()? now,
     bool Function(String radioKeyHex)? pttChannelAddedBefore,
     void Function(String radioKeyHex)? rememberPttChannelAdded,
+    Set<String>? voiceChannels,
+    void Function(Set<String> pskHexes)? saveVoiceChannels,
   }) : _sos = sos,
        _transport = transport,
        _audio = audio,
@@ -377,7 +397,11 @@ class SosVoiceService extends ChangeNotifier {
        _now = now ?? DateTime.now,
        _assembler = SosVoiceAssembler(now: now),
        _pttChannelAddedBefore = pttChannelAddedBefore,
-       _rememberPttChannelAdded = rememberPttChannelAdded {
+       _rememberPttChannelAdded = rememberPttChannelAdded,
+       _saveVoiceChannels = saveVoiceChannels {
+    if (voiceChannels != null) {
+      _voiceChannels.addAll(voiceChannels.map((h) => h.toLowerCase()));
+    }
     _vox = _makeVox();
     _transport.voiceListener = handleInbound;
     _transport.directListener = handleDirect;
@@ -434,7 +458,9 @@ class SosVoiceService extends ChangeNotifier {
     if (isPtt(sosId)) {
       final block = _pttSendBlock(sosId);
       if (block != null) return block;
-      if (sosId == pttChannelKey && channelBusy) return SosVoiceBlock.busy;
+      if (isPttChannelKey(sosId) && channelBusyOn(sosId)) {
+        return SosVoiceBlock.busy;
+      }
       if (meshBusyWait > Duration.zero) return SosVoiceBlock.meshBusy;
       if (talkLimitWait > Duration.zero) return SosVoiceBlock.talkLimit;
       return null;
@@ -482,9 +508,66 @@ class SosVoiceService extends ChangeNotifier {
       .firstOrNull;
 
   /// Someone else's clip is arriving on the Voice channel.
-  bool get channelBusy {
-    final at = _channelChunkAt;
+  bool get channelBusy => channelBusyOn(pttChannelKey);
+
+  /// Someone else's clip is arriving on channel conversation [key].
+  bool channelBusyOn(String key) {
+    final at = _channelChunkAt[key];
     return at != null && _now().difference(at) < pttBusyHold;
+  }
+
+  // ---------------------------------------------------------------------
+  // Voice on other channels (10.2.4)
+  // ---------------------------------------------------------------------
+
+  bool _isSosChannel(Channel c) => _sos.sosChannel?.index == c.index;
+
+  /// Whether voice can be turned on or off for [c]: not #voice (always on),
+  /// not MeshCore's Public channel (never voice: it's everyone's), and not
+  /// the emergency network channel (SOS voice only).
+  bool canChooseVoice(Channel c) =>
+      !listEquals(c.psk, pttChannelPsk) &&
+      !c.isPublicChannel &&
+      !_isSosChannel(c) &&
+      !c.isEmpty;
+
+  /// Whether [c] carries push-to-talk on this phone.
+  bool voiceAllowedOn(Channel c) {
+    if (listEquals(c.psk, pttChannelPsk)) return true;
+    if (!canChooseVoice(c)) return false;
+    return _voiceChannels.contains(c.pskHex.toLowerCase());
+  }
+
+  /// Allows or denies voice on the channel with [psk] (saved on the phone).
+  void setVoiceAllowed(Uint8List psk, bool allowed) {
+    if (listEquals(psk, pttChannelPsk)) return;
+    final hex = psk
+        .map((b) => b.toRadixString(16).padLeft(2, '0'))
+        .join()
+        .toLowerCase();
+    if (hex == Channel.publicChannelPsk.toLowerCase()) return;
+    final changed = allowed
+        ? _voiceChannels.add(hex)
+        : _voiceChannels.remove(hex);
+    if (!changed) return;
+    _saveVoiceChannels?.call(Set.unmodifiable(_voiceChannels));
+    notifyListeners();
+  }
+
+  /// The push-to-talk conversation for channel [c].
+  String pttKeyFor(Channel c) => listEquals(c.psk, pttChannelPsk)
+      ? pttChannelKey
+      : pttChannelKeyForPsk(c.pskHex);
+
+  /// The channel on the radio that carries channel conversation [key], if
+  /// it's there and voice is allowed on it.
+  Channel? channelForKey(String key) {
+    if (key == pttChannelKey) return pttChannel;
+    if (!key.startsWith('ptt:ch:')) return null;
+    final hex = key.substring('ptt:ch:'.length);
+    return _transport.channels
+        .where((c) => c.pskHex.toLowerCase() == hex && voiceAllowedOn(c))
+        .firstOrNull;
   }
 
   /// How long push-to-talk stands aside for text: until [pttQuietAfterText]
@@ -610,9 +693,9 @@ class SosVoiceService extends ChangeNotifier {
     }
     if (sosHeardWait > Duration.zero) return SosVoiceBlock.sosHeard;
     if (!_transport.isConnected) return SosVoiceBlock.radio;
-    if (key == pttChannelKey) {
+    if (isPttChannelKey(key)) {
       if (!_sos.supportsChannelAlerts) return SosVoiceBlock.radio;
-      if (pttChannel == null) return SosVoiceBlock.noChannel;
+      if (channelForKey(key) == null) return SosVoiceBlock.noChannel;
     } else if (_contactFor(key) == null) {
       return SosVoiceBlock.radio;
     }
@@ -870,7 +953,7 @@ class SosVoiceService extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    final direct = clip.sosId != pttChannelKey;
+    final direct = !isPttChannelKey(clip.sosId);
     final packets = SosVoicePacket.split(
       frames: codec.encode(_split(clip.pcm), clip.quality),
       quality: clip.quality,
@@ -903,7 +986,7 @@ class SosVoiceService extends ChangeNotifier {
         );
       } else {
         ok = await _transport.sendChunks(
-          pttChannel!.index,
+          channelForKey(clip.sosId)!.index,
           [for (final p in packets) p.encode()],
           gap: _transport.chunkGap(SosVoicePacket.maxBlobBytes),
           onProgress: progress,
@@ -931,10 +1014,10 @@ class SosVoiceService extends ChangeNotifier {
         )) {
       return; // Our own clip, repeated back to us.
     }
-    if (key == pttChannelKey) _channelChunkAt = _now();
+    if (isPttChannelKey(key)) _channelChunkAt[key] = _now();
     final done = _assembler.add(packet.withSosId(key));
     if (done != null) {
-      if (key == pttChannelKey) _channelChunkAt = null;
+      _channelChunkAt.remove(key);
       _deliver(done);
     }
     notifyListeners();
@@ -957,10 +1040,13 @@ class SosVoiceService extends ChangeNotifier {
   void handleInbound(int channelIndex, Uint8List data) {
     final codec = _codec;
     if (codec == null) return;
-    final ptt = pttChannel;
-    if (ptt != null && ptt.index == channelIndex) {
+    // #voice, or another channel this phone allows voice on
+    final channel = _transport.channels
+        .where((c) => c.index == channelIndex)
+        .firstOrNull;
+    if (channel != null && voiceAllowedOn(channel)) {
       final packet = SosVoicePacket.decode(data);
-      if (packet != null && packet.ptt) _hearPtt(packet, pttChannelKey);
+      if (packet != null && packet.ptt) _hearPtt(packet, pttKeyFor(channel));
       return;
     }
     if (_sos.sosChannel?.index != channelIndex) return;
@@ -986,15 +1072,15 @@ class SosVoiceService extends ChangeNotifier {
   /// Plays clips whose remaining chunks were lost.
   @visibleForTesting
   void checkStale() {
-    final wasBusy = _channelChunkAt != null;
     for (final clip in _assembler.takeStale()) {
       _deliver(clip);
     }
-    if (wasBusy && !channelBusy) {
-      _channelChunkAt = null;
-      notifyListeners(); // the channel is free again
+    final busyBefore = _channelChunkAt.length;
+    _channelChunkAt.removeWhere((key, _) => !channelBusyOn(key));
+    if (_channelChunkAt.length != busyBefore) {
+      notifyListeners(); // a channel is free again
     }
-    if (!_assembler.hasPending && _channelChunkAt == null) {
+    if (!_assembler.hasPending && _channelChunkAt.isEmpty) {
       _staleTimer?.cancel();
       _staleTimer = null;
     }

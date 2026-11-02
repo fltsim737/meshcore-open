@@ -7800,4 +7800,21 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen.';
+
+  @override
+  String get channels_allowVoice => 'Spraak toestaan op dit kanaal';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Push-to-talk in de chat van dit kanaal. Alleen wie spraak er ook heeft toegestaan, hoort de clips.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Alleen tekst. Spraakclips op dit kanaal worden genegeerd.';
+
+  @override
+  String get channels_allowVoiceAction => 'Spraak toestaan';
+
+  @override
+  String get channels_denyVoice => 'Spraak niet toestaan';
 }

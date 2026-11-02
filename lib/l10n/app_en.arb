@@ -4643,5 +4643,10 @@
   "@coverage_pingInterval": {"placeholders": {"time": {"type": "String"}}},
   "@coverage_nextDistance": {"placeholders": {"distance": {"type": "String"}}},
   "@coverage_nextTime": {"placeholders": {"time": {"type": "String"}}},
-  "@coverage_nextEither": {"placeholders": {"distance": {"type": "String"}, "time": {"type": "String"}}}
+  "@coverage_nextEither": {"placeholders": {"distance": {"type": "String"}, "time": {"type": "String"}}},
+  "channels_allowVoice": "Allow voice on this channel",
+  "channels_allowVoiceOn": "Push-to-talk in this channel's chat. Only people who have also allowed voice on it hear the clips.",
+  "channels_allowVoiceOff": "Text only. Voice clips sent on this channel are ignored.",
+  "channels_allowVoiceAction": "Allow voice",
+  "channels_denyVoice": "Don't allow voice"
 }

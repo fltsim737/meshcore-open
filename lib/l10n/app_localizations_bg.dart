@@ -7832,4 +7832,21 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'За да промените колко често се пингва (по разстояние, по време или което настъпи първо), използвайте ⋮ → Настройки на пинга.';
+
+  @override
+  String get channels_allowVoice => 'Разреши глас в този канал';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Натисни и говори в чата на канала. Клиповете чуват само хората, които също са разрешили глас в него.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Само текст. Гласовите клипове в този канал се пренебрегват.';
+
+  @override
+  String get channels_allowVoiceAction => 'Разреши глас';
+
+  @override
+  String get channels_denyVoice => 'Не разрешавай глас';
 }

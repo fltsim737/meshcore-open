@@ -7825,4 +7825,21 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod.';
+
+  @override
+  String get channels_allowVoice => 'Hang engedélyezése ezen a csatornán';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Adóvevős beszéd a csatorna csevegésében. A klipeket csak azok hallják, akik szintén engedélyezték rajta a hangot.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Csak szöveg. A csatornán küldött hangklipeket figyelmen kívül hagyja.';
+
+  @override
+  String get channels_allowVoiceAction => 'Hang engedélyezése';
+
+  @override
+  String get channels_denyVoice => 'Hang tiltása';
 }

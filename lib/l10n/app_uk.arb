@@ -3786,5 +3786,10 @@
   "coverage_nextEither": "Наступний пінг через {distance} або через {time}",
   "coverage_aboutSettings": "Щоб змінити частоту пінгів (за відстанню, за часом або що настане раніше), відкрийте ⋮ → Налаштування пінгів.",
   "settings_clientRepeatRefused": "Прошивка цього радіо не ретранслює на {freq} МГц. Ретрансляція поза мережею дозволена лише на {freqs} МГц. Виберіть одну з них або встановіть прошивку, що дозволяє інші частоти.",
-  "settings_clientRepeatUseFreq": "Використати {freq} МГц"
+  "settings_clientRepeatUseFreq": "Використати {freq} МГц",
+  "channels_allowVoice": "Дозволити голос у цьому каналі",
+  "channels_allowVoiceOn": "Рація в чаті цього каналу. Кліпи чують лише ті, хто теж дозволив у ньому голос.",
+  "channels_allowVoiceOff": "Лише текст. Голосові кліпи в цьому каналі ігноруються.",
+  "channels_allowVoiceAction": "Дозволити голос",
+  "channels_denyVoice": "Не дозволяти голос"
 }

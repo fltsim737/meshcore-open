@@ -3940,5 +3940,10 @@
   "coverage_nextEither": "{distance} 移動するか {time} 後に次の ping",
   "coverage_aboutSettings": "ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。",
   "settings_clientRepeatRefused": "この無線機のファームウェアは {freq} MHz では中継しません。オフグリッド中継は {freqs} MHz でのみ可能です。これらのいずれかを使うか、他の周波数を許可するファームウェアを書き込んでください。",
-  "settings_clientRepeatUseFreq": "{freq} MHz を使用"
+  "settings_clientRepeatUseFreq": "{freq} MHz を使用",
+  "channels_allowVoice": "このチャンネルで音声を許可",
+  "channels_allowVoiceOn": "このチャンネルのチャットでプッシュトゥトーク。音声を許可した人だけがクリップを聞けます。",
+  "channels_allowVoiceOff": "テキストのみ。このチャンネルの音声クリップは無視されます。",
+  "channels_allowVoiceAction": "音声を許可",
+  "channels_denyVoice": "音声を許可しない"
 }

@@ -7845,4 +7845,21 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping.';
+
+  @override
+  String get channels_allowVoice => 'Consenti la voce su questo canale';
+
+  @override
+  String get channels_allowVoiceOn =>
+      'Premi per parlare nella chat di questo canale. Solo chi ha consentito la voce anche lì sente i clip.';
+
+  @override
+  String get channels_allowVoiceOff =>
+      'Solo testo. I clip vocali inviati su questo canale vengono ignorati.';
+
+  @override
+  String get channels_allowVoiceAction => 'Consenti la voce';
+
+  @override
+  String get channels_denyVoice => 'Non consentire la voce';
 }
