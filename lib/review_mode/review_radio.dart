@@ -10,6 +10,10 @@ import 'review_frames.dart';
 import 'review_script.dart';
 
 /// A simulated MeshCore radio that speaks the companion binary protocol.
+
+/// Off-grid repeat frequencies the simulated radio allows, as stock firmware.
+const List<int> _reviewRepeatFreqsKHz = [433000, 869495, 918000];
+
 class ReviewRadio {
   ReviewRadio({
     this.scheduledMessageInterval = const Duration(seconds: 45),
@@ -60,6 +64,7 @@ class ReviewRadio {
   int _latitudeE6 = ReviewScript.selfLatitudeE6;
   int _longitudeE6 = ReviewScript.selfLongitudeE6;
   int _frequencyHz = ReviewScript.frequencyHz;
+  bool _clientRepeat = false;
   int _bandwidthHz = ReviewScript.bandwidthHz;
   int _spreadingFactor = ReviewScript.spreadingFactor;
   int _codingRate = ReviewScript.codingRate;
@@ -185,6 +190,7 @@ class ReviewRadio {
             firmwareVerCode: firmwareVerCode,
             maxContacts: ReviewScript.maxContacts,
             maxChannels: ReviewScript.maxChannels,
+            clientRepeat: _clientRepeat,
           ),
         ]);
         break;
@@ -248,10 +254,8 @@ class ReviewRadio {
         break;
       case cmdGetAllowedRepeatFreq:
         _emit([
-          ReviewFrames.allowedRepeatFreq(const [
-            (lowKHz: 433000, highKHz: 433000),
-            (lowKHz: 869000, highKHz: 869000),
-            (lowKHz: 918000, highKHz: 918000),
+          ReviewFrames.allowedRepeatFreq([
+            for (final f in _reviewRepeatFreqsKHz) (lowKHz: f, highKHz: f),
           ]),
         ]);
         break;
@@ -300,10 +304,18 @@ class ReviewRadio {
         break;
       case cmdSetRadioParams:
         if (frame.length >= 11) {
-          _frequencyHz = readUint32LE(frame, 1);
+          final freq = readUint32LE(frame, 1);
+          final repeat = frame.length >= 12 && frame[11] != 0;
+          // as stock firmware: off-grid repeat only on the allowed frequencies
+          if (repeat && !_reviewRepeatFreqsKHz.contains(freq)) {
+            _emit([ReviewFrames.err()]);
+            break;
+          }
+          _frequencyHz = freq;
           _bandwidthHz = readUint32LE(frame, 5);
           _spreadingFactor = frame[9];
           _codingRate = frame[10];
+          if (frame.length >= 12) _clientRepeat = repeat;
         }
         _emit([ReviewFrames.ok()]);
         break;

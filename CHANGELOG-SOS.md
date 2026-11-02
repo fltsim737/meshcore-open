@@ -2,6 +2,13 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.5 (2026-11-02)
+
+Fixes found while writing the user guide for 10.2.4.
+
+- **SOS Voice: the push-to-talk hint on your own channels.** On a channel you allowed voice on, the line under **Hold to talk** said "Everyone on the mesh with SOS Voice hears this channel", which is only true of #voice. It now says that only people on that channel who have allowed voice on it hear your clips.
+- **Review mode's simulated radio** reported its frequency 1,000 times too high (910525 MHz), so Radio Settings showed **Custom** with a nonsense frequency. It now shows 910.525 MHz (the USA/Canada preset). It also refuses Off-Grid Repeat on a frequency stock firmware doesn't allow, as a real radio does, so the app's offer of an allowed frequency can be tried without a radio.
+
 ## 10.2.4 (2026-11-02)
 
 Both apps, plus a channel option in SOS Voice. Blocking works best with MeshCore SOS radio firmware 1.8.6.
