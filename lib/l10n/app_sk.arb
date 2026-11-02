@@ -3772,5 +3772,22 @@
   "coverage_nextEither": "Ďalší ping po {distance} alebo o {time}",
   "coverage_aboutSettings": "Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov.",
   "settings_clientRepeatRefused": "Firmvér tohto rádia neopakuje na {freq} MHz. Opakovanie mimo siete povoľuje len na {freqs} MHz. Použite jednu z nich alebo nahrajte firmvér, ktorý povoľuje iné frekvencie.",
-  "settings_clientRepeatUseFreq": "Použiť {freq} MHz"
+  "settings_clientRepeatUseFreq": "Použiť {freq} MHz",
+  "block_blockRadio": "Blokovať toto rádio",
+  "block_blockSender": "Blokovať odosielateľa",
+  "block_title": "Blokovať {name}?",
+  "block_body": "Jeho oznámenia sa budú ignorovať, odstráni sa z kontaktov a jeho priame správy a správy v kanáloch pod jeho menom sa skryjú. Upozornenia SOS sa zobrazujú vždy.",
+  "block_bodyRadio": "Vaše rádio ho tiež blokuje: ignoruje jeho oznámenia aj bez telefónu a nikdy ich neopakuje.",
+  "block_bodyNameOnly": "Známe je len meno, preto sa skryjú správy v kanáloch pod týmto menom. Upozornenia SOS sa zobrazujú vždy.",
+  "block_confirm": "Blokovať",
+  "block_blocked": "{name} zablokované",
+  "block_screenTitle": "Zablokované rádiá",
+  "block_settingsSubtitle": "Rádiá, ktorých oznámenia a správy sa ignorujú",
+  "block_settingsCount": "{count, plural, =1{1 zablokované rádio} few{{count} zablokované rádiá} other{{count} zablokovaných rádií}}",
+  "block_empty": "Žiadne zablokované rádiá. Rádio zablokujete z jeho ponuky v Kontaktoch alebo Objavených, odosielateľa zo správy v kanáli.",
+  "block_about": "Blokovanie mení len váš telefón a rádio: ostatné rádiá zablokované rádio stále počujú a opakovače ho stále prenášajú.",
+  "block_radioToo": "Vaše rádio tiež blokuje tieto rádiá a jeho webová stránka zobrazuje rovnaký zoznam.",
+  "block_unblock": "Odblokovať",
+  "block_unblocked": "{name} odblokované",
+  "block_nameOnly": "Správy v kanáloch len podľa mena"
 }

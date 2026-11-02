@@ -3905,5 +3905,22 @@
   "coverage_nextEither": "{distance} 이동하거나 {time} 후 다음 핑",
   "coverage_aboutSettings": "핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다.",
   "settings_clientRepeatRefused": "이 무전기의 펌웨어는 {freq} MHz에서 중계하지 않습니다. 오프그리드 중계는 {freqs} MHz에서만 허용됩니다. 이 중 하나를 사용하거나 다른 주파수를 허용하는 펌웨어를 설치하세요.",
-  "settings_clientRepeatUseFreq": "{freq} MHz 사용"
+  "settings_clientRepeatUseFreq": "{freq} MHz 사용",
+  "block_blockRadio": "이 무전기 차단",
+  "block_blockSender": "보낸 사람 차단",
+  "block_title": "{name}을(를) 차단할까요?",
+  "block_body": "광고는 무시되고 연락처에서 제거되며, 직접 메시지와 그 이름으로 보낸 채널 메시지는 숨겨집니다. SOS 경보는 항상 표시됩니다.",
+  "block_bodyRadio": "무전기도 차단합니다. 휴대폰이 없을 때도 광고를 무시하고 절대 중계하지 않습니다.",
+  "block_bodyNameOnly": "이름만 알려져 있어 이 이름으로 보낸 채널 메시지를 숨깁니다. SOS 경보는 항상 표시됩니다.",
+  "block_confirm": "차단",
+  "block_blocked": "{name} 차단됨",
+  "block_screenTitle": "차단된 무전기",
+  "block_settingsSubtitle": "광고와 메시지를 무시하는 무전기",
+  "block_settingsCount": "{count, plural, other{무전기 {count}대 차단됨}}",
+  "block_empty": "차단된 무전기가 없습니다. 연락처나 발견됨 메뉴, 또는 채널 메시지에서 차단하세요.",
+  "block_about": "차단은 내 휴대폰과 무전기에만 적용됩니다. 다른 무전기는 여전히 듣고 중계기는 전달합니다.",
+  "block_radioToo": "무전기도 이 무전기들을 차단하며 웹 페이지에 같은 목록이 표시됩니다.",
+  "block_unblock": "차단 해제",
+  "block_unblocked": "{name} 차단 해제됨",
+  "block_nameOnly": "이름으로만 (채널 메시지)"
 }

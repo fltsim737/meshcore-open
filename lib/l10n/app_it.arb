@@ -3905,5 +3905,22 @@
   "coverage_nextEither": "Prossimo ping dopo {distance} o tra {time}",
   "coverage_aboutSettings": "Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping.",
   "settings_clientRepeatRefused": "Il firmware di questa radio non ripete su {freq} MHz. Consente la ripetizione fuori rete solo su {freqs} MHz. Usa una di queste o installa sulla radio un firmware che consenta altre frequenze.",
-  "settings_clientRepeatUseFreq": "Usa {freq} MHz"
+  "settings_clientRepeatUseFreq": "Usa {freq} MHz",
+  "block_blockRadio": "Blocca questa radio",
+  "block_blockSender": "Blocca mittente",
+  "block_title": "Bloccare {name}?",
+  "block_body": "I suoi annunci saranno ignorati, sarà rimossa dai contatti, e i suoi messaggi diretti e i messaggi di canale inviati con il suo nome saranno nascosti. Gli allarmi SOS sono sempre mostrati.",
+  "block_bodyRadio": "Anche la tua radio la blocca: ignora i suoi annunci anche quando il telefono non c'è e non li ripete mai.",
+  "block_bodyNameOnly": "È noto solo il nome, quindi vengono nascosti i messaggi di canale inviati con questo nome. Gli allarmi SOS sono sempre mostrati.",
+  "block_confirm": "Blocca",
+  "block_blocked": "{name} bloccata",
+  "block_screenTitle": "Radio bloccate",
+  "block_settingsSubtitle": "Radio di cui annunci e messaggi vengono ignorati",
+  "block_settingsCount": "{count, plural, =1{1 radio bloccata} other{{count} radio bloccate}}",
+  "block_empty": "Nessuna radio bloccata. Blocca una radio dal suo menu in Contatti o Scoperti, o un mittente da un messaggio di canale.",
+  "block_about": "Bloccare cambia solo il tuo telefono e la tua radio: le altre radio sentono ancora la radio bloccata e i ripetitori la inoltrano.",
+  "block_radioToo": "Anche la tua radio blocca queste radio, e la sua pagina web mostra lo stesso elenco.",
+  "block_unblock": "Sblocca",
+  "block_unblocked": "{name} sbloccata",
+  "block_nameOnly": "Messaggi di canale solo per nome"
 }

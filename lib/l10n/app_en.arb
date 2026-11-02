@@ -4575,5 +4575,50 @@
   "@coverage_pingInterval": {"placeholders": {"time": {"type": "String"}}},
   "@coverage_nextDistance": {"placeholders": {"distance": {"type": "String"}}},
   "@coverage_nextTime": {"placeholders": {"time": {"type": "String"}}},
-  "@coverage_nextEither": {"placeholders": {"distance": {"type": "String"}, "time": {"type": "String"}}}
+  "@coverage_nextEither": {"placeholders": {"distance": {"type": "String"}, "time": {"type": "String"}}},
+  "block_blockRadio": "Block this radio",
+  "block_blockSender": "Block sender",
+  "block_title": "Block {name}?",
+  "@block_title": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "block_body": "Its adverts will be ignored, it's removed from your contacts, and its direct messages and any channel messages sent under its name are hidden. SOS alerts are always shown.",
+  "block_bodyRadio": "Your radio blocks it too: it ignores its adverts even while your phone is away, and never repeats them.",
+  "block_bodyNameOnly": "Only its name is known, so channel messages sent under this name are hidden. SOS alerts are always shown.",
+  "block_confirm": "Block",
+  "block_blocked": "{name} blocked",
+  "@block_blocked": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "block_screenTitle": "Blocked radios",
+  "block_settingsSubtitle": "Radios whose adverts and messages are ignored",
+  "block_settingsCount": "{count, plural, =1{1 radio blocked} other{{count} radios blocked}}",
+  "@block_settingsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "block_empty": "No radios blocked. Block a radio from its menu in Contacts or Discovered, or a sender from a channel message.",
+  "block_about": "Blocking changes only your phone and radio: other radios still hear a blocked radio, and repeaters still pass it on.",
+  "block_radioToo": "Your radio blocks these radios too, and its web page shows the same list.",
+  "block_unblock": "Unblock",
+  "block_unblocked": "{name} unblocked",
+  "@block_unblocked": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "block_nameOnly": "Channel messages by name only"
 }

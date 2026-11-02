@@ -17,6 +17,7 @@ import '../utils/contact_search.dart';
 import '../utils/platform_info.dart';
 import '../utils/share_origin.dart';
 import '../widgets/app_bar.dart';
+import '../widgets/block_radio_dialog.dart';
 import '../widgets/contact_visuals.dart';
 import '../widgets/list_filter_widget.dart';
 import '../widgets/mesh_ui.dart';
@@ -354,6 +355,14 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                 title: Text(l10n.discoveredContacts_deleteContact),
                 onTap: () => Navigator.of(sheetContext).pop('delete_contact'),
               ),
+              ListTile(
+                leading: Icon(
+                  Icons.block,
+                  color: Theme.of(sheetContext).colorScheme.error,
+                ),
+                title: Text(l10n.block_blockRadio),
+                onTap: () => Navigator.of(sheetContext).pop('block_radio'),
+              ),
               const SizedBox(height: 8),
             ],
           ),
@@ -376,6 +385,14 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
         break;
       case 'delete_contact':
         connector.removeDiscoveredContact(contact);
+        break;
+      case 'block_radio':
+        await confirmBlockRadio(
+          context,
+          connector,
+          keyHex: contact.publicKeyHex,
+          name: contact.name,
+        );
         break;
     }
   }

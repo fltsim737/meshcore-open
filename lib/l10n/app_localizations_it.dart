@@ -7714,4 +7714,76 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping.';
+
+  @override
+  String get block_blockRadio => 'Blocca questa radio';
+
+  @override
+  String get block_blockSender => 'Blocca mittente';
+
+  @override
+  String block_title(String name) {
+    return 'Bloccare $name?';
+  }
+
+  @override
+  String get block_body =>
+      'I suoi annunci saranno ignorati, sarà rimossa dai contatti, e i suoi messaggi diretti e i messaggi di canale inviati con il suo nome saranno nascosti. Gli allarmi SOS sono sempre mostrati.';
+
+  @override
+  String get block_bodyRadio =>
+      'Anche la tua radio la blocca: ignora i suoi annunci anche quando il telefono non c\'è e non li ripete mai.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'È noto solo il nome, quindi vengono nascosti i messaggi di canale inviati con questo nome. Gli allarmi SOS sono sempre mostrati.';
+
+  @override
+  String get block_confirm => 'Blocca';
+
+  @override
+  String block_blocked(String name) {
+    return '$name bloccata';
+  }
+
+  @override
+  String get block_screenTitle => 'Radio bloccate';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Radio di cui annunci e messaggi vengono ignorati';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count radio bloccate',
+      one: '1 radio bloccata',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Nessuna radio bloccata. Blocca una radio dal suo menu in Contatti o Scoperti, o un mittente da un messaggio di canale.';
+
+  @override
+  String get block_about =>
+      'Bloccare cambia solo il tuo telefono e la tua radio: le altre radio sentono ancora la radio bloccata e i ripetitori la inoltrano.';
+
+  @override
+  String get block_radioToo =>
+      'Anche la tua radio blocca queste radio, e la sua pagina web mostra lo stesso elenco.';
+
+  @override
+  String get block_unblock => 'Sblocca';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name sbloccata';
+  }
+
+  @override
+  String get block_nameOnly => 'Messaggi di canale solo per nome';
 }

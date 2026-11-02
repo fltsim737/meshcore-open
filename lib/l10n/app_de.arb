@@ -3906,5 +3906,22 @@
   "coverage_nextEither": "Nächster Ping nach {distance} oder in {time}",
   "coverage_aboutSettings": "Wie oft gepingt wird (nach Strecke, nach Zeit oder was zuerst eintritt), stellst du unter ⋮ → Ping-Einstellungen ein.",
   "settings_clientRepeatRefused": "Die Firmware dieses Funkgeräts leitet auf {freq} MHz nicht weiter. Sie erlaubt die Weiterleitung ohne Netzstrom nur auf {freqs} MHz. Wähle eine davon oder spiele eine Firmware auf, die andere Frequenzen erlaubt.",
-  "settings_clientRepeatUseFreq": "{freq} MHz verwenden"
+  "settings_clientRepeatUseFreq": "{freq} MHz verwenden",
+  "block_blockRadio": "Dieses Funkgerät blockieren",
+  "block_blockSender": "Absender blockieren",
+  "block_title": "{name} blockieren?",
+  "block_body": "Seine Adverts werden ignoriert, es wird aus deinen Kontakten entfernt, und seine Direktnachrichten sowie Kanalnachrichten unter seinem Namen werden ausgeblendet. SOS-Alarme werden immer angezeigt.",
+  "block_bodyRadio": "Dein Funkgerät blockiert es auch: Es ignoriert seine Adverts, auch wenn dein Telefon nicht verbunden ist, und leitet sie nie weiter.",
+  "block_bodyNameOnly": "Nur der Name ist bekannt, daher werden Kanalnachrichten unter diesem Namen ausgeblendet. SOS-Alarme werden immer angezeigt.",
+  "block_confirm": "Blockieren",
+  "block_blocked": "{name} blockiert",
+  "block_screenTitle": "Blockierte Funkgeräte",
+  "block_settingsSubtitle": "Funkgeräte, deren Adverts und Nachrichten ignoriert werden",
+  "block_settingsCount": "{count, plural, =1{1 Funkgerät blockiert} other{{count} Funkgeräte blockiert}}",
+  "block_empty": "Keine Funkgeräte blockiert. Blockiere ein Funkgerät über sein Menü in Kontakte oder Entdeckt, oder einen Absender über eine Kanalnachricht.",
+  "block_about": "Blockieren betrifft nur dein Telefon und Funkgerät: Andere Funkgeräte hören ein blockiertes Funkgerät weiterhin, und Repeater leiten es weiter.",
+  "block_radioToo": "Dein Funkgerät blockiert diese Funkgeräte auch, und seine Webseite zeigt dieselbe Liste.",
+  "block_unblock": "Freigeben",
+  "block_unblocked": "{name} freigegeben",
+  "block_nameOnly": "Kanalnachrichten nur nach Name"
 }

@@ -7702,4 +7702,76 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'За да промените колко често се пингва (по разстояние, по време или което настъпи първо), използвайте ⋮ → Настройки на пинга.';
+
+  @override
+  String get block_blockRadio => 'Блокирай това радио';
+
+  @override
+  String get block_blockSender => 'Блокирай подателя';
+
+  @override
+  String block_title(String name) {
+    return 'Да се блокира ли $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Обявите му ще се пренебрегват, ще бъде премахнато от контактите, а личните му съобщения и съобщенията в канали под неговото име ще се скриват. SOS сигналите винаги се показват.';
+
+  @override
+  String get block_bodyRadio =>
+      'Радиото ви също го блокира: пренебрегва обявите му дори когато телефонът ви не е наблизо и никога не ги препредава.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Известно е само името, затова се скриват съобщенията в канали под това име. SOS сигналите винаги се показват.';
+
+  @override
+  String get block_confirm => 'Блокирай';
+
+  @override
+  String block_blocked(String name) {
+    return '$name е блокиран';
+  }
+
+  @override
+  String get block_screenTitle => 'Блокирани радиа';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Радиа, чиито обяви и съобщения се пренебрегват';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count блокирани радиа',
+      one: '1 блокирано радио',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Няма блокирани радиа. Блокирайте радио от менюто му в Контакти или Открити, или подател от съобщение в канал.';
+
+  @override
+  String get block_about =>
+      'Блокирането променя само вашия телефон и радио: другите радиа все още чуват блокираното радио и ретранслаторите го предават.';
+
+  @override
+  String get block_radioToo =>
+      'Радиото ви също блокира тези радиа и уеб страницата му показва същия списък.';
+
+  @override
+  String get block_unblock => 'Отблокирай';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name е отблокиран';
+  }
+
+  @override
+  String get block_nameOnly => 'Съобщения в канали само по име';
 }

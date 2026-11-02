@@ -7648,4 +7648,76 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar.';
+
+  @override
+  String get block_blockRadio => 'Blockera den här radion';
+
+  @override
+  String get block_blockSender => 'Blockera avsändare';
+
+  @override
+  String block_title(String name) {
+    return 'Blockera $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Dess adverts ignoreras, den tas bort från dina kontakter, och dess direktmeddelanden och kanalmeddelanden under dess namn döljs. SOS-larm visas alltid.';
+
+  @override
+  String get block_bodyRadio =>
+      'Din radio blockerar den också: den ignorerar dess adverts även när telefonen inte är där, och vidarebefordrar dem aldrig.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Bara namnet är känt, så kanalmeddelanden under det namnet döljs. SOS-larm visas alltid.';
+
+  @override
+  String get block_confirm => 'Blockera';
+
+  @override
+  String block_blocked(String name) {
+    return '$name blockerad';
+  }
+
+  @override
+  String get block_screenTitle => 'Blockerade radioapparater';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Radioapparater vars adverts och meddelanden ignoreras';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count radioapparater blockerade',
+      one: '1 radio blockerad',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Inga radioapparater blockerade. Blockera en radio från dess meny i Kontakter eller Upptäckta, eller en avsändare från ett kanalmeddelande.';
+
+  @override
+  String get block_about =>
+      'Blockering påverkar bara din telefon och radio: andra radioapparater hör fortfarande den blockerade, och repeatrar vidarebefordrar den.';
+
+  @override
+  String get block_radioToo =>
+      'Din radio blockerar också dessa, och dess webbsida visar samma lista.';
+
+  @override
+  String get block_unblock => 'Avblockera';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name avblockerad';
+  }
+
+  @override
+  String get block_nameOnly => 'Kanalmeddelanden bara efter namn';
 }

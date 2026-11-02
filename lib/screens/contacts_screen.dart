@@ -23,6 +23,7 @@ import '../utils/dialog_utils.dart';
 import '../utils/disconnect_navigation_mixin.dart';
 import '../utils/emoji_utils.dart';
 import '../utils/route_transitions.dart';
+import '../widgets/block_radio_dialog.dart';
 import '../widgets/contact_visuals.dart';
 import '../widgets/list_filter_widget.dart';
 import '../widgets/empty_state.dart';
@@ -1826,6 +1827,27 @@ class _ContactsScreenState extends State<ContactsScreen>
               onTap: () {
                 Navigator.pop(sheetContext);
                 _confirmDelete(context, connector, contact);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.block,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              title: Text(
+                context.l10n.block_blockRadio,
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+              onTap: () {
+                Navigator.pop(sheetContext);
+                unawaited(
+                  confirmBlockRadio(
+                    context,
+                    connector,
+                    keyHex: contact.publicKeyHex,
+                    name: contact.name,
+                  ),
+                );
               },
             ),
             const SizedBox(height: 8),

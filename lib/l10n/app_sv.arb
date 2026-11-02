@@ -3766,5 +3766,22 @@
   "coverage_nextEither": "Nästa ping efter {distance} eller om {time}",
   "coverage_aboutSettings": "Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar.",
   "settings_clientRepeatRefused": "Radions firmware vidarebefordrar inte på {freq} MHz. Den tillåter vidarebefordran utan nät bara på {freqs} MHz. Välj någon av dem eller installera firmware som tillåter andra frekvenser.",
-  "settings_clientRepeatUseFreq": "Använd {freq} MHz"
+  "settings_clientRepeatUseFreq": "Använd {freq} MHz",
+  "block_blockRadio": "Blockera den här radion",
+  "block_blockSender": "Blockera avsändare",
+  "block_title": "Blockera {name}?",
+  "block_body": "Dess adverts ignoreras, den tas bort från dina kontakter, och dess direktmeddelanden och kanalmeddelanden under dess namn döljs. SOS-larm visas alltid.",
+  "block_bodyRadio": "Din radio blockerar den också: den ignorerar dess adverts även när telefonen inte är där, och vidarebefordrar dem aldrig.",
+  "block_bodyNameOnly": "Bara namnet är känt, så kanalmeddelanden under det namnet döljs. SOS-larm visas alltid.",
+  "block_confirm": "Blockera",
+  "block_blocked": "{name} blockerad",
+  "block_screenTitle": "Blockerade radioapparater",
+  "block_settingsSubtitle": "Radioapparater vars adverts och meddelanden ignoreras",
+  "block_settingsCount": "{count, plural, =1{1 radio blockerad} other{{count} radioapparater blockerade}}",
+  "block_empty": "Inga radioapparater blockerade. Blockera en radio från dess meny i Kontakter eller Upptäckta, eller en avsändare från ett kanalmeddelande.",
+  "block_about": "Blockering påverkar bara din telefon och radio: andra radioapparater hör fortfarande den blockerade, och repeatrar vidarebefordrar den.",
+  "block_radioToo": "Din radio blockerar också dessa, och dess webbsida visar samma lista.",
+  "block_unblock": "Avblockera",
+  "block_unblocked": "{name} avblockerad",
+  "block_nameOnly": "Kanalmeddelanden bara efter namn"
 }

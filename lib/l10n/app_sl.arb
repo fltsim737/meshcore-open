@@ -3772,5 +3772,22 @@
   "coverage_nextEither": "Naslednji ping po {distance} ali čez {time}",
   "coverage_aboutSettings": "Kako pogosto pošilja pinge (po razdalji, času ali kar je prej), spremeniš v ⋮ → Nastavitve pingov.",
   "settings_clientRepeatRefused": "Strojna programska oprema tega radia ne ponavlja na {freq} MHz. Ponavljanje zunaj omrežja dovoli le na {freqs} MHz. Uporabite eno od teh ali naložite programsko opremo, ki dovoli druge frekvence.",
-  "settings_clientRepeatUseFreq": "Uporabi {freq} MHz"
+  "settings_clientRepeatUseFreq": "Uporabi {freq} MHz",
+  "block_blockRadio": "Blokiraj ta radio",
+  "block_blockSender": "Blokiraj pošiljatelja",
+  "block_title": "Blokiram {name}?",
+  "block_body": "Njegova oznanila bodo prezrta, odstranjen bo iz stikov, njegova neposredna sporočila in sporočila na kanalih pod njegovim imenom pa bodo skrita. Opozorila SOS so vedno prikazana.",
+  "block_bodyRadio": "Vaš radio ga tudi blokira: prezre njegova oznanila tudi brez telefona in jih nikoli ne ponovi.",
+  "block_bodyNameOnly": "Znano je le ime, zato so skrita sporočila na kanalih pod tem imenom. Opozorila SOS so vedno prikazana.",
+  "block_confirm": "Blokiraj",
+  "block_blocked": "{name} blokiran",
+  "block_screenTitle": "Blokirani radii",
+  "block_settingsSubtitle": "Radii, katerih oznanila in sporočila so prezrta",
+  "block_settingsCount": "{count, plural, =1{1 blokiran radio} =2{2 blokirana radia} few{{count} blokirani radii} other{{count} blokiranih radiev}}",
+  "block_empty": "Ni blokiranih radiev. Radio blokirate v njegovem meniju v Stikih ali Odkritih, pošiljatelja pa v sporočilu na kanalu.",
+  "block_about": "Blokiranje spremeni le vaš telefon in radio: drugi radii blokirani radio še vedno slišijo, repetitorji pa ga prenašajo.",
+  "block_radioToo": "Vaš radio blokira tudi te radie, njegova spletna stran pa prikaže enak seznam.",
+  "block_unblock": "Odblokiraj",
+  "block_unblocked": "{name} odblokiran",
+  "block_nameOnly": "Sporočila na kanalih samo po imenu"
 }

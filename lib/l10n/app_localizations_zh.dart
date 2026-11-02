@@ -7217,4 +7217,68 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       '要更改 ping 的频率（按距离、按时间或先到者为准），请使用 ⋮ → Ping 设置。';
+
+  @override
+  String get block_blockRadio => '屏蔽此电台';
+
+  @override
+  String get block_blockSender => '屏蔽发送者';
+
+  @override
+  String block_title(String name) {
+    return '屏蔽 $name？';
+  }
+
+  @override
+  String get block_body => '将忽略它的广播，从联系人中移除，并隐藏它的私信和以它名义发送的频道消息。SOS 警报始终显示。';
+
+  @override
+  String get block_bodyRadio => '你的电台也会屏蔽它：即使手机不在也忽略它的广播，且从不转发。';
+
+  @override
+  String get block_bodyNameOnly => '只知道名字，因此会隐藏以此名字发送的频道消息。SOS 警报始终显示。';
+
+  @override
+  String get block_confirm => '屏蔽';
+
+  @override
+  String block_blocked(String name) {
+    return '已屏蔽 $name';
+  }
+
+  @override
+  String get block_screenTitle => '已屏蔽的电台';
+
+  @override
+  String get block_settingsSubtitle => '忽略其广播和消息的电台';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '已屏蔽 $count 个电台',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty => '没有屏蔽的电台。可在联系人或已发现的菜单中屏蔽电台，或在频道消息中屏蔽发送者。';
+
+  @override
+  String get block_about => '屏蔽只影响你的手机和电台：其他电台仍能听到被屏蔽的电台，中继器仍会转发它。';
+
+  @override
+  String get block_radioToo => '你的电台也会屏蔽这些电台，其网页显示相同的列表。';
+
+  @override
+  String get block_unblock => '取消屏蔽';
+
+  @override
+  String block_unblocked(String name) {
+    return '已取消屏蔽 $name';
+  }
+
+  @override
+  String get block_nameOnly => '仅按名字（频道消息）';
 }

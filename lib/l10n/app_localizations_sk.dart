@@ -7679,4 +7679,77 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Ako často pingovať (podľa vzdialenosti, času alebo toho, čo príde skôr), zmeníš v ⋮ → Nastavenia pingov.';
+
+  @override
+  String get block_blockRadio => 'Blokovať toto rádio';
+
+  @override
+  String get block_blockSender => 'Blokovať odosielateľa';
+
+  @override
+  String block_title(String name) {
+    return 'Blokovať $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Jeho oznámenia sa budú ignorovať, odstráni sa z kontaktov a jeho priame správy a správy v kanáloch pod jeho menom sa skryjú. Upozornenia SOS sa zobrazujú vždy.';
+
+  @override
+  String get block_bodyRadio =>
+      'Vaše rádio ho tiež blokuje: ignoruje jeho oznámenia aj bez telefónu a nikdy ich neopakuje.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Známe je len meno, preto sa skryjú správy v kanáloch pod týmto menom. Upozornenia SOS sa zobrazujú vždy.';
+
+  @override
+  String get block_confirm => 'Blokovať';
+
+  @override
+  String block_blocked(String name) {
+    return '$name zablokované';
+  }
+
+  @override
+  String get block_screenTitle => 'Zablokované rádiá';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Rádiá, ktorých oznámenia a správy sa ignorujú';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count zablokovaných rádií',
+      few: '$count zablokované rádiá',
+      one: '1 zablokované rádio',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Žiadne zablokované rádiá. Rádio zablokujete z jeho ponuky v Kontaktoch alebo Objavených, odosielateľa zo správy v kanáli.';
+
+  @override
+  String get block_about =>
+      'Blokovanie mení len váš telefón a rádio: ostatné rádiá zablokované rádio stále počujú a opakovače ho stále prenášajú.';
+
+  @override
+  String get block_radioToo =>
+      'Vaše rádio tiež blokuje tieto rádiá a jeho webová stránka zobrazuje rovnaký zoznam.';
+
+  @override
+  String get block_unblock => 'Odblokovať';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name odblokované';
+  }
+
+  @override
+  String get block_nameOnly => 'Správy v kanáloch len podľa mena';
 }

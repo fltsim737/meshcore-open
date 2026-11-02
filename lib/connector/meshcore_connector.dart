@@ -10,6 +10,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_blue_plus_platform_interface/flutter_blue_plus_platform_interface.dart';
 
 import '../storage/prefs_manager.dart';
+import '../models/blocked_radios.dart';
 import '../models/channel.dart';
 import '../models/channel_message.dart';
 import '../models/companion_radio_stats.dart';
@@ -295,6 +296,10 @@ class MeshCoreConnector extends ChangeNotifier {
   int? _currentSf;
   int? _currentCr;
   bool? _clientRepeat;
+
+  /// Radios the user blocked (10.2.4), kept on the phone for every radio.
+  final BlockedRadios _blocked = BlockedRadios();
+  bool _blocksSyncedThisConnection = false;
   MeshCoreRadioStateSnapshot? _rememberedNonRepeatRadioState;
   int? _firmwareVerCode;
   int _pathHashByteWidth = 1;
@@ -1854,6 +1859,7 @@ class MeshCoreConnector extends ChangeNotifier {
   }
 
   Future<void> loadContactCache() async {
+    _blocked.load(PrefsManager.instance.getString(BlockedRadios.prefsKey));
     _contactUrlImagesEnabled.clear();
     final cached = await _contactStore.loadContacts();
     _knownContactKeys
@@ -3895,6 +3901,7 @@ class MeshCoreConnector extends ChangeNotifier {
     _lastZeroHopAdvertLatitude = null;
     _lastZeroHopAdvertLongitude = null;
     _clientRepeat = null;
+    _blocksSyncedThisConnection = false;
     _rememberedNonRepeatRadioState = null;
     _firmwareVerCode = null;
     _allowedRepeatFreqRanges = null;
@@ -5252,6 +5259,127 @@ class MeshCoreConnector extends ChangeNotifier {
       channelSendQueueId: channelSendQueueId,
       waitForGenericAck: true,
     );
+  }
+
+  // ---------------------------------------------------------------------
+  // Blocked radios (10.2.4)
+  // ---------------------------------------------------------------------
+
+  /// Newest first.
+  List<BlockedRadio> get blockedRadios => _blocked.all;
+
+  bool isRadioBlocked(String keyHex) => _blocked.isKeyHexBlocked(keyHex);
+
+  /// The connected radio blocks radios itself (SOS radio firmware 1.8.6+):
+  /// it then also ignores their adverts while the phone is away, never
+  /// repeats them, and shares the list with its web page.
+  bool get radioCanBlock =>
+      _currentCustomVars?.containsKey('sos_block') ?? false;
+
+  void _saveBlocked() => unawaited(
+    PrefsManager.instance.setString(BlockedRadios.prefsKey, _blocked.toJson()),
+  );
+
+  /// Blocks a radio by its key ([keyHex], full or at least 12 hex digits),
+  /// or a channel sender by [name] alone when no key is known.
+  Future<bool> blockRadio({String? keyHex, required String name}) async {
+    final entry = _blocked.add(keyHex: keyHex, name: name);
+    if (entry == null) return false;
+    _saveBlocked();
+    final hex = entry.keyHex;
+    if (hex != null) {
+      bool matches(Contact c) => c.publicKeyHex.toLowerCase().startsWith(
+        hex.substring(0, BlockedRadios.prefixHexLength),
+      );
+      _discoveredContacts.removeWhere(matches);
+      unawaited(updateKnownDiscovered());
+      final contact = _contacts.where(matches).firstOrNull;
+      if (contact != null && isConnected) {
+        try {
+          await removeContact(contact);
+        } catch (e) {
+          appLogger.warn(
+            'Removing blocked contact failed: $e',
+            tag: 'Connector',
+          );
+        }
+      }
+      if (radioCanBlock) {
+        unawaited(_runRadioCli('block add $hex ${_cliName(entry.name)}'));
+      }
+    }
+    notifyListeners();
+    return true;
+  }
+
+  Future<void> unblockRadio(String id) async {
+    final entry = _blocked.byId(id);
+    if (entry == null || !_blocked.remove(id)) return;
+    _saveBlocked();
+    notifyListeners();
+    final hex = entry.keyHex;
+    if (hex != null && radioCanBlock) {
+      unawaited(
+        _runRadioCli(
+          'block del ${hex.substring(0, BlockedRadios.prefixHexLength)}',
+        ),
+      );
+    }
+  }
+
+  /// A name as the radio's CLI keeps it: one line, at most 31 bytes.
+  static String _cliName(String name) {
+    var n = name.replaceAll(RegExp(r'[\r\n|]'), ' ').trim();
+    while (utf8.encode(n).length > 31) {
+      n = n.substring(0, n.length - 1);
+    }
+    return n;
+  }
+
+  /// Runs a command on the radio's own CLI (CMD_RUN_CLI_COMMAND) and returns
+  /// its reply, or null when there's none in time.
+  Future<String?> _runRadioCli(String command) async {
+    if (!isConnected) return null;
+    try {
+      final reply = receivedFrames
+          .firstWhere((f) => f.isNotEmpty && f[0] == respCodeCliReply)
+          .timeout(const Duration(seconds: 5));
+      await sendFrame(buildRunCliCommandFrame(command));
+      final frame = await reply;
+      return utf8.decode(frame.sublist(1), allowMalformed: true);
+    } catch (e) {
+      appLogger.warn('Radio CLI "$command" failed: $e', tag: 'Connector');
+      return null;
+    }
+  }
+
+  /// On connecting to a radio that blocks: the phone's blocks go to the
+  /// radio, and the radio's (made on its web page) come to the phone.
+  Future<void> _syncBlocksWithRadio() async {
+    for (final b in _blocked.all) {
+      final hex = b.keyHex;
+      if (hex == null) continue;
+      await _runRadioCli('block add $hex ${_cliName(b.name)}');
+    }
+    var start = 0;
+    var changed = false;
+    for (var page = 0; page < 8; page++) {
+      final reply = await _runRadioCli('block list $start');
+      if (reply == null) break;
+      final (entries, more) = BlockedRadios.parseRadioList(reply);
+      for (final e in entries) {
+        if (!_blocked.isKeyHexBlocked(e.keyHex)) {
+          _blocked.add(keyHex: e.keyHex, name: e.name);
+          changed = true;
+        }
+      }
+      if (!more || entries.isEmpty) break;
+      start += entries.length;
+    }
+    if (changed) {
+      _saveBlocked();
+      notifyListeners();
+    }
   }
 
   Future<void> removeContact(
@@ -6984,6 +7112,7 @@ class MeshCoreConnector extends ChangeNotifier {
     if (contact == null || listEquals(contact.publicKey, _selfPublicKey)) {
       return;
     }
+    if (_blocked.isKeyBlocked(contact.publicKey)) return; // blocked: ignored
     _handleDiscovery(contact, frame);
     notifyListeners();
   }
@@ -7023,6 +7152,18 @@ class MeshCoreConnector extends ChangeNotifier {
           removeContact(contactTmp).catchError(
             (e) => appLogger.warn(
               'Failed to remove self contact: $e',
+              tag: 'Connector',
+            ),
+          ),
+        );
+        return;
+      }
+      if (_blocked.isKeyBlocked(contactTmp.publicKey)) {
+        // a blocked radio the radio added (auto-add): take it off again
+        unawaited(
+          removeContact(contactTmp).catchError(
+            (e) => appLogger.warn(
+              'Failed to remove blocked contact: $e',
               tag: 'Connector',
             ),
           ),
@@ -7314,6 +7455,12 @@ class MeshCoreConnector extends ChangeNotifier {
     }
 
     var message = _parseContactMessage(frame);
+
+    // a blocked radio's direct messages are dropped
+    final blockedPrefix = _extractSenderPrefix(frame);
+    if (blockedPrefix != null && _blocked.isKeyBlocked(blockedPrefix)) {
+      return;
+    }
 
     // Unknown sender: the firmware has already dropped this message from its
     // offline queue, so hold it until the sender's CONTACT frame arrives
@@ -7824,6 +7971,10 @@ class MeshCoreConnector extends ChangeNotifier {
             channelIndex: parsed.channelIndex,
           ),
         );
+        return;
+      }
+      // sent under a blocked radio's name (SOS alerts above are never blocked)
+      if (!parsed.isOutgoing && _blocked.isNameBlocked(parsed.senderName)) {
         return;
       }
       final contentHash = _computeContentHash(
@@ -9130,6 +9281,10 @@ class MeshCoreConnector extends ChangeNotifier {
     final buf = BufferReader(frame.sublist(1));
     try {
       _currentCustomVars = _parseKeyValueString(buf.readCString());
+      if (radioCanBlock && !_blocksSyncedThisConnection) {
+        _blocksSyncedThisConnection = true;
+        unawaited(_syncBlocksWithRadio());
+      }
       // Reflect current GPS state in the polling timer (handles initial
       // device state on connect as well as external CLI/USB toggles).
       if (_currentCustomVars?['gps'] == '1') {

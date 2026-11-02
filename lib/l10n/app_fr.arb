@@ -3905,5 +3905,22 @@
   "coverage_nextEither": "Prochain ping après {distance} ou dans {time}",
   "coverage_aboutSettings": "Pour changer la fréquence des pings (par distance, par durée ou au premier des deux), utilisez ⋮ → Réglages des pings.",
   "settings_clientRepeatRefused": "Le firmware de cette radio ne relaie pas sur {freq} MHz. Il n'autorise le relais hors réseau que sur {freqs} MHz. Utilisez l'une de ces fréquences ou installez sur la radio un firmware qui en autorise d'autres.",
-  "settings_clientRepeatUseFreq": "Utiliser {freq} MHz"
+  "settings_clientRepeatUseFreq": "Utiliser {freq} MHz",
+  "block_blockRadio": "Bloquer cette radio",
+  "block_blockSender": "Bloquer l'expéditeur",
+  "block_title": "Bloquer {name} ?",
+  "block_body": "Ses annonces seront ignorées, elle sera retirée de vos contacts, et ses messages directs ainsi que les messages de canal envoyés sous son nom seront masqués. Les alertes SOS sont toujours affichées.",
+  "block_bodyRadio": "Votre radio la bloque aussi : elle ignore ses annonces même quand votre téléphone n'est pas là, et ne les relaie jamais.",
+  "block_bodyNameOnly": "Seul son nom est connu : les messages de canal envoyés sous ce nom sont masqués. Les alertes SOS sont toujours affichées.",
+  "block_confirm": "Bloquer",
+  "block_blocked": "{name} bloquée",
+  "block_screenTitle": "Radios bloquées",
+  "block_settingsSubtitle": "Radios dont les annonces et messages sont ignorés",
+  "block_settingsCount": "{count, plural, =1{1 radio bloquée} other{{count} radios bloquées}}",
+  "block_empty": "Aucune radio bloquée. Bloquez une radio depuis son menu dans Contacts ou Découverts, ou un expéditeur depuis un message de canal.",
+  "block_about": "Bloquer ne change que votre téléphone et votre radio : les autres radios entendent toujours la radio bloquée, et les répéteurs la relaient toujours.",
+  "block_radioToo": "Votre radio bloque aussi ces radios, et sa page web affiche la même liste.",
+  "block_unblock": "Débloquer",
+  "block_unblocked": "{name} débloquée",
+  "block_nameOnly": "Messages de canal par nom seulement"
 }

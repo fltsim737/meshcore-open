@@ -7670,4 +7670,76 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen.';
+
+  @override
+  String get block_blockRadio => 'Deze radio blokkeren';
+
+  @override
+  String get block_blockSender => 'Afzender blokkeren';
+
+  @override
+  String block_title(String name) {
+    return '$name blokkeren?';
+  }
+
+  @override
+  String get block_body =>
+      'Zijn adverts worden genegeerd, hij wordt uit je contacten verwijderd, en zijn directe berichten en kanaalberichten onder zijn naam worden verborgen. SOS-alarmen worden altijd getoond.';
+
+  @override
+  String get block_bodyRadio =>
+      'Je radio blokkeert hem ook: die negeert zijn adverts ook als je telefoon er niet is, en geeft ze nooit door.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Alleen de naam is bekend, dus kanaalberichten onder deze naam worden verborgen. SOS-alarmen worden altijd getoond.';
+
+  @override
+  String get block_confirm => 'Blokkeren';
+
+  @override
+  String block_blocked(String name) {
+    return '$name geblokkeerd';
+  }
+
+  @override
+  String get block_screenTitle => 'Geblokkeerde radio\'s';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Radio\'s waarvan adverts en berichten worden genegeerd';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count radio\'s geblokkeerd',
+      one: '1 radio geblokkeerd',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Geen radio\'s geblokkeerd. Blokkeer een radio via zijn menu in Contacten of Ontdekt, of een afzender via een kanaalbericht.';
+
+  @override
+  String get block_about =>
+      'Blokkeren verandert alleen je telefoon en radio: andere radio\'s horen een geblokkeerde radio nog, en repeaters geven hem door.';
+
+  @override
+  String get block_radioToo =>
+      'Je radio blokkeert deze radio\'s ook, en zijn webpagina toont dezelfde lijst.';
+
+  @override
+  String get block_unblock => 'Deblokkeren';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name gedeblokkeerd';
+  }
+
+  @override
+  String get block_nameOnly => 'Kanaalberichten alleen op naam';
 }

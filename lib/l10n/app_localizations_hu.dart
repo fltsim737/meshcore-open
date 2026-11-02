@@ -7695,4 +7695,76 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get coverage_aboutSettings =>
       'A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod.';
+
+  @override
+  String get block_blockRadio => 'Rádió letiltása';
+
+  @override
+  String get block_blockSender => 'Feladó letiltása';
+
+  @override
+  String block_title(String name) {
+    return 'Letiltja: $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Hirdetéseit figyelmen kívül hagyja, eltávolítja a névjegyek közül, és elrejti a közvetlen üzeneteit és a nevével küldött csatornaüzeneteket. Az SOS riasztások mindig megjelennek.';
+
+  @override
+  String get block_bodyRadio =>
+      'A rádiója is letiltja: figyelmen kívül hagyja a hirdetéseit akkor is, ha a telefonja nincs a közelben, és soha nem továbbítja őket.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Csak a neve ismert, ezért a nevével küldött csatornaüzenetek rejtve maradnak. Az SOS riasztások mindig megjelennek.';
+
+  @override
+  String get block_confirm => 'Letiltás';
+
+  @override
+  String block_blocked(String name) {
+    return '$name letiltva';
+  }
+
+  @override
+  String get block_screenTitle => 'Letiltott rádiók';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Rádiók, amelyek hirdetéseit és üzeneteit figyelmen kívül hagyja';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count letiltott rádió',
+      one: '1 letiltott rádió',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Nincs letiltott rádió. Rádiót a Névjegyek vagy Felfedezett menüjéből, feladót csatornaüzenetből tilthat le.';
+
+  @override
+  String get block_about =>
+      'A letiltás csak a telefonját és rádióját érinti: más rádiók továbbra is hallják a letiltott rádiót, és a jelismétlők továbbítják.';
+
+  @override
+  String get block_radioToo =>
+      'A rádiója is letiltja ezeket a rádiókat, és a weboldala ugyanezt a listát mutatja.';
+
+  @override
+  String get block_unblock => 'Feloldás';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name feloldva';
+  }
+
+  @override
+  String get block_nameOnly => 'Csatornaüzenetek csak név szerint';
 }

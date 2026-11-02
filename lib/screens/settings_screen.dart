@@ -27,6 +27,7 @@ import '../widgets/radio_stats_entry.dart';
 import 'telemetry_screen.dart';
 import '../widgets/sync_progress_overlay.dart';
 import 'region_management_screen.dart';
+import 'blocked_radios_screen.dart';
 import '../utils/share_origin.dart';
 import '../utils/config_backup.dart';
 import '../utils/platform_info.dart';
@@ -554,6 +555,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
           title: l10n.settings_regionSettings,
           subtitle: l10n.settings_regionSettingsSubtitle,
           onTap: () => pushRegionManagementScreen(context),
+        ),
+        const Divider(height: 1, indent: 16),
+        MeshNavTile(
+          icon: Icons.block,
+          title: l10n.block_screenTitle,
+          subtitle: connector.blockedRadios.isEmpty
+              ? l10n.block_settingsSubtitle
+              : l10n.block_settingsCount(connector.blockedRadios.length),
+          onTap: () => pushBlockedRadiosScreen(context),
         ),
         const Divider(height: 1, indent: 16),
         MeshNavTile(

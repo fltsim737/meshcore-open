@@ -3905,5 +3905,22 @@
   "coverage_nextEither": "{distance} 移動するか {time} 後に次の ping",
   "coverage_aboutSettings": "ping の頻度（距離、時間、または先に来た方）は ⋮ → ping の設定 で変更できます。",
   "settings_clientRepeatRefused": "この無線機のファームウェアは {freq} MHz では中継しません。オフグリッド中継は {freqs} MHz でのみ可能です。これらのいずれかを使うか、他の周波数を許可するファームウェアを書き込んでください。",
-  "settings_clientRepeatUseFreq": "{freq} MHz を使用"
+  "settings_clientRepeatUseFreq": "{freq} MHz を使用",
+  "block_blockRadio": "この無線機をブロック",
+  "block_blockSender": "送信者をブロック",
+  "block_title": "{name} をブロックしますか？",
+  "block_body": "アドバートは無視され、連絡先から削除され、ダイレクトメッセージとその名前で送られたチャンネルメッセージは非表示になります。SOS アラートは常に表示されます。",
+  "block_bodyRadio": "無線機もブロックします。電話が離れていてもアドバートを無視し、中継しません。",
+  "block_bodyNameOnly": "名前しか分からないため、この名前で送られたチャンネルメッセージを非表示にします。SOS アラートは常に表示されます。",
+  "block_confirm": "ブロック",
+  "block_blocked": "{name} をブロックしました",
+  "block_screenTitle": "ブロックした無線機",
+  "block_settingsSubtitle": "アドバートとメッセージを無視する無線機",
+  "block_settingsCount": "{count, plural, other{{count} 台をブロック中}}",
+  "block_empty": "ブロックした無線機はありません。連絡先や検出済みのメニュー、またはチャンネルメッセージからブロックできます。",
+  "block_about": "ブロックは自分の電話と無線機だけに影響します。他の無線機には聞こえ、リピーターは中継します。",
+  "block_radioToo": "無線機もこれらをブロックし、そのウェブページにも同じ一覧が表示されます。",
+  "block_unblock": "ブロック解除",
+  "block_unblocked": "{name} のブロックを解除しました",
+  "block_nameOnly": "名前のみ（チャンネルメッセージ）"
 }

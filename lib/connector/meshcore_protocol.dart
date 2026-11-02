@@ -269,6 +269,11 @@ const int respCodeContactMsgRecvV3 = 16;
 const int respCodeChannelMsgRecvV3 = 17;
 const int respCodeChannelInfo = 18;
 const int respCodeCustomVars = 21;
+
+/// CMD_RUN_CLI_COMMAND (companion firmware v14+): a line for the radio's own
+/// CLI; the reply comes back as RESP_CODE_CLI_REPLY (text).
+const int cmdRunCliCommand = 66;
+const int respCodeCliReply = 29;
 const int respCodeAutoAddConfig = 25;
 const int respCodeAllowedRepeatFreq = 26;
 const int respCodeStats = 24;
@@ -587,6 +592,14 @@ Uint8List buildSendChannelTextMsgFrame(
   writer.writeUInt32LE(timestamp);
   writer.writeString(text);
   writer.writeByte(0);
+  return writer.toBytes();
+}
+
+// Build CMD_RUN_CLI_COMMAND frame
+Uint8List buildRunCliCommandFrame(String command) {
+  final writer = BufferWriter();
+  writer.writeByte(cmdRunCliCommand);
+  writer.writeBytes(Uint8List.fromList(utf8.encode(command)));
   return writer.toBytes();
 }
 

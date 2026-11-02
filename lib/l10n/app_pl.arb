@@ -3804,5 +3804,22 @@
   "coverage_nextEither": "Następny ping po przejechaniu {distance} lub za {time}",
   "coverage_aboutSettings": "Aby zmienić, jak często wysyłać pingi (według odległości, czasu lub tego, co nastąpi pierwsze), użyj ⋮ → Ustawienia pingów.",
   "settings_clientRepeatRefused": "Oprogramowanie tego radia nie przekazuje na {freq} MHz. Pozwala na przekazywanie poza siecią tylko na {freqs} MHz. Wybierz jedną z nich albo wgraj oprogramowanie, które pozwala na inne częstotliwości.",
-  "settings_clientRepeatUseFreq": "Użyj {freq} MHz"
+  "settings_clientRepeatUseFreq": "Użyj {freq} MHz",
+  "block_blockRadio": "Zablokuj to radio",
+  "block_blockSender": "Zablokuj nadawcę",
+  "block_title": "Zablokować {name}?",
+  "block_body": "Jego ogłoszenia będą pomijane, zostanie usunięte z kontaktów, a jego wiadomości bezpośrednie i wiadomości na kanałach pod jego nazwą będą ukryte. Alarmy SOS są zawsze pokazywane.",
+  "block_bodyRadio": "Twoje radio też je blokuje: pomija jego ogłoszenia nawet bez telefonu i nigdy ich nie przekazuje.",
+  "block_bodyNameOnly": "Znana jest tylko nazwa, więc ukrywane są wiadomości na kanałach pod tą nazwą. Alarmy SOS są zawsze pokazywane.",
+  "block_confirm": "Zablokuj",
+  "block_blocked": "Zablokowano {name}",
+  "block_screenTitle": "Zablokowane radia",
+  "block_settingsSubtitle": "Radia, których ogłoszenia i wiadomości są pomijane",
+  "block_settingsCount": "{count, plural, =1{1 zablokowane radio} few{{count} zablokowane radia} other{{count} zablokowanych radiów}}",
+  "block_empty": "Brak zablokowanych radiów. Zablokuj radio z jego menu w Kontaktach lub Wykrytych albo nadawcę z wiadomości na kanale.",
+  "block_about": "Blokada zmienia tylko twój telefon i radio: inne radia nadal słyszą zablokowane radio, a przemienniki je przekazują.",
+  "block_radioToo": "Twoje radio też blokuje te radia, a jego strona pokazuje tę samą listę.",
+  "block_unblock": "Odblokuj",
+  "block_unblocked": "Odblokowano {name}",
+  "block_nameOnly": "Wiadomości na kanałach tylko po nazwie"
 }

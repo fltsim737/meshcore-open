@@ -4,7 +4,7 @@ Both apps share the SOS code, so each release applies to both: `sos-<version>` f
 
 ## 10.2.4 (2026-11-02)
 
-Both apps, plus a channel option in SOS Voice.
+Both apps, plus a channel option in SOS Voice. Blocking works best with MeshCore SOS radio firmware 1.8.6.
 
 ### Australia (Narrow): the new default settings
 
@@ -18,6 +18,18 @@ Both apps, plus a channel option in SOS Voice.
 - **This depends on the radio's firmware.** Stock MeshCore companion firmware only allows Off-Grid Repeat on 433.000, 869.495 or 918.000 MHz, and refuses any other frequency. If it refuses, the app says which frequencies your radio allows and offers the nearest one, instead of a bare "not applied". Firmware that allows other frequencies repeats on them with no further change in the app.
 - The **Off-Grid 433**, **Off-Grid 869** and **Off-Grid 918** presets are now in the list, for radios with stock firmware.
 - Off-Grid Repeat makes your radio pass on everyone's packets, so use it where it's needed, not as a permanent repeater on a busy mesh.
+
+### Block a radio
+
+For a radio that floods the mesh with adverts, or keeps messaging you: a bot, for example.
+
+- **Block it from its menu:** long-press it in **Contacts** or **Discovered** and choose **Block this radio**, or long-press one of its channel messages and choose **Block sender**.
+- **What blocking does on your phone:** its adverts are ignored, so it no longer shows in Discovered or comes back into Contacts; it's taken off your radio's contacts; its direct messages are dropped; and channel messages sent under its name are hidden. **SOS alerts are always shown**, whoever sends them.
+- **Settings → Blocked radios** lists them, to unblock. The list is kept on your phone and applies to every radio you connect to.
+- **On a MeshCore SOS radio (firmware 1.8.6 or later) the radio blocks them too.** It then ignores their adverts even while your phone is away, never repeats them when Off-Grid Repeat is on, and drops channel messages sent under their name. The phone and the radio share one list: blocks made in the app go to the radio, and blocks made on the radio's web page come to the app.
+- **The radio's web page** has **Block this radio** in each contact's menu and a ⊘ button in **Discovered nearby**, and lists blocked radios in **Settings → Contact settings**. Up to 16 radios.
+- **What blocking can't do:** other radios still hear a blocked radio, and repeaters still pass it on. Blocking a radio on a repeater is not part of this release.
+- A channel message carries only the sender's name, not their key. **Block sender** uses the key of a contact with that name when there is one; otherwise it blocks the name alone, which hides that name's channel messages and nothing else. Someone else using the same name is hidden too, so unblock in **Settings → Blocked radios** if that happens.
 
 ### SOS Voice: choose whether a channel carries voice
 
