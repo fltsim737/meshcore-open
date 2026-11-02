@@ -7752,4 +7752,25 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Správy v kanáloch len podľa mena';
+
+  @override
+  String get chat_search => 'Hľadať v tomto čete';
+
+  @override
+  String get chat_searchHint => 'Hľadať správy a mená';
+
+  @override
+  String get chat_searchStart =>
+      'Napíšte slovo alebo meno. Každé slovo sa musí vyskytovať, v akomkoľvek poradí.';
+
+  @override
+  String get chat_searchNone => 'Žiadna správa sa nezhoduje.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Nájdené: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Prehľadávam históriu…';
 }

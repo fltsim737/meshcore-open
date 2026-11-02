@@ -7791,4 +7791,25 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Повідомлення в каналах лише за іменем';
+
+  @override
+  String get chat_search => 'Пошук у цьому чаті';
+
+  @override
+  String get chat_searchHint => 'Шукати повідомлення та імена';
+
+  @override
+  String get chat_searchStart =>
+      'Введіть слово або ім\'я. Кожне слово має траплятися, у будь-якому порядку.';
+
+  @override
+  String get chat_searchNone => 'Повідомлень не знайдено.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Знайдено: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Пошук в історії…';
 }

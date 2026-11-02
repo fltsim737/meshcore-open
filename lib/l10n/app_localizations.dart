@@ -12948,6 +12948,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Channel messages by name only'**
   String get block_nameOnly;
+
+  /// No description provided for @chat_search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search this chat'**
+  String get chat_search;
+
+  /// No description provided for @chat_searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search messages and names'**
+  String get chat_searchHint;
+
+  /// No description provided for @chat_searchStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a word or a name. Every word you type must appear, in any order.'**
+  String get chat_searchStart;
+
+  /// No description provided for @chat_searchNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages match.'**
+  String get chat_searchNone;
+
+  /// No description provided for @chat_searchCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} found'**
+  String chat_searchCount(int count);
+
+  /// No description provided for @chat_searchLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching the chat history…'**
+  String get chat_searchLoading;
 }
 
 class _AppLocalizationsDelegate

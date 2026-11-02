@@ -7756,4 +7756,25 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Sporočila na kanalih samo po imenu';
+
+  @override
+  String get chat_search => 'Išči v tem klepetu';
+
+  @override
+  String get chat_searchHint => 'Išči sporočila in imena';
+
+  @override
+  String get chat_searchStart =>
+      'Vpišite besedo ali ime. Vsaka beseda se mora pojaviti, v poljubnem vrstnem redu.';
+
+  @override
+  String get chat_searchNone => 'Nobeno sporočilo se ne ujema.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Najdenih: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Iskanje po zgodovini…';
 }

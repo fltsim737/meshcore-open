@@ -3788,5 +3788,11 @@
   "block_radioToo": "O seu rádio também bloqueia estes rádios e a sua página web mostra a mesma lista.",
   "block_unblock": "Desbloquear",
   "block_unblocked": "{name} desbloqueado",
-  "block_nameOnly": "Mensagens de canal só pelo nome"
+  "block_nameOnly": "Mensagens de canal só pelo nome",
+  "chat_search": "Pesquisar nesta conversa",
+  "chat_searchHint": "Pesquisar mensagens e nomes",
+  "chat_searchStart": "Escreva uma palavra ou um nome. Cada palavra tem de aparecer, por qualquer ordem.",
+  "chat_searchNone": "Nenhuma mensagem corresponde.",
+  "chat_searchCount": "{count} encontradas",
+  "chat_searchLoading": "A pesquisar o histórico…"
 }

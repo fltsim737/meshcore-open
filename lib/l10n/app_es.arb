@@ -3922,5 +3922,11 @@
   "block_radioToo": "Tu radio también bloquea estas radios y su página web muestra la misma lista.",
   "block_unblock": "Desbloquear",
   "block_unblocked": "{name} desbloqueada",
-  "block_nameOnly": "Mensajes de canal solo por nombre"
+  "block_nameOnly": "Mensajes de canal solo por nombre",
+  "chat_search": "Buscar en este chat",
+  "chat_searchHint": "Buscar mensajes y nombres",
+  "chat_searchStart": "Escribe una palabra o un nombre. Cada palabra debe aparecer, en cualquier orden.",
+  "chat_searchNone": "Ningún mensaje coincide.",
+  "chat_searchCount": "{count} encontrados",
+  "chat_searchLoading": "Buscando en el historial…"
 }

@@ -7281,4 +7281,24 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get block_nameOnly => '仅按名字（频道消息）';
+
+  @override
+  String get chat_search => '搜索此聊天';
+
+  @override
+  String get chat_searchHint => '搜索消息和名称';
+
+  @override
+  String get chat_searchStart => '输入一个词或名称。输入的每个词都必须出现,顺序不限。';
+
+  @override
+  String get chat_searchNone => '没有匹配的消息。';
+
+  @override
+  String chat_searchCount(int count) {
+    return '找到 $count 条';
+  }
+
+  @override
+  String get chat_searchLoading => '正在搜索聊天记录…';
 }

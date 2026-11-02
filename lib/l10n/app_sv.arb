@@ -3783,5 +3783,11 @@
   "block_radioToo": "Din radio blockerar också dessa, och dess webbsida visar samma lista.",
   "block_unblock": "Avblockera",
   "block_unblocked": "{name} avblockerad",
-  "block_nameOnly": "Kanalmeddelanden bara efter namn"
+  "block_nameOnly": "Kanalmeddelanden bara efter namn",
+  "chat_search": "Sök i den här chatten",
+  "chat_searchHint": "Sök meddelanden och namn",
+  "chat_searchStart": "Skriv ett ord eller ett namn. Varje ord måste finnas med, i valfri ordning.",
+  "chat_searchNone": "Inga meddelanden matchar.",
+  "chat_searchCount": "{count} hittade",
+  "chat_searchLoading": "Söker i historiken…"
 }

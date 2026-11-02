@@ -15,6 +15,7 @@ import '../models/community.dart';
 import '../storage/community_store.dart';
 import '../utils/platform_info.dart';
 import '../helpers/chat_scroll_controller.dart';
+import '../helpers/message_search.dart';
 import '../connector/meshcore_protocol.dart';
 import '../helpers/cyr2lat.dart';
 import '../helpers/gif_helper.dart';
@@ -39,6 +40,7 @@ import '../widgets/block_radio_dialog.dart';
 import '../widgets/received_image_message.dart';
 import '../widgets/chat_day_separator.dart';
 import '../widgets/empty_state.dart';
+import '../widgets/message_search_screen.dart';
 
 import '../widgets/chat_composer.dart';
 import '../widgets/chat_send_pipeline.dart';
@@ -105,6 +107,9 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
   final ChatSendGuard _sendGuard = ChatSendGuard();
   bool _channelSkipNextBottomSnap = false;
   String? _unreadDividerMessageId;
+  // the message a search jumped to, highlighted for a moment (10.2.6)
+  String? _searchHighlightId;
+  Timer? _searchHighlightTimer;
   _TranscriptLayout? _transcriptLayout;
   ReceivedImageStore? _watchedImageStore;
   int _imageStoreVersion = 0;
@@ -233,6 +238,7 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
     _textFieldFocusNode.removeListener(_onTextFieldFocusChange);
     _textFieldFocusNode.dispose();
     _textController.dispose();
+    _searchHighlightTimer?.cancel();
     _scrollController.dispose();
     super.dispose();
   }
@@ -251,6 +257,66 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
       _replyingToMessage = null;
       _useReplyRegion = false;
     });
+  }
+
+  /// Searches this channel's whole history, then jumps to the message picked
+  /// and highlights it for a moment (10.2.6).
+  Future<void> _openSearch() async {
+    final connector = context.read<MeshCoreConnector>();
+    final you = context.l10n.pathTrace_you;
+    final id = await MessageSearchScreen.open(
+      context,
+      title: context.l10n.chat_search,
+      load: () async => [
+        for (final m in await connector.allChannelMessages(widget.channel))
+          MessageSearchHit(
+            messageId: m.messageId,
+            sender: m.isOutgoing ? you : m.senderName,
+            text: m.translatedText == null
+                ? m.text
+                : '${m.text}\n${m.translatedText}',
+            time: m.shownTime,
+          ),
+      ],
+    );
+    if (id == null || !mounted) return;
+    _channelSkipNextBottomSnap =
+        true; // loading older pages mustn't snap back down
+    final found = await connector.loadChannelMessagesUntil(widget.channel, id);
+    if (!mounted) return;
+    if (!found) {
+      showDismissibleSnackBar(
+        context,
+        content: Text(context.l10n.chat_originalMessageNotFound),
+        duration: const Duration(seconds: 2),
+      );
+      return;
+    }
+    _searchHighlightTimer?.cancel();
+    setState(() => _searchHighlightId = id);
+    await WidgetsBinding.instance.endOfFrame;
+    if (!mounted) return;
+    final layout = _transcriptLayout;
+    final row = layout?.ids.indexOf(id) ?? -1;
+    final fraction = layout == null || row < 0 || layout.length == 0
+        ? 0.5
+        : row / layout.length;
+    final key = _messageKeys.putIfAbsent(id, GlobalKey.new);
+    await _scrollController.reveal(key, fraction: fraction);
+    _searchHighlightTimer = Timer(const Duration(seconds: 3), () {
+      if (mounted) setState(() => _searchHighlightId = null);
+    });
+  }
+
+  Widget _searchHighlight(String id, Widget bubble) {
+    if (id != _searchHighlightId) return bubble;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: bubble,
+    );
   }
 
   Future<void> _scrollToMessage(String messageId, {bool quiet = false}) async {
@@ -401,6 +467,11 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
         centerTitle: false,
         bottom: const SyncProgressAppBarBottom(),
         actions: [
+          IconButton(
+            tooltip: context.l10n.chat_search,
+            icon: const Icon(Icons.search),
+            onPressed: _openSearch,
+          ),
           Consumer<AppSettingsService>(
             builder: (context, settings, _) {
               final muteKey = widget.channel.muteKey;
@@ -545,16 +616,19 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
                                         (service) => service.scale,
                                       );
                                   final message = row.message;
-                                  final bubble = message != null
-                                      ? _buildMessageBubble(
-                                          message,
-                                          textScale,
-                                          urlImagesEnabled,
-                                        )
-                                      : _buildImageBubble(
-                                          row.image!,
-                                          textScale,
-                                        );
+                                  final bubble = _searchHighlight(
+                                    row.id,
+                                    message != null
+                                        ? _buildMessageBubble(
+                                            message,
+                                            textScale,
+                                            urlImagesEnabled,
+                                          )
+                                        : _buildImageBubble(
+                                            row.image!,
+                                            textScale,
+                                          ),
+                                  );
                                   final startsDay =
                                       index == rowCount - 1 ||
                                       !isSameChatDay(

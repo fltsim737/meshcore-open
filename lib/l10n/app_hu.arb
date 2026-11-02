@@ -3827,5 +3827,11 @@
   "block_radioToo": "A rádiója is letiltja ezeket a rádiókat, és a weboldala ugyanezt a listát mutatja.",
   "block_unblock": "Feloldás",
   "block_unblocked": "{name} feloldva",
-  "block_nameOnly": "Csatornaüzenetek csak név szerint"
+  "block_nameOnly": "Csatornaüzenetek csak név szerint",
+  "chat_search": "Keresés ebben a csevegésben",
+  "chat_searchHint": "Üzenetek és nevek keresése",
+  "chat_searchStart": "Írj be egy szót vagy nevet. Minden szónak szerepelnie kell, bármilyen sorrendben.",
+  "chat_searchNone": "Nincs egyező üzenet.",
+  "chat_searchCount": "{count} találat",
+  "chat_searchLoading": "Keresés az előzményekben…"
 }

@@ -3923,5 +3923,11 @@
   "block_radioToo": "Dein Funkgerät blockiert diese Funkgeräte auch, und seine Webseite zeigt dieselbe Liste.",
   "block_unblock": "Freigeben",
   "block_unblocked": "{name} freigegeben",
-  "block_nameOnly": "Kanalnachrichten nur nach Name"
+  "block_nameOnly": "Kanalnachrichten nur nach Name",
+  "chat_search": "Diesen Chat durchsuchen",
+  "chat_searchHint": "Nachrichten und Namen suchen",
+  "chat_searchStart": "Gib ein Wort oder einen Namen ein. Jedes Wort muss vorkommen, in beliebiger Reihenfolge.",
+  "chat_searchNone": "Keine Nachricht passt.",
+  "chat_searchCount": "{count} gefunden",
+  "chat_searchLoading": "Verlauf wird durchsucht…"
 }

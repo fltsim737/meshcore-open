@@ -3789,5 +3789,11 @@
   "block_radioToo": "Vaš radio blokira tudi te radie, njegova spletna stran pa prikaže enak seznam.",
   "block_unblock": "Odblokiraj",
   "block_unblocked": "{name} odblokiran",
-  "block_nameOnly": "Sporočila na kanalih samo po imenu"
+  "block_nameOnly": "Sporočila na kanalih samo po imenu",
+  "chat_search": "Išči v tem klepetu",
+  "chat_searchHint": "Išči sporočila in imena",
+  "chat_searchStart": "Vpišite besedo ali ime. Vsaka beseda se mora pojaviti, v poljubnem vrstnem redu.",
+  "chat_searchNone": "Nobeno sporočilo se ne ujema.",
+  "chat_searchCount": "Najdenih: {count}",
+  "chat_searchLoading": "Iskanje po zgodovini…"
 }

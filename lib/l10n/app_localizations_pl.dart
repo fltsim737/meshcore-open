@@ -7805,4 +7805,25 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Wiadomości na kanałach tylko po nazwie';
+
+  @override
+  String get chat_search => 'Szukaj w tym czacie';
+
+  @override
+  String get chat_searchHint => 'Szukaj wiadomości i nazw';
+
+  @override
+  String get chat_searchStart =>
+      'Wpisz słowo lub nazwę. Każde słowo musi wystąpić, w dowolnej kolejności.';
+
+  @override
+  String get chat_searchNone => 'Brak pasujących wiadomości.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Znaleziono: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Przeszukiwanie historii…';
 }

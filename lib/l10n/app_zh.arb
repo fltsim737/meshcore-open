@@ -3793,5 +3793,11 @@
   "block_radioToo": "你的电台也会屏蔽这些电台，其网页显示相同的列表。",
   "block_unblock": "取消屏蔽",
   "block_unblocked": "已取消屏蔽 {name}",
-  "block_nameOnly": "仅按名字（频道消息）"
+  "block_nameOnly": "仅按名字（频道消息）",
+  "chat_search": "搜索此聊天",
+  "chat_searchHint": "搜索消息和名称",
+  "chat_searchStart": "输入一个词或名称。输入的每个词都必须出现,顺序不限。",
+  "chat_searchNone": "没有匹配的消息。",
+  "chat_searchCount": "找到 {count} 条",
+  "chat_searchLoading": "正在搜索聊天记录…"
 }

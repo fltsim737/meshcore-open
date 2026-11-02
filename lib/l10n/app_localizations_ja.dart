@@ -7440,4 +7440,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get block_nameOnly => '名前のみ（チャンネルメッセージ）';
+
+  @override
+  String get chat_search => 'このチャットを検索';
+
+  @override
+  String get chat_searchHint => 'メッセージと名前を検索';
+
+  @override
+  String get chat_searchStart =>
+      '単語または名前を入力してください。入力した単語はすべて含まれている必要があります(順不同)。';
+
+  @override
+  String get chat_searchNone => '一致するメッセージはありません。';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count 件';
+  }
+
+  @override
+  String get chat_searchLoading => '履歴を検索中…';
 }

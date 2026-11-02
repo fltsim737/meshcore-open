@@ -3821,5 +3821,11 @@
   "block_radioToo": "Twoje radio też blokuje te radia, a jego strona pokazuje tę samą listę.",
   "block_unblock": "Odblokuj",
   "block_unblocked": "Odblokowano {name}",
-  "block_nameOnly": "Wiadomości na kanałach tylko po nazwie"
+  "block_nameOnly": "Wiadomości na kanałach tylko po nazwie",
+  "chat_search": "Szukaj w tym czacie",
+  "chat_searchHint": "Szukaj wiadomości i nazw",
+  "chat_searchStart": "Wpisz słowo lub nazwę. Każde słowo musi wystąpić, w dowolnej kolejności.",
+  "chat_searchNone": "Brak pasujących wiadomości.",
+  "chat_searchCount": "Znaleziono: {count}",
+  "chat_searchLoading": "Przeszukiwanie historii…"
 }

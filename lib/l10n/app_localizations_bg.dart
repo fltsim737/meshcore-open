@@ -7774,4 +7774,25 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Съобщения в канали само по име';
+
+  @override
+  String get chat_search => 'Търсене в този чат';
+
+  @override
+  String get chat_searchHint => 'Търсене на съобщения и имена';
+
+  @override
+  String get chat_searchStart =>
+      'Въведете дума или име. Всяка дума трябва да се среща, в произволен ред.';
+
+  @override
+  String get chat_searchNone => 'Няма съвпадащи съобщения.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Намерени: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Търсене в историята…';
 }

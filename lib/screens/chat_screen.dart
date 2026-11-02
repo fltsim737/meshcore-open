@@ -19,6 +19,8 @@ import '../helpers/reaction_helper.dart';
 import '../widgets/message_status_icon.dart';
 import '../widgets/empty_state.dart';
 import '../helpers/chat_scroll_controller.dart';
+import '../helpers/message_search.dart';
+import '../widgets/message_search_screen.dart';
 import '../helpers/gif_helper.dart';
 import '../models/channel_message.dart';
 import '../models/contact.dart';
@@ -81,6 +83,10 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _isLoadingOlder = false;
   MeshCoreConnector? _connector;
   Message? _pendingUnreadScrollTarget;
+  // the message a search jumped to, highlighted for a moment (10.2.6)
+  String? _searchHighlightId;
+  Timer? _searchHighlightTimer;
+  final GlobalKey _searchKey = GlobalKey();
   String? _unreadDividerMessageId;
   final ChatSendGuard _sendGuard = ChatSendGuard();
 
@@ -196,6 +202,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _textFieldFocusNode.removeListener(_onTextFieldFocusChange);
     _textFieldFocusNode.dispose();
     _textController.dispose();
+    _searchHighlightTimer?.cancel();
     _scrollController.dispose();
     super.dispose();
   }
@@ -254,6 +261,11 @@ class _ChatScreenState extends State<ChatScreen> {
         centerTitle: false,
         bottom: const SyncProgressAppBarBottom(),
         actions: [
+          IconButton(
+            tooltip: context.l10n.chat_search,
+            icon: const Icon(Icons.search),
+            onPressed: _openSearch,
+          ),
           const RadioStatsIconButton(),
           Consumer<MeshCoreConnector>(
             builder: (context, connector, _) {
@@ -477,15 +489,76 @@ class _ChatScreenState extends State<ChatScreen> {
                       ],
                     )
                   : bubble;
+              final shown = message.messageId == _searchHighlightId
+                  ? KeyedSubtree(
+                      key: _searchKey,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: child,
+                      ),
+                    )
+                  : child;
               if (identical(message, _pendingUnreadScrollTarget)) {
-                return KeyedSubtree(key: _unreadScrollKey, child: child);
+                return KeyedSubtree(key: _unreadScrollKey, child: shown);
               }
-              return child;
+              return shown;
             },
           );
         },
       ),
     );
+  }
+
+  /// Searches the whole history with this contact, then jumps to the message
+  /// picked and highlights it for a moment (10.2.6).
+  Future<void> _openSearch() async {
+    final connector = context.read<MeshCoreConnector>();
+    final you = context.l10n.pathTrace_you;
+    final them = _resolveContact(connector).name;
+    final id = await MessageSearchScreen.open(
+      context,
+      title: context.l10n.chat_search,
+      load: () async => [
+        for (final m in await connector.allMessages(widget.contact))
+          if (m.messageId.isNotEmpty && !m.isCli)
+            MessageSearchHit(
+              messageId: m.messageId,
+              sender: m.isOutgoing ? you : them,
+              text: m.translatedText == null
+                  ? m.text
+                  : '${m.text}\n${m.translatedText}',
+              time: m.shownTime,
+            ),
+      ],
+    );
+    if (id == null || !mounted) return;
+    final found = await connector.loadMessagesUntil(widget.contact, id);
+    if (!mounted) return;
+    if (!found) {
+      showDismissibleSnackBar(
+        context,
+        content: Text(context.l10n.chat_originalMessageNotFound),
+        duration: const Duration(seconds: 2),
+      );
+      return;
+    }
+    _searchHighlightTimer?.cancel();
+    setState(() => _searchHighlightId = id);
+    await WidgetsBinding.instance.endOfFrame;
+    if (!mounted) return;
+    final messages = connector.getMessages(widget.contact);
+    final i = messages.indexWhere((m) => m.messageId == id);
+    // the list is reversed: the newest is row 0
+    final fraction = messages.isEmpty || i < 0
+        ? 0.5
+        : (messages.length - 1 - i) / messages.length;
+    await _scrollController.reveal(_searchKey, fraction: fraction);
+    _searchHighlightTimer = Timer(const Duration(seconds: 3), () {
+      if (mounted) setState(() => _searchHighlightId = null);
+    });
   }
 
   void _markAsUnread(Message message) {

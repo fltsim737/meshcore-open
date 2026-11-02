@@ -3789,5 +3789,11 @@
   "block_radioToo": "Vaše rádio tiež blokuje tieto rádiá a jeho webová stránka zobrazuje rovnaký zoznam.",
   "block_unblock": "Odblokovať",
   "block_unblocked": "{name} odblokované",
-  "block_nameOnly": "Správy v kanáloch len podľa mena"
+  "block_nameOnly": "Správy v kanáloch len podľa mena",
+  "chat_search": "Hľadať v tomto čete",
+  "chat_searchHint": "Hľadať správy a mená",
+  "chat_searchStart": "Napíšte slovo alebo meno. Každé slovo sa musí vyskytovať, v akomkoľvek poradí.",
+  "chat_searchNone": "Žiadna správa sa nezhoduje.",
+  "chat_searchCount": "Nájdené: {count}",
+  "chat_searchLoading": "Prehľadávam históriu…"
 }

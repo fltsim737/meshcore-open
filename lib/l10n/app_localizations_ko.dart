@@ -7451,4 +7451,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get block_nameOnly => '이름으로만 (채널 메시지)';
+
+  @override
+  String get chat_search => '이 채팅 검색';
+
+  @override
+  String get chat_searchHint => '메시지와 이름 검색';
+
+  @override
+  String get chat_searchStart =>
+      '단어나 이름을 입력하세요. 입력한 모든 단어가 순서와 관계없이 포함되어야 합니다.';
+
+  @override
+  String get chat_searchNone => '일치하는 메시지가 없습니다.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count개 찾음';
+  }
+
+  @override
+  String get chat_searchLoading => '기록 검색 중…';
 }

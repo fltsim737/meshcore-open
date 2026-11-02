@@ -7767,4 +7767,25 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Csatornaüzenetek csak név szerint';
+
+  @override
+  String get chat_search => 'Keresés ebben a csevegésben';
+
+  @override
+  String get chat_searchHint => 'Üzenetek és nevek keresése';
+
+  @override
+  String get chat_searchStart =>
+      'Írj be egy szót vagy nevet. Minden szónak szerepelnie kell, bármilyen sorrendben.';
+
+  @override
+  String get chat_searchNone => 'Nincs egyező üzenet.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count találat';
+  }
+
+  @override
+  String get chat_searchLoading => 'Keresés az előzményekben…';
 }

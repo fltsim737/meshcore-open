@@ -3689,5 +3689,11 @@
   "block_radioToo": "Je radio blokkeert deze radio's ook, en zijn webpagina toont dezelfde lijst.",
   "block_unblock": "Deblokkeren",
   "block_unblocked": "{name} gedeblokkeerd",
-  "block_nameOnly": "Kanaalberichten alleen op naam"
+  "block_nameOnly": "Kanaalberichten alleen op naam",
+  "chat_search": "Deze chat doorzoeken",
+  "chat_searchHint": "Berichten en namen zoeken",
+  "chat_searchStart": "Typ een woord of een naam. Elk woord moet voorkomen, in willekeurige volgorde.",
+  "chat_searchNone": "Geen berichten gevonden.",
+  "chat_searchCount": "{count} gevonden",
+  "chat_searchLoading": "Geschiedenis doorzoeken…"
 }
