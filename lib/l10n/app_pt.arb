@@ -3829,5 +3829,11 @@
   "block_unblock": "Desbloquear",
   "block_unblocked": "{name} desbloqueado",
   "block_nameOnly": "Mensagens de canal só pelo nome",
-  "ptt_ownChannelHelp": "Só ouvem os seus clipes as pessoas deste canal que permitiram voz nele. Clipes até 10 s. Cada clipe usa tempo de emissão partilhado por toda a malha: mantenha-os curtos."
+  "ptt_ownChannelHelp": "Só ouvem os seus clipes as pessoas deste canal que permitiram voz nele. Clipes até 10 s. Cada clipe usa tempo de emissão partilhado por toda a malha: mantenha-os curtos.",
+  "chat_search": "Pesquisar nesta conversa",
+  "chat_searchHint": "Pesquisar mensagens e nomes",
+  "chat_searchStart": "Escreva uma palavra ou um nome. Cada palavra tem de aparecer, por qualquer ordem.",
+  "chat_searchNone": "Nenhuma mensagem corresponde.",
+  "chat_searchCount": "{count} encontradas",
+  "chat_searchLoading": "A pesquisar o histórico…"
 }

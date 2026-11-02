@@ -7907,4 +7907,25 @@ class AppLocalizationsSl extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Vaše posnetke slišijo le tisti na tem kanalu, ki so na njem dovolili glas. Posnetki do 10 s. Vsak posnetek porabi oddajni čas, ki si ga deli celo omrežje: naj bodo kratki.';
+
+  @override
+  String get chat_search => 'Išči v tem klepetu';
+
+  @override
+  String get chat_searchHint => 'Išči sporočila in imena';
+
+  @override
+  String get chat_searchStart =>
+      'Vpišite besedo ali ime. Vsaka beseda se mora pojaviti, v poljubnem vrstnem redu.';
+
+  @override
+  String get chat_searchNone => 'Nobeno sporočilo se ne ujema.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Najdenih: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Iskanje po zgodovini…';
 }

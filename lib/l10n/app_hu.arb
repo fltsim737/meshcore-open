@@ -3868,5 +3868,11 @@
   "block_unblock": "Feloldás",
   "block_unblocked": "{name} feloldva",
   "block_nameOnly": "Csatornaüzenetek csak név szerint",
-  "ptt_ownChannelHelp": "A klipjeit csak azok hallják ezen a csatornán, akik engedélyezték rajta a hangot. Legfeljebb 10 s-os klipek. Minden klip a teljes háló közös adásidejét használja: legyen rövid."
+  "ptt_ownChannelHelp": "A klipjeit csak azok hallják ezen a csatornán, akik engedélyezték rajta a hangot. Legfeljebb 10 s-os klipek. Minden klip a teljes háló közös adásidejét használja: legyen rövid.",
+  "chat_search": "Keresés ebben a csevegésben",
+  "chat_searchHint": "Üzenetek és nevek keresése",
+  "chat_searchStart": "Írj be egy szót vagy nevet. Minden szónak szerepelnie kell, bármilyen sorrendben.",
+  "chat_searchNone": "Nincs egyező üzenet.",
+  "chat_searchCount": "{count} találat",
+  "chat_searchLoading": "Keresés az előzményekben…"
 }

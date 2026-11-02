@@ -117,13 +117,13 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.2.5; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.2.6; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
 
 | Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
 |---|---|---|
-| Android (any phone) | `meshcore-open-sos-10.2.5.apk` | `meshcore-open-sos-voice-10.2.5.apk` |
-| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.2.5-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.2.5-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.2.5-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.2.5-windows-source.zip` |
+| Android (any phone) | `meshcore-open-sos-10.2.6.apk` | `meshcore-open-sos-voice-10.2.6.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.2.6-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.2.6-x86_64.AppImage` |
+| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.2.6-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.2.6-windows-source.zip` |
 
 ### Android
 
@@ -204,6 +204,10 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 ### 6. Talking (SOS Voice only)
 
 See [Voice](#voice-sos-voice-only) and [Push-to-talk](#push-to-talk-sos-voice-only) below.
+
+### Searching a chat
+
+Tap the **search** icon at the top of any channel or direct-message chat and type a word, a phrase or a name. Matching messages appear as you type, newest first, with your words highlighted; every word must appear, in any order, and capitals and accents don't matter. It searches the chat's whole history on the device, with no radio or internet needed. Tap a result to jump to that message in the chat, highlighted for a moment. (Since 10.2.6.)
 
 ### Naming your contacts
 

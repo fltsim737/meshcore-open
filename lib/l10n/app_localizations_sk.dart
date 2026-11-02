@@ -7903,4 +7903,25 @@ class AppLocalizationsSk extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Vaše klipy počujú len tí v tomto kanáli, ktorí v ňom povolili hlas. Klipy do 10 s. Každý klip zaberá vysielací čas celej siete: nech sú krátke.';
+
+  @override
+  String get chat_search => 'Hľadať v tomto čete';
+
+  @override
+  String get chat_searchHint => 'Hľadať správy a mená';
+
+  @override
+  String get chat_searchStart =>
+      'Napíšte slovo alebo meno. Každé slovo sa musí vyskytovať, v akomkoľvek poradí.';
+
+  @override
+  String get chat_searchNone => 'Žiadna správa sa nezhoduje.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Nájdené: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Prehľadávam históriu…';
 }

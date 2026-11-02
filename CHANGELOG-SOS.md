@@ -2,6 +2,17 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.6 (2026-11-02)
+
+Both apps.
+
+### Search a chat
+
+- **A search button at the top of every channel and direct-message chat.** Type a word, a phrase or a name, and the messages that match appear as you type, newest first. Each shows who sent it, when, and the message with your words highlighted.
+- **Every word you type must appear, in any order**, in the message or its sender's name, so *maya bridge* finds Maya's messages about the bridge. Capitals and accents don't matter: *jose* finds *José*.
+- **It searches the chat's whole history** kept on this device, not just the messages loaded on screen, and works without a radio or the internet. Translated messages are found by their translation too.
+- **Tap a result to go to that message in the chat.** Older messages are loaded as needed, and the message is highlighted for a moment, so you can read what came before and after it.
+
 ## 10.2.5 (2026-11-02)
 
 Fixes found while writing the user guide for 10.2.4.

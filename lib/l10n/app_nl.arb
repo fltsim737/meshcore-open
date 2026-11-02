@@ -3730,5 +3730,11 @@
   "block_unblock": "Deblokkeren",
   "block_unblocked": "{name} gedeblokkeerd",
   "block_nameOnly": "Kanaalberichten alleen op naam",
-  "ptt_ownChannelHelp": "Alleen wie op dit kanaal spraak heeft toegestaan, hoort je clips. Clips tot 10 s. Elke clip gebruikt zendtijd die het hele mesh deelt: houd ze kort."
+  "ptt_ownChannelHelp": "Alleen wie op dit kanaal spraak heeft toegestaan, hoort je clips. Clips tot 10 s. Elke clip gebruikt zendtijd die het hele mesh deelt: houd ze kort.",
+  "chat_search": "Deze chat doorzoeken",
+  "chat_searchHint": "Berichten en namen zoeken",
+  "chat_searchStart": "Typ een woord of een naam. Elk woord moet voorkomen, in willekeurige volgorde.",
+  "chat_searchNone": "Geen berichten gevonden.",
+  "chat_searchCount": "{count} gevonden",
+  "chat_searchLoading": "Geschiedenis doorzoeken…"
 }

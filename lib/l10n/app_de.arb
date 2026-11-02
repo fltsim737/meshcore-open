@@ -3964,5 +3964,11 @@
   "block_unblock": "Freigeben",
   "block_unblocked": "{name} freigegeben",
   "block_nameOnly": "Kanalnachrichten nur nach Name",
-  "ptt_ownChannelHelp": "Nur wer in diesem Kanal Sprache erlaubt hat, hört deine Clips. Clips bis 10 s. Jeder Clip belegt Sendezeit, die sich das ganze Mesh teilt: halte sie kurz."
+  "ptt_ownChannelHelp": "Nur wer in diesem Kanal Sprache erlaubt hat, hört deine Clips. Clips bis 10 s. Jeder Clip belegt Sendezeit, die sich das ganze Mesh teilt: halte sie kurz.",
+  "chat_search": "Diesen Chat durchsuchen",
+  "chat_searchHint": "Nachrichten und Namen suchen",
+  "chat_searchStart": "Gib ein Wort oder einen Namen ein. Jedes Wort muss vorkommen, in beliebiger Reihenfolge.",
+  "chat_searchNone": "Keine Nachricht passt.",
+  "chat_searchCount": "{count} gefunden",
+  "chat_searchLoading": "Verlauf wird durchsucht…"
 }

@@ -7948,4 +7948,25 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Nur wer in diesem Kanal Sprache erlaubt hat, hört deine Clips. Clips bis 10 s. Jeder Clip belegt Sendezeit, die sich das ganze Mesh teilt: halte sie kurz.';
+
+  @override
+  String get chat_search => 'Diesen Chat durchsuchen';
+
+  @override
+  String get chat_searchHint => 'Nachrichten und Namen suchen';
+
+  @override
+  String get chat_searchStart =>
+      'Gib ein Wort oder einen Namen ein. Jedes Wort muss vorkommen, in beliebiger Reihenfolge.';
+
+  @override
+  String get chat_searchNone => 'Keine Nachricht passt.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count gefunden';
+  }
+
+  @override
+  String get chat_searchLoading => 'Verlauf wird durchsucht…';
 }

@@ -7918,4 +7918,25 @@ class AppLocalizationsHu extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'A klipjeit csak azok hallják ezen a csatornán, akik engedélyezték rajta a hangot. Legfeljebb 10 s-os klipek. Minden klip a teljes háló közös adásidejét használja: legyen rövid.';
+
+  @override
+  String get chat_search => 'Keresés ebben a csevegésben';
+
+  @override
+  String get chat_searchHint => 'Üzenetek és nevek keresése';
+
+  @override
+  String get chat_searchStart =>
+      'Írj be egy szót vagy nevet. Minden szónak szerepelnie kell, bármilyen sorrendben.';
+
+  @override
+  String get chat_searchNone => 'Nincs egyező üzenet.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count találat';
+  }
+
+  @override
+  String get chat_searchLoading => 'Keresés az előzményekben…';
 }

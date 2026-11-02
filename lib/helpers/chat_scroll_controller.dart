@@ -68,6 +68,39 @@ class ChatScrollController extends ScrollController {
     WidgetsBinding.instance.addPostFrameCallback((_) => onJumped());
   }
 
+  /// Brings the widget under [key] into view (10.2.6, chat search). Message
+  /// heights vary, so it first jumps to [fraction] of the list (0 the newest,
+  /// 1 the oldest), then steps outwards a screen at a time until the widget
+  /// is built, and centres it. False if it never appears.
+  Future<bool> reveal(GlobalKey key, {required double fraction}) async {
+    if (!hasClients) return false;
+    Future<void> frame() => WidgetsBinding.instance.endOfFrame;
+    if (key.currentContext == null) {
+      final max = position.maxScrollExtent;
+      jumpTo((max * fraction.clamp(0.0, 1.0)).clamp(0.0, max));
+      await frame();
+    }
+    final step = position.viewportDimension * 0.8;
+    final base = hasClients ? offset : 0.0;
+    for (var i = 1; key.currentContext == null && i <= 80; i++) {
+      if (!hasClients) return false;
+      final reach = step * ((i + 1) ~/ 2);
+      final target = base + (i.isOdd ? reach : -reach);
+      if (target < -step && target > position.maxScrollExtent + step) break;
+      jumpTo(target.clamp(0.0, position.maxScrollExtent));
+      await frame();
+    }
+    final ctx = key.currentContext;
+    if (ctx == null || !ctx.mounted) return false;
+    await Scrollable.ensureVisible(
+      ctx,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      alignment: 0.4,
+    );
+    return true;
+  }
+
   void scrollToBottomIfAtBottom() {
     // Only scroll if jump button is NOT showing (i.e., already at bottom)
     if (!showJumpToBottom.value && hasClients && position.maxScrollExtent > 0) {

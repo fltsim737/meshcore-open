@@ -7871,4 +7871,25 @@ class AppLocalizationsSv extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Bara de i den här kanalen som har tillåtit röst där hör dina klipp. Klipp upp till 10 s. Varje klipp tar sändningstid som hela nätet delar: håll dem korta.';
+
+  @override
+  String get chat_search => 'Sök i den här chatten';
+
+  @override
+  String get chat_searchHint => 'Sök meddelanden och namn';
+
+  @override
+  String get chat_searchStart =>
+      'Skriv ett ord eller ett namn. Varje ord måste finnas med, i valfri ordning.';
+
+  @override
+  String get chat_searchNone => 'Inga meddelanden matchar.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count hittade';
+  }
+
+  @override
+  String get chat_searchLoading => 'Söker i historiken…';
 }

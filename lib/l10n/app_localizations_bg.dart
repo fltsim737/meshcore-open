@@ -7925,4 +7925,25 @@ class AppLocalizationsBg extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Клиповете ви чуват само хората в този канал, които са разрешили глас в него. Клипове до 10 s. Всеки клип заема ефир, споделян от цялата мрежа: правете ги кратки.';
+
+  @override
+  String get chat_search => 'Търсене в този чат';
+
+  @override
+  String get chat_searchHint => 'Търсене на съобщения и имена';
+
+  @override
+  String get chat_searchStart =>
+      'Въведете дума или име. Всяка дума трябва да се среща, в произволен ред.';
+
+  @override
+  String get chat_searchNone => 'Няма съвпадащи съобщения.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Намерени: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Търсене в историята…';
 }

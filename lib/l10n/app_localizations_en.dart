@@ -7851,4 +7851,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Only people on this channel who have allowed voice on it hear your clips. Clips up to 10 s. Every clip uses airtime the whole mesh shares: keep them short.';
+
+  @override
+  String get chat_search => 'Search this chat';
+
+  @override
+  String get chat_searchHint => 'Search messages and names';
+
+  @override
+  String get chat_searchStart =>
+      'Type a word or a name. Every word you type must appear, in any order.';
+
+  @override
+  String get chat_searchNone => 'No messages match.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count found';
+  }
+
+  @override
+  String get chat_searchLoading => 'Searching the chat history…';
 }

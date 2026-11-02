@@ -3830,5 +3830,11 @@
   "block_unblock": "Odblokovať",
   "block_unblocked": "{name} odblokované",
   "block_nameOnly": "Správy v kanáloch len podľa mena",
-  "ptt_ownChannelHelp": "Vaše klipy počujú len tí v tomto kanáli, ktorí v ňom povolili hlas. Klipy do 10 s. Každý klip zaberá vysielací čas celej siete: nech sú krátke."
+  "ptt_ownChannelHelp": "Vaše klipy počujú len tí v tomto kanáli, ktorí v ňom povolili hlas. Klipy do 10 s. Každý klip zaberá vysielací čas celej siete: nech sú krátke.",
+  "chat_search": "Hľadať v tomto čete",
+  "chat_searchHint": "Hľadať správy a mená",
+  "chat_searchStart": "Napíšte slovo alebo meno. Každé slovo sa musí vyskytovať, v akomkoľvek poradí.",
+  "chat_searchNone": "Žiadna správa sa nezhoduje.",
+  "chat_searchCount": "Nájdené: {count}",
+  "chat_searchLoading": "Prehľadávam históriu…"
 }

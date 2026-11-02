@@ -7944,4 +7944,25 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Ваши клипы слышат только те в этом канале, кто разрешил в нём голос. Клипы до 10 с. Каждый клип занимает эфир всей сети: говорите коротко.';
+
+  @override
+  String get chat_search => 'Поиск в этом чате';
+
+  @override
+  String get chat_searchHint => 'Искать сообщения и имена';
+
+  @override
+  String get chat_searchStart =>
+      'Введите слово или имя. Каждое слово должно встречаться, в любом порядке.';
+
+  @override
+  String get chat_searchNone => 'Сообщений не найдено.';
+
+  @override
+  String chat_searchCount(int count) {
+    return 'Найдено: $count';
+  }
+
+  @override
+  String get chat_searchLoading => 'Поиск по истории…';
 }

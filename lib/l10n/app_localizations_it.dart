@@ -7938,4 +7938,25 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get ptt_ownChannelHelp =>
       'Solo chi è su questo canale e vi ha consentito la voce sente i tuoi clip. Clip fino a 10 s. Ogni clip usa tempo di trasmissione condiviso da tutta la rete: tienili brevi.';
+
+  @override
+  String get chat_search => 'Cerca in questa chat';
+
+  @override
+  String get chat_searchHint => 'Cerca messaggi e nomi';
+
+  @override
+  String get chat_searchStart =>
+      'Scrivi una parola o un nome. Ogni parola deve comparire, in qualsiasi ordine.';
+
+  @override
+  String get chat_searchNone => 'Nessun messaggio corrisponde.';
+
+  @override
+  String chat_searchCount(int count) {
+    return '$count trovati';
+  }
+
+  @override
+  String get chat_searchLoading => 'Ricerca nella cronologia…';
 }

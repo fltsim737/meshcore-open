@@ -3830,5 +3830,11 @@
   "block_unblock": "Odblokiraj",
   "block_unblocked": "{name} odblokiran",
   "block_nameOnly": "Sporočila na kanalih samo po imenu",
-  "ptt_ownChannelHelp": "Vaše posnetke slišijo le tisti na tem kanalu, ki so na njem dovolili glas. Posnetki do 10 s. Vsak posnetek porabi oddajni čas, ki si ga deli celo omrežje: naj bodo kratki."
+  "ptt_ownChannelHelp": "Vaše posnetke slišijo le tisti na tem kanalu, ki so na njem dovolili glas. Posnetki do 10 s. Vsak posnetek porabi oddajni čas, ki si ga deli celo omrežje: naj bodo kratki.",
+  "chat_search": "Išči v tem klepetu",
+  "chat_searchHint": "Išči sporočila in imena",
+  "chat_searchStart": "Vpišite besedo ali ime. Vsaka beseda se mora pojaviti, v poljubnem vrstnem redu.",
+  "chat_searchNone": "Nobeno sporočilo se ne ujema.",
+  "chat_searchCount": "Najdenih: {count}",
+  "chat_searchLoading": "Iskanje po zgodovini…"
 }

@@ -1128,6 +1128,69 @@ class MeshCoreConnector extends ChangeNotifier {
     return _channelMessages[_canonicalSlot(channel.index)] ?? [];
   }
 
+  // ---------------------------------------------------------------------
+  // Chat search (10.2.6): the whole stored history, not just the window
+  // ---------------------------------------------------------------------
+
+  /// Every message stored for [channel], oldest first, with any in memory
+  /// that isn't saved yet.
+  Future<List<ChannelMessage>> allChannelMessages(Channel channel) async {
+    final slot = _canonicalSlot(channel.index);
+    final inMemory = _channelMessages[slot] ?? const <ChannelMessage>[];
+    final channelId = _channelIdForSlot(slot);
+    if (channelId == null) return List.of(inMemory);
+    final stored = _bindToSlot(
+      await _channelMessageStore.loadChannelMessages(channelId),
+      slot,
+    );
+    final ids = {for (final m in stored) m.messageId};
+    return [
+      ...stored,
+      for (final m in inMemory)
+        if (!ids.contains(m.messageId)) m,
+    ];
+  }
+
+  /// Every message stored with [contact], oldest first, with any in memory
+  /// that isn't saved yet.
+  Future<List<Message>> allMessages(Contact contact) async {
+    final key = contact.publicKeyHex;
+    final inMemory = _conversations[key] ?? const <Message>[];
+    final stored = await _messageStore.loadMessages(key);
+    final ids = {for (final m in stored) m.messageId};
+    return [
+      ...stored,
+      for (final m in inMemory)
+        if (m.messageId.isEmpty || !ids.contains(m.messageId)) m,
+    ];
+  }
+
+  /// Loads older pages of [channel] until [messageId] is in memory; false if
+  /// it isn't in the history at all.
+  Future<bool> loadChannelMessagesUntil(
+    Channel channel,
+    String messageId,
+  ) async {
+    bool loaded() =>
+        getChannelMessages(channel).any((m) => m.messageId == messageId);
+    while (!loaded()) {
+      final older = await loadOlderChannelMessages(channel.index, count: 200);
+      if (older.isEmpty) return loaded();
+    }
+    return true;
+  }
+
+  /// Loads older pages with [contact] until [messageId] is in memory; false
+  /// if it isn't in the history at all.
+  Future<bool> loadMessagesUntil(Contact contact, String messageId) async {
+    bool loaded() => getMessages(contact).any((m) => m.messageId == messageId);
+    while (!loaded()) {
+      final older = await loadOlderMessages(contact.publicKeyHex, count: 200);
+      if (older.isEmpty) return loaded();
+    }
+    return true;
+  }
+
   Future<void> deleteChannelMessage(ChannelMessage message) async {
     final channelIndex = message.channelIndex;
     if (channelIndex == null) return;

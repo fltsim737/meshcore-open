@@ -3963,5 +3963,11 @@
   "block_unblock": "차단 해제",
   "block_unblocked": "{name} 차단 해제됨",
   "block_nameOnly": "이름으로만 (채널 메시지)",
-  "ptt_ownChannelHelp": "이 채널에서 음성을 허용한 사람만 클립을 듣습니다. 클립은 최대 10초. 모든 클립은 메시 전체가 공유하는 방송 시간을 씁니다. 짧게 하세요."
+  "ptt_ownChannelHelp": "이 채널에서 음성을 허용한 사람만 클립을 듣습니다. 클립은 최대 10초. 모든 클립은 메시 전체가 공유하는 방송 시간을 씁니다. 짧게 하세요.",
+  "chat_search": "이 채팅 검색",
+  "chat_searchHint": "메시지와 이름 검색",
+  "chat_searchStart": "단어나 이름을 입력하세요. 입력한 모든 단어가 순서와 관계없이 포함되어야 합니다.",
+  "chat_searchNone": "일치하는 메시지가 없습니다.",
+  "chat_searchCount": "{count}개 찾음",
+  "chat_searchLoading": "기록 검색 중…"
 }

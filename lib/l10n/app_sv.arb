@@ -3824,5 +3824,11 @@
   "block_unblock": "Avblockera",
   "block_unblocked": "{name} avblockerad",
   "block_nameOnly": "Kanalmeddelanden bara efter namn",
-  "ptt_ownChannelHelp": "Bara de i den här kanalen som har tillåtit röst där hör dina klipp. Klipp upp till 10 s. Varje klipp tar sändningstid som hela nätet delar: håll dem korta."
+  "ptt_ownChannelHelp": "Bara de i den här kanalen som har tillåtit röst där hör dina klipp. Klipp upp till 10 s. Varje klipp tar sändningstid som hela nätet delar: håll dem korta.",
+  "chat_search": "Sök i den här chatten",
+  "chat_searchHint": "Sök meddelanden och namn",
+  "chat_searchStart": "Skriv ett ord eller ett namn. Varje ord måste finnas med, i valfri ordning.",
+  "chat_searchNone": "Inga meddelanden matchar.",
+  "chat_searchCount": "{count} hittade",
+  "chat_searchLoading": "Söker i historiken…"
 }
