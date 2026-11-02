@@ -3850,5 +3850,22 @@
   "channels_allowVoiceOn": "Adóvevős beszéd a csatorna csevegésében. A klipeket csak azok hallják, akik szintén engedélyezték rajta a hangot.",
   "channels_allowVoiceOff": "Csak szöveg. A csatornán küldött hangklipeket figyelmen kívül hagyja.",
   "channels_allowVoiceAction": "Hang engedélyezése",
-  "channels_denyVoice": "Hang tiltása"
+  "channels_denyVoice": "Hang tiltása",
+  "block_blockRadio": "Rádió letiltása",
+  "block_blockSender": "Feladó letiltása",
+  "block_title": "Letiltja: {name}?",
+  "block_body": "Hirdetéseit figyelmen kívül hagyja, eltávolítja a névjegyek közül, és elrejti a közvetlen üzeneteit és a nevével küldött csatornaüzeneteket. Az SOS riasztások mindig megjelennek.",
+  "block_bodyRadio": "A rádiója is letiltja: figyelmen kívül hagyja a hirdetéseit akkor is, ha a telefonja nincs a közelben, és soha nem továbbítja őket.",
+  "block_bodyNameOnly": "Csak a neve ismert, ezért a nevével küldött csatornaüzenetek rejtve maradnak. Az SOS riasztások mindig megjelennek.",
+  "block_confirm": "Letiltás",
+  "block_blocked": "{name} letiltva",
+  "block_screenTitle": "Letiltott rádiók",
+  "block_settingsSubtitle": "Rádiók, amelyek hirdetéseit és üzeneteit figyelmen kívül hagyja",
+  "block_settingsCount": "{count, plural, =1{1 letiltott rádió} other{{count} letiltott rádió}}",
+  "block_empty": "Nincs letiltott rádió. Rádiót a Névjegyek vagy Felfedezett menüjéből, feladót csatornaüzenetből tilthat le.",
+  "block_about": "A letiltás csak a telefonját és rádióját érinti: más rádiók továbbra is hallják a letiltott rádiót, és a jelismétlők továbbítják.",
+  "block_radioToo": "A rádiója is letiltja ezeket a rádiókat, és a weboldala ugyanezt a listát mutatja.",
+  "block_unblock": "Feloldás",
+  "block_unblocked": "{name} feloldva",
+  "block_nameOnly": "Csatornaüzenetek csak név szerint"
 }

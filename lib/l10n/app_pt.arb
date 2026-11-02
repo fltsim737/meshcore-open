@@ -3811,5 +3811,22 @@
   "channels_allowVoiceOn": "Premir para falar no chat deste canal. Só quem também permitiu voz nele ouve os clipes.",
   "channels_allowVoiceOff": "Só texto. Os clipes de voz enviados neste canal são ignorados.",
   "channels_allowVoiceAction": "Permitir voz",
-  "channels_denyVoice": "Não permitir voz"
+  "channels_denyVoice": "Não permitir voz",
+  "block_blockRadio": "Bloquear este rádio",
+  "block_blockSender": "Bloquear remetente",
+  "block_title": "Bloquear {name}?",
+  "block_body": "Os seus anúncios serão ignorados, será removido dos contactos, e as suas mensagens diretas e as mensagens de canal enviadas com o seu nome ficam ocultas. Os alertas SOS são sempre mostrados.",
+  "block_bodyRadio": "O seu rádio também o bloqueia: ignora os seus anúncios mesmo sem o telefone e nunca os repete.",
+  "block_bodyNameOnly": "Só o nome é conhecido, por isso ficam ocultas as mensagens de canal enviadas com esse nome. Os alertas SOS são sempre mostrados.",
+  "block_confirm": "Bloquear",
+  "block_blocked": "{name} bloqueado",
+  "block_screenTitle": "Rádios bloqueados",
+  "block_settingsSubtitle": "Rádios cujos anúncios e mensagens são ignorados",
+  "block_settingsCount": "{count, plural, =1{1 rádio bloqueado} other{{count} rádios bloqueados}}",
+  "block_empty": "Nenhum rádio bloqueado. Bloqueie um rádio no seu menu em Contactos ou Descobertos, ou um remetente numa mensagem de canal.",
+  "block_about": "Bloquear só muda o seu telefone e rádio: os outros rádios continuam a ouvir o rádio bloqueado e os repetidores continuam a passá-lo.",
+  "block_radioToo": "O seu rádio também bloqueia estes rádios e a sua página web mostra a mesma lista.",
+  "block_unblock": "Desbloquear",
+  "block_unblocked": "{name} desbloqueado",
+  "block_nameOnly": "Mensagens de canal só pelo nome"
 }

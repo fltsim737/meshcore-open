@@ -7775,4 +7775,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Don\'t allow voice';
+
+  @override
+  String get block_blockRadio => 'Block this radio';
+
+  @override
+  String get block_blockSender => 'Block sender';
+
+  @override
+  String block_title(String name) {
+    return 'Block $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Its adverts will be ignored, it\'s removed from your contacts, and its direct messages and any channel messages sent under its name are hidden. SOS alerts are always shown.';
+
+  @override
+  String get block_bodyRadio =>
+      'Your radio blocks it too: it ignores its adverts even while your phone is away, and never repeats them.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Only its name is known, so channel messages sent under this name are hidden. SOS alerts are always shown.';
+
+  @override
+  String get block_confirm => 'Block';
+
+  @override
+  String block_blocked(String name) {
+    return '$name blocked';
+  }
+
+  @override
+  String get block_screenTitle => 'Blocked radios';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Radios whose adverts and messages are ignored';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count radios blocked',
+      one: '1 radio blocked',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'No radios blocked. Block a radio from its menu in Contacts or Discovered, or a sender from a channel message.';
+
+  @override
+  String get block_about =>
+      'Blocking changes only your phone and radio: other radios still hear a blocked radio, and repeaters still pass it on.';
+
+  @override
+  String get block_radioToo =>
+      'Your radio blocks these radios too, and its web page shows the same list.';
+
+  @override
+  String get block_unblock => 'Unblock';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name unblocked';
+  }
+
+  @override
+  String get block_nameOnly => 'Channel messages by name only';
 }

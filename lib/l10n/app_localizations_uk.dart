@@ -7865,4 +7865,77 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Не дозволяти голос';
+
+  @override
+  String get block_blockRadio => 'Заблокувати це радіо';
+
+  @override
+  String get block_blockSender => 'Заблокувати відправника';
+
+  @override
+  String block_title(String name) {
+    return 'Заблокувати $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Його оголошення ігноруватимуться, його буде видалено з контактів, а його особисті повідомлення та повідомлення в каналах під його іменем буде приховано. SOS-сигнали показуються завжди.';
+
+  @override
+  String get block_bodyRadio =>
+      'Ваше радіо теж його блокує: ігнорує його оголошення навіть без телефона і ніколи їх не ретранслює.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Відоме лише ім\'я, тому приховуються повідомлення в каналах під цим іменем. SOS-сигнали показуються завжди.';
+
+  @override
+  String get block_confirm => 'Заблокувати';
+
+  @override
+  String block_blocked(String name) {
+    return '$name заблоковано';
+  }
+
+  @override
+  String get block_screenTitle => 'Заблоковані радіо';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Радіо, чиї оголошення та повідомлення ігноруються';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count радіо заблоковано',
+      few: '$count радіо заблоковано',
+      one: '1 радіо заблоковано',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Немає заблокованих радіо. Заблокуйте радіо з його меню в Контактах або Виявлених, чи відправника з повідомлення в каналі.';
+
+  @override
+  String get block_about =>
+      'Блокування змінює лише ваш телефон і радіо: інші радіо й далі чують заблоковане, а ретранслятори передають його.';
+
+  @override
+  String get block_radioToo =>
+      'Ваше радіо теж блокує ці радіо, і його вебсторінка показує той самий список.';
+
+  @override
+  String get block_unblock => 'Розблокувати';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name розблоковано';
+  }
+
+  @override
+  String get block_nameOnly => 'Повідомлення в каналах лише за іменем';
 }

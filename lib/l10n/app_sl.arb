@@ -3812,5 +3812,22 @@
   "channels_allowVoiceOn": "Pritisni in govori v klepetu tega kanala. Posnetke slišijo le tisti, ki so na njem prav tako dovolili glas.",
   "channels_allowVoiceOff": "Samo besedilo. Glasovni posnetki na tem kanalu so prezrti.",
   "channels_allowVoiceAction": "Dovoli glas",
-  "channels_denyVoice": "Ne dovoli glasu"
+  "channels_denyVoice": "Ne dovoli glasu",
+  "block_blockRadio": "Blokiraj ta radio",
+  "block_blockSender": "Blokiraj pošiljatelja",
+  "block_title": "Blokiram {name}?",
+  "block_body": "Njegova oznanila bodo prezrta, odstranjen bo iz stikov, njegova neposredna sporočila in sporočila na kanalih pod njegovim imenom pa bodo skrita. Opozorila SOS so vedno prikazana.",
+  "block_bodyRadio": "Vaš radio ga tudi blokira: prezre njegova oznanila tudi brez telefona in jih nikoli ne ponovi.",
+  "block_bodyNameOnly": "Znano je le ime, zato so skrita sporočila na kanalih pod tem imenom. Opozorila SOS so vedno prikazana.",
+  "block_confirm": "Blokiraj",
+  "block_blocked": "{name} blokiran",
+  "block_screenTitle": "Blokirani radii",
+  "block_settingsSubtitle": "Radii, katerih oznanila in sporočila so prezrta",
+  "block_settingsCount": "{count, plural, =1{1 blokiran radio} =2{2 blokirana radia} few{{count} blokirani radii} other{{count} blokiranih radiev}}",
+  "block_empty": "Ni blokiranih radiev. Radio blokirate v njegovem meniju v Stikih ali Odkritih, pošiljatelja pa v sporočilu na kanalu.",
+  "block_about": "Blokiranje spremeni le vaš telefon in radio: drugi radii blokirani radio še vedno slišijo, repetitorji pa ga prenašajo.",
+  "block_radioToo": "Vaš radio blokira tudi te radie, njegova spletna stran pa prikaže enak seznam.",
+  "block_unblock": "Odblokiraj",
+  "block_unblocked": "{name} odblokiran",
+  "block_nameOnly": "Sporočila na kanalih samo po imenu"
 }

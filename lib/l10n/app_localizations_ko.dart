@@ -7525,4 +7525,71 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get channels_denyVoice => '음성 허용 안 함';
+
+  @override
+  String get block_blockRadio => '이 무전기 차단';
+
+  @override
+  String get block_blockSender => '보낸 사람 차단';
+
+  @override
+  String block_title(String name) {
+    return '$name을(를) 차단할까요?';
+  }
+
+  @override
+  String get block_body =>
+      '광고는 무시되고 연락처에서 제거되며, 직접 메시지와 그 이름으로 보낸 채널 메시지는 숨겨집니다. SOS 경보는 항상 표시됩니다.';
+
+  @override
+  String get block_bodyRadio => '무전기도 차단합니다. 휴대폰이 없을 때도 광고를 무시하고 절대 중계하지 않습니다.';
+
+  @override
+  String get block_bodyNameOnly =>
+      '이름만 알려져 있어 이 이름으로 보낸 채널 메시지를 숨깁니다. SOS 경보는 항상 표시됩니다.';
+
+  @override
+  String get block_confirm => '차단';
+
+  @override
+  String block_blocked(String name) {
+    return '$name 차단됨';
+  }
+
+  @override
+  String get block_screenTitle => '차단된 무전기';
+
+  @override
+  String get block_settingsSubtitle => '광고와 메시지를 무시하는 무전기';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '무전기 $count대 차단됨',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty => '차단된 무전기가 없습니다. 연락처나 발견됨 메뉴, 또는 채널 메시지에서 차단하세요.';
+
+  @override
+  String get block_about =>
+      '차단은 내 휴대폰과 무전기에만 적용됩니다. 다른 무전기는 여전히 듣고 중계기는 전달합니다.';
+
+  @override
+  String get block_radioToo => '무전기도 이 무전기들을 차단하며 웹 페이지에 같은 목록이 표시됩니다.';
+
+  @override
+  String get block_unblock => '차단 해제';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name 차단 해제됨';
+  }
+
+  @override
+  String get block_nameOnly => '이름으로만 (채널 메시지)';
 }

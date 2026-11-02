@@ -7514,4 +7514,71 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get channels_denyVoice => '音声を許可しない';
+
+  @override
+  String get block_blockRadio => 'この無線機をブロック';
+
+  @override
+  String get block_blockSender => '送信者をブロック';
+
+  @override
+  String block_title(String name) {
+    return '$name をブロックしますか？';
+  }
+
+  @override
+  String get block_body =>
+      'アドバートは無視され、連絡先から削除され、ダイレクトメッセージとその名前で送られたチャンネルメッセージは非表示になります。SOS アラートは常に表示されます。';
+
+  @override
+  String get block_bodyRadio => '無線機もブロックします。電話が離れていてもアドバートを無視し、中継しません。';
+
+  @override
+  String get block_bodyNameOnly =>
+      '名前しか分からないため、この名前で送られたチャンネルメッセージを非表示にします。SOS アラートは常に表示されます。';
+
+  @override
+  String get block_confirm => 'ブロック';
+
+  @override
+  String block_blocked(String name) {
+    return '$name をブロックしました';
+  }
+
+  @override
+  String get block_screenTitle => 'ブロックした無線機';
+
+  @override
+  String get block_settingsSubtitle => 'アドバートとメッセージを無視する無線機';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 台をブロック中',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'ブロックした無線機はありません。連絡先や検出済みのメニュー、またはチャンネルメッセージからブロックできます。';
+
+  @override
+  String get block_about => 'ブロックは自分の電話と無線機だけに影響します。他の無線機には聞こえ、リピーターは中継します。';
+
+  @override
+  String get block_radioToo => '無線機もこれらをブロックし、そのウェブページにも同じ一覧が表示されます。';
+
+  @override
+  String get block_unblock => 'ブロック解除';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name のブロックを解除しました';
+  }
+
+  @override
+  String get block_nameOnly => '名前のみ（チャンネルメッセージ）';
 }

@@ -7846,4 +7846,76 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Não permitir voz';
+
+  @override
+  String get block_blockRadio => 'Bloquear este rádio';
+
+  @override
+  String get block_blockSender => 'Bloquear remetente';
+
+  @override
+  String block_title(String name) {
+    return 'Bloquear $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Os seus anúncios serão ignorados, será removido dos contactos, e as suas mensagens diretas e as mensagens de canal enviadas com o seu nome ficam ocultas. Os alertas SOS são sempre mostrados.';
+
+  @override
+  String get block_bodyRadio =>
+      'O seu rádio também o bloqueia: ignora os seus anúncios mesmo sem o telefone e nunca os repete.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Só o nome é conhecido, por isso ficam ocultas as mensagens de canal enviadas com esse nome. Os alertas SOS são sempre mostrados.';
+
+  @override
+  String get block_confirm => 'Bloquear';
+
+  @override
+  String block_blocked(String name) {
+    return '$name bloqueado';
+  }
+
+  @override
+  String get block_screenTitle => 'Rádios bloqueados';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Rádios cujos anúncios e mensagens são ignorados';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count rádios bloqueados',
+      one: '1 rádio bloqueado',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Nenhum rádio bloqueado. Bloqueie um rádio no seu menu em Contactos ou Descobertos, ou um remetente numa mensagem de canal.';
+
+  @override
+  String get block_about =>
+      'Bloquear só muda o seu telefone e rádio: os outros rádios continuam a ouvir o rádio bloqueado e os repetidores continuam a passá-lo.';
+
+  @override
+  String get block_radioToo =>
+      'O seu rádio também bloqueia estes rádios e a sua página web mostra a mesma lista.';
+
+  @override
+  String get block_unblock => 'Desbloquear';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name desbloqueado';
+  }
+
+  @override
+  String get block_nameOnly => 'Mensagens de canal só pelo nome';
 }

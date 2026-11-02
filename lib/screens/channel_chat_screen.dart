@@ -35,6 +35,7 @@ import '../services/translation_service.dart';
 import '../utils/image_save.dart';
 import '../utils/lora_airtime.dart';
 import '../widgets/marker_label_dialog.dart';
+import '../widgets/block_radio_dialog.dart';
 import '../widgets/received_image_message.dart';
 import '../widgets/chat_day_separator.dart';
 import '../widgets/empty_state.dart';
@@ -2273,6 +2274,30 @@ class _ChannelChatScreenState extends State<ChannelChatScreen> {
                 copyChatMessageText(context, message.text);
               },
             ),
+            if (!message.isOutgoing && message.senderName.trim().isNotEmpty)
+              ListTile(
+                leading: Icon(
+                  Icons.block,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                title: Text(context.l10n.block_blockSender),
+                onTap: () {
+                  Navigator.pop(sheetContext);
+                  final connector = context.read<MeshCoreConnector>();
+                  // a contact by that name gives its key; else the name alone
+                  final contact = connector.contacts
+                      .where((c) => c.name.trim() == message.senderName.trim())
+                      .firstOrNull;
+                  unawaited(
+                    confirmBlockRadio(
+                      context,
+                      connector,
+                      keyHex: contact?.publicKeyHex,
+                      name: message.senderName.trim(),
+                    ),
+                  );
+                },
+              ),
             if (canTranslateMessage)
               ListTile(
                 leading: const Icon(Icons.translate),

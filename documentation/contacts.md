@@ -137,3 +137,9 @@ Contacts are shared using the `meshcore://` URI scheme:
 meshcore://<hex-encoded-advertisement-packet>
 ```
 This contains the node's public key and metadata. Paste it into another MeshCore app to import.
+
+## Blocked radios
+
+Long-press a contact or a discovered radio and choose **Block this radio**, or long-press a channel message and choose **Block sender**. A blocked radio's adverts are ignored, it is removed from the radio's contacts, its direct messages are dropped, and channel messages sent under its name are hidden. SOS alerts are never blocked. **Settings → Blocked radios** lists them for unblocking; the list is kept on the phone (`blocked_radios`) for every radio.
+
+A MeshCore SOS radio with firmware 1.8.6 or later reports `sos_block:<count>` in its custom variables. The app then mirrors the list to the radio with `block add <key hex> <name>` / `block del <prefix>` over `CMD_RUN_CLI_COMMAND` (66; replies `RESP_CODE_CLI_REPLY`, 29) and reads the radio's own list with `block list [start]`, which replies `> <count>|<hex12>,<name>|...` ending `|+` when more follow. The radio ignores blocked adverts, never repeats them, and drops channel messages sent under a blocked name.

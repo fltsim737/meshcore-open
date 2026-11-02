@@ -3712,5 +3712,22 @@
   "channels_allowVoiceOn": "Push-to-talk in de chat van dit kanaal. Alleen wie spraak er ook heeft toegestaan, hoort de clips.",
   "channels_allowVoiceOff": "Alleen tekst. Spraakclips op dit kanaal worden genegeerd.",
   "channels_allowVoiceAction": "Spraak toestaan",
-  "channels_denyVoice": "Spraak niet toestaan"
+  "channels_denyVoice": "Spraak niet toestaan",
+  "block_blockRadio": "Deze radio blokkeren",
+  "block_blockSender": "Afzender blokkeren",
+  "block_title": "{name} blokkeren?",
+  "block_body": "Zijn adverts worden genegeerd, hij wordt uit je contacten verwijderd, en zijn directe berichten en kanaalberichten onder zijn naam worden verborgen. SOS-alarmen worden altijd getoond.",
+  "block_bodyRadio": "Je radio blokkeert hem ook: die negeert zijn adverts ook als je telefoon er niet is, en geeft ze nooit door.",
+  "block_bodyNameOnly": "Alleen de naam is bekend, dus kanaalberichten onder deze naam worden verborgen. SOS-alarmen worden altijd getoond.",
+  "block_confirm": "Blokkeren",
+  "block_blocked": "{name} geblokkeerd",
+  "block_screenTitle": "Geblokkeerde radio's",
+  "block_settingsSubtitle": "Radio's waarvan adverts en berichten worden genegeerd",
+  "block_settingsCount": "{count, plural, =1{1 radio geblokkeerd} other{{count} radio's geblokkeerd}}",
+  "block_empty": "Geen radio's geblokkeerd. Blokkeer een radio via zijn menu in Contacten of Ontdekt, of een afzender via een kanaalbericht.",
+  "block_about": "Blokkeren verandert alleen je telefoon en radio: andere radio's horen een geblokkeerde radio nog, en repeaters geven hem door.",
+  "block_radioToo": "Je radio blokkeert deze radio's ook, en zijn webpagina toont dezelfde lijst.",
+  "block_unblock": "Deblokkeren",
+  "block_unblocked": "{name} gedeblokkeerd",
+  "block_nameOnly": "Kanaalberichten alleen op naam"
 }

@@ -7884,4 +7884,76 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Ne pas autoriser la voix';
+
+  @override
+  String get block_blockRadio => 'Bloquer cette radio';
+
+  @override
+  String get block_blockSender => 'Bloquer l\'expéditeur';
+
+  @override
+  String block_title(String name) {
+    return 'Bloquer $name ?';
+  }
+
+  @override
+  String get block_body =>
+      'Ses annonces seront ignorées, elle sera retirée de vos contacts, et ses messages directs ainsi que les messages de canal envoyés sous son nom seront masqués. Les alertes SOS sont toujours affichées.';
+
+  @override
+  String get block_bodyRadio =>
+      'Votre radio la bloque aussi : elle ignore ses annonces même quand votre téléphone n\'est pas là, et ne les relaie jamais.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Seul son nom est connu : les messages de canal envoyés sous ce nom sont masqués. Les alertes SOS sont toujours affichées.';
+
+  @override
+  String get block_confirm => 'Bloquer';
+
+  @override
+  String block_blocked(String name) {
+    return '$name bloquée';
+  }
+
+  @override
+  String get block_screenTitle => 'Radios bloquées';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Radios dont les annonces et messages sont ignorés';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count radios bloquées',
+      one: '1 radio bloquée',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Aucune radio bloquée. Bloquez une radio depuis son menu dans Contacts ou Découverts, ou un expéditeur depuis un message de canal.';
+
+  @override
+  String get block_about =>
+      'Bloquer ne change que votre téléphone et votre radio : les autres radios entendent toujours la radio bloquée, et les répéteurs la relaient toujours.';
+
+  @override
+  String get block_radioToo =>
+      'Votre radio bloque aussi ces radios, et sa page web affiche la même liste.';
+
+  @override
+  String get block_unblock => 'Débloquer';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name débloquée';
+  }
+
+  @override
+  String get block_nameOnly => 'Messages de canal par nom seulement';
 }

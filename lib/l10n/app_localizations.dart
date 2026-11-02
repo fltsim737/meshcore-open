@@ -13086,6 +13086,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Don\'t allow voice'**
   String get channels_denyVoice;
+
+  /// No description provided for @block_blockRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'Block this radio'**
+  String get block_blockRadio;
+
+  /// No description provided for @block_blockSender.
+  ///
+  /// In en, this message translates to:
+  /// **'Block sender'**
+  String get block_blockSender;
+
+  /// No description provided for @block_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Block {name}?'**
+  String block_title(String name);
+
+  /// No description provided for @block_body.
+  ///
+  /// In en, this message translates to:
+  /// **'Its adverts will be ignored, it\'s removed from your contacts, and its direct messages and any channel messages sent under its name are hidden. SOS alerts are always shown.'**
+  String get block_body;
+
+  /// No description provided for @block_bodyRadio.
+  ///
+  /// In en, this message translates to:
+  /// **'Your radio blocks it too: it ignores its adverts even while your phone is away, and never repeats them.'**
+  String get block_bodyRadio;
+
+  /// No description provided for @block_bodyNameOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Only its name is known, so channel messages sent under this name are hidden. SOS alerts are always shown.'**
+  String get block_bodyNameOnly;
+
+  /// No description provided for @block_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get block_confirm;
+
+  /// No description provided for @block_blocked.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} blocked'**
+  String block_blocked(String name);
+
+  /// No description provided for @block_screenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked radios'**
+  String get block_screenTitle;
+
+  /// No description provided for @block_settingsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Radios whose adverts and messages are ignored'**
+  String get block_settingsSubtitle;
+
+  /// No description provided for @block_settingsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 radio blocked} other{{count} radios blocked}}'**
+  String block_settingsCount(int count);
+
+  /// No description provided for @block_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No radios blocked. Block a radio from its menu in Contacts or Discovered, or a sender from a channel message.'**
+  String get block_empty;
+
+  /// No description provided for @block_about.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocking changes only your phone and radio: other radios still hear a blocked radio, and repeaters still pass it on.'**
+  String get block_about;
+
+  /// No description provided for @block_radioToo.
+  ///
+  /// In en, this message translates to:
+  /// **'Your radio blocks these radios too, and its web page shows the same list.'**
+  String get block_radioToo;
+
+  /// No description provided for @block_unblock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unblock'**
+  String get block_unblock;
+
+  /// No description provided for @block_unblocked.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} unblocked'**
+  String block_unblocked(String name);
+
+  /// No description provided for @block_nameOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel messages by name only'**
+  String get block_nameOnly;
 }
 
 class _AppLocalizationsDelegate

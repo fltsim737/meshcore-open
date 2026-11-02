@@ -7872,4 +7872,76 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Sprache nicht erlauben';
+
+  @override
+  String get block_blockRadio => 'Dieses Funkgerät blockieren';
+
+  @override
+  String get block_blockSender => 'Absender blockieren';
+
+  @override
+  String block_title(String name) {
+    return '$name blockieren?';
+  }
+
+  @override
+  String get block_body =>
+      'Seine Adverts werden ignoriert, es wird aus deinen Kontakten entfernt, und seine Direktnachrichten sowie Kanalnachrichten unter seinem Namen werden ausgeblendet. SOS-Alarme werden immer angezeigt.';
+
+  @override
+  String get block_bodyRadio =>
+      'Dein Funkgerät blockiert es auch: Es ignoriert seine Adverts, auch wenn dein Telefon nicht verbunden ist, und leitet sie nie weiter.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Nur der Name ist bekannt, daher werden Kanalnachrichten unter diesem Namen ausgeblendet. SOS-Alarme werden immer angezeigt.';
+
+  @override
+  String get block_confirm => 'Blockieren';
+
+  @override
+  String block_blocked(String name) {
+    return '$name blockiert';
+  }
+
+  @override
+  String get block_screenTitle => 'Blockierte Funkgeräte';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Funkgeräte, deren Adverts und Nachrichten ignoriert werden';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Funkgeräte blockiert',
+      one: '1 Funkgerät blockiert',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Keine Funkgeräte blockiert. Blockiere ein Funkgerät über sein Menü in Kontakte oder Entdeckt, oder einen Absender über eine Kanalnachricht.';
+
+  @override
+  String get block_about =>
+      'Blockieren betrifft nur dein Telefon und Funkgerät: Andere Funkgeräte hören ein blockiertes Funkgerät weiterhin, und Repeater leiten es weiter.';
+
+  @override
+  String get block_radioToo =>
+      'Dein Funkgerät blockiert diese Funkgeräte auch, und seine Webseite zeigt dieselbe Liste.';
+
+  @override
+  String get block_unblock => 'Freigeben';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name freigegeben';
+  }
+
+  @override
+  String get block_nameOnly => 'Kanalnachrichten nur nach Name';
 }

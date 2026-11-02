@@ -7829,4 +7829,78 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Ne dovoli glasu';
+
+  @override
+  String get block_blockRadio => 'Blokiraj ta radio';
+
+  @override
+  String get block_blockSender => 'Blokiraj pošiljatelja';
+
+  @override
+  String block_title(String name) {
+    return 'Blokiram $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Njegova oznanila bodo prezrta, odstranjen bo iz stikov, njegova neposredna sporočila in sporočila na kanalih pod njegovim imenom pa bodo skrita. Opozorila SOS so vedno prikazana.';
+
+  @override
+  String get block_bodyRadio =>
+      'Vaš radio ga tudi blokira: prezre njegova oznanila tudi brez telefona in jih nikoli ne ponovi.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Znano je le ime, zato so skrita sporočila na kanalih pod tem imenom. Opozorila SOS so vedno prikazana.';
+
+  @override
+  String get block_confirm => 'Blokiraj';
+
+  @override
+  String block_blocked(String name) {
+    return '$name blokiran';
+  }
+
+  @override
+  String get block_screenTitle => 'Blokirani radii';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Radii, katerih oznanila in sporočila so prezrta';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count blokiranih radiev',
+      few: '$count blokirani radii',
+      two: '2 blokirana radia',
+      one: '1 blokiran radio',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Ni blokiranih radiev. Radio blokirate v njegovem meniju v Stikih ali Odkritih, pošiljatelja pa v sporočilu na kanalu.';
+
+  @override
+  String get block_about =>
+      'Blokiranje spremeni le vaš telefon in radio: drugi radii blokirani radio še vedno slišijo, repetitorji pa ga prenašajo.';
+
+  @override
+  String get block_radioToo =>
+      'Vaš radio blokira tudi te radie, njegova spletna stran pa prikaže enak seznam.';
+
+  @override
+  String get block_unblock => 'Odblokiraj';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name odblokiran';
+  }
+
+  @override
+  String get block_nameOnly => 'Sporočila na kanalih samo po imenu';
 }

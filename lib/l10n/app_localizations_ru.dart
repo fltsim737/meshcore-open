@@ -7867,4 +7867,77 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get channels_denyVoice => 'Не разрешать голос';
+
+  @override
+  String get block_blockRadio => 'Заблокировать это радио';
+
+  @override
+  String get block_blockSender => 'Заблокировать отправителя';
+
+  @override
+  String block_title(String name) {
+    return 'Заблокировать $name?';
+  }
+
+  @override
+  String get block_body =>
+      'Его объявления будут игнорироваться, оно будет удалено из контактов, а его личные сообщения и сообщения в каналах под его именем будут скрыты. SOS-сигналы показываются всегда.';
+
+  @override
+  String get block_bodyRadio =>
+      'Ваше радио тоже его блокирует: игнорирует его объявления даже без телефона и никогда их не ретранслирует.';
+
+  @override
+  String get block_bodyNameOnly =>
+      'Известно только имя, поэтому скрываются сообщения в каналах под этим именем. SOS-сигналы показываются всегда.';
+
+  @override
+  String get block_confirm => 'Заблокировать';
+
+  @override
+  String block_blocked(String name) {
+    return '$name заблокировано';
+  }
+
+  @override
+  String get block_screenTitle => 'Заблокированные радио';
+
+  @override
+  String get block_settingsSubtitle =>
+      'Радио, чьи объявления и сообщения игнорируются';
+
+  @override
+  String block_settingsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count радио заблокировано',
+      few: '$count радио заблокировано',
+      one: '1 радио заблокировано',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get block_empty =>
+      'Нет заблокированных радио. Заблокируйте радио из его меню в Контактах или Обнаруженных, или отправителя из сообщения в канале.';
+
+  @override
+  String get block_about =>
+      'Блокировка меняет только ваш телефон и радио: другие радио по-прежнему слышат заблокированное, а ретрансляторы передают его.';
+
+  @override
+  String get block_radioToo =>
+      'Ваше радио тоже блокирует эти радио, и его веб-страница показывает тот же список.';
+
+  @override
+  String get block_unblock => 'Разблокировать';
+
+  @override
+  String block_unblocked(String name) {
+    return '$name разблокировано';
+  }
+
+  @override
+  String get block_nameOnly => 'Сообщения в каналах только по имени';
 }
