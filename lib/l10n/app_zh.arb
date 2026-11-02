@@ -3833,5 +3833,6 @@
   "block_radioToo": "你的电台也会屏蔽这些电台，其网页显示相同的列表。",
   "block_unblock": "取消屏蔽",
   "block_unblocked": "已取消屏蔽 {name}",
-  "block_nameOnly": "仅按名字（频道消息）"
+  "block_nameOnly": "仅按名字（频道消息）",
+  "ptt_ownChannelHelp": "只有此频道中允许了语音的人能听到你的片段。片段最长 10 秒。每个片段都占用整个网络共享的通话时间：请保持简短。"
 }

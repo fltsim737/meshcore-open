@@ -7889,4 +7889,8 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Kanaalberichten alleen op naam';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Alleen wie op dit kanaal spraak heeft toegestaan, hoort je clips. Clips tot 10 s. Elke clip gebruikt zendtijd die het hele mesh deelt: houd ze kort.';
 }

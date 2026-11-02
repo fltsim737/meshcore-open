@@ -7592,4 +7592,8 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get block_nameOnly => '이름으로만 (채널 메시지)';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      '이 채널에서 음성을 허용한 사람만 클립을 듣습니다. 클립은 최대 10초. 모든 클립은 메시 전체가 공유하는 방송 시간을 씁니다. 짧게 하세요.';
 }

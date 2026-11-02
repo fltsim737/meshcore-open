@@ -7952,4 +7952,8 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Wiadomości na kanałach tylko po nazwie';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Twoje klipy słyszą tylko osoby na tym kanale, które zezwoliły na nim na głos. Klipy do 10 s. Każdy klip zużywa czas antenowy całej sieci: niech będą krótkie.';
 }

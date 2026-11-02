@@ -7938,4 +7938,8 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Повідомлення в каналах лише за іменем';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Ваші кліпи чують лише ті в цьому каналі, хто дозволив у ньому голос. Кліпи до 10 с. Кожен кліп займає ефір усієї мережі: говоріть коротко.';
 }

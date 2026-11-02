@@ -98,9 +98,12 @@ class PttPanel extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 note ??
-                    (contactName == null
+                    (contactName != null
+                        ? l10n.ptt_directHelp(contactName!)
+                        : conversation == SosVoiceService.pttChannelKey
                         ? l10n.ptt_channelHelp
-                        : l10n.ptt_directHelp(contactName!)),
+                        // a channel the user allowed voice on (10.2.4)
+                        : l10n.ptt_ownChannelHelp),
                 style: textTheme.bodySmall?.copyWith(
                   color: note == null ? scheme.onSurfaceVariant : scheme.error,
                 ),

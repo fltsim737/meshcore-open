@@ -3829,5 +3829,6 @@
   "block_radioToo": "Vaš radio blokira tudi te radie, njegova spletna stran pa prikaže enak seznam.",
   "block_unblock": "Odblokiraj",
   "block_unblocked": "{name} odblokiran",
-  "block_nameOnly": "Sporočila na kanalih samo po imenu"
+  "block_nameOnly": "Sporočila na kanalih samo po imenu",
+  "ptt_ownChannelHelp": "Vaše posnetke slišijo le tisti na tem kanalu, ki so na njem dovolili glas. Posnetki do 10 s. Vsak posnetek porabi oddajni čas, ki si ga deli celo omrežje: naj bodo kratki."
 }

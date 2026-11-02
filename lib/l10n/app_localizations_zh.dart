@@ -7421,4 +7421,8 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get block_nameOnly => '仅按名字（频道消息）';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      '只有此频道中允许了语音的人能听到你的片段。片段最长 10 秒。每个片段都占用整个网络共享的通话时间：请保持简短。';
 }

@@ -7914,4 +7914,8 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Csatornaüzenetek csak név szerint';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'A klipjeit csak azok hallják ezen a csatornán, akik engedélyezték rajta a hangot. Legfeljebb 10 s-os klipek. Minden klip a teljes háló közös adásidejét használja: legyen rövid.';
 }

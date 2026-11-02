@@ -3962,5 +3962,6 @@
   "block_radioToo": "Anche la tua radio blocca queste radio, e la sua pagina web mostra lo stesso elenco.",
   "block_unblock": "Sblocca",
   "block_unblocked": "{name} sbloccata",
-  "block_nameOnly": "Messaggi di canale solo per nome"
+  "block_nameOnly": "Messaggi di canale solo per nome",
+  "ptt_ownChannelHelp": "Solo chi è su questo canale e vi ha consentito la voce sente i tuoi clip. Clip fino a 10 s. Ogni clip usa tempo di trasmissione condiviso da tutta la rete: tienili brevi."
 }

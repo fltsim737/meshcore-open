@@ -7903,4 +7903,8 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Sporočila na kanalih samo po imenu';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Vaše posnetke slišijo le tisti na tem kanalu, ki so na njem dovolili glas. Posnetki do 10 s. Vsak posnetek porabi oddajni čas, ki si ga deli celo omrežje: naj bodo kratki.';
 }

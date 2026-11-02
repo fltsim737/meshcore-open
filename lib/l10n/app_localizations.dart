@@ -13188,6 +13188,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Channel messages by name only'**
   String get block_nameOnly;
+
+  /// No description provided for @ptt_ownChannelHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Only people on this channel who have allowed voice on it hear your clips. Clips up to 10 s. Every clip uses airtime the whole mesh shares: keep them short.'**
+  String get ptt_ownChannelHelp;
 }
 
 class _AppLocalizationsDelegate

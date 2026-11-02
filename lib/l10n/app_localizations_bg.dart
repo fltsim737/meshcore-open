@@ -7921,4 +7921,8 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Съобщения в канали само по име';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Клиповете ви чуват само хората в този канал, които са разрешили глас в него. Клипове до 10 s. Всеки клип заема ефир, споделян от цялата мрежа: правете ги кратки.';
 }

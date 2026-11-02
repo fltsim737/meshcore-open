@@ -3861,5 +3861,6 @@
   "block_radioToo": "Twoje radio też blokuje te radia, a jego strona pokazuje tę samą listę.",
   "block_unblock": "Odblokuj",
   "block_unblocked": "Odblokowano {name}",
-  "block_nameOnly": "Wiadomości na kanałach tylko po nazwie"
+  "block_nameOnly": "Wiadomości na kanałach tylko po nazwie",
+  "ptt_ownChannelHelp": "Twoje klipy słyszą tylko osoby na tym kanale, które zezwoliły na nim na głos. Klipy do 10 s. Każdy klip zużywa czas antenowy całej sieci: niech będą krótkie."
 }

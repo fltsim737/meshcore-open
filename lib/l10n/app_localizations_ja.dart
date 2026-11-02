@@ -7581,4 +7581,8 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get block_nameOnly => '名前のみ（チャンネルメッセージ）';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'このチャンネルで音声を許可した人だけがクリップを聞けます。クリップは最大 10 秒。各クリップはメッシュ全体で共有する通信時間を使います。短くしてください。';
 }

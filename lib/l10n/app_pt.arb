@@ -3828,5 +3828,6 @@
   "block_radioToo": "O seu rádio também bloqueia estes rádios e a sua página web mostra a mesma lista.",
   "block_unblock": "Desbloquear",
   "block_unblocked": "{name} desbloqueado",
-  "block_nameOnly": "Mensagens de canal só pelo nome"
+  "block_nameOnly": "Mensagens de canal só pelo nome",
+  "ptt_ownChannelHelp": "Só ouvem os seus clipes as pessoas deste canal que permitiram voz nele. Clipes até 10 s. Cada clipe usa tempo de emissão partilhado por toda a malha: mantenha-os curtos."
 }

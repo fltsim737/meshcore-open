@@ -3963,5 +3963,6 @@
   "block_radioToo": "Dein Funkgerät blockiert diese Funkgeräte auch, und seine Webseite zeigt dieselbe Liste.",
   "block_unblock": "Freigeben",
   "block_unblocked": "{name} freigegeben",
-  "block_nameOnly": "Kanalnachrichten nur nach Name"
+  "block_nameOnly": "Kanalnachrichten nur nach Name",
+  "ptt_ownChannelHelp": "Nur wer in diesem Kanal Sprache erlaubt hat, hört deine Clips. Clips bis 10 s. Jeder Clip belegt Sendezeit, die sich das ganze Mesh teilt: halte sie kurz."
 }

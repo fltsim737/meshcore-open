@@ -7899,4 +7899,8 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Správy v kanáloch len podľa mena';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Vaše klipy počujú len tí v tomto kanáli, ktorí v ňom povolili hlas. Klipy do 10 s. Každý klip zaberá vysielací čas celej siete: nech sú krátke.';
 }

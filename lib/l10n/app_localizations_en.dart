@@ -7847,4 +7847,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Channel messages by name only';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Only people on this channel who have allowed voice on it hear your clips. Clips up to 10 s. Every clip uses airtime the whole mesh shares: keep them short.';
 }

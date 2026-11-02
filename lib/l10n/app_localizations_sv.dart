@@ -7867,4 +7867,8 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Kanalmeddelanden bara efter namn';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Bara de i den här kanalen som har tillåtit röst där hör dina klipp. Klipp upp till 10 s. Varje klipp tar sändningstid som hela nätet delar: håll dem korta.';
 }

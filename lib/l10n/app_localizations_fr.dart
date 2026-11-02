@@ -7956,4 +7956,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Messages de canal par nom seulement';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Seules les personnes de ce canal qui y ont autorisé la voix entendent vos clips. Clips de 10 s maximum. Chaque clip utilise du temps d\'antenne partagé par tout le maillage : faites court.';
 }

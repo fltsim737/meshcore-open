@@ -7944,4 +7944,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get block_nameOnly => 'Kanalnachrichten nur nach Name';
+
+  @override
+  String get ptt_ownChannelHelp =>
+      'Nur wer in diesem Kanal Sprache erlaubt hat, hört deine Clips. Clips bis 10 s. Jeder Clip belegt Sendezeit, die sich das ganze Mesh teilt: halte sie kurz.';
 }
