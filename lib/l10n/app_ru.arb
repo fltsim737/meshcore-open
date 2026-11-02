@@ -2273,7 +2273,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Частота {freq} МГц для повторения вне сети",
+  "settings_clientRepeatFrequencyNote": "Ретрансляция вне сети будет на {freq} МГц",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3101,5 +3101,7 @@
   "coverage_nextDistance": "Следующий пинг через {distance}",
   "coverage_nextTime": "Следующий пинг через {time}",
   "coverage_nextEither": "Следующий пинг через {distance} или через {time}",
-  "coverage_aboutSettings": "Чтобы изменить частоту пингов (по расстоянию, по времени или что наступит раньше), откройте ⋮ → Настройки пингов."
+  "coverage_aboutSettings": "Чтобы изменить частоту пингов (по расстоянию, по времени или что наступит раньше), откройте ⋮ → Настройки пингов.",
+  "settings_clientRepeatRefused": "Прошивка этого радио не ретранслирует на {freq} МГц. Ретрансляция вне сети разрешена только на {freqs} МГц. Выберите одну из них или установите прошивку, которая разрешает другие частоты.",
+  "settings_clientRepeatUseFreq": "Использовать {freq} МГц"
 }

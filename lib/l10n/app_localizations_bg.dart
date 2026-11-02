@@ -818,7 +818,17 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Честота $freq MHz за повторение извън мрежата';
+    return 'Препредаването извън мрежата ще използва $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Фърмуерът на това радио не препредава на $freq MHz. Позволява препредаване извън мрежата само на $freqs MHz. Използвайте една от тях или сложете на радиото фърмуер, който позволява други честоти.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Използвай $freq MHz';
   }
 
   @override

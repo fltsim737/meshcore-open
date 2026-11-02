@@ -3110,7 +3110,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "오프그리드 반복용으로 주파수를 {freq} MHz로 설정",
+  "settings_clientRepeatFrequencyNote": "오프그리드 중계는 {freq} MHz를 사용합니다",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3938,5 +3938,7 @@
   "coverage_nextDistance": "{distance} 이동하면 다음 핑",
   "coverage_nextTime": "{time} 후 다음 핑",
   "coverage_nextEither": "{distance} 이동하거나 {time} 후 다음 핑",
-  "coverage_aboutSettings": "핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다."
+  "coverage_aboutSettings": "핑 빈도(거리, 시간, 또는 먼저 오는 쪽)는 ⋮ → 핑 설정에서 바꿀 수 있습니다.",
+  "settings_clientRepeatRefused": "이 무전기의 펌웨어는 {freq} MHz에서 중계하지 않습니다. 오프그리드 중계는 {freqs} MHz에서만 허용됩니다. 이 중 하나를 사용하거나 다른 주파수를 허용하는 펌웨어를 설치하세요.",
+  "settings_clientRepeatUseFreq": "{freq} MHz 사용"
 }

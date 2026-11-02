@@ -58,7 +58,7 @@ Opens a dialog pre-populated with the device's current radio settings. Contains:
 - **Spreading Factor**: SF5–SF12
 - **Coding Rate**: 4/5, 4/6, 4/7, 4/8
 - **TX Power** (dBm): Validated 0 to device max (typically 22 dBm)
-- **Client Repeat** toggle: Only shown on firmware v9+; requires frequency to be exactly 433.000, 869.000, or 918.000 MHz (the Off-Grid presets). Save is blocked with a warning if enabled on other frequencies
+- **Off-Grid Repeat** toggle: only shown on firmware v9+. Repeats on whatever frequency is set above; turning it on no longer changes the frequency. Stock firmware only allows it on 433.000, 869.495 or 918.000 MHz (the Off-Grid presets) and refuses others: the app then says which frequencies the radio allows and offers the nearest. Firmware that reports wider ranges (CMD_GET_ALLOWED_REPEAT_FREQ) repeats on any frequency in them
 
 ### Regions
 

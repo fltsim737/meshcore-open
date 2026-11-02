@@ -801,7 +801,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frequency set to $freq MHz for off-grid repeat';
+    return 'Off-grid repeat will use $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'This radio\'s firmware won\'t repeat on $freq MHz. It only allows Off-Grid Repeat on $freqs MHz. Use one of those, or put firmware on the radio that allows other frequencies.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Use $freq MHz';
   }
 
   @override

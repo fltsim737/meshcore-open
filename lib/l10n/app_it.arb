@@ -3115,7 +3115,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Frequenza impostata su {freq} MHz per la ripetizione fuori rete",
+  "settings_clientRepeatFrequencyNote": "La ripetizione fuori rete userà {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3938,5 +3938,7 @@
   "coverage_nextDistance": "Prossimo ping dopo {distance}",
   "coverage_nextTime": "Prossimo ping tra {time}",
   "coverage_nextEither": "Prossimo ping dopo {distance} o tra {time}",
-  "coverage_aboutSettings": "Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping."
+  "coverage_aboutSettings": "Per cambiare la frequenza dei ping (per distanza, per tempo o ciò che arriva prima), usa ⋮ → Impostazioni ping.",
+  "settings_clientRepeatRefused": "Il firmware di questa radio non ripete su {freq} MHz. Consente la ripetizione fuori rete solo su {freqs} MHz. Usa una di queste o installa sulla radio un firmware che consenta altre frequenze.",
+  "settings_clientRepeatUseFreq": "Usa {freq} MHz"
 }

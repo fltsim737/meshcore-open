@@ -2956,7 +2956,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Частота {freq} МГц для повтору без підключення до мережі",
+  "settings_clientRepeatFrequencyNote": "Ретрансляція поза мережею використовуватиме {freq} МГц",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3784,5 +3784,7 @@
   "coverage_nextDistance": "Наступний пінг через {distance}",
   "coverage_nextTime": "Наступний пінг через {time}",
   "coverage_nextEither": "Наступний пінг через {distance} або через {time}",
-  "coverage_aboutSettings": "Щоб змінити частоту пінгів (за відстанню, за часом або що настане раніше), відкрийте ⋮ → Налаштування пінгів."
+  "coverage_aboutSettings": "Щоб змінити частоту пінгів (за відстанню, за часом або що настане раніше), відкрийте ⋮ → Налаштування пінгів.",
+  "settings_clientRepeatRefused": "Прошивка цього радіо не ретранслює на {freq} МГц. Ретрансляція поза мережею дозволена лише на {freqs} МГц. Виберіть одну з них або встановіть прошивку, що дозволяє інші частоти.",
+  "settings_clientRepeatUseFreq": "Використати {freq} МГц"
 }

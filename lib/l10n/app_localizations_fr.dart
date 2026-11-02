@@ -818,7 +818,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Fréquence réglée sur $freq MHz pour la répétition hors réseau';
+    return 'Le relais hors réseau utilisera $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Le firmware de cette radio ne relaie pas sur $freq MHz. Il n\'autorise le relais hors réseau que sur $freqs MHz. Utilisez l\'une de ces fréquences ou installez sur la radio un firmware qui en autorise d\'autres.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Utiliser $freq MHz';
   }
 
   @override

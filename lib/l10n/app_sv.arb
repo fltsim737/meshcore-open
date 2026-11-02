@@ -2971,7 +2971,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Frekvensen är satt till {freq} MHz för upprepning utan elnät",
+  "settings_clientRepeatFrequencyNote": "Vidarebefordran utan nät använder {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3799,5 +3799,7 @@
   "coverage_nextDistance": "Nästa ping efter {distance}",
   "coverage_nextTime": "Nästa ping om {time}",
   "coverage_nextEither": "Nästa ping efter {distance} eller om {time}",
-  "coverage_aboutSettings": "Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar."
+  "coverage_aboutSettings": "Hur ofta den pingar (efter sträcka, tid eller det som kommer först) ändrar du under ⋮ → Ping-inställningar.",
+  "settings_clientRepeatRefused": "Radions firmware vidarebefordrar inte på {freq} MHz. Den tillåter vidarebefordran utan nät bara på {freqs} MHz. Välj någon av dem eller installera firmware som tillåter andra frekvenser.",
+  "settings_clientRepeatUseFreq": "Använd {freq} MHz"
 }

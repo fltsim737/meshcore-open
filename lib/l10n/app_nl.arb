@@ -1852,7 +1852,7 @@
   "snrIndicator_nearByRepeaters": "Repeaters in de buurt",
   "chat_ShowAllPaths": "Toon alle paden",
   "settings_clientRepeat": "Off-Grid Herhalen",
-  "settings_clientRepeatFrequencyNote": "Frequentie ingesteld op {freq} MHz voor off-grid herhalen",
+  "settings_clientRepeatFrequencyNote": "Off-grid doorgeven gebruikt {freq} MHz",
   "settings_clientRepeatSubtitle": "Laat dit apparaat meshpakketten doorsturen voor anderen",
   "settings_clientRepeatFreqWarning": "Off-grid herhalen vereist een frequentie van 433, 869,495 of 918 MHz",
   "settings_aboutOpenMeteoAttribution": "LOS-hoogtegegevens: Open-Meteo (CC BY 4.0)",
@@ -3705,5 +3705,7 @@
   "coverage_nextDistance": "Volgende ping na {distance}",
   "coverage_nextTime": "Volgende ping over {time}",
   "coverage_nextEither": "Volgende ping na {distance} of over {time}",
-  "coverage_aboutSettings": "Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen."
+  "coverage_aboutSettings": "Hoe vaak er gepingd wordt (op afstand, op tijd of wat het eerst komt) stel je in via ⋮ → Ping-instellingen.",
+  "settings_clientRepeatRefused": "De firmware van deze radio geeft niet door op {freq} MHz. Off-grid doorgeven mag alleen op {freqs} MHz. Kies er een daarvan of zet firmware op de radio die andere frequenties toestaat.",
+  "settings_clientRepeatUseFreq": "{freq} MHz gebruiken"
 }

@@ -774,7 +774,17 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'オフグリッド中継用に周波数を $freq MHz に設定';
+    return 'オフグリッド中継は $freq MHz を使用します';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'この無線機のファームウェアは $freq MHz では中継しません。オフグリッド中継は $freqs MHz でのみ可能です。これらのいずれかを使うか、他の周波数を許可するファームウェアを書き込んでください。';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return '$freq MHz を使用';
   }
 
   @override

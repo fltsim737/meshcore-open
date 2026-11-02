@@ -3111,7 +3111,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "Frequenz für die Weiterleitung ohne Netzstrom auf {freq} MHz gesetzt",
+  "settings_clientRepeatFrequencyNote": "Weiterleitung ohne Netzstrom nutzt {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3939,5 +3939,7 @@
   "coverage_nextDistance": "Nächster Ping nach {distance}",
   "coverage_nextTime": "Nächster Ping in {time}",
   "coverage_nextEither": "Nächster Ping nach {distance} oder in {time}",
-  "coverage_aboutSettings": "Wie oft gepingt wird (nach Strecke, nach Zeit oder was zuerst eintritt), stellst du unter ⋮ → Ping-Einstellungen ein."
+  "coverage_aboutSettings": "Wie oft gepingt wird (nach Strecke, nach Zeit oder was zuerst eintritt), stellst du unter ⋮ → Ping-Einstellungen ein.",
+  "settings_clientRepeatRefused": "Die Firmware dieses Funkgeräts leitet auf {freq} MHz nicht weiter. Sie erlaubt die Weiterleitung ohne Netzstrom nur auf {freqs} MHz. Wähle eine davon oder spiele eine Firmware auf, die andere Frequenzen erlaubt.",
+  "settings_clientRepeatUseFreq": "{freq} MHz verwenden"
 }

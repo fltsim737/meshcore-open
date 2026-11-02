@@ -807,7 +807,17 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Frekvenca nastavljena na $freq MHz za ponavljanje brez omrežja';
+    return 'Ponavljanje zunaj omrežja bo uporabilo $freq MHz';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Strojna programska oprema tega radia ne ponavlja na $freq MHz. Ponavljanje zunaj omrežja dovoli le na $freqs MHz. Uporabite eno od teh ali naložite programsko opremo, ki dovoli druge frekvence.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Uporabi $freq MHz';
   }
 
   @override

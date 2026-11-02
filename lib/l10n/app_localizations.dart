@@ -1543,8 +1543,20 @@ abstract class AppLocalizations {
   /// No description provided for @settings_clientRepeatFrequencyNote.
   ///
   /// In en, this message translates to:
-  /// **'Frequency set to {freq} MHz for off-grid repeat'**
+  /// **'Off-grid repeat will use {freq} MHz'**
   String settings_clientRepeatFrequencyNote(String freq);
+
+  /// No description provided for @settings_clientRepeatRefused.
+  ///
+  /// In en, this message translates to:
+  /// **'This radio\'s firmware won\'t repeat on {freq} MHz. It only allows Off-Grid Repeat on {freqs} MHz. Use one of those, or put firmware on the radio that allows other frequencies.'**
+  String settings_clientRepeatRefused(String freq, String freqs);
+
+  /// No description provided for @settings_clientRepeatUseFreq.
+  ///
+  /// In en, this message translates to:
+  /// **'Use {freq} MHz'**
+  String settings_clientRepeatUseFreq(String freq);
 
   /// No description provided for @settings_clientRepeatSubtitle.
   ///

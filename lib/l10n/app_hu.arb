@@ -3015,7 +3015,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "{freq} MHz frekvencia beállítva a hálózaton kívüli ismétléshez",
+  "settings_clientRepeatFrequencyNote": "A hálózaton kívüli továbbítás {freq} MHz-et használ",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3843,5 +3843,7 @@
   "coverage_nextDistance": "Következő ping {distance} után",
   "coverage_nextTime": "Következő ping {time} múlva",
   "coverage_nextEither": "Következő ping {distance} után vagy {time} múlva",
-  "coverage_aboutSettings": "A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod."
+  "coverage_aboutSettings": "A pingelés gyakoriságát (távolság, idő, vagy ami előbb jön) a ⋮ → Ping-beállítások menüben módosíthatod.",
+  "settings_clientRepeatRefused": "A rádió firmware-e nem továbbít {freq} MHz-en. A hálózaton kívüli továbbítást csak ezeken engedi: {freqs} MHz. Válasszon ezek közül, vagy telepítsen olyan firmware-t, amely más frekvenciákat is enged.",
+  "settings_clientRepeatUseFreq": "{freq} MHz használata"
 }

@@ -817,7 +817,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return 'Частота $freq МГц для повторения вне сети';
+    return 'Ретрансляция вне сети будет на $freq МГц';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return 'Прошивка этого радио не ретранслирует на $freq МГц. Ретрансляция вне сети разрешена только на $freqs МГц. Выберите одну из них или установите прошивку, которая разрешает другие частоты.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return 'Использовать $freq МГц';
   }
 
   @override

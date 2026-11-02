@@ -2,6 +2,30 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.4 (2026-11-02)
+
+Both apps, plus a channel option in SOS Voice.
+
+### Australia (Narrow): the new default settings
+
+- **The Australia (Narrow) preset now matches the settings MeshCore Australia has confirmed as the new default: 916.575 MHz, 62.5 kHz bandwidth, SF7, coding rate 4/7, and 22 dBm transmit power.** Before, it used coding rate 4/5 and 20 dBm.
+- **All the Australian presets now set 22 dBm.** Radios that can't transmit that strongly get their own maximum instead, so Save is never greyed out by a preset.
+- Choosing a preset doesn't change your radio until you press **Save**. If your radio already uses Australia (Narrow) with coding rate 4/5, open **Settings → Radio Settings**, choose the preset again and save. Every radio you talk to must use the same frequency, bandwidth and spreading factor.
+
+### Off-Grid Repeat on any frequency
+
+- **Off-Grid Repeat now uses the frequency you choose.** Before, turning it on moved your radio to 433, 869.495 or 918 MHz, so you could only repeat away from your local mesh. It now stays on the frequency in the box above, whether that comes from a preset or is typed in.
+- **This depends on the radio's firmware.** Stock MeshCore companion firmware only allows Off-Grid Repeat on 433.000, 869.495 or 918.000 MHz, and refuses any other frequency. If it refuses, the app says which frequencies your radio allows and offers the nearest one, instead of a bare "not applied". Firmware that allows other frequencies repeats on them with no further change in the app.
+- The **Off-Grid 433**, **Off-Grid 869** and **Off-Grid 918** presets are now in the list, for radios with stock firmware.
+- Off-Grid Repeat makes your radio pass on everyone's packets, so use it where it's needed, not as a permanent repeater on a busy mesh.
+
+### SOS Voice: choose whether a channel carries voice
+
+- **When you add a channel in SOS Voice, you choose whether to allow voice on it.** Voice is off unless you turn it on. With it on, the channel's chat has the push-to-talk panel, as #voice does.
+- **You can change it later:** long-press the channel and choose **Allow voice** or **Don't allow voice**.
+- The choice is kept on your phone, not the radio. Only people who've also allowed voice on that channel hear the clips; others never see or hear them.
+- #voice always allows voice, and the emergency network channel always carries SOS voice during an SOS, whatever is chosen. Push-to-talk keeps its limits on every channel: clips up to 10 seconds, a rest after 3 minutes of talk, and nothing while an SOS is live or the mesh is busy with text.
+
 ## 10.2.3 (2026-11-01)
 
 Both apps. Fixes for radios connected by USB cable on Linux and macOS; Android and Windows behave as before.

@@ -776,7 +776,17 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String settings_clientRepeatFrequencyNote(String freq) {
-    return '오프그리드 반복용으로 주파수를 $freq MHz로 설정';
+    return '오프그리드 중계는 $freq MHz를 사용합니다';
+  }
+
+  @override
+  String settings_clientRepeatRefused(String freq, String freqs) {
+    return '이 무전기의 펌웨어는 $freq MHz에서 중계하지 않습니다. 오프그리드 중계는 $freqs MHz에서만 허용됩니다. 이 중 하나를 사용하거나 다른 주파수를 허용하는 펌웨어를 설치하세요.';
+  }
+
+  @override
+  String settings_clientRepeatUseFreq(String freq) {
+    return '$freq MHz 사용';
   }
 
   @override

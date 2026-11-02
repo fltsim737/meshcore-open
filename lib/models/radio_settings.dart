@@ -68,17 +68,18 @@ class RadioSettings {
         bandwidth: LoRaBandwidth.bw250,
         spreadingFactor: LoRaSpreadingFactor.sf10,
         codingRate: LoRaCodingRate.cr4_5,
-        txPowerDbm: 20,
+        txPowerDbm: 22,
       ),
     ),
     (
       'Australia (Narrow)',
+      // MeshCore Australia's confirmed default (2026-11).
       RadioSettings(
         frequencyMHz: 916.575,
         bandwidth: LoRaBandwidth.bw62_5,
         spreadingFactor: LoRaSpreadingFactor.sf7,
-        codingRate: LoRaCodingRate.cr4_5,
-        txPowerDbm: 20,
+        codingRate: LoRaCodingRate.cr4_7,
+        txPowerDbm: 22,
       ),
     ),
     (
@@ -88,7 +89,7 @@ class RadioSettings {
         bandwidth: LoRaBandwidth.bw125,
         spreadingFactor: LoRaSpreadingFactor.sf9,
         codingRate: LoRaCodingRate.cr4_5,
-        txPowerDbm: 20,
+        txPowerDbm: 22,
       ),
     ),
     (
@@ -98,7 +99,7 @@ class RadioSettings {
         bandwidth: LoRaBandwidth.bw62_5,
         spreadingFactor: LoRaSpreadingFactor.sf8,
         codingRate: LoRaCodingRate.cr4_5,
-        txPowerDbm: 20,
+        txPowerDbm: 22,
       ),
     ),
     (
@@ -511,7 +512,9 @@ class RadioSettings {
         txPowerDbm: 20,
       ),
     ),
-    // Off-grid repeat presets (valid client_repeat frequencies)
+    // Frequencies stock firmware allows for off-grid repeat. Repeat can be
+    // turned on with any preset; firmware that only allows these refuses
+    // others, and the radio settings dialog offers the nearest of them.
     (
       'Off-Grid 433',
       RadioSettings(

@@ -2981,7 +2981,7 @@
       }
     }
   },
-  "settings_clientRepeatFrequencyNote": "为离网重复设置的频率：{freq} MHz",
+  "settings_clientRepeatFrequencyNote": "离网中继将使用 {freq} MHz",
   "@settings_clientRepeatFrequencyNote": {
     "placeholders": {
       "freq": {
@@ -3809,5 +3809,7 @@
   "coverage_nextDistance": "移动 {distance} 后发送下一次 ping",
   "coverage_nextTime": "{time} 后发送下一次 ping",
   "coverage_nextEither": "移动 {distance} 后或 {time} 后发送下一次 ping",
-  "coverage_aboutSettings": "要更改 ping 的频率（按距离、按时间或先到者为准），请使用 ⋮ → Ping 设置。"
+  "coverage_aboutSettings": "要更改 ping 的频率（按距离、按时间或先到者为准），请使用 ⋮ → Ping 设置。",
+  "settings_clientRepeatRefused": "此电台的固件不会在 {freq} MHz 上中继。离网中继只允许在 {freqs} MHz 上使用。请选择其中之一，或为电台安装允许其他频率的固件。",
+  "settings_clientRepeatUseFreq": "使用 {freq} MHz"
 }
