@@ -3836,5 +3836,13 @@
   "chat_searchStart": "Napíšte slovo alebo meno. Každé slovo sa musí vyskytovať, v akomkoľvek poradí.",
   "chat_searchNone": "Žiadna správa sa nezhoduje.",
   "chat_searchCount": "Nájdené: {count}",
-  "chat_searchLoading": "Prehľadávam históriu…"
+  "chat_searchLoading": "Prehľadávam históriu…",
+  "pathTrace_hexLabel": "Cesta (hex)",
+  "pathTrace_hexHelper": "{chars} hex znaky na skok, oddelené čiarkami. Napíšte alebo vložte cestu, alebo ju zostavte nižšie.",
+  "pathTrace_paste": "Vložiť",
+  "pathTrace_noHops": "Zatiaľ žiadne skoky. Napíšte cestu vyššie alebo ťuknite na opakovače nižšie.",
+  "pathTrace_buildBelow": "Zostavte cestu: ťuknite na opakovače v poradí",
+  "pathTrace_oneWay": "Jedným smerom",
+  "pathTrace_thereAndBack": "Sledovať tam a späť",
+  "pathTrace_oneWayNote": "Jedným smerom funguje len vtedy, keď posledný opakovač dosiahne vaše rádio priamo."
 }

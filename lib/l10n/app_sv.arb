@@ -3830,5 +3830,13 @@
   "chat_searchStart": "Skriv ett ord eller ett namn. Varje ord måste finnas med, i valfri ordning.",
   "chat_searchNone": "Inga meddelanden matchar.",
   "chat_searchCount": "{count} hittade",
-  "chat_searchLoading": "Söker i historiken…"
+  "chat_searchLoading": "Söker i historiken…",
+  "pathTrace_hexLabel": "Väg (hex)",
+  "pathTrace_hexHelper": "{chars} hex-tecken per hopp, åtskilda med kommatecken. Skriv eller klistra in en väg, eller bygg den nedan.",
+  "pathTrace_paste": "Klistra in",
+  "pathTrace_noHops": "Inga hopp än. Skriv en väg ovan eller tryck på repeatrar nedan.",
+  "pathTrace_buildBelow": "Bygg vägen: tryck på repeatrar i ordning",
+  "pathTrace_oneWay": "Enkel väg",
+  "pathTrace_thereAndBack": "Spåra fram och tillbaka",
+  "pathTrace_oneWayNote": "Enkel väg fungerar bara om den sista repeatern når din radio direkt."
 }

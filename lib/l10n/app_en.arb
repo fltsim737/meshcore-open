@@ -4701,5 +4701,14 @@
   "chat_searchNone": "No messages match.",
   "chat_searchCount": "{count} found",
   "chat_searchLoading": "Searching the chat history…",
-  "@chat_searchCount": {"placeholders": {"count": {"type": "int"}}}
+  "@chat_searchCount": {"placeholders": {"count": {"type": "int"}}},
+  "pathTrace_hexLabel": "Path (hex)",
+  "pathTrace_hexHelper": "{chars} hex characters per hop, separated by commas. Type or paste a path, or build it below.",
+  "pathTrace_paste": "Paste",
+  "pathTrace_noHops": "No hops yet. Type a path above, or tap repeaters below.",
+  "pathTrace_buildBelow": "Build the path: tap repeaters in order",
+  "pathTrace_oneWay": "One way",
+  "pathTrace_thereAndBack": "Trace there and back",
+  "pathTrace_oneWayNote": "One way only works if the last repeater can reach your radio directly.",
+  "@pathTrace_hexHelper": {"placeholders": {"chars": {"type": "int"}}}
 }

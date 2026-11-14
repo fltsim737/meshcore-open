@@ -3736,5 +3736,13 @@
   "chat_searchStart": "Typ een woord of een naam. Elk woord moet voorkomen, in willekeurige volgorde.",
   "chat_searchNone": "Geen berichten gevonden.",
   "chat_searchCount": "{count} gevonden",
-  "chat_searchLoading": "Geschiedenis doorzoeken…"
+  "chat_searchLoading": "Geschiedenis doorzoeken…",
+  "pathTrace_hexLabel": "Pad (hex)",
+  "pathTrace_hexHelper": "{chars} hex-tekens per hop, gescheiden door komma's. Typ of plak een pad, of stel het hieronder samen.",
+  "pathTrace_paste": "Plakken",
+  "pathTrace_noHops": "Nog geen hops. Typ hierboven een pad of tik hieronder op repeaters.",
+  "pathTrace_buildBelow": "Pad samenstellen: tik de repeaters op volgorde aan",
+  "pathTrace_oneWay": "Enkele reis",
+  "pathTrace_thereAndBack": "Heen en terug traceren",
+  "pathTrace_oneWayNote": "Enkele reis werkt alleen als de laatste repeater je radio direct bereikt."
 }

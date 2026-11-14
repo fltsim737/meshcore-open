@@ -7969,4 +7969,33 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Verlauf wird durchsucht…';
+
+  @override
+  String get pathTrace_hexLabel => 'Pfad (Hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars Hex-Zeichen pro Hop, durch Kommas getrennt. Pfad eingeben oder einfügen, oder unten zusammenstellen.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Einfügen';
+
+  @override
+  String get pathTrace_noHops =>
+      'Noch keine Hops. Gib oben einen Pfad ein oder tippe unten auf Repeater.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Pfad zusammenstellen: Repeater der Reihe nach antippen';
+
+  @override
+  String get pathTrace_oneWay => 'Nur hin';
+
+  @override
+  String get pathTrace_thereAndBack => 'Hin und zurück verfolgen';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      '„Nur hin“ funktioniert nur, wenn der letzte Repeater dein Funkgerät direkt erreicht.';
 }

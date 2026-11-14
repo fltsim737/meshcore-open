@@ -3836,5 +3836,13 @@
   "chat_searchStart": "Vpišite besedo ali ime. Vsaka beseda se mora pojaviti, v poljubnem vrstnem redu.",
   "chat_searchNone": "Nobeno sporočilo se ne ujema.",
   "chat_searchCount": "Najdenih: {count}",
-  "chat_searchLoading": "Iskanje po zgodovini…"
+  "chat_searchLoading": "Iskanje po zgodovini…",
+  "pathTrace_hexLabel": "Pot (hex)",
+  "pathTrace_hexHelper": "{chars} šestnajstiških znakov na skok, ločenih z vejicami. Vnesite ali prilepite pot ali jo sestavite spodaj.",
+  "pathTrace_paste": "Prilepi",
+  "pathTrace_noHops": "Še ni skokov. Vnesite pot zgoraj ali tapnite repetitorje spodaj.",
+  "pathTrace_buildBelow": "Sestavite pot: tapnite repetitorje po vrsti",
+  "pathTrace_oneWay": "V eno smer",
+  "pathTrace_thereAndBack": "Sledi tja in nazaj",
+  "pathTrace_oneWayNote": "V eno smer deluje le, če zadnji repetitor neposredno doseže vaš radio."
 }

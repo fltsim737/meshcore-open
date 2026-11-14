@@ -7924,4 +7924,33 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Prehľadávam históriu…';
+
+  @override
+  String get pathTrace_hexLabel => 'Cesta (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars hex znaky na skok, oddelené čiarkami. Napíšte alebo vložte cestu, alebo ju zostavte nižšie.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Vložiť';
+
+  @override
+  String get pathTrace_noHops =>
+      'Zatiaľ žiadne skoky. Napíšte cestu vyššie alebo ťuknite na opakovače nižšie.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Zostavte cestu: ťuknite na opakovače v poradí';
+
+  @override
+  String get pathTrace_oneWay => 'Jedným smerom';
+
+  @override
+  String get pathTrace_thereAndBack => 'Sledovať tam a späť';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'Jedným smerom funguje len vtedy, keď posledný opakovač dosiahne vaše rádio priamo.';
 }

@@ -7928,4 +7928,33 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Iskanje po zgodovini…';
+
+  @override
+  String get pathTrace_hexLabel => 'Pot (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars šestnajstiških znakov na skok, ločenih z vejicami. Vnesite ali prilepite pot ali jo sestavite spodaj.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Prilepi';
+
+  @override
+  String get pathTrace_noHops =>
+      'Še ni skokov. Vnesite pot zgoraj ali tapnite repetitorje spodaj.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Sestavite pot: tapnite repetitorje po vrsti';
+
+  @override
+  String get pathTrace_oneWay => 'V eno smer';
+
+  @override
+  String get pathTrace_thereAndBack => 'Sledi tja in nazaj';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'V eno smer deluje le, če zadnji repetitor neposredno doseže vaš radio.';
 }

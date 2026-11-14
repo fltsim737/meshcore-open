@@ -3970,5 +3970,13 @@
   "chat_searchStart": "Gib ein Wort oder einen Namen ein. Jedes Wort muss vorkommen, in beliebiger Reihenfolge.",
   "chat_searchNone": "Keine Nachricht passt.",
   "chat_searchCount": "{count} gefunden",
-  "chat_searchLoading": "Verlauf wird durchsucht…"
+  "chat_searchLoading": "Verlauf wird durchsucht…",
+  "pathTrace_hexLabel": "Pfad (Hex)",
+  "pathTrace_hexHelper": "{chars} Hex-Zeichen pro Hop, durch Kommas getrennt. Pfad eingeben oder einfügen, oder unten zusammenstellen.",
+  "pathTrace_paste": "Einfügen",
+  "pathTrace_noHops": "Noch keine Hops. Gib oben einen Pfad ein oder tippe unten auf Repeater.",
+  "pathTrace_buildBelow": "Pfad zusammenstellen: Repeater der Reihe nach antippen",
+  "pathTrace_oneWay": "Nur hin",
+  "pathTrace_thereAndBack": "Hin und zurück verfolgen",
+  "pathTrace_oneWayNote": "„Nur hin“ funktioniert nur, wenn der letzte Repeater dein Funkgerät direkt erreicht."
 }

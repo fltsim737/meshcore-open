@@ -7981,4 +7981,33 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Recherche dans l\'historique…';
+
+  @override
+  String get pathTrace_hexLabel => 'Chemin (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars caractères hex par saut, séparés par des virgules. Saisissez ou collez un chemin, ou construisez-le ci-dessous.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Coller';
+
+  @override
+  String get pathTrace_noHops =>
+      'Aucun saut. Saisissez un chemin ci-dessus ou touchez des répéteurs ci-dessous.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Construire le chemin : touchez les répéteurs dans l\'ordre';
+
+  @override
+  String get pathTrace_oneWay => 'Aller seul';
+
+  @override
+  String get pathTrace_thereAndBack => 'Tracer aller-retour';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'L\'aller seul ne fonctionne que si le dernier répéteur atteint directement votre radio.';
 }

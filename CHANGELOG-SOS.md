@@ -2,6 +2,23 @@
 
 Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
 
+## 10.2.7 (2026-11-14)
+
+Both apps.
+
+### Ping a repeater directly
+
+- **Ping now goes straight from your radio to the repeater and back**, one hop, even when the app knows a longer route to it through other repeaters. It shows whether that repeater hears you directly, and how well each of you hears the other. If it is out of direct range, the ping gets no answer.
+- **Path Trace** is a separate item on a repeater that has a known route. It traces that route through the other repeaters, as Ping did before.
+
+### A simpler Path Trace
+
+- **Map → ⋮ → Path Trace now opens one page** instead of tapping radios on the map. It no longer needs your radio's position.
+- **The path in hex is at the top.** Type or paste it, for example *A1,B2,C3*, and the hops appear below with each repeater's name.
+- **Or build it below:** search the repeaters and tap them in order. The hex path at the top fills in as you go. Remove a hop, drag to reorder, or **Clear** to start again.
+- **Two buttons run it: Trace there and back**, which returns along the same path, or **One way**, which only works if the last repeater can reach your radio directly. The result still shows on the map, hop by hop.
+- The page remembers the last path you traced.
+
 ## 10.2.6 (2026-11-02)
 
 Both apps.

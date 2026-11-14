@@ -7939,4 +7939,33 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Keresés az előzményekben…';
+
+  @override
+  String get pathTrace_hexLabel => 'Útvonal (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return 'Ugrásonként $chars hex karakter, vesszővel elválasztva. Írj be vagy illessz be egy útvonalat, vagy építsd fel lent.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Beillesztés';
+
+  @override
+  String get pathTrace_noHops =>
+      'Még nincs ugrás. Írj be fent egy útvonalat, vagy koppints lent az átjátszókra.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Útvonal építése: koppints sorban az átjátszókra';
+
+  @override
+  String get pathTrace_oneWay => 'Csak oda';
+
+  @override
+  String get pathTrace_thereAndBack => 'Követés oda-vissza';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'A „csak oda” csak akkor működik, ha az utolsó átjátszó közvetlenül eléri a rádiódat.';
 }

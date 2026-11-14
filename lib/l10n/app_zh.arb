@@ -3840,5 +3840,13 @@
   "chat_searchStart": "输入一个词或名称。输入的每个词都必须出现,顺序不限。",
   "chat_searchNone": "没有匹配的消息。",
   "chat_searchCount": "找到 {count} 条",
-  "chat_searchLoading": "正在搜索聊天记录…"
+  "chat_searchLoading": "正在搜索聊天记录…",
+  "pathTrace_hexLabel": "路径（十六进制）",
+  "pathTrace_hexHelper": "每跳 {chars} 个十六进制字符，用逗号分隔。输入或粘贴路径，或在下方构建。",
+  "pathTrace_paste": "粘贴",
+  "pathTrace_noHops": "还没有跳点。在上方输入路径，或点按下方的中继器。",
+  "pathTrace_buildBelow": "构建路径：按顺序点按中继器",
+  "pathTrace_oneWay": "单程",
+  "pathTrace_thereAndBack": "往返追踪",
+  "pathTrace_oneWayNote": "只有当最后一个中继器能直接到达你的电台时，单程才有效。"
 }

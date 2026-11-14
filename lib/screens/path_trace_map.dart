@@ -60,6 +60,10 @@ class PathTraceMapScreen extends StatefulWidget {
   final int? repeaterId;
   final bool flipPathAround;
   final bool reversePathAround;
+
+  /// Ping the target directly (one hop out and back), ignoring any stored
+  /// route through other repeaters.
+  final bool directOnly;
   final Contact? targetContact;
   final int pathHashByteWidth;
   final List<Contact>? pathContacts;
@@ -71,6 +75,7 @@ class PathTraceMapScreen extends StatefulWidget {
     this.repeaterId,
     this.flipPathAround = false,
     this.reversePathAround = false,
+    this.directOnly = false,
     this.targetContact,
     this.pathHashByteWidth = pathHashSize,
     this.pathContacts,
@@ -332,6 +337,9 @@ class _PathTraceMapScreenState extends State<PathTraceMapScreen>
   /// contact's learned width for its device path, the local mode otherwise.
   (Uint8List, int) _resolveLivePath(MeshCoreConnector connector) {
     final target = widget.targetContact;
+    if (widget.directOnly && target != null) {
+      return (Uint8List(0), widget.pathHashByteWidth);
+    }
     if (!widget.flipPathAround || target == null) {
       return (widget.path, widget.pathHashByteWidth);
     }

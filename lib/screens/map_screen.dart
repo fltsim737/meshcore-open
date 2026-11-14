@@ -9,6 +9,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:meshcore_open/helpers/path_helper.dart';
 import 'package:meshcore_open/helpers/path_hop_resolver.dart';
 import 'package:meshcore_open/screens/path_trace_map.dart';
+import 'package:meshcore_open/screens/path_trace_builder_screen.dart';
 import 'package:meshcore_open/widgets/app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -742,9 +743,7 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
               actions: [
                 PopupMenuButton(
                   itemBuilder: (context) => [
-                    if (!_isBuildingPathTrace &&
-                        connector.selfLatitude != null &&
-                        connector.selfLongitude != null)
+                    if (!_isBuildingPathTrace)
                       PopupMenuItem(
                         child: Row(
                           children: [
@@ -753,10 +752,11 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
                             Text(context.l10n.contacts_pathTrace),
                           ],
                         ),
-                        onTap: () => _startPath(
-                          LatLng(
-                            connector.selfLatitude!,
-                            connector.selfLongitude!,
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PathTraceBuilderScreen(),
                           ),
                         ),
                       ),
@@ -4162,18 +4162,6 @@ class _MapScreenState extends State<MapScreen> with DisconnectNavigationMixin {
         ),
       ); // Add contact to path trace contacts
       _points.add(position ?? LatLng(contact.latitude!, contact.longitude!));
-    });
-  }
-
-  void _startPath(LatLng position) {
-    setState(() {
-      _isBuildingPathTrace = true;
-      _pathTrace.clear();
-      _pathTraceHopWidths.clear();
-      _pathTraceContacts.clear();
-      _points.clear();
-      _polylines.clear();
-      _points.add(position);
     });
   }
 

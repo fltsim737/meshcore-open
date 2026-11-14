@@ -7914,4 +7914,33 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Geschiedenis doorzoeken…';
+
+  @override
+  String get pathTrace_hexLabel => 'Pad (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars hex-tekens per hop, gescheiden door komma\'s. Typ of plak een pad, of stel het hieronder samen.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Plakken';
+
+  @override
+  String get pathTrace_noHops =>
+      'Nog geen hops. Typ hierboven een pad of tik hieronder op repeaters.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Pad samenstellen: tik de repeaters op volgorde aan';
+
+  @override
+  String get pathTrace_oneWay => 'Enkele reis';
+
+  @override
+  String get pathTrace_thereAndBack => 'Heen en terug traceren';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'Enkele reis werkt alleen als de laatste repeater je radio direct bereikt.';
 }
