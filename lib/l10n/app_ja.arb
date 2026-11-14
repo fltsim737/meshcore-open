@@ -3928,5 +3928,13 @@
   "chat_searchStart": "単語または名前を入力してください。入力した単語はすべて含まれている必要があります(順不同)。",
   "chat_searchNone": "一致するメッセージはありません。",
   "chat_searchCount": "{count} 件",
-  "chat_searchLoading": "履歴を検索中…"
+  "chat_searchLoading": "履歴を検索中…",
+  "pathTrace_hexLabel": "パス (16進)",
+  "pathTrace_hexHelper": "1ホップあたり16進{chars}文字、カンマ区切り。パスを入力・貼り付けするか、下で組み立てます。",
+  "pathTrace_paste": "貼り付け",
+  "pathTrace_noHops": "まだホップがありません。上にパスを入力するか、下のリピーターをタップしてください。",
+  "pathTrace_buildBelow": "パスを組み立てる: リピーターを順にタップ",
+  "pathTrace_oneWay": "片道",
+  "pathTrace_thereAndBack": "往復でトレース",
+  "pathTrace_oneWayNote": "片道は、最後のリピーターがあなたの無線機に直接届く場合のみ機能します。"
 }

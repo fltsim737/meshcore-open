@@ -7301,4 +7301,30 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chat_searchLoading => '正在搜索聊天记录…';
+
+  @override
+  String get pathTrace_hexLabel => '路径（十六进制）';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '每跳 $chars 个十六进制字符，用逗号分隔。输入或粘贴路径，或在下方构建。';
+  }
+
+  @override
+  String get pathTrace_paste => '粘贴';
+
+  @override
+  String get pathTrace_noHops => '还没有跳点。在上方输入路径，或点按下方的中继器。';
+
+  @override
+  String get pathTrace_buildBelow => '构建路径：按顺序点按中继器';
+
+  @override
+  String get pathTrace_oneWay => '单程';
+
+  @override
+  String get pathTrace_thereAndBack => '往返追踪';
+
+  @override
+  String get pathTrace_oneWayNote => '只有当最后一个中继器能直接到达你的电台时，单程才有效。';
 }

@@ -3928,5 +3928,13 @@
   "chat_searchStart": "Scrivi una parola o un nome. Ogni parola deve comparire, in qualsiasi ordine.",
   "chat_searchNone": "Nessun messaggio corrisponde.",
   "chat_searchCount": "{count} trovati",
-  "chat_searchLoading": "Ricerca nella cronologia…"
+  "chat_searchLoading": "Ricerca nella cronologia…",
+  "pathTrace_hexLabel": "Percorso (hex)",
+  "pathTrace_hexHelper": "{chars} caratteri hex per salto, separati da virgole. Scrivi o incolla un percorso, oppure crealo qui sotto.",
+  "pathTrace_paste": "Incolla",
+  "pathTrace_noHops": "Ancora nessun salto. Scrivi un percorso sopra o tocca i ripetitori qui sotto.",
+  "pathTrace_buildBelow": "Crea il percorso: tocca i ripetitori in ordine",
+  "pathTrace_oneWay": "Solo andata",
+  "pathTrace_thereAndBack": "Traccia andata e ritorno",
+  "pathTrace_oneWayNote": "Solo andata funziona solo se l'ultimo ripetitore raggiunge direttamente la tua radio."
 }

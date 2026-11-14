@@ -7792,4 +7792,33 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'A pesquisar o histórico…';
+
+  @override
+  String get pathTrace_hexLabel => 'Caminho (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars caracteres hex por salto, separados por vírgulas. Escreva ou cole um caminho, ou monte-o abaixo.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Colar';
+
+  @override
+  String get pathTrace_noHops =>
+      'Ainda sem saltos. Escreva um caminho acima ou toque em repetidores abaixo.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Montar o caminho: toque nos repetidores por ordem';
+
+  @override
+  String get pathTrace_oneWay => 'Só ida';
+
+  @override
+  String get pathTrace_thereAndBack => 'Rastrear ida e volta';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'Só ida só funciona se o último repetidor alcançar o seu rádio diretamente.';
 }

@@ -3928,5 +3928,13 @@
   "chat_searchStart": "단어나 이름을 입력하세요. 입력한 모든 단어가 순서와 관계없이 포함되어야 합니다.",
   "chat_searchNone": "일치하는 메시지가 없습니다.",
   "chat_searchCount": "{count}개 찾음",
-  "chat_searchLoading": "기록 검색 중…"
+  "chat_searchLoading": "기록 검색 중…",
+  "pathTrace_hexLabel": "경로 (16진)",
+  "pathTrace_hexHelper": "홉당 16진 {chars}자, 쉼표로 구분. 경로를 입력하거나 붙여넣거나 아래에서 만드세요.",
+  "pathTrace_paste": "붙여넣기",
+  "pathTrace_noHops": "아직 홉이 없습니다. 위에 경로를 입력하거나 아래 리피터를 탭하세요.",
+  "pathTrace_buildBelow": "경로 만들기: 리피터를 순서대로 탭",
+  "pathTrace_oneWay": "편도",
+  "pathTrace_thereAndBack": "왕복 추적",
+  "pathTrace_oneWayNote": "편도는 마지막 리피터가 내 무전기에 직접 닿을 때만 작동합니다."
 }

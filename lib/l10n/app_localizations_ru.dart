@@ -7814,4 +7814,33 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Поиск по истории…';
+
+  @override
+  String get pathTrace_hexLabel => 'Путь (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars hex-символа на хоп, через запятую. Введите или вставьте путь либо соберите его ниже.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Вставить';
+
+  @override
+  String get pathTrace_noHops =>
+      'Хопов пока нет. Введите путь выше или нажмите на ретрансляторы ниже.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Соберите путь: нажимайте на ретрансляторы по порядку';
+
+  @override
+  String get pathTrace_oneWay => 'В одну сторону';
+
+  @override
+  String get pathTrace_thereAndBack => 'Трассировка туда и обратно';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'В одну сторону работает, только если последний ретранслятор напрямую достаёт до вашего радио.';
 }

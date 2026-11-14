@@ -7472,4 +7472,30 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get chat_searchLoading => '기록 검색 중…';
+
+  @override
+  String get pathTrace_hexLabel => '경로 (16진)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '홉당 16진 $chars자, 쉼표로 구분. 경로를 입력하거나 붙여넣거나 아래에서 만드세요.';
+  }
+
+  @override
+  String get pathTrace_paste => '붙여넣기';
+
+  @override
+  String get pathTrace_noHops => '아직 홉이 없습니다. 위에 경로를 입력하거나 아래 리피터를 탭하세요.';
+
+  @override
+  String get pathTrace_buildBelow => '경로 만들기: 리피터를 순서대로 탭';
+
+  @override
+  String get pathTrace_oneWay => '편도';
+
+  @override
+  String get pathTrace_thereAndBack => '왕복 추적';
+
+  @override
+  String get pathTrace_oneWayNote => '편도는 마지막 리피터가 내 무전기에 직접 닿을 때만 작동합니다.';
 }

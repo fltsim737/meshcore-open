@@ -7461,4 +7461,30 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get chat_searchLoading => '履歴を検索中…';
+
+  @override
+  String get pathTrace_hexLabel => 'パス (16進)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '1ホップあたり16進$chars文字、カンマ区切り。パスを入力・貼り付けするか、下で組み立てます。';
+  }
+
+  @override
+  String get pathTrace_paste => '貼り付け';
+
+  @override
+  String get pathTrace_noHops => 'まだホップがありません。上にパスを入力するか、下のリピーターをタップしてください。';
+
+  @override
+  String get pathTrace_buildBelow => 'パスを組み立てる: リピーターを順にタップ';
+
+  @override
+  String get pathTrace_oneWay => '片道';
+
+  @override
+  String get pathTrace_thereAndBack => '往復でトレース';
+
+  @override
+  String get pathTrace_oneWayNote => '片道は、最後のリピーターがあなたの無線機に直接届く場合のみ機能します。';
 }

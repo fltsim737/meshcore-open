@@ -7741,4 +7741,32 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Söker i historiken…';
+
+  @override
+  String get pathTrace_hexLabel => 'Väg (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars hex-tecken per hopp, åtskilda med kommatecken. Skriv eller klistra in en väg, eller bygg den nedan.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Klistra in';
+
+  @override
+  String get pathTrace_noHops =>
+      'Inga hopp än. Skriv en väg ovan eller tryck på repeatrar nedan.';
+
+  @override
+  String get pathTrace_buildBelow => 'Bygg vägen: tryck på repeatrar i ordning';
+
+  @override
+  String get pathTrace_oneWay => 'Enkel väg';
+
+  @override
+  String get pathTrace_thereAndBack => 'Spåra fram och tillbaka';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'Enkel väg fungerar bara om den sista repeatern når din radio direkt.';
 }

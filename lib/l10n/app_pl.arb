@@ -3827,5 +3827,13 @@
   "chat_searchStart": "Wpisz słowo lub nazwę. Każde słowo musi wystąpić, w dowolnej kolejności.",
   "chat_searchNone": "Brak pasujących wiadomości.",
   "chat_searchCount": "Znaleziono: {count}",
-  "chat_searchLoading": "Przeszukiwanie historii…"
+  "chat_searchLoading": "Przeszukiwanie historii…",
+  "pathTrace_hexLabel": "Ścieżka (hex)",
+  "pathTrace_hexHelper": "{chars} znaki hex na skok, oddzielone przecinkami. Wpisz lub wklej ścieżkę albo zbuduj ją poniżej.",
+  "pathTrace_paste": "Wklej",
+  "pathTrace_noHops": "Brak skoków. Wpisz ścieżkę powyżej lub dotknij przemienników poniżej.",
+  "pathTrace_buildBelow": "Zbuduj ścieżkę: dotykaj przemienników po kolei",
+  "pathTrace_oneWay": "W jedną stronę",
+  "pathTrace_thereAndBack": "Śledź tam i z powrotem",
+  "pathTrace_oneWayNote": "W jedną stronę działa tylko wtedy, gdy ostatni przemiennik dociera bezpośrednio do twojego radia."
 }

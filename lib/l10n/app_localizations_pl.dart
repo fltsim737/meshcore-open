@@ -7826,4 +7826,33 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Przeszukiwanie historii…';
+
+  @override
+  String get pathTrace_hexLabel => 'Ścieżka (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars znaki hex na skok, oddzielone przecinkami. Wpisz lub wklej ścieżkę albo zbuduj ją poniżej.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Wklej';
+
+  @override
+  String get pathTrace_noHops =>
+      'Brak skoków. Wpisz ścieżkę powyżej lub dotknij przemienników poniżej.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Zbuduj ścieżkę: dotykaj przemienników po kolei';
+
+  @override
+  String get pathTrace_oneWay => 'W jedną stronę';
+
+  @override
+  String get pathTrace_thereAndBack => 'Śledź tam i z powrotem';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'W jedną stronę działa tylko wtedy, gdy ostatni przemiennik dociera bezpośrednio do twojego radia.';
 }

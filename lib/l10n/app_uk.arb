@@ -3774,5 +3774,13 @@
   "chat_searchStart": "Введіть слово або ім'я. Кожне слово має траплятися, у будь-якому порядку.",
   "chat_searchNone": "Повідомлень не знайдено.",
   "chat_searchCount": "Знайдено: {count}",
-  "chat_searchLoading": "Пошук в історії…"
+  "chat_searchLoading": "Пошук в історії…",
+  "pathTrace_hexLabel": "Шлях (hex)",
+  "pathTrace_hexHelper": "{chars} hex-символи на хоп, через кому. Введіть або вставте шлях чи зберіть його нижче.",
+  "pathTrace_paste": "Вставити",
+  "pathTrace_noHops": "Хопів ще немає. Введіть шлях вище або торкніться ретрансляторів нижче.",
+  "pathTrace_buildBelow": "Зберіть шлях: торкайтеся ретрансляторів по черзі",
+  "pathTrace_oneWay": "В один бік",
+  "pathTrace_thereAndBack": "Трасування туди й назад",
+  "pathTrace_oneWayNote": "В один бік працює, лише якщо останній ретранслятор напряму досягає вашого радіо."
 }

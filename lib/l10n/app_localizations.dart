@@ -12984,6 +12984,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Searching the chat history…'**
   String get chat_searchLoading;
+
+  /// No description provided for @pathTrace_hexLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Path (hex)'**
+  String get pathTrace_hexLabel;
+
+  /// No description provided for @pathTrace_hexHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'{chars} hex characters per hop, separated by commas. Type or paste a path, or build it below.'**
+  String pathTrace_hexHelper(int chars);
+
+  /// No description provided for @pathTrace_paste.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste'**
+  String get pathTrace_paste;
+
+  /// No description provided for @pathTrace_noHops.
+  ///
+  /// In en, this message translates to:
+  /// **'No hops yet. Type a path above, or tap repeaters below.'**
+  String get pathTrace_noHops;
+
+  /// No description provided for @pathTrace_buildBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'Build the path: tap repeaters in order'**
+  String get pathTrace_buildBelow;
+
+  /// No description provided for @pathTrace_oneWay.
+  ///
+  /// In en, this message translates to:
+  /// **'One way'**
+  String get pathTrace_oneWay;
+
+  /// No description provided for @pathTrace_thereAndBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Trace there and back'**
+  String get pathTrace_thereAndBack;
+
+  /// No description provided for @pathTrace_oneWayNote.
+  ///
+  /// In en, this message translates to:
+  /// **'One way only works if the last repeater can reach your radio directly.'**
+  String get pathTrace_oneWayNote;
 }
 
 class _AppLocalizationsDelegate

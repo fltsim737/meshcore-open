@@ -1655,10 +1655,9 @@ class _ContactsScreenState extends State<ContactsScreen>
                     MaterialPageRoute(
                       builder: (context) => PathTraceMapScreen(
                         title: context.l10n.contacts_repeaterPing,
-                        path: contact.pathBytesForDisplay.isNotEmpty
-                            ? contact.pathBytesForDisplay
-                            : _contactPathPrefix(contact, hw),
+                        path: _contactPathPrefix(contact, hw),
                         flipPathAround: true,
+                        directOnly: true,
                         targetContact: contact,
                         pathHashByteWidth: hw,
                       ),
@@ -1666,6 +1665,29 @@ class _ContactsScreenState extends State<ContactsScreen>
                   );
                 },
               ),
+              if (contact.pathBytesForDisplay.isNotEmpty)
+                ListTile(
+                  leading: Icon(Icons.route, color: MeshPalette.signal),
+                  title: Text(context.l10n.contacts_pathTrace),
+                  onTap: () {
+                    Navigator.pop(sheetContext);
+                    final hw = context
+                        .read<MeshCoreConnector>()
+                        .pathHashByteWidth;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PathTraceMapScreen(
+                          title: context.l10n.contacts_pathTrace,
+                          path: contact.pathBytesForDisplay,
+                          flipPathAround: true,
+                          targetContact: contact,
+                          pathHashByteWidth: hw,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ListTile(
                 leading: Icon(Icons.cell_tower, color: MeshPalette.warn),
                 title: Text(context.l10n.contacts_manageRepeater),

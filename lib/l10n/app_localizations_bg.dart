@@ -7795,4 +7795,33 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get chat_searchLoading => 'Търсене в историята…';
+
+  @override
+  String get pathTrace_hexLabel => 'Път (hex)';
+
+  @override
+  String pathTrace_hexHelper(int chars) {
+    return '$chars hex знака на скок, разделени със запетаи. Въведете или поставете път, или го изградете по-долу.';
+  }
+
+  @override
+  String get pathTrace_paste => 'Постави';
+
+  @override
+  String get pathTrace_noHops =>
+      'Още няма скокове. Въведете път по-горе или докоснете ретранслатори по-долу.';
+
+  @override
+  String get pathTrace_buildBelow =>
+      'Изградете пътя: докоснете ретранслаторите по ред';
+
+  @override
+  String get pathTrace_oneWay => 'В една посока';
+
+  @override
+  String get pathTrace_thereAndBack => 'Проследи натам и обратно';
+
+  @override
+  String get pathTrace_oneWayNote =>
+      'В една посока работи само ако последният ретранслатор достига радиото ви директно.';
 }
