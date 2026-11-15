@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "pl",
-  "appTitle": "MeshCore Open SOS Voice",
+  "appTitle": "Outback Mesh Voice",
   "nav_contacts": "Kontakty",
   "nav_channels": "Kanały",
   "nav_map": "Mapa",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Dziennik debugowania aplikacji",
   "settings_appDebugLogSubtitle": "Komunikaty debugowania aplikacji",
   "settings_about": "O aplikacji",
-  "settings_aboutVersion": "MeshCore Open SOS Voice w wersji {version}",
+  "settings_aboutVersion": "Outback Mesh Voice w wersji {version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
+  "settings_aboutLegalese": "Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Otwartoźródłowy klient Flutter dla urządzeń MeshCore LoRa do sieci mesh.",
   "settings_infoName": "Nazwa",
   "settings_infoId": "ID",
@@ -2427,7 +2427,7 @@
   "background_serviceText": "Keeping BLE connected",
   "background_serviceRunningText": "Nasłuchiwanie wiadomości i alarmów SOS",
   "background_stop": "Zatrzymaj",
-  "tray_show": "Pokaż MeshCore Open SOS Voice",
+  "tray_show": "Pokaż Outback Mesh Voice",
   "tray_quit": "Zakończ",
   "appSettings_translationModelDeleted": "Deleted {name}",
   "@appSettings_translationModelDeleted": {
@@ -3045,7 +3045,7 @@
     }
   },
   "appSettings_batteryOptimization": "Działanie w tle",
-  "appSettings_batteryOptimizationSubtitle": "Ustaw w ustawieniach baterii aplikacji MeshCore Open SOS Voice opcję „Nie optymalizuj”, aby wiadomości przychodziły w tle",
+  "appSettings_batteryOptimizationSubtitle": "Ustaw w ustawieniach baterii aplikacji Outback Mesh Voice opcję „Nie optymalizuj”, aby wiadomości przychodziły w tle",
   "appSettings_startOnLogin": "Uruchamiaj po zalogowaniu",
   "appSettings_startOnLoginSubtitle": "Otwiera się ukryta w zasobniku i nasłuchuje wiadomości oraz alarmów SOS",
   "contacts_storageFull": "Pamięć kontaktów w węźle jest pełna. Nowe węzły nie mogą być dodane, dopóki nie usuniesz kontaktów.",
@@ -3108,11 +3108,11 @@
   "notification_replyHint": "Wiadomość",
   "notification_you": "Ty",
   "notification_replyFailedTitle": "Odpowiedź nie została wysłana",
-  "notification_replyNotConnected": "Brak połączenia z radiem. Połącz się ponownie w MeshCore Open SOS Voice i wyślij odpowiedź jeszcze raz.",
-  "notification_replyTooLong": "Twoja odpowiedź jest za długa, aby wysłać ją z powiadomienia. Wyślij ją zamiast tego z MeshCore Open SOS Voice.",
+  "notification_replyNotConnected": "Brak połączenia z radiem. Połącz się ponownie w Outback Mesh Voice i wyślij odpowiedź jeszcze raz.",
+  "notification_replyTooLong": "Twoja odpowiedź jest za długa, aby wysłać ją z powiadomienia. Wyślij ją zamiast tego z Outback Mesh Voice.",
   "notification_replyUnavailable": "Tej rozmowy nie ma już na podłączonym radiu.",
-  "notification_replySendFailed": "Twoja odpowiedź mogła nie zostać wysłana. Sprawdź w MeshCore Open SOS Voice i spróbuj ponownie.",
-  "notification_replyAppNotRunning": "MeshCore Open SOS Voice nie jest uruchomiony. Otwórz go i wyślij odpowiedź jeszcze raz.",
+  "notification_replySendFailed": "Twoja odpowiedź mogła nie zostać wysłana. Sprawdź w Outback Mesh Voice i spróbuj ponownie.",
+  "notification_replyAppNotRunning": "Outback Mesh Voice nie jest uruchomiony. Otwórz go i wyślij odpowiedź jeszcze raz.",
   "snrIndicator_nearByRepeatersDescription": "Przekaźniki usłyszane bezpośrednio przez Twoje radio, najpierw te ostatnio usłyszane.",
   "radioStats_sectionSignal": "Sygnał",
   "radioStats_sectionAirtime": "Czas w eterze",
@@ -3467,7 +3467,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Otwórz MeshCore Open SOS Voice, aby wysłać ACK",
+  "sos_notificationOpenToRespond": "Otwórz Outback Mesh Voice, aby wysłać ACK",
   "sos_notificationChannelName": "Alarmy SOS",
   "sos_notificationChannelDescription": "Alarm dla wiadomości SOS od innych węzłów",
   "sos_ackChannelName": "Potwierdzenia SOS",
@@ -3656,7 +3656,7 @@
   "backup_exported": "Konfigurację zapisano w {path}",
   "backup_exportFailed": "Nie udało się wyeksportować: {error}",
   "backup_exportDisabled": "Oprogramowanie tego radia nie pozwala eksportować jego tożsamości.",
-  "backup_notConfig": "Ten plik nie jest konfiguracją MeshCore SOS.",
+  "backup_notConfig": "Ten plik nie jest konfiguracją Outback Mesh SOS.",
   "backup_tooLarge": "Ten plik jest za duży, by być konfiguracją.",
   "backup_importConfirm": "Zaimportować konfigurację „{name}” (tożsamość {key}…)? To radio przejmie tę tożsamość i ustawienia, a kontakty i kanały z pliku zostaną dodane. Nie używaj tej samej tożsamości na dwóch radiach jednocześnie.",
   "backup_importing": "Importowanie: {step}",
@@ -3714,8 +3714,8 @@
   "sos_soundNotConnected": "Niepodłączone: do czasu powrotu używane jest domyślne urządzenie systemowe",
   "sos_soundNoDevices": "Nie znaleziono innych urządzeń",
   "ptt_title": "Naciśnij, aby mówić",
-  "ptt_channelHelp": "Wszyscy w sieci z SOS Voice słyszą ten kanał. Nagrania do 10 s. Każde nagranie zajmuje czas antenowy wspólny dla całej sieci: mów krótko.",
-  "ptt_directHelp": "Nagrania do 10 s, wysyłane bezpośrednio do {name}. Odtworzy je tylko SOS Voice.",
+  "ptt_channelHelp": "Wszyscy w sieci z Outback Mesh Voice słyszą ten kanał. Nagrania do 10 s. Każde nagranie zajmuje czas antenowy wspólny dla całej sieci: mów krótko.",
+  "ptt_directHelp": "Nagrania do 10 s, wysyłane bezpośrednio do {name}. Odtworzy je tylko Outback Mesh Voice.",
   "ptt_sosLive": "Wstrzymane: trwa SOS i ma pierwszeństwo.",
   "ptt_noChannel": "Kanału głosowego #voice nie ma w tym radiu. Dodaj go w Kanałach (kanał hashtag o nazwie #voice).",
   "ptt_busy": "Ktoś mówi…",

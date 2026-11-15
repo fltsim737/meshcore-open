@@ -9,7 +9,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open SOS Voice';
+  String get appTitle => 'Outback Mesh Voice';
 
   @override
   String get nav_contacts => '연락처';
@@ -173,7 +173,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get common_interval => '간격';
 
   @override
-  String get scanner_title => 'MeshCore Open SOS Voice';
+  String get scanner_title => 'Outback Mesh Voice';
 
   @override
   String get connectionChoiceUsbLabel => 'USB';
@@ -267,7 +267,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nOutback Mesh Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -687,12 +687,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open SOS Voice v$version';
+    return 'Outback Mesh Voice v$version';
   }
 
   @override
   String get settings_aboutLegalese =>
-      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
+      'Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -973,7 +973,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      '배터리 설정에서 MeshCore Open SOS Voice을 \"최적화 안 함\"으로 지정하면 백그라운드에서도 메시지가 계속 수신됩니다';
+      '배터리 설정에서 Outback Mesh Voice을 \"최적화 안 함\"으로 지정하면 백그라운드에서도 메시지가 계속 수신됩니다';
 
   @override
   String get appSettings_startOnLogin => '로그인 시 시작';
@@ -4645,22 +4645,22 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      '라디오에 연결되어 있지 않습니다. MeshCore Open SOS Voice에서 다시 연결한 뒤 답장을 다시 보내세요.';
+      '라디오에 연결되어 있지 않습니다. Outback Mesh Voice에서 다시 연결한 뒤 답장을 다시 보내세요.';
 
   @override
   String get notification_replyTooLong =>
-      '답장이 너무 길어 알림으로 전송할 수 없습니다. 대신 MeshCore Open SOS Voice에서 보내세요.';
+      '답장이 너무 길어 알림으로 전송할 수 없습니다. 대신 Outback Mesh Voice에서 보내세요.';
 
   @override
   String get notification_replyUnavailable => '이 대화는 연결된 라디오에 더 이상 없습니다.';
 
   @override
   String get notification_replySendFailed =>
-      '답장이 전송되지 않았을 수 있습니다. MeshCore Open SOS Voice에서 확인한 뒤 다시 시도하세요.';
+      '답장이 전송되지 않았을 수 있습니다. Outback Mesh Voice에서 확인한 뒤 다시 시도하세요.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open SOS Voice이 실행 중이 아닙니다. 앱을 연 뒤 답장을 다시 보내세요.';
+      'Outback Mesh Voice이 실행 중이 아닙니다. 앱을 연 뒤 답장을 다시 보내세요.';
 
   @override
   String get settings_gpxExportRepeaters => 'GPX로 전송/방 관리 서버';
@@ -5089,7 +5089,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get background_stop => '중지';
 
   @override
-  String get tray_show => 'MeshCore Open SOS Voice 표시';
+  String get tray_show => 'Outback Mesh Voice 표시';
 
   @override
   String get tray_quit => '종료';
@@ -6487,7 +6487,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'ACK를 보내려면 MeshCore Open SOS Voice을 여세요';
+      'ACK를 보내려면 Outback Mesh Voice을 여세요';
 
   @override
   String get sos_notificationChannelName => '긴급 SOS 경보';
@@ -6842,7 +6842,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get backup_exportDisabled => '이 무전기의 펌웨어는 신원 내보내기를 허용하지 않습니다.';
 
   @override
-  String get backup_notConfig => 'MeshCore SOS 설정 파일이 아닙니다.';
+  String get backup_notConfig => 'Outback Mesh SOS 설정 파일이 아닙니다.';
 
   @override
   String get backup_tooLarge => '설정 파일로 보기에는 너무 큽니다.';

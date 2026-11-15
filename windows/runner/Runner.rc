@@ -90,7 +90,7 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.meshcore" "\0"
-            VALUE "FileDescription", "MeshCore Open SOS Voice" "\0"
+            VALUE "FileDescription", "Outback Mesh Voice" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "meshcore_open_sos_voice" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.meshcore. All rights reserved." "\0"

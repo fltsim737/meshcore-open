@@ -1,6 +1,18 @@
-# MeshCore Open SOS and SOS Voice changelog
+# Outback Mesh SOS and Outback Mesh Voice changelog
 
-Both apps share the SOS code, so each release applies to both: `sos-<version>` for MeshCore Open SOS and `sos-voice-<version>` for MeshCore Open SOS Voice.
+Both apps share the SOS code, so each release applies to both: `sos-<version>` for Outback Mesh SOS and `sos-voice-<version>` for Outback Mesh Voice. Before 10.3.0 they were called MeshCore Open SOS and MeshCore Open SOS Voice.
+
+## 10.3.0 (2026-11-15)
+
+Both apps.
+
+### A new name: Outback Mesh
+
+- **MeshCore Open SOS is now Outback Mesh SOS, and MeshCore Open SOS Voice is now Outback Mesh Voice.** They are the same apps with a new name, so they aren't mistaken for official MeshCore products. They still work with MeshCore radios, repeaters and the MeshCore network, and still credit MeshCore Open and MeshCore, which they are built on.
+- **Nothing to redo.** The apps update in place on Android, Linux and Windows, with your messages, contacts, emergency network and settings kept. The Windows installer keeps the same install folder and start-on-login setting.
+- **New file names:** `outback-mesh-sos-<version>.apk`, `Outback_Mesh_SOS-<version>-x86_64.AppImage`, `Outback-Mesh-SOS-Setup.exe`, and the same with *voice* for Outback Mesh Voice. On Linux, run the new AppImage once and it replaces the old menu entry; you can then delete the old AppImage.
+- **The SOS radio** is now called the *Outback Mesh SOS radio* in the apps.
+- The apps can now also be built for iPhone.
 
 ## 10.2.7 (2026-11-14)
 

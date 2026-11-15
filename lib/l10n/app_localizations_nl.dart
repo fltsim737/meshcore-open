@@ -9,7 +9,7 @@ class AppLocalizationsNl extends AppLocalizations {
   AppLocalizationsNl([String locale = 'nl']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open SOS Voice';
+  String get appTitle => 'Outback Mesh Voice';
 
   @override
   String get nav_contacts => 'Contacten';
@@ -177,7 +177,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get common_interval => 'Tijdsinterval';
 
   @override
-  String get scanner_title => 'MeshCore Open SOS Voice';
+  String get scanner_title => 'Outback Mesh Voice';
 
   @override
   String get connectionChoiceUsbLabel => 'USB';
@@ -277,7 +277,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nOutback Mesh Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -720,12 +720,12 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open SOS Voice versie $version';
+    return 'Outback Mesh Voice versie $version';
   }
 
   @override
   String get settings_aboutLegalese =>
-      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
+      'Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -1013,7 +1013,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      'Zet MeshCore Open SOS Voice op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen';
+      'Zet Outback Mesh Voice op \"Niet optimaliseren\" in de batterij-instellingen zodat berichten op de achtergrond blijven binnenkomen';
 
   @override
   String get appSettings_startOnLogin => 'Starten bij inloggen';
@@ -4842,11 +4842,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      'Niet verbonden met een radio. Maak opnieuw verbinding in MeshCore Open SOS Voice en verzend je antwoord opnieuw.';
+      'Niet verbonden met een radio. Maak opnieuw verbinding in Outback Mesh Voice en verzend je antwoord opnieuw.';
 
   @override
   String get notification_replyTooLong =>
-      'Je antwoord is te lang om vanuit een melding te verzenden. Verzend het vanuit MeshCore Open SOS Voice.';
+      'Je antwoord is te lang om vanuit een melding te verzenden. Verzend het vanuit Outback Mesh Voice.';
 
   @override
   String get notification_replyUnavailable =>
@@ -4854,11 +4854,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get notification_replySendFailed =>
-      'Je antwoord is mogelijk niet verzonden. Controleer dit in MeshCore Open SOS Voice en probeer het opnieuw.';
+      'Je antwoord is mogelijk niet verzonden. Controleer dit in Outback Mesh Voice en probeer het opnieuw.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open SOS Voice is niet actief. Open de app en verzend je antwoord opnieuw.';
+      'Outback Mesh Voice is niet actief. Open de app en verzend je antwoord opnieuw.';
 
   @override
   String get settings_gpxExportRepeaters =>
@@ -5314,7 +5314,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get background_stop => 'Stoppen';
 
   @override
-  String get tray_show => 'MeshCore Open SOS Voice tonen';
+  String get tray_show => 'Outback Mesh Voice tonen';
 
   @override
   String get tray_quit => 'Afsluiten';
@@ -6748,7 +6748,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'Open MeshCore Open SOS Voice om ACK te sturen';
+      'Open Outback Mesh Voice om ACK te sturen';
 
   @override
   String get sos_notificationChannelName => 'Nood-SOS-meldingen';
@@ -7116,7 +7116,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get backup_notConfig =>
-      'Dat bestand is geen MeshCore SOS-configuratie.';
+      'Dat bestand is geen Outback Mesh SOS-configuratie.';
 
   @override
   String get backup_tooLarge =>
@@ -7345,11 +7345,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ptt_channelHelp =>
-      'Iedereen op het mesh met SOS Voice hoort dit kanaal. Clips tot 10 s. Elke clip gebruikt zendtijd die het hele mesh deelt: houd het kort.';
+      'Iedereen op het mesh met Outback Mesh Voice hoort dit kanaal. Clips tot 10 s. Elke clip gebruikt zendtijd die het hele mesh deelt: houd het kort.';
 
   @override
   String ptt_directHelp(String name) {
-    return 'Clips tot 10 s, rechtstreeks naar $name. Alleen SOS Voice kan ze afspelen.';
+    return 'Clips tot 10 s, rechtstreeks naar $name. Alleen Outback Mesh Voice kan ze afspelen.';
   }
 
   @override

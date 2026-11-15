@@ -1,7 +1,7 @@
 @echo off
-rem Builds MeshCore Open SOS Voice for Windows: double-click this file.
-rem Makes build\windows\installer\MeshCore-Open-SOS-Voice-<version>-Windows-portable.zip (unzip and run, no install)
-rem and, with Inno Setup 6 installed, build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe.
+rem Builds Outback Mesh Voice for Windows: double-click this file.
+rem Makes build\windows\installer\Outback-Mesh-Voice-<version>-Windows-portable.zip (unzip and run, no install)
+rem and, with Inno Setup 6 installed, build\windows\installer\Outback-Mesh-Voice-Setup.exe.
 rem The tools it needs are listed in README-WINDOWS.txt.
 cd /d "%~dp0"
 powershell -NoProfile -ExecutionPolicy Bypass -File windows\installer\build-windows.ps1

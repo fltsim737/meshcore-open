@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open SOS Voice';
+  String get appTitle => 'Outback Mesh Voice';
 
   @override
   String get nav_contacts => '联系人';
@@ -265,7 +265,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nOutback Mesh Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -675,12 +675,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open SOS Voice v$version';
+    return 'Outback Mesh Voice v$version';
   }
 
   @override
   String get settings_aboutLegalese =>
-      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
+      'Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -958,7 +958,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      '在电池设置中将 MeshCore Open SOS Voice 设为“不优化”，这样后台也能继续接收消息';
+      '在电池设置中将 Outback Mesh Voice 设为“不优化”，这样后台也能继续接收消息';
 
   @override
   String get appSettings_startOnLogin => '登录时启动';
@@ -4522,22 +4522,22 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      '未连接到无线电。请在 MeshCore Open SOS Voice 中重新连接后再次发送回复。';
+      '未连接到无线电。请在 Outback Mesh Voice 中重新连接后再次发送回复。';
 
   @override
   String get notification_replyTooLong =>
-      '回复太长，无法从通知中发送。请改为在 MeshCore Open SOS Voice 中发送。';
+      '回复太长，无法从通知中发送。请改为在 Outback Mesh Voice 中发送。';
 
   @override
   String get notification_replyUnavailable => '此对话已不在所连接的无线电上。';
 
   @override
   String get notification_replySendFailed =>
-      '回复可能未发送。请在 MeshCore Open SOS Voice 中检查后重试。';
+      '回复可能未发送。请在 Outback Mesh Voice 中检查后重试。';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open SOS Voice 未在运行。请打开它并再次发送回复。';
+      'Outback Mesh Voice 未在运行。请打开它并再次发送回复。';
 
   @override
   String get settings_gpxExportRepeaters => '导出转发节点/房间服务器到 GPX';
@@ -4953,7 +4953,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get background_stop => '停止';
 
   @override
-  String get tray_show => '显示 MeshCore Open SOS Voice';
+  String get tray_show => '显示 Outback Mesh Voice';
 
   @override
   String get tray_quit => '退出';
@@ -6337,8 +6337,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get sos_notificationOpenToRespond =>
-      '打开 MeshCore Open SOS Voice 以发送 ACK';
+  String get sos_notificationOpenToRespond => '打开 Outback Mesh Voice 以发送 ACK';
 
   @override
   String get sos_notificationChannelName => '紧急 SOS 警报';
@@ -6689,7 +6688,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backup_exportDisabled => '此电台的固件不允许导出其身份。';
 
   @override
-  String get backup_notConfig => '该文件不是 MeshCore SOS 配置。';
+  String get backup_notConfig => '该文件不是 Outback Mesh SOS 配置。';
 
   @override
   String get backup_tooLarge => '该文件太大,不像是配置文件。';
@@ -6902,11 +6901,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ptt_channelHelp =>
-      '网状网络中所有使用 SOS Voice 的人都能听到此频道。每段最长 10 秒。每段语音都会占用整个网络共享的通话时间:请尽量简短。';
+      '网状网络中所有使用 Outback Mesh Voice 的人都能听到此频道。每段最长 10 秒。每段语音都会占用整个网络共享的通话时间:请尽量简短。';
 
   @override
   String ptt_directHelp(String name) {
-    return '每段最长 10 秒,直接发送给 $name。只有 SOS Voice 能播放。';
+    return '每段最长 10 秒,直接发送给 $name。只有 Outback Mesh Voice 能播放。';
   }
 
   @override

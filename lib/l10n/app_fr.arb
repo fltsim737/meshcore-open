@@ -8,7 +8,7 @@
     }
   },
   "@@locale": "fr",
-  "appTitle": "MeshCore Open SOS Voice",
+  "appTitle": "Outback Mesh Voice",
   "nav_contacts": "Contacts",
   "nav_channels": "Canaux",
   "nav_map": "Carte",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open SOS Voice",
+  "scanner_title": "Outback Mesh Voice",
   "scanner_scanning": "Recherche de périphériques...",
   "scanner_connecting": "Connexion en cours...",
   "scanner_disconnecting": "Déconnexion...",
@@ -127,7 +127,7 @@
   "settings_appDebugLog": "Journal de débogage de l'application",
   "settings_appDebugLogSubtitle": "Messages de débogage de l'application",
   "settings_about": "À propos",
-  "settings_aboutVersion": "MeshCore Open SOS Voice v{version}",
+  "settings_aboutVersion": "Outback Mesh Voice v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -135,7 +135,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
+  "settings_aboutLegalese": "Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "Client Flutter open source pour les appareils de réseau maillé LoRa MeshCore.",
   "settings_infoName": "Nom",
   "settings_infoId": "ID",
@@ -2522,7 +2522,7 @@
   "background_serviceText": "Maintien de la connexion BLE",
   "background_serviceRunningText": "À l'écoute des messages et alertes SOS",
   "background_stop": "Arrêter",
-  "tray_show": "Afficher MeshCore Open SOS Voice",
+  "tray_show": "Afficher Outback Mesh Voice",
   "tray_quit": "Quitter",
   "appSettings_translationModelDeleted": "Supprimé {name}",
   "@appSettings_translationModelDeleted": {
@@ -3146,7 +3146,7 @@
     }
   },
   "appSettings_batteryOptimization": "Activité en arrière-plan",
-  "appSettings_batteryOptimizationSubtitle": "Définissez MeshCore Open SOS Voice sur « Ne pas optimiser » dans les paramètres de batterie pour que les messages continuent d'arriver en arrière-plan",
+  "appSettings_batteryOptimizationSubtitle": "Définissez Outback Mesh Voice sur « Ne pas optimiser » dans les paramètres de batterie pour que les messages continuent d'arriver en arrière-plan",
   "appSettings_startOnLogin": "Démarrer à l'ouverture de session",
   "appSettings_startOnLoginSubtitle": "S'ouvre masquée dans la zone de notification, à l'écoute des messages et alertes SOS",
   "contacts_storageFull": "Le stockage des contacts sur le nœud est plein. Impossible d'ajouter de nouveaux nœuds tant que des contacts ne sont pas supprimés.",
@@ -3209,11 +3209,11 @@
   "notification_replyHint": "Message",
   "notification_you": "Vous",
   "notification_replyFailedTitle": "Réponse non envoyée",
-  "notification_replyNotConnected": "Non connecté à une radio. Reconnectez-vous dans MeshCore Open SOS Voice et renvoyez votre réponse.",
-  "notification_replyTooLong": "Votre réponse est trop longue pour être envoyée depuis une notification. Envoyez-la depuis MeshCore Open SOS Voice.",
+  "notification_replyNotConnected": "Non connecté à une radio. Reconnectez-vous dans Outback Mesh Voice et renvoyez votre réponse.",
+  "notification_replyTooLong": "Votre réponse est trop longue pour être envoyée depuis une notification. Envoyez-la depuis Outback Mesh Voice.",
   "notification_replyUnavailable": "Cette conversation n'est plus disponible sur la radio connectée.",
-  "notification_replySendFailed": "Votre réponse n'a peut-être pas été envoyée. Vérifiez dans MeshCore Open SOS Voice et réessayez.",
-  "notification_replyAppNotRunning": "MeshCore Open SOS Voice n'est pas actif. Ouvrez l'application et renvoyez votre réponse.",
+  "notification_replySendFailed": "Votre réponse n'a peut-être pas été envoyée. Vérifiez dans Outback Mesh Voice et réessayez.",
+  "notification_replyAppNotRunning": "Outback Mesh Voice n'est pas actif. Ouvrez l'application et renvoyez votre réponse.",
   "snrIndicator_nearByRepeatersDescription": "Les répéteurs entendus directement par votre radio, du plus récent au plus ancien.",
   "radioStats_sectionSignal": "Signal",
   "radioStats_sectionAirtime": "Temps d'antenne",
@@ -3568,7 +3568,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "Ouvrez MeshCore Open SOS Voice pour envoyer ACK",
+  "sos_notificationOpenToRespond": "Ouvrez Outback Mesh Voice pour envoyer ACK",
   "sos_notificationChannelName": "Alertes SOS d'urgence",
   "sos_notificationChannelDescription": "Alarme pour les messages SOS d'autres nœuds",
   "sos_ackChannelName": "Accusés de réception SOS",
@@ -3757,7 +3757,7 @@
   "backup_exported": "Configuration enregistrée dans {path}",
   "backup_exportFailed": "Échec de l'export : {error}",
   "backup_exportDisabled": "Le firmware de cette radio n'autorise pas l'export de son identité.",
-  "backup_notConfig": "Ce fichier n'est pas une configuration MeshCore SOS.",
+  "backup_notConfig": "Ce fichier n'est pas une configuration Outback Mesh SOS.",
   "backup_tooLarge": "Ce fichier est trop volumineux pour être une configuration.",
   "backup_importConfirm": "Importer la configuration de « {name} » (identité {key}…) ? Cette radio prend cette identité et ses réglages, et les contacts et canaux du fichier sont ajoutés. N'utilisez jamais la même identité sur deux radios à la fois.",
   "backup_importing": "Import : {step}",
@@ -3815,8 +3815,8 @@
   "sos_soundNotConnected": "Non connecté : le périphérique par défaut du système est utilisé jusqu'à son retour",
   "sos_soundNoDevices": "Aucun autre périphérique trouvé",
   "ptt_title": "Appuyer pour parler",
-  "ptt_channelHelp": "Tout le monde sur le maillage avec SOS Voice entend ce canal. Clips de 10 s maximum. Chaque clip utilise du temps d'antenne partagé par tout le maillage : soyez bref.",
-  "ptt_directHelp": "Clips de 10 s maximum, envoyés directement à {name}. Seul SOS Voice peut les lire.",
+  "ptt_channelHelp": "Tout le monde sur le maillage avec Outback Mesh Voice entend ce canal. Clips de 10 s maximum. Chaque clip utilise du temps d'antenne partagé par tout le maillage : soyez bref.",
+  "ptt_directHelp": "Clips de 10 s maximum, envoyés directement à {name}. Seul Outback Mesh Voice peut les lire.",
   "ptt_sosLive": "En pause : un SOS est en cours et passe en premier.",
   "ptt_noChannel": "Le canal vocal #voice n'est pas sur cette radio. Ajoutez-le dans Canaux (un canal hashtag nommé #voice).",
   "ptt_busy": "Quelqu'un parle…",

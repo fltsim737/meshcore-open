@@ -133,7 +133,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open SOS Voice'**
+  /// **'Outback Mesh Voice'**
   String get appTitle;
 
   /// No description provided for @nav_contacts.
@@ -427,7 +427,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanner_title.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open SOS Voice'**
+  /// **'Outback Mesh Voice'**
   String get scanner_title;
 
   /// No description provided for @connectionChoiceUsbLabel.
@@ -601,7 +601,7 @@ abstract class AppLocalizations {
   /// No description provided for @usbAccessMessage.
   ///
   /// In en, this message translates to:
-  /// **'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.'**
+  /// **'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nOutback Mesh Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.'**
   String get usbAccessMessage;
 
   /// No description provided for @usbAccessManual.
@@ -1381,13 +1381,13 @@ abstract class AppLocalizations {
   /// No description provided for @settings_aboutVersion.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open SOS Voice v{version}'**
+  /// **'Outback Mesh Voice v{version}'**
   String settings_aboutVersion(String version);
 
   /// No description provided for @settings_aboutLegalese.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.'**
+  /// **'Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.'**
   String get settings_aboutLegalese;
 
   /// No description provided for @settings_aboutDescription.
@@ -1867,7 +1867,7 @@ abstract class AppLocalizations {
   /// No description provided for @appSettings_batteryOptimizationSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Set MeshCore Open SOS Voice to \"Don\'t optimize\" in battery settings so messages keep arriving in the background'**
+  /// **'Set Outback Mesh Voice to \"Don\'t optimize\" in battery settings so messages keep arriving in the background'**
   String get appSettings_batteryOptimizationSubtitle;
 
   /// No description provided for @appSettings_startOnLogin.
@@ -8297,13 +8297,13 @@ abstract class AppLocalizations {
   /// No description provided for @notification_replyNotConnected.
   ///
   /// In en, this message translates to:
-  /// **'Not connected to a radio. Reconnect in MeshCore Open SOS Voice and send your reply again.'**
+  /// **'Not connected to a radio. Reconnect in Outback Mesh Voice and send your reply again.'**
   String get notification_replyNotConnected;
 
   /// No description provided for @notification_replyTooLong.
   ///
   /// In en, this message translates to:
-  /// **'Your reply is too long to send from a notification. Send it from MeshCore Open SOS Voice instead.'**
+  /// **'Your reply is too long to send from a notification. Send it from Outback Mesh Voice instead.'**
   String get notification_replyTooLong;
 
   /// No description provided for @notification_replyUnavailable.
@@ -8315,13 +8315,13 @@ abstract class AppLocalizations {
   /// No description provided for @notification_replySendFailed.
   ///
   /// In en, this message translates to:
-  /// **'Your reply may not have been sent. Check in MeshCore Open SOS Voice and try again.'**
+  /// **'Your reply may not have been sent. Check in Outback Mesh Voice and try again.'**
   String get notification_replySendFailed;
 
   /// No description provided for @notification_replyAppNotRunning.
   ///
   /// In en, this message translates to:
-  /// **'MeshCore Open SOS Voice isn\'t running. Open it and send your reply again.'**
+  /// **'Outback Mesh Voice isn\'t running. Open it and send your reply again.'**
   String get notification_replyAppNotRunning;
 
   /// No description provided for @settings_gpxExportRepeaters.
@@ -9083,7 +9083,7 @@ abstract class AppLocalizations {
   /// No description provided for @tray_show.
   ///
   /// In en, this message translates to:
-  /// **'Show MeshCore Open SOS Voice'**
+  /// **'Show Outback Mesh Voice'**
   String get tray_show;
 
   /// No description provided for @tray_quit.
@@ -11368,7 +11368,7 @@ abstract class AppLocalizations {
   /// No description provided for @sos_notificationOpenToRespond.
   ///
   /// In en, this message translates to:
-  /// **'Open MeshCore Open SOS Voice to send ACK'**
+  /// **'Open Outback Mesh Voice to send ACK'**
   String get sos_notificationOpenToRespond;
 
   /// No description provided for @sos_notificationChannelName.
@@ -11968,7 +11968,7 @@ abstract class AppLocalizations {
   /// No description provided for @backup_notConfig.
   ///
   /// In en, this message translates to:
-  /// **'That file isn\'t a MeshCore SOS config.'**
+  /// **'That file isn\'t an Outback Mesh SOS config.'**
   String get backup_notConfig;
 
   /// No description provided for @backup_tooLarge.
@@ -12316,13 +12316,13 @@ abstract class AppLocalizations {
   /// No description provided for @ptt_channelHelp.
   ///
   /// In en, this message translates to:
-  /// **'Everyone on the mesh with SOS Voice hears this channel. Clips up to 10 s. Every clip uses airtime the whole mesh shares: keep them short.'**
+  /// **'Everyone on the mesh with Outback Mesh Voice hears this channel. Clips up to 10 s. Every clip uses airtime the whole mesh shares: keep them short.'**
   String get ptt_channelHelp;
 
   /// No description provided for @ptt_directHelp.
   ///
   /// In en, this message translates to:
-  /// **'Clips up to 10 s, sent straight to {name}. Only SOS Voice can play them.'**
+  /// **'Clips up to 10 s, sent straight to {name}. Only Outback Mesh Voice can play them.'**
   String ptt_directHelp(String name);
 
   /// No description provided for @ptt_sosLive.

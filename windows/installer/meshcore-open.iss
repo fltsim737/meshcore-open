@@ -8,7 +8,10 @@
 #ifndef AppVersion
   #define AppVersion "0.0.0"
 #endif
-#define AppName "MeshCore Open SOS Voice"
+#define AppName "Outback Mesh Voice"
+; Name of the start-on-login registry value: kept from earlier versions so
+; upgrades replace it rather than adding a second one.
+#define RunValueName "MeshCore Open SOS Voice"
 #define AppExe "meshcore_open_sos_voice.exe"
 ; Must match appUserModelId in lib/services/notification_service.dart.
 #define AppUserModelId "org.meshcore.open.sosvoice"
@@ -28,7 +31,7 @@ PrivilegesRequiredOverridesAllowed=dialog
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 OutputDir=..\..\build\windows\installer
-OutputBaseFilename=MeshCore-Open-SOS-Voice-Setup
+OutputBaseFilename=Outback-Mesh-Voice-Setup
 SetupIconFile=..\runner\resources\app_icon.ico
 UninstallDisplayIcon={app}\{#AppExe}
 UninstallDisplayName={#AppName}
@@ -52,9 +55,9 @@ Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopico
 
 [Registry]
 ; Start on sign-in, chosen here or later in the app's settings (same value).
-Root: HKCU; Subkey: "{#RunKey}"; ValueType: string; ValueName: "{#AppName}"; ValueData: """{app}\{#AppExe}"" --hidden"; Tasks: startonlogin
+Root: HKCU; Subkey: "{#RunKey}"; ValueType: string; ValueName: "{#RunValueName}"; ValueData: """{app}\{#AppExe}"" --hidden"; Tasks: startonlogin
 ; Removed on uninstall however it was set. ValueType none creates nothing.
-Root: HKCU; Subkey: "{#RunKey}"; ValueType: none; ValueName: "{#AppName}"; Flags: uninsdeletevalue dontcreatekey
+Root: HKCU; Subkey: "{#RunKey}"; ValueType: none; ValueName: "{#RunValueName}"; Flags: uninsdeletevalue dontcreatekey
 ; Notification registration the app writes on first run.
 Root: HKCU; Subkey: "Software\Classes\AppUserModelId\{#AppUserModelId}"; ValueType: none; Flags: uninsdeletekey dontcreatekey
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\PushNotifications\Backup\{#AppUserModelId}"; ValueType: none; Flags: uninsdeletekey dontcreatekey
@@ -73,7 +76,7 @@ procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if (CurUninstallStep = usPostUninstall) and not UninstallSilent then
   begin
-    if MsgBox('Also delete MeshCore Open SOS Voice''s messages, contacts and settings from this computer?'
+    if MsgBox('Also delete Outback Mesh Voice''s messages, contacts and settings from this computer?'
         + #13#10#13#10 + 'Choose No to keep them for a later reinstall.',
         mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     begin

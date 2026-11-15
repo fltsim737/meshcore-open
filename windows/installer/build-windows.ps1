@@ -1,6 +1,6 @@
 # Builds MeshCore Open for Windows and packages it as an installer,
-# build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe, and as a portable zip that runs
-# without installing, build\windows\installer\MeshCore-Open-SOS-Voice-<version>-Windows-portable.zip.
+# build\windows\installer\Outback-Mesh-Voice-Setup.exe, and as a portable zip that runs
+# without installing, build\windows\installer\Outback-Mesh-Voice-<version>-Windows-portable.zip.
 #
 # Needs Flutter, Visual Studio 2022 with "Desktop development with C++"
 # and Windows Developer Mode; Inno Setup 6 for the installer (without it,
@@ -50,7 +50,7 @@ if (-not $iscc) {
 
 # pubspec.yaml "version: 9.5.0+19" -> 9.5.0
 $version = (Select-String -Path pubspec.yaml -Pattern '^version:\s*([0-9.]+)').Matches[0].Groups[1].Value
-Write-Host "MeshCore Open SOS Voice $version"
+Write-Host "Outback Mesh Voice $version"
 
 Step 'Fetching packages'
 flutter pub get
@@ -72,7 +72,7 @@ Step 'Packaging the portable zip'
 # The app folder as it is: unzip anywhere and run meshcore_open_sos_voice.exe, no install.
 $outDir = 'build\windows\installer'
 New-Item -ItemType Directory -Force $outDir | Out-Null
-$portable = "$outDir\MeshCore-Open-SOS-Voice-$version-Windows-portable.zip"
+$portable = "$outDir\Outback-Mesh-Voice-$version-Windows-portable.zip"
 if (Test-Path $portable) { Remove-Item $portable }
 Compress-Archive -Path "$release\*" -DestinationPath $portable
 Write-Host "Portable: $(Resolve-Path $portable)" -ForegroundColor Green
@@ -81,7 +81,7 @@ if ($iscc) {
   Step 'Packaging the installer'
   & $iscc "/DAppVersion=$version" 'windows\installer\meshcore-open.iss'
   if ($LASTEXITCODE) { Fail 'Inno Setup failed (see above).' }
-  $setup = Resolve-Path 'build\windows\installer\MeshCore-Open-SOS-Voice-Setup.exe'
+  $setup = Resolve-Path 'build\windows\installer\Outback-Mesh-Voice-Setup.exe'
   Write-Host "Installer: $setup" -ForegroundColor Green
 }
 Write-Host "`nDone." -ForegroundColor Green

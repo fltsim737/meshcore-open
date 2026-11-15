@@ -38,7 +38,7 @@
     <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
 
     <application
-        android:label="MeshCore Open SOS Voice"
+        android:label="Outback Mesh Voice"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <service

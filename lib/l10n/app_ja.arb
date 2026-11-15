@@ -1,6 +1,6 @@
 {
   "@@locale": "ja",
-  "appTitle": "MeshCore Open SOS Voice",
+  "appTitle": "Outback Mesh Voice",
   "nav_contacts": "連絡先",
   "nav_channels": "チャンネル",
   "nav_map": "地図",
@@ -54,7 +54,7 @@
       }
     }
   },
-  "scanner_title": "MeshCore Open SOS Voice",
+  "scanner_title": "Outback Mesh Voice",
   "connectionChoiceUsbLabel": "USB",
   "connectionChoiceBluetoothLabel": "Bluetooth",
   "connectionChoiceTcpLabel": "TCP",
@@ -196,7 +196,7 @@
   "settings_appDebugLog": "アプリのデバッグログ",
   "settings_appDebugLogSubtitle": "アプリケーションのデバッグメッセージ",
   "settings_about": "概要",
-  "settings_aboutVersion": "MeshCore Open SOS Voice v{version}",
+  "settings_aboutVersion": "Outback Mesh Voice v{version}",
   "@settings_aboutVersion": {
     "placeholders": {
       "version": {
@@ -204,7 +204,7 @@
       }
     }
   },
-  "settings_aboutLegalese": "MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.",
+  "settings_aboutLegalese": "Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.",
   "settings_aboutDescription": "MeshCore LoRa メッシュネットワークデバイス向けのオープンソース Flutter クライアント。",
   "settings_aboutOpenMeteoAttribution": "LOS 標高データ：Open-Meteo (CC BY 4.0)",
   "settings_infoName": "名前",
@@ -2528,7 +2528,7 @@
   "background_serviceText": "BLE 接続を維持しています",
   "background_serviceRunningText": "メッセージとSOSアラートを待ち受け中",
   "background_stop": "停止",
-  "tray_show": "MeshCore Open SOS Voice を表示",
+  "tray_show": "Outback Mesh Voice を表示",
   "tray_quit": "終了",
   "appSettings_translationModelDeleted": "{name} を削除しました",
   "@appSettings_translationModelDeleted": {
@@ -3146,7 +3146,7 @@
     }
   },
   "appSettings_batteryOptimization": "バックグラウンド動作",
-  "appSettings_batteryOptimizationSubtitle": "バッテリー設定で MeshCore Open SOS Voice を「最適化しない」に設定すると、バックグラウンドでもメッセージを受信し続けられます",
+  "appSettings_batteryOptimizationSubtitle": "バッテリー設定で Outback Mesh Voice を「最適化しない」に設定すると、バックグラウンドでもメッセージを受信し続けられます",
   "appSettings_startOnLogin": "ログイン時に起動",
   "appSettings_startOnLoginSubtitle": "トレイに隠れた状態で起動し、メッセージとSOSアラートを待ち受けます",
   "contacts_storageFull": "ノードの連絡先ストレージが満杯です。連絡先を削除するまで、新しいノードを追加できません。",
@@ -3209,11 +3209,11 @@
   "notification_replyHint": "メッセージ",
   "notification_you": "自分",
   "notification_replyFailedTitle": "返信を送信できませんでした",
-  "notification_replyNotConnected": "ラジオに接続されていません。MeshCore Open SOS Voice で再接続してから、もう一度返信を送信してください。",
-  "notification_replyTooLong": "返信が長すぎて通知から送信できません。MeshCore Open SOS Voice から送信してください。",
+  "notification_replyNotConnected": "ラジオに接続されていません。Outback Mesh Voice で再接続してから、もう一度返信を送信してください。",
+  "notification_replyTooLong": "返信が長すぎて通知から送信できません。Outback Mesh Voice から送信してください。",
   "notification_replyUnavailable": "この会話は接続中のラジオにありません。",
-  "notification_replySendFailed": "返信が送信されていない可能性があります。MeshCore Open SOS Voice で確認してから再試行してください。",
-  "notification_replyAppNotRunning": "MeshCore Open SOS Voice が起動していません。起動してから、もう一度返信を送信してください。",
+  "notification_replySendFailed": "返信が送信されていない可能性があります。Outback Mesh Voice で確認してから再試行してください。",
+  "notification_replyAppNotRunning": "Outback Mesh Voice が起動していません。起動してから、もう一度返信を送信してください。",
   "snrIndicator_nearByRepeatersDescription": "ラジオが直接受信したリピータ（最近受信した順）",
   "radioStats_sectionSignal": "信号",
   "radioStats_sectionAirtime": "放送時間",
@@ -3568,7 +3568,7 @@
       }
     }
   },
-  "sos_notificationOpenToRespond": "ACKを送るには MeshCore Open SOS Voice を開いてください",
+  "sos_notificationOpenToRespond": "ACKを送るには Outback Mesh Voice を開いてください",
   "sos_notificationChannelName": "緊急SOSアラート",
   "sos_notificationChannelDescription": "他のノードからのSOSメッセージのアラーム",
   "sos_ackChannelName": "SOSの応答",
@@ -3757,7 +3757,7 @@
   "backup_exported": "設定を {path} に保存しました",
   "backup_exportFailed": "エクスポートできませんでした: {error}",
   "backup_exportDisabled": "この無線機のファームウェアはIDのエクスポートを許可していません。",
-  "backup_notConfig": "このファイルはMeshCore SOSの設定ではありません。",
+  "backup_notConfig": "このファイルはOutback Mesh SOSの設定ではありません。",
   "backup_tooLarge": "設定ファイルとしては大きすぎます。",
   "backup_importConfirm": "「{name}」(ID {key}…)の設定をインポートしますか? この無線機はそのIDと設定を引き継ぎ、ファイルの連絡先とチャンネルが追加されます。同じIDを2台の無線機で同時に使わないでください。",
   "backup_importing": "インポート中: {step}",
@@ -3815,8 +3815,8 @@
   "sos_soundNotConnected": "未接続:戻るまでシステムの既定を使います",
   "sos_soundNoDevices": "ほかのデバイスが見つかりません",
   "ptt_title": "プッシュトゥトーク",
-  "ptt_channelHelp": "このチャンネルは、SOS Voice を使うメッシュ上の全員に聞こえます。1 回 10 秒まで。クリップはどれもメッシュ全体で共有する通信時間を使います。短くまとめてください。",
-  "ptt_directHelp": "1 回 10 秒まで、{name} に直接送ります。再生できるのは SOS Voice だけです。",
+  "ptt_channelHelp": "このチャンネルは、Outback Mesh Voice を使うメッシュ上の全員に聞こえます。1 回 10 秒まで。クリップはどれもメッシュ全体で共有する通信時間を使います。短くまとめてください。",
+  "ptt_directHelp": "1 回 10 秒まで、{name} に直接送ります。再生できるのは Outback Mesh Voice だけです。",
   "ptt_sosLive": "一時停止中:SOS が進行中のため、そちらが優先されます。",
   "ptt_noChannel": "この無線機に #voice 音声チャンネルがありません。「チャンネル」から追加してください(#voice という名前のハッシュタグチャンネル)。",
   "ptt_busy": "誰かが話しています…",

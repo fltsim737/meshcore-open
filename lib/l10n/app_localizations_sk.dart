@@ -9,7 +9,7 @@ class AppLocalizationsSk extends AppLocalizations {
   AppLocalizationsSk([String locale = 'sk']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open SOS Voice';
+  String get appTitle => 'Outback Mesh Voice';
 
   @override
   String get nav_contacts => 'Kontakty';
@@ -278,7 +278,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nOutback Mesh Voice can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -724,7 +724,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get settings_aboutLegalese =>
-      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
+      'Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -1012,7 +1012,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      'V nastaveniach batérie nastavte MeshCore Open SOS Voice na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí';
+      'V nastaveniach batérie nastavte Outback Mesh Voice na „Nie optimalizovať“, aby správy naďalej prichádzali na pozadí';
 
   @override
   String get appSettings_startOnLogin => 'Spustiť po prihlásení';
@@ -4852,11 +4852,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      'Nie je pripojené k rádiu. Znova sa pripojte v MeshCore Open SOS Voice a odošlite odpoveď ešte raz.';
+      'Nie je pripojené k rádiu. Znova sa pripojte v Outback Mesh Voice a odošlite odpoveď ešte raz.';
 
   @override
   String get notification_replyTooLong =>
-      'Vaša odpoveď je príliš dlhá na odoslanie z upozornenia. Pošlite ju namiesto toho z MeshCore Open SOS Voice.';
+      'Vaša odpoveď je príliš dlhá na odoslanie z upozornenia. Pošlite ju namiesto toho z Outback Mesh Voice.';
 
   @override
   String get notification_replyUnavailable =>
@@ -4864,11 +4864,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get notification_replySendFailed =>
-      'Vaša odpoveď možno nebola odoslaná. Skontrolujte to v MeshCore Open SOS Voice a skúste to znova.';
+      'Vaša odpoveď možno nebola odoslaná. Skontrolujte to v Outback Mesh Voice a skúste to znova.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open SOS Voice nebeží. Otvorte ho a odošlite odpoveď ešte raz.';
+      'Outback Mesh Voice nebeží. Otvorte ho a odošlite odpoveď ešte raz.';
 
   @override
   String get settings_gpxExportRepeaters =>
@@ -5325,7 +5325,7 @@ class AppLocalizationsSk extends AppLocalizations {
   String get background_stop => 'Zastaviť';
 
   @override
-  String get tray_show => 'Zobraziť MeshCore Open SOS Voice';
+  String get tray_show => 'Zobraziť Outback Mesh Voice';
 
   @override
   String get tray_quit => 'Ukončiť';
@@ -6761,7 +6761,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'Otvorte MeshCore Open SOS Voice a pošlite ACK';
+      'Otvorte Outback Mesh Voice a pošlite ACK';
 
   @override
   String get sos_notificationChannelName => 'Núdzové SOS poplachy';
@@ -7129,7 +7129,7 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get backup_notConfig =>
-      'Tento súbor nie je konfigurácia MeshCore SOS.';
+      'Tento súbor nie je konfigurácia Outback Mesh SOS.';
 
   @override
   String get backup_tooLarge => 'Tento súbor je príliš veľký na konfiguráciu.';
@@ -7354,11 +7354,11 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ptt_channelHelp =>
-      'Tento kanál počujú všetci v sieti so SOS Voice. Klipy do 10 s. Každý klip zaberá vysielací čas, ktorý zdieľa celá sieť: hovorte stručne.';
+      'Tento kanál počujú všetci v sieti so Outback Mesh Voice. Klipy do 10 s. Každý klip zaberá vysielací čas, ktorý zdieľa celá sieť: hovorte stručne.';
 
   @override
   String ptt_directHelp(String name) {
-    return 'Klipy do 10 s, poslané priamo $name. Prehrať ich vie iba SOS Voice.';
+    return 'Klipy do 10 s, poslané priamo $name. Prehrať ich vie iba Outback Mesh Voice.';
   }
 
   @override
