@@ -74,16 +74,25 @@ _Bindings? _bindings;
 /// Overrides where the library is loaded from, for tests on the host.
 String? codec2LibraryPath;
 
-_Bindings _load() => _bindings ??= _Bindings(
-  DynamicLibrary.open(
-    codec2LibraryPath ??
-        (Platform.isAndroid || Platform.isLinux
-            ? 'libcodec2_ffi.so'
-            : Platform.isWindows
-            ? 'codec2_ffi.dll'
-            : throw UnsupportedError('Codec2 is not built for this platform')),
-  ),
-);
+_Bindings _load() => _bindings ??= _Bindings(_openLibrary());
+
+DynamicLibrary _openLibrary() {
+  final path = codec2LibraryPath;
+  if (path != null) return DynamicLibrary.open(path);
+  if (Platform.isAndroid || Platform.isLinux) {
+    return DynamicLibrary.open('libcodec2_ffi.so');
+  }
+  if (Platform.isWindows) return DynamicLibrary.open('codec2_ffi.dll');
+  if (Platform.isIOS) {
+    // Built by hook/build.dart and bundled as a framework.
+    try {
+      return DynamicLibrary.open('codec2_ffi.framework/codec2_ffi');
+    } on ArgumentError {
+      return DynamicLibrary.open('libcodec2_ffi.dylib');
+    }
+  }
+  throw UnsupportedError('Codec2 is not built for this platform');
+}
 
 /// One Codec2 encoder/decoder. Frames are 40 ms of 8 kHz mono 16-bit audio;
 /// encoded frames are returned byte-aligned as Codec2 packs them. Call
