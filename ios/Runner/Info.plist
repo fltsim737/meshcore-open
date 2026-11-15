@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Meshcore Open</string>
+	<string>SOS Voice</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -41,6 +41,8 @@
 	<string>Your location is included in an Emergency SOS so responders can find you.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>This app connects to a MeshCore radio on your WiFi network.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The microphone records the voice clips you send to other radios.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app lets you pick a photo to compress and send over the mesh.</string>
 	<key>UIApplicationSceneManifest</key>
