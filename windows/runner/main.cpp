@@ -8,7 +8,7 @@
 #include "utils.h"
 
 // The window title, also used to find a running copy.
-constexpr const wchar_t kWindowTitle[] = L"MeshCore Open SOS";
+constexpr const wchar_t kWindowTitle[] = L"Outback Mesh SOS";
 
 int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
                       _In_ wchar_t *command_line, _In_ int show_command) {

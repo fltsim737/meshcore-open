@@ -1,10 +1,12 @@
-# MeshCore Open SOS and MeshCore Open SOS Voice
+# Outback Mesh SOS and Outback Mesh Voice
+
+> **New name from 10.3.0.** These apps were called MeshCore Open SOS and MeshCore Open SOS Voice. They are the same apps, renamed so they aren't mistaken for official MeshCore products: they work with MeshCore radios and the MeshCore network, but are not made, affiliated with or endorsed by the MeshCore project. Installed apps update in place, with everything kept.
 
 Two builds of [MeshCore Open](README.md) that add emergency calling over a MeshCore LoRa mesh. They are for places with no mobile coverage and no internet: farms, stations, national parks, back roads, bushfire and flood country.
 
-| | **MeshCore Open SOS** | **MeshCore Open SOS Voice** |
+| | **Outback Mesh SOS** | **Outback Mesh Voice** |
 |---|---|---|
-| What it adds | Emergency SOS alerts, acknowledgements, emergency networks, and messaging between the sender and responders | Everything in MeshCore Open SOS, plus short voice clips between the sender and responders during a live SOS, and push-to-talk on a public #voice channel and in direct messages |
+| What it adds | Emergency SOS alerts, acknowledgements, emergency networks, and messaging between the sender and responders | Everything in Outback Mesh SOS, plus short voice clips between the sender and responders during a live SOS, and push-to-talk on a public #voice channel and in direct messages |
 | Platforms | Android, Linux (AppImage), Windows | Android, Linux (AppImage), Windows |
 | Branch | `feat/emergency-sos` | `feat/sos-voice` (built on `feat/emergency-sos`) |
 | Android package | `com.meshcore.meshcore_open_sos` (from 9.5.8) | `com.meshcore.meshcore_open_voice` |
@@ -14,7 +16,7 @@ The two apps can be installed side by side, and each keeps its own settings and 
 
 **Neither build needs a firmware change.** They run on any standard MeshCore companion radio and work alongside people using other MeshCore apps.
 
-**About the MeshCore SOS radio.** The changelog mentions the *MeshCore SOS radio*, a stand-alone SOS radio that sends and understands the same alerts. Its firmware is a separate, proprietary product that is still being tested: it isn't part of this repository, isn't covered by its licence, and isn't publicly released. The apps don't need it.
+**About the Outback Mesh SOS radio.** The changelog mentions the *Outback Mesh SOS radio*, a stand-alone SOS radio that sends and understands the same alerts. Its firmware is a separate, proprietary product that is still being tested: it isn't part of this repository, isn't covered by its licence, and isn't publicly released. The apps don't need it.
 
 > **An SOS is best effort.** LoRa delivery is never guaranteed. An acknowledgement means someone received your alert, not that help is on the way. Keep using every other way of calling for help that you have: a PLB, satellite messenger, UHF radio or phone.
 
@@ -26,8 +28,8 @@ The two apps can be installed side by side, and each keeps its own settings and 
 - [How it works](#how-it-works)
 - [Installing](#installing)
 - [User guide](#user-guide)
-- [Voice (SOS Voice only)](#voice-sos-voice-only)
-- [Push-to-talk (SOS Voice only)](#push-to-talk-sos-voice-only)
+- [Voice (Outback Mesh Voice only)](#voice-outback-mesh-voice-only)
+- [Push-to-talk (Outback Mesh Voice only)](#push-to-talk-outback-mesh-voice-only)
 - [Privacy and security](#privacy-and-security)
 - [Limitations](#limitations)
 - [Why it should be included, used and developed further](#why-it-should-be-included-used-and-developed-further)
@@ -47,7 +49,7 @@ The current options all have gaps:
 - **Satellite messengers** need a subscription for each person and a clear view of the sky.
 - **UHF/CB radio** needs someone listening on the right channel at that moment, and doesn't send a position.
 
-MeshCore already gives communities cheap, solar-powered repeaters and pocket radios that pass messages across tens of kilometres with no infrastructure. What it lacked was a dependable way to say "I need help, here is where I am" and keep saying it until someone answers. MeshCore Open SOS adds that, and SOS Voice adds the ability to talk once someone has answered.
+MeshCore already gives communities cheap, solar-powered repeaters and pocket radios that pass messages across tens of kilometres with no infrastructure. What it lacked was a dependable way to say "I need help, here is where I am" and keep saying it until someone answers. Outback Mesh SOS adds that, and Outback Mesh Voice adds the ability to talk once someone has answered.
 
 ---
 
@@ -82,7 +84,7 @@ The alert **repeats every minute for the first five minutes, then every five min
 
 A responder's phone shows a full-screen red **EMERGENCY SOS** warning with the sender, any info line the sender added (such as a short address), position, position source and the times the alert was first and last heard. The alarm is **SOS in Morse code** (· · · – – – · · ·) by default, so it can't be mistaken for other emergency apps' alerts (the classic two-tone alert can be chosen instead in the SOS settings); on Android the app plays it as alarm audio, so silent and vibrate mode don't mute it: it turns the alarm volume up, takes the sound from other apps (music, videos, a call in Discord), vibrates SOS in Morse and loops until the responder acknowledges or dismisses it, then puts everything back. With **SOS through Do Not Disturb** allowed it also breaks through Do Not Disturb. During a phone call Android only lets it play quietly, so it vibrates and shows full screen as well. **Send ACK** answers on the mesh; **Message** opens a chat with the sender (sending the ACK again first, so their radio knows the responder). On Android the alert wakes the screen and shows over the lock screen. Every responder can see who else has acknowledged, so a group knows who is already responding. **Map** shows where to go.
 
-**Locate** helps responders close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and each responder's screen shows how strong each one is and whether they're getting warmer or colder. Several searchers can work together: any of them can turn the beacons' power down as they close in (from a MeshCore SOS radio), so only those near still hear them, and each searcher's app shares its position and what it hears every 30 seconds. The **Search map** shows each reading as a ring, how far that signal puts the radio, and shades the area where the rings agree. It's an estimate to search, not a pin.
+**Locate** helps responders close in on the sender once near: the sender's radio sends a short beacon every few seconds, radio to radio only, and each responder's screen shows how strong each one is and whether they're getting warmer or colder. Several searchers can work together: any of them can turn the beacons' power down as they close in (from an Outback Mesh SOS radio), so only those near still hear them, and each searcher's app shares its position and what it hears every 30 seconds. The **Search map** shows each reading as a ring, how far that signal puts the radio, and shades the area where the rings agree. It's an estimate to search, not a pin.
 
 Each alert also shows **how it reached you**: *Straight from their radio*, or *Via Scaramouche → Superstar*, with how many copies came each way. Locate needs the first: if the alert has only come through repeaters, the Locate screen says so and names the repeater nearest the sender.
 
@@ -92,22 +94,22 @@ Each SOS and ACK carries the sender's public key, so the two phones save each ot
 
 When the sender cancels, a cancellation goes out on the network and by direct message to every emergency contact and every responder who acknowledged. It is repeated, and direct copies are re-sent until delivered. A responder whose acknowledged alert goes quiet checks back with the sender, so a missed cancellation still arrives. Each responder's alarm stops and the live alert closes. A record of it, with its positions, acknowledgements and outcome, stays in the **SOS history** until the user deletes it, ready to share as a text report.
 
-### Voice (SOS Voice)
+### Voice (Outback Mesh Voice)
 
 Once an SOS is live, a **Voice** panel appears on the sender's SOS card and on each responder's alert. Speech is compressed with [Codec2](https://github.com/drowe67/codec2), an open-source codec built for HF and low-bitrate radio, at 700 or 1300 bit/s. It is sent as a short clip of up to 12 packets on the emergency network channel, the same way MeshCore Open sends images. Clips play aloud as they arrive. This is like walkie-talkie messages, not a live call: LoRa is far too slow to stream speech across a mesh.
 
-**Push-to-talk** (from 10.0.0) uses the same clips outside an emergency, on a public **#voice** channel and in direct messages, with limits that keep it from crowding out text and SOS traffic: see [Push-to-talk](#push-to-talk-sos-voice-only).
+**Push-to-talk** (from 10.0.0) uses the same clips outside an emergency, on a public **#voice** channel and in direct messages, with limits that keep it from crowding out text and SOS traffic: see [Push-to-talk](#push-to-talk-outback-mesh-voice-only).
 
 ### On the wire
 
 | Packet | Carried as | Who can read it |
 |---|---|---|
-| SOS, ACK, cancel | Channel data type `0x5053` on the emergency network | MeshCore Open SOS / SOS Voice holders of the network code |
-| Locate request, locator beacon, searcher's reading | Channel data type `0x5053`; beacons are sent zero hop | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
-| Retune note ("re-tuned", "back") | Channel data type `0x5053` | MeshCore Open SOS / SOS Voice holders of the network code (responders only, on sealed networks) |
-| Voice clip | Channel data type `0x5356` (SV) on the emergency network | SOS Voice holders of the network code |
-| Push-to-talk clip | Channel data type `0x5356`, voice packet version 3, on the `#voice` hashtag channel | Anyone with SOS Voice 10.0.0 (public) |
-| Push-to-talk clip in a direct message | Direct messages of type CLI data, `~ptt1:` + base64, along the contact's route | That contact's SOS Voice 10.0.0 (encrypted end to end by MeshCore); other apps may show odd text |
+| SOS, ACK, cancel | Channel data type `0x5053` on the emergency network | Outback Mesh SOS / Outback Mesh Voice holders of the network code |
+| Locate request, locator beacon, searcher's reading | Channel data type `0x5053`; beacons are sent zero hop | Outback Mesh SOS / Outback Mesh Voice holders of the network code (responders only, on sealed networks) |
+| Retune note ("re-tuned", "back") | Channel data type `0x5053` | Outback Mesh SOS / Outback Mesh Voice holders of the network code (responders only, on sealed networks) |
+| Voice clip | Channel data type `0x5356` (SV) on the emergency network | Outback Mesh Voice holders of the network code |
+| Push-to-talk clip | Channel data type `0x5356`, voice packet version 3, on the `#voice` hashtag channel | Anyone with Outback Mesh Voice 10.0.0 (public) |
+| Push-to-talk clip in a direct message | Direct messages of type CLI data, `~ptt1:` + base64, along the contact's route | That contact's Outback Mesh Voice 10.0.0 (encrypted end to end by MeshCore); other apps may show odd text |
 | SOS DM to emergency contacts | Plain text, under 160 bytes | Any MeshCore app |
 | Repeater owner info | Existing `GET_OWNER_INFO` request (`0x07`) | Any guest of the repeater |
 
@@ -117,28 +119,28 @@ Full layouts are in [documentation/emergency-sos.md](documentation/emergency-sos
 
 ## Installing
 
-Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.2.7; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **SOS Voice**; both can be installed together. A new install opens a short setup wizard.
+Download the files for your platform from the [Releases](https://github.com/fltsim737/meshcore-open/releases) page (the current version is 10.3.0; versions before 10.0.0 have been withdrawn). What changed in each version is in the [changelog](CHANGELOG-SOS.md). Pick **SOS** or **Outback Mesh Voice**; both can be installed together. A new install opens a short setup wizard.
 
-| Platform | MeshCore Open SOS | MeshCore Open SOS Voice |
+| Platform | Outback Mesh SOS | Outback Mesh Voice |
 |---|---|---|
-| Android (any phone) | `meshcore-open-sos-10.2.7.apk` | `meshcore-open-sos-voice-10.2.7.apk` |
-| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `MeshCore_Open_SOS-10.2.7-x86_64.AppImage` | `MeshCore_Open_SOS_Voice-10.2.7-x86_64.AppImage` |
-| Windows x64 | `MeshCore-Open-SOS-Setup.exe`, built from `meshcore-open-sos-10.2.7-windows-source.zip` with `build-windows.bat` | `MeshCore-Open-SOS-Voice-Setup.exe`, built from `meshcore-open-sos-voice-10.2.7-windows-source.zip` |
+| Android (any phone) | `outback-mesh-sos-10.3.0.apk` | `outback-mesh-voice-10.3.0.apk` |
+| Linux x86-64 (Ubuntu 24.04, Mint 22 or newer) | `Outback_Mesh_SOS-10.3.0-x86_64.AppImage` | `Outback_Mesh_Voice-10.3.0-x86_64.AppImage` |
+| Windows x64 | `Outback-Mesh-SOS-Setup.exe`, built from `outback-mesh-sos-10.3.0-windows-source.zip` with `build-windows.bat` | `Outback-Mesh-Voice-Setup.exe`, built from `outback-mesh-voice-10.3.0-windows-source.zip` |
 
 ### Android
 
 1. Copy the APK to the phone and open it. Allow "install unknown apps" for your file manager if asked.
-2. On first launch, allow Bluetooth, location and notifications. SOS Voice also asks for the microphone the first time you talk.
+2. On first launch, allow Bluetooth, location and notifications. Outback Mesh Voice also asks for the microphone the first time you talk.
 3. To keep alerts arriving with the screen off, allow the app to run in the background when asked (battery optimisation off). A notification shows while it is listening.
 4. So an SOS opens the red alert even when the app isn't open, check **Settings → App Settings → Emergency SOS → Full-screen SOS alerts** and tap it to allow what it asks for: **Display over other apps**, and on Samsung and Android 14 or later, **full-screen notifications**. If the settings page doesn't show the app, or a setting won't stay on (seen on Samsung phones), close all apps, restart the phone and try again. Tap **SOS through Do Not Disturb** in the same place and allow Do Not Disturb access, so Do Not Disturb can't silence an SOS. Then also set the app's **Battery** to **Unrestricted** (long-press the app icon → App info → Battery).
-5. MeshCore Open SOS and MeshCore Open SOS Voice are separate apps from the original MeshCore Open and can be installed beside it (from 9.5.8; earlier MeshCore Open SOS builds replaced it).
+5. Outback Mesh SOS and Outback Mesh Voice are separate apps from the original MeshCore Open and can be installed beside it (from 9.5.8; earlier Outback Mesh SOS builds replaced it).
 
 ### Linux
 
 1. Make the AppImage executable and run it:
    ```bash
-   chmod +x MeshCore_Open_SOS_Voice-x86_64.AppImage
-   ./MeshCore_Open_SOS_Voice-x86_64.AppImage
+   chmod +x Outback_Mesh_Voice-x86_64.AppImage
+   ./Outback_Mesh_Voice-x86_64.AppImage
    ```
 2. On first run it adds itself to the applications menu and installs an uninstaller. Deleting the AppImage removes the menu entry automatically.
 3. Closing the window leaves the app running in the system tray, still listening for alerts. Use the tray menu's **Quit** to stop it. The tray libraries are bundled, so nothing else needs installing.
@@ -148,7 +150,7 @@ Download the files for your platform from the [Releases](https://github.com/flts
 
 1. Run the setup program. It installs for the current user and doesn't need administrator rights. The installer isn't signed yet, so Windows may show "Windows protected your PC": click **More info**, then **Run anyway**.
 2. Choose whether to start it at sign-in. It then runs hidden in the tray, listening for alerts.
-3. For SOS Voice, allow the microphone: **Settings → Privacy & security → Microphone**, with both "Microphone access" and "Let desktop apps access your microphone" turned on.
+3. For Outback Mesh Voice, allow the microphone: **Settings → Privacy & security → Microphone**, with both "Microphone access" and "Let desktop apps access your microphone" turned on.
 4. Windows PCs have no GPS, so a desktop SOS uses the radio's location or the stored emergency location.
 
 ---
@@ -176,8 +178,8 @@ The network's channel goes on the radio connected when you join. Any other radio
 | Stored emergency location | Your base, used when neither phone nor radio has a position. **Use current GPS** fills it in. |
 | Emergency contacts | People who always get the SOS by direct message, even if they use another MeshCore app. |
 | Include favourite contacts | On by default: favourites get the DM too. |
-| Speakers and microphone (Linux, Windows) | **Speaker for alerts and notifications** and, in SOS Voice, **Speaker for voice** and **Microphone**: only this app's sound goes there, and the computer's default devices stay as they are. An unplugged device falls back to the system default. |
-| Voice volume (SOS Voice) | Clips are levelled so quiet ones are easy to hear; 25% to 300% on top of that, for quiet speakers (since 10.1.1). |
+| Speakers and microphone (Linux, Windows) | **Speaker for alerts and notifications** and, in Outback Mesh Voice, **Speaker for voice** and **Microphone**: only this app's sound goes there, and the computer's default devices stay as they are. An unplugged device falls back to the system default. |
+| Voice volume (Outback Mesh Voice) | Clips are levelled so quiet ones are easy to hear; 25% to 300% on top of that, for quiet speakers (since 10.1.1). |
 | Setup wizard | Runs once on a new install; run it again here. |
 
 Open the **Emergency** tab once so the app can ask for location permission ahead of time.
@@ -201,9 +203,9 @@ If the radio disconnects, the SOS keeps its schedule and sends whatever came due
 6. Alert on another frequency (it crossed a bridge)? Once you're within coverage on the sender's side, press **Retune to their frequency**; the other responders are told first. Press **Back to …** on the Emergency tab when you're done.
 7. **Dismiss** puts it aside without replying: the alarm stops and it shrinks to a line on the Emergency tab, with **Show again** to pick it up at once (its position, your acknowledgement and Locate are kept). If you hadn't acknowledged it, the sender's next repeat brings it back with the alarm; an acknowledged one stays put aside until you tap Show again.
 
-### 6. Talking (SOS Voice only)
+### 6. Talking (Outback Mesh Voice only)
 
-See [Voice](#voice-sos-voice-only) and [Push-to-talk](#push-to-talk-sos-voice-only) below.
+See [Voice](#voice-outback-mesh-voice-only) and [Push-to-talk](#push-to-talk-outback-mesh-voice-only) below.
 
 ### Searching a chat
 
@@ -223,7 +225,7 @@ Long-press a sensor in Contacts for **Telemetry** and **Manage Sensor**. Manage 
 
 ### Backing up your radio
 
-**Settings → Backup and restore → Export config** saves the radio's identity (its private key), name, radio settings, channels and contacts, with this app's emergency network, home location and emergency contacts, in one file. **Import config** puts it back after a firmware update or erase, or onto a new radio that takes over the old one's identity. A MeshCore SOS radio's web page reads and writes the same file; its WiFi and button settings come back only through that page. Keep the file private: anyone with it can pretend to be your radio.
+**Settings → Backup and restore → Export config** saves the radio's identity (its private key), name, radio settings, channels and contacts, with this app's emergency network, home location and emergency contacts, in one file. **Import config** puts it back after a firmware update or erase, or onto a new radio that takes over the old one's identity. An Outback Mesh SOS radio's web page reads and writes the same file; its WiFi and button settings come back only through that page. Keep the file private: anyone with it can pretend to be your radio.
 
 ### Managing a repeater
 
@@ -233,11 +235,11 @@ Login, status, neighbours, settings, owner info and CLI commands wait for the re
 
 ### Practising
 
-Agree on a time with your group, then send a test SOS, acknowledge it and cancel it. Make sure everyone's phone actually sounds, and that background running is allowed on each Android phone. To explore the screens without a radio, use review mode: on the Connect screen, long-press the app's name at the top ("MeshCore Open SOS" or "MeshCore Open SOS Voice") and tap **Enter**.
+Agree on a time with your group, then send a test SOS, acknowledge it and cancel it. Make sure everyone's phone actually sounds, and that background running is allowed on each Android phone. To explore the screens without a radio, use review mode: on the Connect screen, long-press the app's name at the top ("Outback Mesh SOS" or "Outback Mesh Voice") and tap **Enter**.
 
 ---
 
-## Voice (SOS Voice only)
+## Voice (Outback Mesh Voice only)
 
 The **Voice** panel sits in the active SOS card for the sender and in each alert for responders.
 
@@ -257,11 +259,11 @@ Clips play aloud as they arrive, one after another. While a clip is playing, han
 - If a packet is lost, the clip has a gap. If the last packet is lost, the clip isn't played: say it again or send a text.
 - SOS voice stops when the SOS is cancelled.
 
-## Push-to-talk (SOS Voice only)
+## Push-to-talk (Outback Mesh Voice only)
 
-From 10.0.0, SOS Voice also does walkie-talkie clips outside an emergency.
+From 10.0.0, Outback Mesh Voice also does walkie-talkie clips outside an emergency.
 
-- **#voice channel.** SOS Voice adds a public hashtag channel, `#voice`, to the radio once (in its last free slot; removed, it stays removed). Everyone on the mesh with SOS Voice hears it. Push-to-talk never uses MeshCore's Public channel. Hold to talk in the bar above the text box.
+- **#voice channel.** Outback Mesh Voice adds a public hashtag channel, `#voice`, to the radio once (in its last free slot; removed, it stays removed). Everyone on the mesh with Outback Mesh Voice hears it. Push-to-talk never uses MeshCore's Public channel. Hold to talk in the bar above the text box.
 - **Direct messages.** The mic button at the top of a chat. Clips go to that contact along their route and never appear in the chat.
 - **Clips heard** raise a notification and play aloud; in a chat, push-to-talk opens by itself when one arrives.
 - **Clips up to 10 s**, with no wait between them, so a conversation can flow.
@@ -328,7 +330,7 @@ What it can't protect against:
 
 **7. It is ready for review.** Both builds pass the project's analyzer and tests (over 1,000 tests on each branch), the strings are translated into all 18 locales, the behaviour is documented, and there are installers for Android, Linux and Windows. The changes are on their own branches and can be reviewed and merged in pieces.
 
-**8. Separate builds keep the risk low.** SOS and SOS Voice are separate apps with separate IDs, so voice can be field-tested without risking the stable SOS build that people may already depend on.
+**8. Separate builds keep the risk low.** SOS and Outback Mesh Voice are separate apps with separate IDs, so voice can be field-tested without risking the stable SOS build that people may already depend on.
 
 ---
 
@@ -351,8 +353,8 @@ Discussion and issues are welcome. Please target `dev` and discuss larger change
 Requires Flutter 3.47 or later; Android needs Java 17.
 
 ```bash
-git checkout feat/emergency-sos      # MeshCore Open SOS
-git checkout feat/sos-voice          # MeshCore Open SOS Voice
+git checkout feat/emergency-sos      # Outback Mesh SOS
+git checkout feat/sos-voice          # Outback Mesh Voice
 
 flutter pub get
 flutter test
@@ -372,27 +374,27 @@ powershell -ExecutionPolicy Bypass -File windows\installer\build-windows.ps1
 
 The installer is written to `build\windows\installer\`.
 
-SOS Voice builds Codec2 from source as part of the app (`packages/codec2_ffi`), so no extra libraries are needed.
+Outback Mesh Voice builds Codec2 from source as part of the app (`packages/codec2_ffi`), so no extra libraries are needed.
 
 ---
 
 ## Licences, credits and disclaimer
 
-**MeshCore Open** is © 2025 zjs81 and contributors, under the MIT licence: see [LICENSE](LICENSE). MeshCore Open SOS and MeshCore Open SOS Voice build on it.
+**MeshCore Open** is © 2025 zjs81 and contributors, under the MIT licence: see [LICENSE](LICENSE). Outback Mesh SOS and Outback Mesh Voice build on it.
 
 **MeshCore**, the mesh firmware and companion radio protocol these apps talk to, is © 2025 Scott Powell / rippleradios.com under the MIT licence, and is developed with **Liam Cottle** and the other MeshCore contributors. Liam Cottle also makes the official MeshCore apps, the MeshCore web client and [meshcore.js](https://github.com/liamcottle/meshcore.js). Thank you to them and to everyone who runs MeshCore repeaters.
 
 **Every contributor** to MeshCore and to MeshCore Open is named in [CREDITS.md](CREDITS.md), with the software and data the apps include.
 
-**The SOS and SOS Voice additions** are © 2026 fltsim737 and released under the same MIT licence.
+**The SOS and Outback Mesh Voice additions** are © 2026 fltsim737 and released under the same MIT licence.
 
-**Codec2** (SOS Voice only): SOS Voice includes the speech subset of Codec2 1.2.0, © David Rowe and contributors, under the **GNU Lesser General Public License 2.1**. It's built as a separate library that the app loads, and its full source, licence text (`src/codec2/COPYING`) and the changes made to it (variable-length arrays replaced so it builds with MSVC) are in [packages/codec2_ffi](packages/codec2_ffi), and in each release's Windows source zip. You may replace it with your own modified build of Codec2.
+**Codec2** (Outback Mesh Voice only): Outback Mesh Voice includes the speech subset of Codec2 1.2.0, © David Rowe and contributors, under the **GNU Lesser General Public License 2.1**. It's built as a separate library that the app loads, and its full source, licence text (`src/codec2/COPYING`) and the changes made to it (variable-length arrays replaced so it builds with MSVC) are in [packages/codec2_ffi](packages/codec2_ffi), and in each release's Windows source zip. You may replace it with your own modified build of Codec2.
 
 **flserial** (USB serial on Windows and Linux), in [third_party/flserial](third_party/flserial), is © 2024 Grzegorz Leśniak, under the MIT licence.
 
 **Other Flutter and Dart packages** used by the apps keep their own licences (mostly BSD, MIT and Apache 2.0). The app lists them all under **Settings → About → View licenses**.
 
-**Not affiliated.** MeshCore Open SOS and SOS Voice are independent community builds. They aren't made, endorsed or supported by the MeshCore project, Scott Powell, rippleradios.com, Liam Cottle or the MeshCore Open maintainers; "MeshCore" is used only to say what they work with. The separate MeshCore SOS radio firmware is proprietary and isn't covered by this repository's licence.
+**Not affiliated.** Outback Mesh SOS and Outback Mesh Voice are independent community builds. They aren't made, endorsed or supported by the MeshCore project, Scott Powell, rippleradios.com, Liam Cottle or the MeshCore Open maintainers; "MeshCore" is used only to say what they work with. The separate Outback Mesh SOS radio firmware is proprietary and isn't covered by this repository's licence.
 
 **Disclaimer.** The apps are provided "as is", without warranty of any kind, as the MIT licence says; that licence's disclaimer and limitation of liability cover all their authors and copyright holders, zjs81 and contributors and fltsim737 alike. In plain words:
 - they **aren't a certified emergency, medical or personal alarm**, and nobody monitors them;

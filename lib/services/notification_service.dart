@@ -135,7 +135,7 @@ class NotificationService {
       requestSoundPermission: true,
     );
     const windowsSettings = WindowsInitializationSettings(
-      appName: 'MeshCore Open SOS',
+      appName: 'Outback Mesh SOS',
       appUserModelId: 'org.meshcore.open.sos',
       guid: 'fc87c15d-705f-49e3-a52f-720cf83b2bde',
     );

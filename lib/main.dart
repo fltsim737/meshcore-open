@@ -516,7 +516,7 @@ class _MeshCoreAppState extends State<MeshCoreApp> with WidgetsBindingObserver {
       child: Consumer<AppSettingsService>(
         builder: (context, settingsService, child) {
           return MaterialApp(
-            title: 'MeshCore Open SOS',
+            title: 'Outback Mesh SOS',
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const [
               AppLocalizations.delegate,

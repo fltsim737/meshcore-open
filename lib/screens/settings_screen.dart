@@ -634,7 +634,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           onTap: connected ? () => _editLocation(context, connector) : null,
         ),
         const Divider(height: 1, indent: 16),
-        // A MeshCore SOS radio (firmware 1.8.3) says how it connects, one way
+        // An Outback Mesh SOS radio (firmware 1.8.3) says how it connects, one way
         // at a time, and lets the app change it.
         if (connected &&
             (connector.currentCustomVars?.containsKey('sos_link') ??
@@ -1171,7 +1171,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     };
   }
 
-  /// How a MeshCore SOS radio connects: its hotspot, home WiFi, Bluetooth or
+  /// How an Outback Mesh SOS radio connects: its hotspot, home WiFi, Bluetooth or
   /// USB, one at a time. Changing it restarts the radio, so this says how to
   /// connect again first.
   Future<void> _editSosRadioLink(
@@ -1401,14 +1401,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final l10n = context.l10n;
     showAboutDialog(
       context: context,
-      applicationName: 'MeshCore Open SOS',
+      applicationName: 'Outback Mesh SOS',
       applicationVersion: _appVersion.isEmpty
           ? l10n.common_loading
           : _appVersion,
       // Credits and licence: the same in every language
       applicationLegalese:
-          'MeshCore Open © 2025 zjs81 and contributors. '
-          'SOS additions © 2026 fltsim737. MIT licence.\n'
+          'Based on MeshCore Open © 2025 zjs81 and contributors. '
+          'Outback Mesh additions © 2026 fltsim737. MIT licence.\n'
           'Works with MeshCore, by Scott Powell (rippleradios.com) and '
           'Liam Cottle, with the MeshCore contributors.\n'
           'Not affiliated with or endorsed by the MeshCore project. '

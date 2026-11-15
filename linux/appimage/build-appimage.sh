@@ -18,7 +18,7 @@
 # scripts use MeshCore Open's names and are adjusted as they are copied.
 set -eu
 APPIMAGETOOL="${1:?usage: $0 /path/to/appimagetool}"
-APP_NAME="${APP_NAME:-MeshCore Open SOS}"
+APP_NAME="${APP_NAME:-Outback Mesh SOS}"
 APP_SLUG="${APP_SLUG:-meshcore-open-sos}"
 APP_ID="${APP_ID:-com.meshcore.meshcore_open_sos}"
 SRC="$(cd "$(dirname "$0")" && pwd)"

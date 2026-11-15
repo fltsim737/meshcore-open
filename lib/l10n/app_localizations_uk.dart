@@ -9,7 +9,7 @@ class AppLocalizationsUk extends AppLocalizations {
   AppLocalizationsUk([String locale = 'uk']) : super(locale);
 
   @override
-  String get appTitle => 'MeshCore Open SOS';
+  String get appTitle => 'Outback Mesh SOS';
 
   @override
   String get nav_contacts => 'Контакти';
@@ -276,7 +276,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get usbAccessMessage =>
-      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nMeshCore Open SOS can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
+      'This computer doesn\'t let you use USB serial devices yet, so the radio can\'t be opened.\n\nOutback Mesh SOS can fix this now. Your password is asked for once, and USB radios then work for whoever is logged in at this computer, without logging out.';
 
   @override
   String get usbAccessManual =>
@@ -721,12 +721,12 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String settings_aboutVersion(String version) {
-    return 'MeshCore Open SOS v$version';
+    return 'Outback Mesh SOS v$version';
   }
 
   @override
   String get settings_aboutLegalese =>
-      'MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.MeshCore Open © 2025 zjs81 and contributors; SOS additions © 2026 fltsim737. MIT licence.';
+      'Outback Mesh is based on MeshCore Open © 2025 zjs81 and contributors; Outback Mesh additions © 2026 fltsim737. MIT licence.';
 
   @override
   String get settings_aboutDescription =>
@@ -1014,7 +1014,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get appSettings_batteryOptimizationSubtitle =>
-      'Встановіть для MeshCore Open SOS значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні';
+      'Встановіть для Outback Mesh SOS значення «Не оптимізувати» в налаштуваннях батареї, щоб повідомлення надходили й у фоні';
 
   @override
   String get appSettings_startOnLogin => 'Запускати під час входу';
@@ -4880,11 +4880,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get notification_replyNotConnected =>
-      'Немає з’єднання з радіо. Підключіться знову в MeshCore Open SOS і надішліть відповідь ще раз.';
+      'Немає з’єднання з радіо. Підключіться знову в Outback Mesh SOS і надішліть відповідь ще раз.';
 
   @override
   String get notification_replyTooLong =>
-      'Ваша відповідь задовга для надсилання з повідомлення. Надішліть її з MeshCore Open SOS.';
+      'Ваша відповідь задовга для надсилання з повідомлення. Надішліть її з Outback Mesh SOS.';
 
   @override
   String get notification_replyUnavailable =>
@@ -4892,11 +4892,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get notification_replySendFailed =>
-      'Можливо, вашу відповідь не було надіслано. Перевірте у MeshCore Open SOS і спробуйте ще раз.';
+      'Можливо, вашу відповідь не було надіслано. Перевірте у Outback Mesh SOS і спробуйте ще раз.';
 
   @override
   String get notification_replyAppNotRunning =>
-      'MeshCore Open SOS не запущено. Відкрийте його та надішліть відповідь ще раз.';
+      'Outback Mesh SOS не запущено. Відкрийте його та надішліть відповідь ще раз.';
 
   @override
   String get settings_gpxExportRepeaters =>
@@ -5359,7 +5359,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get background_stop => 'Зупинити';
 
   @override
-  String get tray_show => 'Показати MeshCore Open SOS';
+  String get tray_show => 'Показати Outback Mesh SOS';
 
   @override
   String get tray_quit => 'Вийти';
@@ -6800,7 +6800,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get sos_notificationOpenToRespond =>
-      'Відкрийте MeshCore Open SOS, щоб надіслати ACK';
+      'Відкрийте Outback Mesh SOS, щоб надіслати ACK';
 
   @override
   String get sos_notificationChannelName => 'Екстрені SOS-сигнали';
@@ -7089,7 +7089,8 @@ class AppLocalizationsUk extends AppLocalizations {
       'Прошивка цієї рації не дозволяє експортувати її ідентичність.';
 
   @override
-  String get backup_notConfig => 'Цей файл не є конфігурацією MeshCore SOS.';
+  String get backup_notConfig =>
+      'Цей файл не є конфігурацією Outback Mesh SOS.';
 
   @override
   String get backup_tooLarge => 'Цей файл завеликий для конфігурації.';

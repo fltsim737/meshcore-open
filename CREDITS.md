@@ -1,10 +1,10 @@
 # Credits
 
-MeshCore Open SOS and MeshCore Open SOS Voice exist because of the work of many people. Thank you to every one of them, and to everyone who builds, hosts and looks after MeshCore repeaters for others to use.
+Outback Mesh SOS and Outback Mesh Voice exist because of the work of many people. Thank you to every one of them, and to everyone who builds, hosts and looks after MeshCore repeaters for others to use.
 
 ## MeshCore
 
-The mesh firmware and companion radio protocol these apps talk to, and that the MeshCore SOS radio runs on. © 2025 Scott Powell / rippleradios.com, under the MIT licence. <https://github.com/meshcore-dev/MeshCore>
+The mesh firmware and companion radio protocol these apps talk to, and that the Outback Mesh SOS radio runs on. © 2025 Scott Powell / rippleradios.com, under the MIT licence. <https://github.com/meshcore-dev/MeshCore>
 
 - **Scott Powell** (rippleradios.com): creator of MeshCore.
 - **Liam Cottle**: core developer of MeshCore (the companion radio firmware, WiFi and many boards among his work), and maker of the official MeshCore apps, the MeshCore web client and [meshcore.js](https://github.com/liamcottle/meshcore.js). His MeshCore technical presentation is a good introduction to how it all works.
@@ -17,13 +17,13 @@ The open-source MeshCore app these apps are built from. © 2025 zjs81 and contri
 - **zjs81**: creator of MeshCore Open.
 - **All 50 MeshCore Open contributors**, as named in its history: zjs81, Winston Lowe, just_stuff_tm, ericz, Ben Allfree, PacoX, HDDen, Zach, Ded, Serge Tarkovski, Enot (ded) Skelly, 446564, Eric Poulsen, Gianluca Boiano, Leah, thesebas, spfmoby, edouard, Seth Golub, ZIER, ericszimmermann, Specter242, shortwavesurfer2009, Adam Novak, Hacuchino-hash, Dmitry Polshakov, Michael Lynch, n-kam, Dennis ten Hoove, MGJ, Max Cooley, Stempit, Stephan Rodemeier, me, Aaron Easterling, Abdullah, DomeDan, Hamid Elaosta, Krasimir Kazakov, Ryan Malloy, Sebastian Szymbor, WarMax356, anupoh, erikklavora, hdhog, ionphoketi, kingult, km-foss, kyleyank, megadimich.
 
-## MeshCore Open SOS and SOS Voice
+## Outback Mesh SOS and Outback Mesh Voice
 
-The emergency SOS, SOS Voice, push-to-talk and related additions. © 2026 fltsim737, under the MIT licence. <https://github.com/fltsim737/meshcore-open>
+The emergency SOS, Outback Mesh Voice, push-to-talk and related additions. © 2026 fltsim737, under the MIT licence. <https://github.com/fltsim737/meshcore-open>
 
 ## Software and data included
 
-- **Codec2** 1.2.0 (speech subset, SOS Voice only): © David Rowe and contributors, GNU LGPL 2.1. Source and changes in `packages/codec2_ffi`.
+- **Codec2** 1.2.0 (speech subset, Outback Mesh Voice only): © David Rowe and contributors, GNU LGPL 2.1. Source and changes in `packages/codec2_ffi`.
 - **flserial** (USB serial on Linux and Windows): © 2024 Grzegorz Leśniak, MIT.
 - **Flutter** and the **Dart and Flutter packages** the apps use: © Google and the authors of each package, under their own licences (mostly BSD, MIT and Apache 2.0). All are listed in the app under **Settings → About → View licenses**.
 - **Map data** © OpenStreetMap contributors, ODbL; elevation data from **Open-Meteo**, CC BY 4.0.

@@ -34,7 +34,7 @@
     <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
 
     <application
-        android:label="MeshCore Open SOS"
+        android:label="Outback Mesh SOS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <service

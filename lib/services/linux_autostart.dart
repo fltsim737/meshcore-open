@@ -62,7 +62,7 @@ class LinuxAutostart implements LoginAutostart {
       '''
 [Desktop Entry]
 Type=Application
-Name=MeshCore Open
+Name=Outback Mesh SOS
 Comment=Listens for messages and SOS alerts
 TryExec=${_launchPath.replaceAll('\\', '\\\\')}
 Exec=${_quote(_launchPath)} $hiddenArgument
